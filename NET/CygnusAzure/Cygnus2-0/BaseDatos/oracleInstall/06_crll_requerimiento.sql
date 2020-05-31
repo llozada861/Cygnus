@@ -13,7 +13,7 @@ ALTER TABLE ll_requerimiento ADD(fecha_actualiza DATE);
 
 ALTER TABLE ll_requerimiento ADD(usuario varchar2(100));
 
-ALTER TABLE ll_requerimiento ADD(completado NUMBER);
+ALTER TABLE ll_requerimiento ADD(completado NUMBER(5,1));
 
 create index idxll_requerimiento01 on ll_requerimiento(usuario);
 

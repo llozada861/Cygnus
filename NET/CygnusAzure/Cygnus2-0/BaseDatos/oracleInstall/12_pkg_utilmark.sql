@@ -637,7 +637,7 @@ AS
             
         OPEN oRefRq FOR
             SELECT 'INSERT INTO flex.ll_requerimiento (codigo,descripcion,id_azure,estado,fecha_actualiza,usuario,fecha_display,completado,fecha_registro,hist_usuario) '||
-                    'values ('||codigo||','''||descripcion||''','||id_azure||','''||estado||''','''||to_char(nvl(fecha_actualiza,SYSDATE),'dd/mm/yyyy')||''','''||usuario||''','''||to_char(nvl(fecha_display,SYSDATE),'dd/mm/yyyy')||''','''||nvl(completado,0)||''','''||to_char(nvl(fecha_registro,SYSDATE),'dd/mm/yyyy')||''','||hist_usuario||');' valor
+                    'values ('||codigo||','''||descripcion||''','||id_azure||','''||estado||''','''||to_char(nvl(fecha_actualiza,SYSDATE),'dd/mm/yyyy')||''','''||usuario||''','''||to_char(nvl(fecha_display,SYSDATE),'dd/mm/yyyy')||''','''||nvl(completado,0)||''','''||to_char(nvl(fecha_registro,SYSDATE),'dd/mm/yyyy')||''','||nvl(hist_usuario,0)||');' valor
             FROM flex.ll_requerimiento;   
             
         OPEN oRefHorasH FOR

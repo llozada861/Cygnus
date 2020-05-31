@@ -233,4 +233,62 @@ SELECT *
             FROM flex.ll_horashoja 
 /                        
 SELECT *
-            FROM flex.ll_requerimiento;                          
+            FROM flex.ll_requerimiento;  
+/
+--Reporte total
+            SELECT fecha_ini fecha, 
+                   rq.hist_usuario,
+                   rq.id_azure,
+                   rq.descripcion,
+                   lunes horaCygnus,
+                   rq.completado horaAzure
+            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
+            WHERE rq.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/05/2020'
+            AND   ho.fecha_fin <= '31/05/2020'
+            AND hh.id_hoja = ho.codigo
+            AND hh.requerimiento = rq.codigo
+            AND lunes > 0
+            
+            UNION
+            SELECT fecha_ini+1,martes, rq.descripcion
+            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
+            WHERE requerimiento = inuRq
+            AND hh.id_hoja = ho.codigo
+            AND hh.requerimiento = rq.codigo
+            AND martes > 0
+            UNION
+            SELECT fecha_ini+2,miercoles, rq.descripcion
+            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
+            WHERE requerimiento = inuRq
+            AND hh.id_hoja = ho.codigo
+            AND hh.requerimiento = rq.codigo
+            AND miercoles > 0
+            UNION
+            SELECT fecha_ini+3,jueves, rq.descripcion
+            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
+            WHERE requerimiento = inuRq
+            AND hh.id_hoja = ho.codigo
+            AND hh.requerimiento = rq.codigo
+            AND jueves > 0
+            UNION
+            SELECT fecha_ini+4,viernes, rq.descripcion
+            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
+            WHERE requerimiento = inuRq
+            AND hh.id_hoja = ho.codigo
+            AND hh.requerimiento = rq.codigo
+            AND viernes > 0
+            UNION
+            SELECT fecha_ini+5,sabado, rq.descripcion
+            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
+            WHERE requerimiento = inuRq
+            AND hh.id_hoja = ho.codigo
+            AND hh.requerimiento = rq.codigo
+            AND sabado > 0
+            UNION
+            SELECT fecha_ini+6,domingo, rq.descripcion
+            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
+            WHERE requerimiento = inuRq
+            AND hh.id_hoja = ho.codigo
+            AND hh.requerimiento = rq.codigo
+            AND domingo > 0;                                              
