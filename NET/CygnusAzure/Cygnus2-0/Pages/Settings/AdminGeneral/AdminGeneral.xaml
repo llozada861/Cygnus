@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Settings.AdminGeneral.AdminGeneral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <!-- TODO: set @SelectedSource -->
+        <mui:ModernTab Layout="Tab" SelectedSource="/Pages/Settings/AdminGeneral/UCGeneral.xaml">
+            <mui:ModernTab.Links>
+                <!-- TODO: set @Source -->
+                <mui:Link DisplayName="General" Source="/Pages/Settings/AdminGeneral/UCGeneral.xaml" />
+                <!--<mui:Link DisplayName="Html" Source="#" />
+                <mui:Link DisplayName="Palabras reservadas" Source="#" />
+                <mui:Link DisplayName="Tipos objetos" Source="#" />
+                <mui:Link DisplayName="Grants" Source="#" />
+                <mui:Link DisplayName="Encabezados" Source="#" />
+                <mui:Link DisplayName="Usuarios BD" Source="#" />-->
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
+    </Grid>
+</UserControl>

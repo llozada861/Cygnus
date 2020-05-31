@@ -1,0 +1,9 @@
+<Package;</Package>;Fuente;P;>
+<Procedure;</Procedure>;Fuente;P;>
+<Unidad;</Unidad>;;S;
+<Descripcion;</Descripcion>;;S;
+<Autor;</Autor>;;S;
+<Fecha;</Fecha>;;S;
+<Retorno;</Retorno>;Nombre|Tipo;S;>
+<param;</param>;Nombre|Tipo|Direccion;S;>
+<Modificacion;</Modificacion>;Autor|Fecha|Inc;S;>

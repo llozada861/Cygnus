@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Settings.AdminGeneral.UCGeneral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <GroupBox x:Name="grbConfiguracion" Header="Configuración de la aplicación">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <CheckBox x:Name="checkBoxOrden" Content="Orden automático?" IsChecked="{Binding Path=OrdenAutomatico}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5"/>
+                <CheckBox x:Name="checkBoxGrant" Content="Genera grants?" IsChecked="{Binding Path=Grant}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5"/>
+                <CheckBox x:Name="checkBoxDocu" Content="Genera doc html?" IsChecked="{Binding Path=GeneraHtml}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5"/>
+                <CheckBox x:Name="checkBoxProxy" Content="Desactivar proxy?" IsChecked="{Binding Path=Proxy}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5"/>
+                <!--
+                <CheckBox x:Name="checkBoxVersion" IsEnabled="false" Content="Ejecutar sqlplus?" IsChecked="{Binding Handl.Formulario.GeneraVersion, Mode = TwoWay}"/>
+                <CheckBox x:Name="checkBoxCarpApl" IsEnabled="false" Content="Generar aplica una capeta arriba?" IsChecked="{Binding Handl.Formulario.AplicaCarpetaArriba, Mode = TwoWay}" />
+                <CheckBox x:Name="checkBox" IsEnabled="false" IsChecked="{Binding Handl.Formulario.CopiaRepo, Mode = TwoWay}" Content="Guardar objetos en el repositorio?" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Checked="checkBox_Checked"/>
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Foreground="Black" Height="45" Margin="10,299,0,0" TextWrapping="Wrap" Text="{Binding Handl.Formulario.RutaCopiaRepoMantCorr, Mode = TwoWay}" VerticalAlignment="Top" Width="543" BorderThickness="1"/>
+                <Label x:Name="label1" Content="Ruta Mantenimiento Correctivo:" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label2" Content="Ruta Mantenimiento Preventivo:" HorizontalAlignment="Left" Margin="10,344,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox1" HorizontalAlignment="Left" Foreground="Black" Height="54" Margin="11,372,0,0" TextWrapping="Wrap" Text="{Binding Handl.Formulario.RutaCopiaRepoMantPrev, Mode = TwoWay}" VerticalAlignment="Top" Width="542" BorderThickness="1" Grid.ColumnSpan="2"/>
+                <CheckBox x:Name="checkSolLB" IsEnabled="false" IsChecked="{Binding Handl.Formulario.SolicitudLineaBase, Mode = TwoWay}" Content="Solicitud Línea Base?" HorizontalAlignment="Left" Margin="11,167,0,0" VerticalAlignment="Top" />-->
+                
+                <!--<Label x:Name="lblSqlplus" Content="Ruta Sqlplus" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                <TextBox x:Name="txtSqlplus" TextWrapping="Wrap" Text="{Binding Path=RutaSqlplus}" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="5" Grid.RowSpan="2" Margin="5,0,0,0"/>-->
+                <Button x:Name="btnCerrarConf" Content="Guardar" Command="{Binding Path=Process}" Grid.Column="5" Grid.Row="7" Grid.ColumnSpan="3"/>
+
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

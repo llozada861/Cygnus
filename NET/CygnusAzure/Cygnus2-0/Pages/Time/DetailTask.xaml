@@ -1,0 +1,97 @@
+﻿<Window x:Class="Cygnus2_0.Pages.Time.DetailTask"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             Width="600" Height="450" 
+             WindowStyle="SingleBorderWindow" 
+             WindowStartupLocation="CenterScreen" 
+             ResizeMode="CanResize" Loaded="Window_Loaded" Title="Detalle de la tarea">
+    <Grid x:Name="GridDetails">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--<GroupBox Header="Total Horas Cygnus" b Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
+        </GroupBox>-->
+        <Label x:Name="lblTitulo" Margin="10" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right"  >Total Cygnus:</Label>
+        <TextBox x:Name="CasoText" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                 Text="{Binding Path=TotalRequerimiento}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" FontWeight="Bold" FontSize="24" Foreground="#FFFB0202" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+
+        <Label x:Name="lblAzure" Margin="10" Grid.Column="5" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right"  >Total Azure:</Label>
+        <TextBox x:Name="CasoTextAz" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                 Text="{Binding Path=TotalRequerimientoAzure}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="8" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="24" Foreground="#FFFB0202" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Label x:Name="lblTHU" Margin="10" Grid.Column="2" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="2" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right"  >Total HU:</Label>
+        <TextBox x:Name="CasoTextTHU" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                 Text="{Binding Path=TotalHU}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="5" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="24" Foreground="#FFFB0202" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        
+        <DataGrid
+                x:Name="dataGridTareas" 
+                IsReadOnly="false" 
+                AllowDrop="True"                   
+                AutoGenerateColumns="False"
+                SelectionMode="Single"
+                CanUserDeleteRows="false"
+                CanUserAddRows="false"
+                CanUserReorderColumns="false"
+                CanUserSortColumns="True"            
+                ItemsSource="{Binding Path=ListaDetalleTarea, Mode=TwoWay}"
+                            GridLinesVisibility="All"                       
+                            Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="10" Grid.RowSpan="7" Margin="15,0">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn
+                        Header="Fecha"
+                        x:Name="idFecha"
+                        IsReadOnly="True"
+                        Binding="{Binding Path=FechaIni, Mode=OneWay,  ConverterCulture='es-ES'}" 
+                        />
+                <DataGridTemplateColumn x:Name="idTarea" Header="Tarea" Width="350" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Text, Mode=OneWay}">
+                                <TextBlock.ToolTip>
+                                    <TextBlock Text="{Binding Path=Text, Mode=OneWay}"/>
+                                </TextBlock.ToolTip>
+                                        </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn
+                        Header="Horas"
+                        x:Name="idHora"
+                        IsReadOnly="true"
+                        Binding="{Binding Path=Horas, Mode=TwoWay}" />               
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--<Button x:Name="BtnCancel" Content="Cancelar" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Click="BtnCancel_Click" />-->
+    </Grid>
+</Window>

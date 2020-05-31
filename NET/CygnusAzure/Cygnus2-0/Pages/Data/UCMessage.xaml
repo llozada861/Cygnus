@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Data.UCMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="groupBox" Header="Generación de mensajes" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="6" Grid.RowSpan="8" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Label x:Name="label1" Content="Mensaje" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,5,0"/>
+                <TextBox x:Name="textBox" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Descripcion}"  Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="8" Grid.RowSpan="3" Margin="0,0,0,5"/>
+                <Label x:Name="label2" Content="Causa" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,5,0" />
+                <TextBox x:Name="textBox1" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Causa}"  Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="8" Grid.RowSpan="3" Margin="0,0,0,5"/>
+                <Label x:Name="label3" Content="Solución" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,5,0"/>
+                <TextBox x:Name="textBox2" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Solucion}"  Grid.Column="2" Grid.Row="6" Grid.ColumnSpan="8" Grid.RowSpan="3" Margin="0,0,0,5"/>
+                <Button x:Name="btnGuardar" Content="Guardar" VerticalAlignment="Center" Command="{Binding Path=Process}" Grid.Column="6" Grid.Row="9" Grid.ColumnSpan="4"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+¿La solución a entregar cumple con los lineamientos definidos en el procedimiento de entrega?;DATOS
+¿Los objetos se encuentran nombrados respetando el estandar definido?;DATOS
+¿Para el manejo de la transaccionalidad de la operación se incluyen los comandos commit/rollback?;DATOS
+¿Se generaron las trazas como lo explica el documento y se verificó que no existan en la traza errores propios de Oracle y/o que todos esten controlados?;DATOS
+¿Los objetos a entregar no estan cualificados con el usuario de desarrollo?;DATOS
+¿La OC a entregar contiene el/los archivo/s de Traza/s de prueba del proceso?;DATOS
+¿En la OC de Datos se revisó la traza de salida (OUT) validando que los contadores de los siguientes mensajes estén correctos? (Total de datos exitosos + Total de datos inconsistentes + Total de datos con error = Total de datos procesados);DATOS
+¿Las variables que almacenan datos extraídos de la base de datos estan declaradas del tipo del campo Tabla.campo%type?;DESARROLLO
+¿La solución a entregar cumple con los lineamientos definidos en el procedimiento de entrega?;DESARROLLO
+¿Los objetos se encuentran nombrados respetando el estandar definido?;DESARROLLO
+¿El código está identado y cumple el estandar definido para la generación del documento HTML?;DESARROLLO
+¿Se adicionan los tags donde se indican las modificaciones o cambios en los objetos a entregar?;DESARROLLO
+¿Se genero la documentación HTML para todos los paquetes que se incluyen en la entrega?;DESARROLLO
+¿Se incluyó la función fsbversion y se asignó el número correcto de la OC?;DESARROLLO
+¿Se incluyó la constante de versión y fue nombrada correctamente (csbVersion CONSTANT pkg_epm_utilidades.tyVersion := 'SAOXXXXXX';)?;DESARROLLO
+¿Para cada método modificado o nuevo se generaron como mínimo la traza de inicio y finalización utilizando el paquete  Pkg_Epm_Utilidades.Trace_SetMsg()?;DESARROLLO
+¿Para el manejo de la transaccionalidad de la operación se incluyen los comandos commit/rollback?;DESARROLLO
+¿El nombramiento de los archivos (archivos de objetos de las bases de datos,  paquetes,  funciones,  procedimientos,  tablas) a ser entregados se hizo en letra minúscula? Esto aplica  solo para objetos que se crean como nuevos. Nota: Si es un paquete viejo se debe trabajar sobre lo existente y si es nuevo se debe de manejar el control de errores nuevo.;DESARROLLO
+¿La OC a entregar contiene el/los archivo/s de Traza/s de prueba del proceso?;DESARROLLO
+¿La OC a entregar contiene el/los archivo/s del log de la ejecución del aplica?;DESARROLLO
+¿Los objetos a entregar no estan cualificados con el usuario de desarrollo?;DESARROLLO
+¿Se identificó con qué usuario se debe/n aplicar el/los objeto/s Flex,  Flex_Customizacion, OPENSIRIUS;DESARROLLO
+¿Se  diligenció la plantilla de dimensionamiento de Objetos (Tablas e Indices)?;DESARROLLO
+¿Los aplicas cumplen con los lineamientos definidos?;DESARROLLO
+¿La tabla de auditoria se nombro según el estandar definido (AUDIT_<NombreTablaBase>).;DESARROLLO
+¿Se diligenció claramente en el documento información del requerimiento como: Número del requerimiento, descripción y autor?;DOCU
+¿Se diligenció claramente en el documento el nombre del Analista funcional, Arquitecto de la aplicación y el Analista de MVM?;DOCU
+¿Se redacto en términos funcionales la justificación del cambio solicitada?;DOCU
+¿Se identificaron las funcionalidades que se ven impactadas por el cambio solicitado?;DOCU
+¿Se describe claramente la solución dada al requerimiento?;DOCU
+¿Se detalla la secuencia de actividades para el paso entre ambientes del requerimiento?;DOCU
+¿Se detalla en el cuadro de Componentes de configuración del sistema todos los componentes que hacen parte de la entrega e involucran ser ejecutados por EPM?;DOCU
+¿Se realizan las pruebas donde se evidencia la correcta ejecución del desarrollo?;DOCU
+¿Se colocó en el documento la versión de los ajustes realizados en el cuadro de versiones?;DOCU

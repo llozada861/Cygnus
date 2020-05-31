@@ -1,0 +1,3 @@
+<Retorno Nombre="[nombre]" Tipo="[tipo_return]">		
+	[descripcion]
+</Retorno>	

@@ -1,0 +1,9 @@
+Grants
+
+GRANT <permiso> ON  OPEN.<objeto> TO <usuario>;
+
+GRANT <permiso> ON  OPEN.<objeto> TO SYSTEM_OBJ_PRIVS_ROLE;
+
+GRANT <permiso> ON  OPEN.<objeto> TO REPORTES;
+
+GRANT <permiso> ON  OPEN.<objeto> TO USELAXEDE;

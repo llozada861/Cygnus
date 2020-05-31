@@ -1,0 +1,1 @@
+insert INTO configuration (key,value) values('PROXY','False');

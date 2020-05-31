@@ -1,0 +1,3 @@
+	<param nombre="[nombre_param]" tipo="[tipo_param]" Direccion="[dir_param]">				
+		[descripcion_param]
+	</param>	

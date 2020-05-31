@@ -1,0 +1,1514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Analisis" xml:space="preserve">
+    <value>ANALISIS</value>
+  </data>
+  <data name="Arroa" xml:space="preserve">
+    <value>@</value>
+  </data>
+  <data name="NombreAplicaCus" xml:space="preserve">
+    <value>_apl_flex_customizacion.sql</value>
+  </data>
+  <data name="NombreAplicaFlex" xml:space="preserve">
+    <value>_apl_flex.sql</value>
+  </data>
+  <data name="Cambio" xml:space="preserve">
+    <value>Cambio</value>
+  </data>
+  <data name="crepm" xml:space="preserve">
+    <value>crepm</value>
+  </data>
+  <data name="CultureInfo" xml:space="preserve">
+    <value>es-CO</value>
+  </data>
+  <data name="Diseño" xml:space="preserve">
+    <value>DISEÑO</value>
+  </data>
+  <data name="Funcion" xml:space="preserve">
+    <value>f</value>
+  </data>
+  <data name="function" xml:space="preserve">
+    <value>function</value>
+  </data>
+  <data name="IN" xml:space="preserve">
+    <value>IN</value>
+  </data>
+  <data name="Indice" xml:space="preserve">
+    <value>idx</value>
+  </data>
+  <data name="Insert_mensaje" xml:space="preserve">
+    <value>insmensaje_</value>
+  </data>
+  <data name="Insert_parametr" xml:space="preserve">
+    <value>insepm_parametr</value>
+  </data>
+  <data name="NombrePlantillaDiseño" xml:space="preserve">
+    <value>OpenEPM20_DisenoXXXXXX#Plantilla_Documento_Arquitectura_de_Software.doc</value>
+  </data>
+  <data name="No_aplica" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="Nuevo" xml:space="preserve">
+    <value>Nuevo</value>
+  </data>
+  <data name="Obtener_OC" xml:space="preserve">
+    <value>DEFINE OC=</value>
+  </data>
+  <data name="package" xml:space="preserve">
+    <value>package</value>
+  </data>
+  <data name="Paquete_con_standar" xml:space="preserve">
+    <value>pkg_epm</value>
+  </data>
+  <data name="Paquete_no_standar" xml:space="preserve">
+    <value>pk</value>
+  </data>
+  <data name="Paquete_primer_nivel" xml:space="preserve">
+    <value>pktbl</value>
+  </data>
+  <data name="Procedimiento" xml:space="preserve">
+    <value>p_</value>
+  </data>
+  <data name="procedure" xml:space="preserve">
+    <value>procedure</value>
+  </data>
+  <data name="Script" xml:space="preserve">
+    <value>Script</value>
+  </data>
+  <data name="Secuencia" xml:space="preserve">
+    <value>sq</value>
+  </data>
+  <data name="Servidor" xml:space="preserve">
+    <value>Servidor</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>table</value>
+  </data>
+  <data name="TamañoLetra10" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="TamañoLetra8" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="TipoDatoArial" xml:space="preserve">
+    <value>Arial</value>
+  </data>
+  <data name="Viñeta" xml:space="preserve">
+    <value>vineta</value>
+  </data>
+  <data name="NombrePlantillaAnalisis" xml:space="preserve">
+    <value>OpenEPM10_AnalisisXXXXXX#OTI-DSE-FR__Especificacion_Req_Servicio.docx</value>
+  </data>
+  <data name="NombrePlantillaPruebas" xml:space="preserve">
+    <value>F-115_Pruebas_de_nivel_1_RQXXXXXXX-OCXXXXXX.doc</value>
+  </data>
+  <data name="PathPlantillas" xml:space="preserve">
+    <value>\\Plantillas</value>
+  </data>
+  <data name="Prueba" xml:space="preserve">
+    <value>PRUEBAS</value>
+  </data>
+  <data name="DescPktbl" xml:space="preserve">
+    <value>Paquete primer nivel</value>
+  </data>
+  <data name="Ingreso" xml:space="preserve">
+    <value>Ingreso</value>
+  </data>
+  <data name="Numero" xml:space="preserve">
+    <value>NUMBER</value>
+  </data>
+  <data name="NombreAplicaGrantCus" xml:space="preserve">
+    <value>_apl_grant_flex_customizacion.sql</value>
+  </data>
+  <data name="NombreAplicaGrantFlex" xml:space="preserve">
+    <value>_apl_grant_flex.sql</value>
+  </data>
+  <data name="TipoArchivo" xml:space="preserve">
+    <value>Archivo</value>
+  </data>
+  <data name="TipoGrantFlex" xml:space="preserve">
+    <value>GrantFlex</value>
+  </data>
+  <data name="TipoOtros" xml:space="preserve">
+    <value>Otros</value>
+  </data>
+  <data name="Flex" xml:space="preserve">
+    <value>FLEX</value>
+  </data>
+  <data name="Flex_Customizacion" xml:space="preserve">
+    <value>FLEX_CUSTOMIZACION</value>
+  </data>
+  <data name="TipoGrantCustomizacion" xml:space="preserve">
+    <value>GrantCustomizacion</value>
+  </data>
+  <data name="VinetaFlexManager" xml:space="preserve">
+    <value>flex_manager</value>
+  </data>
+  <data name="MarcadorFinalCus" xml:space="preserve">
+    <value>FinalDatosFlex_CUS</value>
+  </data>
+  <data name="MarcadorFinalFlex" xml:space="preserve">
+    <value>FinalDatosFlex</value>
+  </data>
+  <data name="MarcadorFinalManager" xml:space="preserve">
+    <value>FinalManager</value>
+  </data>
+  <data name="MarcadorFinalCuadroNota" xml:space="preserve">
+    <value>CuadroNota</value>
+  </data>
+  <data name="ExtensionExcel" xml:space="preserve">
+    <value>.xls</value>
+  </data>
+  <data name="ExtensionExcelX" xml:space="preserve">
+    <value>.xlsx</value>
+  </data>
+  <data name="ExtensionHtml" xml:space="preserve">
+    <value>.html</value>
+  </data>
+  <data name="ExtensionPlantilla" xml:space="preserve">
+    <value>.txt</value>
+  </data>
+  <data name="ExtensionWord" xml:space="preserve">
+    <value>.doc</value>
+  </data>
+  <data name="ExtensionWordX" xml:space="preserve">
+    <value>.docx</value>
+  </data>
+  <data name="TipoExcel" xml:space="preserve">
+    <value>Excel</value>
+  </data>
+  <data name="TipoHtml" xml:space="preserve">
+    <value>HTML</value>
+  </data>
+  <data name="TipoNet" xml:space="preserve">
+    <value>.NET</value>
+  </data>
+  <data name="TipoPlantilla" xml:space="preserve">
+    <value>Plantilla</value>
+  </data>
+  <data name="TipoWord" xml:space="preserve">
+    <value>WORD</value>
+  </data>
+  <data name="DATOS" xml:space="preserve">
+    <value>DATOS</value>
+  </data>
+  <data name="DESARROLLO" xml:space="preserve">
+    <value>DESARROLLO</value>
+  </data>
+  <data name="LabelTipo" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="NombrePlantillaDatosAnalisis" xml:space="preserve">
+    <value>OpenDatosEPM01_AnalisisXXXXXX#OTI-DSE-FR__Especificacion_Req_Servicio.docx</value>
+  </data>
+  <data name="NombrePlantillaDatosDiseno" xml:space="preserve">
+    <value>OpenDatosEPM02_DisenoyConstruccionXXXXXX#Plantilla_Documento_Arquitectura_de_Software.doc</value>
+  </data>
+  <data name="NombrePlantillaDatosPrueba" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PrefijoArchivoDatoAnalisis" xml:space="preserve">
+    <value>OpenDatosEPM01_Analisis</value>
+  </data>
+  <data name="PrefijoArchivoDatoDiseno" xml:space="preserve">
+    <value>OpenDatosEPM02_DisenoyConstruccion</value>
+  </data>
+  <data name="PrefijoArchivoDatoPrueba" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PrefijoArchivoDesaAnalisis" xml:space="preserve">
+    <value>OpenEPM10_Analisis</value>
+  </data>
+  <data name="PrefijoArchivoDesaDiseno" xml:space="preserve">
+    <value>OpenEPM20_Diseno</value>
+  </data>
+  <data name="PrefijoArchivoDesaPrueba" xml:space="preserve">
+    <value>F-115_Pruebas_de_nivel_1_RQ</value>
+  </data>
+  <data name="Tag_requerimiento_oc" xml:space="preserve">
+    <value>&lt;requerimiento_oc&gt;</value>
+  </data>
+  <data name="SufijoArchivoDatoAnalisis" xml:space="preserve">
+    <value>#OTI-DSE-FR__Especificacion_Req_Servicio.docx</value>
+  </data>
+  <data name="SufijoArchivoDatoDiseno" xml:space="preserve">
+    <value>#Plantilla_Documento_Arquitectura_de_Software.doc</value>
+  </data>
+  <data name="SufijoArchivoDatoPrueba" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SufijoArchivoDesaAnalisis" xml:space="preserve">
+    <value>#OTI-DSE-FR__Especificacion_Req_Servicio.docx</value>
+  </data>
+  <data name="SufijoArchivoDesaDiseno" xml:space="preserve">
+    <value>#Plantilla_Documento_Arquitectura_de_Software.doc</value>
+  </data>
+  <data name="SufijoArchivoDesaPrueba" xml:space="preserve">
+    <value>.doc</value>
+  </data>
+  <data name="Tag_titulo" xml:space="preserve">
+    <value>&lt;titulo&gt;</value>
+  </data>
+  <data name="Administrador1" xml:space="preserve">
+    <value>administrador</value>
+  </data>
+  <data name="Administrador2" xml:space="preserve">
+    <value>lozada</value>
+  </data>
+  <data name="ExtensionSQL" xml:space="preserve">
+    <value>.sql</value>
+  </data>
+  <data name="LibreriaWord" xml:space="preserve">
+    <value>EPM.OpenWord.dll</value>
+  </data>
+  <data name="MensajeOCRequerida" xml:space="preserve">
+    <value>Debe ingresar el código de la OC</value>
+  </data>
+  <data name="PlantillaOcDatos" xml:space="preserve">
+    <value>EPM.OpenWord.Plantillas.Datos.Scripts.OCXXXXXX.sql</value>
+  </data>
+  <data name="Tag_aplica_flex" xml:space="preserve">
+    <value>&lt;aplica_flex&gt;</value>
+  </data>
+  <data name="Tag_aplica_flex_cus" xml:space="preserve">
+    <value>&lt;aplica_flex_cus&gt;</value>
+  </data>
+  <data name="Tag_archivo_entrada" xml:space="preserve">
+    <value>&lt;archivo_entrada&gt;</value>
+  </data>
+  <data name="Tag_archivo_sql" xml:space="preserve">
+    <value>&lt;archivo_sql&gt;</value>
+  </data>
+  <data name="Tag_arquitecto" xml:space="preserve">
+    <value>&lt;arquitecto&gt;</value>
+  </data>
+  <data name="Tag_desarrollador" xml:space="preserve">
+    <value>&lt;desarrollador&gt;</value>
+  </data>
+  <data name="Tag_fecha" xml:space="preserve">
+    <value>&lt;fecha&gt;</value>
+  </data>
+  <data name="Tag_funcional" xml:space="preserve">
+    <value>&lt;funcional&gt;</value>
+  </data>
+  <data name="Tag_grant_flex" xml:space="preserve">
+    <value>&lt;grant_flex&gt;</value>
+  </data>
+  <data name="Tag_grant_flex_cus" xml:space="preserve">
+    <value>&lt;grant_flex_cus&gt;</value>
+  </data>
+  <data name="Tag_modulo" xml:space="preserve">
+    <value>&lt;modulo&gt;</value>
+  </data>
+  <data name="Tag_numero_oc" xml:space="preserve">
+    <value>&lt;numero_oc&gt;</value>
+  </data>
+  <data name="TipoScriptActualizaDatos" xml:space="preserve">
+    <value>Script actualización de datos</value>
+  </data>
+  <data name="EncabezadoFunction" xml:space="preserve">
+    <value>create or replace function</value>
+  </data>
+  <data name="EncabezadoPaqueteBody" xml:space="preserve">
+    <value>create or replace package body</value>
+  </data>
+  <data name="EncabezadoPkgFunction" xml:space="preserve">
+    <value>function</value>
+  </data>
+  <data name="EncabezadoProcedure" xml:space="preserve">
+    <value>create or replace procedure</value>
+  </data>
+  <data name="EncabezadoTrigger" xml:space="preserve">
+    <value>create or replace trigger</value>
+  </data>
+  <data name="EncabezadoPkgProcedure" xml:space="preserve">
+    <value>procedure</value>
+  </data>
+  <data name="MetodoFunction" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="MetodoProcedimiento" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="MetodoTrigger" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SubMetodoFuncion" xml:space="preserve">
+    <value>SF</value>
+  </data>
+  <data name="SubMetodoProcedure" xml:space="preserve">
+    <value>SP</value>
+  </data>
+  <data name="TipoExpMetodo" xml:space="preserve">
+    <value>Metodo</value>
+  </data>
+  <data name="TipoObjetoFuncion" xml:space="preserve">
+    <value>Funcion</value>
+  </data>
+  <data name="TipoObjetoPaquete" xml:space="preserve">
+    <value>Paquete</value>
+  </data>
+  <data name="TipoObjetoProcedimiento" xml:space="preserve">
+    <value>Procedimiento</value>
+  </data>
+  <data name="TipoObjetoTrigger" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="TipoSubMetodo" xml:space="preserve">
+    <value>SubMetodo</value>
+  </data>
+  <data name="EncabezadoSecuencia" xml:space="preserve">
+    <value>create sequence</value>
+  </data>
+  <data name="EncabezadoTabla" xml:space="preserve">
+    <value>create table</value>
+  </data>
+  <data name="MetodoSecuencia" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="MetodoTabla" xml:space="preserve">
+    <value>TA</value>
+  </data>
+  <data name="TipoSecuencia" xml:space="preserve">
+    <value>Secuencia</value>
+  </data>
+  <data name="TipoTabla" xml:space="preserve">
+    <value>Tabla</value>
+  </data>
+  <data name="MarcadorFinalCuadroTexto" xml:space="preserve">
+    <value>TextoNota</value>
+  </data>
+  <data name="MarcadorFinalDatosFlex_CUS_Grant" xml:space="preserve">
+    <value>FinalDatosFlex_CUS_Grant</value>
+  </data>
+  <data name="MarcadorFinalDatosFlex_Grant" xml:space="preserve">
+    <value>FinalDatosFlex_Grant</value>
+  </data>
+  <data name="Tag_nota" xml:space="preserve">
+    <value>&lt;nota&gt;</value>
+  </data>
+  <data name="HTMLEncabezado" xml:space="preserve">
+    <value>&lt;!--Documentacion generada automaticamente --&gt;
+&lt;meta http-equiv='Content-Type' content='text/html; charset=utf-8' /&gt;&lt;html&gt;&lt;body&gt;</value>
+  </data>
+  <data name="HTMLFin" xml:space="preserve">
+    <value>&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;/body&gt;&lt;/html&gt;</value>
+  </data>
+  <data name="HTMLHistorialHeadModif" xml:space="preserve">
+    <value>&lt;tr&gt;&lt;td colspan="6" align="center" style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Historial de Modificaciones&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Fecha&lt;/center&gt;&lt;/td&gt;
+&lt;td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Autor&lt;/center&gt;&lt;/td&gt;
+&lt;td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Incidente&lt;/center&gt;&lt;/td&gt;
+&lt;td width="40%" colspan="3" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Descripción&lt;/center&gt;&lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="HTMLHistorialModif" xml:space="preserve">
+    <value>&lt;tr&gt;
+&lt;td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[fecha]&lt;/td&gt;
+&lt;td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[autor]&lt;/td&gt;
+&lt;td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[numero_oc]&lt;/td&gt;
+&lt;td width="20%" colspan="4" style="border:1px solid black;padding:5px"&gt;&lt;pre style="font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;
+[descripcion_mod]
+&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="HTMLTablaPaquete" xml:space="preserve">
+    <value>&lt;table cellpadding="3" width="90%" style="background-color:#FFF;border-collapse:collapse;"&gt;
+&lt;th align="left" colspan="6" style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:11.0pt;font-family:Arial;font-weight:bold"&gt;[metodo]&lt;/th&gt;
+&lt;tr&gt;
+&lt;td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Fuente de Datos&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[descripcion_fuente]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Diseñado  Por&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[autor]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Programador Original&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[autor]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Fecha de Creación&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[fecha]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;!--&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Version&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;&lt;/td&gt;
+&lt;/tr&gt; --&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Descripción&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px"&gt;&lt;pre style="font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;
+        [descripcion_metodo] 
+    &lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="HTMLTablaFin" xml:space="preserve">
+    <value>&lt;/table&gt;</value>
+  </data>
+  <data name="TagHtml_autor" xml:space="preserve">
+    <value>[autor]</value>
+  </data>
+  <data name="TagHtml_descFuente" xml:space="preserve">
+    <value>[descripcion_fuente]</value>
+  </data>
+  <data name="TagHtml_descMetodo" xml:space="preserve">
+    <value>[descripcion_metodo]</value>
+  </data>
+  <data name="TagHtml_descripcionModi" xml:space="preserve">
+    <value>[descripcion_mod]</value>
+  </data>
+  <data name="TagHtml_fecha" xml:space="preserve">
+    <value>[fecha]</value>
+  </data>
+  <data name="TagHtml_metodo" xml:space="preserve">
+    <value>[metodo]</value>
+  </data>
+  <data name="TagHtml_numeroOC" xml:space="preserve">
+    <value>[numero_oc]</value>
+  </data>
+  <data name="Text_Paquete" xml:space="preserve">
+    <value>Paquete:</value>
+  </data>
+  <data name="HTMLHeadParametros" xml:space="preserve">
+    <value>&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Parametro&lt;/center&gt;&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Tipo&lt;/center&gt;&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;In&lt;/center&gt;&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Out&lt;/center&gt;&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Default&lt;/center&gt;&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Descripción&lt;/center&gt;&lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="HTMLParametros" xml:space="preserve">
+    <value>&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[parametro]&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[tipo]&lt;/td&gt;
+&lt;td align="center" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[valor_in]&lt;/td&gt;
+&lt;td align="center" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[valor_out]&lt;/td&gt;
+&lt;td align="center" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[valor_defecto]&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:2px;"&gt;&lt;pre style="font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[descripcion]&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="HTMLTablaMetodo" xml:space="preserve">
+    <value>&lt;table cellpadding="3" width="90%" style="background-color:#FFF;border-collapse:collapse;"&gt;
+&lt;th align="left" colspan="6" style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:11.0pt;font-family:Arial;font-weight:bold"&gt;[metodo]&lt;/th&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Fuente de Datos&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[descripcion_fuente]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Descripción&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px"&gt;
+        [descripcion_metodo] 
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Diseñado Por&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[autor]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Programador Original&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[autor]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;Fecha de Creación&lt;/td&gt;
+&lt;td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[fecha]&lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="TagHTML_default" xml:space="preserve">
+    <value>[valor_defecto]</value>
+  </data>
+  <data name="TagHTML_Desc" xml:space="preserve">
+    <value>[descripcion]</value>
+  </data>
+  <data name="TagHTML_in" xml:space="preserve">
+    <value>[valor_in]</value>
+  </data>
+  <data name="TagHTML_out" xml:space="preserve">
+    <value>[valor_out]</value>
+  </data>
+  <data name="TagHTML_parametro" xml:space="preserve">
+    <value>[parametro]</value>
+  </data>
+  <data name="TagHTML_tipo" xml:space="preserve">
+    <value>[tipo]</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>error</value>
+  </data>
+  <data name="HTMLHeadRetornos" xml:space="preserve">
+    <value>&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Retorno&lt;/center&gt;&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Tipo&lt;/center&gt;&lt;/td&gt;
+&lt;td colspan="4" style="border:1px solid black;background:#DCDCDC;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"&gt;&lt;center&gt;Descripción&lt;/center&gt;&lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="HtmlRetornos" xml:space="preserve">
+    <value>&lt;tr&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[nombre]&lt;/td&gt;
+&lt;td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;[tipo]&lt;/td&gt;
+&lt;td colspan="4" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"&gt;
+        [descripcion]
+    &lt;/td&gt;
+&lt;/tr&gt;</value>
+  </data>
+  <data name="TagHTML_nombre" xml:space="preserve">
+    <value>[nombre]</value>
+  </data>
+  <data name="NombreAplicaSirius" xml:space="preserve">
+    <value>_apl_opensirius.sql</value>
+  </data>
+  <data name="DIAGNOSTICO" xml:space="preserve">
+    <value>DIAGNOSTICO</value>
+  </data>
+  <data name="PrefijoArchivoDiagnostico" xml:space="preserve">
+    <value>Diagnostico_RQ</value>
+  </data>
+  <data name="RutaPlantillasDatos" xml:space="preserve">
+    <value>EPM\Datos\</value>
+  </data>
+  <data name="RutaPlantillasDesarrollo" xml:space="preserve">
+    <value>EPM\Desarrollo\</value>
+  </data>
+  <data name="RutaPlantillasDiagnos" xml:space="preserve">
+    <value>EPM\Diagnostico\</value>
+  </data>
+  <data name="RutaSave" xml:space="preserve">
+    <value>~/App_Data/Save/</value>
+  </data>
+  <data name="RutaUpload" xml:space="preserve">
+    <value>~/App_Data/Uploads/</value>
+  </data>
+  <data name="RutaPlantillas" xml:space="preserve">
+    <value>~/Plantillas/</value>
+  </data>
+  <data name="TipoPaquete" xml:space="preserve">
+    <value>pkg</value>
+  </data>
+  <data name="EncabezadoPaquete" xml:space="preserve">
+    <value>create or replace package</value>
+  </data>
+  <data name="MenosUno" xml:space="preserve">
+    <value>-1</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Si" xml:space="preserve">
+    <value>Si</value>
+  </data>
+  <data name="TipoObjetoAnonimo" xml:space="preserve">
+    <value>Declare</value>
+  </data>
+  <data name="ExcelSolicitudObjetos" xml:space="preserve">
+    <value>XXXXXXXX_ICB_SubVersion (solicitud obj SAO XXXXXX).xlsx</value>
+  </data>
+  <data name="NombrePlantillaExcel" xml:space="preserve">
+    <value>_ICB_SubVersion (solicitud obj SAO </value>
+  </data>
+  <data name="TemplatePathGDO" xml:space="preserve">
+    <value>~/Plantillas/GDO/</value>
+  </data>
+  <data name="TipoObjetoFCED" xml:space="preserve">
+    <value>FCED</value>
+  </data>
+  <data name="TipoObjetoFWCEA" xml:space="preserve">
+    <value>FWCEA</value>
+  </data>
+  <data name="TipoObjetoMD" xml:space="preserve">
+    <value>Forma MD</value>
+  </data>
+  <data name="TipoObjetoPB" xml:space="preserve">
+    <value>Forma PB</value>
+  </data>
+  <data name="TipoObjetoPI" xml:space="preserve">
+    <value>PI</value>
+  </data>
+  <data name="TipoObjetoReporte" xml:space="preserve">
+    <value>Reporte</value>
+  </data>
+  <data name="TipoObjetoTramite" xml:space="preserve">
+    <value>Tramite</value>
+  </data>
+  <data name="TipoObjetoVista" xml:space="preserve">
+    <value>Vista</value>
+  </data>
+  <data name="TipoObjetoWF" xml:space="preserve">
+    <value>WorkFlow</value>
+  </data>
+  <data name="RQOC" xml:space="preserve">
+    <value>oc</value>
+  </data>
+  <data name="RQSAO" xml:space="preserve">
+    <value>sao</value>
+  </data>
+  <data name="RQCantidadNum" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SolicitudObjetos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\GDO\XXXXXXXX_ICB_SubVersion (solicitud obj SAO XXXXXX).xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoEncabezadoObj" xml:space="preserve">
+    <value>ListaEncabezadoObjetos.txt</value>
+  </data>
+  <data name="CarpetaBD" xml:space="preserve">
+    <value>bd</value>
+  </data>
+  <data name="ArchivoListaEncabezadoObjetos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\ListaEncabezadoObjetos.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ArchivoListaTipoObjetos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\ListaTipoObjetos.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoTiposObj" xml:space="preserve">
+    <value>ListaTipoObjetos.txt</value>
+  </data>
+  <data name="CuerpoAplica" xml:space="preserve">
+    <value>prompt "Aplicando &lt;objeto&gt;"
+@.&lt;objeto&gt;</value>
+  </data>
+  <data name="EncabezadoAplica" xml:space="preserve">
+    <value>SET appinfo ON
+SET echo OFF
+SET serveroutput ON
+SET timing OFF
+SET verify OFF
+SET heading OFF 
+SET feedback ON
+
+COLUMN file_script new_val file_script;
+COLUMN instance_name new_val instance_name;
+COLUMN fecha_exec new_val fecha_exec;
+COLUMN spool_file new_val spool_file;
+COLUMN usuario_exec new_val usuario_exec;
+COLUMN usuario_os new_val usuario_os;
+DEFINE OC=&lt;numero_oc&gt;
+
+SELECT SUBSTR(SYS_CONTEXT('USERENV','MODULE'),INSTR(SYS_CONTEXT('USERENV','MODULE'),'@')+2) file_script,
+       SYS_CONTEXT('USERENV', 'DB_NAME') instance_name,
+       TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS') fecha_exec,
+       USER usuario_exec,
+       SYS_CONTEXT('USERENV', 'OS_USER') usuario_os,
+       '&amp;OC'||'_'||'apl_'||USER||'_'||SUBSTR(SYS_CONTEXT('USERENV', 'DB_NAME'),1,4)||
+       '_'||TO_CHAR(SYSDATE, 'YYYYMMDD_HH24MISS')  spool_file  FROM DUAL;
+
+SPOOL &amp;spool_file..log
+PROMPT
+PROMPT =========================================
+PROMPT  ****   Información de Ejecución    ****
+PROMPT =========================================
+PROMPT Archivo ejecutado: &amp;file_script
+PROMPT Instancia        : &amp;instance_name 
+PROMPT Fecha ejecución  : &amp;fecha_exec
+PROMPT Usuario DB       : &amp;usuario_exec
+PROMPT Usuario O.S      : &amp;usuario_os
+PROMPT WO               : &amp;OC
+PROMPT ========================================= 
+PROMPT
+PROMPT **** Aplica de objetos **** 
+
+SET define OFF 
+
+PROMPT INICIA PROCESO ....</value>
+  </data>
+  <data name="FinAplica" xml:space="preserve">
+    <value>PROMPT **** Termina aplica de objetos **** 
+
+SPOOL OFF
+SET SERVEROUTPUT OFF</value>
+  </data>
+  <data name="NombreAplica" xml:space="preserve">
+    <value>_apl_</value>
+  </data>
+  <data name="TagNombreAplica" xml:space="preserve">
+    <value>&lt;nombre_aplica&gt;</value>
+  </data>
+  <data name="TagObjetoAplica" xml:space="preserve">
+    <value>&lt;objeto&gt;</value>
+  </data>
+  <data name="Extensiones" xml:space="preserve">
+    <value>.sql,.pkg,.pkb,.pks</value>
+  </data>
+  <data name="NombreVersionInsert" xml:space="preserve">
+    <value>insGe_database_version_</value>
+  </data>
+  <data name="NombreVersionUpdate" xml:space="preserve">
+    <value>updGe_database_version_</value>
+  </data>
+  <data name="TagEntrega" xml:space="preserve">
+    <value>&lt;entrega&gt;</value>
+  </data>
+  <data name="VersionInsert" xml:space="preserve">
+    <value>/*****************************************************************
+Archivo Generado Automáticamente
+@Autor Llozada
+******************************************************************/
+INSERT INTO ge_database_version
+(
+	version_id,
+	version_name,
+	install_init_date
+)
+VALUES 
+(
+	seq_ge_database_version.NEXTVAL,
+	'&lt;entrega&gt;', 
+	SYSDATE
+);
+
+COMMIT;</value>
+  </data>
+  <data name="VersionUpdate" xml:space="preserve">
+    <value>/*****************************************************************
+Archivo Generado Automáticamente
+@Autor Llozada
+******************************************************************/
+UPDATE  ge_database_version
+SET     install_end_date = SYSDATE
+WHERE   version_name = '&lt;entrega&gt;';
+
+COMMIT;</value>
+  </data>
+  <data name="EncabezadoAutomatico" xml:space="preserve">
+    <value>/*****************************************************************
+Archivo Generado Automáticamente
+@Autor Llozada
+******************************************************************/</value>
+  </data>
+  <data name="GrantALL" xml:space="preserve">
+    <value>ALL</value>
+  </data>
+  <data name="GrantEXECUTE" xml:space="preserve">
+    <value>EXECUTE</value>
+  </data>
+  <data name="GrantSELECT" xml:space="preserve">
+    <value>SELECT</value>
+  </data>
+  <data name="ListaPalabrasReservadas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\ListaPalabrasReservadas.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoGrant" xml:space="preserve">
+    <value>_apl_grant_</value>
+  </data>
+  <data name="NombreArchivoPalReser" xml:space="preserve">
+    <value>ListaPalabrasReservadas.txt</value>
+  </data>
+  <data name="NombreArchivoUsGrants" xml:space="preserve">
+    <value>Grants.txt</value>
+  </data>
+  <data name="PlantillaGrant" xml:space="preserve">
+    <value>PROMPT ASIGNACION PERMISOS OBJETO &lt;objeto&gt;
+GRANT &lt;permiso&gt; ON &lt;objeto&gt; TO &lt;usuario&gt;;</value>
+  </data>
+  <data name="TagGrantObjeto" xml:space="preserve">
+    <value>&lt;objeto&gt;</value>
+  </data>
+  <data name="TagGrantPermiso" xml:space="preserve">
+    <value>&lt;permiso&gt;</value>
+  </data>
+  <data name="TagGrantUsuario" xml:space="preserve">
+    <value>&lt;usuario&gt;</value>
+  </data>
+  <data name="TipoGrantExecute" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="TipoGrantSelect" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="TipoGrantTodos" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="ListaChequeo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\ListaChequeo.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoChequeo" xml:space="preserve">
+    <value>ListaChequeo.txt</value>
+  </data>
+  <data name="NombreArchivoListaChequeo" xml:space="preserve">
+    <value>ListaChequeo_OPEN_OCXXXXXX.xls</value>
+  </data>
+  <data name="NombreArchivoSolObjetos" xml:space="preserve">
+    <value>XXXXXXXX_ICB_SubVersion__solicitud_obj_SAO_XXXXXX_.xlsx</value>
+  </data>
+  <data name="XXXXXXXX_ICB_SubVersion__solicitud_obj_SAO_XXXXXX_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\GDO\XXXXXXXX_ICB_SubVersion (solicitud obj SAO XXXXXX).xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DOCU" xml:space="preserve">
+    <value>DOCU</value>
+  </data>
+  <data name="NombreArchivoOutChequeo" xml:space="preserve">
+    <value>ListaChequeo_OPEN_OC</value>
+  </data>
+  <data name="ListaChequeo_OPEN_SAOXXXXXX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\GDO\ListaChequeo_OPEN_SAOXXXXXX.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoRutaRepo" xml:space="preserve">
+    <value>RutaRepo.txt</value>
+  </data>
+  <data name="CORRECTIVO" xml:space="preserve">
+    <value>CORRECTIVO</value>
+  </data>
+  <data name="PREVENTIVO" xml:space="preserve">
+    <value>PREVENTIVO</value>
+  </data>
+  <data name="ExtensionZIP" xml:space="preserve">
+    <value>.zip</value>
+  </data>
+  <data name="RutaRepoMantCorrectivo" xml:space="preserve">
+    <value>https://axd-files2.axede.com.co/svn/CONTRATO_035-2018/3_CONTRATO_035-2018/2_AREAS_DE_TRABAJO/ENLACE/6_MANTENIMIENTO_CORRECTIVO/</value>
+  </data>
+  <data name="RutaRepoMantPreventivo" xml:space="preserve">
+    <value>https://axd-files2.axede.com.co/svn/CONTRATO_035-2018/3_CONTRATO_035-2018/2_AREAS_DE_TRABAJO/ENLACE/7_MANTENIMIENTO_PREVENTIVO/</value>
+  </data>
+  <data name="NombreArchivoSolLineaBase" xml:space="preserve">
+    <value>F_125_Solicitud_Creacion_Linea_Base_SAO_XXXXXX.xlsx</value>
+  </data>
+  <data name="NombreArchivoOutSolLB" xml:space="preserve">
+    <value>F_125_Solicitud_Creacion_Linea_Base_SAO_</value>
+  </data>
+  <data name="F_125_Solicitud_Creacion_Linea_Base_SAO_XXXXXX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\GDO\F_125_Solicitud_Creacion_Linea_Base_SAO_XXXXXX.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ArchivoCopyFileXSLTemplate" xml:space="preserve">
+    <value>CopyFileXSLTemplate.sh</value>
+  </data>
+  <data name="CopyFileXSLTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\GDO\CopyFileXSLTemplate.sh;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EncabezadoAplicaPlantilla" xml:space="preserve">
+    <value>prompt "------------------------------------------------------"
+prompt " APLICANDO UPDATE GE_XSL_TEMPLATE "
+prompt "------------------------------------------------------"
+PROMPT "              Actualizando datos en la tabla GE_XSL_TEMPLATE                             "
+PROMPT "NOTA: Si el servidor donde se esta ejecutando la actualización es diferente al servidor  "
+PROMPT "donde se encuentra la  base de datos,  se requieren permisos de ejecución para el comando"
+PROMPT "[rcp] en el servidor de la base de datos, si no se tienen permisos se debe copiar manual "
+PROMPT "mente los archivos (TEMPLATE_SOURCE_*.txt TEMPLATE_XSL_*.txt) del directorio             "
+PROMPT "../Product/General/server/sql/02tbls/ge_xsl_template/09data, en el directorio de trabajo "
+PROMPT "XML_DIR.                                                                                 "
+PROMPT "Para encontrar la ruta del directorio de trabajo se debe ejecutar el siguiente select:   "
+PROMPT "SELECT * FROM ALL_DIRECTORIES WHERE DIRECTORY_NAME = 'XML_DIR'                           "
+PROMPT
+PROMPT
+PROMPT " Digite el string de conexion con el siguiente formato :                                 "
+PROMPT " [usuario/password@instancia]                                                            "
+ACCEPT strConnection PROMPT ' String de conexion : '
+
+!ksh ./bin/CopyFileXSLTemplate.sh &amp;strConnection</value>
+  </data>
+  <data name="NombreArchivoScript_Regen_XSL" xml:space="preserve">
+    <value>Script_Regen_XSL.sql</value>
+  </data>
+  <data name="Script_Regen_XSL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\GDO\Script_Regen_XSL.sql;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Configuracion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\Configuracion.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UsuariosBD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\UsuariosBD.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ArchivoUsGrants" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\Grants.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoConfiguracion" xml:space="preserve">
+    <value>Configuracion.txt</value>
+  </data>
+  <data name="NombreArchivoUsuariosBD" xml:space="preserve">
+    <value>UsuariosBD.txt</value>
+  </data>
+  <data name="Conexion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\Conexion.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoConexion" xml:space="preserve">
+    <value>Conexion.txt</value>
+  </data>
+  <data name="Slash" xml:space="preserve">
+    <value>/</value>
+  </data>
+  <data name="ListaChequeo_OPEN_OCXXXXXX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\EPM\ListaChequeo_OPEN_OCXXXXXX.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EncabezadoAplicaGDO" xml:space="preserve">
+    <value>column dt new_value vdt
+column db new_value vdb
+select to_char(sysdate,'yyyymmdd_hh24miss') dt, sys_context('userenv','db_name') db from dual;
+spool &amp;vdb._logSAO&lt;numero_oc&gt;_&amp;vdt..txt
+set serveroutput on
+set define off
+set timing on
+execute dbms_application_info.set_action('APLICANDO SAO&lt;numero_oc&gt;');
+prompt Inicio Proceso!!
+select to_char(sysdate,'yyyy-mm-dd hh:mi:ss p.m.') fecha_inicio from dual;
+
+prompt "------------------------------------------------------"
+prompt " APLICANDO &lt;nombre_aplica&gt; "
+prompt "------------------------------------------------------"</value>
+  </data>
+  <data name="FinAplicaGDO" xml:space="preserve">
+    <value>prompt "------------------------------------------------------"
+prompt " FIN DE APLICA &lt;nombre_aplica&gt; "
+prompt "------------------------------------------------------"
+
+select to_char(sysdate,'yyyy-mm-dd hh:mi:ss p.m.') fecha_fin from dual;
+prompt Fin Proceso!!
+set timing off
+set serveroutput off
+set define on
+spool off</value>
+  </data>
+  <data name="EncabezadoAplicaGrant" xml:space="preserve">
+    <value>SET feedback ON
+
+COLUMN file_script new_val file_script;
+COLUMN instance_name new_val instance_name;
+COLUMN fecha_exec new_val fecha_exec;
+COLUMN spool_file new_val spool_file;
+COLUMN usuario_exec new_val usuario_exec;
+COLUMN usuario_os new_val usuario_os;
+DEFINE OC=&lt;numero_oc&gt;
+
+SELECT SUBSTR(SYS_CONTEXT('USERENV','MODULE'),INSTR(SYS_CONTEXT('USERENV','MODULE'),'@')+2) file_script,
+       SYS_CONTEXT('USERENV', 'DB_NAME') instance_name,
+       TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS') fecha_exec,
+       USER usuario_exec,
+       SYS_CONTEXT('USERENV', 'OS_USER') usuario_os,
+       '&amp;OC'||'_'||'apl_grant_'||USER||'_'||SUBSTR(SYS_CONTEXT('USERENV', 'DB_NAME'),1,4)||
+       '_'||TO_CHAR(SYSDATE, 'YYYYMMDD_HH24MISS')  spool_file  FROM DUAL;
+
+SPOOL &amp;spool_file..log
+PROMPT
+PROMPT =========================================
+PROMPT  ****   Información de Ejecución    ****
+PROMPT =========================================
+PROMPT Archivo ejecutado: &amp;file_script
+PROMPT Instancia        : &amp;instance_name 
+PROMPT Fecha ejecución  : &amp;fecha_exec
+PROMPT Usuario DB       : &amp;usuario_exec
+PROMPT Usuario O.S      : &amp;usuario_os
+PROMPT OC               : &amp;OC
+PROMPT ========================================= 
+PROMPT
+PROMPT **** Aplica de permisos para los objetos ****</value>
+  </data>
+  <data name="FinAplicaGrant" xml:space="preserve">
+    <value>PROMPT **** Termina aplica de permisos para los objetos **** 
+
+SPOOL OFF
+SET SERVEROUTPUT OFF</value>
+  </data>
+  <data name="PlantillaSinonimo" xml:space="preserve">
+    <value>PROMPT CREACION PUBLIC SYNONYM &lt;objeto&gt;
+CREATE OR REPLACE PUBLIC SYNONYM &lt;objeto&gt; FOR &lt;usuario&gt;.&lt;objeto&gt;;</value>
+  </data>
+  <data name="TipoGrantUsuario" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="insepm_parametr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\insepm_parametr.sql;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoInsepm_parametr" xml:space="preserve">
+    <value>insepm_parametr</value>
+  </data>
+  <data name="PlantillaInsParametr" xml:space="preserve">
+    <value>REM Archivo Generado Automáticamente
+REM Nombre      : insepm_parametr_&lt;parametro&gt;.sql
+REM Descripcion : script que registra el parámetro en epm_parametr
+REM Autor       : @Llozada
+
+BEGIN
+    INSERT INTO epm_parametr (PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, DATA_TYPE, ALLOW_UPDATE)
+     VALUES
+     (
+         '&lt;parametro&gt;',
+         '&lt;descripcion&gt;',
+         '&lt;valor&gt;',
+         '&lt;funcion&gt;',
+         201,
+         '&lt;tipo&gt;',
+         'Y'
+     );
+    COMMIT;
+END;
+/</value>
+  </data>
+  <data name="Tag_parafunc" xml:space="preserve">
+    <value>&lt;funcion&gt;</value>
+  </data>
+  <data name="Tag_paramdesc" xml:space="preserve">
+    <value>&lt;descripcion&gt;</value>
+  </data>
+  <data name="Tag_parametro" xml:space="preserve">
+    <value>&lt;parametro&gt;</value>
+  </data>
+  <data name="Tag_paramtipo" xml:space="preserve">
+    <value>&lt;tipo&gt;</value>
+  </data>
+  <data name="Tag_paramvalo" xml:space="preserve">
+    <value>&lt;valor&gt;</value>
+  </data>
+  <data name="NombreLibOracle" xml:space="preserve">
+    <value>Oracle_ManagedDataAccess.dll</value>
+  </data>
+  <data name="Oracle_ManagedDataAccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Plantillas\Oracle.ManagedDataAccess.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PlantillaInsMensaje" xml:space="preserve">
+    <value>REM Archivo Generado Automáticamente
+REM Nombre      : insmensaje_EPM-CUZ-&lt;codigo&gt;.sql
+REM Descripcion : script que registra en la tabla mensaje
+REM Autor       : @Llozada
+
+BEGIN
+    --realiza la insercción del mensaje EPM - CUZ - &lt;codigo&gt;
+    INSERT INTO mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo ) 
+	VALUES
+	(
+		&lt;codigo&gt;,
+		'&lt;descripcion&gt;',
+		'EPM',
+		'CUZ',
+		'&lt;causa&gt;',
+		'&lt;solucion&gt;'
+	);
+    COMMIT;    
+END;
+/</value>
+  </data>
+  <data name="NombreArchivoInsMensaje" xml:space="preserve">
+    <value>insmensaje_EPM-CUZ-</value>
+  </data>
+  <data name="Tag_causa" xml:space="preserve">
+    <value>&lt;causa&gt;</value>
+  </data>
+  <data name="Tag_codigo" xml:space="preserve">
+    <value>&lt;codigo&gt;</value>
+  </data>
+  <data name="Tag_descripcion" xml:space="preserve">
+    <value>&lt;descripcion&gt;</value>
+  </data>
+  <data name="Tag_solucion" xml:space="preserve">
+    <value>&lt;solucion&gt;</value>
+  </data>
+  <data name="END" xml:space="preserve">
+    <value>end</value>
+  </data>
+  <data name="PuntoYComa" xml:space="preserve">
+    <value>pc</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>MVM_EPM_CYGNUS_2018_INGENIERIA_SOFTWARE_AUTOR_LLOZ</value>
+  </data>
+  <data name="TipoAplica" xml:space="preserve">
+    <value>Aplica</value>
+  </data>
+  <data name="TipoGrantSIUD" xml:space="preserve">
+    <value>S|I|U|D</value>
+  </data>
+  <data name="GrantSIUD" xml:space="preserve">
+    <value>SELECT,INSERT,UPDATE,DELETE</value>
+  </data>
+  <data name="Antes" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="Despues" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="RutaActualiza" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\RutaActualiza.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MensajeCheckList" xml:space="preserve">
+    <value>"Ingrese el número del caso para continuar."</value>
+  </data>
+  <data name="NombreArchivoRutaActualiza" xml:space="preserve">
+    <value>RutaActualiza.txt</value>
+  </data>
+  <data name="DropBox" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="RedLocal" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="Principal" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="VistaCompila" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="NombreArchivoRutaSqlplus" xml:space="preserve">
+    <value>RutaSqlplus.txt</value>
+  </data>
+  <data name="RutaSqlplus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\RutaSqlplus.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DocumentacionHtml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\DocumentacionHtml.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoDocHtml" xml:space="preserve">
+    <value>DocumentacionHtml.txt</value>
+  </data>
+  <data name="SQL" xml:space="preserve">
+    <value>SQL</value>
+  </data>
+  <data name="SQLPLUS" xml:space="preserve">
+    <value>SQLPLUS</value>
+  </data>
+  <data name="EncabezadoAplSqlplus" xml:space="preserve">
+    <value>SET appinfo ON
+SET echo OFF
+SET serveroutput ON
+SET timing OFF
+SET verify OFF
+SET heading OFF 
+SET feedback ON
+SPOOL &lt;nombre_spool&gt;
+PROMPT **** Aplica de objetos ****</value>
+  </data>
+  <data name="FinAplSqlplus" xml:space="preserve">
+    <value>PROMPT **** Termina aplica de objetos **** 
+SPOOL OFF
+SET SERVEROUTPUT OFF</value>
+  </data>
+  <data name="CarpetaAplTemp" xml:space="preserve">
+    <value>aplTemp</value>
+  </data>
+  <data name="PlantillaGrantNP" xml:space="preserve">
+    <value>GRANT &lt;permiso&gt; ON &lt;objeto&gt; TO &lt;usuario&gt;</value>
+  </data>
+  <data name="PlantillaSinonimoNP" xml:space="preserve">
+    <value>CREATE OR REPLACE PUBLIC SYNONYM &lt;objeto&gt; FOR &lt;usuario&gt;.&lt;objeto&gt;</value>
+  </data>
+  <data name="MensajeExito" xml:space="preserve">
+    <value>Proceso terminado con éxito.</value>
+  </data>
+  <data name="MensajeNoConexion" xml:space="preserve">
+    <value>No se pudo establecer la conexión con la base de datos.</value>
+  </data>
+  <data name="CarpetaBK" xml:space="preserve">
+    <value>bk</value>
+  </data>
+  <data name="ReiniciaSecuencia" xml:space="preserve">
+    <value>declare
+    nuval number;
+begin
+	--1. Reiniciar la secuencia seq_ll_objetosbl.
+
+    SELECT seq_ll_objetosbl.nextval
+    INTO nuval
+    FROM dual;
+
+    /*el valor máximo menos el current*/
+    execute immediate 'alter sequence seq_ll_objetosbl increment BY '||(&lt;nuObjetosBl&gt; - nuval);
+
+    SELECT seq_ll_objetosbl.nextval
+    INTO nuval
+    FROM dual;
+
+    execute immediate 'alter sequence seq_ll_objetosbl increment BY 1';
+	
+	--2. Reiniciar la secuencia seq_ll_logapli.
+	SELECT seq_ll_logapli.nextval
+    INTO nuval
+    FROM dual;
+
+    /*el valor máximo menos el current*/
+    execute immediate 'alter sequence seq_ll_logapli increment BY '||(&lt;nuObjetosLog&gt; - nuval);
+
+    SELECT seq_ll_logapli.nextval
+    INTO nuval
+    FROM dual;
+
+    execute immediate 'alter sequence seq_ll_logapli increment BY 1';
+	
+	--3. Reiniciar la secuencia seq_ll_requerimiento.
+	SELECT seq_ll_requerimiento.nextval
+    INTO nuval
+    FROM dual;
+
+    /*el valor máximo menos el current*/
+    execute immediate 'alter sequence seq_ll_requerimiento increment BY '||(&lt;nuRq&gt; - nuval);
+
+    SELECT seq_ll_requerimiento.nextval
+    INTO nuval
+    FROM dual;
+
+    execute immediate 'alter sequence seq_ll_requerimiento increment BY 1';
+	
+	--4. Reiniciar la secuencia seq_ll_horashoja.
+	SELECT seq_ll_horashoja.nextval
+    INTO nuval
+    FROM dual;
+
+    /*el valor máximo menos el current*/
+    execute immediate 'alter sequence seq_ll_horashoja increment BY '||(&lt;nuHorasHoja&gt; - nuval);
+
+    SELECT seq_ll_horashoja.nextval
+    INTO nuval
+    FROM dual;
+
+    execute immediate 'alter sequence seq_ll_horashoja increment BY 1';
+	
+	--5. Reiniciar la secuencia seq_ll_negativa.
+	SELECT seq_ll_negativa.nextval
+    INTO nuval
+    FROM dual;
+
+    /*el valor máximo menos el current*/
+    execute immediate 'alter sequence seq_ll_negativa increment BY '||(&lt;nuSeqNeg&gt; - nuval);
+
+    SELECT seq_ll_negativa.nextval
+    INTO nuval
+    FROM dual;
+
+    execute immediate 'alter sequence seq_ll_negativa increment BY 1';
+	
+End;
+/</value>
+  </data>
+  <data name="HtmlEspec" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\HtmlEspec.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HtmlMetodo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\HtmlMetodo.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HtmlMetodoParam" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\HtmlMetodoParam.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HtmlMetodoReturn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\HtmlMetodoReturn.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HtmlScript" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\bd\HtmlScript.txt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NombreArchivoHtmlEspec" xml:space="preserve">
+    <value>HtmlEspec.txt</value>
+  </data>
+  <data name="NombreArchivoHtmlMetodo" xml:space="preserve">
+    <value>HtmlMetodo.txt</value>
+  </data>
+  <data name="NombreArchivoHtmlParam" xml:space="preserve">
+    <value>HtmlMetodoParam.txt</value>
+  </data>
+  <data name="NombreArchivoHtmlReturn" xml:space="preserve">
+    <value>HtmlMetodoReturn.txt</value>
+  </data>
+  <data name="NombreArchivoHtmlScript" xml:space="preserve">
+    <value>HtmlScript.txt</value>
+  </data>
+  <data name="OUT" xml:space="preserve">
+    <value>OUT</value>
+  </data>
+  <data name="TagHtmlParaDesc" xml:space="preserve">
+    <value>[descripcion_param]</value>
+  </data>
+  <data name="TagHtmlParamDir" xml:space="preserve">
+    <value>[dir_param]</value>
+  </data>
+  <data name="TagHtmlParamName" xml:space="preserve">
+    <value>[nombre_param]</value>
+  </data>
+  <data name="TagHtmlParamType" xml:space="preserve">
+    <value>[tipo_param]</value>
+  </data>
+  <data name="TagHtmlRetorno" xml:space="preserve">
+    <value>[retorno]</value>
+  </data>
+  <data name="TagHtmlTipoRetorno" xml:space="preserve">
+    <value>[tipo_return]</value>
+  </data>
+  <data name="DescReturn" xml:space="preserve">
+    <value>D-Return</value>
+  </data>
+  <data name="NameReturn" xml:space="preserve">
+    <value>N-Return</value>
+  </data>
+  <data name="TagHtml_desarrollador" xml:space="preserve">
+    <value>[desarrollador]</value>
+  </data>
+  <data name="Cygnus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\Cygnus.db;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="KeyGeneraGrants" xml:space="preserve">
+    <value>GeneraGrants</value>
+  </data>
+  <data name="KeyOrdenAutomatico" xml:space="preserve">
+    <value>OrdenAutomatico</value>
+  </data>
+  <data name="KeyEspecificacion" xml:space="preserve">
+    <value>ESPECIFICACION</value>
+  </data>
+  <data name="KeyMetodo" xml:space="preserve">
+    <value>METODO</value>
+  </data>
+  <data name="KeyMetoParam" xml:space="preserve">
+    <value>METODOPARAM</value>
+  </data>
+  <data name="KeyMetoReturn" xml:space="preserve">
+    <value>METODORETURN</value>
+  </data>
+  <data name="KeyScript" xml:space="preserve">
+    <value>SCRIPT</value>
+  </data>
+  <data name="keyDisplayName" xml:space="preserve">
+    <value>DISPLAYNAME</value>
+  </data>
+  <data name="keyFontSize" xml:space="preserve">
+    <value>FONTSIZE</value>
+  </data>
+  <data name="keyThemeColor" xml:space="preserve">
+    <value>THEMECOLOR</value>
+  </data>
+  <data name="keyThemeSource" xml:space="preserve">
+    <value>THEMESOURCE</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenido</value>
+  </data>
+  <data name="KeyProxy" xml:space="preserve">
+    <value>PROXY</value>
+  </data>
+  <data name="RutaSqlplusDefault" xml:space="preserve">
+    <value>RUTA</value>
+  </data>
+  <data name="UsuarioSQLDefault" xml:space="preserve">
+    <value>SQL_USUARIO</value>
+  </data>
+  <data name="PARACREAACTKEY" xml:space="preserve">
+    <value>PARACREAACTKEY</value>
+  </data>
+  <data name="ayudaAzure" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\ayudaAzure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Fullname" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\fullname.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArchivoCredenciales" xml:space="preserve">
+    <value>od.txt</value>
+  </data>
+  <data name="ArchivoVersion" xml:space="preserve">
+    <value>Version.txt</value>
+  </data>
+</root>

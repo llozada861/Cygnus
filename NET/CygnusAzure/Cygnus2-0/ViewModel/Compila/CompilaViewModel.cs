@@ -1,0 +1,150 @@
+﻿using Cygnus2_0.General;
+using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Compila;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using res = Cygnus2_0.Properties.Resources;
+
+namespace Cygnus2_0.ViewModel.Compila
+{
+    public class CompilaViewModel: ViewModelBase, IViews
+    {
+        private Handler handler;
+        private readonly DelegateCommand _process;
+        private readonly DelegateCommand _clean;
+        private readonly DelegateCommand _conectar;
+        private CompilaModel model;
+        private SelectListItem _usuario;
+        private string archivosDescomp;
+        private string archivosCompila;
+        private string estadoConn;
+        private ObservableCollection<SelectListItem> listaObservaciones;
+        private ObservableCollection<Archivo> listaArchivosCargados;
+        private ObservableCollection<SelectListItem> listaUsuarios;
+
+        public ICommand Process => _process;
+        public ICommand Clean => _clean;
+        public ICommand Conectar => _conectar;
+        public CompilaViewModel(Handler hand)
+        {
+            _process = new DelegateCommand(OnProcess);
+            _clean = new DelegateCommand(OnClean);
+            _conectar = new DelegateCommand(OnConection);
+
+            handler = hand;
+            model = new CompilaModel(handler, this);
+
+            this.ListaObservaciones = new ObservableCollection<SelectListItem>();
+            this.ListaArchivosCargados = new ObservableCollection<Archivo>();
+            ListaUsuarios = handler.ListaUsuarios;
+
+            try
+            {
+                this.ArchivosCompilados = model.pObtCantObjsInvalidos();
+                this.ArchivosDescompilados = this.ArchivosCompilados;
+            }
+            catch(Exception ex)
+            {
+                handler.MensajeError(res.MensajeNoConexion + ". [" + ex.Message + "]");
+                this.ArchivosCompilados = "0";
+                this.ArchivosDescompilados = "0";
+            }
+        }
+
+        public SelectListItem Usuario
+        {
+            get { return _usuario; }
+            set { SetProperty(ref _usuario, value); }
+        }
+        public string ArchivosCompilados
+        {
+            get { return archivosCompila; }
+            set { SetProperty(ref archivosCompila, value); }
+        }
+        public string ArchivosDescompilados
+        {
+            get { return archivosDescomp; }
+            set { SetProperty(ref archivosDescomp, value); }
+        }
+        public string EstadoConn
+        {
+            get { return handler.EstadoConn; }
+            set { SetProperty(ref estadoConn, handler.EstadoConn); }
+        }
+        public ObservableCollection<Archivo> ListaArchivosCargados
+        {
+            get { return listaArchivosCargados; }
+            set { SetProperty(ref listaArchivosCargados, value); }
+        }
+        public ObservableCollection<SelectListItem> ListaObservaciones
+        {
+            get { return listaObservaciones; }
+            set { SetProperty(ref listaObservaciones, value); }
+        }
+        public ObservableCollection<SelectListItem> ListaUsuarios
+        {
+            get { return listaUsuarios; }
+            set { SetProperty(ref listaUsuarios, value); }
+        }
+
+        public void OnProcess(object commandParameter)
+        {
+            if (this.Usuario == null)
+            {
+                handler.MensajeError("Debe ingresar el usuario.");
+                return;
+            }
+
+            try
+            {
+                model.pCompilarObjetos();
+            }
+            catch(Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
+        }
+        public void OnClean(object commandParameter)
+        {
+            try
+            {
+                model.pCleanView();
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
+        }
+        public void OnConection(object commandParameter)
+        {
+            try
+            {
+                //se intenta realizar la conexión con la base de datos
+                handler.pRealizaConexion();
+                this.ArchivosCompilados = model.pObtCantObjsInvalidos();
+            }
+            catch(Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
+
+            this.EstadoConn = handler.fsbValidaConexion();
+        }
+        public void pListaArchivos(string[] DropPath)
+        {
+            try
+            {
+                model.pListaArchivos(DropPath);
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
+        }
+    }
+}

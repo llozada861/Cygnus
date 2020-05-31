@@ -1,0 +1,20 @@
+Paso a paso:
+
+Las credenciales de FLEX y FLEX_CUSTOMIZACION se deben solicitar a base 
+de datos o un especialista.
+
+1. Con el usuario FLEX, ejecutar el script Aplica_FLEX.sql. Este 
+   crea todos los objetos que requiere la aplicación cygnus, así como 
+   todos los usuarios sql y sus respectivos permisos.
+   
+2. Crear los usuarios por smartflex a través de SAASE/General/Nuevo Usuario. 
+   Ver las caracteristicas que debe tener los usuarios en el archivo
+   Crea_Usuarios_Aplicacion.docx y seguir las instrucciones del documento.
+   
+3. Creados los usuarios en smartflex, adicionar usuarios nuevos al
+	script_roles_smartflex.sql y ejecutar con FLEX.
+   
+4. Aplicar todas las WO que se encontraban en pruebas.
+
+5. Validar que los usuarios se hayan creado correctamente.
+

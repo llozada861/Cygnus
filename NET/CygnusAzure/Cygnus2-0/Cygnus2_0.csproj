@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{85C50BA1-895F-4159-8207-6EF6757028F4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cygnus2_0</RootNamespace>
+    <AssemblyName>Cygnus</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icons8-código-fuente-64.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.9.0, Culture=neutral, PublicKeyToken=bc9b0c37bf06c6a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Independentsoft.Share, Version=1.0.700.15434, Culture=neutral, PublicKeyToken=76be97fe952f1ec7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Independentsoft.Share.1.0.700\lib\net45\Independentsoft.Share.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.2.4\lib\net451\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.2.4\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.4\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Build2.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Build2.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Common, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Services.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Core.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Core.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Dashboards.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Dashboards.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.DistributedTask.Common.Contracts, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.16.153.0\lib\net45\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Policy.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Policy.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.SourceControl.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.SourceControl.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Test.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Test.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.TestManagement.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.TestManagement.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Wiki.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Wiki.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Work.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.Work.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.TeamFoundation.WorkItemTracking.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Services.Common, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Services.Client.16.153.0\lib\net45\Microsoft.VisualStudio.Services.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Services.TestManagement.TestPlanning.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.VisualStudio.Services.TestManagement.TestPlanning.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Services.TestResults.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.TeamFoundationServer.Client.16.153.0\lib\net45\Microsoft.VisualStudio.Services.TestResults.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Services.WebApi, Version=16.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Services.Client.16.153.0\lib\net45\Microsoft.VisualStudio.Services.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.18.6.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.4\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BaseDatos\sqlite\DbContext.cs" />
+    <Compile Include="DAO\MarkDAO.cs" />
+    <Compile Include="DAO\SqliteDAO.cs" />
+    <Compile Include="General\Archivo.cs" />
+    <Compile Include="General\ConexionOracle.cs" />
+    <Compile Include="General\Documentacion\DocumentacionHTML.cs" />
+    <Compile Include="General\Documentacion\DocumentacionModel.cs" />
+    <Compile Include="General\Documentacion\ModificacionModel.cs" />
+    <Compile Include="General\Documentacion\ParametrosModel.cs" />
+    <Compile Include="General\Documentacion\RetornoModel.cs" />
+    <Compile Include="General\EncriptaPass.cs" />
+    <Compile Include="General\Handler.cs" />
+    <Compile Include="General\LocUtil.cs" />
+    <Compile Include="General\Mail.cs" />
+    <Compile Include="General\SelectListItem.cs" />
+    <Compile Include="General\Times\Day.cs" />
+    <Compile Include="General\Times\Hoja.cs" />
+    <Compile Include="General\Times\TareaHoja.cs" />
+    <Compile Include="Interface\IViews.cs" />
+    <Compile Include="Model\Aplica\GenerateAplicaModel.cs" />
+    <Compile Include="Model\Compila\CompilaModel.cs" />
+    <Compile Include="Model\Index\IndexModel.cs" />
+    <Compile Include="Model\Objects\BlockModel.cs" />
+    <Compile Include="Model\Objects\DesblockModel.cs" />
+    <Compile Include="Model\Refresh\RefreshModel.cs" />
+    <Compile Include="Model\Security\EncryptModel.cs" />
+    <Compile Include="Model\Security\RoleModel.cs" />
+    <Compile Include="Model\Settings\ConexionModel.cs" />
+    <Compile Include="Model\Settings\ConfGeneralModel.cs" />
+    <Compile Include="Model\Settings\UpdateModel.cs" />
+    <Compile Include="Model\Time\TimeModel.cs" />
+    <Compile Include="Pages\Aplica\UCGenerateAplica.xaml.cs">
+      <DependentUpon>UCGenerateAplica.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Aplica\VisualHelper.cs" />
+    <Compile Include="Pages\Compila\UCCompila.xaml.cs">
+      <DependentUpon>UCCompila.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\AdminData.xaml.cs">
+      <DependentUpon>AdminData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\UCMessage.xaml.cs">
+      <DependentUpon>UCMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\UCParametro.xaml.cs">
+      <DependentUpon>UCParametro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Documentation\AdminDoc.xaml.cs">
+      <DependentUpon>AdminDoc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Documentation\DocHtml.xaml.cs">
+      <DependentUpon>DocHtml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Documentation\GenerateHtml.xaml.cs">
+      <DependentUpon>GenerateHtml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\General\WinImage.xaml.cs">
+      <DependentUpon>WinImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Objects\AdminObjects.xaml.cs">
+      <DependentUpon>AdminObjects.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Objects\UCBlockObject.xaml.cs">
+      <DependentUpon>UCBlockObject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Objects\UCDesBlockObjects.xaml.cs">
+      <DependentUpon>UCDesBlockObjects.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Pkg\UCPackageFirstLevel.xaml.cs">
+      <DependentUpon>UCPackageFirstLevel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Refresh\RefreshView.xaml.cs">
+      <DependentUpon>RefreshView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Security\AdminUser.xaml.cs">
+      <DependentUpon>AdminUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Security\EncryptPass.xaml.cs">
+      <DependentUpon>EncryptPass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Security\OneDriveCred.xaml.cs">
+      <DependentUpon>OneDriveCred.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Security\Role.xaml.cs">
+      <DependentUpon>Role.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Security\User.xaml.cs">
+      <DependentUpon>User.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\AdminGeneral\AdminGeneral.xaml.cs">
+      <DependentUpon>AdminGeneral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\AzureData\Azure.xaml.cs">
+      <DependentUpon>Azure.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Database\GrantsUserControl.xaml.cs">
+      <DependentUpon>GrantsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Database\UserBDUserControl.xaml.cs">
+      <DependentUpon>UserBDUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Documentation\ConfHtmlUserControl.xaml.cs">
+      <DependentUpon>ConfHtmlUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Documentation\HtmlUserControl.xaml.cs">
+      <DependentUpon>HtmlUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\General\HeadUserControl.xaml.cs">
+      <DependentUpon>HeadUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\General\ObjectTypeUserControl.xaml.cs">
+      <DependentUpon>ObjectTypeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\General\PathsUserControl.xaml.cs">
+      <DependentUpon>PathsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\General\ReservWords.xaml.cs">
+      <DependentUpon>ReservWords.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\General\UCGeneral.xaml.cs">
+      <DependentUpon>UCGeneral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\AdminGeneral\UCHtml.xaml.cs">
+      <DependentUpon>UCHtml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Treeview\TreeViewWpf.xaml.cs">
+      <DependentUpon>TreeViewWpf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Help\UCUpdate.xaml.cs">
+      <DependentUpon>UCUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\DelegateCommand.cs" />
+    <Compile Include="Pages\SolInfo\RequetInfo.xaml.cs">
+      <DependentUpon>RequetInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Threats\ThreatsProcess.xaml.cs">
+      <DependentUpon>ThreatsProcess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\Combine.xaml.cs">
+      <DependentUpon>Combine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\DetailTask.xaml.cs">
+      <DependentUpon>DetailTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\HelpArea.xaml.cs">
+      <DependentUpon>HelpArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\SendMail.xaml.cs">
+      <DependentUpon>SendMail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\TimesView.xaml.cs">
+      <DependentUpon>TimesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\upTask.xaml.cs">
+      <DependentUpon>upTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\winProgressBar.xaml.cs">
+      <DependentUpon>winProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Cygnus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Cygnus.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\AnonymousIdentity.cs" />
+    <Compile Include="Security\AuthenticationService.cs" />
+    <Compile Include="Security\CustomIdentity.cs" />
+    <Compile Include="Security\CustomPrincipal.cs" />
+    <Compile Include="TotalSumConverter.cs" />
+    <Compile Include="ViewModel\Aplica\GenerateAplicaViewModel.cs" />
+    <Compile Include="ViewModel\Compila\CompilaViewModel.cs" />
+    <Compile Include="ViewModel\Data\MessageViewModel.cs" />
+    <Compile Include="ViewModel\Data\ParameterViewModel.cs" />
+    <Compile Include="ViewModel\Documentation\GeneratHtmlViewModel.cs" />
+    <Compile Include="ViewModel\Home\HomeViewModel.cs" />
+    <Compile Include="ViewModel\Index\IndexViewModel.cs" />
+    <Compile Include="ViewModel\Objects\BlockViewModel.cs" />
+    <Compile Include="ViewModel\Objects\DesblockViewModel.cs" />
+    <Compile Include="ViewModel\Pkg\FirstLevelViewModel.cs" />
+    <Compile Include="ViewModel\Refresh\RefreshViewModel.cs" />
+    <Compile Include="ViewModel\Security\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModel\Security\EncryptViewModel.cs" />
+    <Compile Include="ViewModel\Security\RoleViewModel.cs" />
+    <Compile Include="ViewModel\Settings\ConexionViewModel.cs" />
+    <Compile Include="Interface\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Settings\ConfGeneralViewModel.cs" />
+    <Compile Include="ViewModel\Settings\UpdateViewModel.cs" />
+    <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\01_crll_credmark.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\02_crll_logapli.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\03_crll_objetosbl.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\04_crll_usuarios.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\05_crll_version.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\06_crll_requerimiento.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\07_crll_hoja.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\08_crll_horashoja.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\09_crSequences.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\11_crseq_ll_logapli.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\12_pkg_utilmark.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\14_Grants_usuarios_epm_cygnus.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\15_insepm_parametrCY_GRUPO_CORREO.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\16_insepm_parametrEXC_MENSAJE_MARK.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\26_crea_usua_sql_asig_permisos_mvm.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\pkg_utilmark_fenix.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\00_LEEMEEEEEE.txt" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\Aplica_FLEX.sql" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\FENIX.sql" />
+    <Content Include="img\Fullname.png" />
+    <EmbeddedResource Include="Libs\Updater.exe" />
+    <EmbeddedResource Include="Libs\Independentsoft.Share.dll" />
+    <EmbeddedResource Include="Libs\od.txt" />
+    <EmbeddedResource Include="Libs\Newtonsoft.Json.dll" />
+    <EmbeddedResource Include="Libs\FirstFloor.ModernUI.dll" />
+    <EmbeddedResource Include="Libs\Cygnus.exe.config" />
+    <None Include="Resources\Image1.bmp" />
+    <Page Include="Assets\ModernUI.Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <None Include="img\ayudaAzure.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Libs\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.IdentityModel.Logging.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.IdentityModel.Tokens.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Build2.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Common.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Core.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Dashboards.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Policy.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.SourceControl.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Test.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.TestManagement.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Wiki.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.Work.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.VisualStudio.Services.Common.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.VisualStudio.Services.TestManagement.TestPlanning.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.VisualStudio.Services.TestResults.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Microsoft.VisualStudio.Services.WebApi.dll" />
+    <EmbeddedResource Include="Libs\Notifications.Wpf.dll" />
+    <EmbeddedResource Include="Libs\Oracle.ManagedDataAccess.dll" />
+    <EmbeddedResource Include="Libs\System.Data.SQLite.dll" />
+    <EmbeddedResource Include="Libs\System.IdentityModel.Tokens.Jwt.dll" />
+    <EmbeddedResource Include="Libs\System.Net.Http.Formatting.dll" />
+    <Content Include="i18N\es-CO.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="i18N\en-US.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Content>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Pages\Aplica\UCGenerateAplica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Compila\UCCompila.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\AdminData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\UCMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Data\UCParametro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Documentation\AdminDoc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Documentation\DocHtml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Documentation\GenerateHtml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\General\WinImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Objects\AdminObjects.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Objects\UCBlockObject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Objects\UCDesBlockObjects.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Pkg\UCPackageFirstLevel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Refresh\RefreshView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Security\AdminUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Security\EncryptPass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Security\OneDriveCred.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Security\Role.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Security\User.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\AzureData\Azure.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Database\GrantsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Database\UserBDUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Documentation\ConfHtmlUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Documentation\HtmlUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\General\HeadUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\General\ObjectTypeUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\General\PathsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\General\ReservWords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Help\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Pages\Settings\Help\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\Settings\AdminGeneral\AdminGeneral.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\AdminGeneral\UCHtml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\General\Appearance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Pages\Settings\General\Appearance.xaml.cs">
+      <DependentUpon>Appearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\General\AppearanceViewModel.cs" />
+    <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Database\UCConection.xaml.cs">
+      <DependentUpon>UCConection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Pages\Settings\Treeview\TreeViewWpf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Database\UCConection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\General\UCGeneral.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Help\UCUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SolInfo\RequetInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Threats\ThreatsProcess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\Combine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\DetailTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\HelpArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\SendMail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\TimesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\upTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\winProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="BaseDatos\Cygnus.db" />
+    <EmbeddedResource Include="BaseDatos\oracleInstall\Crea_Usuarios_Aplicacion.docx" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Plantillas\EPM\ListaChequeo_OPEN_OCXXXXXX.xls" />
+    <None Include="Plantillas\GDO\CopyFileXSLTemplate.sh" />
+    <None Include="Plantillas\GDO\F_125_Solicitud_Creacion_Linea_Base_SAO_XXXXXX.xlsx" />
+    <None Include="Plantillas\GDO\ListaChequeo_OPEN_SAOXXXXXX.xls" />
+    <None Include="Plantillas\GDO\XXXXXXXX_ICB_SubVersion %28solicitud obj SAO XXXXXX%29.xlsx" />
+    <None Include="Properties\Cygnus.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Cygnus.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BaseDatos\oracleInstall\script_roles_smartflex.sql" />
+    <None Include="BaseDatos\bd\HtmlEspec.txt" />
+    <None Include="BaseDatos\bd\HtmlScript.txt" />
+    <None Include="BaseDatos\bd\HtmlMetodoReturn.txt" />
+    <None Include="BaseDatos\bd\HtmlMetodoParam.txt" />
+    <None Include="BaseDatos\bd\HtmlMetodo.txt" />
+    <Content Include="icons8-código-fuente-64.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\Conexion.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\Configuracion.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\DocumentacionHtml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\Grants.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\ListaChequeo.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\ListaEncabezadoObjetos.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\ListaPalabrasReservadas.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\ListaTipoObjetos.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\RutaActualiza.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\RutaSqlplus.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseDatos\bd\UsuariosBD.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Plantillas\GDO\Script_Regen_XSL.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Plantillas\insepm_parametr.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Plantillas\Oracle.ManagedDataAccess.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="General\Word\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Notifications.Wpf\Notifications.Wpf.csproj">
+      <Project>{5c9a4f46-263d-4c23-b361-f09e14bb109e}</Project>
+      <Name>Notifications.Wpf</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Aplica.UCGenerateAplica"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cygnus2_0.Pages.Aplica" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="7" >
+            <DataGrid
+            x:Name="dataGridArchivosCargados" 
+            IsReadOnly="false" 
+            AllowDrop="True" 
+            Drop="listBox1_Drop"
+            AutoGenerateColumns="False"
+            SelectionMode="Single"
+            CanUserDeleteRows="True"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="False"
+            ItemsSource="{Binding Path=ListaArchivosCargados}"
+            local:VisualHelper.EnableRowsMove="True"            
+            VerticalContentAlignment="Center"
+                SelectionChanged="dataGridArchivosCargados_SelectionChanged"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Archivo"
+                  Binding="{Binding Path=FileName}" />
+                    <DataGridTextColumn
+                  Header="Tipo"
+                  IsReadOnly="True"
+                  Binding="{Binding Path=Tipo}" />
+                    <!--<DataGridTextColumn
+                  Header="Ruta"
+                  IsReadOnly="True"
+                  Binding="{Binding Path=Ruta}" />-->
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Column="0" Grid.Row="5" Grid.RowSpan="5" Grid.ColumnSpan="7">
+            <DataGrid 
+            x:Name="dataGridArchivosGen" 
+            IsReadOnly="True" 
+            AutoGenerateColumns="False"
+            AllowDrop="False" 
+            SelectionMode="Single"
+            CanUserDeleteRows="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="False"
+            ItemsSource="{Binding Path=ListaArchivosGenerados}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Archivo"
+                  Foreground="Red"
+                  Binding="{Binding Path=FileName}" />
+                    <DataGridTextColumn
+                  Header="Observación"
+                  IsReadOnly="True"
+                  Binding="{Binding Path=Observacion}" />
+                    <!--<DataGridTextColumn
+                  Header="Ruta"
+                  IsReadOnly="True"
+                  Binding="{Binding Path=Ruta}" />-->
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Label x:Name="SaoLabel" Content="Código" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="CasoText" Text="{Binding Path=Codigo}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,4" VerticalAlignment="Center"/>
+
+                <Label x:Name="label4" Content="Usuario" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox x:Name="comboBox" 
+                  ItemsSource="{Binding Path=ListaUsuarios}" 
+                  SelectedItem="{Binding Path=Usuario}"
+                  DisplayMemberPath="Text"
+                  Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center"
+                  >
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox x:Name="grbTotal" Header="Archivos Cargados" Grid.Column="7" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="3" >
+            <Grid >
+                <Label x:Name="labelTotal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=ArchivosCargados}" FontWeight="Bold" FontSize="80" />
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="grbGen" Header="Archivos Generados" Grid.Column="7" Grid.Row="6" Grid.ColumnSpan="3" Grid.RowSpan="3" >
+            <Grid>
+                <Label x:Name="labelGen" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=ArchivosGenerados}" FontWeight="Bold" FontSize="80"/>
+            </Grid>
+        </GroupBox>
+
+        <Label x:Name="label3" Visibility="Hidden" Content="Ruta Apl." HorizontalAlignment="Left" Margin="6,65,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBoxPlant" IsChecked="{Binding Handl.Formulario.EntregaPlantilla, Mode = TwoWay}" Content="Plantillas?" HorizontalAlignment="Left" Margin="22,71,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Visibility="Hidden"/>
+
+        <Button x:Name="btnSqlPlus" Content="Sqlplus" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Sqlplus}" Grid.Column="7" Grid.Row="9" Margin="0,0,5,0"/>
+        <Button x:Name="BotonGenerar" Content="Procesar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="8" Grid.Row="9" Margin="0,0,5,0" Click="BotonGenerar_Click"/>
+        <Button x:Name="BotonLimpiar" Content="Limpiar" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Clean}" Grid.Column="9" Grid.Row="9" Click="BotonLimpiar_Click"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,18 @@
+-- ************************************************************************
+-- Propiedad intelectual de Empresas Públicas de Medellín Copyright 2017
+--
+-- Archivo         :   [objeto]
+-- Descripción     :   [descripcion]
+-- Observaciones   :
+--
+-- Autor           :   [desarrollador]
+-- Fecha          :    [fecha]
+--
+-- Historia de Modificaciones
+-- Fecha        Autor      Modificación
+-- [fecha]   [desarrollador]     [WO] - Creación
+-- ************************************************************************
+PROMPT - Script :   [objeto]
+PROMPT - Autor  :   [desarrollador]
+PROMPT
+PROMPT - [descripcion] ...

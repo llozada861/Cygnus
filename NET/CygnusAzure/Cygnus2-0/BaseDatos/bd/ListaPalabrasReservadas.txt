@@ -1,0 +1,12 @@
+create 
+or
+replace
+function 
+procedure 
+package 
+table
+sequence 
+view 
+execute
+immediate
+as

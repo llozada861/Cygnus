@@ -1,0 +1,9 @@
+GeneraArchivoVersion;false
+GeneraAplicaArriba;false
+OrdenAutomatico;true
+GeneraGrants;true
+ListaChequeo;false
+GuardaObjRepo;false
+SolicitudLineaBase;false
+RutaRepo1;
+RutaRepo2;

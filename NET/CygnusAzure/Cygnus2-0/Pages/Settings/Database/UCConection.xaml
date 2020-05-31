@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Settings.UCConection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <GroupBox x:Name="Main" Header="Datos De Conexión">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="10*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+
+                <Label x:Name="lblUsuario" Content="Usuario" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txtUsuario" Text="{Binding Path=Usuario}"  TextWrapping="Wrap" Grid.Column="3" Grid.Row="1" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
+                <Label x:Name="lblpass" Content="Contraseña"  HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
+                <PasswordBox x:Name="passwordBox" Grid.ColumnSpan="5" Grid.Column="3" Grid.Row="2" Margin="0,0,0,5" />
+                <Label x:Name="lblBd" Content="Base Datos" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txtBd" TextWrapping="Wrap" Text="{Binding BaseDatos}" Grid.Column="3" Grid.Row="3" Margin="0,0,0,5" Grid.ColumnSpan="5"/>
+                <Label x:Name="lblServer" Content="Servidor" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Margin="0,0,6,0" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txtServer" TextWrapping="Wrap" Text="{Binding Servidor}" Grid.Column="3" Grid.Row="4" Margin="0,0,0,5" Grid.ColumnSpan="5"/>
+                <Label x:Name="lblPuerto" Content="Puerto" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txtPuerto"  TextWrapping="Wrap" Text="{Binding Puerto}" Grid.Column="3" Grid.Row="5" Margin="0,0,0,5" Grid.ColumnSpan="5"/>
+                <Button x:Name="btnGuardar" Content="Conectar" Command="{Binding Path=Process}" CommandParameter="{Binding ElementName=passwordBox}" VerticalAlignment="Top" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3" Margin="0,0,5,0"/>
+                <Button x:Name="btnProbar" Visibility="Hidden" Content="Probar Conexión" Command="{Binding Path=Test}" CommandParameter="{Binding ElementName=passwordBox}" VerticalAlignment="Top" Grid.Column="4" Grid.Row="7" Grid.ColumnSpan="4"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

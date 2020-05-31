@@ -1,0 +1,16 @@
+Funcion;Si;1;300;E
+Procedimiento;Si;1;301;E
+Paquete;Si;1;302;E
+Trigger;Si;1;303;No
+Tabla;No;0;100;S|I|U|D
+Secuencia;No;0;104;S
+Vista;No;0;103;S
+Indice;No;0;101;No
+Sinonimo;No;0;108;No
+Alter;No;0;105;No
+Drop;No;0;1;No
+Insert;No;0;201;No
+Update;No;0;202;No
+Delete;No;0;200;No
+Script;Si;1;400;No
+Otros;No;0;500;No

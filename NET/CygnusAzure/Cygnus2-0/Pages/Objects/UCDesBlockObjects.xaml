@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Objects.UCDesBlockObjects"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:controls="clr-namespace:Notifications.Wpf.Controls;assembly=Notifications.Wpf"
+             xmlns:wpf="clr-namespace:Notifications.Wpf;assembly=Notifications.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <!--<GroupBox x:Name="ActualizaFecha" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4">
+        
+        </GroupBox>-->
+        
+        <GroupBox x:Name="grbObjsBloqs" Header="Objetos Bloqueados" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="5">
+            <Grid>
+                <DataGrid
+        x:Name="dataGridObjetos" 
+        IsReadOnly="false" 
+        AllowDrop="True"                   
+        AutoGenerateColumns="False"
+        SelectionMode="Single"
+        CanUserDeleteRows="false"
+        CanUserAddRows="False"
+        CanUserReorderColumns="False"
+        CanUserSortColumns="True"            
+        ItemsSource="{Binding Path=ListaArchivosBloqueo}"
+                 MouseDoubleClick="dataGridObjetos_MouseDoubleClick" 
+                    SelectionChanged="dataGridObjetos_SelectionChanged">
+                    
+                    <DataGrid.Columns>                        
+                        <DataGridTextColumn
+                Header="Objeto"
+                IsReadOnly="True"
+                Binding="{Binding Path=FileName}" />
+                        <DataGridTextColumn                  
+                IsReadOnly="True"
+                Header="Owner"
+                Binding="{Binding Path=Owner}" />
+                        <DataGridTextColumn
+                Header="OC"
+                IsReadOnly="True"
+                Binding="{Binding Path=OrdenCambio}" />
+                        <DataGridTextColumn
+                Header="Fecha Estimada Lib."
+                IsReadOnly="True"                
+                Binding="{Binding Path=FechaEstLib}"
+                FontStyle="Italic"/>
+                        <DataGridTextColumn
+                Header="Fecha Bloqueo"
+                IsReadOnly="True"
+                Binding="{Binding Path=FechaBloqueo}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="grbUpFecha" Header="Actualizar Fecha" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <DatePicker x:Name="dtFechaLib" SelectedDate="{Binding Path=Fecha}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
+                <Button x:Name="btnUpd" Content="Actualizar" Click="btnUpd_Click" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" />
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="grbDesbloqueo" Header="Objetos a Desbloquear" Grid.Column="0" Grid.Row="5" Grid.RowSpan="5" Grid.ColumnSpan="6">
+            <Grid>
+                <DataGrid 
+        x:Name="dataGridObjsDesbloq" 
+        IsReadOnly="False" 
+        AutoGenerateColumns="False"
+        AllowDrop="False" 
+        SelectionMode="Single"
+        CanUserDeleteRows="True"
+        CanUserAddRows="False"
+        CanUserReorderColumns="False"
+        CanUserSortColumns="True" 
+        ItemsSource="{Binding Path=ListaArchivosDesbloq}" 
+                    SelectionChanged="dataGridObjsDesbloq_SelectionChanged">
+                    <DataGrid.Columns>                        
+                        <DataGridTextColumn
+                Header="Objeto"
+                IsReadOnly="True"
+                Binding="{Binding Path=FileName}" />
+                        <DataGridTextColumn                  
+                IsReadOnly="True"
+                Header="Owner"
+                Binding="{Binding Path=Owner}" />
+                        <DataGridTextColumn
+                Header="OC"
+                IsReadOnly="True"
+                Binding="{Binding Path=OrdenCambio}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="grbCantidad" Header="Objetos A Desbloquear" Grid.Column="6" Grid.Row="5" Grid.ColumnSpan="4" Grid.RowSpan="4">
+            <Grid>
+                <Label x:Name="labelDesBlock"  Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=CantidadObjetos}" FontWeight="Bold" FontSize="80" />
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btnDesbloq" Content="Desbloquear" Command="{Binding Path=Process}" VerticalAlignment="Center"  Grid.Column="6" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0"/>
+        <Button x:Name="btnLimpiar" Content="Limpiar" Command="{Binding Path=Clean}" VerticalAlignment="Center"  Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" />
+        <!--<Button x:Name="Conexion" Content="Conexión BD" Command="{Binding Path=Conectar}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" VerticalAlignment="Center" />
+        <Label x:Name="Estado" Content="{Binding Path=EstadoConn}" Grid.Column="2" Grid.Row="9" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="5,0,0,0"/>
+        <controls:NotificationArea x:Name="WindowArea" Position="TopRight" MaxItems="3" Grid.Column="5" Grid.ColumnSpan="5" Grid.RowSpan="2"/>-->
+    </Grid>    
+</UserControl>

@@ -1,0 +1,15 @@
+/***************************************************************************
+<Package Fuente="Propiedad Intelectual de Empresas Publicas de Medellín">
+<Unidad> pkg_epm_uiepmroc </Unidad>
+<Autor> Luis Lozada </Autor>
+<Fecha>15-06-2019</Fecha>
+<Descripcion>
+Paquete para uso del .Net EPMAOC.
+</Descripcion>
+<Historial>
+<Modificacion Autor="llozada" Fecha="15-06-2019" Inc="OC[XXXXXX]">
+Creación.
+</Modificacion>
+</Historial>
+</Package>
+***************************************************************************/

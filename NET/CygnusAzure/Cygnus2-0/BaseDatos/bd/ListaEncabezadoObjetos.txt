@@ -1,0 +1,21 @@
+create or replace function;Funcion;1;end
+create or replace procedure;Procedimiento;2;end
+create or replace package;Paquete;3;end
+create or replace trigger;Trigger;4;end
+create table;Tabla;5;pc
+create sequence;Secuencia;6;pc
+create or replace view;Vista;7;pc
+create index;Indice;8;pc
+create synonym;Sinonimo;9;pc
+create public synonym;Sinonimo;10;pc
+alter table;Alter;11;pc
+drop table;Drop;12;pc
+drop package;Drop;13;pc
+drop index;Drop;14;pc
+drop synonym;Drop;15;pc
+insert into;Insert;16;pc
+update;Update;17;pc
+delete from;Delete;18;pc
+merge into;Merge;19;pc
+declare;Script;20;end
+begin;Script;21;end

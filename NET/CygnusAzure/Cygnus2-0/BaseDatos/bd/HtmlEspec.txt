@@ -1,0 +1,15 @@
+/***************************************************************************
+<Package Fuente="Propiedad Intelectual de Empresas Publicas de Medellín">
+<Unidad> [metodo] </Unidad>
+<Autor> [autor] - MVM </Autor>
+<Fecha> [fecha] </Fecha>
+<Descripcion>
+	[descripcion]
+</Descripcion>
+<Historial>
+<Modificacion Autor="[desarrollador]" Fecha="[fecha]" Inc="[numero_oc]">
+	Creación.
+</Modificacion>
+</Historial>
+</Package>
+***************************************************************************/

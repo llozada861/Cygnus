@@ -1,0 +1,81 @@
+--HTMLTablaMetodo
+<table cellpadding="3" width="90%" style="background-color:#FFF;border-collapse:collapse;">
+<th align="left" colspan="6" style="border:1px solid black;padding:5px;background:#CCCCFF;font-size:12.0pt;font-family:Arial;font-weight:bold">[metodo]</th>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Fuente de Datos</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[descripcion_fuente]</td>
+</tr>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Descripción</td>
+<td colspan="5" style="border:1px solid black;padding:5px"><pre style="font-size:10.0pt;font-family:Arial;font-weight:plain">
+        [descripcion_metodo] 
+    </pre></td>
+</tr>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Diseñado Por</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[autor]</td>
+</tr>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Programador Original</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[autor]</td>
+</tr>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Fecha de Creación</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[fecha]</td>
+</tr>
+
+--HTMLTablaPaquete
+<table cellpadding="3" width="90%" style="background-color:#FFF;border-collapse:collapse;">
+<th align="left" colspan="6" style="border:1px solid black;padding:5px;background:#CCCCFF;font-size:16.0pt;font-family:Arial;font-weight:bold">[metodo]</th>
+<tr>
+<td width="20%" style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Fuente de Datos</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[descripcion_fuente]</td>
+</tr>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Diseñado  Por</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[autor]</td>
+</tr>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Programador Original</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[autor]</td>
+</tr>
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Fecha de Creación</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">[fecha]</td>
+</tr>
+<!--<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Version</td>
+<td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain"></td>
+</tr> -->
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Descripción</td>
+<td colspan="5" style="border:1px solid black;padding:5px"><pre style="font-size:10.0pt;font-family:Arial;font-weight:plain">
+        [descripcion_metodo] 
+    </pre></td>
+</tr>
+
+--HTMLHistorialHeadModif
+<tr><td colspan="6" align="center" style="border:1px solid black;padding:5px;background:#CCCCFF;font-size:10.0pt;font-family:Arial;font-weight:bold">Historial de Modificaciones</td></tr>
+<tr>
+<td width="20%" style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Fecha</td>
+<td width="20%" style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Autor</td>
+<td width="20%" style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Incidente</td>
+<td width="40%" colspan="3" style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Descripción</td>
+</tr>
+
+--HTMLHeadRetornos
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Retorno</td>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Tipo</td>
+<td colspan="4" style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Descripción</td>
+</tr>
+
+--HTMLHeadParametros
+<tr>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Parametro </td>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Tipo</td>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">In</td>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Out</td>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Default</td>
+<td style="border:1px solid black;padding:5px;background:#FFFACD;font-size:10.0pt;font-family:Arial;font-weight:bold">Descripción</td>
+</tr>

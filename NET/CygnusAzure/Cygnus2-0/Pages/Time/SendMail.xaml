@@ -1,0 +1,42 @@
+﻿<Window x:Class="Cygnus2_0.Pages.Time.SendMail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             Width="550" Height="350" 
+             WindowStyle="None" 
+             WindowStartupLocation="CenterScreen" 
+             ResizeMode="NoResize" Loaded="Window_Loaded" >
+    <Grid x:Name="pWindow">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Label Margin="20,10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontWeight="Bold"  >Para</Label>
+        <TextBox x:Name="txtPara" Text="{Binding Path=MailCreaRq.Para, Mode=TwoWay}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" />
+
+        <Label Margin="20,10" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontWeight="Bold"  >Asunto</Label>
+        <TextBox x:Name="txtAsunto" Text="{Binding Path=MailCreaRq.Asunto, Mode=TwoWay}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+
+        <Label Margin="20,10" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontWeight="Bold"  >Cuerpo</Label>
+        <TextBox x:Name="txtCuerpo" Text="{Binding Path=MailCreaRq.Cuerpo,Mode=TwoWay}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+
+        <Button x:Name="btnEnviar" Content="Enviar"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Grid.Column="0" Grid.Row="9" Click="btnEnviar_Click"  />
+        <Button x:Name="BtnCancel" Content="Cancelar" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Grid.Column="1" Grid.Row="9" Click="BtnCancel_Click"  />
+    </Grid>
+</Window>

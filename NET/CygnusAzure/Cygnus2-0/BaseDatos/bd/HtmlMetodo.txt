@@ -1,0 +1,19 @@
+/***************************************************************************				
+<Procedure Fuente="Propiedad Intelectual de Empresas Publicas de Medellín">				
+<Unidad> [metodo] </Unidad>				
+<Descripcion>				
+	[descripcion]
+</Descripcion>				
+<Autor> [autor] - MVM </Autor>				
+<Fecha>[fecha]</Fecha>				
+<Parametros>				
+	[parametro]
+</Parametros>				
+[retorno]
+<Historial>				
+<Modificacion Autor="[desarrollador]" Fecha="[fecha]" Inc="[numero_oc]">				
+	Creación del método.				
+</Modificacion>				
+</Historial>				
+</Procedure>				
+***************************************************************************/

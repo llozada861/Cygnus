@@ -1,0 +1,231 @@
+﻿using Cygnus2_0.General;
+using Cygnus2_0.ViewModel.Compila;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using res = Cygnus2_0.Properties.Resources;
+
+namespace Cygnus2_0.Model.Compila
+{
+    public class CompilaModel
+    {
+        private Handler handler;
+        private CompilaViewModel view;
+        public CompilaModel(Handler hand, CompilaViewModel view)
+        {
+            handler = hand;
+            this.view = view;
+        }
+
+        public void pListaArchivos(string[] DropPath)
+        {
+            foreach (string dropfilepath in DropPath)
+            {
+                Archivo archivo = new Archivo();
+                archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
+                archivo.RutaConArchivo = dropfilepath;
+                archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
+                archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
+                archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+                ObtenerTipoArchivoComp(archivo);
+                archivo.BloquesCodigo = new List<string>();
+
+                if (!archivo.Observacion.Equals(res.No_aplica))
+                    view.ListaArchivosCargados.Add(archivo);
+                else
+                    view.ListaObservaciones.Add(new SelectListItem { Text = archivo.FileName, Observacion = archivo.Tipo, Value = "Archivo no permitido para aplicar por esta pantalla" });
+            }
+        }
+
+        public void ObtenerTipoArchivoComp(Archivo archivo)
+        {
+            string sbLine = "";
+            string sbLineSpace = "";
+            Int64 nuMenosUno = Convert.ToInt64(res.MenosUno);
+
+            string nombreArchivo = archivo.NombreSinExt;
+            archivo.Observacion = "";
+
+            if (res.Extensiones.IndexOf(archivo.Extension.ToLower()) > -1)
+            {
+                using (StreamReader streamReader = new StreamReader(archivo.RutaConArchivo))
+                {
+                    sbLine = streamReader.ReadLine();
+
+                    while (sbLine != null)
+                    {
+                        sbLineSpace = Regex.Replace(sbLine, @"\s+", " ");
+
+                        if (sbLineSpace.StartsWith(res.Arroa))
+                        {
+                            archivo.Tipo = res.TipoAplica;
+                            archivo.Observacion = res.No_aplica;
+                            break;
+                        }
+
+                        archivo.TipoAplicacion = res.SQLPLUS;
+
+                        foreach (SelectListItem prefijo in handler.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
+                        {
+                            if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
+                            {
+                                archivo.Tipo = prefijo.Value;
+                                archivo.NombreObjeto = handler.pObtenerNombreObjeto(sbLineSpace);
+                                archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
+                                archivo.TipoAplicacion = archivo.FinArchivo.Equals(res.END) ? res.SQL : res.SQLPLUS;
+                                archivo.InicioArchivo = prefijo.Text.ToLower();
+                                break;
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(archivo.Tipo))
+                        {
+                            sbLine = streamReader.ReadLine();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            //Sino se encuentra el tipo dentro del archivo
+            if (string.IsNullOrEmpty(archivo.Tipo))
+            {
+                /*foreach (SelectListItem prefijo in handler.ListaTipoArchivos)
+                {
+                    if (archivo.FileName.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
+                    {
+                        archivo.Tipo = prefijo.Value;
+                        handler.SavePath = archivo.Ruta + "\\";
+                        break;
+                    }
+                }*/
+
+                if (string.IsNullOrEmpty(archivo.NombreObjeto))
+                {
+                    archivo.NombreObjeto = nombreArchivo;
+                }
+
+                //Si no encuentra ningún tipo
+                if (string.IsNullOrEmpty(archivo.Tipo))
+                {
+                    archivo.Tipo = res.TipoOtros;
+                }
+            }
+        }
+
+        public string pObtCantObjsInvalidos()
+        {
+            return handler.DAO.pObtCantObjsInvalidos();
+        }
+
+        public void pCompilarObjetos()
+        {
+            handler.pObtenerUsuarioCompilacion(view.Usuario.Text);
+
+            foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQL)))
+            {
+                handler.pObtieneBloquesCodigo(archivo);
+                pCompilaObjetosBD(archivo);
+                handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
+            }
+
+            if (handler.ConexionOracle.ConexionOracleCompila.State == System.Data.ConnectionState.Open)
+            {
+                handler.ConexionOracle.ConexionOracleCompila.Close();
+            }
+
+            pExeSqlplus();
+
+            view.ArchivosDescompilados = pObtCantObjsInvalidos();
+        }
+
+        public void pCompilaObjetosBD(Archivo archivo)
+        {
+            //Valida que el objeto no se encuentra aplicado en más de un esquema
+            handler.DAO.pValidaUsuarioCompila(archivo, handler);
+            //Valida que solo se aplique en un esquema
+            handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
+
+            view.ArchivosCompilados = handler.DAO.pObtCantObjsInvalidos();
+
+            //Se guarda el estado de los objetos compilados antes de la ejecución
+            //dao.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, stObjetosInvalidosAntes, res.Antes, handler.DatosConexion.UsuarioCompila);
+            handler.pGuardaLogCompilacion(archivo, view.ArchivosCompilados, res.Antes);
+
+            for (int i = archivo.BloquesCodigo.Count - 1; i >= 0; i--)
+            {
+                //Console.WriteLine(archivo.BloquesCodigo.ElementAt(i));
+                handler.DAO.pEjecutarScriptBD(archivo.BloquesCodigo.ElementAt(i));
+            }
+
+            view.ArchivosDescompilados = handler.DAO.pObtCantObjsInvalidos();
+
+            //dao.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, stObjetosInvalidosDespues, res.Despues, handler.DatosConexion.UsuarioCompila);
+            handler.pGuardaLogCompilacion(archivo, view.ArchivosDescompilados, res.Despues);
+            pObtieneErroresAplicacion(archivo);
+        }
+
+        public void pObtieneErroresAplicacion(Archivo archivo)
+        {
+            handler.DAO.pObtErrores(archivo, view);
+
+            if (!view.ListaObservaciones.ToList().Exists(x => x.Text.Equals(archivo.NombreObjeto)) && string.IsNullOrEmpty(archivo.AplicaTemporal))
+                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.NombreObjeto, Value = "Sin Errores." });
+            else
+                if (!string.IsNullOrEmpty(archivo.AplicaTemporal))
+                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.AplicaTemporal, Value = "Ver log de la aplicación." });
+
+            view.ListaObservaciones = view.ListaObservaciones;
+        }
+
+        public void pExeSqlplus()
+        {
+            string credenciales;
+
+            if (view.ListaArchivosCargados.Count > 0)
+            {
+                handler.pObtenerUsuarioCompilacion(view.Usuario.Text);
+                credenciales = handler.ConnViewModel.UsuarioCompila + "/" + handler.ConnViewModel.PassCompila + "@" + handler.ConnViewModel.BaseDatos;
+
+                foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
+                {
+                    handler.pGuardaLogCompilacion(archivo, view.ArchivosCompilados, res.Antes);
+                    handler.DAO.pExecuteSqlplus(credenciales, archivo);
+                }
+            }
+
+            Thread.Sleep(3000);
+
+            foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
+            {
+                pObtieneErroresAplicacion(archivo);
+                handler.pGuardaLogCompilacion(archivo, view.ArchivosDescompilados, res.Despues);
+                handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
+            }
+
+            if (Convert.ToInt64(view.ArchivosCompilados) < Convert.ToInt64(view.ArchivosDescompilados))
+            {
+                throw new Exception("Los scritps aplicados descompilaron objetos en la base de datos. Antes [" + view.ArchivosCompilados + " objetos descompilados]. Ahora [" + view.ArchivosDescompilados + " objetos descompilados]");
+            }
+        }
+
+        public void pCleanView()
+        {
+            view.ListaArchivosCargados.Clear();
+            view.ListaObservaciones.Clear();
+            view.ArchivosCompilados = pObtCantObjsInvalidos();
+            view.ArchivosDescompilados = "0";
+            view.ListaUsuarios = null;
+            view.ListaUsuarios = handler.ListaUsuarios;
+            view.EstadoConn = "1";
+        }
+    }
+}

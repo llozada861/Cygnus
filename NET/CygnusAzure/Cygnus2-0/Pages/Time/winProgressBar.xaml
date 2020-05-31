@@ -1,0 +1,13 @@
+﻿<Window x:Class="Cygnus2_0.Pages.Time.winProgressBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cygnus2_0.Pages.Time"
+             mc:Ignorable="d" 
+             Title="Espere..." Height="117" Width="225" Loaded="Window_Loaded" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="pWindow">
+        <ProgressBar Name="pbStatus"  Minimum="0" Maximum="100" HorizontalAlignment="Left" Height="19" Margin="10,46,0,0" VerticalAlignment="Top" Width="197"/>
+        <Label x:Name="txtBar" Content="Descargando tareas de Azure..." HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="197"/>
+    </Grid>
+</Window>
