@@ -970,7 +970,7 @@ AS
         END IF;
         
         --Se valida que el objeto no se encuentre bloqueado para el usuario.
-        OPEN  cuValidaBloqueo;
+        /*OPEN  cuValidaBloqueo;
         FETCH cuValidaBloqueo INTO sbUsuario,sdFechaBl,sbOrden;
         CLOSE cuValidaBloqueo;   
         
@@ -999,7 +999,7 @@ AS
                 onuErrorCode := 1004;
                 osbErrorMessage := 'El objeto ['||isbObjeto||'] debe estar bloqueado con su usuario SQL para poder compilarlo en los ambientes controlados.';
             END IF;
-        END IF;
+        END IF;*/
         
     EXCEPTION
         WHEN OTHERS THEN

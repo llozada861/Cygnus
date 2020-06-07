@@ -390,6 +390,7 @@
     <Compile Include="Interface\ViewModelBase.cs" />
     <Compile Include="ViewModel\Settings\ConfGeneralViewModel.cs" />
     <Compile Include="ViewModel\Settings\UpdateViewModel.cs" />
+    <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\01_crll_credmark.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\02_crll_logapli.sql" />
