@@ -377,6 +377,18 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a begin
+        ///    pkg_epm_bogenericthreads.process(&apos;[NOMBRE]&apos;,&apos;[PARAMETROS]&apos;,NULL,NULL);
+        ///end;
+        ////.
+        /// </summary>
+        public static string EjecutaHilos {
+            get {
+                return ResourceManager.GetString("EjecutaHilos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a SET appinfo ON
         ///SET echo OFF
         ///SET serveroutput ON
@@ -1990,6 +2002,27 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a /***************************************************************************
+        ///    &lt;Procedure Fuente=&quot;Propiedad Intelectual de Empresas Publicas de Medellín&quot;&gt;
+        ///    &lt;Unidad&gt; pProcesoMasivo[NOMBRE] &lt;/Unidad&gt;
+        ///    &lt;Descripcion&gt;
+        ///        Api principal para el proceso [NOMBRE]
+        ///    &lt;/Descripcion&gt;
+        ///    &lt;Autor&gt; [desarrollador] - MVM &lt;/Autor&gt;
+        ///    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+        ///    &lt;Parametros&gt;
+        ///        &lt;param nombre=&quot;inuHilo&quot; tipo=&quot;NUMBER&quot; Direccion=&quot;IN&quot;&gt;
+        ///            Hilo a procesar
+        ///        &lt;/param&gt;
+        ///        &lt;param nomb [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaProcesoMasivo {
+            get {
+                return ResourceManager.GetString("PlantillaProcesoMasivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a PROMPT CREACION PUBLIC SYNONYM &lt;objeto&gt;
         ///CREATE OR REPLACE PUBLIC SYNONYM &lt;objeto&gt; FOR &lt;usuario&gt;.&lt;objeto&gt;;.
         /// </summary>
@@ -2905,11 +2938,38 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [NOMBRE].
+        /// </summary>
+        public static string TagNombreHilos {
+            get {
+                return ResourceManager.GetString("TagNombreHilos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &lt;objeto&gt;.
         /// </summary>
         public static string TagObjetoAplica {
             get {
                 return ResourceManager.GetString("TagObjetoAplica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [PARAMETROS_HTML].
+        /// </summary>
+        public static string TagPARAMETROS_HTML {
+            get {
+                return ResourceManager.GetString("TagPARAMETROS_HTML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [PARAMETROS].
+        /// </summary>
+        public static string TagParametrosHilos {
+            get {
+                return ResourceManager.GetString("TagParametrosHilos", resourceCulture);
             }
         }
         

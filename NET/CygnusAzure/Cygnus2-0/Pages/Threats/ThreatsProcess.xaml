@@ -6,6 +6,40 @@
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Threats"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="textSource" 
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="Gray"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -32,29 +66,39 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <GroupBox x:Name="grbDatosRequeridos" Header="Proceso" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="4">
-            <Grid>
+        <GroupBox x:Name="grbDatosRequeridos" Header="Proceso" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="4">
+            <Grid Margin="10,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label x:Name="lblNombre" Content="Nombre (sin estándar)" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox x:Name="txtNombre" Text="{Binding Path=Nombre}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,4" VerticalAlignment="Center"/>
+                <Label x:Name="lblNombre" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="txtNombre" Text="{Binding Path=Nombre}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Column="2" Grid.Row="0"
+                         Grid.ColumnSpan="3" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Nombre máximo 6 letras" TextChanged="TxtNombre_TextChanged"
+                         />
 
-                <Label x:Name="lblHilos" Content="Usuario" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox x:Name="txtHilos" Text="{Binding Path=Hilos}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,4" VerticalAlignment="Center"/>
+                <Label x:Name="lblHilos" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="txtHilos" Text="{Binding Path=Hilos}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Column="2" Grid.Row="1" 
+                         Grid.ColumnSpan="3" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Cantidad de hilos"
+                         />
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="grbParametros" Header="Parámetros" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="4">
-            <Grid>
+        <GroupBox x:Name="grbParametros" Header="Parámetros" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="4">
+            <Grid Margin="10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -70,10 +114,97 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBox x:Name="txtParam" Text="{Binding Path=Parametro}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,5,0" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtTipo" Text="{Binding Path=Tipo}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,0" VerticalAlignment="Center"/>
-                
+                <TextBox x:Name="txtParam" 
+                         Text="{Binding Path=Parametro}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Column="0" Grid.Row="0" 
+                         Grid.ColumnSpan="2" Margin="0,0,5,0" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Nombre Parámetro"
+                         />
+                <TextBox x:Name="txtTipo" Text="{Binding Path=Tipo}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" 
+                         Grid.ColumnSpan="2" Margin="5,0" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Tipo"
+                         />
+                <Button x:Name="btnAdd" Content="+" Command="{Binding Path=Add}" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnAdd_Click" />
+
+                <DataGrid x:Name="dataGridParameter"
+                    AutoGenerateColumns="False"
+                    SelectionMode="Single"
+                    CanUserDeleteRows="True"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserSortColumns="False"
+                    ItemsSource="{Binding Path=ListaParametros}"
+                    Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4"
+                      >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn                  
+                            IsReadOnly="True"
+                            Header="Parámetro"
+                            Binding="{Binding Path=Text}" 
+                            Width="300"/>
+                        <DataGridTextColumn
+                            IsReadOnly="True"
+                            Header="Tipo"
+                            Binding="{Binding Path=Observacion}" 
+                            Width="200"
+                            />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
+        </GroupBox>
+
+        <GroupBox x:Name="grbProcesos" Header="Procesos" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="6">
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <CheckBox Name="chkPre" Content="Api Pre?" Grid.Column="0" Grid.Row="1" Click="ChkPre_Click" />
+                <CheckBox Name="chkPrin" Content="Api Principal" Grid.Column="0" Grid.Row="2" IsChecked="True" IsEnabled="False"/>
+                <CheckBox Name="chkPost" Content="Api Post?" Grid.Column="0" Grid.Row="3" Click="ChkPost_Click" />
+                <RadioButton Name="rdPkg" Content="Paquete?" Grid.Column="0" Grid.Row="4" Click="RdPkg_Click" />
+                <RadioButton Name="rdPro" Content="Procedimiento?" Grid.Column="0" Grid.Row="5" Click="RdPro_Click" />
+
+                <Button x:Name="btnPre" Content="Ver" Command="{Binding Path=Pre}" Visibility="Hidden" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPre_Click" />
+                <Button x:Name="btnPrin" Content="Ver" Command="{Binding Path=Principal}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPrin_Click" />
+                <Button x:Name="btnPost" Content="Ver" Visibility="Hidden" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPost_Click" />
+                <Button x:Name="btnPkg" Content="Ver" Visibility="Hidden" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPkg_Click" />
+
+                <Button x:Name="btnEjecuta" Content="Ejecución" Command="{Binding Path=Ejecutar}" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                
+                <Button x:Name="btnGenerar" Content="Descargar" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox x:Name="grbEjecuta" Header="Vista Previa" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="7" Grid.RowSpan="6">
+            <RichTextBox x:Name="richTextBoxResult" IsReadOnly="True">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="{Binding Path=VistaPrevia}"/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
         </GroupBox>
     </Grid>
 </UserControl>

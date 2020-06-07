@@ -1511,4 +1511,115 @@ End;
   <data name="ArchivoVersion" xml:space="preserve">
     <value>Version.txt</value>
   </data>
+  <data name="EjecutaHilos" xml:space="preserve">
+    <value>begin
+    pkg_epm_bogenericthreads.process('[NOMBRE]','[PARAMETROS]',NULL,NULL);
+end;
+/</value>
+  </data>
+  <data name="PlantillaProcesoMasivo" xml:space="preserve">
+    <value>/***************************************************************************
+    &lt;Procedure Fuente="Propiedad Intelectual de Empresas Publicas de Medellín"&gt;
+    &lt;Unidad&gt; pProcesoMasivo[NOMBRE] &lt;/Unidad&gt;
+    &lt;Descripcion&gt;
+        Api principal para el proceso [NOMBRE]
+    &lt;/Descripcion&gt;
+    &lt;Autor&gt; [desarrollador] - MVM &lt;/Autor&gt;
+    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+    &lt;Parametros&gt;
+        &lt;param nombre="inuHilo" tipo="NUMBER" Direccion="IN"&gt;
+            Hilo a procesar
+        &lt;/param&gt;
+        &lt;param nombre="inuHilos" tipo="NUMBER" Direccion="IN"&gt;
+            Cantidad de hilos
+        &lt;/param&gt;
+        &lt;param nombre="inuTotal" tipo="NUMBER" Direccion="IN"&gt;
+            Cantidad de registros a procesar
+        &lt;/param&gt;
+        &lt;param nombre="isbPrograma" tipo="estaprog.esprprog%type" Direccion="IN"&gt;
+            Programa
+        &lt;/param&gt;
+        [PARAMETROS_HTML]
+        &lt;param nombre="isbUsuario" tipo="VARCHAR2" Direccion="IN"&gt;
+            Usuario que ejecuta
+        &lt;/param&gt;
+        &lt;param nombre="isbTerminal" tipo="VARCHAR2" Direccion="IN"&gt;
+            Terminal
+        &lt;/param&gt;
+        &lt;param nombre="onuCodigoError" tipo="Pkg_Epm_Utilidades.tyCodigoError" Direccion="OUT"&gt;
+            Código de error
+        &lt;/param&gt;
+        &lt;param nombre="osbMensajeError" tipo="Pkg_Epm_Utilidades.tyMensajeError" Direccion="OUT"&gt;
+            Mensaje de error
+        &lt;/param&gt;
+    &lt;/Parametros&gt;
+    &lt;Historial&gt;
+    &lt;Modificacion Autor="[desarrollador]" Fecha="[fecha]" Inc="WOXXXX"&gt;
+        Método creado por Cygnus.
+    &lt;/Modificacion&gt;
+    &lt;/Historial&gt;
+    &lt;/Procedure&gt;
+    ***************************************************************************/
+    PROCEDURE pProcesoMasivo[NOMBRE]
+    (
+        inuHilo         IN  NUMBER,
+        inuHilos        IN  NUMBER,
+        inuTotal        IN  NUMBER,
+        isbPrograma     IN  estaprog.esprprog%type,
+        [PARAMETROS]
+        isbUsuario      IN  VARCHAR2,
+        isbTerminal     IN  VARCHAR2,
+        onuCodigoError  OUT Pkg_Epm_Utilidades.tyCodigoError,
+        osbMensajeError OUT Pkg_Epm_Utilidades.tyMensajeError
+    )
+    IS
+        csbMT_NAME              VARCHAR2(50)   := 'pProcesoMasivo[NOMBRE]';
+        sbProgramaHilo          estaprog.esprprog%TYPE;
+        nuPorcentaje            estaprog.esprporc%TYPE := 1;     
+    BEGIN
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPUSH);
+
+        --Programa del hilo a procesar
+        sbProgramaHilo := isbPrograma||'-'||to_char(inuHilo);
+
+        -- Inserta registro en estados de programa - ESTAPROG
+        pkStatusExeProgramMgr.AddRecord (sbProgramaHilo,'Procesando ...',inuTotal);
+        pkGeneralServices.CommitTransaction;
+
+        /******************* START USER CODE ***********************/        
+            --Se actualiza el proceso en estaprog
+            nuPorcentaje := nuPorcentaje + 1;
+            Pkstatusexeprogrammgr.Upstatusexeprogramat(sbProgramaHilo, 'Proceso en ejecucion...', inuTotal, nuPorcentaje);
+            pkGeneralServices.committransaction;
+       /******************** END USER CODE ************************/
+
+        --Finaliza proceso
+        Pkstatusexeprogrammgr.Upstatusexeprogramat(sbProgramaHilo, 'Proceso en ejecucion...', inuTotal, inuTotal);
+        Pkstatusexeprogrammgr.Processfinishok(sbProgramaHilo, 'Proceso Finalizado');
+        pkGeneralServices.CommitTransaction;
+
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP);
+    EXCEPTION
+        WHEN LOGIN_DENIED OR ex.CONTROLLED_ERROR OR pkConstante.exERROR_LEVEL2 THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERC);
+            Pkstatusexeprogrammgr.Processfinishnok(sbProgramaHilo, SQLERRM);
+            Pkgeneralservices.Committransaction;
+            RAISE;
+        WHEN OTHERS THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERR);
+            Errors.SetError;
+            Pkstatusexeprogrammgr.Processfinishnok(sbProgramaHilo, SQLERRM);
+            Pkgeneralservices.Committransaction;
+            RAISE ex.CONTROLLED_ERROR;
+    END pProcesoMasivo[NOMBRE];</value>
+  </data>
+  <data name="TagNombreHilos" xml:space="preserve">
+    <value>[NOMBRE]</value>
+  </data>
+  <data name="TagParametrosHilos" xml:space="preserve">
+    <value>[PARAMETROS]</value>
+  </data>
+  <data name="TagPARAMETROS_HTML" xml:space="preserve">
+    <value>[PARAMETROS_HTML]</value>
+  </data>
 </root>
