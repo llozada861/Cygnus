@@ -34,7 +34,7 @@ namespace Cygnus2_0.Pages.Threats
             DataContext = view;
 
             InitializeComponent();
-            rdPkg.IsChecked = true;
+            //rdPkg.IsChecked = true;
         }
 
         private void BtnPre_Click(object sender, RoutedEventArgs e)
@@ -64,34 +64,46 @@ namespace Cygnus2_0.Pages.Threats
 
         private void ChkPre_Click(object sender, RoutedEventArgs e)
         {
-            if(chkPre.IsChecked == true) 
+            if (chkPre.IsChecked == true)
+            {
                 btnPre.Visibility = Visibility.Visible;
+                view.ApiPre = true;
+            }
             else
+            {
                 btnPre.Visibility = Visibility.Hidden;
+                view.ApiPre = false;
+            }
         }
 
         private void ChkPost_Click(object sender, RoutedEventArgs e)
         {
             if (chkPost.IsChecked == true)
+            {
                 btnPost.Visibility = Visibility.Visible;
+                view.ApiPost = true;
+            }
             else
+            {
                 btnPost.Visibility = Visibility.Hidden;
+                view.ApiPost = false;
+            }
         }
 
         private void RdPkg_Click(object sender, RoutedEventArgs e)
         {
-            if (rdPkg.IsChecked == true)
+            /*if (rdPkg.IsChecked == true)
             {
                 btnPkg.Visibility = Visibility.Visible;
-            }
+            }*/
         }
 
         private void RdPro_Click(object sender, RoutedEventArgs e)
         {
-            if (rdPro.IsChecked == true)
+            /*if (rdPro.IsChecked == true)
             {
                 btnPkg.Visibility = Visibility.Hidden;
-            }
+            }*/
         }
 
         private void TxtNombre_TextChanged(object sender, TextChangedEventArgs e)
@@ -101,6 +113,25 @@ namespace Cygnus2_0.Pages.Threats
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void ChkCant_Click(object sender, RoutedEventArgs e)
+        {
+            if (chkCant.IsChecked == true)
+            {
+                btnCant.Visibility = Visibility.Visible;
+                view.ApiCantidad = true;
+            }
+            else
+            {
+                btnCant.Visibility = Visibility.Hidden;
+                view.ApiCantidad = false;
+            }
+        }
+
+        private void BtnCant_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
