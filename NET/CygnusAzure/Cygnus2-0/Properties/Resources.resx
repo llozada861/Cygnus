@@ -1622,4 +1622,199 @@ end;
   <data name="TagPARAMETROS_HTML" xml:space="preserve">
     <value>[PARAMETROS_HTML]</value>
   </data>
+  <data name="PlantillaProcesoPost" xml:space="preserve">
+    <value>/***************************************************************************
+    &lt;Procedure Fuente="Propiedad Intelectual de Empresas Publicas de Medellín"&gt;
+    &lt;Unidad&gt; pProcesoPost[NOMBRE] &lt;/Unidad&gt;
+    &lt;Descripcion&gt;
+        Api POST para el proceso [NOMBRE]
+    &lt;/Descripcion&gt;
+    &lt;Autor&gt; [desarrollador] - MVM &lt;/Autor&gt;
+    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+    &lt;Parametros&gt;
+        &lt;param nombre="isbPrograma" tipo="estaprog.esprprog%type" Direccion="IN"&gt;
+            Programa
+        &lt;/param&gt;
+        &lt;param nombre="inuHilos" tipo="NUMBER" Direccion="IN"&gt;
+            Cantidad de hilos
+        &lt;/param&gt;
+        [PARAMETROS_HTML]
+    &lt;/Parametros&gt;
+    &lt;Historial&gt;
+    &lt;Modificacion Autor="[desarrollador]" Fecha="[fecha]" Inc="WOXXXX"&gt;
+        Método creado por Cygnus.
+    &lt;/Modificacion&gt;
+    &lt;/Historial&gt;
+    &lt;/Procedure&gt;
+    ***************************************************************************/
+    PROCEDURE pProcesoPost[NOMBRE]
+    (
+        isbPrograma IN estaprog.esprprog%type,
+        inuHilos    IN NUMBER,
+        [PARAMETROS]
+    )
+    IS
+        csbMT_NAME      VARCHAR2(50)   := 'pProcesoPost[NOMBRE]';
+    BEGIN
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPUSH);
+
+        /******************* START USER CODE ***********************/        
+            
+       /******************** END USER CODE ************************/
+
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP);
+    EXCEPTION
+        WHEN LOGIN_DENIED OR ex.CONTROLLED_ERROR OR pkConstante.exERROR_LEVEL2 THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERC);
+            RAISE;
+        WHEN OTHERS THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERR);
+            Errors.SetError;
+            RAISE ex.CONTROLLED_ERROR;
+    END pProcesoPost[NOMBRE];</value>
+  </data>
+  <data name="PlantillaProcesoPre" xml:space="preserve">
+    <value>/***************************************************************************
+    &lt;Procedure Fuente="Propiedad Intelectual de Empresas Publicas de Medellín"&gt;
+    &lt;Unidad&gt; pProcesoPre[NOMBRE] &lt;/Unidad&gt;
+    &lt;Descripcion&gt;
+        Api PRE para el proceso [NOMBRE]
+    &lt;/Descripcion&gt;
+    &lt;Autor&gt; [desarrollador] - MVM &lt;/Autor&gt;
+    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+    &lt;Parametros&gt;
+        &lt;param nombre="isbPrograma" tipo="estaprog.esprprog%type" Direccion="IN"&gt;
+            Programa
+        &lt;/param&gt;
+        &lt;param nombre="inuHilos" tipo="NUMBER" Direccion="IN"&gt;
+            Cantidad de hilos
+        &lt;/param&gt;
+        [PARAMETROS_HTML]
+    &lt;/Parametros&gt;
+    &lt;Historial&gt;
+    &lt;Modificacion Autor="[desarrollador]" Fecha="[fecha]" Inc="WOXXXX"&gt;
+        Método creado por Cygnus.
+    &lt;/Modificacion&gt;
+    &lt;/Historial&gt;
+    &lt;/Procedure&gt;
+    ***************************************************************************/
+    PROCEDURE pProcesoPre[NOMBRE]
+    (
+        isbPrograma IN estaprog.esprprog%type,
+        inuHilos    IN NUMBER,
+        [PARAMETROS]
+    )
+    IS
+        csbMT_NAME      VARCHAR2(50)   := 'pProcesoPre[NOMBRE]';
+    BEGIN
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPUSH);
+
+        /******************* START USER CODE ***********************/        
+            
+       /******************** END USER CODE ************************/
+
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP);
+    EXCEPTION
+        WHEN LOGIN_DENIED OR ex.CONTROLLED_ERROR OR pkConstante.exERROR_LEVEL2 THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERC);
+            RAISE;
+        WHEN OTHERS THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERR);
+            Errors.SetError;
+            RAISE ex.CONTROLLED_ERROR;
+    END pProcesoPre[NOMBRE];</value>
+  </data>
+  <data name="PlantillaCantidadHilos" xml:space="preserve">
+    <value>/******************************************************************************************************
+    &lt;Procedure Fuente="Propiedad Intelectual de Empresas Publicas de Medellín"&gt;
+    &lt;Unidad&gt; fnuObtCantidad[NOMBRE]&lt;/Unidad&gt;
+    &lt;Descripcion&gt;
+         Obtiene la cantidad de registros a procesar para el hilo
+    &lt;/Descripcion&gt;
+    &lt;Autor&gt;[desarrollador] - MVM &lt;/Autor&gt;
+    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+    &lt;Parametros&gt;
+        &lt;param nombre="inuHilo" tipo="NUMBER" Direccion="In" &gt;
+             Hilo a procesar
+        &lt;/param&gt;
+        &lt;param nombre="isbPrograma" tipo="estaprog.esprprog%type" Direccion="In" &gt;
+             Programa estaprog
+        &lt;/param&gt;
+        &lt;param nombre="inuHilo" tipo="NUMBER" Direccion="In" &gt;
+             Hilo a procesar
+        &lt;/param&gt;
+        &lt;param nombre="inuHilos" tipo="NUMBER" Direccion="In" &gt;
+             Cantidad de hilos
+        &lt;/param&gt;
+        [PARAMETROS_HTML]
+    &lt;/Parametros&gt;
+    &lt;Retorno Nombre = "Numérico" Tipo = "NUMBER"&gt;
+        Descripcion
+    &lt;/Retorno&gt;
+    &lt;Historial&gt;
+    &lt;Modificacion Autor="[desarrollador]" Fecha="[fecha]" Inc="WOXXXXX"&gt;
+          Creacion.
+    &lt;/Modificacion&gt;
+    &lt;/Historial&gt;
+    &lt;/Procedure&gt;
+    ******************************************************************************************************/
+    FUNCTION fnuObtCantidad[NOMBRE]
+    (
+        inuHilo     IN NUMBER,
+        isbPrograma IN estaprog.esprprog%type,
+        inuHilos    IN NUMBER,
+        [PARAMETROS]
+    )
+    RETURN NUMBER
+    IS
+        csbMT_NAME      VARCHAR2(50)   := 'fnuObtCantidad[NOMBRE]';
+    BEGIN
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPUSH);
+
+        /******************* START USER CODE ***********************/        
+            
+       /******************** END USER CODE ************************/
+
+        pkg_epm_utilidades.trace_setmsg (csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP);
+    EXCEPTION
+        WHEN LOGIN_DENIED OR ex.CONTROLLED_ERROR OR pkConstante.exERROR_LEVEL2 THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERC);
+            RAISE;
+        WHEN OTHERS THEN
+            Pkg_Epm_Utilidades.Trace_SetMsg(csbSP_NAME||csbMT_NAME, cnuNVLTRC, csbPOP_ERR);
+            Errors.SetError;
+            RAISE ex.CONTROLLED_ERROR;
+    END fnuObtCantidad[NOMBRE];</value>
+  </data>
+  <data name="PlantillaInsertHilos" xml:space="preserve">
+    <value>Insert into FLEX.EPM_REGPROC
+   (PROCESO, API_DESC, API_PROCESO, HILOS, GENERA_ARCHIVO [api_pre] [api_post] [api_cant])
+ Values
+   ('[NOMBRE]', '[descripcion]','[api_prin]', [hilos], 'N' [api_preval] [api_postval] [api_cantval]);
+COMMIT;</value>
+  </data>
+  <data name="TagApiCant" xml:space="preserve">
+    <value>[api_cant]</value>
+  </data>
+  <data name="TagApiCantVal" xml:space="preserve">
+    <value>[api_cantval]</value>
+  </data>
+  <data name="TagApiPost" xml:space="preserve">
+    <value>[api_post]</value>
+  </data>
+  <data name="TagApiPostVal" xml:space="preserve">
+    <value>[api_postval]</value>
+  </data>
+  <data name="TagApiPre" xml:space="preserve">
+    <value>[api_pre]</value>
+  </data>
+  <data name="TagApiPreVal" xml:space="preserve">
+    <value>[api_preval]</value>
+  </data>
+  <data name="TagApiPrin" xml:space="preserve">
+    <value>[api_prin]</value>
+  </data>
+  <data name="TagCantidadHilos" xml:space="preserve">
+    <value>[hilos]</value>
+  </data>
 </root>

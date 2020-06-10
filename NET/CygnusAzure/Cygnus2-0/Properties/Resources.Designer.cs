@@ -1918,6 +1918,25 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a /******************************************************************************************************
+        ///    &lt;Procedure Fuente=&quot;Propiedad Intelectual de Empresas Publicas de Medellín&quot;&gt;
+        ///    &lt;Unidad&gt; fnuObtCantidad[NOMBRE]&lt;/Unidad&gt;
+        ///    &lt;Descripcion&gt;
+        ///         Obtiene la cantidad de registros a procesar para el hilo
+        ///    &lt;/Descripcion&gt;
+        ///    &lt;Autor&gt;[desarrollador] - MVM &lt;/Autor&gt;
+        ///    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+        ///    &lt;Parametros&gt;
+        ///        &lt;param nombre=&quot;inuHilo&quot; tipo=&quot;NUMBER&quot; Direccion=&quot;In&quot; &gt;
+        ///             Hilo a p [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaCantidadHilos {
+            get {
+                return ResourceManager.GetString("PlantillaCantidadHilos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a PROMPT ASIGNACION PERMISOS OBJETO &lt;objeto&gt;
         ///GRANT &lt;permiso&gt; ON &lt;objeto&gt; TO &lt;usuario&gt;;.
         /// </summary>
@@ -1933,6 +1952,19 @@ namespace Cygnus2_0.Properties {
         public static string PlantillaGrantNP {
             get {
                 return ResourceManager.GetString("PlantillaGrantNP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Insert into FLEX.EPM_REGPROC
+        ///   (PROCESO, API_DESC, API_PROCESO, HILOS, GENERA_ARCHIVO [api_pre] [api_post] [api_cant])
+        /// Values
+        ///   (&apos;[NOMBRE]&apos;, &apos;[descripcion]&apos;,&apos;[api_prin]&apos;, [hilos], &apos;N&apos; [api_preval] [api_postval] [api_cantval]);
+        ///COMMIT;.
+        /// </summary>
+        public static string PlantillaInsertHilos {
+            get {
+                return ResourceManager.GetString("PlantillaInsertHilos", resourceCulture);
             }
         }
         
@@ -2019,6 +2051,48 @@ namespace Cygnus2_0.Properties {
         public static string PlantillaProcesoMasivo {
             get {
                 return ResourceManager.GetString("PlantillaProcesoMasivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a /***************************************************************************
+        ///    &lt;Procedure Fuente=&quot;Propiedad Intelectual de Empresas Publicas de Medellín&quot;&gt;
+        ///    &lt;Unidad&gt; pProcesoPost[NOMBRE] &lt;/Unidad&gt;
+        ///    &lt;Descripcion&gt;
+        ///        Api POST para el proceso [NOMBRE]
+        ///    &lt;/Descripcion&gt;
+        ///    &lt;Autor&gt; [desarrollador] - MVM &lt;/Autor&gt;
+        ///    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+        ///    &lt;Parametros&gt;
+        ///        &lt;param nombre=&quot;isbPrograma&quot; tipo=&quot;estaprog.esprprog%type&quot; Direccion=&quot;IN&quot;&gt;
+        ///            Programa
+        ///        &lt;/param&gt;
+        ///        &lt;para [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaProcesoPost {
+            get {
+                return ResourceManager.GetString("PlantillaProcesoPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a /***************************************************************************
+        ///    &lt;Procedure Fuente=&quot;Propiedad Intelectual de Empresas Publicas de Medellín&quot;&gt;
+        ///    &lt;Unidad&gt; pProcesoPre[NOMBRE] &lt;/Unidad&gt;
+        ///    &lt;Descripcion&gt;
+        ///        Api PRE para el proceso [NOMBRE]
+        ///    &lt;/Descripcion&gt;
+        ///    &lt;Autor&gt; [desarrollador] - MVM &lt;/Autor&gt;
+        ///    &lt;Fecha&gt;[fecha]&lt;/Fecha&gt;
+        ///    &lt;Parametros&gt;
+        ///        &lt;param nombre=&quot;isbPrograma&quot; tipo=&quot;estaprog.esprprog%type&quot; Direccion=&quot;IN&quot;&gt;
+        ///            Programa
+        ///        &lt;/param&gt;
+        ///        &lt;param  [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PlantillaProcesoPre {
+            get {
+                return ResourceManager.GetString("PlantillaProcesoPre", resourceCulture);
             }
         }
         
@@ -2700,6 +2774,78 @@ namespace Cygnus2_0.Properties {
         public static string Tag_titulo {
             get {
                 return ResourceManager.GetString("Tag_titulo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [api_cant].
+        /// </summary>
+        public static string TagApiCant {
+            get {
+                return ResourceManager.GetString("TagApiCant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [api_cantval].
+        /// </summary>
+        public static string TagApiCantVal {
+            get {
+                return ResourceManager.GetString("TagApiCantVal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [api_post].
+        /// </summary>
+        public static string TagApiPost {
+            get {
+                return ResourceManager.GetString("TagApiPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [api_postval].
+        /// </summary>
+        public static string TagApiPostVal {
+            get {
+                return ResourceManager.GetString("TagApiPostVal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [api_pre].
+        /// </summary>
+        public static string TagApiPre {
+            get {
+                return ResourceManager.GetString("TagApiPre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [api_preval].
+        /// </summary>
+        public static string TagApiPreVal {
+            get {
+                return ResourceManager.GetString("TagApiPreVal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [api_prin].
+        /// </summary>
+        public static string TagApiPrin {
+            get {
+                return ResourceManager.GetString("TagApiPrin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [hilos].
+        /// </summary>
+        public static string TagCantidadHilos {
+            get {
+                return ResourceManager.GetString("TagCantidadHilos", resourceCulture);
             }
         }
         

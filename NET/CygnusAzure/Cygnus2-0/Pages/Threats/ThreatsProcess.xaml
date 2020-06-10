@@ -87,10 +87,17 @@
                          Style="{StaticResource placeHolder}" Tag="Nombre máximo 6 letras" TextChanged="TxtNombre_TextChanged"
                          />
 
-                <Label x:Name="lblHilos" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="txtDescripcion" Text="{Binding Path=Descripcion}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Column="2" Grid.Row="1"
+                         Grid.ColumnSpan="3" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Descripción"
+                         />
+                
                 <TextBox x:Name="txtHilos" Text="{Binding Path=Hilos}" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" Grid.Column="2" Grid.Row="1" 
+                         CharacterCasing="Upper" Grid.Column="2" Grid.Row="2" 
                          Grid.ColumnSpan="3" 
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Cantidad de hilos"
@@ -178,17 +185,19 @@
                 <CheckBox Name="chkPre" Content="Api Pre?" Grid.Column="0" Grid.Row="1" Click="ChkPre_Click" />
                 <CheckBox Name="chkPrin" Content="Api Principal" Grid.Column="0" Grid.Row="2" IsChecked="True" IsEnabled="False"/>
                 <CheckBox Name="chkPost" Content="Api Post?" Grid.Column="0" Grid.Row="3" Click="ChkPost_Click" />
-                <RadioButton Name="rdPkg" Content="Paquete?" Grid.Column="0" Grid.Row="4" Click="RdPkg_Click" />
-                <RadioButton Name="rdPro" Content="Procedimiento?" Grid.Column="0" Grid.Row="5" Click="RdPro_Click" />
+                <CheckBox Name="chkCant" Content="Api Cantidad?" Grid.Column="0" Grid.Row="4" Click="ChkCant_Click" />
+                <!--<RadioButton Name="rdPkg" Content="Paquete?" Grid.Column="0" Grid.Row="4" Click="RdPkg_Click" />-->
+                <!--<RadioButton Name="rdPro" Content="Procedimiento?" Grid.Column="0" Grid.Row="5" Click="RdPro_Click" />-->
 
                 <Button x:Name="btnPre" Content="Ver" Command="{Binding Path=Pre}" Visibility="Hidden" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPre_Click" />
                 <Button x:Name="btnPrin" Content="Ver" Command="{Binding Path=Principal}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPrin_Click" />
-                <Button x:Name="btnPost" Content="Ver" Visibility="Hidden" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPost_Click" />
+                <Button x:Name="btnPost" Content="Ver" Command="{Binding Path=Post}" Visibility="Hidden" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPost_Click" />
+                <Button x:Name="btnCant" Content="Ver" Command="{Binding Path=Cantidad}" Visibility="Hidden" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnCant_Click" />
                 <Button x:Name="btnPkg" Content="Ver" Visibility="Hidden" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnPkg_Click" />
 
                 <Button x:Name="btnEjecuta" Content="Ejecución" Command="{Binding Path=Ejecutar}" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                
-                <Button x:Name="btnGenerar" Content="Descargar" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Button x:Name="btnGenerar" Content="Registro" Command="{Binding Path=Registrar}" Grid.Column="0" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
 
