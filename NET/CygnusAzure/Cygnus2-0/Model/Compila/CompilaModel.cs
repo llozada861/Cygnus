@@ -36,9 +36,14 @@ namespace Cygnus2_0.Model.Compila
                 archivo.BloquesCodigo = new List<string>();
 
                 if (!archivo.Observacion.Equals(res.No_aplica))
+                    archivo.TipoAplicacion = res.SQLPLUS;
+
+                view.ListaArchivosCargados.Add(archivo);
+
+                /*if (!archivo.Observacion.Equals(res.No_aplica))
                     view.ListaArchivosCargados.Add(archivo);
                 else
-                    view.ListaObservaciones.Add(new SelectListItem { Text = archivo.FileName, Observacion = archivo.Tipo, Value = "Archivo no permitido para aplicar por esta pantalla" });
+                    view.ListaObservaciones.Add(new SelectListItem { Text = archivo.FileName, Observacion = archivo.Tipo, Value = "Archivo no permitido para aplicar por esta pantalla" });*/
             }
         }
 
@@ -132,9 +137,12 @@ namespace Cygnus2_0.Model.Compila
 
             foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQL)))
             {
-                handler.pObtieneBloquesCodigo(archivo);
-                pCompilaObjetosBD(archivo);
-                handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
+                if (archivo.TipoAplicacion != res.SQLPLUS)
+                {
+                    handler.pObtieneBloquesCodigo(archivo);
+                    pCompilaObjetosBD(archivo);
+                    handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
+                }
             }
 
             if (handler.ConexionOracle.ConexionOracleCompila.State == System.Data.ConnectionState.Open)
@@ -206,9 +214,13 @@ namespace Cygnus2_0.Model.Compila
 
             foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
             {
-                pObtieneErroresAplicacion(archivo);
-                handler.pGuardaLogCompilacion(archivo, view.ArchivosDescompilados, res.Despues);
-                handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
+                try
+                {
+                    pObtieneErroresAplicacion(archivo);
+                    handler.pGuardaLogCompilacion(archivo, view.ArchivosDescompilados, res.Despues);
+                    handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
+                }
+                catch { }
             }
 
             if (Convert.ToInt64(view.ArchivosCompilados) < Convert.ToInt64(view.ArchivosDescompilados))
