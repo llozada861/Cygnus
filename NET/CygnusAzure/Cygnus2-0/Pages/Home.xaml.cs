@@ -121,6 +121,8 @@ namespace Cygnus2_0.Pages
 
                 registry.SetValue("ProxyEnable", 0);
                 registry.SetValue("ProxyServer", 0);
+                registry.SetValue("AutoDetect", 0);
+                registry.SetValue("AutoConfigURL", 0);
 
                 registry.Close();
                 settingsReturn = InternetSetOption
