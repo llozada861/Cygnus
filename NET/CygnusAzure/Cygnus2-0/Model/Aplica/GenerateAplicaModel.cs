@@ -371,6 +371,11 @@ namespace Cygnus2_0.Model.Aplica
 
                 for (int i = lines.Count - 1; i > (lines.Count - 6); i--)
                 {
+                    if(i == 0)
+                    {
+                        break;
+                    }
+
                     if (lines[i].IndexOf('/') > -1)
                     {
                         cantidadSlash++;
@@ -384,11 +389,16 @@ namespace Cygnus2_0.Model.Aplica
                 {
                     if (archivo.Tipo.Trim().Equals(tipoObjeto.Text))
                     {
-                        if (archivo.CantidadSlahs < tipoObjeto.CantidadSlash)
+                        if(tipoObjeto.CantidadSlash > 0 && archivo.CantidadSlahs == 0)
+                        {
+                            handler.MensajeError("El archivo ["+archivo.NombreObjeto+"] no tiene el / al final. Por favor ajustar.");
+                        }
+
+                        /*if (archivo.CantidadSlahs < tipoObjeto.CantidadSlash)
                         {
                             //Si no cumple con los slash, los agrega y crea el nuevo archivo.
                             pGenerarSlashArchivo(archivo, tipoObjeto.CantidadSlash);
-                        }
+                        }*/
                     }
                 }
             }
