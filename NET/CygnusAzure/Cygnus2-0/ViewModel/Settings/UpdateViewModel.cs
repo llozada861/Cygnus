@@ -40,7 +40,7 @@ namespace Cygnus2_0.ViewModel.Settings
         {
             try
             {
-                updateModel.pActualizaApp();
+                updateModel.pActualizaApp(handler.ConnViewModel.Usuario, handler.ConnViewModel.Pass, handler.DAO.pObtCodigoVersion(), handler.ConnViewModel.Servidor, handler.ConnViewModel.BaseDatos, handler.ConnViewModel.Puerto);
             }
             catch(Exception ex)
             {

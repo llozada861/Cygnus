@@ -16,7 +16,7 @@
                 <mui:Link DisplayName="Encriptar" Source="/Pages/Security/EncryptPass.xaml" />
                 <mui:Link DisplayName="Rol" Source="/Pages/Security/Role.xaml" />
                 <mui:Link DisplayName="Crear Usuario" Source="/Pages/Security/User.xaml" />
-                <mui:Link DisplayName="One Drive" Source="/Pages/Security/OneDriveCred.xaml" />
+                <mui:Link DisplayName="Version Cygnus" Source="/Pages/Security/Version.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
 
@@ -26,7 +26,7 @@
                 <mui:Link DisplayName="Encriptar" Source="/Pages/Security/EncryptPass.xaml" />
                 <mui:Link DisplayName="Rol" Source="/Pages/Security/Role.xaml" />
                 <mui:Link DisplayName="Crear Usuario" Source="/Pages/Security/User.xaml" />
-                <mui:Link DisplayName="One Drive" Source="/Pages/Security/OneDriveCred.xaml" />
+                <mui:Link DisplayName="Version Cygnus" Source="/Pages/Security/Version.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

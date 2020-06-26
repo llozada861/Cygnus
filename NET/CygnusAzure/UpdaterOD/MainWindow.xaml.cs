@@ -1,4 +1,4 @@
-﻿using Independentsoft.Share;
+﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -21,7 +21,7 @@ namespace Updater
         bool called = true;
         private string tempDownloadFolder = "";
         private string processToEnd = "";
-        private string downloadFile = "";
+        private string downloadFile = "Cygnus.zip";
         private string URL = "";
         private string destinationFolder = "";
         private string Tipo = "";
@@ -38,6 +38,11 @@ namespace Updater
         public string RutaInstalador { set; get; }
         public string ArchivoVersion { set; get; }
         public string Version { set; get; }
+        public string Usuario { set; get; }
+        public string Pass { set; get; }
+        public string BaseDatos { set; get; }
+        public string Servidor { set; get; }
+        public string Puerto { set; get; }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -111,6 +116,7 @@ namespace Updater
             destinationFolder = Environment.CurrentDirectory;
             postProcessFile = "Cygnus";
             processToEnd = "Cygnus";
+            string cmdLn = "";
 
             try
             {
@@ -141,12 +147,36 @@ namespace Updater
             }
 
             Directory.CreateDirectory(tempDownloadFolder);
+
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                cmdLn += arg;
+            }
+
+            if (cmdLn.IndexOf('|') > -1)
+            {
+                string[] tmpCmd = cmdLn.Split('|');
+
+                for (int i = 1; i < tmpCmd.GetLength(0); i++)
+                {
+                    if (tmpCmd[i] == "usuario") Usuario = tmpCmd[i + 1];
+                    if (tmpCmd[i] == "pass") Pass = tmpCmd[i + 1];
+                    if (tmpCmd[i] == "servidor") Servidor = tmpCmd[i + 1];
+                    if (tmpCmd[i] == "puerto") Puerto = tmpCmd[i + 1];
+                    if (tmpCmd[i] == "baseDatos") BaseDatos = tmpCmd[i + 1];
+                    if (tmpCmd[i] == "version") Version = tmpCmd[i + 1];
+                    i++;
+                }
+            }
         }
 
         private void postDownload()
         {
+            string cmdLn = "";
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = postProcessFile;
+            startInfo.FileName = "Cygnus";
+            cmdLn += "|Up|Y";
+            startInfo.Arguments = cmdLn;
             Process.Start(startInfo);
         }   
 
@@ -187,144 +217,63 @@ namespace Updater
 
         public void pActualiza()
         {
-            
-            string archivoDestino;
-            string url;
-            string usuario;
-            string pass;
-            string rutaversion;
-            string rutaZip;
-
-            //Se obtienen las credenciales de acceso al share
-            pObtenerCredencialesOD(out url, out usuario, out pass, out rutaversion, out rutaZip);
-
-            archivoDestino = System.IO.Path.Combine(Environment.CurrentDirectory , ArchivoVersion);
-
-            if (System.IO.File.Exists(archivoDestino))
-            {
-                System.IO.File.Delete(archivoDestino);
-            }
-
-            try
-            {
-                
-                Service service = new Service(url, usuario, pass);
-                //Service service = new Service("https://mvmingenieriadesoftware-my.sharepoint.com/personal/luis_lozada_mvm_com_co", "luis.lozada@mvm.com.co", "dici2018*");
-
-                //Increase timeout to 600000 milliseconds (10 minutes). Useful when downloading large files.
-                //Default value is 100000 (100 seconds).
-                service.Timeout = 100000;
-
-                pDescargaOneDrive(ArchivoVersion, Environment.CurrentDirectory, service, rutaversion);
-                //pDescargaOneDrive(ArchivoVersion, Environment.CurrentDirectory, service, "/personal/luis_lozada_mvm_com_co/Documents/InstaladorCygnus/Actualizacion/Version.txt");
-                //pDescargaOneDrive(downloadFile, tempDownloadFolder, service, "/personal/luis_lozada_mvm_com_co/Documents/InstaladorCygnus/Actualizacion/Cygnus.zip");
-                pDescargaOneDrive(downloadFile, tempDownloadFolder, service, rutaZip);
-            }
-            catch (ServiceException ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                Console.WriteLine("Error: " + ex.ErrorCode);
-                Console.WriteLine("Error: " + ex.ErrorString);
-                Console.WriteLine("Error: " + ex.RequestUrl);
-                Console.Read();
-            }
-            catch (WebException ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                Console.Read();
-            }
+            byte[] archivoZip = pDescargarVersionBD();
+            File.WriteAllBytes(tempDownloadFolder + "\\" + downloadFile, archivoZip);
         }
+       
+        internal byte[] pDescargarVersionBD()
+        {           
+            byte[] bytes;
+            OracleConnection con = RealizarConexion();
 
-        /*public void pVerificaVersion(string tipo)
-        {
-            string file;
-            string sbLine;
-            string[] substrings;
-            char delimiter = ';';
-
-            file = System.IO.Path.Combine(Environment.CurrentDirectory, ArchivoVersion);
-
-            using (StreamReader streamReader = new StreamReader(file, Encoding.Default))
+            using (OracleCommand cmd = new OracleCommand())
             {
-                sbLine = streamReader.ReadLine();
-                substrings = sbLine.Split(delimiter);
-                Version= substrings[0]; //Version
-                downloadFile = substrings[1]; //Instalador
-            }
-        }*/
+                cmd.CommandText = "select objeto from flex.ll_version where version = :actualiza";
+                cmd.Parameters.Add(":actualiza", Version);
+                cmd.Connection = con;
 
-        public void pDescargaOneDrive(string archivo, string ruta, Service service,string archivoDescarga)
-        {
-            
-            Stream inputStream = service.GetFileStream(archivoDescarga);                
-
-            FileStream outputStream = new FileStream(ruta+"\\"+archivo, FileMode.CreateNew);
-
-            using (inputStream)
-            {
-                using (outputStream)
+                using (OracleDataReader sdr = cmd.ExecuteReader())
                 {
-                    byte[] buffer = new byte[8192];
-                    int len = 0;
+                    sdr.Read();
 
-                    while ((len = inputStream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        outputStream.Write(buffer, 0, len);
-                    }
+                    bytes = (byte[])sdr["objeto"];
                 }
+                con.Close();
             }
+
+            return bytes;
         }
 
-        public void pCreaArchivoBD(string path, string nombre, byte[] myFile)
+        public OracleConnection RealizarConexion()
         {
-            string archivo = System.IO.Path.Combine(path, nombre);
+            OracleConnection conexionOracleSql;
 
-            if (!System.IO.File.Exists((string)archivo))
-            {
-                using (FileStream tempFile = System.IO.File.Create(archivo))
-                    tempFile.Write(myFile, 0, myFile.Length);
-            }
+            string connectionstring = OracleConnString
+                                        (
+                                            Servidor,
+                                            Puerto,
+                                            BaseDatos,
+                                            Usuario,
+                                            Pass
+                                        );
+
+            conexionOracleSql = new OracleConnection(connectionstring);
+            conexionOracleSql.Open();
+            return conexionOracleSql;
         }
-        private void pObtenerCredencialesOD(out string url, out string usuario, out string pass, out string rutaversion, out string rutaZip)
+
+        public string OracleConnString(string host, string port, string servicename, string user, string pass)
         {
-            string sbLine;
-            string sbLineUnWrap;
-            string[] substrings;
-            char delimiter = '|';
-            string[] versionurl;
-            string[] archivourl;
-
-            url = "";
-            usuario = "";
-            pass = "";
-            rutaversion = "";
-            rutaZip = "";
-
-            string ArchivoCred = System.IO.Path.Combine(Environment.CurrentDirectory, res.ArchivoCredenciales);
-
-            using (StreamReader streamReader = new StreamReader(ArchivoCred, Encoding.Default))
-            {
-                sbLine = streamReader.ReadLine();
-
-                if (!string.IsNullOrEmpty(sbLine))
-                {
-                    //Se desencripta la linea con las credenciales
-                    sbLineUnWrap = EncriptaPass.Desencriptar(sbLine);
-
-                    substrings = sbLineUnWrap.Split(delimiter);
-                    url = substrings[0];
-                    usuario = substrings[1];
-                    pass = substrings[2];
-                    rutaversion = substrings[3];
-                    rutaZip = substrings[4];
-
-                    versionurl = rutaversion.Split('/');
-                    archivourl = rutaZip.Split('/');
-
-                    ArchivoVersion = versionurl[versionurl.Length-1];
-                    downloadFile = archivourl[archivourl.Length-1];
-                }
-            }
+            return String.Format
+            (
+                  "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})" +
+                  "(PORT={1}))(CONNECT_DATA=(SERVICE_NAME={2})));User Id={3};Password={4};",
+                  host,
+                  port,
+                  servicename,
+                  user,
+                  pass
+            );
         }
     }
 }

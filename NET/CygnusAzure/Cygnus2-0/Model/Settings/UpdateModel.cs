@@ -1,5 +1,4 @@
 ﻿using Cygnus2_0.General;
-using Independentsoft.Share;
 using System.Diagnostics;
 using System.IO;
 using res = Cygnus2_0.Properties.Resources;
@@ -15,16 +14,20 @@ namespace Cygnus2_0.Model.Settings
         }
 
         #region Actualizacion
-        public void pActualizaApp()
+        public void pActualizaApp(string usuario, string pass,string version, string servidor, string basedatos, string puerto)
         {
-            pDescargarActualizacion(res.RedLocal);
+            pDescargarActualizacion(usuario,pass,version,servidor,basedatos,puerto);
         }
 
-        public static void pDescargarActualizacion(string tipo)
+        public static void pDescargarActualizacion(string usuario, string pass,string version, string servidor, string basedatos, string puerto)
         {
             string cmdLn = "";
-            cmdLn += "|processToEnd|Cygnus";
-            cmdLn += "|postProcess|Cygnus";
+            cmdLn += "|usuario|" + usuario;
+            cmdLn += "|pass|" + pass;
+            cmdLn += "|servidor|" + servidor;
+            cmdLn += "|puerto|" + puerto;
+            cmdLn += "|baseDatos|" + basedatos;
+            cmdLn += "|version|" + version;
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "Updater";
