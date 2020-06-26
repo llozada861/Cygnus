@@ -33,7 +33,6 @@ using System.Reflection;
 using System.IO;
 using System.Security;
 using Cygnus2_0.Model.Settings;
-using Independentsoft.Share;
 
 namespace Cygnus2_0
 {
@@ -47,7 +46,7 @@ namespace Cygnus2_0
 
         public MainWindow()
         {
-            //AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+            //pObtParamEntrada();
 
             string fechaExp = "01/08/2021";
             
@@ -70,21 +69,6 @@ namespace Cygnus2_0
             }
         }
 
-        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Cygnus2_0.Libs.Oracle.ManagedDataAccess.dll"))
-            {
-                byte[] assemblyFirst = new byte[stream.Length];
-                stream.Read(assemblyFirst, 0, assemblyFirst.Length);
-                return Assembly.Load(assemblyFirst);
-            }
-            //From the assembly where this code lives!
-            //this.GetType().Assembly.GetManifestResourceNames();
-
-            //or from the entry point to the application - there is a difference!
-            //Assembly.GetExecutingAssembly().GetManifestResourceNames();
-        }
-
         public Handler Handler
         {
             get { return handler; }
@@ -98,27 +82,6 @@ namespace Cygnus2_0
             this.Title = "Cygnus [version " + fieVersionInfo.FileVersion + "]";
             handler.fsbVersion = fieVersionInfo.FileVersion;
         }
-
-        #region Parámetros Entrada
-        private void pObtieneParametrosEntrada()
-        {
-            string cmdLn = "";
-            handler.EsLlamadoDesdeUpdater = "N";
-
-            foreach (string arg in Environment.GetCommandLineArgs())
-            {
-                cmdLn += arg;
-            }
-
-            string[] tmpCmd = cmdLn.Split('|');
-
-            for (int i = 1; i < tmpCmd.GetLength(0); i++)
-            {
-                if (tmpCmd[i] == "Updater") handler.EsLlamadoDesdeUpdater = tmpCmd[i + 1];
-                i++;
-            }
-        }
-        #endregion Parámetros Entrada
 
         private void ModernWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -157,14 +120,14 @@ namespace Cygnus2_0
                 {
                     if (handler.ConexionOracle.ConexionOracleSQL.State == System.Data.ConnectionState.Open)
                     {
-                        version = pObtCodigoVersion();
+                        version = handler.DAO.pObtCodigoVersion();
 
                         if (!handler.fsbVersion.Equals(version))
                         {
                             try
                             {
                                 actualiza = true;
-                                UpdateModel.pDescargarActualizacion("R");
+                                UpdateModel.pDescargarActualizacion(handler.ConnViewModel.Usuario,handler.ConnViewModel.Pass, version,handler.ConnViewModel.Servidor, handler.ConnViewModel.BaseDatos, handler.ConnViewModel.Puerto);
                                 this.Close();
                             }
                             catch { }
@@ -200,71 +163,7 @@ namespace Cygnus2_0
         {
         }
 
-        private string pObtCodigoVersion()
-        {
-            string archivoDestino;
-            string version;
-            string url;
-            string usuario;
-            string pass;
-            string rutaversion;
-            string rutaZip;
-
-            archivoDestino = System.IO.Path.Combine(Environment.CurrentDirectory, res.ArchivoVersion);
-
-            if (System.IO.File.Exists(archivoDestino))
-            {
-                System.IO.File.Delete(archivoDestino);
-            }
-
-            try
-            {
-                //Se obtienen las credenciales de acceso al share
-                pObtenerCredencialesOD(out url, out usuario, out pass, out rutaversion, out rutaZip);
-
-                if (string.IsNullOrEmpty(url))
-                    return handler.fsbVersion;
-
-                Service service = new Service(url, usuario, pass);
-                //Service service = new Service("https://mvmingenieriadesoftware-my.sharepoint.com/personal/luis_lozada_mvm_com_co", "luis.lozada@mvm.com.co", "xxxxx");
-
-
-                //Increase timeout to 600000 milliseconds (10 minutes). Useful when downloading large files.
-                //Default value is 100000 (100 seconds).
-                service.Timeout = 100000;
-
-                pDescargaOneDrive(res.ArchivoVersion, Environment.CurrentDirectory, service, rutaversion);
-
-                //pDescargaOneDrive(res.ArchivoVersion, Environment.CurrentDirectory, service, "/personal/luis_lozada_mvm_com_co/Documents/InstaladorCygnus/Actualizacion/Version.txt");
-                version = pTraeVersion();
-
-                if (!string.IsNullOrEmpty(version))
-                {
-                    return version;
-                }
-                else
-                {
-                    return handler.fsbVersion;
-                }
-            }
-            catch (ServiceException ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                Console.WriteLine("Error: " + ex.ErrorCode);
-                Console.WriteLine("Error: " + ex.ErrorString);
-                Console.WriteLine("Error: " + ex.RequestUrl);
-                Console.Read();
-                return handler.fsbVersion;
-            }
-            catch (System.Net.WebException ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                Console.Read();
-                return handler.fsbVersion;
-            }
-        }
-
-        private void pDescargaOneDrive(string archivo, string ruta, Service service, string archivoDescarga)
+        /*private void pDescargaOneDrive(string archivo, string ruta, Service service, string archivoDescarga)
         {
             Stream inputStream = service.GetFileStream(archivoDescarga);
 
@@ -283,7 +182,30 @@ namespace Cygnus2_0
                     }
                 }
             }
+        }*/
+
+        private void pObtParamEntrada()
+        {
+            string cmdLn = "";
+            string up = "";
+
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                cmdLn += arg;
+            }
+
+            if (cmdLn.IndexOf('|') > -1)
+            {
+                string[] tmpCmd = cmdLn.Split('|');
+
+                for (int i = 1; i < tmpCmd.GetLength(0); i++)
+                {
+                    if (tmpCmd[i] == "Up") up = tmpCmd[i + 1];
+                    i++;
+                }
+            }
         }
+
         private string pTraeVersion()
         {
             string file;

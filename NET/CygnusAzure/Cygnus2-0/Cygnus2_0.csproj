@@ -56,10 +56,6 @@
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Independentsoft.Share, Version=1.0.700.15434, Culture=neutral, PublicKeyToken=76be97fe952f1ec7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Independentsoft.Share.1.0.700\lib\net45\Independentsoft.Share.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.2.4\lib\net451\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
       <Private>True</Private>
@@ -278,8 +274,8 @@
     <Compile Include="Pages\Security\EncryptPass.xaml.cs">
       <DependentUpon>EncryptPass.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Security\OneDriveCred.xaml.cs">
-      <DependentUpon>OneDriveCred.xaml</DependentUpon>
+    <Compile Include="Pages\Security\Version.xaml.cs">
+      <DependentUpon>Version.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Security\Role.xaml.cs">
       <DependentUpon>Role.xaml</DependentUpon>
@@ -392,6 +388,7 @@
     <Compile Include="ViewModel\Settings\UpdateViewModel.cs" />
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <EmbeddedResource Include="Libs\Updater.exe" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\01_crll_credmark.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\02_crll_logapli.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\03_crll_objetosbl.sql" />
@@ -412,9 +409,6 @@
     <EmbeddedResource Include="BaseDatos\oracleInstall\Aplica_FLEX.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\FENIX.sql" />
     <Content Include="img\Fullname.png" />
-    <EmbeddedResource Include="Libs\Updater.exe" />
-    <EmbeddedResource Include="Libs\Independentsoft.Share.dll" />
-    <EmbeddedResource Include="Libs\od.txt" />
     <EmbeddedResource Include="Libs\Newtonsoft.Json.dll" />
     <EmbeddedResource Include="Libs\FirstFloor.ModernUI.dll" />
     <EmbeddedResource Include="Libs\Cygnus.exe.config" />
@@ -531,7 +525,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Security\OneDriveCred.xaml">
+    <Page Include="Pages\Security\Version.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -290,6 +290,23 @@ namespace Cygnus2_0.DAO
 
             return sbCodigoVersion;
         }
+        internal void pCargaVersion(byte[] bytes, string archivo, string version)
+        {
+            //using (OracleConnection con = handler.ConexionOracle.ConexionOracleSQL)
+
+            {
+                string query = "insert into flex.ll_version values (:version,sysdate,sysdate,:data)";
+
+                //using (OracleCommand cmd = new OracleCommand(query))
+                using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
+                {
+                    cmd.Parameters.Add(":version", version);
+                    cmd.Parameters.Add(":data", bytes);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
         internal void pObtCodigoSql()
         {

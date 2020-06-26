@@ -34,9 +34,9 @@
                 <mui:Link DisplayName="Datos" Source="/Pages/Data/AdminData.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
                 <mui:Link DisplayName="Documentación" Source="/Pages/Documentation/AdminDoc.xaml" />
-                <mui:Link DisplayName="Usuarios" Source="/Pages/Security/AdminUser.xaml" />
-                <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />
                 <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
+                <mui:Link DisplayName="Seguridad" Source="/Pages/Security/AdminUser.xaml" />
+                <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
         <!--Tab Admin-->
@@ -49,9 +49,9 @@
                 <mui:Link DisplayName="Datos" Source="/Pages/Data/AdminData.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml"/>
                 <mui:Link DisplayName="Documentación" Source="/Pages/Documentation/AdminDoc.xaml" />
-                <mui:Link DisplayName="Usuarios" Source="/Pages/Security/AdminUser.xaml" />
-                <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />
                 <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
+                <mui:Link DisplayName="Seguridad" Source="/Pages/Security/AdminUser.xaml" />
+                <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
         <controls:NotificationArea x:Name="WindowArea" Position="BottomLeft" MaxItems="3" />
