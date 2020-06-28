@@ -236,6 +236,7 @@ SELECT *
             FROM flex.ll_requerimiento;  
 /
 --Reporte total
+SELECT * FROM (
             SELECT fecha_ini fecha, 
                    rq.hist_usuario,
                    rq.id_azure,
@@ -243,52 +244,97 @@ SELECT *
                    lunes horaCygnus,
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
-            WHERE rq.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/05/2020'
-            AND   ho.fecha_fin <= '31/05/2020'
+            WHERE hh.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/06/2020'
+            AND   ho.fecha_fin <= '30/06/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
-            AND lunes > 0
-            
+            AND lunes > 0                        
             UNION
-            SELECT fecha_ini+1,martes, rq.descripcion
+            SELECT fecha_ini+1 fecha,
+                   rq.hist_usuario,
+                   rq.id_azure,
+                   rq.descripcion,
+                   martes horaCygnus,
+                   rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
-            WHERE requerimiento = inuRq
-            AND hh.id_hoja = ho.codigo
+            WHERE hh.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/06/2020'
+            AND   ho.fecha_fin <= '30/06/2020'
+            AND   hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND martes > 0
             UNION
-            SELECT fecha_ini+2,miercoles, rq.descripcion
+            SELECT fecha_ini+2 fecha,
+                   rq.hist_usuario,
+                   rq.id_azure,
+                   rq.descripcion,
+                   miercoles horaCygnus,
+                   rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
-            WHERE requerimiento = inuRq
+            WHERE hh.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/06/2020'
+            AND   ho.fecha_fin <= '30/06/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND miercoles > 0
             UNION
-            SELECT fecha_ini+3,jueves, rq.descripcion
+            SELECT fecha_ini+3 fecha,
+                   rq.hist_usuario,
+                   rq.id_azure,
+                   rq.descripcion,
+                   jueves horaCygnus,
+                   rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
-            WHERE requerimiento = inuRq
+            WHERE hh.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/06/2020'
+            AND   ho.fecha_fin <= '30/06/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND jueves > 0
             UNION
-            SELECT fecha_ini+4,viernes, rq.descripcion
+            SELECT fecha_ini+4 fecha,
+                   rq.hist_usuario,
+                   rq.id_azure,
+                   rq.descripcion,
+                   viernes horaCygnus,
+                   rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
-            WHERE requerimiento = inuRq
+            WHERE hh.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/06/2020'
+            AND   ho.fecha_fin <= '30/06/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND viernes > 0
             UNION
-            SELECT fecha_ini+5,sabado, rq.descripcion
+            SELECT fecha_ini+5 fecha,
+                   rq.hist_usuario,
+                   rq.id_azure,
+                   rq.descripcion,
+                   sabado horaCygnus,
+                   rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
-            WHERE requerimiento = inuRq
+            WHERE hh.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/06/2020'
+            AND   ho.fecha_fin <= '30/06/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND sabado > 0
             UNION
-            SELECT fecha_ini+6,domingo, rq.descripcion
+            SELECT fecha_ini+6 fecha,
+                   rq.hist_usuario,
+                   rq.id_azure,
+                   rq.descripcion,
+                   domingo horaCygnus,
+                   rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
-            WHERE requerimiento = inuRq
+            WHERE hh.usuario = 'SQL_LLOZADA'
+            AND   ho.fecha_ini >= '01/06/2020'
+            AND   ho.fecha_fin <= '30/06/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
-            AND domingo > 0;                                              
+            AND domingo > 0 
+            )
+            ORDER BY fecha;  
+/
+SELECT * FROM ll_horashoja WHERE usuario = 'SQL_LLOZADA'                                                       
