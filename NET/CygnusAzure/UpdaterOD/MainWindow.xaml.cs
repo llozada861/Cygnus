@@ -1,6 +1,7 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.ComponentModel;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -28,6 +29,7 @@ namespace Updater
         private string updateFolder = Environment.CurrentDirectory + @"\updates\";
         private string postProcessFile = "";
         private string path;
+        private const string DBName = "Cygnus.db";
 
         public MainWindow()
         {
@@ -168,6 +170,10 @@ namespace Updater
                     i++;
                 }
             }
+            else
+            {
+                pObtDatosBd();
+            }
         }
 
         private void postDownload()
@@ -274,6 +280,62 @@ namespace Updater
                   user,
                   pass
             );
+        }
+
+        public void pObtDatosBd()
+        {
+            string query = "select * from conection";
+
+            using (SQLiteConnection conn = GetInstance())
+            {
+                using (var command = new SQLiteCommand(query, conn))
+                {
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Usuario = reader.GetString(0);
+                        Pass = reader.GetString(1);
+                        BaseDatos = reader.GetString(2);
+                        Servidor = reader.GetString(3);
+                        Puerto = reader.GetString(4);
+                    }
+                }
+            }
+
+            Version = pObtVersionBD();
+        }
+
+        public static SQLiteConnection GetInstance()
+        {
+            var db = new SQLiteConnection(
+                string.Format("Data Source={0};Version=3;", DBName)
+            );
+            db.Open();
+
+            return db;
+        }
+
+        public string pObtVersionBD()
+        {
+            string versionbd = "";
+
+            OracleConnection con = RealizarConexion();
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = "SELECT version FROM flex.ll_version ORDER BY fecha_ini desc";
+                cmd.Connection = con;
+
+                using (OracleDataReader sdr = cmd.ExecuteReader())
+                {
+                    sdr.Read();
+                    versionbd = (string)sdr["version"];
+                }
+                con.Close();
+            }
+
+            return versionbd;
         }
     }
 }
