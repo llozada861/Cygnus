@@ -3480,6 +3480,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq.
+        /// </summary>
+        public static string TokenAzureConn {
+            get {
+                return ResourceManager.GetString("TokenAzureConn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         public static byte[] UsuariosBD {

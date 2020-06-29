@@ -1438,6 +1438,140 @@ namespace Cygnus2_0.DAO
         }
         #endregion Azure
 
+        #region
+        public List<TareaHoja> pObtListaTareas(ReportViewModel view)
+        {
+            List<TareaHoja> listaTareas = new List<TareaHoja>();
+
+            string sql = "SELECT * FROM (" +
+                        "            SELECT fecha_ini fecha, " +
+                        "                   rq.hist_usuario," +
+                        "                   rq.id_azure," +
+                        "                   rq.descripcion," +
+                        "                   lunes horaCygnus," +
+                        "                   rq.completado horaAzure" +
+                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            WHERE hh.usuario = :usuario" +
+                        "            AND   ho.fecha_ini >= :fecha_i" +
+                        "            AND   ho.fecha_fin <= :fecha_f" +
+                        "            AND hh.id_hoja = ho.codigo" +
+                        "            AND hh.requerimiento = rq.codigo" +
+                        "            AND lunes > 0                        " +
+                        "            UNION" +
+                        "            SELECT fecha_ini+1 fecha," +
+                        "                   rq.hist_usuario," +
+                        "                   rq.id_azure," +
+                        "                   rq.descripcion," +
+                        "                   martes horaCygnus," +
+                        "                   rq.completado horaAzure" +
+                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            WHERE hh.usuario = :usuario" +
+                        "            AND   ho.fecha_ini >= :fecha_i" +
+                        "            AND   ho.fecha_fin <= :fecha_f" +
+                        "            AND   hh.id_hoja = ho.codigo" +
+                        "            AND hh.requerimiento = rq.codigo" +
+                        "            AND martes > 0" +
+                        "            UNION" +
+                        "            SELECT fecha_ini+2 fecha," +
+                        "                   rq.hist_usuario," +
+                        "                   rq.id_azure," +
+                        "                   rq.descripcion," +
+                        "                   miercoles horaCygnus," +
+                        "                   rq.completado horaAzure" +
+                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            WHERE hh.usuario = :usuario" +
+                        "            AND   ho.fecha_ini >= :fecha_i" +
+                        "            AND   ho.fecha_fin <= :fecha_f" +
+                        "            AND hh.id_hoja = ho.codigo" +
+                        "            AND hh.requerimiento = rq.codigo" +
+                        "            AND miercoles > 0" +
+                        "            UNION" +
+                        "            SELECT fecha_ini+3 fecha," +
+                        "                   rq.hist_usuario," +
+                        "                   rq.id_azure," +
+                        "                   rq.descripcion," +
+                        "                   jueves horaCygnus," +
+                        "                   rq.completado horaAzure" +
+                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            WHERE hh.usuario = :usuario" +
+                        "            AND   ho.fecha_ini >= :fecha_i" +
+                        "            AND   ho.fecha_fin <= :fecha_f" +
+                        "            AND hh.id_hoja = ho.codigo" +
+                        "            AND hh.requerimiento = rq.codigo" +
+                        "            AND jueves > 0" +
+                        "            UNION" +
+                        "            SELECT fecha_ini+4 fecha," +
+                        "                   rq.hist_usuario," +
+                        "                   rq.id_azure," +
+                        "                   rq.descripcion," +
+                        "                   viernes horaCygnus," +
+                        "                   rq.completado horaAzure" +
+                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            WHERE hh.usuario = :usuario" +
+                        "            AND   ho.fecha_ini >= :fecha_i" +
+                        "            AND   ho.fecha_fin <= :fecha_f" +
+                        "            AND hh.id_hoja = ho.codigo" +
+                        "            AND hh.requerimiento = rq.codigo" +
+                        "            AND viernes > 0" +
+                        "            UNION" +
+                        "            SELECT fecha_ini+5 fecha," +
+                        "                   rq.hist_usuario," +
+                        "                   rq.id_azure," +
+                        "                   rq.descripcion," +
+                        "                   sabado horaCygnus," +
+                        "                   rq.completado horaAzure" +
+                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            WHERE hh.usuario = :usuario" +
+                        "            AND   ho.fecha_ini >= :fecha_i" +
+                        "            AND   ho.fecha_fin <= :fecha_f" +
+                        "            AND hh.id_hoja = ho.codigo" +
+                        "            AND hh.requerimiento = rq.codigo" +
+                        "            AND sabado > 0" +
+                        "            UNION" +
+                        "            SELECT fecha_ini+6 fecha," +
+                        "                   rq.hist_usuario," +
+                        "                   rq.id_azure," +
+                        "                   rq.descripcion," +
+                        "                   domingo horaCygnus," +
+                        "                   rq.completado horaAzure" +
+                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            WHERE hh.usuario = :usuario" +
+                        "            AND   ho.fecha_ini >= :fecha_i" +
+                        "            AND   ho.fecha_fin <= :fecha_f" +
+                        "            AND hh.id_hoja = ho.codigo" +
+                        "            AND hh.requerimiento = rq.codigo" +
+                        "            AND domingo > 0 " +
+                        "            )" +
+                        "            ORDER BY fecha";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Parameters.Add(":usuario", handler.ConnViewModel.Usuario.ToUpper());
+                cmd.Parameters.Add(":fecha_i", view.FechaDesde.ToShortDateString());
+                cmd.Parameters.Add(":fecha_f", view.FechaHasta.ToShortDateString());
+                cmd.Connection = con;
+
+                using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it
+                {
+                    while (rdr.Read()) // loop through each row from oracle
+                    {
+                        listaTareas.Add(new TareaHoja { FechaCreacion = rdr["fecha"].ToString(),
+                                                        HU = Convert.ToInt32(rdr["hist_usuario"]),
+                                                        IdAzure = Convert.ToInt32(rdr["id_azure"].ToString()),
+                                                        Descripcion = rdr["descripcion"].ToString(),
+                                                        Total = Convert.ToDouble(rdr["horaCygnus"].ToString())
+                        });
+                    }
+                    rdr.Close(); // close the oracle reader
+                }
+            }
+
+            return listaTareas;
+        }
+        #endregion
         public string prueba()
         {
             string sql = "select * from ll_prueba";
