@@ -543,6 +543,25 @@ namespace Cygnus2_0.General
                 File.WriteAllText(saveFileDialog.FileName, cuerpo, Encoding.Default);
         }
 
+        public void pGuardaArchivoByte(string NombreArchivo,string nuevoNombre)
+        {
+            byte[] cuerpo;
+
+            using (Stream fs = File.OpenRead(NombreArchivo))
+            {
+                using (BinaryReader br = new BinaryReader(fs))
+                {
+                    cuerpo = br.ReadBytes((Int32)fs.Length);
+                }
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = nuevoNombre;
+
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                File.WriteAllBytes(saveFileDialog.FileName, cuerpo);
+        }
+
         public bool pObtRole(int role)
         {
             bool valor = false;
