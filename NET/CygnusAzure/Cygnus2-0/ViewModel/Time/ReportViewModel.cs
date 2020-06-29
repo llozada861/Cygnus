@@ -7,7 +7,9 @@ using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -25,7 +27,6 @@ namespace Cygnus2_0.ViewModel.Time
         private Microsoft.Office.Interop.Excel.Workbook WB = null;
         public Microsoft.Office.Interop.Excel.Worksheet SheetCygnus = null;
         public Microsoft.Office.Interop.Excel.Worksheet SheetAzure = null;
-        SynchronizationContext uiContext;
 
         public ReportViewModel(Handler handler)
         {
@@ -48,6 +49,8 @@ namespace Cygnus2_0.ViewModel.Time
 
         public void pGeneraReporte()
         {
+            string archivoTemporal = Environment.CurrentDirectory + "\\ReporteHoras.xlsx";
+
             if (string.IsNullOrEmpty(FechaDesde.ToString()))
             {
                 handler.MensajeError("Ingrese fecha desde");
@@ -71,21 +74,20 @@ namespace Cygnus2_0.ViewModel.Time
                 handler.MensajeError("No se recomienda buscar más de 90 días");
                 return;
             }
-
-            uiContext = SynchronizationContext.Current;
-
-            Open(Environment.CurrentDirectory + "\\MyExcel.xlsx");
+            
+            Open(archivoTemporal);
             CreateHeader();
             InsertDataCygnus();
-            InsertDataAzure(uiContext, FechaDesde,fechaHasta);
+            pInsertaTareaAzure();
             Close();
+
+            handler.pGuardaArchivoByte(archivoTemporal,"ReporteHoras["+FechaDesde.Day+ FechaDesde.Month+ FechaDesde.Year+"-"+ FechaHasta.Day + FechaHasta.Month + FechaHasta.Year+"].xlsx");
+            File.Delete(archivoTemporal);
         }
 
         private void Open(string Location)
         {
             ReporteExcel = new Microsoft.Office.Interop.Excel.Application();
-
-            this.ReporteExcel = new Microsoft.Office.Interop.Excel.Application();
             ReporteExcel.Visible = false;
             ReporteExcel.DisplayAlerts = false;
             WB = ReporteExcel.Workbooks.Add(Type.Missing);
@@ -113,7 +115,8 @@ namespace Cygnus2_0.ViewModel.Time
             this.SheetAzure.Cells[1, 1] = "Fecha";
             this.SheetAzure.Cells[1, 2] = "Task";
             this.SheetAzure.Cells[1, 3] = "Descripcion";
-            this.SheetAzure.Cells[1, 4] = "Horas";
+            this.SheetAzure.Cells[1, 4] = "Estado";
+            this.SheetAzure.Cells[1, 5] = "Horas";
         }
         private void InsertDataCygnus()
         {
@@ -131,16 +134,18 @@ namespace Cygnus2_0.ViewModel.Time
             }
         }
 
-        public void pInsertaTareaAzure(List<TareaHoja> lista)
+        public void pInsertaTareaAzure()
         {
             int ind = 2;
+            List<TareaHoja> lista = handler.DAO.pObtListaTaskAzure(this);
 
             foreach (TareaHoja field in lista)
             {
                 this.SheetAzure.Cells[ind, 1] = field.FechaCreacion;
                 this.SheetAzure.Cells[ind, 2] = field.IdAzure;
                 this.SheetAzure.Cells[ind, 3] = field.Descripcion;
-                this.SheetAzure.Cells[ind, 4] = field.Total;
+                this.SheetAzure.Cells[ind, 4] = field.Estado;
+                this.SheetAzure.Cells[ind, 5] = field.Total;
                 ind++;
             }
         }
@@ -178,7 +183,7 @@ namespace Cygnus2_0.ViewModel.Time
             throw new NotImplementedException();
         }
 
-        public async Task InsertDataAzure(SynchronizationContext uiContext, DateTime fechaDesde, DateTime fechaHasta)
+        /*public async Task InsertDataAzure(SynchronizationContext uiContext, DateTime fechaDesde, DateTime fechaHasta)
         {
             string log = "Antes de traer los items - ";
             CultureInfo culture = new CultureInfo("es-CO");
@@ -203,11 +208,6 @@ namespace Cygnus2_0.ViewModel.Time
                     tarea.Thu = new Day();
                     tarea.Fri = new Day();
                     tarea.Sat = new Day();
-
-                    /*if (tarea.IdAzure == 117899)
-                    {
-                        int pru = 1;
-                    }*/
 
                     try
                     {
@@ -275,6 +275,6 @@ namespace Cygnus2_0.ViewModel.Time
                 // get work items for the ids found in query
                 return await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
             }
-        }
+        }*/
     }
 }

@@ -25,3 +25,5 @@ create index idxll_requerimiento02 on ll_requerimiento(id_azure,usuario);
 create index idxll_requerimiento03 on ll_requerimiento(fecha_display);
 
 ALTER TABLE ll_requerimiento ADD(hist_usuario NUMBER(15));
+
+ALTER TABLE ll_requerimiento ADD(fecha_inicio DATE);

@@ -90,7 +90,7 @@ namespace Cygnus2_0.Model.Time
                     tarea.Sat = new Day();
                     tarea.HU = await pObtenerHU(tarea.IdAzure);
 
-                    /*if (tarea.IdAzure == 117899)
+                    /*if (tarea.IdAzure == 167561)
                     {
                         int pru = 1;
                     }*/
@@ -128,7 +128,7 @@ namespace Cygnus2_0.Model.Time
 
                 foreach (TareaHoja tareaAzure in this.listaTareaAzure)
                 {
-                    /*if(tareaAzure.IdAzure == 117899)
+                    /*if(tareaAzure.IdAzure == 167587)
                     {
                         int pru = 1;
                     }*/
@@ -145,11 +145,12 @@ namespace Cygnus2_0.Model.Time
 
                             if (hojaActual != null)
                             {
-                                if (hojaActual.Completed != tareaAzure.Completed || !hojaActual.Descripcion.Equals(tareaAzure.Descripcion) || hojaActual.HU != tareaAzure.HU)
+                                if (hojaActual.Completed != tareaAzure.Completed || !hojaActual.Descripcion.Equals(tareaAzure.Descripcion) || hojaActual.HU != tareaAzure.HU || hojaActual.IniFecha != tareaAzure.IniFecha)
                                 {
                                     hojaActual.Completed = tareaAzure.Completed;
                                     hojaActual.Descripcion = tareaAzure.Descripcion;
                                     hojaActual.HU = tareaAzure.HU;
+                                    hojaActual.IniFecha = tareaAzure.IniFecha;
                                     handler.DAO.pActualizaTareaAzure(hojaActual);
                                 }
                             }

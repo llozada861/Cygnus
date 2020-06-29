@@ -339,6 +339,22 @@ SELECT * FROM (
 /
 SELECT * FROM ll_horashoja WHERE usuario = 'SQL_LLOZADA'   
 /
+SELECT fecha_inicio,
+       hist_usuario,
+       id_azure,
+       estado,
+       completado
+FROM flex.ll_requerimiento
+WHERE usuario = 'SQL_LLOZADA'
+AND fecha_inicio >= '01/06/2020'
+AND fecha_inicio <= '30/06/2020'
+ORDER BY fecha_inicio DESC
+/
+SELECT *
+FROM flex.ll_requerimiento
+WHERE usuario = 'SQL_LLOZADA'
+ORDER BY fecha_registro DESC
+/
 --C#
 "SELECT * FROM ("+
 "            SELECT fecha_ini fecha, "+
@@ -440,3 +456,13 @@ SELECT * FROM ll_horashoja WHERE usuario = 'SQL_LLOZADA'
 "            AND domingo > 0 "+
 "            )"+
 "            ORDER BY fecha"
+/
+"SELECT fecha_inicio,"+
+"       hist_usuario,"+
+"       id_azure,"+
+"       estado,"+
+"       completado "+
+"FROM flex.ll_requerimiento "+
+"WHERE usuario = :usuario "+
+"AND fecha_inicio >= :fecha_i "+
+"AND fecha_inicio <= :fecha_f "

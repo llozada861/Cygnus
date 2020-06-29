@@ -278,7 +278,8 @@ AS
         onuSeqNeg       OUT NUMBER,
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2,
-        isbIdHU         IN NUMBER DEFAULT 0 
+        isbIdHU         IN NUMBER DEFAULT 0,
+        isbFechaIni     IN VARCHAR2 DEFAULT NULL 
     );
     
     PROCEDURE pEliminaTarea
@@ -1332,9 +1333,9 @@ AS
            nucodigo := flex.seq_ll_requerimiento.nextval;
             
            INSERT INTO flex.ll_requerimiento
-           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario)       
+           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario,fecha_inicio)       
            VALUES 
-           (nucodigo,isbDescripcion,isbIdAzure,isbEstado,isbUsuario,NULL,(dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU);
+           (nucodigo,isbDescripcion,isbIdAzure,isbEstado,isbUsuario,NULL,(dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU,dtFechaCreaAzure);
            
            COMMIT;
            
@@ -1384,7 +1385,8 @@ AS
                completado = inuCompletado,
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
-               hist_usuario = isbIdHU
+               hist_usuario = isbIdHU,
+               fecha_inicio = dtFechaCreaAzure
            WHERE codigo = nucodigo;
            
            COMMIT;
@@ -1428,13 +1430,15 @@ AS
         onuSeqNeg       OUT NUMBER,
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2,
-        isbIdHU         IN NUMBER DEFAULT 0
+        isbIdHU         IN NUMBER DEFAULT 0,
+        isbFechaIni     IN VARCHAR2 DEFAULT NULL
     )
     IS
        nucodigo NUMBER(10);
        nuCodHoja NUMBER;
        nuIdAzure    NUMBER;
        dtFechaFin DATE;
+       dtFechaCreaAzure DATE;
        
        CURSOR cuHorasHojas
        IS
@@ -1459,6 +1463,7 @@ AS
     BEGIN
        pInicializaError(onuErrorCode,osbErrorMessage);
        onuSeqNeg := 0;
+       dtFechaCreaAzure := to_date(isbFechaIni,'dd/mm/yyyy');
        
        nuCodHoja := NULL;
        
@@ -1485,9 +1490,9 @@ AS
            CLOSE cuDatosHoja;
                
            INSERT INTO flex.ll_requerimiento
-           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario)       
+           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario,fecha_inicio)       
            VALUES 
-           (nucodigo,isbDescripcion,nuIdAzure,isbEstado,isbUsuario,NULL, (dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU);
+           (nucodigo,isbDescripcion,nuIdAzure,isbEstado,isbUsuario,NULL, (dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU,dtFechaCreaAzure);
        ELSE
                
            UPDATE flex.ll_requerimiento
@@ -1496,7 +1501,8 @@ AS
                completado = inuCompletado,
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
-               hist_usuario = isbIdHU
+               hist_usuario = isbIdHU,
+               fecha_inicio = dtFechaCreaAzure
            WHERE codigo = nucodigo
            AND usuario = isbUsuario;
        END IF;
@@ -1668,7 +1674,8 @@ AS
                    rq.fecha_display,
                    qHojaActual.fecha_fin,
                    rq.completado,
-                   nvl(rq.hist_usuario,0) hu
+                   nvl(rq.hist_usuario,0) hu,
+                   rq.fecha_inicio
             FROM flex.ll_horashoja hh,flex.ll_requerimiento rq,qHojaActual
             WHERE hh.requerimiento = rq.codigo
             AND   hh.usuario = isbUsuario

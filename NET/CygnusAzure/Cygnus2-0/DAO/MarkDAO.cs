@@ -1090,6 +1090,7 @@ namespace Cygnus2_0.DAO
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
                 handler.ConexionOracle.AddInParameter(cmd, "isbIdHU", OracleDbType.Int64, tareaAzure.HU.ToString());
+                handler.ConexionOracle.AddInParameter(cmd, "isbFechaIni", OracleDbType.Varchar2, string.IsNullOrEmpty(tareaAzure.IniFecha) ? tareaAzure.FechaCreacion : tareaAzure.IniFecha);
 
                 try
                 {
@@ -1217,6 +1218,7 @@ namespace Cygnus2_0.DAO
                         tarea.Completed = Convert.ToDouble(reader["completado"]);
                         tarea.HU = Convert.ToInt32(reader["hu"]);
                         tarea.Tipo = "F";
+                        tarea.IniFecha = String.IsNullOrEmpty(Convert.ToString(reader["fecha_inicio"]))? Convert.ToString(reader["fecha_inicio"]) : "";
                         tarea.pCalcularTotal();
 
                         view.ListaHojas.ToList().Find(x => x.Id == view.HojaActual.Id).ListaTareas.Add(tarea);
@@ -1563,6 +1565,53 @@ namespace Cygnus2_0.DAO
                                                         IdAzure = Convert.ToInt32(rdr["id_azure"].ToString()),
                                                         Descripcion = rdr["descripcion"].ToString(),
                                                         Total = Convert.ToDouble(rdr["horaCygnus"].ToString())
+                        });
+                    }
+                    rdr.Close(); // close the oracle reader
+                }
+            }
+
+            return listaTareas;
+        }
+        public List<TareaHoja> pObtListaTaskAzure(ReportViewModel view)
+        {
+            List<TareaHoja> listaTareas = new List<TareaHoja>();
+
+            string sql = "SELECT * FROM (" +
+                        "SELECT fecha_inicio fecha," +
+                        "       hist_usuario," +
+                        "       id_azure," +
+                        "       descripcion," +
+                        "       estado," +
+                        "       completado " +
+                        "FROM flex.ll_requerimiento " +
+                        "WHERE usuario = :usuario " +
+                        "AND fecha_inicio >= :fecha_i " +
+                        "AND fecha_inicio <= :fecha_f "+
+                        ") ORDER BY fecha";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Parameters.Add(":usuario", handler.ConnViewModel.Usuario.ToUpper());
+                cmd.Parameters.Add(":fecha_i", view.FechaDesde.ToShortDateString());
+                cmd.Parameters.Add(":fecha_f", view.FechaHasta.ToShortDateString());
+                cmd.Connection = con;
+
+                using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it
+                {
+                    while (rdr.Read()) // loop through each row from oracle
+                    {
+                        listaTareas.Add(new TareaHoja
+                        {
+                            FechaCreacion = rdr["fecha"].ToString(),
+                            HU = Convert.ToInt32(rdr["hist_usuario"]),
+                            IdAzure = Convert.ToInt32(rdr["id_azure"].ToString()),
+                            Descripcion = rdr["descripcion"].ToString(),
+                            Estado = rdr["estado"].ToString(),
+                            Total = Convert.ToDouble(rdr["completado"].ToString())
                         });
                     }
                     rdr.Close(); // close the oracle reader
