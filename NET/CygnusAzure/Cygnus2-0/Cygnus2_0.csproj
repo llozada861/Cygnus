@@ -68,6 +68,10 @@
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.4\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
@@ -332,6 +336,9 @@
     <Compile Include="Pages\Threats\ThreatsProcess.xaml.cs">
       <DependentUpon>ThreatsProcess.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Time\AdminTime.xaml.cs">
+      <DependentUpon>AdminTime.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Time\Combine.xaml.cs">
       <DependentUpon>Combine.xaml</DependentUpon>
     </Compile>
@@ -340,6 +347,9 @@
     </Compile>
     <Compile Include="Pages\Time\HelpArea.xaml.cs">
       <DependentUpon>HelpArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Time\SendMail.xaml.cs">
       <DependentUpon>SendMail.xaml</DependentUpon>
@@ -387,6 +397,7 @@
     <Compile Include="ViewModel\Settings\ConfGeneralViewModel.cs" />
     <Compile Include="ViewModel\Settings\UpdateViewModel.cs" />
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
+    <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
     <EmbeddedResource Include="Libs\Updater.exe" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\01_crll_credmark.sql" />
@@ -638,6 +649,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Time\AdminTime.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Time\Combine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -647,6 +662,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Time\HelpArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\Report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,6 +14,7 @@ using Cygnus2_0.Pages.Time;
 using System.Threading;
 using System.IO;
 using System.Globalization;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Model.Time
 {
@@ -168,7 +169,7 @@ namespace Cygnus2_0.Model.Time
         public async Task<IList<WorkItem>> QueryOpenBugs(string sbDiasAtras)
         {
             string areas = "";
-            string personalAccessToken = "trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
+            string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
 
             VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
             VssConnection connection = null;
@@ -206,7 +207,7 @@ namespace Cygnus2_0.Model.Time
         public async Task<int> pObtenerHU(int idTask)
         {
             int HU = 0;
-            string personalAccessToken = "trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
+            string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
 
             VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
             VssConnection connection = null;

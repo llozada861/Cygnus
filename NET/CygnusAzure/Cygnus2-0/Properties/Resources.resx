@@ -1817,4 +1817,7 @@ COMMIT;</value>
   <data name="TagCantidadHilos" xml:space="preserve">
     <value>[hilos]</value>
   </data>
+  <data name="TokenAzureConn" xml:space="preserve">
+    <value>trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq</value>
+  </data>
 </root>

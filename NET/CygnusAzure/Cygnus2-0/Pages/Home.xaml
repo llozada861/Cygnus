@@ -12,9 +12,9 @@
     </UserControl.Resources>
     <Grid>
         <!--Tab genérico-->
-        <mui:ModernTab Name="UserTab" Layout="List" SelectedSource="/Pages/Time/TimesView.xaml" Visibility="{Binding IsUser, Converter={StaticResource booleanToVisibilityConverter}}">
+        <mui:ModernTab Name="UserTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsUser, Converter={StaticResource booleanToVisibilityConverter}}">
             <mui:ModernTab.Links >
-                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/TimesView.xaml" />
+                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
                 <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
                 <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
@@ -25,9 +25,9 @@
             </mui:ModernTab.Links>
         </mui:ModernTab>
         <!--Tab Especialista-->
-        <mui:ModernTab Name="EspecialistTab" Layout="List" SelectedSource="/Pages/Time/TimesView.xaml" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}">
+        <mui:ModernTab Name="EspecialistTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}">
             <mui:ModernTab.Links >
-                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/TimesView.xaml" />
+                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
                 <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
                 <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
@@ -40,9 +40,9 @@
             </mui:ModernTab.Links>
         </mui:ModernTab>
         <!--Tab Admin-->
-        <mui:ModernTab Name="AdminTab" Layout="List" SelectedSource="/Pages/Time/TimesView.xaml" Visibility="{Binding IsAdmin, Converter={StaticResource booleanToVisibilityConverter}}">
+        <mui:ModernTab Name="AdminTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsAdmin, Converter={StaticResource booleanToVisibilityConverter}}">
             <mui:ModernTab.Links >
-                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/TimesView.xaml" />
+                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
                 <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
                 <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
