@@ -1278,6 +1278,14 @@ AS
        dtFechaFin DATE;
        dtFechaCreaAzure DATE;
        nuTotalRq NUMBER;
+       dia_semana NUMBER;
+       lunes NUMBER;
+       martes NUMBER;
+       miercoles NUMBER;
+       jueves NUMBER;
+       viernes NUMBER;
+       sabado NUMBER;
+       domingo NUMBER;
         
        CURSOR cuRq
        IS
@@ -1316,6 +1324,7 @@ AS
        pInicializaError(onuErrorCode,osbErrorMessage);
        
        dtFechaCreaAzure := to_date(isbFechaCreacion,'dd/mm/yyyy');
+       dia_semana := to_char(dtFechaCreaAzure,'D');
        
        OPEN cuRq;
        FETCH cuRq INTO nucodigoRq;
@@ -1339,17 +1348,35 @@ AS
            
            COMMIT;
            
+           lunes := 0;
+           martes := 0;
+           miercoles := 0;
+           jueves := 0;
+           viernes := 0;
+           sabado := 0;
+           domingo := 0;
+           
+           CASE dia_semana
+               WHEN 1 THEN lunes := inuCompletado;
+               WHEN 2 THEN martes := inuCompletado;
+               WHEN 3 THEN miercoles := inuCompletado;
+               WHEN 4 THEN jueves := inuCompletado;
+               WHEN 5 THEN viernes := inuCompletado;
+               WHEN 6 THEN sabado := inuCompletado;
+               WHEN 7 THEN domingo := inuCompletado;
+           END CASE;
+           
            pinshorashoja
            (
                nuCodHoja,
                SYSDATE,
-               0,
-               0,
-               0,
-               0,
-               inuCompletado,
-               0,
-               0,
+               lunes,
+               martes,
+               miercoles,
+               jueves,
+               viernes,
+               sabado,
+               domingo,
                isbUsuario,
                NULL,
                nucodigo,
