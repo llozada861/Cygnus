@@ -217,7 +217,7 @@ AS
         isbUsuario       IN VARCHAR2,
         onuRefCursor    OUT tyRefCursor,
         onuErrorCode    OUT NUMBER,
-        osbErrorMessage OUT VARCHAR2 
+        osbErrorMessage OUT VARCHAR2
     );
     
     PROCEDURE pInsertaTareaAzure
@@ -229,7 +229,8 @@ AS
         inuCompletado   IN NUMBER,
         isbFechaCreacion IN VARCHAR2,
         onuErrorCode    OUT NUMBER,
-        osbErrorMessage OUT VARCHAR2 
+        osbErrorMessage OUT VARCHAR2,
+		isbIdHU         IN NUMBER DEFAULT 0		
     );
     
     PROCEDURE pinshorashoja
@@ -269,7 +270,9 @@ AS
         inuCompletado IN NUMBER,
         onuSeqNeg       OUT NUMBER,
         onuErrorCode    OUT NUMBER,
-        osbErrorMessage OUT VARCHAR2 
+        osbErrorMessage OUT VARCHAR2,
+        isbIdHU         IN NUMBER DEFAULT 0,
+        isbFechaIni     IN VARCHAR2 DEFAULT NULL 
     );
     
     PROCEDURE pEliminaTarea
@@ -294,6 +297,8 @@ AS
         inuRq           IN NUMBER,
         onuTotal        OUT NUMBER,
         onuTotalAzure   OUT NUMBER,
+		onuHU           OUT NUMBER,
+        onuTotalHU      OUT NUMBER,
         onuRefCursor    OUT tyrefcursor,
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2 
@@ -1171,7 +1176,8 @@ AS
         inuCompletado   IN NUMBER,
         isbFechaCreacion IN VARCHAR2,
         onuErrorCode    OUT NUMBER,
-        osbErrorMessage OUT VARCHAR2 
+        osbErrorMessage OUT VARCHAR2,
+		isbIdHU         IN NUMBER DEFAULT 0
     )
     IS
        nucodigo NUMBER(10);
@@ -1236,9 +1242,9 @@ AS
            nucodigo := seq_ll_requerimiento.nextval;
             
            INSERT INTO ll_requerimiento
-           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro)       
+           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario,fecha_inicio)       
            VALUES 
-           (nucodigo,isbDescripcion,isbIdAzure,isbEstado,isbUsuario,NULL,(dtFechaFin+7),inuCompletado,SYSDATE);
+           (nucodigo,isbDescripcion,isbIdAzure,isbEstado,isbUsuario,NULL,(dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU,dtFechaCreaAzure);
            
            COMMIT;
            
@@ -1330,7 +1336,9 @@ AS
         inuCompletado IN NUMBER,
         onuSeqNeg       OUT NUMBER,
         onuErrorCode    OUT NUMBER,
-        osbErrorMessage OUT VARCHAR2 
+        osbErrorMessage OUT VARCHAR2,
+		isbIdHU         IN NUMBER DEFAULT 0,
+        isbFechaIni     IN VARCHAR2 DEFAULT NULL		
     )
     IS
        nucodigo NUMBER(10);
@@ -1568,7 +1576,9 @@ AS
                    hh.domingo,
                    rq.fecha_display,
                    qHojaActual.fecha_fin,
-                   rq.completado
+                   rq.completado,
+				   nvl(rq.hist_usuario,0) hu,
+                   rq.fecha_inicio
             FROM ll_horashoja hh,ll_requerimiento rq,qHojaActual
             WHERE hh.requerimiento = rq.codigo
             AND   hh.usuario = isbUsuario
@@ -1654,6 +1664,8 @@ AS
         inuRq           IN NUMBER,
         onuTotal        OUT NUMBER,
         onuTotalAzure   OUT NUMBER,
+		onuHU           OUT NUMBER,
+        onuTotalHU      OUT NUMBER,
         onuRefCursor    OUT tyrefcursor,
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2 
@@ -1675,6 +1687,8 @@ AS
         
         onuTotal := 0;
         onuTotalAzure := 0;
+		onuHU := 0;
+        onuTotalHU := 0;
         
         OPEN cuTotalRq;
         FETCH cuTotalRq INTO onuTotal;

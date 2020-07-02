@@ -38,47 +38,42 @@ PROMPT
 PROMPT **** Aplica de objetos **** 
 
 PROMPT INICIA PROCESO ....
-prompt "Aplicando /crll_credmark.sql"
-@./crll_credmark.sql
+prompt "Aplicando /01_crll_credmark.sql"
+@./01_crll_credmark.sql
 
-prompt "Aplicando /crll_logapli.sql"
-@./crll_logapli.sql
+prompt "Aplicando /02_crll_logapli.sql"
+@./02_crll_logapli.sql
 
-prompt "Aplicando /crll_objetosbl.sql"
-@./crll_objetosbl.sql
+prompt "Aplicando /03_crll_objetosbl.sql"
+@./03_crll_objetosbl.sql
 
-prompt "Aplicando /crll_usuarios.sql"
-@./crll_usuarios.sql
+prompt "Aplicando /04_crll_usuarios.sql"
+@./04_crll_usuarios.sql
 
-prompt "Aplicando /crll_version.sql"
-@./crll_version.sql
+prompt "Aplicando /05_crll_version.sql"
+@./05_crll_version.sql
 
-prompt "Aplicando /01_crll_requerimiento.sql"
-@./01_crll_requerimiento.sql
+prompt "Aplicando /06_crll_requerimiento.sql"
+@./06_crll_requerimiento.sql
 
-prompt "Aplicando /02_crll_hoja.sql"
-@./02_crll_hoja.sql
+prompt "Aplicando /07_crll_hoja.sql"
+@./07_crll_hoja.sql
 
-prompt "Aplicando /03_crll_horashoja.sql"
-@./03_crll_horashoja.sql
+prompt "Aplicando /08_crll_horashoja.sql"
+@./08_crll_horashoja.sql
 
-prompt "Aplicando /crSequences.sql"
-@./crSequences.sql
+prompt "Aplicando /09_crSequences.sql"
+@./09_crSequences.sql
 
-prompt "Aplicando /crsequencehoja.sql"
-@./crsequencehoja.sql
-
-prompt "Aplicando /crseq_ll_logapli.sql"
-@./crseq_ll_logapli.sql
-
-prompt "Aplicando /inshojas.sql"
-@./inshojas.sql
+prompt "Aplicando /11_crseq_ll_logapli.sql"
+@./11_crseq_ll_logapli.sql
 
 prompt "Aplicando /pkg_utilmark_fenix.sql"
 @./pkg_utilmark_fenix.sql
 
-prompt "Aplicando /Grants_usuarios_epm_cygnus.sql"
-@./Grants_usuarios_epm_cygnus.sql
+prompt "Aplicando /23_inshojas_fenix.sql"
+@./23_inshojas_fenix.sql
+commit;
 
 PROMPT **** Termina aplica de objetos **** 
 
