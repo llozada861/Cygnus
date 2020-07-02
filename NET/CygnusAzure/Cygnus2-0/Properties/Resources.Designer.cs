@@ -3480,7 +3480,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq.
+        ///   Busca una cadena traducida similar a scet7yovwwxs62bnzvvzalhyinqtqdldy2em2kmqyb4bt2xpsucq.
         /// </summary>
         public static string TokenAzureConn {
             get {
