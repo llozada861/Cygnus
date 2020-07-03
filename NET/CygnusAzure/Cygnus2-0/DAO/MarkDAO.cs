@@ -295,7 +295,7 @@ namespace Cygnus2_0.DAO
             //using (OracleConnection con = handler.ConexionOracle.ConexionOracleSQL)
 
             {
-                string query = "insert into flex.ll_version values (:version,sysdate,sysdate,:data)";
+                string query = "insert into ll_version values (:version,sysdate,sysdate,:data)";
 
                 //using (OracleCommand cmd = new OracleCommand(query))
                 using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
@@ -1452,7 +1452,7 @@ namespace Cygnus2_0.DAO
                         "                   rq.descripcion," +
                         "                   lunes horaCygnus," +
                         "                   rq.completado horaAzure" +
-                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
                         "            WHERE hh.usuario = :usuario" +
                         "            AND   ho.fecha_ini >= :fecha_i" +
                         "            AND   ho.fecha_fin <= :fecha_f" +
@@ -1466,7 +1466,7 @@ namespace Cygnus2_0.DAO
                         "                   rq.descripcion," +
                         "                   martes horaCygnus," +
                         "                   rq.completado horaAzure" +
-                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
                         "            WHERE hh.usuario = :usuario" +
                         "            AND   ho.fecha_ini >= :fecha_i" +
                         "            AND   ho.fecha_fin <= :fecha_f" +
@@ -1480,7 +1480,7 @@ namespace Cygnus2_0.DAO
                         "                   rq.descripcion," +
                         "                   miercoles horaCygnus," +
                         "                   rq.completado horaAzure" +
-                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
                         "            WHERE hh.usuario = :usuario" +
                         "            AND   ho.fecha_ini >= :fecha_i" +
                         "            AND   ho.fecha_fin <= :fecha_f" +
@@ -1494,7 +1494,7 @@ namespace Cygnus2_0.DAO
                         "                   rq.descripcion," +
                         "                   jueves horaCygnus," +
                         "                   rq.completado horaAzure" +
-                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
                         "            WHERE hh.usuario = :usuario" +
                         "            AND   ho.fecha_ini >= :fecha_i" +
                         "            AND   ho.fecha_fin <= :fecha_f" +
@@ -1508,7 +1508,7 @@ namespace Cygnus2_0.DAO
                         "                   rq.descripcion," +
                         "                   viernes horaCygnus," +
                         "                   rq.completado horaAzure" +
-                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
                         "            WHERE hh.usuario = :usuario" +
                         "            AND   ho.fecha_ini >= :fecha_i" +
                         "            AND   ho.fecha_fin <= :fecha_f" +
@@ -1522,7 +1522,7 @@ namespace Cygnus2_0.DAO
                         "                   rq.descripcion," +
                         "                   sabado horaCygnus," +
                         "                   rq.completado horaAzure" +
-                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
                         "            WHERE hh.usuario = :usuario" +
                         "            AND   ho.fecha_ini >= :fecha_i" +
                         "            AND   ho.fecha_fin <= :fecha_f" +
@@ -1536,7 +1536,7 @@ namespace Cygnus2_0.DAO
                         "                   rq.descripcion," +
                         "                   domingo horaCygnus," +
                         "                   rq.completado horaAzure" +
-                        "            FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq" +
+                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
                         "            WHERE hh.usuario = :usuario" +
                         "            AND   ho.fecha_ini >= :fecha_i" +
                         "            AND   ho.fecha_fin <= :fecha_f" +
@@ -1584,7 +1584,7 @@ namespace Cygnus2_0.DAO
                         "       descripcion," +
                         "       estado," +
                         "       completado " +
-                        "FROM flex.ll_requerimiento " +
+                        "FROM ll_requerimiento " +
                         "WHERE usuario = :usuario " +
                         "AND fecha_inicio >= :fecha_i " +
                         "AND fecha_inicio <= :fecha_f "+

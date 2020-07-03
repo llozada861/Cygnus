@@ -49,40 +49,47 @@ namespace Cygnus2_0.ViewModel.Time
 
         public void pGeneraReporte()
         {
-            string archivoTemporal = Environment.CurrentDirectory + "\\ReporteHoras.xlsx";
-
-            if (string.IsNullOrEmpty(FechaDesde.ToString()))
+            try
             {
-                handler.MensajeError("Ingrese fecha desde");
-                return;
-            }
+                string archivoTemporal = Environment.CurrentDirectory + "\\ReporteHoras.xlsx";
 
-            if (string.IsNullOrEmpty(FechaHasta.ToString()))
+                if (string.IsNullOrEmpty(FechaDesde.ToString()))
+                {
+                    handler.MensajeError("Ingrese fecha desde");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(FechaHasta.ToString()))
+                {
+                    handler.MensajeError("Ingrese fecha hasta");
+                    return;
+                }
+
+                if (FechaHasta < FechaDesde)
+                {
+                    handler.MensajeError("La fecha hasta debe ser mayor que la fecha desde");
+                    return;
+                }
+
+                if ((FechaHasta.Date - FechaDesde.Date).Days > 90)
+                {
+                    handler.MensajeError("No se recomienda buscar más de 90 días");
+                    return;
+                }
+
+                Open(archivoTemporal);
+                CreateHeader();
+                InsertDataCygnus();
+                pInsertaTareaAzure();
+                Close();
+
+                handler.pGuardaArchivoByte(archivoTemporal, "ReporteHoras[" + FechaDesde.Day + FechaDesde.Month + FechaDesde.Year + "-" + FechaHasta.Day + FechaHasta.Month + FechaHasta.Year + "].xlsx");
+                File.Delete(archivoTemporal);
+            }
+            catch
             {
-                handler.MensajeError("Ingrese fecha hasta");
-                return;
+                Close();
             }
-
-            if (FechaHasta < FechaDesde)
-            {
-                handler.MensajeError("La fecha hasta debe ser mayor que la fecha desde");
-                return;
-            }
-
-            if ((FechaHasta.Date - FechaDesde.Date).Days > 90)
-            {
-                handler.MensajeError("No se recomienda buscar más de 90 días");
-                return;
-            }
-            
-            Open(archivoTemporal);
-            CreateHeader();
-            InsertDataCygnus();
-            pInsertaTareaAzure();
-            Close();
-
-            handler.pGuardaArchivoByte(archivoTemporal,"ReporteHoras["+FechaDesde.Day+ FechaDesde.Month+ FechaDesde.Year+"-"+ FechaHasta.Day + FechaHasta.Month + FechaHasta.Year+"].xlsx");
-            File.Delete(archivoTemporal);
         }
 
         private void Open(string Location)

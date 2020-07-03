@@ -19,6 +19,10 @@ BEGIN
             execute immediate 'grant execute on pkg_utilmark to '||sbUsuario; 
             execute immediate 'grant select, insert on ll_logapli to '||sbUsuario;
             execute immediate 'grant select on ll_credmark to '||sbUsuario;
+            execute immediate 'grant select on ll_hoja to '||sbUsuario;
+            execute immediate 'grant select, insert, update, delete on ll_horashoja to '||sbUsuario;
+            execute immediate 'grant select, insert, update, delete on ll_requerimiento to '||sbUsuario;
+            execute immediate 'grant select, insert on ll_version to '||sbUsuario;
         EXCEPTION
             WHEN OTHERS THEN
                 dbms_output.put_line(SQLERRM);
@@ -26,9 +30,13 @@ BEGIN
     END LOOP;
     CLOSE cuUsuarios;
 	
-	execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM pkg_utilmark FOR pkg_utilmark'; 
-	execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_logapli FOR ll_logapli';
-	execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_credmark FOR ll_credmark';
+	execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM pkg_utilmark FOR flex.pkg_utilmark'; 
+	execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_logapli FOR flex.ll_logapli';
+	execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_credmark FOR flex.ll_credmark';
+    execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_requerimiento FOR flex.ll_requerimiento';
+    execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_horashoja FOR flex.ll_horashoja';
+    execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_hoja FOR flex.ll_hoja';
+    execute immediate 'CREATE OR REPLACE PUBLIC SYNONYM ll_version FOR flex.ll_version';
 END;
 /
 /*select * from dba_tab_privs where table_name = 'LL_CREDMARK'
