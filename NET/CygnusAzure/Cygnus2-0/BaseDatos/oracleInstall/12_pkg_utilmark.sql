@@ -1357,13 +1357,13 @@ AS
            domingo := 0;
            
            CASE dia_semana
-               WHEN 1 THEN lunes := inuCompletado;
-               WHEN 2 THEN martes := inuCompletado;
-               WHEN 3 THEN miercoles := inuCompletado;
-               WHEN 4 THEN jueves := inuCompletado;
-               WHEN 5 THEN viernes := inuCompletado;
-               WHEN 6 THEN sabado := inuCompletado;
-               WHEN 7 THEN domingo := inuCompletado;
+               WHEN 1 THEN domingo := inuCompletado;
+               WHEN 2 THEN lunes := inuCompletado;
+               WHEN 3 THEN martes := inuCompletado;
+               WHEN 4 THEN miercoles := inuCompletado;
+               WHEN 5 THEN jueves := inuCompletado;
+               WHEN 6 THEN viernes := inuCompletado;
+               WHEN 7 THEN sabado := inuCompletado;
            END CASE;
            
            pinshorashoja
