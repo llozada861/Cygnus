@@ -86,9 +86,10 @@ namespace Cygnus2_0.ViewModel.Time
                 handler.pGuardaArchivoByte(archivoTemporal, "ReporteHoras[" + FechaDesde.Day + FechaDesde.Month + FechaDesde.Year + "-" + FechaHasta.Day + FechaHasta.Month + FechaHasta.Year + "].xlsx");
                 File.Delete(archivoTemporal);
             }
-            catch
+            catch(Exception ex)
             {
                 Close();
+                handler.MensajeError(ex.Message);
             }
         }
 
