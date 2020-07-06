@@ -1579,11 +1579,11 @@ namespace Cygnus2_0.DAO
 
             string sql = "SELECT * FROM (" +
                         "SELECT fecha_inicio fecha," +
-                        "       nvl(hist_usuario,0)," +
+                        "       nvl(hist_usuario,0) hist_usuario," +
                         "       id_azure," +
                         "       descripcion," +
                         "       estado," +
-                        "       nvl(completado,0) " +
+                        "       nvl(completado,0) completado " +
                         "FROM ll_requerimiento " +
                         "WHERE usuario = :usuario " +
                         "AND fecha_inicio >= :fecha_i " +
