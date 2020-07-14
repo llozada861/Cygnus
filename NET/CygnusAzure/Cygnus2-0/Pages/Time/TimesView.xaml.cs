@@ -192,6 +192,7 @@ namespace Cygnus2_0.Pages.Time
             btnProcesar.IsEnabled = true;
             btnProcesar.Background = Brushes.Orange;
             btnProcesar.Foreground = Brushes.Black;
+            handler.GuardarTiempos = true;
         }
 
         private void pDesactivarBtnGuardar()
@@ -199,6 +200,7 @@ namespace Cygnus2_0.Pages.Time
             btnProcesar.Background = backgroundBtn;
             btnProcesar.Foreground = foregroudnBtn;
             btnProcesar.IsEnabled = false;
+            handler.GuardarTiempos = false;
         }
 
         private void Eliminar_Click(object sender, RoutedEventArgs e)

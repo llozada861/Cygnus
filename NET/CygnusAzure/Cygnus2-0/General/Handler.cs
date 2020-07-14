@@ -255,6 +255,7 @@ namespace Cygnus2_0.General
         public StringBuilder HtmlMetodoParam { set; get; }
         public StringBuilder HtmlMetodoReturn { set; get; }
         public StringBuilder HtmlScript { set; get; }
+        public Boolean GuardarTiempos { set; get; }
         public void MensajeError(string mensaje)
         {
             try

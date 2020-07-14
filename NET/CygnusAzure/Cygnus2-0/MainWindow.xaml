@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterScreen"
         Width="1146" 
         Height="650" Loaded="ModernWindow_Loaded" 
-        xmlns:p="clr-namespace:Cygnus2_0.Properties" WindowState="Maximized"
+        xmlns:p="clr-namespace:Cygnus2_0.Properties" WindowState="Maximized" Closing="ModernWindow_Closing"
  >
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Bienvenido" >
