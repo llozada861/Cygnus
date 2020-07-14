@@ -1384,7 +1384,7 @@ AS
                osbErrorMessage
            ); 
     	   
-           IF(nuCodHojaSigSem IS NOT NULL)THEN
+           /*IF(nuCodHojaSigSem IS NOT NULL)THEN
                --Se inserta para siguiente semana
                pinshorashoja
                (
@@ -1403,7 +1403,7 @@ AS
                    onuErrorCode,
                    osbErrorMessage
                );
-           END IF;
+           END IF;*/
        ELSE
            nucodigo := nucodigoRq;
            

@@ -259,5 +259,14 @@ namespace Cygnus2_0
                 }
             }
         }
+
+        private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (handler.GuardarTiempos)
+            {
+                handler.MensajeError("Hay cambios pendientes por guardar en la hoja de horas.");
+                e.Cancel = true;
+            }
+        }
     }
 }
