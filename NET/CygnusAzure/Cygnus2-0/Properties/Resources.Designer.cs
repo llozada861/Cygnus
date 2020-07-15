@@ -479,6 +479,7 @@ namespace Cygnus2_0.Properties {
         ///SET verify OFF
         ///SET heading OFF 
         ///SET feedback ON
+        ///SET DEFINE OFF
         ///SPOOL &lt;nombre_spool&gt;
         ///PROMPT **** Aplica de objetos ****.
         /// </summary>

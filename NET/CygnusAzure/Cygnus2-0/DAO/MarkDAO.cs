@@ -930,7 +930,7 @@ namespace Cygnus2_0.DAO
                     File.Delete(sbAplica);
                 }
 
-                nombreLog = "Log_" + archivo.NombreSinExt + ".log";
+                nombreLog = DateTime.Now.ToString("ddMMyyyy") +"_Log_" + archivo.NombreSinExt + ".log";
                 rutaLog = Path.Combine(archivo.Ruta, nombreLog);
 
                 if (File.Exists(rutaLog))
@@ -964,7 +964,7 @@ namespace Cygnus2_0.DAO
             process.StartInfo.RedirectStandardOutput = false;
             process.StartInfo.RedirectStandardInput = false; 
             process.StartInfo.FileName = Path.Combine(handler.ConfGeneralViewModel.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
-            process.StartInfo.Arguments = string.Format("{0} @{1} ", credentials, sbAplica);
+            process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
             process.StartInfo.CreateNoWindow = false;
 
             process.Start();
