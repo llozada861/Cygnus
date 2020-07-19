@@ -205,6 +205,11 @@ namespace Cygnus2_0.Model.Compila
 
                 foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
                 {
+                    //Valida que el objeto no se encuentra aplicado en más de un esquema
+                    handler.DAO.pValidaUsuarioCompila(archivo, handler);
+                    //Valida que solo se aplique en un esquema
+                    handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
+
                     handler.pGuardaLogCompilacion(archivo, view.ArchivosCompilados, res.Antes);
                     handler.DAO.pExecuteSqlplus(credenciales, archivo);
                 }
