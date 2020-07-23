@@ -2171,6 +2171,10 @@ AS
                     sbToken := 'isb';
                 WHEN 'DATE' THEN
                     sbToken := 'idt';
+                WHEN 'CLOB' THEN
+                    sbToken := 'icl';
+                WHEN 'BLOB' THEN
+                    sbToken := 'ibl';
             END CASE;
             RETURN sbToken;   
         END;
