@@ -51,6 +51,7 @@ namespace Cygnus2_0.Pages.Compila
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
                     compilaViewModel.pListaArchivos(DropPath);
+                    //pSetValorCombo();
                 }
             }
             catch (Exception ex)
@@ -58,7 +59,10 @@ namespace Cygnus2_0.Pages.Compila
                 handler.MensajeError(ex.Message);
             }
         }
-
+        private void pSetValorCombo()
+        {
+            //DataGridComboBoxColumn combo = dataGridArchCompila.Columns[1];
+        }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
         }

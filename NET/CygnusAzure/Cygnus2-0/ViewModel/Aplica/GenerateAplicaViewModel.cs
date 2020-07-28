@@ -62,7 +62,6 @@ namespace Cygnus2_0.ViewModel.Aplica
             get { return archivosGenerados; }
             set { SetProperty(ref archivosGenerados, value); }
         }
-
         public ObservableCollection<Archivo> ListaArchivosCargados
         {
             get { return listaArchivosCargados; }
@@ -80,6 +79,8 @@ namespace Cygnus2_0.ViewModel.Aplica
         }
         public void OnProcess(object commandParameter)
         {
+            bool Noselec = false;
+
             if (String.IsNullOrEmpty(this.Codigo))
             {
                 handler.MensajeError("Ingrese número de caso");
@@ -98,14 +99,26 @@ namespace Cygnus2_0.ViewModel.Aplica
                 return;
             }
 
+            foreach (Archivo archivo in this.ListaArchivosCargados)
+            {
+                if (string.IsNullOrEmpty(archivo.Tipo))
+                {
+                    Noselec = true;
+                }
+            }
+
+            if (Noselec)
+            {
+                handler.MensajeError("Todos los archivos deben tener un tipo. Seleccione un tipo para el archivo.");
+                return;
+            }
+
             model.pProcesar();
 
             if (handler.MensajeConfirmacion("Desea ejecutar el aplica por SQLPLUS?") == "Y")
             {
                 this.OnSqlplus(null);
             }
-            //handler.MensajeOk("Proceso terminado con éxito. Verifique los archivos generados.");
-
         }
         public void OnClean(object commandParameter)
         {

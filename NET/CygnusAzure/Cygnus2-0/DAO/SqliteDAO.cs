@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.DAO
 {
@@ -274,6 +275,18 @@ namespace Cygnus2_0.DAO
                             }
                         );
                     }
+
+                    handler.ListaTiposObjetos.Add
+                    (
+                        new SelectListItem
+                        {
+                            Text = res.TipoAplica,
+                            Value = res.TipoAplica,
+                            CantidadSlash = 0,
+                            Prioridad = 200,
+                            Grant = "No"
+                        }
+                    );
                 }
             }
         }

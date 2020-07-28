@@ -91,12 +91,27 @@ namespace Cygnus2_0.ViewModel.Compila
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }
         }
-
         public void OnProcess(object commandParameter)
         {
+            bool Noselec = false;
+
             if (this.Usuario == null)
             {
                 handler.MensajeError("Debe ingresar el usuario.");
+                return;
+            }
+
+            foreach(Archivo archivo in this.ListaArchivosCargados)
+            {
+                if (string.IsNullOrEmpty(archivo.Tipo))
+                {
+                    Noselec = true;
+                }
+            }
+
+            if(Noselec)
+            {
+                handler.MensajeError("Todos los archivos deben tener un tipo. Seleccione un tipo para el archivo.");
                 return;
             }
 

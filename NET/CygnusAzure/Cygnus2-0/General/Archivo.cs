@@ -1,6 +1,8 @@
 ﻿using Cygnus2_0.General.Documentacion;
+using Cygnus2_0.Interface;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,6 +29,8 @@ namespace Cygnus2_0.General
         public List<StringBuilder> DocumentacionSinDepurar { set; get; }
         public List<ModificacionModel> Modificaciones { set; get; }
         public List<DocumentacionModel> ListDocumentacionDepurada { set; get; }
+        public ObservableCollection<SelectListItem> ListaTipos { set; get; }
+        public SelectListItem SelectItemTipo { set; get; }
         public bool ObjetoSql { get; set; }
         public int CantidadSlahs { get; set; }
         public string Observacion { get; set; }

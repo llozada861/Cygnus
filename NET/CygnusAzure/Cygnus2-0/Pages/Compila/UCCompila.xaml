@@ -49,14 +49,24 @@
                   IsReadOnly="True"
                   Header="Archivo"
                   Binding="{Binding Path=FileName}" />
-                    <DataGridTextColumn
-                  Header="Tipo"
-                  IsReadOnly="True"
-                  Binding="{Binding Path=Tipo}" />
-                    <!--<DataGridTextColumn
-                  Header="Ruta"
-                  IsReadOnly="True"
-                  Binding="{Binding Path=Ruta}" />-->
+
+                    <DataGridComboBoxColumn Width="200"
+                         DisplayMemberPath="Text"
+                                            SelectedValuePath="Text"
+                                            Header="Tipo"
+                                            SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="{x:Type ComboBox}">
+                                <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="{x:Type ComboBox}">
+                                <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                    </DataGridComboBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
