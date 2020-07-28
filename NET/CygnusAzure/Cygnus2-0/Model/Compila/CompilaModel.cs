@@ -32,6 +32,7 @@ namespace Cygnus2_0.Model.Compila
                 archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
                 archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                 archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+                archivo.ListaTipos = handler.ListaTiposObjetos;
                 ObtenerTipoArchivoComp(archivo);
                 archivo.BloquesCodigo = new List<string>();
 
@@ -39,11 +40,6 @@ namespace Cygnus2_0.Model.Compila
                     archivo.TipoAplicacion = res.SQLPLUS;
 
                 view.ListaArchivosCargados.Add(archivo);
-
-                /*if (!archivo.Observacion.Equals(res.No_aplica))
-                    view.ListaArchivosCargados.Add(archivo);
-                else
-                    view.ListaObservaciones.Add(new SelectListItem { Text = archivo.FileName, Observacion = archivo.Tipo, Value = "Archivo no permitido para aplicar por esta pantalla" });*/
             }
         }
 
@@ -80,6 +76,7 @@ namespace Cygnus2_0.Model.Compila
                             if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
                             {
                                 archivo.Tipo = prefijo.Value;
+                                archivo.SelectItemTipo = prefijo;
                                 archivo.NombreObjeto = handler.pObtenerNombreObjeto(sbLineSpace);
                                 archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
                                 archivo.TipoAplicacion = archivo.FinArchivo.Equals(res.END) ? res.SQL : res.SQLPLUS;
@@ -116,12 +113,6 @@ namespace Cygnus2_0.Model.Compila
                 if (string.IsNullOrEmpty(archivo.NombreObjeto))
                 {
                     archivo.NombreObjeto = nombreArchivo;
-                }
-
-                //Si no encuentra ningún tipo
-                if (string.IsNullOrEmpty(archivo.Tipo))
-                {
-                    archivo.Tipo = res.TipoOtros;
                 }
             }
         }

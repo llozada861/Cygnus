@@ -75,6 +75,7 @@ namespace Cygnus2_0.Model.Aplica
                 archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
                 archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                 archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+                archivo.ListaTipos = handler.ListaTiposObjetos;
                 handler.ObtenerTipoArchivo(archivo);
                 view.ListaArchivosCargados.Add(archivo);
                 archivo.OrdenAplicacion = view.ListaArchivosCargados.IndexOf(archivo);
