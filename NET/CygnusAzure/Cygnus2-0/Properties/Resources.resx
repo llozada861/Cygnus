@@ -1821,4 +1821,7 @@ COMMIT;</value>
   <data name="TokenAzureConn" xml:space="preserve">
     <value>scet7yovwwxs62bnzvvzalhyinqtqdldy2em2kmqyb4bt2xpsucq</value>
   </data>
+  <data name="KeyRutaSonar" xml:space="preserve">
+    <value>RUTASONAR</value>
+  </data>
 </root>

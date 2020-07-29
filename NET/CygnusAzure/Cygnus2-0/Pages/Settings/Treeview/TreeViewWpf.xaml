@@ -54,6 +54,8 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Azure" IsExpanded="True" Uid="100">
                 </TreeViewItem>
+                <TreeViewItem Header="Sonar" IsExpanded="True" Uid="101">
+                </TreeViewItem>
                 <TreeViewItem Header="Documentación" IsExpanded="True" Uid="60">
                     <TreeViewItem Header="Configuración" Uid="62"/>
                     <TreeViewItem Header="HTML" Uid="63"/>

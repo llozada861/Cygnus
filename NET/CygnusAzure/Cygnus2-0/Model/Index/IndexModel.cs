@@ -311,6 +311,11 @@ namespace Cygnus2_0.Model.Index
                 handler.ConfGeneralViewModel.Proxy = false;
             }
 
+            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaSonar)))
+            {
+                handler.RutaSonar = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaSonar)).Value;
+            }
+
             /*
             handler.ConfGeneralViewModel.GeneraVersion = Convert.ToBoolean(handler.ConfGeneralViewModel.ListaConfiguracion.ElementAt(0).Value);
             handler.ConfGeneralViewModel.AplicaCarpetaArriba = Convert.ToBoolean(handler.ConfGeneralViewModel.ListaConfiguracion.ElementAt(1).Value);

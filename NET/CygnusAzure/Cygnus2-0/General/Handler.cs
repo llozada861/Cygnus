@@ -230,6 +230,7 @@ namespace Cygnus2_0.General
         public string SavePathAplica { set; get; }
         public string PathArchivos { set; get; }
         public string CarpetaPadre { set; get; }
+        public string RutaSonar { set; get; }
         public string EsLlamadoDesdeUpdater { set; get; }
         public List<SelectListItem> ListaChequeo { set; get; }
         public List<SelectListItem> ListaTipoArchivos { get; set; }
