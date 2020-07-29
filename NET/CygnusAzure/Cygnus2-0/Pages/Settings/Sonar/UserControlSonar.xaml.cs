@@ -34,54 +34,65 @@ namespace Cygnus2_0.Pages.Settings.Sonar
         {
             grbDatosInstall.Visibility = Visibility.Hidden;
             grbDatosRequeridos.Visibility = Visibility.Visible;
+            btnGuardar.Content = "Guardar";
         }
 
         private void RdbNuevo_Checked(object sender, RoutedEventArgs e)
         {
             grbDatosInstall.Visibility = Visibility.Visible;
             grbDatosRequeridos.Visibility = Visibility.Hidden;
+            btnGuardar.Content = "Instalar";
         }
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            string rutaSonar = "";
-
-            if (rdbExiste.IsChecked == true)
+            try
             {
-                if (string.IsNullOrEmpty(txtRuta.Text))
+                if (rdbExiste.IsChecked == true)
                 {
-                    handler.MensajeError("Ingrese ruta");
-                    return;
+                    if (string.IsNullOrEmpty(txtRuta.Text))
+                    {
+                        handler.MensajeError("Ingrese ruta");
+                        return;
+                    }
+
+                    handler.RutaSonar = txtRuta.Text;
+                    SqliteDAO.pCreaConfiguracion(res.KeyRutaSonar, handler.RutaSonar);
+                    handler.MensajeOk("Ya puedes analizar el código al momento de compilar de los objetos.");
                 }
 
-                handler.RutaSonar = txtRuta.Text;
-            }
+                if (rdbNuevo.IsChecked == true)
+                {
+                    if (string.IsNullOrEmpty(txtRutaInstall.Text))
+                    {
+                        handler.MensajeError("Ingrese ruta");
+                        return;
+                    }
 
-            if(rdbNuevo.IsChecked == true)
+                    if (string.IsNullOrEmpty(txtUser.Text))
+                    {
+                        handler.MensajeError("Ingrese usuario");
+                        return;
+                    }
+
+                    if (string.IsNullOrEmpty(txtPass.Text))
+                    {
+                        handler.MensajeError("Ingrese contraseña");
+                        return;
+                    }
+
+                    handler.RutaSonar = txtRutaInstall.Text;
+                    SqliteDAO.pCreaConfiguracion(res.KeyRutaSonar, handler.RutaSonar);
+                    SonarQube.pInstalaSonar(handler.RutaSonar, txtUser.Text, txtPass.Text);
+                    handler.MensajeOk("Se instala con éxito. Ya puedes analizar el código al momento de compilar de los objetos.");
+                    txtUser.Text = "";
+                    txtPass.Text = "";
+                }
+            }
+            catch(Exception ex)
             {
-                if (string.IsNullOrEmpty(txtRutaInstall.Text))
-                {
-                    handler.MensajeError("Ingrese ruta");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtUser.Text))
-                {
-                    handler.MensajeError("Ingrese usuario");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtPass.Text))
-                {
-                    handler.MensajeError("Ingrese contraseña");
-                    return;
-                }
-
-                handler.RutaSonar = txtRutaInstall.Text;
-                SonarQ.General.Handler.pInstalaSonar(handler.RutaSonar, txtUser.Text, txtUser.Text);
+                handler.MensajeError(ex.Message);
             }
-
-            SqliteDAO.pCreaConfiguracion(res.KeyRutaSonar, rutaSonar);
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -90,7 +101,7 @@ namespace Cygnus2_0.Pages.Settings.Sonar
 
             rdbExiste.IsChecked = true;
 
-            if (string.IsNullOrEmpty(handler.RutaSonar))
+            if (!string.IsNullOrEmpty(handler.RutaSonar))
             {
                 txtRuta.Text = handler.RutaSonar;
             }

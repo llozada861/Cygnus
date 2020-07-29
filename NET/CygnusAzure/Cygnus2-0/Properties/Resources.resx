@@ -1824,4 +1824,56 @@ COMMIT;</value>
   <data name="KeyRutaSonar" xml:space="preserve">
     <value>RUTASONAR</value>
   </data>
+  <data name="CarpetaObjetos" xml:space="preserve">
+    <value>objetos</value>
+  </data>
+  <data name="CarpetaSonar" xml:space="preserve">
+    <value>Sonar</value>
+  </data>
+  <data name="NombreSonarConn" xml:space="preserve">
+    <value>sonar-scanner.properties</value>
+  </data>
+  <data name="NombreSonarProperties" xml:space="preserve">
+    <value>sonar-project.properties</value>
+  </data>
+  <data name="SonarConn" xml:space="preserve">
+    <value>#Configure here general information about the environment, such as SonarQube server connection details for example
+#No information about specific project should appear here
+
+#----- Default SonarQube server
+#sonar.host.url=http://localhost:9000
+#----- Default source code encoding
+#https://sonar.epm.com.co/sonar/projects
+#sonar.sourceEncoding=UTF-8
+sonar.host.url= https://sonar.epm.com.co/sonar
+sonar.login=[usuario]
+sonar.password=[pass]</value>
+  </data>
+  <data name="SonarProperties" xml:space="preserve">
+    <value>#sonar-project.properties
+# must be unique in a given SonarQube instance
+sonar.projectKey=Open
+
+# --- optional properties ---
+
+# defaults to project key
+sonar.projectName=Open
+# defaults to 'not provided'
+#sonar.projectVersion=1.0
+ 
+# Path is relative to the sonar-project.properties file. Defaults to .
+sonar.sources=[ruta]
+sonar.language=plsql
+#sonar.branch=desarrollo
+sonar.branch.name=[rama]
+# Encoding of the source code. Default is default system encoding
+#sonar.sourceEncoding=UTF-8
+sonar.branch.target=desarrollo</value>
+  </data>
+  <data name="SonarZip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sonar-scanner-cli-4.4.0.2170-windows.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ZipZonar" xml:space="preserve">
+    <value>sonarq.zip</value>
+  </data>
 </root>

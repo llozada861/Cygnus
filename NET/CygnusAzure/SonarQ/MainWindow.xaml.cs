@@ -27,7 +27,7 @@ namespace SonarQ
 
             List<SelectListItem> archivos = new List<SelectListItem>();
             archivos.Add(new SelectListItem { Text = "D:\\", Value = "pkg_epm_bolegacortesirius.sql" });
-            Handler.pEjecutarSonar(@"D:\SonarQ\Sonar", archivos);
+            SonarQube.pEjecutarSonar(@"D:\SonarQ\Sonar", archivos);
             //Handler.pInstalaSonar("D:\\SonarQ", "llozada","123");}
             
         }

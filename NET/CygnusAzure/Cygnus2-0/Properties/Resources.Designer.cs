@@ -209,6 +209,24 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a objetos.
+        /// </summary>
+        public static string CarpetaObjetos {
+            get {
+                return ResourceManager.GetString("CarpetaObjetos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sonar.
+        /// </summary>
+        public static string CarpetaSonar {
+            get {
+                return ResourceManager.GetString("CarpetaSonar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         public static byte[] Conexion {
@@ -1801,6 +1819,24 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a sonar-scanner.properties.
+        /// </summary>
+        public static string NombreSonarConn {
+            get {
+                return ResourceManager.GetString("NombreSonarConn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a sonar-project.properties.
+        /// </summary>
+        public static string NombreSonarProperties {
+            get {
+                return ResourceManager.GetString("NombreSonarProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a insGe_database_version_.
         /// </summary>
         public static string NombreVersionInsert {
@@ -2468,6 +2504,62 @@ namespace Cygnus2_0.Properties {
         public static byte[] SolicitudObjetos {
             get {
                 object obj = ResourceManager.GetObject("SolicitudObjetos", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a #Configure here general information about the environment, such as SonarQube server connection details for example
+        ///#No information about specific project should appear here
+        ///
+        ///#----- Default SonarQube server
+        ///#sonar.host.url=http://localhost:9000
+        ///#----- Default source code encoding
+        ///#https://sonar.epm.com.co/sonar/projects
+        ///#sonar.sourceEncoding=UTF-8
+        ///sonar.host.url= https://sonar.epm.com.co/sonar
+        ///sonar.login=[usuario]
+        ///sonar.password=[pass].
+        /// </summary>
+        public static string SonarConn {
+            get {
+                return ResourceManager.GetString("SonarConn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a #sonar-project.properties
+        ///# must be unique in a given SonarQube instance
+        ///sonar.projectKey=Open
+        ///
+        ///# --- optional properties ---
+        ///
+        ///# defaults to project key
+        ///sonar.projectName=Open
+        ///# defaults to &apos;not provided&apos;
+        ///#sonar.projectVersion=1.0
+        /// 
+        ///# Path is relative to the sonar-project.properties file. Defaults to .
+        ///sonar.sources=[ruta]
+        ///sonar.language=plsql
+        ///#sonar.branch=desarrollo
+        ///sonar.branch.name=[rama]
+        ///# Encoding of the source code. Default is default system encoding
+        ///#sonar.sourceEncoding=UTF-8
+        ///sona [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string SonarProperties {
+            get {
+                return ResourceManager.GetString("SonarProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Byte[].
+        /// </summary>
+        public static byte[] SonarZip {
+            get {
+                object obj = ResourceManager.GetObject("SonarZip", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -3603,6 +3695,15 @@ namespace Cygnus2_0.Properties {
             get {
                 object obj = ResourceManager.GetObject("XXXXXXXX_ICB_SubVersion__solicitud_obj_SAO_XXXXXX_", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a sonarq.zip.
+        /// </summary>
+        public static string ZipZonar {
+            get {
+                return ResourceManager.GetString("ZipZonar", resourceCulture);
             }
         }
     }

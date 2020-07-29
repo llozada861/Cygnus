@@ -213,6 +213,7 @@
     <Compile Include="General\LocUtil.cs" />
     <Compile Include="General\Mail.cs" />
     <Compile Include="General\SelectListItem.cs" />
+    <Compile Include="General\SonarQube.cs" />
     <Compile Include="General\Times\Day.cs" />
     <Compile Include="General\Times\Hoja.cs" />
     <Compile Include="General\Times\TareaHoja.cs" />
@@ -253,6 +254,9 @@
     </Compile>
     <Compile Include="Pages\Documentation\GenerateHtml.xaml.cs">
       <DependentUpon>GenerateHtml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\General\UserControlLog.xaml.cs">
+      <DependentUpon>UserControlLog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\General\WinImage.xaml.cs">
       <DependentUpon>WinImage.xaml</DependentUpon>
@@ -427,6 +431,7 @@
     <EmbeddedResource Include="Libs\FirstFloor.ModernUI.dll" />
     <EmbeddedResource Include="Libs\Cygnus.exe.config" />
     <None Include="Resources\Image1.bmp" />
+    <None Include="Resources\sonar-scanner-cli-4.4.0.2170-windows.zip" />
     <Page Include="Assets\ModernUI.Theme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -504,6 +509,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Documentation\GenerateHtml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\General\UserControlLog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -788,10 +797,6 @@
       <Project>{5c9a4f46-263d-4c23-b361-f09e14bb109e}</Project>
       <Name>Notifications.Wpf</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
-    <ProjectReference Include="..\SonarQ\SonarQ.csproj">
-      <Project>{6d1d37a9-385d-4b2b-b677-cde9617cc764}</Project>
-      <Name>SonarQ</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
