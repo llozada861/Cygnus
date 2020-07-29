@@ -4,6 +4,7 @@ using Cygnus2_0.Model.Compila;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,38 +92,12 @@ namespace Cygnus2_0.ViewModel.Compila
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }
         }
-        public void OnProcess(object commandParameter)
+        public List<string> pCompilar()
         {
-            bool Noselec = false;
-
-            if (this.Usuario == null)
-            {
-                handler.MensajeError("Debe ingresar el usuario.");
-                return;
-            }
-
-            foreach(Archivo archivo in this.ListaArchivosCargados)
-            {
-                if (string.IsNullOrEmpty(archivo.Tipo))
-                {
-                    Noselec = true;
-                }
-            }
-
-            if(Noselec)
-            {
-                handler.MensajeError("Todos los archivos deben tener un tipo. Seleccione un tipo para el archivo.");
-                return;
-            }
-
-            try
-            {
-                model.pCompilarObjetos();
-            }
-            catch(Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
+            return model.pCompilarObjetos();
+        }
+        public void OnProcess(object commandParameter)
+        {            
         }
         public void OnClean(object commandParameter)
         {

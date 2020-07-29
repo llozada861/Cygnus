@@ -127,7 +127,7 @@
             </Grid>
         </GroupBox>
 
-        <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Command="{Binding Path=Process}" Grid.Column="6" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" HorizontalAlignment="Center"/>
+        <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Grid.Column="6" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnProcesar_Click" />
         <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Command="{Binding Path=Clean}" Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
         <!--<Button x:Name="btnSql" Content="Sqlplus" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Foreground="White" FontStyle="Italic" FontWeight="Bold" Click="btnSql_Click" Background="#FF5C99D6" Visibility="Hidden" Margin="0"/>
         <Button x:Name="Conexion" Content="Conexión BD" Command="{Binding Path=Conectar}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" VerticalAlignment="Center" />

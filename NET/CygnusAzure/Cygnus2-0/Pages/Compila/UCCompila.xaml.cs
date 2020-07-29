@@ -17,6 +17,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 using System.Security.Permissions;
+using System.IO;
+using System.Diagnostics;
+using Cygnus2_0.Pages.General;
 
 namespace Cygnus2_0.Pages.Compila
 {
@@ -78,6 +81,62 @@ namespace Cygnus2_0.Pages.Compila
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+        }
+
+        private void BtnProcesar_Click(object sender, RoutedEventArgs e)
+        {
+            bool Noselec = false;
+            string line;
+
+            try
+            {
+                if (compilaViewModel.Usuario == null)
+                {
+                    handler.MensajeError("Debe ingresar el usuario.");
+                    return;
+                }
+
+                foreach (Archivo archivo in compilaViewModel.ListaArchivosCargados)
+                {
+                    if (string.IsNullOrEmpty(archivo.Tipo))
+                    {
+                        Noselec = true;
+                    }
+                }
+
+                if (Noselec)
+                {
+                    handler.MensajeError("Todos los archivos deben tener un tipo. Seleccione un tipo para el archivo.");
+                    return;
+                }
+
+                List<string> salida = compilaViewModel.pCompilar();
+                System.Console.WriteLine(salida);
+
+                string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
+
+                StringBuilder salidaBuild = new StringBuilder();
+
+                foreach(string linea in salida)
+                {
+                    salidaBuild.AppendLine(linea);
+                }
+
+                if (exito != null)
+                {
+                    string[] vecExito = exito.Split(' ');
+                    string url = vecExito[vecExito.Length - 1];
+                    Process.Start(url);
+                }
+
+                UserControl log = new UserControlLog(salidaBuild);
+                WinImage request = new WinImage(log, "Traza");
+                request.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
         }
     }
 }
