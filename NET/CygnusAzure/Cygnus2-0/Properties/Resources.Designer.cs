@@ -1167,6 +1167,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a RUTASONAR.
+        /// </summary>
+        public static string KeyRutaSonar {
+            get {
+                return ResourceManager.GetString("KeyRutaSonar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a SCRIPT.
         /// </summary>
         public static string KeyScript {

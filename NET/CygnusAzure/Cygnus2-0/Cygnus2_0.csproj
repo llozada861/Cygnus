@@ -323,6 +323,9 @@
     <Compile Include="Pages\Settings\AdminGeneral\UCHtml.xaml.cs">
       <DependentUpon>UCHtml.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Settings\Sonar\UserControlSonar.xaml.cs">
+      <DependentUpon>UserControlSonar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Settings\Treeview\TreeViewWpf.xaml.cs">
       <DependentUpon>TreeViewWpf.xaml</DependentUpon>
     </Compile>
@@ -625,6 +628,10 @@
       <DependentUpon>UCConection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="Pages\Settings\Sonar\UserControlSonar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Settings\Treeview\TreeViewWpf.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -781,6 +788,10 @@
       <Project>{5c9a4f46-263d-4c23-b361-f09e14bb109e}</Project>
       <Name>Notifications.Wpf</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+    <ProjectReference Include="..\SonarQ\SonarQ.csproj">
+      <Project>{6d1d37a9-385d-4b2b-b677-cde9617cc764}</Project>
+      <Name>SonarQ</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
