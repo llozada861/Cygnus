@@ -1876,4 +1876,13 @@ sonar.branch.target=desarrollo</value>
   <data name="ZipZonar" xml:space="preserve">
     <value>sonarq.zip</value>
   </data>
+  <data name="Feature" xml:space="preserve">
+    <value>feature/HU</value>
+  </data>
+  <data name="Despliegues" xml:space="preserve">
+    <value>Despliegues</value>
+  </data>
+  <data name="RamaMasterDatos" xml:space="preserve">
+    <value>master-datos</value>
+  </data>
 </root>

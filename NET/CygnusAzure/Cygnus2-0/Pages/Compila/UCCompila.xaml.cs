@@ -41,6 +41,7 @@ namespace Cygnus2_0.Pages.Compila
             DataContext = compilaViewModel;
             InitializeComponent();
 
+            compilaViewModel.ArchivosCompilados = "0";
             compilaViewModel.ArchivosDescompilados = "0";
         }
 
@@ -86,7 +87,6 @@ namespace Cygnus2_0.Pages.Compila
         private void BtnProcesar_Click(object sender, RoutedEventArgs e)
         {
             bool Noselec = false;
-            string line;
 
             try
             {
@@ -110,28 +110,14 @@ namespace Cygnus2_0.Pages.Compila
                     return;
                 }
 
-                List<string> salida = compilaViewModel.pCompilar();
-                System.Console.WriteLine(salida);
-
-                string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
-
-                StringBuilder salidaBuild = new StringBuilder();
-
-                foreach(string linea in salida)
+                if(compilaViewModel.ListaArchivosCargados.Count == 0)
                 {
-                    salidaBuild.AppendLine(linea);
+                    handler.MensajeError("No hay archivos para compilar");
+                    return;
                 }
 
-                if (exito != null)
-                {
-                    string[] vecExito = exito.Split(' ');
-                    string url = vecExito[vecExito.Length - 1];
-                    Process.Start(url);
-                }
-
-                UserControl log = new UserControlLog(salidaBuild);
-                WinImage request = new WinImage(log, "Traza");
-                request.ShowDialog();
+                compilaViewModel.pCompilar();
+                handler.MensajeOk("Proceso terminó con éxito!");
             }
             catch (Exception ex)
             {

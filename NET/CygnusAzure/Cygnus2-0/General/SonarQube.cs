@@ -14,9 +14,11 @@ namespace Cygnus2_0.General
 {
     public static class SonarQube
     {
-        public static List<string> pEjecutarSonar(string ruta, List<SelectListItem> listaArchivosCargados)
+        public static List<string> pEjecutarSonar(string codigo, string hu,string ruta, List<SelectListItem> listaArchivosCargados)
         {
             List<string> salida = new List<string>();
+
+            pCrearArchivoConf(ruta, codigo, hu);
 
             pCopiarArchivos(Path.Combine(ruta,res.CarpetaObjetos),listaArchivosCargados);
 
@@ -46,7 +48,7 @@ namespace Cygnus2_0.General
             return salida;
         }
 
-        private static void pCopiarArchivos(string ruta, List<SelectListItem> listaArchivosCargados)
+        public static void pCopiarArchivos(string ruta, List<SelectListItem> listaArchivosCargados)
         {
             string sourceFile;
             string destFile;
@@ -71,30 +73,19 @@ namespace Cygnus2_0.General
         public static void pInstalaSonar(string ruta, string usuario, string pass)
         {
             byte[] myFile;
-            StringBuilder SonarProperties = new StringBuilder();
             StringBuilder SonarConn = new StringBuilder();
             string path = ruta;
 
             pCrearDirectorio(path, res.CarpetaObjetos);
 
-            //Se instala SOnar
+            //Se instala Sonar
             myFile = res.SonarZip;
             pCreaArchivoBD(path, res.ZipZonar, myFile);
             unZip(Path.Combine(path, res.ZipZonar), path);
             File.Delete(Path.Combine(path, res.ZipZonar));
 
-            string RutaObjetos = path + "\\" + res.CarpetaObjetos;
-            RutaObjetos = RutaObjetos.Replace(@"\", @"\\");
-
-            //Se configuran los archivos
-            SonarProperties.Append(res.SonarProperties);
-            SonarProperties.Replace("[rama]", usuario);
-            SonarProperties.Replace("[ruta]", RutaObjetos);
-
-            using (StreamWriter SonarProp = new StreamWriter(Path.Combine(path, res.NombreSonarProperties)))
-            {
-                SonarProp.Write(SonarProperties);
-            }
+            //archivo de configuración
+            pCrearArchivoConf(path,"1","1");
 
             SonarConn.Append(res.SonarConn);
             SonarConn.Replace("[usuario]", usuario);
@@ -114,6 +105,31 @@ namespace Cygnus2_0.General
             {
                 string setValor = variablePath + ";" + newPath;
                 Environment.SetEnvironmentVariable("Path", setValor, EnvironmentVariableTarget.User);
+            }
+        }
+
+        private static void pCrearArchivoConf(string path, string codigo, string hu)
+        {
+            StringBuilder SonarProperties = new StringBuilder();
+            string RutaObjetos = path + "\\" + res.CarpetaObjetos;
+            RutaObjetos = RutaObjetos.Replace(@"\", @"\\");
+
+            string rama = res.Feature + hu + "_" + codigo + "_" + Environment.UserName.ToUpper();
+            string archivConf = Path.Combine(path, res.NombreSonarProperties);
+
+            //Se configuran los archivos
+            SonarProperties.Append(res.SonarProperties);
+            SonarProperties.Replace("[rama]", rama);
+            SonarProperties.Replace("[ruta]", RutaObjetos);
+
+            if(File.Exists(archivConf))
+            {
+                File.Delete(archivConf);
+            }
+
+            using (StreamWriter SonarProp = new StreamWriter(archivConf))
+            {
+                SonarProp.Write(SonarProperties);
             }
         }
         public static void pDropFiles(string ruta)

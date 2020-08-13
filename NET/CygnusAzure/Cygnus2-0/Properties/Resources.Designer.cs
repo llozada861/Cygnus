@@ -340,6 +340,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Despliegues.
+        /// </summary>
+        public static string Despliegues {
+            get {
+                return ResourceManager.GetString("Despliegues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a D.
         /// </summary>
         public static string Despues {
@@ -715,6 +724,15 @@ namespace Cygnus2_0.Properties {
             get {
                 object obj = ResourceManager.GetObject("F_125_Solicitud_Creacion_Linea_Base_SAO_XXXXXX", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a feature/HU.
+        /// </summary>
+        public static string Feature {
+            get {
+                return ResourceManager.GetString("Feature", resourceCulture);
             }
         }
         
@@ -2275,6 +2293,15 @@ namespace Cygnus2_0.Properties {
         public static string PuntoYComa {
             get {
                 return ResourceManager.GetString("PuntoYComa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a master-datos.
+        /// </summary>
+        public static string RamaMasterDatos {
+            get {
+                return ResourceManager.GetString("RamaMasterDatos", resourceCulture);
             }
         }
         

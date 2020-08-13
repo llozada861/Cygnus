@@ -24,6 +24,8 @@ namespace Cygnus2_0.ViewModel.Compila
         private string archivosDescomp;
         private string archivosCompila;
         private string estadoConn;
+        private string _codigo;
+        private string _hu;
         private ObservableCollection<SelectListItem> listaObservaciones;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
@@ -62,6 +64,16 @@ namespace Cygnus2_0.ViewModel.Compila
             get { return _usuario; }
             set { SetProperty(ref _usuario, value); }
         }
+        public string Codigo
+        {
+            get { return _codigo; }
+            set { SetProperty(ref _codigo, value); }
+        }
+        public string HU
+        {
+            get { return _hu; }
+            set { SetProperty(ref _hu, value); }
+        }
         public string ArchivosCompilados
         {
             get { return archivosCompila; }
@@ -92,9 +104,13 @@ namespace Cygnus2_0.ViewModel.Compila
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }
         }
-        public List<string> pCompilar()
+        public void pCompilar()
         {
-            return model.pCompilarObjetos();
+            model.pCompilarObjetos();
+        }
+        public List<string> pSonar()
+        {
+            return model.pSonar(this.Codigo,this.HU);
         }
         public void OnProcess(object commandParameter)
         {            

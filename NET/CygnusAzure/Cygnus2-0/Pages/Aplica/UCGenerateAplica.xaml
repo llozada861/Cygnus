@@ -109,27 +109,32 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                
-                <Label x:Name="SaoLabel" Content="Código" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox x:Name="CasoText" Text="{Binding Path=Codigo}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,4" VerticalAlignment="Center"/>
 
-                <Label x:Name="label4" Content="Usuario" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox x:Name="CasoText" 
+                         Text="{Binding Path=Codigo}" 
+                         TextWrapping="Wrap" 
+                         VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" 
+                         Grid.Row="0" 
+                         Margin="0,0,0,4"
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="# de caso"/>
+                
                 <ComboBox x:Name="comboBox" 
                   ItemsSource="{Binding Path=ListaUsuarios}" 
                   SelectedItem="{Binding Path=Usuario}"
-                  DisplayMemberPath="Text"
-                  Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center"
+                  DisplayMemberPath="Text" Grid.Row="1" VerticalAlignment="Center"
                   >
                 </ComboBox>
+                <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+                   Grid.Row="1" VerticalAlignment="Center"
+                   Text="Usuario" 
+                   Style="{StaticResource ComboBoxSelectOverlay}"/>
             </Grid>
         </GroupBox>
 
