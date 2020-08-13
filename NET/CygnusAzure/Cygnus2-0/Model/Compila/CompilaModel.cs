@@ -122,12 +122,8 @@ namespace Cygnus2_0.Model.Compila
             return handler.DAO.pObtCantObjsInvalidos();
         }
 
-        public List<string> pCompilarObjetos()
+        public void pCompilarObjetos()
         {
-            List<string> salida = null;
-
-            List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
-
             handler.pObtenerUsuarioCompilacion(view.Usuario.Text);
 
             foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQL)))
@@ -148,15 +144,21 @@ namespace Cygnus2_0.Model.Compila
             pExeSqlplus();
 
             view.ArchivosDescompilados = pObtCantObjsInvalidos();
+        }
 
-            if(!string.IsNullOrEmpty(handler.RutaSonar))
+        public List<string> pSonar(string codigo, string HU)
+        {
+            List<string> salida = null;
+            List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
+
+            if (!string.IsNullOrEmpty(handler.RutaSonar))
             {
                 foreach (Archivo archivo in view.ListaArchivosCargados)
                 {
                     archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
                 }
 
-                salida = SonarQube.pEjecutarSonar(handler.RutaSonar, archivosEvaluar);
+                salida = SonarQube.pEjecutarSonar(codigo, HU, handler.RutaSonar, archivosEvaluar);
             }
 
             return salida;

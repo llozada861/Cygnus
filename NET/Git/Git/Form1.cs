@@ -17,7 +17,12 @@ namespace Git
         {
             InitializeComponent();
 
-            using (var repo = new Repository(@"E:\Luis\Trabajo\MVM\RepositorioEPM\BaseDeDatos"))
+            string ruta = "D:\\RepoEPM";
+            string url = "https://langeles:fas6zsqe7j756lunlqekjqxmb7h3w5btt4vdh723mprwu2kr36uq@grupoepm.visualstudio.com/OPEN/_git/ActualizacionDatos";
+
+            string repo = pClonarRepo(ruta, url);
+
+            using (var repo = new Repository(@repo))
             {               
 
                 var branches = repo.Branches;
@@ -38,6 +43,13 @@ namespace Git
                 var branch = repo.Branches["desarrollo"];
                 Commands.Checkout(repo, "desarrollo");
             }
+        }
+
+        public string pClonarRepo(string ruta,string url)
+        {
+            string clonedRepoPath = Repository.Clone(url, ruta);
+
+            return clonedRepoPath;
         }
     }
 }

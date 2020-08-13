@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\CygnusAzure\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\..\CygnusAzure\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props')" />
   <Import Project="..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -37,7 +38,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LibGit2Sharp, Version=0.26.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
-      <HintPath>..\packages\LibGit2Sharp.0.26.2\lib\net46\LibGit2Sharp.dll</HintPath>
+      <HintPath>..\..\CygnusAzure\packages\LibGit2Sharp.0.26.2\lib\net46\LibGit2Sharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -89,5 +91,6 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
+    <Error Condition="!Exists('..\..\CygnusAzure\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\CygnusAzure\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
   </Target>
 </Project>
