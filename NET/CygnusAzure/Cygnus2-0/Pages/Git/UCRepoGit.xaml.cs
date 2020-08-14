@@ -20,6 +20,7 @@ using System.Security.Permissions;
 using System.IO;
 using System.Diagnostics;
 using Cygnus2_0.Pages.General;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Compila
 {
@@ -53,7 +54,7 @@ namespace Cygnus2_0.Pages.Compila
                 if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-                    compilaViewModel.pListaArchivos(DropPath);
+                    compilaViewModel.pListaArchivos(DropPath,"G");
                 }
             }
             catch (Exception ex)
@@ -75,7 +76,6 @@ namespace Cygnus2_0.Pages.Compila
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            compilaViewModel.OnClean("");
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
@@ -98,25 +98,41 @@ namespace Cygnus2_0.Pages.Compila
                     return;
                 }
 
+                if (compilaViewModel.Comentario == null)
+                {
+                    handler.MensajeError("Debe ingresar el comentrio para el commit.");
+                    return;
+                }
+
                 if (compilaViewModel.ListaArchivosCargados.Count == 0)
                 {
                     handler.MensajeError("No hay archivos para versionar");
                     return;
                 }
 
-                List<string> salida = null;
-                List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
+                if (!compilaViewModel.ListaArchivosCargados.ToList().Exists(x => x.FileName.ToUpper().StartsWith("OPENDATOSEPM")))
+                {
+                    handler.MensajeError("Es importante entregar el documento de arquitectura. Por favor adicionar.");
+                    return;
+                }
 
+                handler.CursorWait();
+
+                List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
 
                 foreach (Archivo archivo in compilaViewModel.ListaArchivosCargados)
                 {
                     archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
                 }
 
-                RepoGit.pVersionarDatos("D:\\RepoEPM\\ActualizacionDatos", compilaViewModel.HU, compilaViewModel.Codigo,"prueba git cygnus",handler.ConnViewModel.Correo, archivosEvaluar);               
+                string rama = RepoGit.pVersionarDatos(handler.RutaGitDatos, compilaViewModel.HU, compilaViewModel.Codigo,compilaViewModel.Comentario,handler.ConnViewModel.Correo, archivosEvaluar);
+
+                handler.CursorNormal();
+                handler.MensajeOk("Versionamiento exitoso! Rama creada ["+ rama+"]");
             }
             catch (Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }

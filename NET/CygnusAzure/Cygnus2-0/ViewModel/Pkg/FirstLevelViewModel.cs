@@ -77,16 +77,21 @@ namespace Cygnus2_0.ViewModel.Pkg
             }
             catch(Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }
 
         internal void pGeneraPktbl()
         {
+            handler.CursorWait();
+
             OracleClob pktbl = handler.DAO.pGeneraPktbl(this.Tabla, this.Usuario, this.Caso);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = "pktbl" + this.Tabla.ToLower().Trim() + ".sql";
+
+            handler.CursorNormal();
 
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 File.WriteAllText(saveFileDialog.FileName, pktbl.Value, Encoding.Default);

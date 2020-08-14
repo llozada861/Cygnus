@@ -78,6 +78,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <TextBox x:Name="CasoText" 
@@ -87,7 +88,7 @@
                          CharacterCasing="Upper"
                          Grid.Row="0"  Grid.Column="0" Margin="5,5,5,5"
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="# de caso" AcceptsTab="True" TabIndex="1" IsTabStop="False"/>
+                         Style="{StaticResource placeHolder}" Tag="# de caso" AcceptsTab="false" TabIndex="1" IsTabStop="False"/>
 
                 <TextBox x:Name="HU" 
                          Text="{Binding Path=HU}" 
@@ -96,7 +97,16 @@
                          CharacterCasing="Upper"
                          Grid.Row="0" Grid.Column="1" Margin="5,5,5,5"
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario" TabIndex="2" IsTabStop="False"/>
+                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario" TabIndex="2" AcceptsTab="False"/>
+
+                <TextBox x:Name="Comment" 
+                         Text="{Binding Path=Comentario}" 
+                         TextWrapping="Wrap" 
+                         VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper"
+                         Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,5,5,5"
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Comentario commit" TabIndex="3" AcceptsTab="false"/>
             </Grid>
         </GroupBox>
 

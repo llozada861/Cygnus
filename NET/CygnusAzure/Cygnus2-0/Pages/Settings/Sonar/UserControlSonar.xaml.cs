@@ -82,6 +82,9 @@ namespace Cygnus2_0.Pages.Settings.Sonar
                     }
 
                     handler.RutaSonar = txtRutaInstall.Text;
+
+                    RepoGit.pCreaDirectorios(handler.RutaSonar);
+
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaSonar, handler.RutaSonar);
                     SonarQube.pInstalaSonar(handler.RutaSonar, txtUser.Text, txtPass.Text);
                     handler.MensajeOk("Se instala con éxito. Ya puedes analizar el código al momento de compilar de los objetos.");
@@ -89,7 +92,7 @@ namespace Cygnus2_0.Pages.Settings.Sonar
                     txtPass.Text = "";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 handler.MensajeError(ex.Message);
             }

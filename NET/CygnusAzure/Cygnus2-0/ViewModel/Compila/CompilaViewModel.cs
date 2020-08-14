@@ -26,6 +26,7 @@ namespace Cygnus2_0.ViewModel.Compila
         private string estadoConn;
         private string _codigo;
         private string _hu;
+        private string _comentario;
         private ObservableCollection<SelectListItem> listaObservaciones;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
@@ -68,6 +69,11 @@ namespace Cygnus2_0.ViewModel.Compila
         {
             get { return _codigo; }
             set { SetProperty(ref _codigo, value); }
+        }
+        public string Comentario
+        {
+            get { return _comentario; }
+            set { SetProperty(ref _comentario, value); }
         }
         public string HU
         {
@@ -141,11 +147,11 @@ namespace Cygnus2_0.ViewModel.Compila
 
             this.EstadoConn = handler.fsbValidaConexion();
         }
-        public void pListaArchivos(string[] DropPath)
+        public void pListaArchivos(string[] DropPath,string from)
         {
             try
             {
-                model.pListaArchivos(DropPath);
+                model.pListaArchivos(DropPath, from);
             }
             catch (Exception ex)
             {

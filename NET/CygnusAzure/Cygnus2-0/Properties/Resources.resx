@@ -1885,4 +1885,16 @@ sonar.branch.target=desarrollo</value>
   <data name="RamaMasterDatos" xml:space="preserve">
     <value>master-datos</value>
   </data>
+  <data name="CarpetaDatosGIT" xml:space="preserve">
+    <value>ActualizacionDatos</value>
+  </data>
+  <data name="RepoDATOS" xml:space="preserve">
+    <value>https://langeles:fas6zsqe7j756lunlqekjqxmb7h3w5btt4vdh723mprwu2kr36uq@grupoepm.visualstudio.com/OPEN/_git/ActualizacionDatos</value>
+  </data>
+  <data name="KeyRutaGitBash" xml:space="preserve">
+    <value>RUTAGITBASH</value>
+  </data>
+  <data name="KeyRutaGitDatos" xml:space="preserve">
+    <value>RUTAGITDATOS</value>
+  </data>
 </root>
