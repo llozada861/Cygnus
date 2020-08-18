@@ -28,7 +28,9 @@ namespace Cygnus2_0.Model.Compila
             {
                 if (string.IsNullOrEmpty(System.IO.Path.GetExtension(dropfilepath)))
                 {
-                    pListaArchivosCarpeta(dropfilepath, from);
+                    string[] DropPath1 = System.IO.Directory.GetFiles(dropfilepath + "\\", "*", System.IO.SearchOption.AllDirectories);
+                    //pListaArchivosCarpeta(dropfilepath, from);
+                    pListaArchivos(DropPath1, from);
                 }
                 else
                 {
@@ -48,6 +50,8 @@ namespace Cygnus2_0.Model.Compila
                     view.ListaArchivosCargados.Add(archivo);
                 }
             }
+
+            return;
         }
 
         private void pListaArchivosCarpeta(string path, string from)

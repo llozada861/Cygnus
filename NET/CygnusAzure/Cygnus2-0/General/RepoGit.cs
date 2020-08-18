@@ -12,7 +12,7 @@ namespace Cygnus2_0.General
 {
     public static class RepoGit
     {
-        public static string pVersionarDatos(string ruta, string hu, string wo, string mensaje,string email,List<SelectListItem> listaArchivosCargados)
+        public static string pVersionarDatos(string ruta, string hu, string wo, string mensaje,string email,List<SelectListItem> listaArchivosCargados, Handler handler)
         {
             bool blRama = false;
 
@@ -85,13 +85,12 @@ namespace Cygnus2_0.General
                 Commands.Checkout(repo, rama);
                 repo.CherryPick(comm, new Signature(Environment.UserName, email, DateTimeOffset.Now));*/
              
-        public static string pClonarRepo(string ruta, string url)
+        public static string pClonarRepo(string ruta, string url, string rutaGitBash)
         {
             pCreaDirectorios(ruta);
 
             string command = "Git clone " + url;
-
-            ExecuteGitBashCommand("C:\\Program Files\\Git\\git-bash.exe", command, ruta);
+            ExecuteGitBashCommand(rutaGitBash+"\\"+res.GitBashExe, command, ruta);
 
             return ruta + res.CarpetaDatosGIT;
         }

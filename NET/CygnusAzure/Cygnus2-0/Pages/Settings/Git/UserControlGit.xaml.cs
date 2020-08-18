@@ -67,7 +67,7 @@ namespace Cygnus2_0.Pages.Settings.Git
                     handler.RutaGitBash = txtRutaGitBash1.Text;
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaGitBash, handler.RutaGitBash);
 
-                    handler.RutaGitDatos = txtRutaGitBash1.Text;
+                    handler.RutaGitDatos = txtRutaInstall1.Text;
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);
 
                     handler.CursorNormal();
@@ -97,7 +97,7 @@ namespace Cygnus2_0.Pages.Settings.Git
 
                     RepoGit.pCreaDirectorios(handler.RutaGitDatos);
 
-                    RepoGit.pClonarRepo(handler.RutaGitDatos, res.RepoDATOS);
+                    RepoGit.pClonarRepo(handler.RutaGitDatos, res.RepoDATOS, handler.RutaGitBash);
 
                     handler.RutaGitDatos = Path.Combine(handler.RutaGitDatos, res.CarpetaDatosGIT);
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);

@@ -845,6 +845,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a git-bash.exe.
+        /// </summary>
+        public static string GitBashExe {
+            get {
+                return ResourceManager.GetString("GitBashExe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ALL.
         /// </summary>
         public static string GrantALL {

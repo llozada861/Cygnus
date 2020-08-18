@@ -1897,4 +1897,7 @@ sonar.branch.target=desarrollo</value>
   <data name="KeyRutaGitDatos" xml:space="preserve">
     <value>RUTAGITDATOS</value>
   </data>
+  <data name="GitBashExe" xml:space="preserve">
+    <value>git-bash.exe</value>
+  </data>
 </root>
