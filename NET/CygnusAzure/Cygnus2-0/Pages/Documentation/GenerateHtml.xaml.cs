@@ -50,125 +50,137 @@ namespace Cygnus2_0.Pages.Documentation
             StringBuilder returnBuilder = new StringBuilder();
             int index;
 
-            if (String.IsNullOrEmpty(view.Descripcion))
+            try
             {
-                handler.MensajeError("Debe ingresar una descripción para el proceso.");
-                return;
-            }
-
-            if (String.IsNullOrEmpty(view.Usuario))
-            {
-                handler.MensajeError("Debe ingresar un usuario para el proceso.");
-                return;
-            }
-
-            if (String.IsNullOrEmpty(view.Wo))
-            {
-                handler.MensajeError("Debe ingresar la WO para el proceso.");
-                return;
-            }
-
-            if (view.ListaParametros.Count > 0)
-            {
-                foreach(ParametrosModel parametro in view.ListaParametros)
+                if (String.IsNullOrEmpty(view.Descripcion))
                 {
-                    if(String.IsNullOrEmpty(parametro.Descripcion))
-                    {
-                        blParaDesc = true;
-                        break;
-                    }
-                }
-
-                if(blParaDesc)
-                {
-                    handler.MensajeError("Todos los parámetros deben tener descripción.");
+                    handler.MensajeError("Debe ingresar una descripción para el proceso.");
                     return;
                 }
-            }
 
-            docModel.Descripcion = view.Descripcion;
-            docModel.Autor = view.Usuario;
-            docModel.Fecha = DateTime.Now.ToShortDateString();
-
-            if (docModel.Fuente != null && docModel.Fuente.ToLower().Equals(res.TipoObjetoPaquete.ToLower()))
-            {
-                metodoBuilder.Append(handler.HtmlEspecificacion);
-                metodoBuilder.Replace(res.TagHtml_metodo, docModel.Unidad);
-                metodoBuilder.Replace(res.TagHTML_Desc, docModel.Descripcion);
-                metodoBuilder.Replace(res.TagHtml_autor, docModel.Autor);
-                metodoBuilder.Replace(res.TagHtml_desarrollador, Environment.UserName);
-                metodoBuilder.Replace(res.TagHtml_fecha, docModel.Fecha);
-                metodoBuilder.Replace(res.TagHtml_numeroOC, view.Wo);
-            }
-            else
-            {
-
-                metodoBuilder.Append(handler.HtmlMetodo);
-                metodoBuilder.Replace(res.TagHtml_metodo, docModel.Unidad);
-                metodoBuilder.Replace(res.TagHTML_Desc, docModel.Descripcion);
-                metodoBuilder.Replace(res.TagHtml_autor, docModel.Autor);
-                metodoBuilder.Replace(res.TagHtml_desarrollador, Environment.UserName);
-                metodoBuilder.Replace(res.TagHtml_fecha, docModel.Fecha);
-                metodoBuilder.Replace(res.TagHtml_numeroOC, view.Wo);
-                metodoBuilder.AppendLine();
-
-                if (docModel.Parametros !=null && docModel.Parametros.Count > 0)
+                if (String.IsNullOrEmpty(view.Usuario))
                 {
-                    foreach (ParametrosModel parameter in docModel.Parametros)
+                    handler.MensajeError("Debe ingresar un usuario para el proceso.");
+                    return;
+                }
+
+                if (String.IsNullOrEmpty(view.Wo))
+                {
+                    handler.MensajeError("Debe ingresar la WO para el proceso.");
+                    return;
+                }
+
+                if (view.ListaParametros.Count > 0)
+                {
+                    foreach (ParametrosModel parametro in view.ListaParametros)
                     {
-                        if (!parameter.Tipo.Equals(res.NameReturn) && !parameter.Tipo.Equals(res.DescReturn))
+                        if (String.IsNullOrEmpty(parametro.Descripcion))
                         {
-                            parametrosBuilder.Append(handler.HtmlMetodoParam);
-                            parametrosBuilder.Replace(res.TagHtmlParamName, parameter.Nombre);
-                            parametrosBuilder.Replace(res.TagHtmlParamType, parameter.Tipo);
-                            parametrosBuilder.Replace(res.TagHtmlParamDir, parameter.Direccion);
-                            parametrosBuilder.Replace(res.TagHtmlParaDesc, parameter.Descripcion);
-
-                            index = docModel.Parametros.IndexOf(parameter);
-
-                            /*if (index < docModel.Parametros.Count - 1)
-                            {
-                                parametrosBuilder.AppendLine();
-                            }*/
-                        }
-                        else
-                        {
-                            if (docModel.Retorno != null)
-                            {
-                                if(parameter.Tipo.Equals(res.NameReturn))
-                                    docModel.Retorno.Nombre = parameter.Descripcion;
-
-                                if (parameter.Tipo.Equals(res.DescReturn))
-                                    docModel.Retorno.Descripcion = parameter.Descripcion;
-                            }
+                            blParaDesc = true;
+                            break;
                         }
                     }
 
-                    metodoBuilder.Replace(res.TagHTML_parametro, parametrosBuilder.ToString());
-                }
-                else
-                {
-                    metodoBuilder.Replace(res.TagHTML_parametro, "");
+                    if (blParaDesc)
+                    {
+                        handler.MensajeError("Todos los parámetros deben tener descripción.");
+                        return;
+                    }
                 }
 
-                if (docModel.Retorno != null)
+                handler.CursorWait();
+
+                docModel.Descripcion = view.Descripcion;
+                docModel.Autor = view.Usuario;
+                docModel.Fecha = DateTime.Now.ToShortDateString();
+
+                if (docModel.Fuente != null && docModel.Fuente.ToLower().Equals(res.TipoObjetoPaquete.ToLower()))
                 {
-                    returnBuilder.Append(handler.HtmlMetodoReturn);
-                    returnBuilder.Replace(res.TagHtmlTipoRetorno, docModel.Retorno.Tipo);
-                    returnBuilder.Replace(res.TagHTML_nombre, docModel.Retorno.Nombre);
-                    returnBuilder.Replace(res.TagHTML_Desc, docModel.Retorno.Descripcion);
-                    metodoBuilder.Replace(res.TagHtmlRetorno, returnBuilder.ToString());
+                    metodoBuilder.Append(handler.HtmlEspecificacion);
+                    metodoBuilder.Replace(res.TagHtml_metodo, docModel.Unidad);
+                    metodoBuilder.Replace(res.TagHTML_Desc, docModel.Descripcion);
+                    metodoBuilder.Replace(res.TagHtml_autor, docModel.Autor);
+                    metodoBuilder.Replace(res.TagHtml_desarrollador, Environment.UserName);
+                    metodoBuilder.Replace(res.TagHtml_fecha, docModel.Fecha);
+                    metodoBuilder.Replace(res.TagHtml_numeroOC, view.Wo);
                 }
                 else
                 {
-                    metodoBuilder.Replace(res.TagHtmlRetorno, "");
+
+                    metodoBuilder.Append(handler.HtmlMetodo);
+                    metodoBuilder.Replace(res.TagHtml_metodo, docModel.Unidad);
+                    metodoBuilder.Replace(res.TagHTML_Desc, docModel.Descripcion);
+                    metodoBuilder.Replace(res.TagHtml_autor, docModel.Autor);
+                    metodoBuilder.Replace(res.TagHtml_desarrollador, Environment.UserName);
+                    metodoBuilder.Replace(res.TagHtml_fecha, docModel.Fecha);
+                    metodoBuilder.Replace(res.TagHtml_numeroOC, view.Wo);
+                    metodoBuilder.AppendLine();
+
+                    if (docModel.Parametros != null && docModel.Parametros.Count > 0)
+                    {
+                        foreach (ParametrosModel parameter in docModel.Parametros)
+                        {
+                            if (!parameter.Tipo.Equals(res.NameReturn) && !parameter.Tipo.Equals(res.DescReturn))
+                            {
+                                parametrosBuilder.Append(handler.HtmlMetodoParam);
+                                parametrosBuilder.Replace(res.TagHtmlParamName, parameter.Nombre);
+                                parametrosBuilder.Replace(res.TagHtmlParamType, parameter.Tipo);
+                                parametrosBuilder.Replace(res.TagHtmlParamDir, parameter.Direccion);
+                                parametrosBuilder.Replace(res.TagHtmlParaDesc, parameter.Descripcion);
+
+                                index = docModel.Parametros.IndexOf(parameter);
+
+                                /*if (index < docModel.Parametros.Count - 1)
+                                {
+                                    parametrosBuilder.AppendLine();
+                                }*/
+                            }
+                            else
+                            {
+                                if (docModel.Retorno != null)
+                                {
+                                    if (parameter.Tipo.Equals(res.NameReturn))
+                                        docModel.Retorno.Nombre = parameter.Descripcion;
+
+                                    if (parameter.Tipo.Equals(res.DescReturn))
+                                        docModel.Retorno.Descripcion = parameter.Descripcion;
+                                }
+                            }
+                        }
+
+                        metodoBuilder.Replace(res.TagHTML_parametro, parametrosBuilder.ToString());
+                    }
+                    else
+                    {
+                        metodoBuilder.Replace(res.TagHTML_parametro, "");
+                    }
+
+                    if (docModel.Retorno != null)
+                    {
+                        returnBuilder.Append(handler.HtmlMetodoReturn);
+                        returnBuilder.Replace(res.TagHtmlTipoRetorno, docModel.Retorno.Tipo);
+                        returnBuilder.Replace(res.TagHTML_nombre, docModel.Retorno.Nombre);
+                        returnBuilder.Replace(res.TagHTML_Desc, docModel.Retorno.Descripcion);
+                        metodoBuilder.Replace(res.TagHtmlRetorno, returnBuilder.ToString());
+                    }
+                    else
+                    {
+                        metodoBuilder.Replace(res.TagHtmlRetorno, "");
+                    }
                 }
+
+                richTextBoxResult.Document.Blocks.Clear();
+                richTextBoxResult.Document.Blocks.Add(new Paragraph(new Run(metodoBuilder.ToString())));
+                Cygnus2_0.Properties.Cygnus.Default.UserName = view.Usuario;
+                Cygnus2_0.Properties.Cygnus.Default.Save();
+
+                handler.CursorNormal();
             }
-
-            richTextBoxResult.Document.Blocks.Clear();
-            richTextBoxResult.Document.Blocks.Add(new Paragraph(new Run(metodoBuilder.ToString())));
-            Cygnus2_0.Properties.Cygnus.Default.UserName = view.Usuario;
-            Cygnus2_0.Properties.Cygnus.Default.Save();
+            catch(Exception ex)
+            {
+                handler.CursorNormal();
+                handler.MensajeError(ex.Message);
+            }
         }
 
         private void richTextBox_TextChanged(object sender, TextChangedEventArgs e)

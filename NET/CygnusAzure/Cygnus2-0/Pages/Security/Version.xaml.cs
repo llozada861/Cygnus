@@ -34,33 +34,45 @@ namespace Cygnus2_0.Pages.Security
 
         private void btnProcesar_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtZip.Text))
+            try
             {
-                handler.MensajeError("Cargue el zip");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(txtVersion.Text))
-            {
-                handler.MensajeError("Ingrese la version");
-                return;
-            }
-
-            string filename = System.IO.Path.GetFileName(txtZip.Text);
-
-            using (Stream fs = File.OpenRead(txtZip.Text))
-            {
-                using (BinaryReader br = new BinaryReader(fs))
+                if (string.IsNullOrEmpty(txtZip.Text))
                 {
-                    byte[] bytes = br.ReadBytes((Int32)fs.Length);
-
-                    handler.DAO.pCargaVersion(bytes, filename, txtVersion.Text);
+                    handler.MensajeError("Cargue el zip");
+                    return;
                 }
-            }
 
-            handler.MensajeOk("Proceso terminó con éxito");
-            txtZip.Text = "";
-            txtVersion.Text = "";
+                if (string.IsNullOrEmpty(txtVersion.Text))
+                {
+                    handler.MensajeError("Ingrese la version");
+                    return;
+                }
+
+                handler.CursorWait();
+
+                string filename = System.IO.Path.GetFileName(txtZip.Text);
+
+                using (Stream fs = File.OpenRead(txtZip.Text))
+                {
+                    using (BinaryReader br = new BinaryReader(fs))
+                    {
+                        byte[] bytes = br.ReadBytes((Int32)fs.Length);
+
+                        handler.DAO.pCargaVersion(bytes, filename, txtVersion.Text);
+                    }
+                }
+
+                handler.CursorNormal();
+
+                handler.MensajeOk("Proceso terminó con éxito");
+                txtZip.Text = "";
+                txtVersion.Text = "";
+            }
+            catch (Exception ex)
+            {
+                handler.CursorNormal();
+                handler.MensajeError(ex.Message);
+            }
 
             /*string cadena = txtUrl.Text + "|" + txtUser.Text + "|" + txtPass.Text + "|" + txtVer.Text + "|" + txtZip.Text;
             string cadenaWrap = EncriptaPass.Encriptar(cadena);

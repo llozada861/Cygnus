@@ -209,6 +209,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ActualizacionDatos.
+        /// </summary>
+        public static string CarpetaDatosGIT {
+            get {
+                return ResourceManager.GetString("CarpetaDatosGIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a objetos.
         /// </summary>
         public static string CarpetaObjetos {
@@ -836,6 +845,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a git-bash.exe.
+        /// </summary>
+        public static string GitBashExe {
+            get {
+                return ResourceManager.GetString("GitBashExe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ALL.
         /// </summary>
         public static string GrantALL {
@@ -1199,6 +1217,24 @@ namespace Cygnus2_0.Properties {
         public static string KeyProxy {
             get {
                 return ResourceManager.GetString("KeyProxy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a RUTAGITBASH.
+        /// </summary>
+        public static string KeyRutaGitBash {
+            get {
+                return ResourceManager.GetString("KeyRutaGitBash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a RUTAGITDATOS.
+        /// </summary>
+        public static string KeyRutaGitDatos {
+            get {
+                return ResourceManager.GetString("KeyRutaGitDatos", resourceCulture);
             }
         }
         
@@ -2339,6 +2375,15 @@ namespace Cygnus2_0.Properties {
         public static string ReiniciaSecuencia {
             get {
                 return ResourceManager.GetString("ReiniciaSecuencia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a https://langeles:fas6zsqe7j756lunlqekjqxmb7h3w5btt4vdh723mprwu2kr36uq@grupoepm.visualstudio.com/OPEN/_git/ActualizacionDatos.
+        /// </summary>
+        public static string RepoDATOS {
+            get {
+                return ResourceManager.GetString("RepoDATOS", resourceCulture);
             }
         }
         

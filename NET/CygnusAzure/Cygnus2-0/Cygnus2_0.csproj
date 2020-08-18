@@ -336,6 +336,9 @@
     <Compile Include="Pages\Settings\AdminGeneral\UCHtml.xaml.cs">
       <DependentUpon>UCHtml.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Settings\Git\UserControlGit.xaml.cs">
+      <DependentUpon>UserControlGit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Settings\Sonar\UserControlSonar.xaml.cs">
       <DependentUpon>UserControlSonar.xaml</DependentUpon>
     </Compile>
@@ -418,6 +421,8 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <EmbeddedResource Include="Libs\git2-106a5f2.dll" />
+    <EmbeddedResource Include="Libs\LibGit2Sharp.dll" />
     <EmbeddedResource Include="Libs\Updater.exe" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\01_crll_credmark.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\02_crll_logapli.sql" />
@@ -442,6 +447,7 @@
     <EmbeddedResource Include="Libs\Newtonsoft.Json.dll" />
     <EmbeddedResource Include="Libs\FirstFloor.ModernUI.dll" />
     <EmbeddedResource Include="Libs\Cygnus.exe.config" />
+    <EmbeddedResource Include="Libs\LibGit2Sharp.dll.config" />
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\sonar-scanner-cli-4.4.0.2170-windows.zip" />
     <Page Include="Assets\HintTextTheme.xaml">
@@ -613,6 +619,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings\General\ReservWords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Git\UserControlGit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

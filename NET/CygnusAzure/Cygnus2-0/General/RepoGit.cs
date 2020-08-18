@@ -1,6 +1,7 @@
 ﻿using LibGit2Sharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,16 +12,15 @@ namespace Cygnus2_0.General
 {
     public static class RepoGit
     {
-        public static void pVersionarDatos(string ruta, string hu, string wo, string mensaje,string email,List<SelectListItem> listaArchivosCargados)
+        public static string pVersionarDatos(string ruta, string hu, string wo, string mensaje,string email,List<SelectListItem> listaArchivosCargados, Handler handler)
         {
-            bool blExisteWO = false;
             bool blRama = false;
 
             string ramaWO = wo.ToUpper();
             string rutaObjetos = Path.Combine(ruta, res.Despliegues);
             rutaObjetos = Path.Combine(rutaObjetos, ramaWO);
             string rama = res.Feature + hu + "_" + ramaWO + "_" + Environment.UserName.ToUpper();
-            
+            string MensajeCommit = ramaWO + " - " + mensaje;
 
             using (var repo = new Repository(@ruta))
             {
@@ -32,40 +32,23 @@ namespace Cygnus2_0.General
                 {
                     Console.WriteLine(b.FriendlyName);
 
-                    if (b.FriendlyName.Equals(ramaWO))
-                    {
-                        blExisteWO = true;
-                    }
-
                     if (b.FriendlyName.Equals(rama))
                     {
                         blRama = true;
                     }
                 }
 
-                if (!blExisteWO)
-                {
-                    repo.CreateBranch(ramaWO);
-                }
-
-                Commands.Checkout(repo, ramaWO);
-                pCreaDirectorios(rutaObjetos);
-                SonarQube.pCopiarArchivos(rutaObjetos, listaArchivosCargados);
-
-                Commands.Stage(repo, "*");
-                Commit comm = repo.Commit(mensaje, new Signature(Environment.UserName, email, DateTimeOffset.Now),new Signature(Environment.UserName, email, DateTimeOffset.Now));
-
-                //Se cambia a master datos para crear el feature
-                Commands.Checkout(repo, res.RamaMasterDatos);
-                Commands.Pull(repo, new Signature(Environment.UserName, email, DateTimeOffset.Now), new PullOptions());
-
                 if (!blRama)
                 {
                     repo.CreateBranch(rama);
                 }
-                
+
                 Commands.Checkout(repo, rama);
-                repo.CherryPick(comm, new Signature(Environment.UserName, email, DateTimeOffset.Now));
+                pCreaDirectorios(rutaObjetos);
+                SonarQube.pCopiarArchivos(rutaObjetos, listaArchivosCargados);
+
+                Commands.Stage(repo, "*");
+                Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, email, DateTimeOffset.Now),new Signature(Environment.UserName, email, DateTimeOffset.Now));
 
                 Remote remote = repo.Network.Remotes["origin"];
                 Branch ramaFeat = null ;
@@ -86,17 +69,30 @@ namespace Cygnus2_0.General
 
                 repo.Network.Push(ramaFeat);
             }
+
+            return rama;
         }
 
-        public static string pClonarRepo(string ruta, string url, string carpeta)
+        /*
+         *                 //Se cambia a master datos para crear el feature
+                Commands.Checkout(repo, res.RamaMasterDatos);
+                Commands.Pull(repo, new Signature(Environment.UserName, email, DateTimeOffset.Now), new PullOptions());
+                         /*if (!blRama)
+                {
+                    repo.CreateBranch(rama);
+                }
+                
+                Commands.Checkout(repo, rama);
+                repo.CherryPick(comm, new Signature(Environment.UserName, email, DateTimeOffset.Now));*/
+             
+        public static string pClonarRepo(string ruta, string url, string rutaGitBash)
         {
-            string path = System.IO.Path.Combine(ruta, carpeta);
+            pCreaDirectorios(ruta);
 
-            pCreaDirectorios(path);
+            string command = "Git clone " + url;
+            ExecuteGitBashCommand(rutaGitBash+"\\"+res.GitBashExe, command, ruta);
 
-            string clonedRepoPath = Repository.Clone(url, path);
-
-            return path;
+            return ruta + res.CarpetaDatosGIT;
         }
 
         public static void pCreaDirectorios(string path)
@@ -107,6 +103,28 @@ namespace Cygnus2_0.General
                 // Try to create the directory.
                 DirectoryInfo di = Directory.CreateDirectory(path);
             }
+        }
+
+        public static void ExecuteGitBashCommand(string fileName, string command, string workingDir)
+        {
+            ProcessStartInfo processStartInfo = new ProcessStartInfo(fileName, "-c \" " + command + " \"")
+            {
+                WorkingDirectory = workingDir,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                RedirectStandardInput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            var process = Process.Start(processStartInfo);
+            process.WaitForExit();
+
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+            var exitCode = process.ExitCode;
+
+            process.Close();
         }
     }
 }

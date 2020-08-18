@@ -22,24 +22,56 @@ namespace Cygnus2_0.Model.Compila
             this.view = view;
         }
 
-        public void pListaArchivos(string[] DropPath)
+        public void pListaArchivos(string[] DropPath, string from)
         {
             foreach (string dropfilepath in DropPath)
             {
-                Archivo archivo = new Archivo();
-                archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
-                archivo.RutaConArchivo = dropfilepath;
-                archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
-                archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
-                archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
-                archivo.ListaTipos = handler.ListaTiposObjetos;
-                ObtenerTipoArchivoComp(archivo);
-                archivo.BloquesCodigo = new List<string>();
+                if (string.IsNullOrEmpty(System.IO.Path.GetExtension(dropfilepath)))
+                {
+                    string[] DropPath1 = System.IO.Directory.GetFiles(dropfilepath + "\\", "*", System.IO.SearchOption.AllDirectories);
+                    //pListaArchivosCarpeta(dropfilepath, from);
+                    pListaArchivos(DropPath1, from);
+                }
+                else
+                {
+                    Archivo archivo = new Archivo();
+                    archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
+                    archivo.RutaConArchivo = dropfilepath;
+                    archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
+                    archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
+                    archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+                    archivo.ListaTipos = handler.ListaTiposObjetos;
+                    ObtenerTipoArchivoComp(archivo);
+                    archivo.BloquesCodigo = new List<string>();
 
-                if (!archivo.Observacion.Equals(res.No_aplica))
-                    archivo.TipoAplicacion = res.SQLPLUS;
+                    if (!archivo.Observacion.Equals(res.No_aplica))
+                        archivo.TipoAplicacion = res.SQLPLUS;
 
-                view.ListaArchivosCargados.Add(archivo);
+                    view.ListaArchivosCargados.Add(archivo);
+                }
+            }
+
+            return;
+        }
+
+        private void pListaArchivosCarpeta(string path, string from)
+        {
+            string[] DropPath = System.IO.Directory.GetFiles(path + "\\", "*", System.IO.SearchOption.AllDirectories);
+
+            if (from.Equals("G"))
+            {
+                foreach (string dropfilepath in DropPath)
+                {
+                    Archivo archivo = new Archivo();
+                    archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
+                    archivo.RutaConArchivo = dropfilepath;
+                    archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
+                    archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
+                    archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+                    archivo.ListaTipos = handler.ListaTiposObjetos;
+                    handler.ObtenerTipoArchivo(archivo);
+                    view.ListaArchivosCargados.Add(archivo);
+                }
             }
         }
 

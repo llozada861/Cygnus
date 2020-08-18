@@ -54,7 +54,7 @@ namespace Cygnus2_0.Pages.Compila
                 if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-                    compilaViewModel.pListaArchivos(DropPath);
+                    compilaViewModel.pListaArchivos(DropPath,"C");
                     //pSetValorCombo();
                 }
             }
@@ -116,11 +116,15 @@ namespace Cygnus2_0.Pages.Compila
                     return;
                 }
 
+                handler.CursorWait();
                 compilaViewModel.pCompilar();
+
+                handler.CursorNormal();
                 handler.MensajeOk("Proceso terminó con éxito!");
             }
             catch (Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }

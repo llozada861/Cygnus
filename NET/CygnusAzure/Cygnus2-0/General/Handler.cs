@@ -31,6 +31,7 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Xml;
 using Cygnus2_0.Pages.Settings.General;
 using System.Reflection;
+using System.Windows.Input;
 
 namespace Cygnus2_0.General
 {
@@ -231,6 +232,8 @@ namespace Cygnus2_0.General
         public string PathArchivos { set; get; }
         public string CarpetaPadre { set; get; }
         public string RutaSonar { set; get; }
+        public string RutaGitBash { set; get; }
+        public string RutaGitDatos { set; get; }
         public string EsLlamadoDesdeUpdater { set; get; }
         public List<SelectListItem> ListaChequeo { set; get; }
         public List<SelectListItem> ListaTipoArchivos { get; set; }
@@ -545,7 +548,7 @@ namespace Cygnus2_0.General
                 File.WriteAllText(saveFileDialog.FileName, cuerpo, Encoding.Default);
         }
 
-        public void pGuardaArchivoByte(string NombreArchivo,string nuevoNombre)
+        public void pGuardaArchivoByte(string NombreArchivo, string nuevoNombre)
         {
             byte[] cuerpo;
 
@@ -696,7 +699,7 @@ namespace Cygnus2_0.General
             }//end of catch
         }//end of Email Method
 
-        public void pEnviarCorreo(string para,string asunto, string body)
+        public void pEnviarCorreo(string para, string asunto, string body)
         {
             try
             {
@@ -740,7 +743,7 @@ namespace Cygnus2_0.General
             string sbTagFin = null;
 
             StringBuilder documentacion = new StringBuilder();
-            
+
             if (this.ConfGeneralViewModel.GeneraHtml)
             {
                 using (StreamReader streamReader = new StreamReader(archivo.RutaConArchivo, Encoding.Default))
@@ -1103,6 +1106,15 @@ namespace Cygnus2_0.General
                     resource.CopyTo(output);
                 }
             }
+        }
+
+        public void CursorWait()
+        {
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+        }
+        public void CursorNormal()
+        {
+            Mouse.OverrideCursor = null;
         }
     }
 }

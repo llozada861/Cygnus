@@ -52,9 +52,10 @@
                     <TreeViewItem Header="Grants" Uid="32"/>
                     <TreeViewItem Header="Usuarios" Uid="33"/>
                 </TreeViewItem>
-                <TreeViewItem Header="Azure" IsExpanded="True" Uid="100">
-                </TreeViewItem>
-                <TreeViewItem Header="Sonar" IsExpanded="True" Uid="101">
+                <TreeViewItem Header="Mvm" IsExpanded="True" Uid="104">
+                    <TreeViewItem Header="Azure" Uid="100"/>
+                    <TreeViewItem Header="Sonar" Uid="101"/>
+                    <TreeViewItem Header="Git" Uid="102"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Documentación" IsExpanded="True" Uid="60">
                     <TreeViewItem Header="Configuración" Uid="62"/>

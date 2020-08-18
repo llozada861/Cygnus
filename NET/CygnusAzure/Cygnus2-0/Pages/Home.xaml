@@ -18,7 +18,7 @@
                 <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
                 <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
                 <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
-                <mui:Link DisplayName="Git" Source="/Pages/Git/UCRepoGit.xaml" />
+                <mui:Link DisplayName="Git Datos" Source="/Pages/Git/UCRepoGit.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
                 <mui:Link DisplayName="Datos" Source="/Pages/Data/AdminData.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
@@ -33,7 +33,7 @@
                 <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
                 <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
                 <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
-                <mui:Link DisplayName="Git" Source="/Pages/Git/UCRepoGit.xaml" />
+                <mui:Link DisplayName="Git Datos" Source="/Pages/Git/UCRepoGit.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
                 <mui:Link DisplayName="Datos" Source="/Pages/Data/AdminData.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
@@ -50,7 +50,7 @@
                 <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
                 <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
                 <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
-                <mui:Link DisplayName="Git" Source="/Pages/Git/UCRepoGit.xaml" />
+                <mui:Link DisplayName="Git Datos" Source="/Pages/Git/UCRepoGit.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
                 <mui:Link DisplayName="Datos" Source="/Pages/Data/AdminData.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml"/>

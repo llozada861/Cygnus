@@ -3,6 +3,7 @@ using Cygnus2_0.Pages.Settings.AzureData;
 using Cygnus2_0.Pages.Settings.Database;
 using Cygnus2_0.Pages.Settings.Documentation;
 using Cygnus2_0.Pages.Settings.General;
+using Cygnus2_0.Pages.Settings.Git;
 using Cygnus2_0.Pages.Settings.Sonar;
 using System;
 using System.Collections.Generic;
@@ -121,6 +122,10 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                     break;
                 case 101:
                     userControls = new UserControlSonar();
+                    GridMain.Children.Add(userControls);
+                    break;
+                case 102:
+                    userControls = new UserControlGit();
                     GridMain.Children.Add(userControls);
                     break;
                 default:
