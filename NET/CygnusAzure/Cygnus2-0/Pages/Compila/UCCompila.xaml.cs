@@ -128,5 +128,29 @@ namespace Cygnus2_0.Pages.Compila
                 handler.MensajeError(ex.Message);
             }
         }
+
+        private void DataGridArchCompila_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGridArchCompila.SelectedItem == null)
+                return; // return if there's no row selected
+
+            Archivo archivo = (Archivo)dataGridArchCompila.SelectedItem;
+            handler.pAbrirArchivo(archivo.RutaConArchivo);
+        }
+
+        private void DataGridMensajes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGridMensajes.SelectedItem == null)
+                return; // return if there's no row selected
+
+            try
+            {
+                SelectListItem archivo = (SelectListItem)dataGridMensajes.SelectedItem;
+                handler.pAbrirArchivo(archivo.Observacion + "\\" + archivo.Text);
+            }
+            catch(Exception ex)
+            {
+            }
+        }
     }
 }

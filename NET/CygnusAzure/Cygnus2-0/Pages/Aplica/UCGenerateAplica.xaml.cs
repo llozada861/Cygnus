@@ -107,5 +107,24 @@ namespace Cygnus2_0.Pages.Aplica
             btnSqlPlus.Visibility = Visibility.Hidden;
             generateAplicaViewModel.Codigo = "";
         }
+
+        private void DataGridArchivosCargados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            if (dataGridArchivosCargados.SelectedItem == null)
+                return; // return if there's no row selected
+
+            Archivo archivo = (Archivo)dataGridArchivosCargados.SelectedItem;
+            handler.pAbrirArchivo(archivo.RutaConArchivo);
+        }
+
+        private void DataGridArchivosGen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGridArchivosGen.SelectedItem == null)
+                return; // return if there's no row selected
+
+            Archivo archivo = (Archivo)dataGridArchivosGen.SelectedItem;
+            handler.pAbrirArchivo(archivo.Ruta+"\\"+archivo.FileName);
+        }
     }
 }

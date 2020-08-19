@@ -47,7 +47,7 @@
             ItemsSource="{Binding Path=ListaArchivosCargados}"
             local:VisualHelper.EnableRowsMove="True"            
             VerticalContentAlignment="Center"
-                SelectionChanged="dataGridArchivosCargados_SelectionChanged"
+                SelectionChanged="dataGridArchivosCargados_SelectionChanged" MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
@@ -86,7 +86,7 @@
             CanUserAddRows="False"
             CanUserReorderColumns="False"
             CanUserSortColumns="False"
-            ItemsSource="{Binding Path=ListaArchivosGenerados}">
+            ItemsSource="{Binding Path=ListaArchivosGenerados}" MouseDoubleClick="DataGridArchivosGen_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
                   IsReadOnly="True"

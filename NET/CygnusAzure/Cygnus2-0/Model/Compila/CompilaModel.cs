@@ -227,10 +227,10 @@ namespace Cygnus2_0.Model.Compila
             handler.DAO.pObtErrores(archivo, view);
 
             if (!view.ListaObservaciones.ToList().Exists(x => x.Text.Equals(archivo.NombreObjeto)) && string.IsNullOrEmpty(archivo.AplicaTemporal))
-                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.NombreObjeto, Value = "Sin Errores." });
+                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.NombreObjeto, Value = "Sin Errores.", Observacion = archivo.Ruta });
             else
                 if (!string.IsNullOrEmpty(archivo.AplicaTemporal))
-                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.AplicaTemporal, Value = "Ver log de la aplicación." });
+                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.AplicaTemporal, Value = "Ver log de la aplicación.", Observacion=archivo.Ruta });
 
             view.ListaObservaciones = view.ListaObservaciones;
         }

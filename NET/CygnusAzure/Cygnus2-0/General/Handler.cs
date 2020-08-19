@@ -1116,5 +1116,10 @@ namespace Cygnus2_0.General
         {
             Mouse.OverrideCursor = null;
         }
+
+        public void pAbrirArchivo(string archivo)
+        {
+            System.Diagnostics.Process.Start(archivo);
+        }
     }
 }
