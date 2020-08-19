@@ -138,5 +138,14 @@ namespace Cygnus2_0.Pages.Compila
                 handler.MensajeError(ex.Message);
             }
         }
+
+        private void DataGridArchCompila_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGridArchCompila.SelectedItem == null)
+                return; // return if there's no row selected
+
+            Archivo archivo = (Archivo)dataGridArchCompila.SelectedItem;
+            handler.pAbrirArchivo(archivo.RutaConArchivo);
+        }
     }
 }

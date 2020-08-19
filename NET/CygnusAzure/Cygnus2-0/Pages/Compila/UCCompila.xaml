@@ -42,7 +42,7 @@
                 CanUserAddRows="False"
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
-                ItemsSource="{Binding Path=ListaArchivosCargados}"
+                ItemsSource="{Binding Path=ListaArchivosCargados}" MouseDoubleClick="DataGridArchCompila_MouseDoubleClick"
                   >
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
@@ -78,7 +78,7 @@
                     CanUserDeleteRows="True"
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
-                    CanUserSortColumns="False">
+                    CanUserSortColumns="False" MouseDoubleClick="DataGridMensajes_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
                   IsReadOnly="True"
