@@ -60,13 +60,7 @@ namespace Cygnus2_0.General
                 sourceFile = Path.Combine(archivo.Text, archivo.Value);
                 destFile = Path.Combine(ruta, archivo.Value);
 
-                using (StreamReader fuente = new StreamReader(sourceFile))
-                {
-                    using (StreamWriter origen = new StreamWriter(destFile))
-                    {
-                        origen.Write(fuente.ReadToEnd());
-                    }
-                }
+                System.IO.File.Copy(sourceFile, destFile, true);
             }
         }
 
