@@ -36,7 +36,6 @@ namespace Cygnus2_0.Model.Time
             if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
             {
                 handler.DAO.pObtHojasBD(view);
-                view.pCalcularTotales();
             }
         }
 
@@ -165,6 +164,8 @@ namespace Cygnus2_0.Model.Time
 
             uiContext.Send(x => view.pObtTareasPorHoja(), null);
             uiContext.Send(x => view.pCalcularTotales(), null);
+            //uiContext.Send(x => view.pRefrescaTareas(), null);
+            //uiContext.Send(x => pSeteaFechaActual(), null);
         }
 
         public async Task<IList<WorkItem>> QueryOpenBugs(string sbDiasAtras)

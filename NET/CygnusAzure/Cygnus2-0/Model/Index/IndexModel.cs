@@ -100,11 +100,9 @@ namespace Cygnus2_0.Model.Index
             ListaTiposObjetos();
             ListaUsGrants();
             ListaPalabrasReservadas();
-            //ListaChequeo();
             ListaConfiguracion();
             ListaUsuarios();
             DatosBd();
-            //RutaSqlplus();
             DatosRutaActualizacion();
             DocumentacionHtml();
             ListaRutas();
