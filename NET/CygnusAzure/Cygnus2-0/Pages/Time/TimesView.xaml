@@ -77,7 +77,7 @@
                             CurrentCellChanged="dataGridObjetos_CurrentCellChanged" 
                             CellEditEnding="dataGridObjetos_CellEditEnding" 
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
+                        VerticalContentAlignment="Center" PreviewMouseRightButtonDown="DataGridObjetos_PreviewMouseRightButtonDown"
                             >
 
                         <DataGrid.ContextMenu>
@@ -137,7 +137,7 @@
                             </DataGridTextColumn.CellStyle>
                         </DataGridTextColumn>-->
 
-                        <DataGridTemplateColumn x:Name="idDescTarea" Header="Tarea" Width="300" IsReadOnly="True">
+                        <DataGridTemplateColumn x:Name="idDescTarea" Header="Tarea" Width="280" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=Descripcion, Mode=OneWay}">

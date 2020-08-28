@@ -221,40 +221,10 @@ namespace Cygnus2_0.Pages.Time
 
         private void comboBoxHojas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DateTime fecha_ini;
-
             if (comboBoxHojas.SelectedItem != null)
             {
-                view.pObtTareasPorHoja();
-                view.pCalcularTotales();
+                pRefrescaEncabezado();
 
-                if(DateTime.Now.Date >= view.HojaActual.FechaIni && DateTime.Now.Date <= view.HojaActual.FechaFin)
-                {
-                    txtTitulo.FontStyle = FontStyles.Italic;
-                    txtTitulo.FontWeight = FontWeights.UltraBold;
-                    txtTitulo.FontSize = 22;
-                }
-                else
-                {
-                    txtTitulo.TextDecorations = null;
-                    txtTitulo.FontStyle = FontStyles.Normal;
-                    txtTitulo.FontWeight = FontWeights.Normal;
-                    txtTitulo.FontSize = 18;
-                    txtTitulo.FontWeight = FontWeights.SemiBold;
-                }
-
-                fecha_ini = view.HojaActual.FechaIni;
-
-                //dataGridObjetos.Columns[1].Header = "Tarea\n[Total] -->";
-                dataGridObjetos.Columns[3].Header = "Lun/" + fecha_ini.Day+"\n    ["+ view.TotalMon+"]";
-                dataGridObjetos.Columns[4].Header = "Mar/" + fecha_ini.AddDays(1).Day + "\n    [" + view.TotalTue + "]";
-                dataGridObjetos.Columns[5].Header = "Mie/" + fecha_ini.AddDays(2).Day + "\n    [" + view.TotalWed + "]";
-                dataGridObjetos.Columns[6].Header = "Jue/" + fecha_ini.AddDays(3).Day + "\n    [" + view.TotalThu + "]";
-                dataGridObjetos.Columns[7].Header = "Vie/" + fecha_ini.AddDays(4).Day + "\n    [" + view.TotalFri + "]";
-                dataGridObjetos.Columns[8].Header = "Sab/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSat + "]";
-                dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSun + "]";
-                dataGridObjetos.Columns[10].Header = "Total" + "\n  [" + view.Total + "]";
-                
                 //dataGridObjetos.Columns[0].SortDirection = ListSortDirection.Descending;
 
                 /*pEstiloNormalGrilla();
@@ -281,6 +251,47 @@ namespace Cygnus2_0.Pages.Time
                 if (fecha_ini.AddDays(6).Day == DateTime.Now.Day)
                     pPintarDiaACtual(8);*/
             }            
+        }
+
+        public void pRefrescaEncabezado()
+        {
+            DateTime fecha_ini;
+
+            try
+            {
+                view.pObtTareasPorHoja();
+                view.pCalcularTotales();
+
+                if (DateTime.Now.Date >= view.HojaActual.FechaIni && DateTime.Now.Date <= view.HojaActual.FechaFin)
+                {
+                    txtTitulo.FontStyle = FontStyles.Italic;
+                    txtTitulo.FontWeight = FontWeights.UltraBold;
+                    txtTitulo.FontSize = 22;
+                }
+                else
+                {
+                    txtTitulo.TextDecorations = null;
+                    txtTitulo.FontStyle = FontStyles.Normal;
+                    txtTitulo.FontWeight = FontWeights.Normal;
+                    txtTitulo.FontSize = 18;
+                    txtTitulo.FontWeight = FontWeights.SemiBold;
+                }
+
+                fecha_ini = view.HojaActual.FechaIni;
+
+                dataGridObjetos.Columns[3].Header = "Lun/" + fecha_ini.Day + "\n    [" + view.TotalMon + "]";
+                dataGridObjetos.Columns[4].Header = "Mar/" + fecha_ini.AddDays(1).Day + "\n    [" + view.TotalTue + "]";
+                dataGridObjetos.Columns[5].Header = "Mie/" + fecha_ini.AddDays(2).Day + "\n    [" + view.TotalWed + "]";
+                dataGridObjetos.Columns[6].Header = "Jue/" + fecha_ini.AddDays(3).Day + "\n    [" + view.TotalThu + "]";
+                dataGridObjetos.Columns[7].Header = "Vie/" + fecha_ini.AddDays(4).Day + "\n    [" + view.TotalFri + "]";
+                dataGridObjetos.Columns[8].Header = "Sab/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSat + "]";
+                dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(7).Day + "\n    [" + view.TotalSun + "]";
+                dataGridObjetos.Columns[10].Header = "Total" + "\n  [" + view.Total + "]";
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void pPintarDiaACtual(int indice)
@@ -366,6 +377,7 @@ namespace Cygnus2_0.Pages.Time
             Thread.Sleep(100);
 
             uiContext.Send(x => pSetTiemposNuevos(), null);
+            uiContext.Send(x => pRefrescaEncabezado(), null);
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -382,16 +394,20 @@ namespace Cygnus2_0.Pages.Time
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
             view.pLimpiarTareas();
-            pSeteaFechaActual();
 
-            view.pObtTareasPorHoja();
-            view.pCalcularTotales();
+            view.ListaTareas.Clear();
+            view.ListaHojas.Clear();
+            view.pRefrescaTareas();
+
+            pSeteaFechaActual();
+            pRefrescaEncabezado();
         }
 
         public void pSeteaFechaActual()
         {
             //Se selecciona la semana actual
             comboBoxHojas.SelectedIndex = 1;
+            view.pCalcularTotales();
         }
 
         private void MenuItemCorre_Click(object sender, RoutedEventArgs e)
@@ -454,6 +470,14 @@ namespace Cygnus2_0.Pages.Time
             nuTiempoEsperaAz1 = 8000;
             nuTiempoEsperaAz2 = 3000;
             nuTiempoEsperaAz3 = 1000;
+        }
+
+        private void DataGridObjetos_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGridObjetos.SelectedItem == null)
+            {
+                return;
+            }
         }
     }
 }
