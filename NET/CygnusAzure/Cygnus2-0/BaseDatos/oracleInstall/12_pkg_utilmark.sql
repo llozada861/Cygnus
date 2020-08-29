@@ -1286,10 +1286,11 @@ AS
        viernes NUMBER;
        sabado NUMBER;
        domingo NUMBER;
+       dtFechaInCygnus DATE;
         
        CURSOR cuRq
        IS
-            SELECT codigo
+            SELECT codigo,fecha_inicio
             FROM flex.ll_requerimiento
             WHERE id_azure = isbIdAzure
             AND usuario = isbUsuario;
@@ -1327,7 +1328,7 @@ AS
        dia_semana := to_char(dtFechaCreaAzure,'D');
        
        OPEN cuRq;
-       FETCH cuRq INTO nucodigoRq;
+       FETCH cuRq INTO nucodigoRq,dtFechaInCygnus;
        CLOSE cuRq;
        
        OPEN cuHojasAzure(dtFechaCreaAzure);
@@ -1382,28 +1383,7 @@ AS
                nucodigo,
                onuErrorCode,
                osbErrorMessage
-           ); 
-    	   
-           /*IF(nuCodHojaSigSem IS NOT NULL)THEN
-               --Se inserta para siguiente semana
-               pinshorashoja
-               (
-                   nuCodHojaSigSem,
-                   SYSDATE,
-                   0,
-                   0,
-                   0,
-                   0,
-                   0,
-                   0,
-                   0,
-                   isbUsuario,
-                   NULL,
-                   nucodigo,
-                   onuErrorCode,
-                   osbErrorMessage
-               );
-           END IF;*/
+           );
        ELSE
            nucodigo := nucodigoRq;
            
@@ -1413,22 +1393,10 @@ AS
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
                hist_usuario = isbIdHU,
-               fecha_inicio = dtFechaCreaAzure
+               fecha_inicio = nvl(dtFechaCreaAzure,dtFechaInCygnus)
            WHERE codigo = nucodigo;
            
            COMMIT;
-           
-           /*nuTotalRq := 0;
-           
-           OPEN cuTotalRq(nucodigo);
-           FETCH cuTotalRq INTO nuTotalRq;
-           CLOSE cuTotalRq;
-           
-           IF(nvl(nuTotalRq,0) = 0)THEN
-                nuTotalRq := nvl(inuCompletado,0);
-           ELSIF(inuCompletado > nuTotalRq)THEN
-                nuTotalRq := inuCompletado - nuTotalRq;
-           END IF;*/
        END IF;
        
     EXCEPTION
@@ -1466,6 +1434,7 @@ AS
        nuIdAzure    NUMBER;
        dtFechaFin DATE;
        dtFechaCreaAzure DATE;
+       dtFechaInCygnus  DATE;
        
        CURSOR cuHorasHojas
        IS
@@ -1482,7 +1451,7 @@ AS
            
        CURSOR cuRq
        IS
-            SELECT codigo
+            SELECT codigo,fecha_inicio
             FROM flex.ll_requerimiento
             WHERE id_azure = isbIdAzure
             AND usuario = isbUsuario;
@@ -1503,7 +1472,7 @@ AS
        
        IF(inuRq = 0)THEN
            OPEN cuRq;
-           FETCH cuRq INTO nucodigo;
+           FETCH cuRq INTO nucodigo,dtFechaInCygnus;
            CLOSE cuRq;
        ELSE
             nucodigo := inuRq;
@@ -1529,7 +1498,7 @@ AS
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
                hist_usuario = isbIdHU,
-               fecha_inicio = dtFechaCreaAzure
+               fecha_inicio = nvl(dtFechaCreaAzure,dtFechaInCygnus)
            WHERE codigo = nucodigo
            AND usuario = isbUsuario;
        END IF;
@@ -1702,12 +1671,14 @@ AS
                    qHojaActual.fecha_fin,
                    rq.completado,
                    nvl(rq.hist_usuario,0) hu,
-                   rq.fecha_inicio
+                   rq.fecha_inicio,
+                   (SELECT (sum(lunes) + sum(martes) + sum(miercoles) + sum(jueves) + sum(viernes) + sum(sabado) + sum(domingo)) horas
+                    FROM flex.ll_horashoja hh
+                    WHERE requerimiento = rq.codigo) total_rq
             FROM flex.ll_horashoja hh,flex.ll_requerimiento rq,qHojaActual
             WHERE hh.requerimiento = rq.codigo
             AND   hh.usuario = isbUsuario
             AND   hh.id_hoja = inuHoja
-            --AND   rq.fecha_display  <= (qHojaActual.fecha_fin + 7)
             ORDER BY id_azure DESC;
             
     EXCEPTION

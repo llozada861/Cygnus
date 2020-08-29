@@ -1219,6 +1219,7 @@ namespace Cygnus2_0.DAO
                         tarea.HU = Convert.ToInt32(reader["hu"]);
                         tarea.Tipo = "F";
                         tarea.IniFecha = String.IsNullOrEmpty(Convert.ToString(reader["fecha_inicio"]))? Convert.ToString(reader["fecha_inicio"]) : "";
+                        tarea.TotalRQ = Convert.ToDouble(reader["total_rq"]);
                         tarea.pCalcularTotal();
 
                         view.ListaHojas.ToList().Find(x => x.Id == view.HojaActual.Id).ListaTareas.Add(tarea);

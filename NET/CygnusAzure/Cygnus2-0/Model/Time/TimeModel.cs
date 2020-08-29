@@ -287,7 +287,7 @@ namespace Cygnus2_0.Model.Time
                         view.ListaHojas.ToList().Find(x => x.Id == view.HojaActual.Id).ListaTareas.Add(nuevaTarea);
                     }
                 }
-            }        
+            }       
         }
     }
 }

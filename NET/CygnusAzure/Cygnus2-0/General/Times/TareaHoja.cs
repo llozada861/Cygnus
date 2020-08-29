@@ -147,6 +147,13 @@ namespace Cygnus2_0.General.Times
             set { total = value; }
         }
 
+        private double totalrq;
+        public double TotalRQ
+        {
+            get { return totalrq; }
+            set { totalrq = value; }
+        }
+
         private DateTime fechaDisplay;
 
         public DateTime FechaDisplay

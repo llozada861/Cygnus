@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Grid>
@@ -55,11 +54,11 @@
         </GroupBox>
 
         <TextBlock x:Name="txtTitulo" Text="{Binding Path=HojaActual.Text}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" VerticalAlignment="Bottom"/>
-
+        
+        <!--CurrentCellChanged="dataGridObjetos_CurrentCellChanged" 
+                            CellEditEnding="dataGridObjetos_CellEditEnding" -->
         <GroupBox Header="Tareas" Margin="0" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
-
-            <!--<ScrollViewer  VerticalAlignment="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">-->
-                <Grid>
+            <Grid>
                     <DataGrid
                 x:Name="dataGridObjetos" 
                 IsReadOnly="false" 
@@ -73,11 +72,10 @@
                 ItemsSource="{Binding Path=HojaActual.ListaTareas, Mode=TwoWay }"
                             GridLinesVisibility="All"
                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                            ScrollViewer.VerticalScrollBarVisibility="Auto"                            
-                            CurrentCellChanged="dataGridObjetos_CurrentCellChanged" 
-                            CellEditEnding="dataGridObjetos_CellEditEnding" 
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
                         HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center" PreviewMouseRightButtonDown="DataGridObjetos_PreviewMouseRightButtonDown"
+                        VerticalContentAlignment="Center"
+                        CellEditEnding="dataGridObjetos_CellEditEnding"
                             >
 
                         <DataGrid.ContextMenu>
@@ -153,7 +151,7 @@
                                 Header="Mon"
                                 x:Name="idMon"
                                 IsReadOnly="False"
-                                Binding="{Binding Path=Mon.Horas, Mode=TwoWay, TargetNullValue={x:Static sys:String.Empty}}" 
+                                Binding="{Binding Path=Mon.Horas, Mode=TwoWay}" 
                                         >
                                     <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
