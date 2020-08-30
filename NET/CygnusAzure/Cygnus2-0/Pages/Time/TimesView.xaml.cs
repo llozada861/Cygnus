@@ -41,6 +41,7 @@ namespace Cygnus2_0.Pages.Time
         private int nuTiempoEsperaAz1;
         private int nuTiempoEsperaAz2;
         private int nuTiempoEsperaAz3;
+        private Brush Colobk;
         public Times()
         {
             myWin = (MainWindow)Application.Current.MainWindow;
@@ -64,6 +65,8 @@ namespace Cygnus2_0.Pages.Time
             nuTiempoEsperaAz1 = 20000;
             nuTiempoEsperaAz2 = 10000;
             nuTiempoEsperaAz3 = 5000;
+
+            dataGridObjetos.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
         }
 
         private void dataGridObjetos_CurrentCellChanged(object sender, EventArgs e)
@@ -284,13 +287,44 @@ namespace Cygnus2_0.Pages.Time
                 dataGridObjetos.Columns[5].Header = "Mie/" + fecha_ini.AddDays(2).Day + "\n    [" + view.TotalWed + "]";
                 dataGridObjetos.Columns[6].Header = "Jue/" + fecha_ini.AddDays(3).Day + "\n    [" + view.TotalThu + "]";
                 dataGridObjetos.Columns[7].Header = "Vie/" + fecha_ini.AddDays(4).Day + "\n    [" + view.TotalFri + "]";
-                dataGridObjetos.Columns[8].Header = "Sab/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSat + "]";
-                dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(7).Day + "\n    [" + view.TotalSun + "]";
+                dataGridObjetos.Columns[8].Header = "Sab/" + fecha_ini.AddDays(5).Day + "\n    [" + view.TotalSat + "]";
+                dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSun + "]";
                 dataGridObjetos.Columns[10].Header = "Total" + "\n  [" + view.Total + "]";
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void pCambiarColorFila()
+        {
+            foreach (TareaHoja item in dataGridObjetos.ItemsSource)
+            {
+                var row = dataGridObjetos.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+
+                if (row != null)
+                {
+                    if(row.Background != Brushes.Red)
+                        Colobk = row.Background;
+
+                    if (Math.Round(item.TotalRQ,1) != Math.Round(item.Completed,1) && item.IdAzure > 0)
+                    {
+                        row.Background = Brushes.Red;
+                    }
+                    else
+                    {
+                        row.Background = Colobk;
+                    }
+                }
+            }
+        }
+
+        private void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
+        {
+            if (dataGridObjetos.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
+            {
+                pCambiarColorFila();
             }
         }
 
@@ -470,14 +504,6 @@ namespace Cygnus2_0.Pages.Time
             nuTiempoEsperaAz1 = 8000;
             nuTiempoEsperaAz2 = 3000;
             nuTiempoEsperaAz3 = 1000;
-        }
-
-        private void DataGridObjetos_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (dataGridObjetos.SelectedItem == null)
-            {
-                return;
-            }
         }
     }
 }
