@@ -217,7 +217,8 @@
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextAlignment" Value="Center" />
-                                            </Style>
+                                    
+                                </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
 
@@ -225,12 +226,13 @@
                                 IsReadOnly="False"
                                 Header="Sun"
                                 x:Name="idSun"
-                                Binding="{Binding Path=Sun.Horas, Mode=TwoWay}" 
+                                Binding="{Binding Path=Sun.Horas, Mode=TwoWay}"
                                             >
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextAlignment" Value="Center" />
-                                            </Style>
+                                    
+                                </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
 

@@ -50,8 +50,8 @@ namespace Cygnus2_0.Pages.Settings.General
             Color.FromRgb(0xf4, 0x72, 0xd0),   // pink
             Color.FromRgb(0xd8, 0x00, 0x73),   // magenta
             Color.FromRgb(0xa2, 0x00, 0x25),   // crimson
-            Color.FromRgb(0xe5, 0x14, 0x00),   // red
-            Color.FromRgb(0xfa, 0x68, 0x00),   // orange
+            //Color.FromRgb(0xe5, 0x14, 0x00),   // red
+            //Color.FromRgb(0xfa, 0x68, 0x00),   // orange
             Color.FromRgb(0xf0, 0xa3, 0x0a),   // amber
             Color.FromRgb(0xe3, 0xc8, 0x00),   // yellow
             Color.FromRgb(0x82, 0x5a, 0x2c),   // brown

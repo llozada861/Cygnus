@@ -42,6 +42,7 @@ namespace Cygnus2_0.Pages.Time
         private int nuTiempoEsperaAz2;
         private int nuTiempoEsperaAz3;
         private Brush Colobk;
+        private Style cellStyleBefore;
         public Times()
         {
             myWin = (MainWindow)Application.Current.MainWindow;
@@ -230,29 +231,7 @@ namespace Cygnus2_0.Pages.Time
 
                 //dataGridObjetos.Columns[0].SortDirection = ListSortDirection.Descending;
 
-                /*pEstiloNormalGrilla();
-
-
-                if (fecha_ini.Day == DateTime.Now.Day)
-                    pPintarDiaACtual(2);
-
-                if (fecha_ini.AddDays(1).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(3);
-
-                if (fecha_ini.AddDays(2).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(4);
-
-                if (fecha_ini.AddDays(3).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(5);
-
-                if (fecha_ini.AddDays(4).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(6);
-
-                if (fecha_ini.AddDays(5).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(7);
-
-                if (fecha_ini.AddDays(6).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(8);*/
+                //pEstiloNormalGrilla();
             }            
         }
 
@@ -290,6 +269,59 @@ namespace Cygnus2_0.Pages.Time
                 dataGridObjetos.Columns[8].Header = "Sab/" + fecha_ini.AddDays(5).Day + "\n    [" + view.TotalSat + "]";
                 dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSun + "]";
                 dataGridObjetos.Columns[10].Header = "Total" + "\n  [" + view.Total + "]";
+
+                var cellStyle = new Style { TargetType = typeof(DataGridCell), };
+                cellStyle.Setters.Add(new Setter(BackgroundProperty, Brushes.OrangeRed));
+
+                dataGridObjetos.Columns[3].CellStyle = null;
+                dataGridObjetos.Columns[4].CellStyle = null;
+                dataGridObjetos.Columns[5].CellStyle = null;
+                dataGridObjetos.Columns[6].CellStyle = null;
+                dataGridObjetos.Columns[7].CellStyle = null;
+                dataGridObjetos.Columns[8].CellStyle = cellStyle;
+                dataGridObjetos.Columns[9].CellStyle = cellStyle;
+
+                //Pintar día actual
+                if (fecha_ini.Day == DateTime.Now.Day)
+                    pPintarDiaACtual(3);
+
+                if (fecha_ini.AddDays(1).Day == DateTime.Now.Day)
+                    pPintarDiaACtual(4);
+
+                if (fecha_ini.AddDays(2).Day == DateTime.Now.Day)
+                    pPintarDiaACtual(5);
+
+                if (fecha_ini.AddDays(3).Day == DateTime.Now.Day)
+                    pPintarDiaACtual(6);
+
+                if (fecha_ini.AddDays(4).Day == DateTime.Now.Day)
+                    pPintarDiaACtual(7);
+
+                if (fecha_ini.AddDays(5).Day == DateTime.Now.Day)
+                    pPintarDiaACtual(8);
+
+                if (fecha_ini.AddDays(6).Day == DateTime.Now.Day)
+                    pPintarDiaACtual(9);
+
+
+                /*for (int i = 0; i < dataGridObjetos.Items.Count; i++)
+                {
+                    for (int j = 0; j < dataGridObjetos.Columns.Count; j++)
+                    {
+                        DataGridCell cell = dataGridObjetos.GetValue
+                        TextBlock tb = cell.Content as TextBlock;
+
+                        if (j == 1)
+                        {
+                            double measure = double.Parse(tb.Text);
+
+                            if (measure > 22.5)
+                            {
+                                cell.Foreground = Brushes.Red;
+                            }
+                        }
+                    }
+                }*/
             }
             catch(Exception ex)
             {
@@ -330,12 +362,15 @@ namespace Cygnus2_0.Pages.Time
 
         public void pPintarDiaACtual(int indice)
         {
-            /*var cellStyle = new Style { TargetType = typeof(DataGridCell), };
+            //cellStyleBefore = dataGridObjetos.Columns[indice].CellStyle;
+                        
+            var cellStyle = new Style { TargetType = typeof(DataGridCell), };
             cellStyle.Setters.Add(new Setter(FontWeightProperty, FontWeights.ExtraBold));
-            cellStyle.Setters.Add(new Setter(ForegroundProperty, Brushes.Red));
+            //cellStyle.Setters.Add(new Setter(BackgroundProperty, Brushes.Purple));
+            cellStyle.Setters.Add(new Setter(BorderBrushProperty, Brushes.Red));
             dataGridObjetos.Columns[indice].CellStyle = cellStyle;
 
-            var cellHeaderStyle = new Style { TargetType = typeof(DataGridColumnHeader), };
+            /*var cellHeaderStyle = new Style { TargetType = typeof(DataGridColumnHeader), };
             cellHeaderStyle.Setters.Add(new Setter(FontWeightProperty, FontWeights.ExtraBold));
             cellHeaderStyle.Setters.Add(new Setter(ForegroundProperty, Brushes.Red));
             dataGridObjetos.Columns[indice].HeaderStyle = cellHeaderStyle;*/
