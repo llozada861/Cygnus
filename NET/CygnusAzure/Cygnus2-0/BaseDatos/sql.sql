@@ -245,8 +245,8 @@ SELECT * FROM (
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
             WHERE hh.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/06/2020'
-            AND   ho.fecha_fin <= '30/06/2020'
+            AND   ho.fecha_ini >= '01/07/2020'
+            AND   ho.fecha_fin <= '31/07/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND lunes > 0                        
@@ -259,8 +259,8 @@ SELECT * FROM (
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
             WHERE hh.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/06/2020'
-            AND   ho.fecha_fin <= '30/06/2020'
+            AND   ho.fecha_ini >= '01/07/2020'
+            AND   ho.fecha_fin <= '31/07/2020'
             AND   hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND martes > 0
@@ -273,8 +273,8 @@ SELECT * FROM (
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
             WHERE hh.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/06/2020'
-            AND   ho.fecha_fin <= '30/06/2020'
+            AND   ho.fecha_ini >= '01/07/2020'
+            AND   ho.fecha_fin <= '31/07/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND miercoles > 0
@@ -287,8 +287,8 @@ SELECT * FROM (
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
             WHERE hh.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/06/2020'
-            AND   ho.fecha_fin <= '30/06/2020'
+            AND   ho.fecha_ini >= '01/07/2020'
+            AND   ho.fecha_fin <= '31/07/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND jueves > 0
@@ -301,8 +301,8 @@ SELECT * FROM (
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
             WHERE hh.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/06/2020'
-            AND   ho.fecha_fin <= '30/06/2020'
+            AND   ho.fecha_ini >= '01/07/2020'
+            AND   ho.fecha_fin <= '31/07/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND viernes > 0
@@ -315,8 +315,8 @@ SELECT * FROM (
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
             WHERE hh.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/06/2020'
-            AND   ho.fecha_fin <= '30/06/2020'
+            AND   ho.fecha_ini >= '01/07/2020'
+            AND   ho.fecha_fin <= '31/07/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND sabado > 0
@@ -329,8 +329,8 @@ SELECT * FROM (
                    rq.completado horaAzure
             FROM flex.ll_horashoja hh,flex.ll_hoja ho, flex.ll_requerimiento rq
             WHERE hh.usuario = 'SQL_LLOZADA'
-            AND   ho.fecha_ini >= '01/06/2020'
-            AND   ho.fecha_fin <= '30/06/2020'
+            AND   ho.fecha_ini >= '01/07/2020'
+            AND   ho.fecha_fin <= '31/07/2020'
             AND hh.id_hoja = ho.codigo
             AND hh.requerimiento = rq.codigo
             AND domingo > 0 
