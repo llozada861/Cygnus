@@ -267,6 +267,12 @@
     <Compile Include="Pages\General\WinImage.xaml.cs">
       <DependentUpon>WinImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Git\AdminGit.xaml.cs">
+      <DependentUpon>AdminGit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Git\UCObjectGit.xaml.cs">
+      <DependentUpon>UCObjectGit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Git\UCRepoGit.xaml.cs">
       <DependentUpon>UCRepoGit.xaml</DependentUpon>
     </Compile>
@@ -539,6 +545,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\General\WinImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Git\AdminGit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Git\UCObjectGit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
