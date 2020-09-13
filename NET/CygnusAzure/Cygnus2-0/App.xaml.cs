@@ -26,8 +26,9 @@ namespace Cygnus2_0
             CustomPrincipal customPrincipal = new CustomPrincipal();
             AppDomain.CurrentDomain.SetThreadPrincipal(customPrincipal);
             customPrincipal.Identity = new CustomIdentity("Anonimo", "", 0);
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("es-CO");
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-ES");
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-ES");
         }
 
         private void pCargarDlls()
@@ -56,7 +57,6 @@ namespace Cygnus2_0
                 }
             }
         }
-
 
         private void CopyResource(string resourceName, string file)
         {          
