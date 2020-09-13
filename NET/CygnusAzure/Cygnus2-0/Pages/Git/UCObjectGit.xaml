@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Git.UCObjectGit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cygnus2_0.Pages.Git"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <RadioButton x:Name="rdbLineaBase" Content="Línea Base" 
+                     Grid.Column="0" 
+                     Grid.ColumnSpan="2" 
+                     Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="RdbLineaBase_Checked"  />
+        <RadioButton x:Name="rdbEntrega" Content="Realizar entrega" 
+                     Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Checked="RdbEntrega_Checked" />
+
+        <Grid x:Name="LineaBase" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="Generar Línea Base" Grid.Row="0" Grid.RowSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="txtWO" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" 
+                         Grid.ColumnSpan="8" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Línea Base"
+                         />
+                    <Button Content="Generar" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="2" Grid.RowSpan="8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <ComboBox x:Name="comboBox" 
+                      ItemsSource="{Binding Path=ListaRamasLB}" 
+                      SelectedItem="{Binding Path=RamaLB}"
+                      DisplayMemberPath="Text" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
+                      Margin="0,0,10,0"
+                      />
+                    <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,0,10,0"
+                       Text="Seleccione Línea Base" 
+                       Style="{StaticResource ComboBoxSelectOverlay}"/>
+
+                    <TextBox x:Name="txtBuscar" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" 
+                         Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="5"
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Objeto"
+                             Margin="10,0,0,0"
+                         />
+                    <Button Content="Buscar" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <DataGrid
+                        x:Name="dataGridResultado" 
+                        IsReadOnly="false" 
+                        AllowDrop="False" 
+                        AutoGenerateColumns="False"
+                        SelectionMode="Extended"
+                        CanUserDeleteRows="False"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserSortColumns="False"
+                        ItemsSource="{Binding Path=ListaArchivosEncontrados}" MouseDoubleClick="DataGridResultado_MouseDoubleClick"
+                        Grid.Row="1" Grid.ColumnSpan="10"        >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Header="Objeto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Path=FileName}" />
+                            <DataGridTextColumn                  
+                                    IsReadOnly="True"
+                                    Header="Ruta"
+                                    Binding="{Binding Path=Ruta}" />
+                                        
+                            </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <Grid x:Name="Entrega">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+        </Grid>
+    </Grid>
+</UserControl>

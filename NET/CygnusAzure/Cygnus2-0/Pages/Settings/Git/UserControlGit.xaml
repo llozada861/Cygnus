@@ -63,7 +63,7 @@
                          CharacterCasing="Upper" Grid.Column="0" Grid.Row="1"
                          Grid.ColumnSpan="3" 
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Ruta para clonar"
+                         Style="{StaticResource placeHolder}" Tag="Ruta del repositorio de datos"
                          />
             </Grid>
         </GroupBox>
