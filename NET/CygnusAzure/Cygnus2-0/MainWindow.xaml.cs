@@ -33,6 +33,7 @@ using System.Reflection;
 using System.IO;
 using System.Security;
 using Cygnus2_0.Model.Settings;
+using System.Globalization;
 
 namespace Cygnus2_0
 {
@@ -47,14 +48,6 @@ namespace Cygnus2_0
         public MainWindow()
         {
             //pObtParamEntrada();
-
-            string fechaExp = "01/08/2021";
-            
-            if (DateTime.Today > Convert.ToDateTime(fechaExp))
-            {
-                System.Windows.MessageBox.Show("La licencia de uso de Cygnus ha vencido. Por favor contacta al admin para renovar tú licencia.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                return;
-            }
 
             InitializeComponent();
 
@@ -87,6 +80,8 @@ namespace Cygnus2_0
         {
             string version;
             Boolean actualiza = false;
+
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("es-CO");
 
             Next = true;
 
@@ -142,8 +137,22 @@ namespace Cygnus2_0
 
             if (!actualiza)
             {
-                ContentSource = new Uri("/Pages/Home.xaml", UriKind.Relative);
-            }         
+                ContentSource = new Uri("/Pages/Home.xaml", UriKind.Relative);                
+            }
+
+            try
+            {
+                string fechaExp = "31/12/2021";
+
+                if (DateTime.Today > Convert.ToDateTime(fechaExp))
+                {
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
 
         private Boolean next;

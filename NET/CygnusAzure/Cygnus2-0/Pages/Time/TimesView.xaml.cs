@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.Threading;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Time
 {
@@ -43,6 +44,8 @@ namespace Cygnus2_0.Pages.Time
         private int nuTiempoEsperaAz3;
         private Brush Colobk;
         private Style cellStyleBefore;
+        private System.Windows.Media.Color color;
+        private SolidColorBrush brush;
         public Times()
         {
             myWin = (MainWindow)Application.Current.MainWindow;
@@ -52,6 +55,8 @@ namespace Cygnus2_0.Pages.Time
 
             DataContext = view;
             InitializeComponent();
+            color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.keyThemeColor)).Value);
+            brush = new SolidColorBrush(color);
 
             pSeteaFechaActual();
             
@@ -161,6 +166,12 @@ namespace Cygnus2_0.Pages.Time
                 pCargarTareasAzure();
                 blConsultaAsure = false;
             }
+
+            color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.keyThemeColor)).Value);
+            brush = new SolidColorBrush(color);
+
+            if(view.HojaActual != null)
+                pintarGrilla(view.HojaActual.FechaIni);
         }
 
         private void pCargarTareasAzure()
@@ -270,39 +281,7 @@ namespace Cygnus2_0.Pages.Time
                 dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSun + "]";
                 dataGridObjetos.Columns[10].Header = "Total" + "\n  [" + view.Total + "]";
 
-                var cellStyle = new Style { TargetType = typeof(DataGridCell), };
-                cellStyle.Setters.Add(new Setter(BackgroundProperty, Brushes.OrangeRed));
-
-                dataGridObjetos.Columns[3].CellStyle = null;
-                dataGridObjetos.Columns[4].CellStyle = null;
-                dataGridObjetos.Columns[5].CellStyle = null;
-                dataGridObjetos.Columns[6].CellStyle = null;
-                dataGridObjetos.Columns[7].CellStyle = null;
-                dataGridObjetos.Columns[8].CellStyle = cellStyle;
-                dataGridObjetos.Columns[9].CellStyle = cellStyle;
-
-                //Pintar día actual
-                if (fecha_ini.Day == DateTime.Now.Day)
-                    pPintarDiaACtual(3);
-
-                if (fecha_ini.AddDays(1).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(4);
-
-                if (fecha_ini.AddDays(2).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(5);
-
-                if (fecha_ini.AddDays(3).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(6);
-
-                if (fecha_ini.AddDays(4).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(7);
-
-                if (fecha_ini.AddDays(5).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(8);
-
-                if (fecha_ini.AddDays(6).Day == DateTime.Now.Day)
-                    pPintarDiaACtual(9);
-
+                pintarGrilla(fecha_ini);
 
                 /*for (int i = 0; i < dataGridObjetos.Items.Count; i++)
                 {
@@ -327,6 +306,42 @@ namespace Cygnus2_0.Pages.Time
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private void pintarGrilla(DateTime fecha_ini)
+        {
+            var cellStyle = new Style { TargetType = typeof(DataGridCell), };
+            cellStyle.Setters.Add(new Setter(BackgroundProperty, brush));
+
+            dataGridObjetos.Columns[3].CellStyle = null;
+            dataGridObjetos.Columns[4].CellStyle = null;
+            dataGridObjetos.Columns[5].CellStyle = null;
+            dataGridObjetos.Columns[6].CellStyle = null;
+            dataGridObjetos.Columns[7].CellStyle = null;
+            dataGridObjetos.Columns[8].CellStyle = cellStyle;
+            dataGridObjetos.Columns[9].CellStyle = cellStyle;
+
+            //Pintar día actual
+            if (fecha_ini.Day == DateTime.Now.Day)
+                pPintarDiaACtual(3);
+
+            if (fecha_ini.AddDays(1).Day == DateTime.Now.Day)
+                pPintarDiaACtual(4);
+
+            if (fecha_ini.AddDays(2).Day == DateTime.Now.Day)
+                pPintarDiaACtual(5);
+
+            if (fecha_ini.AddDays(3).Day == DateTime.Now.Day)
+                pPintarDiaACtual(6);
+
+            if (fecha_ini.AddDays(4).Day == DateTime.Now.Day)
+                pPintarDiaACtual(7);
+
+            if (fecha_ini.AddDays(5).Day == DateTime.Now.Day)
+                pPintarDiaACtual(8);
+
+            if (fecha_ini.AddDays(6).Day == DateTime.Now.Day)
+                pPintarDiaACtual(9);
         }
 
         private void pCambiarColorFila()
@@ -362,13 +377,13 @@ namespace Cygnus2_0.Pages.Time
 
         public void pPintarDiaACtual(int indice)
         {
-            //cellStyleBefore = dataGridObjetos.Columns[indice].CellStyle;
-                        
             var cellStyle = new Style { TargetType = typeof(DataGridCell), };
             cellStyle.Setters.Add(new Setter(FontWeightProperty, FontWeights.ExtraBold));
             //cellStyle.Setters.Add(new Setter(BackgroundProperty, Brushes.Purple));
-            cellStyle.Setters.Add(new Setter(BorderBrushProperty, Brushes.Red));
+            cellStyle.Setters.Add(new Setter(BorderBrushProperty, brush));
             dataGridObjetos.Columns[indice].CellStyle = cellStyle;
+
+            //cellStyleBefore = dataGridObjetos.Columns[indice].CellStyle;
 
             /*var cellHeaderStyle = new Style { TargetType = typeof(DataGridColumnHeader), };
             cellHeaderStyle.Setters.Add(new Setter(FontWeightProperty, FontWeights.ExtraBold));
