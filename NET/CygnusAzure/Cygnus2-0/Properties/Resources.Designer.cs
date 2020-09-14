@@ -2342,6 +2342,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a produccion.
+        /// </summary>
+        public static string RamaProduccion {
+            get {
+                return ResourceManager.GetString("RamaProduccion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a R.
         /// </summary>
         public static string RedLocal {

@@ -226,6 +226,7 @@
     <Compile Include="Interface\IViews.cs" />
     <Compile Include="Model\Aplica\GenerateAplicaModel.cs" />
     <Compile Include="Model\Compila\CompilaModel.cs" />
+    <Compile Include="Model\Git\ObjectGitModel.cs" />
     <Compile Include="Model\Index\IndexModel.cs" />
     <Compile Include="Model\Objects\BlockModel.cs" />
     <Compile Include="Model\Objects\DesblockModel.cs" />
@@ -411,6 +412,7 @@
     <Compile Include="ViewModel\Data\MessageViewModel.cs" />
     <Compile Include="ViewModel\Data\ParameterViewModel.cs" />
     <Compile Include="ViewModel\Documentation\GeneratHtmlViewModel.cs" />
+    <Compile Include="ViewModel\Git\ObjectGitViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeViewModel.cs" />
     <Compile Include="ViewModel\Index\IndexViewModel.cs" />
     <Compile Include="ViewModel\Objects\BlockViewModel.cs" />
