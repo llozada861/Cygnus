@@ -50,8 +50,6 @@ namespace Cygnus2_0.Model.Compila
                     view.ListaArchivosCargados.Add(archivo);
                 }
             }
-
-            return;
         }
 
         private void pListaArchivosCarpeta(string path, string from)

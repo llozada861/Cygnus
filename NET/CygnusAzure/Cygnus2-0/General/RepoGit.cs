@@ -1,6 +1,8 @@
-﻿using LibGit2Sharp;
+﻿using Cygnus2_0.Model.Git;
+using LibGit2Sharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -73,6 +75,59 @@ namespace Cygnus2_0.General
             return rama;
         }
 
+        public static void pCreaLineaBase(ObjectGitModel model, Handler handler)
+        {
+            bool blRama = false;
+
+            using (var repo = new Repository(@handler.RutaGitObjetos))
+            {
+                Commands.Checkout(repo, res.RamaProduccion);
+                Commands.Pull(repo, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new PullOptions());
+
+                var branches = repo.Branches;
+
+                foreach (Branch b in branches)
+                {
+                    if (b.FriendlyName.ToUpper().Equals(model.Codigo.ToUpper()))
+                    {
+                        blRama = true;
+                    }
+                }
+
+                if (blRama)
+                {
+                    throw new Exception("La línea base ya existe.");
+                }
+
+                repo.CreateBranch(model.Codigo.ToUpper());
+            }
+        }
+        public static ObservableCollection<SelectListItem> pObtieneRamasListLB(Handler handler)
+        {
+            ObservableCollection<SelectListItem> listaRamas = new ObservableCollection<SelectListItem>();
+
+            using (var repo = new Repository(@handler.RutaGitObjetos))
+            {
+                BranchCollection branches = repo.Branches;
+
+                foreach (Branch b in branches)
+                {
+                    if(b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
+                        listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
+                }
+            }
+
+            return listaRamas;
+        }
+
+        public static void pSetearLineaBase(string rama, Handler handler)
+        {
+            using (var repo = new Repository(@handler.RutaGitObjetos))
+            {
+                Commands.Checkout(repo, rama);
+            }
+        }
+
         /*
          *                 //Se cambia a master datos para crear el feature
                 Commands.Checkout(repo, res.RamaMasterDatos);
@@ -84,7 +139,7 @@ namespace Cygnus2_0.General
                 
                 Commands.Checkout(repo, rama);
                 repo.CherryPick(comm, new Signature(Environment.UserName, email, DateTimeOffset.Now));*/
-             
+
         public static string pClonarRepo(string ruta, string url, string rutaGitBash)
         {
             pCreaDirectorios(ruta);

@@ -234,6 +234,7 @@ namespace Cygnus2_0.General
         public string RutaSonar { set; get; }
         public string RutaGitBash { set; get; }
         public string RutaGitDatos { set; get; }
+        public string RutaGitObjetos { set; get; }
         public string EsLlamadoDesdeUpdater { set; get; }
         public List<SelectListItem> ListaChequeo { set; get; }
         public List<SelectListItem> ListaTipoArchivos { get; set; }
@@ -1120,6 +1121,30 @@ namespace Cygnus2_0.General
         public void pAbrirArchivo(string archivo)
         {
             System.Diagnostics.Process.Start(archivo);
+        }
+
+        public void pListaArchivosCarpeta(string Path, List<Archivo> archivos)
+        {
+            if (Path.ToUpper().IndexOf(".GIT") > -1 || Path.ToUpper().IndexOf("DESPLIEGUES") > -1)
+                return;
+
+            // Process the list of files found in the directory.
+            string[] fileEntries = Directory.GetFiles(Path);
+            foreach (string fileName in fileEntries)
+            {
+                Archivo archivo = new Archivo();
+                archivo.FileName = System.IO.Path.GetFileName(fileName);
+                archivo.RutaConArchivo = fileName;
+                archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                archivo.Ruta = System.IO.Path.GetDirectoryName(fileName);
+                archivo.Extension = System.IO.Path.GetExtension(fileName);
+                archivos.Add(archivo);
+            }
+
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(Path);
+            foreach (string subdirectory in subdirectoryEntries)
+                pListaArchivosCarpeta(subdirectory, archivos);
         }
     }
 }

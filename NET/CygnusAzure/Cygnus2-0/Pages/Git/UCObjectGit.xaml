@@ -76,9 +76,10 @@
                          CharacterCasing="Upper" 
                          Grid.ColumnSpan="8" 
                          VerticalAlignment="Center"
+                         Text="{Binding Path=GitModel.Codigo}" 
                          Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Línea Base"
                          />
-                    <Button Content="Generar" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Content="Generar" Command="{Binding Path=Process}" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
             </GroupBox>
             <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="2" Grid.RowSpan="8">
@@ -109,10 +110,10 @@
                     </Grid.RowDefinitions>
 
                     <ComboBox x:Name="comboBox" 
-                      ItemsSource="{Binding Path=ListaRamasLB}" 
-                      SelectedItem="{Binding Path=RamaLB}"
+                      ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
+                      SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
                       DisplayMemberPath="Text" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
-                      Margin="0,0,10,0"
+                      Margin="0,0,10,0" SelectionChanged="ComboBox_SelectionChanged"
                       />
                     <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,0,10,0"
@@ -124,10 +125,12 @@
                          CharacterCasing="Upper" 
                          Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="5"
                          VerticalAlignment="Center"
+                         Text="{Binding Path=GitModel.ObjetoBuscar}" 
                          Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Objeto"
-                             Margin="10,0,0,0"
+                             Margin="10,0,0,0" KeyDown="TxtBuscar_KeyDown"
                          />
-                    <Button Content="Buscar" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Content="Buscar" Command="{Binding Path=Buscar}" Grid.Column="8"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Content="Limpiar" Command="{Binding Path=Limpiar}" Grid.Column="9" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <DataGrid
                         x:Name="dataGridResultado" 
@@ -139,13 +142,24 @@
                         CanUserAddRows="False"
                         CanUserReorderColumns="False"
                         CanUserSortColumns="False"
-                        ItemsSource="{Binding Path=ListaArchivosEncontrados}" MouseDoubleClick="DataGridResultado_MouseDoubleClick"
-                        Grid.Row="1" Grid.ColumnSpan="10"        >
-                            <DataGrid.Columns>
+                        ItemsSource="{Binding Path=GitModel.ListaArchivosEncontrados}" MouseDoubleClick="DataGridResultado_MouseDoubleClick"
+                        Grid.Row="1" Grid.ColumnSpan="10"  Grid.RowSpan="9" >
+
+                        <!-- This is required to handle CTRL + C when something is selected in the DataGrid -->
+                        <DataGrid.CommandBindings>
+                            <CommandBinding Command="Copy" Executed="CopyCommand" />
+                        </DataGrid.CommandBindings>
+
+                        <!-- This is required to handle CTRL + C when something is selected in the DataGrid -->
+                        <DataGrid.InputBindings>
+                            <KeyBinding Key="C" Modifiers="Control" Command="Copy" />
+                        </DataGrid.InputBindings>
+
+                        <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Header="Objeto"
                                     IsReadOnly="True"
-                                    Binding="{Binding Path=FileName}" />
+                                    Binding="{Binding Path=FileName}" FontWeight="Bold" />
                             <DataGridTextColumn                  
                                     IsReadOnly="True"
                                     Header="Ruta"

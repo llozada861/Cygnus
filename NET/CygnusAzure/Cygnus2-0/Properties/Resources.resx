@@ -1900,4 +1900,7 @@ sonar.branch.target=desarrollo</value>
   <data name="GitBashExe" xml:space="preserve">
     <value>git-bash.exe</value>
   </data>
+  <data name="RamaProduccion" xml:space="preserve">
+    <value>produccion</value>
+  </data>
 </root>

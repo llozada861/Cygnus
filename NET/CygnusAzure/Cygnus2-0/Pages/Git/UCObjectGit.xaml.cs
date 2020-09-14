@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Cygnus2_0.General;
+using Cygnus2_0.ViewModel.Git;
+using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,10 +23,17 @@ namespace Cygnus2_0.Pages.Git
     /// <summary>
     /// Lógica de interacción para UCObjectGit.xaml
     /// </summary>
-    public partial class UCObjectGit : UserControl
+    public partial class UCObjectGit : UserControl, IContent
     {
+        private Handler handler;
+        private ObjectGitViewModel objectViewModel;
         public UCObjectGit()
         {
+            var myWin = (MainWindow)Application.Current.MainWindow;
+            handler = myWin.Handler;
+            objectViewModel = new ObjectGitViewModel(handler);
+
+            DataContext = objectViewModel;
             InitializeComponent();
         }
 
@@ -47,6 +59,56 @@ namespace Cygnus2_0.Pages.Git
         private void DataGridResultado_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+        }
+        private void CopyCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            StringCollection paths = new StringCollection();
+            List<String> archivos = new List<string>();
+
+            IList<DataGridCellInfo> filas = dataGridResultado.SelectedCells;
+
+            foreach (DataGridCellInfo fila in filas)
+            {
+                Archivo archivo = (Archivo)fila.Item;
+
+                if (!archivos.Exists(x => x.Equals(archivo.RutaConArchivo)))
+                {
+                    paths.Add(archivo.RutaConArchivo);
+                    archivos.Add(archivo.RutaConArchivo);
+                }
+            }
+
+            Clipboard.SetFileDropList(paths);
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            objectViewModel.GitModel.ListaArchivosEncontrados.Clear();
+        }
+
+        private void TxtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                objectViewModel.GitModel.ObjetoBuscar = txtBuscar.Text;
+                objectViewModel.pBuscar(null);
+            }
         }
     }
 }
