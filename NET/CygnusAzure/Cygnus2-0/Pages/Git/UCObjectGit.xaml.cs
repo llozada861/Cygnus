@@ -110,5 +110,28 @@ namespace Cygnus2_0.Pages.Git
                 objectViewModel.pBuscar(null);
             }
         }
+        private void listBox1_Drop(object sender, DragEventArgs e)
+        {
+            string[] DropPath;
+
+            try
+            {
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
+                    List<Archivo> archivos = new List<Archivo>();
+                    handler.pListaArchivos(DropPath, archivos);
+
+                    foreach(Archivo archivo in archivos)
+                    {
+                        objectViewModel.GitModel.ListaArchivos.Add(archivo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
+        }
     }
 }

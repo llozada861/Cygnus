@@ -1149,6 +1149,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a EMAIL.
+        /// </summary>
+        public static string KeyEmail {
+            get {
+                return ResourceManager.GetString("KeyEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ESPECIFICACION.
         /// </summary>
         public static string KeyEspecificacion {

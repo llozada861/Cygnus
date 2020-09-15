@@ -16,10 +16,12 @@ namespace Cygnus2_0.ViewModel.Git
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _buscar;
         private readonly DelegateCommand _limpiar;
+        private readonly DelegateCommand _entrega;
 
         public ICommand Process => _process;
         public ICommand Buscar => _buscar;
         public ICommand Limpiar => _limpiar;
+        public ICommand Entrega => _entrega;
 
         public ObjectGitViewModel(Handler handler)
         {
@@ -28,6 +30,7 @@ namespace Cygnus2_0.ViewModel.Git
             _process = new DelegateCommand(OnProcess);
             _buscar = new DelegateCommand(pBuscar);
             _limpiar = new DelegateCommand(pLimpiar);
+            _entrega = new DelegateCommand(pEntrega);
 
             this.handler.RutaGitObjetos = @"D:\RepoGitEPM\BaseDeDatos";
             this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
@@ -103,6 +106,42 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.ListaArchivosEncontrados.Clear();
             GitModel.ListaRamasLB = null;
             GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
+            GitModel.Comentario = "";
+            GitModel.HU = "";
+            GitModel.ListaArchivos.Clear();
+        }
+        public void pEntrega(object commandParameter)
+        {
+            try
+            {
+                if (GitModel.RamaLBSeleccionada == null)
+                {
+                    handler.MensajeError("Seleccione una rama.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(GitModel.HU))
+                {
+                    handler.MensajeError("Ingrese la historia de usuario.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(GitModel.Comentario))
+                {
+                    handler.MensajeError("Ingrese un comentario para el commit.");
+                    return;
+                }
+
+                if (GitModel.ListaArchivos.Count() > 0)
+                {
+                    handler.MensajeError("Debe colocar los objetos que se van a versionar.");
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
         }
     }
 }
