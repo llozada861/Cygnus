@@ -1,10 +1,12 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.ViewModel.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Model.Security
 {
@@ -22,6 +24,7 @@ namespace Cygnus2_0.Model.Security
         {
             string pass = view.Usuario.Trim()+"-"+view.Rol.Value;
             handler.DAO.pGuardaRol(view.Usuario.Trim(), EncriptaPass.Encriptar(pass), view.Email);
+            SqliteDAO.pCreaConfiguracion(res.KeyEmail, view.Email);
             handler.ConnViewModel.Correo = view.Email;
         }
 

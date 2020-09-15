@@ -13,8 +13,13 @@ namespace Cygnus2_0.Model.Git
     {
         private ObservableCollection<SelectListItem> listaRamasLB;
         private ObservableCollection<Archivo> listaArchivosEncontrados;
+        private ObservableCollection<Archivo> listaArchivos;
+        private ObservableCollection<Archivo> listaRamasCreadas;
+        private ObservableCollection<Archivo> listaArchivosRamas;
         private string codigo;
         private string objetoBuscar;
+        private string hu;
+        private string comentario;
         private SelectListItem ramaLBSeleccionada;
         public ObjectGitModel()
         {
@@ -31,6 +36,16 @@ namespace Cygnus2_0.Model.Git
             get { return objetoBuscar; }
             set { SetProperty(ref objetoBuscar, value); }
         }
+        public string HU
+        {
+            get { return hu; }
+            set { SetProperty(ref hu, value); }
+        }
+        public string Comentario
+        {
+            get { return comentario; }
+            set { SetProperty(ref comentario, value); }
+        }
         public SelectListItem RamaLBSeleccionada
         {
             get { return ramaLBSeleccionada; }
@@ -45,6 +60,21 @@ namespace Cygnus2_0.Model.Git
         {
             get { return listaArchivosEncontrados; }
             set { SetProperty(ref listaArchivosEncontrados, value); }
+        }
+        public ObservableCollection<Archivo> ListaArchivos
+        {
+            get { return listaArchivos; }
+            set { SetProperty(ref listaArchivos, value); }
+        }
+        public ObservableCollection<Archivo> ListaRamasCreadas
+        {
+            get { return listaRamasCreadas; }
+            set { SetProperty(ref listaRamasCreadas, value); }
+        }
+        public ObservableCollection<Archivo> ListaArchivosRamas
+        {
+            get { return listaArchivosRamas; }
+            set { SetProperty(ref listaArchivosRamas, value); }
         }
     }
 }

@@ -1903,4 +1903,7 @@ sonar.branch.target=desarrollo</value>
   <data name="RamaProduccion" xml:space="preserve">
     <value>produccion</value>
   </data>
+  <data name="KeyEmail" xml:space="preserve">
+    <value>EMAIL</value>
+  </data>
 </root>

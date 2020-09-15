@@ -611,6 +611,7 @@ namespace Cygnus2_0.General
 
             //Se obtiene el usuario azure
             this.DAO.pObtAreaAzure();
+            SqliteDAO.pCreaConfiguracion(res.KeyEmail, ConnViewModel.Correo);
 
             if (!SqliteDAO.pblValidaVersion(this))
             {
@@ -1145,6 +1146,35 @@ namespace Cygnus2_0.General
             string[] subdirectoryEntries = Directory.GetDirectories(Path);
             foreach (string subdirectory in subdirectoryEntries)
                 pListaArchivosCarpeta(subdirectory, archivos);
+        }
+
+        public void pListaArchivos(string[] DropPath, List<Archivo> archivos)
+        {
+            foreach (string dropfilepath in DropPath)
+            {
+                if (string.IsNullOrEmpty(System.IO.Path.GetExtension(dropfilepath)))
+                {
+                    string[] DropPath1 = System.IO.Directory.GetFiles(dropfilepath + "\\", "*", System.IO.SearchOption.AllDirectories);
+                    pListaArchivos(DropPath1, archivos);
+                }
+                else
+                {
+                    Archivo archivo = new Archivo();
+                    archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
+                    archivo.RutaConArchivo = dropfilepath;
+                    archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
+                    archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
+                    archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+                    archivo.ListaTipos = this.ListaTiposObjetos;
+                    this.ObtenerTipoArchivo(archivo);
+                    archivo.BloquesCodigo = new List<string>();
+
+                    if (!archivo.Observacion.Equals(res.No_aplica))
+                        archivo.TipoAplicacion = res.SQLPLUS;
+
+                    archivos.Add(archivo);
+                }
+            }
         }
     }
 }
