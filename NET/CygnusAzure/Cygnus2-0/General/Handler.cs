@@ -1166,15 +1166,34 @@ namespace Cygnus2_0.General
                     archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                     archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
                     archivo.ListaTipos = this.ListaTiposObjetos;
+                    archivo.ListaUsuarios = this.ListaUsuarios;
+                    System.IO.DirectoryInfo directoryInfo = System.IO.Directory.GetParent(archivo.RutaConArchivo);
+                    archivo.CarpetaPadre = directoryInfo.Name;
                     this.ObtenerTipoArchivo(archivo);
                     archivo.BloquesCodigo = new List<string>();
 
-                    if (!archivo.Observacion.Equals(res.No_aplica))
-                        archivo.TipoAplicacion = res.SQLPLUS;
+                    if (archivo.ListaUsuarios.ToList().Exists(x => x.Text.ToUpper().Equals(archivo.CarpetaPadre.Trim().ToUpper())))
+                    {
+                        archivo.Usuario = archivo.CarpetaPadre.Trim().ToUpper();
+                    }
 
                     archivos.Add(archivo);
                 }
             }
+        }
+
+        public string[] pCargarArchivos()
+        {
+            string[] archivos = new string[]{ };
+
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            openFileDialog.Filter = "All files (*.*)|*.*";
+            openFileDialog.Multiselect = true;
+
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                archivos = openFileDialog.FileNames;
+
+            return archivos;
         }
     }
 }

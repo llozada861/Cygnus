@@ -30,6 +30,7 @@ namespace Cygnus2_0.General
         public List<ModificacionModel> Modificaciones { set; get; }
         public List<DocumentacionModel> ListDocumentacionDepurada { set; get; }
         public ObservableCollection<SelectListItem> ListaTipos { set; get; }
+        public ObservableCollection<SelectListItem> ListaUsuarios { set; get; }
         public SelectListItem SelectItemTipo { set; get; }
         public bool ObjetoSql { get; set; }
         public int CantidadSlahs { get; set; }
@@ -40,6 +41,7 @@ namespace Cygnus2_0.General
         public string FechaBloqueo { get; set; }
         public string FechaEstLib { get; set; }
         public string Usuario { get; set; }
+        public string CarpetaPadre { get; set; }
         public string TipoAplicacion { get; set; }
         public string AplicaTemporal { get; set; }
     }

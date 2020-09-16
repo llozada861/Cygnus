@@ -25,6 +25,10 @@ namespace Cygnus2_0.Model.Git
         {
             this.ListaRamasLB = new ObservableCollection<SelectListItem>();
             this.ListaArchivosEncontrados = new ObservableCollection<Archivo>();
+            this.ListaArchivos = new ObservableCollection<Archivo>();
+            this.ListaRamasCreadas = new ObservableCollection<Archivo>();
+            this.ListaArchivosRamas = new ObservableCollection<Archivo>();
+
         }
         public string Codigo
         {

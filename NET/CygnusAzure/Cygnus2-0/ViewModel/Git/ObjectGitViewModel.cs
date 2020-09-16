@@ -17,11 +17,13 @@ namespace Cygnus2_0.ViewModel.Git
         private readonly DelegateCommand _buscar;
         private readonly DelegateCommand _limpiar;
         private readonly DelegateCommand _entrega;
+        private readonly DelegateCommand _examinar;
 
         public ICommand Process => _process;
         public ICommand Buscar => _buscar;
         public ICommand Limpiar => _limpiar;
         public ICommand Entrega => _entrega;
+        public ICommand Examinar => _examinar;
 
         public ObjectGitViewModel(Handler handler)
         {
@@ -31,6 +33,7 @@ namespace Cygnus2_0.ViewModel.Git
             _buscar = new DelegateCommand(pBuscar);
             _limpiar = new DelegateCommand(pLimpiar);
             _entrega = new DelegateCommand(pEntrega);
+            _examinar = new DelegateCommand(pExaminar);
 
             this.handler.RutaGitObjetos = @"D:\RepoGitEPM\BaseDeDatos";
             this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
@@ -141,6 +144,23 @@ namespace Cygnus2_0.ViewModel.Git
             catch(Exception ex)
             {
                 handler.MensajeError(ex.Message);
+            }
+        }
+
+        public void pExaminar(object commandParameter)
+        {
+            string[] archivos = handler.pCargarArchivos();
+            ListarArchivos(archivos);
+        }
+
+        public void ListarArchivos(string[] DropPath)
+        {
+            List<Archivo> archivos = new List<Archivo>();
+            handler.pListaArchivos(DropPath, archivos);
+
+            foreach (Archivo archivo in archivos)
+            {
+                this.GitModel.ListaArchivos.Add(archivo);
             }
         }
     }

@@ -1,4 +1,4 @@
-drop table object_head;
+--drop table object_head;
 drop table comments;
 drop table comment_type;
 drop table packages_comments;
@@ -6,6 +6,7 @@ drop table packages;
 drop table statement;
 
 alter table object_type ADD column path TEXT;
+alter table object_head ADD column company INTEGER;
 alter table conection ADD column company INTEGER;
 alter table configuration ADD column company INTEGER;
 alter table documentation ADD column company INTEGER;
