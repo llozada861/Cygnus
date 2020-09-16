@@ -119,13 +119,8 @@ namespace Cygnus2_0.Pages.Git
                 if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-                    List<Archivo> archivos = new List<Archivo>();
-                    handler.pListaArchivos(DropPath, archivos);
 
-                    foreach(Archivo archivo in archivos)
-                    {
-                        objectViewModel.GitModel.ListaArchivos.Add(archivo);
-                    }
+                    objectViewModel.ListarArchivos(DropPath);
                 }
             }
             catch (Exception ex)

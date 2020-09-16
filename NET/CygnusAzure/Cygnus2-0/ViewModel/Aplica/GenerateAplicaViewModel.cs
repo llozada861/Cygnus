@@ -17,6 +17,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
         private readonly DelegateCommand _sqlplus;
+        private readonly DelegateCommand _examinar;
         private GenerateAplicaModel model;
         private string codigo;
         private SelectListItem _usuario;
@@ -28,12 +29,14 @@ namespace Cygnus2_0.ViewModel.Aplica
         public ICommand Process => _process;
         public ICommand Clean => _clean;
         public ICommand Sqlplus => _sqlplus;
+        public ICommand Examinar => _examinar;
 
         public GenerateAplicaViewModel(Handler hand)
         {
             _process = new DelegateCommand(OnProcess);
             _clean = new DelegateCommand(OnClean);
             _sqlplus = new DelegateCommand(OnSqlplus);
+            _examinar = new DelegateCommand(pExaminar);
 
             handler = hand;
             model = new GenerateAplicaModel(handler,this);
@@ -153,10 +156,24 @@ namespace Cygnus2_0.ViewModel.Aplica
                 handler.MensajeError(ex.Message);
             }
         }
-
         public void pRefrescaConteo()
         {
             model.pRefrescaConteo();
+        }
+        public void pExaminar(object commandParameter)
+        {
+            string[] archivos = handler.pCargarArchivos();
+            ListarArchivos(archivos);
+        }
+        public void ListarArchivos(string[] DropPath)
+        {
+            List<Archivo> archivos = new List<Archivo>();
+            handler.pListaArchivos(DropPath, archivos);
+
+            foreach (Archivo archivo in archivos)
+            {
+                this.ListaArchivosCargados.Add(archivo);
+            }
         }
     }
 }

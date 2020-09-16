@@ -33,47 +33,77 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="7" >
-            <DataGrid
-            x:Name="dataGridArchivosCargados" 
-            IsReadOnly="false" 
-            AllowDrop="True" 
-            Drop="listBox1_Drop"
-            AutoGenerateColumns="False"
-            SelectionMode="Single"
-            CanUserDeleteRows="True"
-            CanUserAddRows="False"
-            CanUserReorderColumns="False"
-            CanUserSortColumns="False"
-            ItemsSource="{Binding Path=ListaArchivosCargados}"
-            local:VisualHelper.EnableRowsMove="True"            
-            VerticalContentAlignment="Center"
-                SelectionChanged="dataGridArchivosCargados_SelectionChanged" MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
-                >
-                <DataGrid.Columns>
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Archivo"
-                  Binding="{Binding Path=FileName}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-                    <DataGridComboBoxColumn Width="200"
-                         DisplayMemberPath="Text"
-                                            SelectedValuePath="Text"
-                                            Header="Tipo"
-                                            SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                            >
-                        <DataGridComboBoxColumn.ElementStyle>
-                            <Style TargetType="{x:Type ComboBox}">
-                                <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
-                            </Style>
-                        </DataGridComboBoxColumn.ElementStyle>
-                        <DataGridComboBoxColumn.EditingElementStyle>
-                            <Style TargetType="{x:Type ComboBox}">
-                                <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
-                            </Style>
-                        </DataGridComboBoxColumn.EditingElementStyle>
-                    </DataGridComboBoxColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+                
+                <DataGrid
+                x:Name="dataGridArchivosCargados" 
+                IsReadOnly="false" 
+                AllowDrop="True" 
+                Drop="listBox1_Drop"
+                AutoGenerateColumns="False"
+                SelectionMode="Single"
+                CanUserDeleteRows="True"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="False"
+                ItemsSource="{Binding Path=ListaArchivosCargados}"
+                local:VisualHelper.EnableRowsMove="True"            
+                VerticalContentAlignment="Center"
+                    SelectionChanged="dataGridArchivosCargados_SelectionChanged" MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
+                    Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
+                    >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn                  
+                      IsReadOnly="True"
+                      Header="Archivo"
+                      Binding="{Binding Path=FileName}" />
+
+                        <DataGridComboBoxColumn Width="200"
+                             DisplayMemberPath="Text"
+                                                SelectedValuePath="Text"
+                                                Header="Tipo"
+                                                SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                >
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </GroupBox>
         <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Column="0" Grid.Row="5" Grid.RowSpan="5" Grid.ColumnSpan="7">
             <DataGrid 

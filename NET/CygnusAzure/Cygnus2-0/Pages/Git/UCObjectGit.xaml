@@ -238,45 +238,92 @@
                          Style="{StaticResource placeHolder}" Tag="Comentario commit" TabIndex="3" AcceptsTab="false"/>
                 </Grid>
             </GroupBox>
-            <GroupBox x:Name="groupBox" Header="Arrastre aquí los archivos que desea entregar" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="7">
-                <DataGrid x:Name="dataGridArch" 
-                IsReadOnly="false" 
-                AllowDrop="True" 
-                Drop="listBox1_Drop"
-                AutoGenerateColumns="False"
-                SelectionMode="Single"
-                CanUserDeleteRows="True"
-                CanUserAddRows="False"
-                CanUserReorderColumns="False"
-                CanUserSortColumns="False"
-                ItemsSource="{Binding Path=GitModel.ListaArchivosCargados}" 
-                          
-                  >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Archivo"
-                  Binding="{Binding Path=FileName}" />
+            <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="7">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <DataGridComboBoxColumn Width="200"
-                         DisplayMemberPath="Text"
-                                            SelectedValuePath="Text"
-                                            Header="Tipo"
-                                            SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                            >
-                            <DataGridComboBoxColumn.ElementStyle>
-                                <Style TargetType="{x:Type ComboBox}">
-                                    <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
-                                </Style>
-                            </DataGridComboBoxColumn.ElementStyle>
-                            <DataGridComboBoxColumn.EditingElementStyle>
-                                <Style TargetType="{x:Type ComboBox}">
-                                    <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
-                                </Style>
-                            </DataGridComboBoxColumn.EditingElementStyle>
-                        </DataGridComboBoxColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+                                            
+                    <DataGrid x:Name="dataGridArch" 
+                    IsReadOnly="false" 
+                    AllowDrop="True" 
+                    Drop="listBox1_Drop"
+                    AutoGenerateColumns="False"
+                    SelectionMode="Single"
+                    CanUserDeleteRows="True"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserSortColumns="False"
+                    ItemsSource="{Binding Path=GitModel.ListaArchivos}"  
+                              Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
+                      >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn                  
+                      IsReadOnly="True"
+                      Header="Archivo"
+                      Binding="{Binding Path=FileName}" />
+
+                            <DataGridComboBoxColumn Width="200"
+                             DisplayMemberPath="Text"
+                                                SelectedValuePath="Text"
+                                                Header="Tipo"
+                                                SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+
+                            <DataGridComboBoxColumn Width="200"
+                             DisplayMemberPath="Text"
+                                                SelectedValuePath="Text"
+                                                Header="Usuario"
+                                                SelectedValueBinding="{Binding Usuario, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaUsuarios}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaUsuarios}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </GroupBox>
             <GroupBox x:Name="groupBoxRamas" Header="Ramas Generadas" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
                 <Grid>
