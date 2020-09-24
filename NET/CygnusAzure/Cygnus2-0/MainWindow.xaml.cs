@@ -34,6 +34,8 @@ using System.IO;
 using System.Security;
 using Cygnus2_0.Model.Settings;
 using System.Globalization;
+using Cygnus2_0.Pages.Settings.Git;
+using Cygnus2_0.Pages.Settings.Sonar;
 
 namespace Cygnus2_0
 {
@@ -95,7 +97,21 @@ namespace Cygnus2_0
             if (Next && handler.ConfGeneralViewModel.RutaSqlplus.Equals(res.RutaSqlplusDefault)) //while (handler.ConfGeneralViewModel.RutaSqlplus.Equals(res.RutaSqlplusDefault))
             {
                 userControls = new PathsUserControl();
-                RequetInfo request = new RequetInfo(userControls, this, "Antes de empezar configura la ruta del sqlplus");
+                RequetInfo request = new RequetInfo(userControls, this, "Antes de empezar configura la ruta del sqlplus...");
+                request.ShowDialog();
+            }
+
+            if (string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
+            {
+                userControls = new UserControlGit();
+                RequetInfo request = new RequetInfo(userControls, this, "Antes de empezar configura o clona el repositorio Git...");
+                request.ShowDialog();
+            }
+
+            if (string.IsNullOrEmpty(handler.RutaSonar))
+            {
+                userControls = new UserControlSonar();
+                RequetInfo request = new RequetInfo(userControls, this, "Antes de empezar configura o instala el Sonar...");
                 request.ShowDialog();
             }
 
