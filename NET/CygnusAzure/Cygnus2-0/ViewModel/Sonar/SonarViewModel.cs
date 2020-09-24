@@ -32,7 +32,13 @@ namespace Cygnus2_0.ViewModel.Sonar
             _limpiar = new DelegateCommand(pLimpiar);
 
             this.GitModel = new ObjectGitModel();
-            this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
+
+            if(string.IsNullOrEmpty(handler.RutaGitObjetos))
+            {
+                handler.MensajeAdvertencia("Configure la ruta del repositorio de Git BaseDeDatos en Ajustes/Mvm/Git");
+            }
+            else
+                this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
         }
 
         public ObjectGitModel GitModel { get; set; }
@@ -131,7 +137,8 @@ namespace Cygnus2_0.ViewModel.Sonar
             GitModel.ObjetoBuscar = "";
             GitModel.ListaArchivosEncontrados.Clear();
             GitModel.ListaRamasLB = null;
-            GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
+            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
+                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
             GitModel.Comentario = "";
             GitModel.HU = "";
             GitModel.ListaArchivos.Clear();
