@@ -14,18 +14,18 @@ namespace Cygnus2_0.General
 {
     public static class SonarQube
     {
-        public static List<string> pEjecutarSonar(string codigo, string hu,string ruta, List<SelectListItem> listaArchivosCargados)
+        public static List<string> pEjecutarSonar(string codigo, string hu,string ruta, List<SelectListItem> listaArchivosCargados, string rutaGitObj)
         {
             List<string> salida = new List<string>();
 
-            pCrearArchivoConf(ruta, codigo, hu);
+            pCrearArchivoConf(ruta, codigo, hu, rutaGitObj, listaArchivosCargados);
 
-            pCopiarArchivos(Path.Combine(ruta,res.CarpetaObjetos),listaArchivosCargados);
+            //pCopiarArchivos(Path.Combine(ruta,res.CarpetaObjetos),listaArchivosCargados);
 
             Process process = new Process();
 
             process.StartInfo.UseShellExecute = false;
-            process.StartInfo.WorkingDirectory = ruta;
+            process.StartInfo.WorkingDirectory = rutaGitObj;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardInput = false;
             process.StartInfo.FileName = "cmd.exe";
@@ -79,7 +79,7 @@ namespace Cygnus2_0.General
             File.Delete(Path.Combine(path, res.ZipZonar));
 
             //archivo de configuración
-            pCrearArchivoConf(path,"1","1");
+            //pCrearArchivoConf(path,"1","1","",);
 
             SonarConn.Append(res.SonarConn);
             SonarConn.Replace("[usuario]", usuario);
@@ -102,14 +102,20 @@ namespace Cygnus2_0.General
             }
         }
 
-        private static void pCrearArchivoConf(string path, string codigo, string hu)
+        private static void pCrearArchivoConf(string path, string codigo, string hu, string rutaObjGit, List<SelectListItem> listaArchivos)
         {
             StringBuilder SonarProperties = new StringBuilder();
-            string RutaObjetos = path + "\\" + res.CarpetaObjetos;
-            RutaObjetos = RutaObjetos.Replace(@"\", @"\\");
+            string RutaObjetos = "";
+
+            foreach(SelectListItem archivo in listaArchivos)
+            {
+                RutaObjetos += archivo.Text + ",";
+            }
+
+            RutaObjetos = RutaObjetos.Substring(0, RutaObjetos.Length - 1);
 
             string rama = res.Feature + hu + "_" + codigo + "_" + Environment.UserName.ToUpper();
-            string archivConf = Path.Combine(path, res.NombreSonarProperties);
+            string archivConf = Path.Combine(rutaObjGit, res.NombreSonarProperties);
 
             //Se configuran los archivos
             SonarProperties.Append(res.SonarProperties);

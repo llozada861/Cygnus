@@ -229,7 +229,7 @@
                          Style="{StaticResource placeHolder}" Tag="Historia de Usuario" TabIndex="2" AcceptsTab="False"/>
 
                     <TextBox x:Name="Comment" 
-                         Text="{Binding Path=GitModel.omentario}" 
+                         Text="{Binding Path=GitModel.Comentario}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
@@ -279,14 +279,15 @@
                     CanUserSortColumns="False"
                     ItemsSource="{Binding Path=GitModel.ListaArchivos}"  
                               Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
+                              
                       >
                         <DataGrid.Columns>
                             <DataGridTextColumn                  
-                      IsReadOnly="True"
-                      Header="Archivo"
-                      Binding="{Binding Path=FileName}" />
+                              IsReadOnly="True"
+                              Header="Archivo"
+                              Binding="{Binding Path=FileName}" />
 
-                            <DataGridComboBoxColumn Width="200"
+                            <DataGridComboBoxColumn Width="100"
                              DisplayMemberPath="Text"
                                                 SelectedValuePath="Text"
                                                 Header="Tipo"
@@ -300,11 +301,12 @@
                                 <DataGridComboBoxColumn.EditingElementStyle>
                                     <Style TargetType="{x:Type ComboBox}">
                                         <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                        <EventSetter Event="SelectionChanged" Handler="TipoSelectionChanged" />
                                     </Style>
                                 </DataGridComboBoxColumn.EditingElementStyle>
                             </DataGridComboBoxColumn>
 
-                            <DataGridComboBoxColumn Width="200"
+                            <DataGridComboBoxColumn Width="120"
                              DisplayMemberPath="Text"
                                                 SelectedValuePath="Text"
                                                 Header="Usuario"
@@ -318,9 +320,15 @@
                                 <DataGridComboBoxColumn.EditingElementStyle>
                                     <Style TargetType="{x:Type ComboBox}">
                                         <Setter Property="ItemsSource" Value="{Binding ListaUsuarios}"/>
+                                        <EventSetter Event="SelectionChanged" Handler="UsuarioSelectionChanged" />
                                     </Style>
                                 </DataGridComboBoxColumn.EditingElementStyle>
                             </DataGridComboBoxColumn>
+
+                            <DataGridTextColumn                  
+                              IsReadOnly="False"
+                              Header="Repositorio"
+                              Binding="{Binding Path=NombreObjeto}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

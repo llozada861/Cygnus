@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Compila;
+using Cygnus2_0.Model.Git;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -113,10 +114,6 @@ namespace Cygnus2_0.ViewModel.Compila
         public void pCompilar()
         {
             model.pCompilarObjetos();
-        }
-        public List<string> pSonar()
-        {
-            return model.pSonar(this.Codigo,this.HU);
         }
         public void OnProcess(object commandParameter)
         {            

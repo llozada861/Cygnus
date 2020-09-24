@@ -329,6 +329,11 @@ namespace Cygnus2_0.Model.Index
                 handler.ConnViewModel.Correo = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyEmail)).Value;
             }
 
+            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaGitObjetos)))
+            {
+                handler.RutaGitObjetos = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaGitObjetos)).Value;
+            }
+
             /*
             handler.ConfGeneralViewModel.GeneraVersion = Convert.ToBoolean(handler.ConfGeneralViewModel.ListaConfiguracion.ElementAt(0).Value);
             handler.ConfGeneralViewModel.AplicaCarpetaArriba = Convert.ToBoolean(handler.ConfGeneralViewModel.ListaConfiguracion.ElementAt(1).Value);

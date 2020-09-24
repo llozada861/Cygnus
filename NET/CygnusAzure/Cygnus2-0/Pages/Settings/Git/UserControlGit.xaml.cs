@@ -58,7 +58,13 @@ namespace Cygnus2_0.Pages.Settings.Git
 
                     if (string.IsNullOrEmpty(txtRutaInstall1.Text))
                     {
-                        handler.MensajeError("Ingresa la ruta dónde tienes el repositorio.");
+                        handler.MensajeError("Ingrese la ruta del repositorio de DATOS.");
+                        return;
+                    }
+
+                    if (string.IsNullOrEmpty(txtRutaInstallObj.Text))
+                    {
+                        handler.MensajeError("Ingrese la ruta del repositorio de OBJETOS.");
                         return;
                     }
 
@@ -70,8 +76,11 @@ namespace Cygnus2_0.Pages.Settings.Git
                     handler.RutaGitDatos = txtRutaInstall1.Text;
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);
 
+                    handler.RutaGitObjetos = txtRutaInstallObj.Text;
+                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitObjetos, handler.RutaGitObjetos);
+
                     handler.CursorNormal();
-                    handler.MensajeOk("Ya puedes versionar con Cygnus!");
+                    handler.MensajeOk("Proceso terminó con éxito!");
                 }
 
                 if (rdbNuevo.IsChecked == true)
@@ -84,7 +93,13 @@ namespace Cygnus2_0.Pages.Settings.Git
 
                     if (string.IsNullOrEmpty(txtRutaInstall2.Text))
                     {
-                        handler.MensajeError("Ingresa la ruta dónde vas a clonar el respositorio");
+                        handler.MensajeError("Ingresa la ruta para clonar el respositorio de DATOS");
+                        return;
+                    }
+
+                    if (string.IsNullOrEmpty(txtRutaInstallObj2.Text))
+                    {
+                        handler.MensajeError("Ingresa la ruta para clonar el respositorio de OBJETOS");
                         return;
                     }
 
@@ -94,7 +109,6 @@ namespace Cygnus2_0.Pages.Settings.Git
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaGitBash, handler.RutaGitBash);
 
                     handler.RutaGitDatos = txtRutaInstall2.Text;
-
                     RepoGit.pCreaDirectorios(handler.RutaGitDatos);
 
                     RepoGit.pClonarRepo(handler.RutaGitDatos, res.RepoDATOS, handler.RutaGitBash);
@@ -102,9 +116,17 @@ namespace Cygnus2_0.Pages.Settings.Git
                     handler.RutaGitDatos = Path.Combine(handler.RutaGitDatos, res.CarpetaDatosGIT);
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);
 
+                    handler.RutaGitObjetos = txtRutaInstallObj2.Text;
+                    RepoGit.pCreaDirectorios(handler.RutaGitObjetos);
+
+                    RepoGit.pClonarRepo(handler.RutaGitObjetos, res.RepoOBJETOS, handler.RutaGitBash);
+
+                    handler.RutaGitObjetos = Path.Combine(handler.RutaGitDatos, res.CarpetaObjetosGIT);
+                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitObjetos, handler.RutaGitObjetos);
+
                     handler.CursorNormal();
 
-                    handler.MensajeOk("Ya puedes versionar con Cygnus!");
+                    handler.MensajeOk("Proceso terminó con éxito!");
                     txtRutaGitBash1.Text = handler.RutaGitBash;
                     txtRutaInstall1.Text = handler.RutaGitDatos;
                 }
@@ -130,6 +152,11 @@ namespace Cygnus2_0.Pages.Settings.Git
             if (!string.IsNullOrEmpty(handler.RutaGitBash))
             {
                 txtRutaGitBash1.Text = handler.RutaGitBash;
+            }
+
+            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
+            {
+                txtRutaInstallObj.Text = handler.RutaGitObjetos;
             }
         }
     }

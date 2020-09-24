@@ -14,17 +14,17 @@ namespace Cygnus2_0.General
 {
     public static class RepoGit
     {
-        public static string pVersionarDatos(string ruta, string hu, string wo, string mensaje,string email,List<SelectListItem> listaArchivosCargados, Handler handler)
+        public static string pVersionarDatos(string hu, string wo, string mensaje,string email,List<SelectListItem> listaArchivosCargados, Handler handler)
         {
             bool blRama = false;
 
             string ramaWO = wo.ToUpper();
-            string rutaObjetos = Path.Combine(ruta, res.Despliegues);
+            string rutaObjetos = Path.Combine(handler.RutaGitDatos, res.Despliegues);
             rutaObjetos = Path.Combine(rutaObjetos, ramaWO);
             string rama = res.Feature + hu + "_" + ramaWO + "_" + Environment.UserName.ToUpper();
             string MensajeCommit = ramaWO + " - " + mensaje;
 
-            using (var repo = new Repository(@ruta))
+            using (var repo = new Repository(@handler.RutaGitDatos))
             {
                 Commands.Checkout(repo, res.RamaMasterDatos);
                 Commands.Pull(repo, new Signature(Environment.UserName, email, DateTimeOffset.Now), new PullOptions());
@@ -73,6 +73,39 @@ namespace Cygnus2_0.General
             }
 
             return rama;
+        }
+
+        public static void pVersionarObjetos(ObjectGitModel gitModel, Handler handler)
+        {
+            bool blRama = false;
+
+            string ramaWO = gitModel.RamaLBSeleccionada.Text.ToUpper();
+            string rutaObjetos = Path.Combine(handler.RutaGitObjetos, res.Despliegues);
+            rutaObjetos = Path.Combine(rutaObjetos, ramaWO);
+            string ramaDll = res.Feature + gitModel.HU + "_" + ramaWO + "_" + Environment.UserName.ToUpper()+"_DLL";
+            string ramaPru = res.Feature + gitModel.HU + "_" + ramaWO + "_" + Environment.UserName.ToUpper() + "_PRU";
+            string ramaPdn = res.Feature + gitModel.HU + "_" + ramaWO + "_" + Environment.UserName.ToUpper() + "_PDN";
+            string MensajeCommit = ramaWO + " - " +gitModel.Comentario;
+
+            using (var repo = new Repository(@handler.RutaGitObjetos))
+            {
+                Commands.Checkout(repo, res.RamaProduccion);
+                Commands.Pull(repo, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new PullOptions());
+                Commands.Checkout(repo, ramaWO);
+                pCreaDirectorios(rutaObjetos);
+
+                List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
+
+                foreach (Archivo archivo in gitModel.ListaArchivos)
+                {
+                    archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
+                }
+
+                //Se copian los archivos en despliegue
+                SonarQube.pCopiarArchivos(rutaObjetos, archivosEvaluar);
+                //Se copian los archivos en cada ruta del repo
+                pCopiarObjetosRepo(gitModel);
+            }
         }
 
         public static void pCreaLineaBase(ObjectGitModel model, Handler handler)
@@ -180,6 +213,11 @@ namespace Cygnus2_0.General
             var exitCode = process.ExitCode;
 
             process.Close();
+        }
+
+        public static void pCopiarObjetosRepo(ObjectGitModel gitModel)
+        {
+
         }
     }
 }

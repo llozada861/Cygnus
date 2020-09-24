@@ -31,8 +31,8 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <GroupBox x:Name="groupBox" Header="Arrastre aquí los archivos que desea analizar" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
-            <DataGrid x:Name="dataGridArchCompila" 
+         <!--<GroupBox x:Name="groupBox" Header="Arrastre aquí los archivos que desea analizar" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
+           <DataGrid x:Name="dataGridArchCompila" 
                 IsReadOnly="false" 
                 AllowDrop="True" 
                 Drop="listBox1_Drop"
@@ -69,8 +69,8 @@
                     </DataGridComboBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </GroupBox>
-        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="2">
+        </GroupBox>-->
+        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -80,27 +80,119 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBox x:Name="CasoText" 
-                         Text="{Binding Path=Codigo}" 
-                         TextWrapping="Wrap" 
-                         VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper"
-                         Grid.Row="0"  Grid.Column="0" Margin="5,5,5,5"
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="# de caso"/>
-
                 <TextBox x:Name="HU" 
-                         Text="{Binding Path=HU}" 
+                         Text="{Binding Path=GitModel.HU}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
-                         Grid.Row="0" Grid.Column="1" Margin="5,5,5,5"
+                         Grid.Row="0" Grid.Column="0" Margin="5,5,5,5"
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Historia de Usuario"/>
             </Grid>
         </GroupBox>
+        
+        <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-        <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Grid.Column="6" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnProcesar_Click" />
-        <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Command="{Binding Path=Clean}" Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+                <ComboBox x:Name="comboBox" 
+                      ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
+                      SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
+                      DisplayMemberPath="Text" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
+                      Margin="0,0,10,0" SelectionChanged="ComboBox_SelectionChanged"
+                      />
+                <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,0,10,0"
+                       Text="Seleccione Línea Base" 
+                       Style="{StaticResource ComboBoxSelectOverlay}"/>
+
+                <TextBox x:Name="txtBuscar" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" 
+                         Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="5"
+                         VerticalAlignment="Center"
+                         Text="{Binding Path=GitModel.ObjetoBuscar}" 
+                         Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Objeto"
+                             Margin="10,0,0,0" KeyDown="TxtBuscar_KeyDown"
+                         />
+                <Button Content="Buscar" Command="{Binding Path=Buscar}" Grid.Column="8"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+               
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Resultado"  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="6">
+            <DataGrid
+                        x:Name="dataGridResultado" 
+                        IsReadOnly="false" 
+                        AllowDrop="False" 
+                        AutoGenerateColumns="False"
+                        SelectionMode="Extended"
+                        CanUserDeleteRows="False"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserSortColumns="False"
+                        ItemsSource="{Binding Path=GitModel.ListaArchivosEncontrados}" 
+                        Grid.Row="1" Grid.ColumnSpan="10"  Grid.RowSpan="9" >
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                                    Header="Objeto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Path=FileName}" FontWeight="Bold" />
+                    <DataGridTextColumn                  
+                                    IsReadOnly="True"
+                                    Header="Ruta"
+                                    Binding="{Binding Path=Ruta}" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <Button x:Name="btnPasar" Content=">"  VerticalAlignment="Center" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Center" Click="BtnPasar_Click" />
+
+        <GroupBox Header="Objetos para analizar"  Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="6">
+            <DataGrid
+                        x:Name="dataGridAnalizar" 
+                        IsReadOnly="false" 
+                        AllowDrop="False" 
+                        AutoGenerateColumns="False"
+                        SelectionMode="Extended"
+                        CanUserDeleteRows="False"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserSortColumns="False"
+                        ItemsSource="{Binding Path=GitModel.ListaArchivos}" 
+                        Grid.Row="1" Grid.ColumnSpan="10"  Grid.RowSpan="9" MouseDoubleClick="DataGridAnalizar_MouseDoubleClick" >
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                                    Header="Objeto"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Path=FileName}" FontWeight="Bold" />
+                    <DataGridTextColumn                  
+                                    IsReadOnly="True"
+                                    Header="Ruta"
+                                    Binding="{Binding Path=Ruta}" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <Button x:Name="btnProcesar" Command="{Binding Path=Procesar}" Content="Procesar"  VerticalAlignment="Center" Grid.Column="6" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" HorizontalAlignment="Center" />
+        <Button x:Name="btnLimpiar" Command="{Binding Path=Limpiar}" Content="Limpiar"  VerticalAlignment="Center" Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
     </Grid>
 </UserControl>

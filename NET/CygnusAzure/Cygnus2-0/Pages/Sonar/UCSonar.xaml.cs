@@ -20,6 +20,8 @@ using System.Security.Permissions;
 using System.IO;
 using System.Diagnostics;
 using Cygnus2_0.Pages.General;
+using Cygnus2_0.ViewModel.Sonar;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Compila
 {
@@ -30,42 +32,18 @@ namespace Cygnus2_0.Pages.Compila
     public partial class UCSonar : UserControl,IContent
     {
         private Handler handler;
-        private CompilaViewModel compilaViewModel;
+        private SonarViewModel view;
         public UCSonar()
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
             handler = myWin.Handler;
 
-            compilaViewModel = new CompilaViewModel(handler);
+            view = new SonarViewModel(handler);
 
-            DataContext = compilaViewModel;
+            DataContext = view;
             InitializeComponent();
-
-            compilaViewModel.ArchivosDescompilados = "0";
         }
 
-        private void listBox1_Drop(object sender, DragEventArgs e)
-        {
-            string[] DropPath;
-
-            try
-            {
-                if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                {
-                    DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-                    compilaViewModel.pListaArchivos(DropPath,"G");
-                    //pSetValorCombo();
-                }
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
-        }
-        private void pSetValorCombo()
-        {
-            //DataGridComboBoxColumn combo = dataGridArchCompila.Columns[1];
-        }
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
         }
@@ -76,75 +54,50 @@ namespace Cygnus2_0.Pages.Compila
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            compilaViewModel.OnClean("");
+            view.pLimpiar("");
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
         }
 
-        private void BtnProcesar_Click(object sender, RoutedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
+            view.GitModel.ListaArchivosEncontrados.Clear();
+            view.GitModel.ListaArchivos.Clear();
+        }
+
+        private void TxtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
             {
-                if (compilaViewModel.Codigo == null)
-                {
-                    handler.MensajeError("Debe ingresar el número de caso.");
-                    return;
-                }
-
-                if (compilaViewModel.HU == null)
-                {
-                    handler.MensajeError("Debe ingresar el número de la HU.");
-                    return;
-                }
-
-                if (compilaViewModel.ListaArchivosCargados.Count == 0)
-                {
-                    handler.MensajeError("No hay archivos para analizar");
-                    return;
-                }
-
-                handler.CursorWait();
-
-                List<string> salida = compilaViewModel.pSonar();
-                System.Console.WriteLine(salida);
-
-                string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
-
-                StringBuilder salidaBuild = new StringBuilder();
-
-                foreach(string linea in salida)
-                {
-                    salidaBuild.AppendLine(linea);
-                }
-
-                if (exito != null)
-                {
-                    string[] vecExito = exito.Split(' ');
-                    string url = vecExito[vecExito.Length - 1];
-                    Process.Start(url);
-                }
-
-                handler.CursorNormal();
-
-                UserControl log = new UserControlLog(salidaBuild);
-                WinImage request = new WinImage(log, "Traza");
-                request.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                handler.CursorNormal();
-                handler.MensajeError(ex.Message);
+                view.GitModel.ObjetoBuscar = txtBuscar.Text;
+                view.pBuscar(null);
             }
         }
 
-        private void DataGridArchCompila_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void BtnPasar_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGridArchCompila.SelectedItem == null)
+            var listaSel = dataGridResultado.SelectedItems;
+
+            if (listaSel.Count == 0)
+                return;
+
+            foreach (var row in listaSel)
+            {
+                Archivo archivo = (Archivo)row;
+
+                if(!view.GitModel.ListaArchivos.ToList().Exists(x=>x.FileName.Equals(archivo.FileName)) && archivo.Extension != res.ExtensionHtml)
+                    view.GitModel.ListaArchivos.Add(archivo);
+            }
+        }
+
+        private void DataGridAnalizar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGridAnalizar.SelectedItem == null)
                 return; // return if there's no row selected
 
-            Archivo archivo = (Archivo)dataGridArchCompila.SelectedItem;
+            Archivo archivo = (Archivo)dataGridAnalizar.SelectedItem;
             handler.pAbrirArchivo(archivo.RutaConArchivo);
         }
     }
