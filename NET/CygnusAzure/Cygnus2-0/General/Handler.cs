@@ -1177,6 +1177,15 @@ namespace Cygnus2_0.General
                         archivo.Usuario = archivo.CarpetaPadre.Trim().ToUpper();
                     }
 
+                    if (string.IsNullOrEmpty(archivo.Tipo))
+                    {
+                        if (archivo.Extension.Equals(res.ExtensionHtml))
+                        {
+                            archivo.Tipo = res.TipoObjetoPaquete.ToLower();
+                            archivo.NombreObjeto = archivo.NombreSinExt;
+                        }
+                    }
+
                     archivos.Add(archivo);
                 }
             }

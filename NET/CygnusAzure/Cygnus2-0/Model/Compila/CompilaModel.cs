@@ -176,24 +176,6 @@ namespace Cygnus2_0.Model.Compila
             view.ArchivosDescompilados = pObtCantObjsInvalidos();
         }
 
-        public List<string> pSonar(string codigo, string HU)
-        {
-            List<string> salida = null;
-            List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
-
-            if (!string.IsNullOrEmpty(handler.RutaSonar))
-            {
-                foreach (Archivo archivo in view.ListaArchivosCargados)
-                {
-                    archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
-                }
-
-                salida = SonarQube.pEjecutarSonar(codigo, HU, handler.RutaSonar, archivosEvaluar);
-            }
-
-            return salida;
-        }
-
         public void pCompilaObjetosBD(Archivo archivo)
         {
             //Valida que el objeto no se encuentra aplicado en más de un esquema

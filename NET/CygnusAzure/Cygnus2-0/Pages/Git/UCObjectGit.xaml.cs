@@ -128,5 +128,36 @@ namespace Cygnus2_0.Pages.Git
                 handler.MensajeError(ex.Message);
             }
         }
+
+        private void TipoSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /*var comboBox = sender as ComboBox;
+            SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
+
+            if (tipo != null)
+            {
+                if(tipo.Text.Equals("paquete"))
+                {
+                    Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
+
+                    if (selectedItem.FileName.EndsWith(".html"))
+                    {
+                        selectedItem.NombreObjeto = selectedItem.NombreSinExt;
+                    }
+                }
+            }*/
+        }
+
+        private void UsuarioSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            /*var comboBox = sender as ComboBox;
+            SelectListItem usuario = (SelectListItem)comboBox.SelectedItem;
+
+            if (usuario != null)
+            {
+                Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
+                objectViewModel.pPonerUsuarioArchivos(selectedItem, usuario);
+            }*/
+        }
     }
 }

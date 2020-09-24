@@ -426,6 +426,7 @@
     <Compile Include="Interface\ViewModelBase.cs" />
     <Compile Include="ViewModel\Settings\ConfGeneralViewModel.cs" />
     <Compile Include="ViewModel\Settings\UpdateViewModel.cs" />
+    <Compile Include="ViewModel\Sonar\SonarViewModel.cs" />
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />

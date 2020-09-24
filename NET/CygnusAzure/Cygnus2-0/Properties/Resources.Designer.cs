@@ -227,6 +227,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a BaseDeDatos.
+        /// </summary>
+        public static string CarpetaObjetosGIT {
+            get {
+                return ResourceManager.GetString("CarpetaObjetosGIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sonar.
         /// </summary>
         public static string CarpetaSonar {
@@ -1244,6 +1253,15 @@ namespace Cygnus2_0.Properties {
         public static string KeyRutaGitDatos {
             get {
                 return ResourceManager.GetString("KeyRutaGitDatos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a RUTAGITOBJETOS.
+        /// </summary>
+        public static string KeyRutaGitObjetos {
+            get {
+                return ResourceManager.GetString("KeyRutaGitObjetos", resourceCulture);
             }
         }
         
@@ -2402,6 +2420,15 @@ namespace Cygnus2_0.Properties {
         public static string RepoDATOS {
             get {
                 return ResourceManager.GetString("RepoDATOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a https://langeles:fas6zsqe7j756lunlqekjqxmb7h3w5btt4vdh723mprwu2kr36uq@grupoepm.visualstudio.com/OPEN/_git/BaseDeDatos.
+        /// </summary>
+        public static string RepoOBJETOS {
+            get {
+                return ResourceManager.GetString("RepoOBJETOS", resourceCulture);
             }
         }
         

@@ -122,6 +122,10 @@ namespace Cygnus2_0
                             try
                             {
                                 actualiza = true;
+
+                                //Comentar a futuro
+                                pInstalarActuaLocal();
+
                                 UpdateModel.pDescargarActualizacion(handler.ConnViewModel.Usuario,handler.ConnViewModel.Pass, version,handler.ConnViewModel.Servidor, handler.ConnViewModel.BaseDatos, handler.ConnViewModel.Puerto);
                                 this.Close();
                             }
@@ -275,6 +279,33 @@ namespace Cygnus2_0
             {
                 handler.MensajeError("Hay cambios pendientes por guardar en la hoja de horas.");
                 e.Cancel = true;
+            }
+        }
+
+        public void pInstalarActuaLocal()
+        {
+            string query = "";
+
+            if (handler.Version.Equals("1.0.6.3"))
+            {
+                /*query = "drop table comments";
+                SqliteDAO.pExecuteNonQuery(query);
+
+                query = "drop table comment_type";
+                SqliteDAO.pExecuteNonQuery(query);
+
+                query = "drop table packages_comments";
+                SqliteDAO.pExecuteNonQuery(query);
+
+                query = "drop table packages";
+                SqliteDAO.pExecuteNonQuery(query);
+
+                query = "drop table statement";
+                SqliteDAO.pExecuteNonQuery(query);
+
+                query = "alter table object_type ADD column path TEXT";
+                SqliteDAO.pExecuteNonQuery(query);*/
+
             }
         }
     }

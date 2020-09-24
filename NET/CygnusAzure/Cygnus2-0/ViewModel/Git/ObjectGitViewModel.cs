@@ -35,7 +35,6 @@ namespace Cygnus2_0.ViewModel.Git
             _entrega = new DelegateCommand(pEntrega);
             _examinar = new DelegateCommand(pExaminar);
 
-            this.handler.RutaGitObjetos = @"D:\RepoGitEPM\BaseDeDatos";
             this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
         }
         public ObjectGitModel GitModel { get; set; }
@@ -140,6 +139,8 @@ namespace Cygnus2_0.ViewModel.Git
                     handler.MensajeError("Debe colocar los objetos que se van a versionar.");
                     return;
                 }
+
+
             }
             catch(Exception ex)
             {
@@ -161,6 +162,17 @@ namespace Cygnus2_0.ViewModel.Git
             foreach (Archivo archivo in archivos)
             {
                 this.GitModel.ListaArchivos.Add(archivo);
+            }
+        }
+
+        public void pPonerUsuarioArchivos(Archivo archivo, SelectListItem usuario)
+        {
+            foreach(Archivo fila in GitModel.ListaArchivos)
+            {
+                if(fila.CarpetaPadre.Equals(archivo.CarpetaPadre))
+                {
+                    fila.Usuario = usuario.Text;
+                }
             }
         }
     }

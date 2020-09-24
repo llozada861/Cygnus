@@ -125,10 +125,10 @@ namespace Cygnus2_0.Pages.Compila
                     archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
                 }
 
-                string rama = RepoGit.pVersionarDatos(handler.RutaGitDatos, compilaViewModel.HU, compilaViewModel.Codigo,compilaViewModel.Comentario,handler.ConnViewModel.Correo, archivosEvaluar, handler);
+                string rama = RepoGit.pVersionarDatos(compilaViewModel.HU, compilaViewModel.Codigo,compilaViewModel.Comentario,handler.ConnViewModel.Correo, archivosEvaluar, handler);
 
                 handler.CursorNormal();
-                handler.MensajeOk("Versionamiento exitoso! Rama creada ["+ rama+"]");
+                handler.MensajeOk("Rama creada ["+ rama+"]");
             }
             catch (Exception ex)
             {
