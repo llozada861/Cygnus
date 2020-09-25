@@ -490,10 +490,13 @@ namespace Cygnus2_0.Model.Aplica
 
             foreach (Archivo archivo in view.ListaArchivosCargados)
             {
-                //Valida que el objeto no se encuentra aplicado en más de un esquema
-                handler.DAO.pValidaUsuarioCompila(archivo, handler);
-                //Valida que solo se aplique en un esquema
-                handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
+                if (!string.IsNullOrEmpty(archivo.NombreObjeto))
+                {
+                    //Valida que el objeto no se encuentra aplicado en más de un esquema
+                    handler.DAO.pValidaUsuarioCompila(archivo, handler);
+                    //Valida que solo se aplique en un esquema
+                    handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
+                }
             }
 
             foreach (Archivo archivo in view.ListaArchivosGenerados)

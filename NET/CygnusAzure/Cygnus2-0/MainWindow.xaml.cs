@@ -140,7 +140,7 @@ namespace Cygnus2_0
                                 actualiza = true;
 
                                 //Comentar a futuro
-                                pInstalarActuaLocal();
+                                //pInstalarActuaLocal();
 
                                 UpdateModel.pDescargarActualizacion(handler.ConnViewModel.Usuario,handler.ConnViewModel.Pass, version,handler.ConnViewModel.Servidor, handler.ConnViewModel.BaseDatos, handler.ConnViewModel.Puerto);
                                 this.Close();
@@ -191,27 +191,6 @@ namespace Cygnus2_0
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
         }
-
-        /*private void pDescargaOneDrive(string archivo, string ruta, Service service, string archivoDescarga)
-        {
-            Stream inputStream = service.GetFileStream(archivoDescarga);
-
-            FileStream outputStream = new FileStream(ruta + "\\" + archivo, FileMode.CreateNew);
-
-            using (inputStream)
-            {
-                using (outputStream)
-                {
-                    byte[] buffer = new byte[8192];
-                    int len = 0;
-
-                    while ((len = inputStream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        outputStream.Write(buffer, 0, len);
-                    }
-                }
-            }
-        }*/
 
         private void pObtParamEntrada()
         {
@@ -300,28 +279,92 @@ namespace Cygnus2_0
 
         public void pInstalarActuaLocal()
         {
-            string query = "";
-
             if (handler.Version.Equals("1.0.6.3"))
             {
-                /*query = "drop table comments";
-                SqliteDAO.pExecuteNonQuery(query);
+                /*string[] query = {"drop table comments",
+                            "drop table comment_type",
+                            "drop table packages_comments",
+                            "drop table packages",
+                            "drop table statement",
+                            "alter table object_type ADD column path TEXT",
+                            "alter table object_head ADD column company INTEGER",
+                            "alter table conection ADD column company INTEGER",
+                            "alter table configuration ADD column company INTEGER",
+                            "alter table documentation ADD column company INTEGER",
+                            "alter table html ADD column company INTEGER",
+                            "alter table object_type ADD column company INTEGER",
+                            "alter table paths ADD column company INTEGER",
+                            "alter table user_grants ADD column company INTEGER",
+                            "alter table userbd ADD column company INTEGER",
+                            "alter table version ADD column company INTEGER",
+                            "create table company (codigo integer, descripcion text)",
+                            "insert into company (codigo,descripcion) values (99,'EPM')",
+                            "insert into object_type (object,count_slash,priority,grant) values('llave_primaria',0,110,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('llave_foranea',0,111,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('llave_unica',0,113,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('vista_mat',0,114,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('job',0,401,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('grant',0,402,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('EA',0,501,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('GI',0,502,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('GR',0,503,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('MD',0,504,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('OB',0,505,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('OP',0,506,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('PB',0,507,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('PI',0,508,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('RU',0,509,'No')",
+                            "insert into object_type (object,count_slash,priority,grant) values('TC',0,510,'No')",
+                            "update conection set company = 99",
+                            "update configuration set company = 99",
+                            "update documentation set company = 99",
+                            "update html set company = 99",
+                            "update object_type set company = 99",
+                            "update paths set company = 99",
+                            "update conection set company = 99",
+                            "update user_grants set company = 99",
+                            "update userbd set company = 99",
+                            "update version set company = 99",
+                            "update conection set company = 99",
+                            "update object_type set path = '\\server\\sql\\00dir\\[nombre]\\' where object = 'directorio'",
+                            "update object_type set path = '\\server\\sql\\01seq\\[nombre]\\' where object = 'secuencia'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\00tbl\\' where object = 'tabla'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\00tbl\\' where object = 'alter'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\00tbl\\' where object = 'drop'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\01pkey\\' where object = 'llave_primaria'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\02idx\\' where object = 'indice'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\03fkey\\' where object = 'llave_foranea'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\04chk\\' where object = 'llave_unica'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\05trg\\' where object = 'trigger'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\06data\\' where object = 'insert'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\06data\\' where object = 'update'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\06data\\' where object = 'delete'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\06data\\' where object = 'merge'",
+                            "update object_type set path = '\\server\\sql\\02tbls\\[nombre]\\11syn\\' where object = 'sinonimo'",
+                            "update object_type set path = '\\server\\sql\\03fnc\\[nombre]\\' where object = 'Funcion'",
+                            "update object_type set path = '\\server\\sql\\04proc\\[nombre]\\' where object = 'procedimiento'",
+                            "update object_type set path = '\\server\\sql\\05pkg\\[nombre]\\' where object = 'paquete'",
+                            "update object_type set path = '\\server\\sql\\06view\\[nombre]\\' where object = 'vista'",
+                            "update object_type set path = '\\server\\sql\\07vwmat\\[nombre]\\' where object = 'vista_mat'",
+                            "update object_type set path = '\\server\\sql\\09job\\[nombre]\\' where object = 'job'",
+                            "update object_type set path = '\\server\\sql\\10grt\\[nombre]\\' where object = 'grant'",
+                            "update object_type set path = '\\client\\framework\\EA\\[nombre]\\' where object = 'EA'",
+                            "update object_type set path = '\\client\\framework\\GI\\[nombre]\\' where object = 'GI'",
+                            "update object_type set path = '\\client\\framework\\GR\\[nombre]\\' where object = 'GR'",
+                            "update object_type set path = '\\client\\framework\\MD\\[nombre]\\' where object = 'MD'",
+                            "update object_type set path = '\\client\\framework\\OB\\[nombre]\\' where object = 'OB'",
+                            "update object_type set path = '\\client\\framework\\OP\\[nombre]\\' where object = 'OP'",
+                            "update object_type set path = '\\client\\framework\\PB\\[nombre]\\' where object = 'PB'",
+                            "update object_type set path = '\\client\\framework\\PI\\[nombre]\\' where object = 'PI'",
+                            "update object_type set path = '\\client\\framework\\RU\\[nombre]\\' where object = 'RU'",
+                            "update object_type set path = '\\client\\framework\\TC\\[nombre]\\' where object = 'TC'",
+                            "delete from object_type where object = 'otros'"
+                };
 
-                query = "drop table comment_type";
-                SqliteDAO.pExecuteNonQuery(query);
-
-                query = "drop table packages_comments";
-                SqliteDAO.pExecuteNonQuery(query);
-
-                query = "drop table packages";
-                SqliteDAO.pExecuteNonQuery(query);
-
-                query = "drop table statement";
-                SqliteDAO.pExecuteNonQuery(query);
-
-                query = "alter table object_type ADD column path TEXT";
-                SqliteDAO.pExecuteNonQuery(query);*/
-
+                foreach (string sql in query)
+                {
+                    SqliteDAO.pExecuteNonQuery(sql);
+                }*/
             }
         }
     }
