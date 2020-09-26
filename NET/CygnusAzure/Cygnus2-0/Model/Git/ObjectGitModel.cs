@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Pages.Git;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +17,7 @@ namespace Cygnus2_0.Model.Git
         private ObservableCollection<Archivo> listaArchivos;
         private ObservableCollection<Archivo> listaRamasCreadas;
         private ObservableCollection<Archivo> listaArchivosRamas;
+        private ObservableCollection<Folder> listacarpetas;
         private string codigo;
         private string objetoBuscar;
         private string hu;
@@ -28,6 +30,7 @@ namespace Cygnus2_0.Model.Git
             this.ListaArchivos = new ObservableCollection<Archivo>();
             this.ListaRamasCreadas = new ObservableCollection<Archivo>();
             this.ListaArchivosRamas = new ObservableCollection<Archivo>();
+            this.ListaCarpetas = new ObservableCollection<Folder>();
 
         }
         public string Codigo
@@ -79,6 +82,12 @@ namespace Cygnus2_0.Model.Git
         {
             get { return listaArchivosRamas; }
             set { SetProperty(ref listaArchivosRamas, value); }
+        }
+
+        public ObservableCollection<Folder> ListaCarpetas
+        {
+            get { return listacarpetas; }
+            set { SetProperty(ref listacarpetas, value); }
         }
     }
 }

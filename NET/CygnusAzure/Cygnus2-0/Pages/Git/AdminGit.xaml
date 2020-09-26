@@ -14,7 +14,7 @@
         <mui:ModernTab Name="UserTab" Layout="Tab" SelectedSource="/Pages/Git/UCRepoGit.xaml" Visibility="{Binding IsUser, Converter={StaticResource booleanToVisibilityConverter}}">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="DATOS" Source="/Pages/Git/UCRepoGit.xaml" />
-                <!--<mui:Link DisplayName="OBJETOS" Source="/Pages/Git/UCObjectGit.xaml" />-->
+                <mui:Link DisplayName="OBJETOS" Source="/Pages/Git/UCObjectGit.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
 

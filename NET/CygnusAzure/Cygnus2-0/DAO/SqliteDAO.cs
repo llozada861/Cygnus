@@ -263,17 +263,24 @@ namespace Cygnus2_0.DAO
 
                     while (reader.Read())
                     {
-                        handler.ListaTiposObjetos.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = reader.GetString(0),
-                                Value = reader.GetString(1),
-                                CantidadSlash = reader.GetInt32(2),
-                                Prioridad = reader.GetInt32(3),
-                                Grant = reader.GetString(4)
-                            }
-                        );
+                        SelectListItem item = new SelectListItem();
+                        item.Text = reader.GetString(0);
+
+                        if (!reader.IsDBNull(1))
+                            item.Value = reader.GetString(1);
+                        else
+                            item.Value = "No";
+
+                        item.CantidadSlash = reader.GetInt32(2);
+                        item.Prioridad = reader.GetInt32(3);
+                        item.Grant = reader.GetString(4);
+
+                        if (!reader.IsDBNull(5))
+                            item.Path = reader.GetString(5);
+                        else
+                            item.Path = "";
+
+                        handler.ListaTiposObjetos.Add(item);
                     }
 
                     handler.ListaTiposObjetos.Add

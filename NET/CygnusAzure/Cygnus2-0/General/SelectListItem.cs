@@ -16,5 +16,6 @@ namespace Cygnus2_0.General
         public string Observacion { set; get; }
         public string Fin { set; get; }
         public Boolean BlValor { set; get; }
+        public string Path { set; get; }
     }
 }

@@ -215,6 +215,7 @@
     <Compile Include="General\Documentacion\RetornoModel.cs" />
     <Compile Include="General\EncriptaPass.cs" />
     <Compile Include="General\Handler.cs" />
+    <Compile Include="General\Folder.cs" />
     <Compile Include="General\LocUtil.cs" />
     <Compile Include="General\Mail.cs" />
     <Compile Include="General\RepoGit.cs" />

@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Git;
+using Cygnus2_0.Pages.Git;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -134,7 +135,7 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                if (GitModel.ListaArchivos.Count() > 0)
+                if (GitModel.ListaArchivos.Count() == 0)
                 {
                     handler.MensajeError("Debe colocar los objetos que se van a versionar.");
                     return;
@@ -150,8 +151,68 @@ namespace Cygnus2_0.ViewModel.Git
 
         public void pExaminar(object commandParameter)
         {
+            string usuario = "-";
+            Folder CarpetaPadre;
             string[] archivos = handler.pCargarArchivos();
             ListarArchivos(archivos);
+
+            GitModel.ListaCarpetas.Clear();
+
+            foreach (Archivo archivo in GitModel.ListaArchivos)
+            {
+                if(!string.IsNullOrEmpty(archivo.Usuario))
+                {
+                    if(!usuario.Equals(archivo.Usuario))
+                    {
+                        usuario = archivo.Usuario;
+
+                        if(!GitModel.ListaCarpetas.ToList().Exists(x=>x.FolderLabel.Equals(usuario)))
+                            GitModel.ListaCarpetas.Add(new Folder { FolderLabel = archivo.Usuario});
+                    }
+
+                    CarpetaPadre = GitModel.ListaCarpetas.ToList().Find(x=>x.FolderLabel.Equals(usuario));
+
+                    if (CarpetaPadre != null)
+                    {
+                        //CarpetaPadre.Folders.Add(new Folder {FolderLabel= "prueba" });
+                        pGeneraHijos(archivo, CarpetaPadre);
+                    }
+
+                }
+            }
+        }
+
+        public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)
+        {
+            Folder carpetaHija;
+            string[] Carpetashijas = archivo.SelectItemTipo.Path.Split('\\');
+            string path;
+
+            for(int i=0;i<Carpetashijas.Length;i++)
+            {
+                path = Carpetashijas[i];
+
+                if (!string.IsNullOrEmpty(path))
+                {
+                    path = path.Replace("[nombre]", archivo.NombreObjeto);
+                    carpetaHija = carpetaPadre.Folders.ToList().Find(x => x.FolderLabel.Equals(path));
+
+                    if (carpetaHija == null)
+                    {
+                        carpetaHija = new Folder();
+                        carpetaHija.FolderLabel = path;
+
+                        if (i == Carpetashijas.Length-2)
+                        {
+                            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName });
+                        }
+
+                        carpetaPadre.Folders.Add(carpetaHija);
+                    }
+
+                    carpetaPadre = carpetaHija;
+                }
+            }
         }
 
         public void ListarArchivos(string[] DropPath)
