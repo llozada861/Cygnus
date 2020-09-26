@@ -316,6 +316,7 @@ namespace Cygnus2_0.General
                             if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
                             {
                                 archivo.Tipo = prefijo.Value;
+                                archivo.SelectItemTipo = ListaTiposObjetos.ToList().Find(x=>x.Text.Equals(archivo.Tipo));
                                 archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace);
                                 archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
                                 archivo.InicioArchivo = prefijo.Text.ToLower();

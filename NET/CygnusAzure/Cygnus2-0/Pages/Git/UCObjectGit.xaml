@@ -238,7 +238,38 @@
                          Style="{StaticResource placeHolder}" Tag="Comentario commit" TabIndex="3" AcceptsTab="false"/>
                 </Grid>
             </GroupBox>
-            <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="7">
+
+            <GroupBox x:Name="groupBoxRamas" Header="Ramas Generadas" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                <Grid>
+                    <DataGrid x:Name="dataGridRamas" 
+                IsReadOnly="false" 
+                AllowDrop="false" 
+                AutoGenerateColumns="False"
+                SelectionMode="Single"
+                CanUserDeleteRows="false"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="False"
+                ItemsSource="{Binding Path=GitModel.ListaRamasCreadas}"                        
+                  >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn                  
+                              IsReadOnly="True"
+                              Header="Rama"
+                              Binding="{Binding Path=FileName}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+
+            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -292,6 +323,7 @@
                                                 SelectedValuePath="Text"
                                                 Header="Tipo"
                                                 SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                SelectedItemBinding="{Binding SelectItemTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 >
                                 <DataGridComboBoxColumn.ElementStyle>
                                     <Style TargetType="{x:Type ComboBox}">
@@ -333,51 +365,24 @@
                     </DataGrid>
                 </Grid>
             </GroupBox>
-            <GroupBox x:Name="groupBoxRamas" Header="Ramas Generadas" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
-                <Grid>
-                    <DataGrid x:Name="dataGridRamas" 
-                IsReadOnly="false" 
-                AllowDrop="false" 
-                AutoGenerateColumns="False"
-                SelectionMode="Single"
-                CanUserDeleteRows="false"
-                CanUserAddRows="False"
-                CanUserReorderColumns="False"
-                CanUserSortColumns="False"
-                ItemsSource="{Binding Path=GitModel.ListaRamasCreadas}"                        
-                  >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn                  
-                              IsReadOnly="True"
-                              Header="Rama"
-                              Binding="{Binding Path=FileName}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </GroupBox>
-            <GroupBox x:Name="groupBoxRamasObj" Header="Objetos Rama" Grid.Column="7" Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="6">
-                <Grid>
-                    <DataGrid x:Name="dataGridRamasObj" 
-                IsReadOnly="false" 
-                AllowDrop="false" 
-                AutoGenerateColumns="False"
-                SelectionMode="Single"
-                CanUserDeleteRows="false"
-                CanUserAddRows="False"
-                CanUserReorderColumns="False"
-                CanUserSortColumns="False"
-                ItemsSource="{Binding Path=GitModel.ListaArchivosRamas}"                        
-                  >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn                  
-                              IsReadOnly="True"
-                              Header="Objeto"
-                              Binding="{Binding Path=FileName}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </GroupBox>
 
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+
+                <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Column="2">
+                    <TreeView ItemsSource="{Binding GitModel.ListaCarpetas}" >
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Setter Property="IsExpanded" Value="True" />
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Folders}">
+                                <TreeViewItem Header="{Binding FolderLabel}"/>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </GroupBox>
+            </Grid>
             <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Command="{Binding Path=Entrega}" Grid.Column="7" Grid.Row="9"  Margin="0,0,5,0" HorizontalAlignment="Center" />
             <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Command="{Binding Path=Limpiar}" Grid.Column="8" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
             <Button x:Name="btnGitBash" Content="GitBash"  VerticalAlignment="Center" Command="{Binding Path=GitBash}" Grid.Column="9" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />

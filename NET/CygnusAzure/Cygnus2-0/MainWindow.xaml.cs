@@ -50,6 +50,7 @@ namespace Cygnus2_0
         public MainWindow()
         {
             //pObtParamEntrada();
+            pInstalarActuaLocal();
 
             InitializeComponent();
 
@@ -126,6 +127,7 @@ namespace Cygnus2_0
                     request.ShowDialog();
                 }
 
+
                 //Se valida si se debe actualizar automáticamente
                 if (handler.ConexionOracle.ConexionOracleSQL != null)
                 {
@@ -138,9 +140,6 @@ namespace Cygnus2_0
                             try
                             {
                                 actualiza = true;
-
-                                //Comentar a futuro
-                                //pInstalarActuaLocal();
 
                                 UpdateModel.pDescargarActualizacion(handler.ConnViewModel.Usuario,handler.ConnViewModel.Pass, version,handler.ConnViewModel.Servidor, handler.ConnViewModel.BaseDatos, handler.ConnViewModel.Puerto);
                                 this.Close();
@@ -279,9 +278,12 @@ namespace Cygnus2_0
 
         public void pInstalarActuaLocal()
         {
-            if (handler.Version.Equals("1.0.6.3"))
+            System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+
+            if (fieVersionInfo.FileVersion.Equals("1.0.6.4"))
             {
-                /*string[] query = {"drop table comments",
+                string[] query = {"drop table comments",
                             "drop table comment_type",
                             "drop table packages_comments",
                             "drop table packages",
@@ -361,7 +363,7 @@ namespace Cygnus2_0
                             "delete from object_type where object = 'otros'"
                 };
 
-                foreach (string sql in query)
+                /*foreach (string sql in query)
                 {
                     SqliteDAO.pExecuteNonQuery(sql);
                 }*/
