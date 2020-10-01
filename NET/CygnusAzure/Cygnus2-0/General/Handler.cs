@@ -343,6 +343,7 @@ namespace Cygnus2_0.General
             Boolean blPalabraReservada = false;
             string sbPalabra = "";
             int indice;
+            Boolean blIndex = false;
 
             split = sbLineSpace.Split();
 
@@ -359,12 +360,18 @@ namespace Cygnus2_0.General
                     }
                 }
 
-                if (!blPalabraReservada && sbPalabra.Length > 0)
+                if(blIndex && blPalabraReservada)
+                    blIndex = false;
+
+                if (blPalabraReservada && sbPalabra.Equals("index"))
+                    blIndex = true;
+
+                if (!blPalabraReservada && sbPalabra.Length > 0 && !blIndex)
                 {
                     if (sbPalabra.IndexOf("(") >= 0)
                     {
                         indice = sbPalabra.IndexOf("(");
-                        sbPalabra = sbPalabra.Substring(0, (indice - 1));
+                        sbPalabra = sbPalabra.Substring(0, indice); //(indice - 1));
                     }
                     else
                         break;
@@ -1168,6 +1175,7 @@ namespace Cygnus2_0.General
                     archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
                     archivo.ListaTipos = this.ListaTiposObjetos;
                     archivo.ListaUsuarios = this.ListaUsuarios;
+                    archivo.NombreObjeto = archivo.NombreSinExt;
                     System.IO.DirectoryInfo directoryInfo = System.IO.Directory.GetParent(archivo.RutaConArchivo);
                     archivo.CarpetaPadre = directoryInfo.Name;
                     this.ObtenerTipoArchivo(archivo);
