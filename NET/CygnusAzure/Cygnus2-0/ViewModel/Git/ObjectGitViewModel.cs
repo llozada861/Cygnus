@@ -112,6 +112,8 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.Comentario = "";
             GitModel.HU = "";
             GitModel.ListaArchivos.Clear();
+            GitModel.ListaCarpetas.Clear();
+            GitModel.ActivaAprobRamas = false;
         }
         public void pEntrega(object commandParameter)
         {
@@ -119,7 +121,7 @@ namespace Cygnus2_0.ViewModel.Git
             {
                 if (GitModel.RamaLBSeleccionada == null)
                 {
-                    handler.MensajeError("Seleccione una rama.");
+                    handler.MensajeError("Seleccione una rama de línea base.");
                     return;
                 }
 
@@ -141,7 +143,13 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
+                if(!GitModel.ActivaAprobRamas)
+                {
+                    handler.MensajeError("Por favor revise y apruebe la estructura de archvivos que detectó la aplicación.");
+                    return;
+                }
 
+                GitModel.ActivaAprobRamas = false;
             }
             catch(Exception ex)
             {
@@ -151,42 +159,56 @@ namespace Cygnus2_0.ViewModel.Git
 
         public void pExaminar(object commandParameter)
         {
-            string usuario = "-";
-            Folder CarpetaPadre;
             string[] archivos = handler.pCargarArchivos();
             ListarArchivos(archivos);
 
             GitModel.ListaCarpetas.Clear();
+            pArmarArbol(null);
+
+            GitModel.ActivaAprobRamas = true;
+        }
+
+        public void pArmarArbol(SelectListItem tipo)
+        {
+            string usuario = "-";
+            Folder CarpetaPadre;
 
             foreach (Archivo archivo in GitModel.ListaArchivos)
             {
-                if(!string.IsNullOrEmpty(archivo.Usuario))
+                if (tipo != null)
                 {
-                    if(!usuario.Equals(archivo.Usuario))
+                    archivo.Usuario = !string.IsNullOrEmpty(tipo.Usuario) ? tipo.Usuario : archivo.Usuario;
+                }
+
+                if (!string.IsNullOrEmpty(archivo.Usuario))
+                {
+                    if (!usuario.Equals(archivo.Usuario))
                     {
                         usuario = archivo.Usuario;
 
-                        if(!GitModel.ListaCarpetas.ToList().Exists(x=>x.FolderLabel.Equals(usuario)))
-                            GitModel.ListaCarpetas.Add(new Folder { FolderLabel = archivo.Usuario});
+                        if (!GitModel.ListaCarpetas.ToList().Exists(x => x.FolderLabel.Equals(usuario)))
+                            GitModel.ListaCarpetas.Add(new Folder { FolderLabel = archivo.Usuario });
                     }
 
-                    CarpetaPadre = GitModel.ListaCarpetas.ToList().Find(x=>x.FolderLabel.Equals(usuario));
+                    CarpetaPadre = GitModel.ListaCarpetas.ToList().Find(x => x.FolderLabel.Equals(usuario));
 
                     if (CarpetaPadre != null)
                     {
-                        //CarpetaPadre.Folders.Add(new Folder {FolderLabel= "prueba" });
                         pGeneraHijos(archivo, CarpetaPadre);
                     }
-
                 }
             }
         }
 
         public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)
         {
+            if (archivo.SelectItemTipo == null)
+                return;
+
             Folder carpetaHija;
             string[] Carpetashijas = archivo.SelectItemTipo.Path.Split('\\');
             string path;
+            Boolean blExistePath = true;
 
             for(int i=0;i<Carpetashijas.Length;i++)
             {
@@ -208,11 +230,18 @@ namespace Cygnus2_0.ViewModel.Git
                         }
 
                         carpetaPadre.Folders.Add(carpetaHija);
+                        blExistePath = false;
                     }
 
                     carpetaPadre = carpetaHija;
                 }
             }
+
+            if (blExistePath)
+            {
+                carpetaPadre.Folders.Add(new Folder { FolderLabel = archivo.FileName });
+            }
+
         }
 
         public void ListarArchivos(string[] DropPath)

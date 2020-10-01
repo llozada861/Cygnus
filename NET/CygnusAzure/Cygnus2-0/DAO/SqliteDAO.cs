@@ -280,6 +280,11 @@ namespace Cygnus2_0.DAO
                         else
                             item.Path = "";
 
+                        if (!reader.IsDBNull(6))
+                            item.Usuario = reader.GetString(6);
+                        else
+                            item.Usuario = "";
+
                         handler.ListaTiposObjetos.Add(item);
                     }
 

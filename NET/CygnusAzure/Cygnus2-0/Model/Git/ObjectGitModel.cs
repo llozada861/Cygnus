@@ -23,6 +23,7 @@ namespace Cygnus2_0.Model.Git
         private string hu;
         private string comentario;
         private SelectListItem ramaLBSeleccionada;
+        private bool activaAprobRamas;
         public ObjectGitModel()
         {
             this.ListaRamasLB = new ObservableCollection<SelectListItem>();
@@ -89,5 +90,12 @@ namespace Cygnus2_0.Model.Git
             get { return listacarpetas; }
             set { SetProperty(ref listacarpetas, value); }
         }
+
+        public bool ActivaAprobRamas
+        {
+            get { return activaAprobRamas; }
+            set { activaAprobRamas = value; }
+        }
+
     }
 }

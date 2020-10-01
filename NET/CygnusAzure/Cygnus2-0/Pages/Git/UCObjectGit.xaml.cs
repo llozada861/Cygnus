@@ -35,6 +35,8 @@ namespace Cygnus2_0.Pages.Git
 
             DataContext = objectViewModel;
             InitializeComponent();
+
+            chAprobar.IsEnabled = false;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -121,6 +123,11 @@ namespace Cygnus2_0.Pages.Git
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
 
                     objectViewModel.ListarArchivos(DropPath);
+
+                    if(objectViewModel.GitModel.ListaCarpetas.Count() > 0)
+                    {
+                        chAprobar.IsEnabled = true;
+                    }
                 }
             }
             catch (Exception ex)
@@ -131,6 +138,11 @@ namespace Cygnus2_0.Pages.Git
 
         private void TipoSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            comboBox = sender as ComboBox;
+            SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
+            objectViewModel.pArmarArbol(tipo);
+            //dataGridArch.ItemsSource = objectViewModel.GitModel.ListaArchivos;
+
             /*var comboBox = sender as ComboBox;
             SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
 
@@ -150,6 +162,8 @@ namespace Cygnus2_0.Pages.Git
 
         private void UsuarioSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            objectViewModel.pArmarArbol(null);
+
             /*var comboBox = sender as ComboBox;
             SelectListItem usuario = (SelectListItem)comboBox.SelectedItem;
 
@@ -158,6 +172,21 @@ namespace Cygnus2_0.Pages.Git
                 Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
                 objectViewModel.pPonerUsuarioArchivos(selectedItem, usuario);
             }*/
+        }
+
+        private void BtnProcesar_Click(object sender, RoutedEventArgs e)
+        {
+            chAprobar.IsEnabled = false;
+        }
+
+        private void ChAprobar_Checked(object sender, RoutedEventArgs e)
+        {
+            objectViewModel.GitModel.ActivaAprobRamas = (bool)chAprobar.IsChecked;
+        }
+
+        private void BtnExaminar_Click(object sender, RoutedEventArgs e)
+        {
+            chAprobar.IsEnabled = true;
         }
     }
 }

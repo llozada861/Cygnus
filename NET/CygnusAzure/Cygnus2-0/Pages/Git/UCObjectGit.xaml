@@ -265,11 +265,12 @@
             <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" >
+                <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" Grid.ColumnSpan="2" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -296,7 +297,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+                    <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="BtnExaminar_Click" />
                                             
                     <DataGrid x:Name="dataGridArch" 
                     IsReadOnly="false" 
@@ -308,7 +309,7 @@
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
-                    ItemsSource="{Binding Path=GitModel.ListaArchivos}"  
+                    ItemsSource="{Binding Path=GitModel.ListaArchivos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
                               Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
                               
                       >
@@ -366,10 +367,26 @@
                 </Grid>
             </GroupBox>
 
-            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" />
 
-                <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Column="2">
-                    <TreeView ItemsSource="{Binding GitModel.ListaCarpetas}" >
+                <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Column="3">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        
+                    <CheckBox Name="chAprobar" Content="Aprobar Estructura!" Grid.Row="0" Margin="50,0,0,0" Checked="ChAprobar_Checked"  />
+                        
+                    <TreeView ItemsSource="{Binding GitModel.ListaCarpetas}" Grid.Row="1" Grid.RowSpan="9">
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="{x:Type TreeViewItem}">
                                 <Setter Property="IsExpanded" Value="True" />
@@ -381,9 +398,10 @@
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
+                    </Grid>
                 </GroupBox>
             </Grid>
-            <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Command="{Binding Path=Entrega}" Grid.Column="7" Grid.Row="9"  Margin="0,0,5,0" HorizontalAlignment="Center" />
+            <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Command="{Binding Path=Entrega}" Grid.Column="7" Grid.Row="9"  Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnProcesar_Click" />
             <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Command="{Binding Path=Limpiar}" Grid.Column="8" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
             <Button x:Name="btnGitBash" Content="GitBash"  VerticalAlignment="Center" Command="{Binding Path=GitBash}" Grid.Column="9" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
         </Grid>
