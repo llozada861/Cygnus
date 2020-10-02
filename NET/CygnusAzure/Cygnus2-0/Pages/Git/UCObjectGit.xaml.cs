@@ -188,5 +188,6 @@ namespace Cygnus2_0.Pages.Git
         {
             chAprobar.IsEnabled = true;
         }
+
     }
 }

@@ -320,6 +320,10 @@ namespace Cygnus2_0.General
                                 archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace);
                                 archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
                                 archivo.InicioArchivo = prefijo.Text.ToLower();
+
+                                if (archivo.Tipo.ToLower().Equals(res.Script.ToLower()))
+                                    archivo.NombreObjeto = "";
+
                                 break;
                             }
                         }
@@ -1176,8 +1180,7 @@ namespace Cygnus2_0.General
                     archivo.ListaTipos = this.ListaTiposObjetos;
                     archivo.ListaUsuarios = this.ListaUsuarios;
                     archivo.NombreObjeto = archivo.NombreSinExt;
-                    System.IO.DirectoryInfo directoryInfo = System.IO.Directory.GetParent(archivo.RutaConArchivo);
-                    archivo.CarpetaPadre = directoryInfo.Name;
+                    archivo.CarpetaPadre = pObtCarpetaPadre(archivo.RutaConArchivo);
                     this.ObtenerTipoArchivo(archivo);
                     archivo.BloquesCodigo = new List<string>();
 
@@ -1198,6 +1201,11 @@ namespace Cygnus2_0.General
                     archivos.Add(archivo);
                 }
             }
+        }
+        public string pObtCarpetaPadre(string RutaConArchivo)
+        {
+            System.IO.DirectoryInfo directoryInfo = System.IO.Directory.GetParent(RutaConArchivo);
+            return directoryInfo.Name;
         }
 
         public string[] pCargarArchivos()

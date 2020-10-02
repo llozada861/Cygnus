@@ -371,7 +371,8 @@ namespace Cygnus2_0
                             "insert into words values('into')",
                             "insert into words values('insert')",
                             "insert into words values('update')",
-                            "insert into words values('delete')"
+                            "insert into words values('delete')",
+                            "insert into words values('trigger')"
                 };
 
                 /*foreach (string sql in query)

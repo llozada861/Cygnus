@@ -187,7 +187,13 @@ namespace Cygnus2_0.ViewModel.Git
                         usuario = archivo.Usuario;
 
                         if (!GitModel.ListaCarpetas.ToList().Exists(x => x.FolderLabel.Equals(usuario)))
-                            GitModel.ListaCarpetas.Add(new Folder { FolderLabel = archivo.Usuario });
+                        {
+                            /*Folder carpetap = new Folder();
+                            carpetap.FolderLabel = archivo.Usuario;
+                            pGeneraHijos(archivo, carpetap);
+                            GitModel.ListaCarpetas.Add(carpetap);*/
+                            GitModel.ListaCarpetas.Add(new Folder { FolderLabel = archivo.Usuario, IsNodeExpanded = true });
+                        }
                     }
 
                     CarpetaPadre = GitModel.ListaCarpetas.ToList().Find(x => x.FolderLabel.Equals(usuario));
@@ -206,17 +212,38 @@ namespace Cygnus2_0.ViewModel.Git
                 return;
 
             Folder carpetaHija;
-            string[] Carpetashijas = archivo.SelectItemTipo.Path.Split('\\');
             string path;
+            path = archivo.SelectItemTipo.Path.Replace("[nombre]", archivo.NombreObjeto);
             Boolean blExistePath = true;
 
-            for(int i=0;i<Carpetashijas.Length;i++)
+            archivo.RutaRepo = path + archivo.FileName;
+            string carpetaPadreRepo = handler.pObtCarpetaPadre(archivo.RutaRepo);
+
+            List<String> Carpetashijas = new List<String>();
+
+            int nuIndex = path.IndexOf(carpetaPadreRepo);
+
+            if (nuIndex < 0)
+                return;
+
+            string rutaparcial = path.Substring(0, nuIndex);
+            string rutaparcial2 = archivo.RutaRepo.Substring(nuIndex);
+
+            Carpetashijas.Add(rutaparcial);
+
+            string[] carpetas = rutaparcial2.Split('\\');
+
+            for (int i=0;i< carpetas.Length;i++)
+            {
+                Carpetashijas.Add(carpetas[i]);
+            }
+
+            for (int i=0;i<Carpetashijas.Count-1;i++)
             {
                 path = Carpetashijas[i];
 
                 if (!string.IsNullOrEmpty(path))
                 {
-                    path = path.Replace("[nombre]", archivo.NombreObjeto);
                     carpetaHija = carpetaPadre.Folders.ToList().Find(x => x.FolderLabel.Equals(path));
 
                     if (carpetaHija == null)
@@ -224,9 +251,9 @@ namespace Cygnus2_0.ViewModel.Git
                         carpetaHija = new Folder();
                         carpetaHija.FolderLabel = path;
 
-                        if (i == Carpetashijas.Length-2)
+                        if (i == Carpetashijas.Count - 2)
                         {
-                            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName });
+                            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false });
                         }
 
                         carpetaPadre.Folders.Add(carpetaHija);
@@ -251,7 +278,8 @@ namespace Cygnus2_0.ViewModel.Git
 
             foreach (Archivo archivo in archivos)
             {
-                this.GitModel.ListaArchivos.Add(archivo);
+                if(!this.GitModel.ListaArchivos.ToList().Exists(x=>x.FileName.Equals(archivo.FileName)))
+                    this.GitModel.ListaArchivos.Add(archivo);
             }
         }
 

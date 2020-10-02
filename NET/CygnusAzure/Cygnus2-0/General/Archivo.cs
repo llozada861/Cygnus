@@ -44,5 +44,6 @@ namespace Cygnus2_0.General
         public string CarpetaPadre { get; set; }
         public string TipoAplicacion { get; set; }
         public string AplicaTemporal { get; set; }
+        public string RutaRepo { get; set; }
     }
 }
