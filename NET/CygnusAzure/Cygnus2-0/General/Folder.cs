@@ -15,6 +15,7 @@ namespace Cygnus2_0.General
 
         public string FullPath { get; set; }
         public string FolderLabel { get; set; }
+        public bool IsNodeExpanded { get; set; }
         public List<Folder> Folders { get; set; }
     }
 }
