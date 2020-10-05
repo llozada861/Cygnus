@@ -1916,4 +1916,16 @@ sonar.plsql.file.suffixes=sql,pkg</value>
   <data name="RepoOBJETOS" xml:space="preserve">
     <value>https://langeles:fas6zsqe7j756lunlqekjqxmb7h3w5btt4vdh723mprwu2kr36uq@grupoepm.visualstudio.com/OPEN/_git/BaseDeDatos</value>
   </data>
+  <data name="NO_REPO" xml:space="preserve">
+    <value>No_Repositorio</value>
+  </data>
+  <data name="GIT" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="RamaDesarrollo" xml:space="preserve">
+    <value>desarrollo</value>
+  </data>
+  <data name="RamaPruebas" xml:space="preserve">
+    <value>pruebas</value>
+  </data>
 </root>

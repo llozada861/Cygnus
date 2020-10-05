@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Aplica
 {
@@ -168,7 +169,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         public void ListarArchivos(string[] DropPath)
         {
             List<Archivo> archivos = new List<Archivo>();
-            handler.pListaArchivos(DropPath, archivos);
+            handler.pListaArchivos(DropPath, archivos, res.No_aplica);
 
             foreach (Archivo archivo in archivos)
             {

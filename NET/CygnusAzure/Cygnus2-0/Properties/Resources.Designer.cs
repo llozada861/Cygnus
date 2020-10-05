@@ -854,6 +854,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a G.
+        /// </summary>
+        public static string GIT {
+            get {
+                return ResourceManager.GetString("GIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a git-bash.exe.
         /// </summary>
         public static string GitBashExe {
@@ -1536,6 +1545,15 @@ namespace Cygnus2_0.Properties {
         public static string No_aplica {
             get {
                 return ResourceManager.GetString("No_aplica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No_Repositorio.
+        /// </summary>
+        public static string NO_REPO {
+            get {
+                return ResourceManager.GetString("NO_REPO", resourceCulture);
             }
         }
         
@@ -2360,6 +2378,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a desarrollo.
+        /// </summary>
+        public static string RamaDesarrollo {
+            get {
+                return ResourceManager.GetString("RamaDesarrollo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a master-datos.
         /// </summary>
         public static string RamaMasterDatos {
@@ -2374,6 +2401,15 @@ namespace Cygnus2_0.Properties {
         public static string RamaProduccion {
             get {
                 return ResourceManager.GetString("RamaProduccion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pruebas.
+        /// </summary>
+        public static string RamaPruebas {
+            get {
+                return ResourceManager.GetString("RamaPruebas", resourceCulture);
             }
         }
         

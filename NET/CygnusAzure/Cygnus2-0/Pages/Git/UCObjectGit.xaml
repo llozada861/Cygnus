@@ -56,7 +56,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <GroupBox Header="Generar Línea Base" Grid.Row="0" Grid.RowSpan="2">
+            <GroupBox Header="Generar o Renombrar Línea Base" Grid.Row="0" Grid.RowSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -70,16 +70,46 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
                     <TextBox x:Name="txtWO" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" 
                          Grid.ColumnSpan="8" 
+                             Grid.Row="0"
                          VerticalAlignment="Center"
                          Text="{Binding Path=GitModel.Codigo}" 
                          Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Línea Base"
                          />
-                    <Button Content="Generar" Command="{Binding Path=Process}" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Button Content="Generar" Command="{Binding Path=Process}" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                    <ComboBox x:Name="comboBoxRn" 
+                      ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
+                      SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
+                      DisplayMemberPath="Text" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
+                      Margin="0,0,10,0" SelectionChanged="ComboBox_SelectionChanged"
+                      />
+
+                    <TextBlock DataContext="{Binding ElementName=comboBoxRn,Path=SelectedItem}"
+                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,0,10,0"
+                       Text="Seleccione Línea Base" 
+                       Style="{StaticResource ComboBoxSelectOverlay}"/>
+
+                    <TextBox x:Name="txtRenombrar" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" 
+                         Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="5"
+                         VerticalAlignment="Center"
+                         Text="{Binding Path=GitModel.NuevaRama}" 
+                         Style="{StaticResource placeHolder}" Tag="Nuevo nombre para la rama"
+                             Margin="10,0,0,0" 
+                         />
+
+                    <Button Content="Renombrar" Command="{Binding Path=Renombrar}" Grid.Row="1" Grid.Column="8"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
                 </Grid>
             </GroupBox>
             <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="2" Grid.RowSpan="8">
@@ -156,7 +186,7 @@
                         </DataGrid.InputBindings>
 
                         <DataGrid.Columns>
-                                <DataGridTextColumn
+                            <DataGridTextColumn
                                     Header="Objeto"
                                     IsReadOnly="True"
                                     Binding="{Binding Path=FileName}" FontWeight="Bold" />
@@ -164,40 +194,35 @@
                                     IsReadOnly="True"
                                     Header="Ruta"
                                     Binding="{Binding Path=Ruta}" />
-                                        
-                            </DataGrid.Columns>
+
+                        </DataGrid.Columns>
                     </DataGrid>
 
                 </Grid>
             </GroupBox>
         </Grid>
 
-        <Grid x:Name="Entrega" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="2">
+        <Grid x:Name="Entrega" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="6"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+            <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -239,38 +264,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox x:Name="groupBoxRamas" Header="Ramas Generadas" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2">
-                <Grid>
-                    <DataGrid x:Name="dataGridRamas" 
-                IsReadOnly="false" 
-                AllowDrop="false" 
-                AutoGenerateColumns="False"
-                SelectionMode="Single"
-                CanUserDeleteRows="false"
-                CanUserAddRows="False"
-                CanUserReorderColumns="False"
-                CanUserSortColumns="False"
-                ItemsSource="{Binding Path=GitModel.ListaRamasCreadas}"                        
-                  >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn                  
-                              IsReadOnly="True"
-                              Header="Rama"
-                              Binding="{Binding Path=FileName}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </GroupBox>
-
-            <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="5"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" Grid.ColumnSpan="2" >
+            <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="8" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -310,7 +304,7 @@
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
                     ItemsSource="{Binding Path=GitModel.ListaArchivos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
-                              Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
+                              Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" CellEditEnding="DataGridArch_CellEditEnding"  
                               
                       >
                         <DataGrid.Columns>
@@ -367,9 +361,38 @@
                 </Grid>
             </GroupBox>
 
-            <GridSplitter Grid.Column="2" Width="5" HorizontalAlignment="Stretch" />
+            <GridSplitter Grid.Column="2" Grid.RowSpan="10" Width="5" HorizontalAlignment="Stretch" />
 
-                <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Column="3">
+            <GroupBox x:Name="groupBoxRamas" Header="Ramas"  Grid.Row="0"  Grid.Column="3" Grid.RowSpan="3">
+                    <Grid>
+                        <DataGrid x:Name="dataGridRamas" 
+                IsReadOnly="false" 
+                AllowDrop="false" 
+                AutoGenerateColumns="False"
+                SelectionMode="Single"
+                CanUserDeleteRows="false"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="False"
+                ItemsSource="{Binding Path=GitModel.ListaRamasCreadas}"                        
+                  >
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="MenuItemCr" Header="Crear Rama" Click="MenuItemCr_Click"  />
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                            
+                        <DataGrid.Columns>
+                                <DataGridTextColumn                  
+                              IsReadOnly="false"
+                              Header="Rama"
+                              Binding="{Binding Path=FileName}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </GroupBox>
+                
+                <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Row="3" Grid.Column="3" Grid.RowSpan="7">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -387,24 +410,6 @@
                     <CheckBox Name="chAprobar" Content="Aprobar Estructura!" Grid.Row="0" Margin="50,0,0,0" Checked="ChAprobar_Checked"  />
                         
                     <TreeView x:Name="ArbolRutas" ItemsSource="{Binding GitModel.ListaCarpetas}" Grid.Row="1" Grid.RowSpan="9">
-                            <!--<TreeView.Resources>
-                                <Style TargetType="{x:Type TreeViewItem}">
-                                    <Setter Property="HeaderTemplate">
-                                        <Setter.Value>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image Name="img"
-                                                       Width="20"
-                                                       Height="20"
-                                                       Stretch="Fill"
-                                                       Source="Cygnus2-0/img/carpeta.png"/>
-                                                    <TextBlock Text="{Binding}" Margin="5,0" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </TreeView.Resources>-->
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="{x:Type TreeViewItem}">
                                 <!--<Setter Property="IsExpanded" Value="True" />-->
@@ -423,6 +428,5 @@
             <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Command="{Binding Path=Entrega}" Grid.Column="7" Grid.Row="9"  Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnProcesar_Click" />
             <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Command="{Binding Path=Limpiar}" Grid.Column="8" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
             <Button x:Name="btnGitBash" Content="GitBash"  VerticalAlignment="Center" Command="{Binding Path=GitBash}" Grid.Column="9" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
-        </Grid>
-    </Grid>
+      </Grid>
 </UserControl>

@@ -67,7 +67,7 @@ namespace Cygnus2_0.Model.Compila
                     archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                     archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
                     archivo.ListaTipos = handler.ListaTiposObjetos;
-                    handler.ObtenerTipoArchivo(archivo);
+                    handler.ObtenerTipoArchivo(archivo, res.No_aplica);
                     view.ListaArchivosCargados.Add(archivo);
                 }
             }
@@ -76,6 +76,7 @@ namespace Cygnus2_0.Model.Compila
         public void ObtenerTipoArchivoComp(Archivo archivo)
         {
             string sbLine = "";
+            bool existeOn;
             string sbLineSpace = "";
             Int64 nuMenosUno = Convert.ToInt64(res.MenosUno);
 
@@ -107,7 +108,7 @@ namespace Cygnus2_0.Model.Compila
                             {
                                 archivo.Tipo = prefijo.Value;
                                 archivo.SelectItemTipo = prefijo;
-                                archivo.NombreObjeto = handler.pObtenerNombreObjeto(sbLineSpace);
+                                archivo.NombreObjeto = handler.pObtenerNombreObjeto(sbLineSpace, out existeOn);
                                 archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
                                 archivo.TipoAplicacion = archivo.FinArchivo.Equals(res.END) ? res.SQL : res.SQLPLUS;
                                 archivo.InicioArchivo = prefijo.Text.ToLower();

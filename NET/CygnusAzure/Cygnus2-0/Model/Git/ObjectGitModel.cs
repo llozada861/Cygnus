@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Model.Git
 {
@@ -24,6 +25,7 @@ namespace Cygnus2_0.Model.Git
         private string comentario;
         private SelectListItem ramaLBSeleccionada;
         private bool activaAprobRamas;
+        private string nuevaRama;
         public ObjectGitModel()
         {
             this.ListaRamasLB = new ObservableCollection<SelectListItem>();
@@ -37,7 +39,9 @@ namespace Cygnus2_0.Model.Git
         public string Codigo
         {
             get { return codigo; }
-            set { SetProperty(ref codigo, value); }
+            set {
+                SetProperty(ref codigo, value);
+            }
         }
         public string ObjetoBuscar
         {
@@ -47,17 +51,28 @@ namespace Cygnus2_0.Model.Git
         public string HU
         {
             get { return hu; }
-            set { SetProperty(ref hu, value); }
+            set
+            {
+                SetProperty(ref hu, value);
+                pCreaRamas();
+            }
         }
         public string Comentario
         {
             get { return comentario; }
             set { SetProperty(ref comentario, value); }
         }
+        public string NuevaRama
+        {
+            get { return nuevaRama; }
+            set { SetProperty(ref nuevaRama, value); }
+        }
         public SelectListItem RamaLBSeleccionada
         {
             get { return ramaLBSeleccionada; }
-            set { SetProperty(ref ramaLBSeleccionada, value); }
+            set { SetProperty(ref ramaLBSeleccionada, value);
+                pCreaRamas();
+            }
         }
         public ObservableCollection<SelectListItem> ListaRamasLB
         {
@@ -94,8 +109,25 @@ namespace Cygnus2_0.Model.Git
         public bool ActivaAprobRamas
         {
             get { return activaAprobRamas; }
-            set { activaAprobRamas = value; }
+            set { SetProperty(ref activaAprobRamas, value); }
         }
 
+        public void pCreaRamas()
+        {
+            if(RamaLBSeleccionada != null)
+            { 
+                string ramaDll = res.Feature + HU + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_DLL";
+                string ramaPru = res.Feature + HU + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PRU";
+                string ramaPdn = res.Feature + HU + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PDN";
+
+                if (!string.IsNullOrEmpty(HU) && !string.IsNullOrEmpty(RamaLBSeleccionada.Text))
+                {
+                    ListaRamasCreadas.Clear();
+                    ListaRamasCreadas.Add(new Archivo { FileName = ramaDll });
+                    ListaRamasCreadas.Add(new Archivo { FileName = ramaPru });
+                    ListaRamasCreadas.Add(new Archivo { FileName = ramaPdn });
+                }
+            }
+        }
     }
 }
