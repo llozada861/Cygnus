@@ -292,7 +292,7 @@
                     </Grid.RowDefinitions>
 
                     <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="BtnExaminar_Click" />
-                                            
+
                     <DataGrid x:Name="dataGridArch" 
                     IsReadOnly="false" 
                     AllowDrop="True" 
@@ -304,15 +304,23 @@
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
                     ItemsSource="{Binding Path=GitModel.ListaArchivos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
-                              Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" CellEditEnding="DataGridArch_CellEditEnding"  
+                              Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" CellEditEnding="DataGridArch_CellEditEnding" SelectionChanged="DataGridArch_SelectionChanged"  
                               
                       >
+
                         <DataGrid.Columns>
-                            <DataGridTextColumn                  
-                              IsReadOnly="True"
-                              Header="Archivo"
-                              Binding="{Binding Path=FileName}" 
-                                MaxWidth="300"/>
+
+                            <DataGridTemplateColumn x:Name="idArchivo" Header="Archivo" MaxWidth="300" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=FileName, Mode=OneWay}">
+                                            <TextBlock.ToolTip>
+                                                <TextBlock Text="{Binding Path=FileName, Mode=OneWay}"/>
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
                             <DataGridComboBoxColumn Width="100"
                              DisplayMemberPath="Text"

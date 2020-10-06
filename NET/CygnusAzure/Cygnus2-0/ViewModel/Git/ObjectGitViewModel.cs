@@ -178,7 +178,7 @@ namespace Cygnus2_0.ViewModel.Git
                         break;
                     }
 
-                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && (!archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) || !archivo.Tipo.ToLower().Equals(res.TipoAplica.ToLower())))
                     {
                         archivosNoRepo = true;
                         break;
@@ -239,8 +239,6 @@ namespace Cygnus2_0.ViewModel.Git
 
             string[] archivos = handler.pCargarArchivos();
             ListarArchivos(archivos);
-
-            GitModel.ListaCarpetas.Clear();
             pArmarArbol(null,null);
         }
 
@@ -306,6 +304,8 @@ namespace Cygnus2_0.ViewModel.Git
             string usuario = "-";
             Folder CarpetaPadre;
             string carpetaDespliegue = res.Despliegues+"\\" + GitModel.RamaLBSeleccionada.Text;
+
+            GitModel.ListaCarpetas.Clear();
 
             Folder raiz = new Folder { FolderLabel = res.Carpetas, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
             Folder despliegue = new Folder { FolderLabel = carpetaDespliegue, FullPath = "", Folders = new List<Folder>() };
