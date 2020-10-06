@@ -374,12 +374,17 @@ namespace Cygnus2_0
                             "insert into words values('trigger')",
                             "insert into words values('before')",
                             "insert into words values('after')",
-                            "insert into words values('for')"
+                            "insert into words values('for')",
+                            "INSERT INTO user_grants (user,company) VALUES ('OPENSIRIUS',99)"
                 };
 
                 foreach (string sql in query)
                 {
-                    SqliteDAO.pExecuteNonQuery(sql);
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch { }
                 }
             }
         }
