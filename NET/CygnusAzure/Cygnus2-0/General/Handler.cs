@@ -320,7 +320,13 @@ namespace Cygnus2_0.General
                         else
                             foreach (SelectListItem prefijo in this.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
                             {
-                                if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
+                                if (sbLineSpace.ToUpper().StartsWith("PROMPT") || sbLineSpace.ToUpper().StartsWith("SPOOL") || sbLineSpace.ToUpper().StartsWith("@"))
+                                {
+                                    archivo.NombreObjeto = "";
+                                    archivo.Tipo = res.TipoAplica;
+                                    break;
+                                }
+                                else if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
                                 {
                                     archivo.Tipo = prefijo.Value;
                                     archivo.SelectItemTipo = ListaTiposObjetos.ToList().Find(x => x.Text.Equals(archivo.Tipo));

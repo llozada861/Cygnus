@@ -145,7 +145,6 @@ namespace Cygnus2_0.Pages.Git
         {
             comboBox = sender as ComboBox;
             SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
-            objectViewModel.GitModel.ListaCarpetas.Clear();
             objectViewModel.pArmarArbol(tipo,null);
             //dataGridArch.ItemsSource = objectViewModel.GitModel.ListaArchivos;
 
@@ -168,7 +167,6 @@ namespace Cygnus2_0.Pages.Git
 
         private void UsuarioSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            objectViewModel.GitModel.ListaCarpetas.Clear();
             objectViewModel.pArmarArbol(null, null);
 
             /*var comboBox = sender as ComboBox;
@@ -209,7 +207,6 @@ namespace Cygnus2_0.Pages.Git
                 //    MessageBox.Show("Value after edit: " + editedTextbox.Text);
 
                 item.NombreObjeto = editedTextbox.Text;
-                objectViewModel.GitModel.ListaCarpetas.Clear();
                 objectViewModel.pArmarArbol(null, item);
             }
         }
@@ -241,7 +238,7 @@ namespace Cygnus2_0.Pages.Git
                         row.Background = Colobk;
                     }
 
-                    if(item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    if(item.Tipo != null && (item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) || item.Tipo.ToLower().Equals(res.TipoAplica.ToLower())))
                     {
                         row.Background = Colobk;
                     }
@@ -257,6 +254,11 @@ namespace Cygnus2_0.Pages.Git
             {
                 objectViewModel.pCreaRama(archivo);
             }
+        }
+
+        private void DataGridArch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            objectViewModel.pArmarArbol(null, null);
         }
     }
 }
