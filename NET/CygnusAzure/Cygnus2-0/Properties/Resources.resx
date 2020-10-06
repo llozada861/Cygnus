@@ -1449,9 +1449,6 @@ End;
   <data name="TagHtml_desarrollador" xml:space="preserve">
     <value>[desarrollador]</value>
   </data>
-  <data name="Cygnus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\BaseDatos\Cygnus.db;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="KeyGeneraGrants" xml:space="preserve">
     <value>GeneraGrants</value>
   </data>
@@ -1939,5 +1936,8 @@ sonar.plsql.file.suffixes=sql,pkg</value>
   </data>
   <data name="ExtensionXLSM" xml:space="preserve">
     <value>.xlsm</value>
+  </data>
+  <data name="Cygnus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\BaseDatos\Cygnus.db;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
