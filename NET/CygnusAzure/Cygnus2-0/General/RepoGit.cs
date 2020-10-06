@@ -90,26 +90,11 @@ namespace Cygnus2_0.General
                 Commands.Checkout(repo, ramaWO);
                 pCreaDirectorios(rutaObjetos);
 
-                List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
-
-                foreach (Archivo archivo in gitModel.ListaArchivos)
-                {
-                    archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
-                }
-
-                //Se copian los archivos en despliegue
-                SonarQube.pCopiarArchivos(rutaObjetos, archivosEvaluar);
                 //Se copian los archivos en cada ruta del repo
                 pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), handler.RutaGitObjetos);
 
                 Commands.Stage(repo, "*");
                 Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now));
-
-
-                /*pCreaRamaRepo(handler, res.RamaDesarrollo, ramaDll);
-                pCreaRamaRepo(handler, res.RamaPruebas, ramaPru);
-                pCreaRamaRepo(handler, res.RamaProduccion, ramaPdn);*/
-                //Commands.Checkout(repo, ramaDll);
             }
         }
 
@@ -297,12 +282,19 @@ namespace Cygnus2_0.General
         {
             string destino = "";
             string pathIn = "";
+            string extension = "";
 
             foreach (Folder archivo in ListaCarpetas)
             {
-                if (!archivo.FolderLabel.EndsWith(res.ExtensionSQL))
+                extension = System.IO.Path.GetExtension(archivo.FolderLabel);
+
+                if (string.IsNullOrEmpty(extension))
                 {
-                    pathIn = Path.Combine(path , archivo.FolderLabel);
+                    if (!archivo.FolderLabel.Equals(res.Carpetas))
+                        pathIn = Path.Combine(path, archivo.FolderLabel);
+                    else
+                        pathIn = path;
+
                     pCreaDirectorios(pathIn);
                     pCopiarObjetosRepo(archivo.Folders, pathIn);
                 }

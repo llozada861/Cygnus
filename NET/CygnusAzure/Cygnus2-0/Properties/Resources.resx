@@ -1928,4 +1928,16 @@ sonar.plsql.file.suffixes=sql,pkg</value>
   <data name="RamaPruebas" xml:space="preserve">
     <value>pruebas</value>
   </data>
+  <data name="Carpetas" xml:space="preserve">
+    <value>Carpetas</value>
+  </data>
+  <data name="DocuArquitecturaObjetos" xml:space="preserve">
+    <value>OpenEPM10_AnalisisyDiseno</value>
+  </data>
+  <data name="DocuPruebasObj" xml:space="preserve">
+    <value>PRUEBAS</value>
+  </data>
+  <data name="ExtensionXLSM" xml:space="preserve">
+    <value>.xlsm</value>
+  </data>
 </root>

@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Git
 {
@@ -236,6 +237,11 @@ namespace Cygnus2_0.Pages.Git
                         row.Background = Brushes.Red;
                     }
                     else
+                    {
+                        row.Background = Colobk;
+                    }
+
+                    if(item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
                     {
                         row.Background = Colobk;
                     }

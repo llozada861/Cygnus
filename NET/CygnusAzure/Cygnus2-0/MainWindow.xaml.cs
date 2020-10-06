@@ -361,7 +361,6 @@ namespace Cygnus2_0
                             "update object_type set path = 'client\\framework\\PI\\[nombre]' where object = 'PI'",
                             "update object_type set path = 'client\\framework\\RU\\[nombre]' where object = 'RU'",
                             "update object_type set path = 'client\\framework\\TC\\[nombre]' where object = 'TC'",
-                            "delete from object_type where object = 'otros'",
                             "insert into words values('alter')",
                             "insert into words values('index')",
                             "insert into words values('unique')",
@@ -378,10 +377,10 @@ namespace Cygnus2_0
                             "insert into words values('for')"
                 };
 
-                /*foreach (string sql in query)
+                foreach (string sql in query)
                 {
                     SqliteDAO.pExecuteNonQuery(sql);
-                }*/
+                }
             }
         }
     }

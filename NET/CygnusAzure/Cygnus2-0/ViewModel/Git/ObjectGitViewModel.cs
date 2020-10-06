@@ -129,6 +129,9 @@ namespace Cygnus2_0.ViewModel.Git
         public void pEntrega(object commandParameter)
         {
             bool archivosNoRepo = false;
+            bool blDocArquitectura = false;
+            bool blDocPruebas = false;
+
             try
             {
                 if (GitModel.RamaLBSeleccionada == null)
@@ -163,22 +166,33 @@ namespace Cygnus2_0.ViewModel.Git
 
                 foreach(Archivo archivo in GitModel.ListaArchivos)
                 {
-                    if(string.IsNullOrEmpty(archivo.NombreObjeto))
-                    {
-                        archivosNoRepo = true;
-                        break;
-                    }
-
-                    if(string.IsNullOrEmpty(archivo.Usuario))
-                    {
-                        archivosNoRepo = true;
-                        break;
-                    }
-
                     if (archivo.Tipo == null && string.IsNullOrEmpty(archivo.Tipo))
                     {
                         archivosNoRepo = true;
                         break;
+                    }
+
+                    if (string.IsNullOrEmpty(archivo.Usuario) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    {
+                        archivosNoRepo = true;
+                        break;
+                    }
+
+                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    {
+                        archivosNoRepo = true;
+                        break;
+                    }
+
+
+                    if (archivo.FileName.ToUpper().StartsWith(res.DocuArquitecturaObjetos.ToUpper()))
+                    {
+                        blDocArquitectura = true;
+                    }
+
+                    if (archivo.FileName.ToUpper().IndexOf(res.DocuPruebasObj) > -1)
+                    {
+                        blDocPruebas = true;
                     }
                 }
 
@@ -188,13 +202,25 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
+                if (!blDocArquitectura)
+                {
+                    handler.MensajeError("Debe adicionar el documento de arquitectura.");
+                    return;
+                }
+
+                if (!blDocPruebas)
+                {
+                    handler.MensajeError("Debe adicionar el archivo pruebas.");
+                    return;
+                }
+
                 handler.CursorWait();
                 RepoGit.pVersionarObjetos(GitModel,handler);
                 handler.CursorNormal();
 
                 GitModel.ActivaAprobRamas = false;
 
-                handler.MensajeOk("Continue creando manualmente las ramas Feaure!");
+                handler.MensajeOk("Continue creando manualmente las ramas Feature!");
             }
             catch(Exception ex)
             {
@@ -279,8 +305,22 @@ namespace Cygnus2_0.ViewModel.Git
         {
             string usuario = "-";
             Folder CarpetaPadre;
+            string carpetaDespliegue = res.Despliegues+"\\" + GitModel.RamaLBSeleccionada.Text;
 
-            foreach (Archivo archivo in GitModel.ListaArchivos)
+            Folder raiz = new Folder { FolderLabel = res.Carpetas, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+            Folder despliegue = new Folder { FolderLabel = carpetaDespliegue, FullPath = "", Folders = new List<Folder>() };
+
+            raiz.Folders.Add(despliegue);
+
+            var usuarios = GitModel.ListaArchivos.Select(x => x.Usuario).Distinct();
+
+            foreach (var archivo in usuarios)
+            {
+                CarpetaPadre = new Folder { FolderLabel = archivo, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+                raiz.Folders.Add(CarpetaPadre);
+            }
+
+           foreach (Archivo archivo in GitModel.ListaArchivos)
             {
                 if (tipo != null)
                 {
@@ -294,28 +334,19 @@ namespace Cygnus2_0.ViewModel.Git
 
                 if (!string.IsNullOrEmpty(archivo.Usuario))
                 {
-                    if (!usuario.Equals(archivo.Usuario))
-                    {
-                        usuario = archivo.Usuario;
-
-                        if (!GitModel.ListaCarpetas.ToList().Exists(x => x.FolderLabel.Equals(usuario)))
-                        {
-                            /*Folder carpetap = new Folder();
-                            carpetap.FolderLabel = archivo.Usuario;
-                            pGeneraHijos(archivo, carpetap);
-                            GitModel.ListaCarpetas.Add(carpetap);*/
-                            GitModel.ListaCarpetas.Add(new Folder { FolderLabel = archivo.Usuario, IsNodeExpanded = true, FullPath = archivo.RutaConArchivo });
-                        }
-                    }
-
-                    CarpetaPadre = GitModel.ListaCarpetas.ToList().Find(x => x.FolderLabel.Equals(usuario));
+                    CarpetaPadre = raiz.Folders.Find(x => x.FolderLabel.Equals(archivo.Usuario)); 
 
                     if (CarpetaPadre != null)
                     {
                         pGeneraHijos(archivo, CarpetaPadre);
                     }
                 }
+
+                despliegue.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
             }
+
+            GitModel.ListaCarpetas.Add(raiz);
+
         }
 
         public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)

@@ -1222,6 +1222,12 @@ namespace Cygnus2_0.General
                             archivo.Tipo = res.TipoObjetoPaquete.ToLower();
                             archivo.NombreObjeto = archivo.NombreSinExt;
                         }
+
+                        if (archivo.Extension.Equals(res.ExtensionExcel) || archivo.Extension.Equals(res.ExtensionExcelX) || archivo.Extension.Equals(res.ExtensionWord) || archivo.Extension.Equals(res.ExtensionWordX) || archivo.Extension.Equals(res.ExtensionXLSM))
+                        {
+                            archivo.Tipo = res.TipoOtros.ToLower();
+                            archivo.NombreObjeto = "-";
+                        }
                     }
 
                     archivos.Add(archivo);

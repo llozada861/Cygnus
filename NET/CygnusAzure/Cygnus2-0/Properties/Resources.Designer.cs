@@ -236,6 +236,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Carpetas.
+        /// </summary>
+        public static string Carpetas {
+            get {
+                return ResourceManager.GetString("Carpetas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sonar.
         /// </summary>
         public static string CarpetaSonar {
@@ -403,12 +412,30 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a OpenEPM10_AnalisisyDiseno.
+        /// </summary>
+        public static string DocuArquitecturaObjetos {
+            get {
+                return ResourceManager.GetString("DocuArquitecturaObjetos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         public static byte[] DocumentacionHtml {
             get {
                 object obj = ResourceManager.GetObject("DocumentacionHtml", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PRUEBAS.
+        /// </summary>
+        public static string DocuPruebasObj {
+            get {
+                return ResourceManager.GetString("DocuPruebasObj", resourceCulture);
             }
         }
         
@@ -723,6 +750,15 @@ namespace Cygnus2_0.Properties {
         public static string ExtensionWordX {
             get {
                 return ResourceManager.GetString("ExtensionWordX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a .xlsm.
+        /// </summary>
+        public static string ExtensionXLSM {
+            get {
+                return ResourceManager.GetString("ExtensionXLSM", resourceCulture);
             }
         }
         

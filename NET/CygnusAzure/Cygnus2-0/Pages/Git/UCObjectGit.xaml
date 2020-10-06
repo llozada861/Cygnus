@@ -311,7 +311,8 @@
                             <DataGridTextColumn                  
                               IsReadOnly="True"
                               Header="Archivo"
-                              Binding="{Binding Path=FileName}" />
+                              Binding="{Binding Path=FileName}" 
+                                MaxWidth="300"/>
 
                             <DataGridComboBoxColumn Width="100"
                              DisplayMemberPath="Text"
@@ -412,7 +413,6 @@
                     <TreeView x:Name="ArbolRutas" ItemsSource="{Binding GitModel.ListaCarpetas}" Grid.Row="1" Grid.RowSpan="9">
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="{x:Type TreeViewItem}">
-                                <!--<Setter Property="IsExpanded" Value="True" />-->
                                  <Setter Property="IsExpanded" Value="{Binding IsNodeExpanded}" />
                             </Style>
                         </TreeView.ItemContainerStyle>
