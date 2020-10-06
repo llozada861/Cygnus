@@ -74,7 +74,7 @@ namespace Cygnus2_0.ViewModel.Documentation
                 archivo.DocumentacionSinDepurar = new List<StringBuilder>();
                 archivo.Modificaciones = new List<ModificacionModel>();
                 archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
-                handler.ObtenerTipoArchivo(archivo);
+                handler.ObtenerTipoArchivo(archivo, res.No_aplica);
                 if (handler.pDepuraDocumentacion(archivo))
                 {
                     pAdicionarArchivo

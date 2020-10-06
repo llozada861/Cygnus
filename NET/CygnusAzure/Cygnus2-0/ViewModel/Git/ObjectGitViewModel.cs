@@ -4,10 +4,12 @@ using Cygnus2_0.Model.Git;
 using Cygnus2_0.Pages.Git;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Git
 {
@@ -19,12 +21,16 @@ namespace Cygnus2_0.ViewModel.Git
         private readonly DelegateCommand _limpiar;
         private readonly DelegateCommand _entrega;
         private readonly DelegateCommand _examinar;
+        private readonly DelegateCommand _renombrar;
+        private readonly DelegateCommand _gitBash;
 
         public ICommand Process => _process;
         public ICommand Buscar => _buscar;
         public ICommand Limpiar => _limpiar;
         public ICommand Entrega => _entrega;
         public ICommand Examinar => _examinar;
+        public ICommand Renombrar => _renombrar;
+        public ICommand GitBash => _gitBash;
 
         public ObjectGitViewModel(Handler handler)
         {
@@ -35,6 +41,8 @@ namespace Cygnus2_0.ViewModel.Git
             _limpiar = new DelegateCommand(pLimpiar);
             _entrega = new DelegateCommand(pEntrega);
             _examinar = new DelegateCommand(pExaminar);
+            _renombrar = new DelegateCommand(pRenombrar);
+            _gitBash = new DelegateCommand(pEjecutaGitBash);
 
             this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
         }
@@ -108,15 +116,22 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.ObjetoBuscar = "";
             GitModel.ListaArchivosEncontrados.Clear();
             GitModel.ListaRamasLB = null;
-            GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
+            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
+                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
             GitModel.Comentario = "";
             GitModel.HU = "";
             GitModel.ListaArchivos.Clear();
             GitModel.ListaCarpetas.Clear();
             GitModel.ActivaAprobRamas = false;
+            GitModel.NuevaRama = "";
+            GitModel.ListaRamasCreadas.Clear();
         }
         public void pEntrega(object commandParameter)
         {
+            bool archivosNoRepo = false;
+            bool blDocArquitectura = false;
+            bool blDocPruebas = false;
+
             try
             {
                 if (GitModel.RamaLBSeleccionada == null)
@@ -145,65 +160,193 @@ namespace Cygnus2_0.ViewModel.Git
 
                 if(!GitModel.ActivaAprobRamas)
                 {
-                    handler.MensajeError("Por favor revise y apruebe la estructura de archvivos que detectó la aplicación.");
+                    handler.MensajeError("Por favor revise y apruebe la estructura de archivos que detectó la aplicación.");
                     return;
                 }
 
+                foreach(Archivo archivo in GitModel.ListaArchivos)
+                {
+                    if (archivo.Tipo == null && string.IsNullOrEmpty(archivo.Tipo))
+                    {
+                        archivosNoRepo = true;
+                        break;
+                    }
+
+                    if (string.IsNullOrEmpty(archivo.Usuario) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    {
+                        archivosNoRepo = true;
+                        break;
+                    }
+
+                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    {
+                        archivosNoRepo = true;
+                        break;
+                    }
+
+
+                    if (archivo.FileName.ToUpper().StartsWith(res.DocuArquitecturaObjetos.ToUpper()))
+                    {
+                        blDocArquitectura = true;
+                    }
+
+                    if (archivo.FileName.ToUpper().IndexOf(res.DocuPruebasObj) > -1)
+                    {
+                        blDocPruebas = true;
+                    }
+                }
+
+                if(archivosNoRepo)
+                {
+                    handler.MensajeError("Todos los archivos deben tener TIPO, USUARIO y REPOSITORIO. Por favor revisar.");
+                    return;
+                }
+
+                if (!blDocArquitectura)
+                {
+                    handler.MensajeError("Debe adicionar el documento de arquitectura.");
+                    return;
+                }
+
+                if (!blDocPruebas)
+                {
+                    handler.MensajeError("Debe adicionar el archivo pruebas.");
+                    return;
+                }
+
+                handler.CursorWait();
+                RepoGit.pVersionarObjetos(GitModel,handler);
+                handler.CursorNormal();
+
                 GitModel.ActivaAprobRamas = false;
+
+                handler.MensajeOk("Continue creando manualmente las ramas Feature!");
             }
             catch(Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }
 
         public void pExaminar(object commandParameter)
         {
+            if (GitModel.RamaLBSeleccionada == null)
+            {
+                handler.MensajeError("Seleccione una rama de línea base.");
+                return;
+            }
+
             string[] archivos = handler.pCargarArchivos();
             ListarArchivos(archivos);
 
             GitModel.ListaCarpetas.Clear();
-            pArmarArbol(null);
-
-            GitModel.ActivaAprobRamas = true;
+            pArmarArbol(null,null);
         }
 
-        public void pArmarArbol(SelectListItem tipo)
+        public void pRenombrar(object commandParameter)
+        {
+            try
+            {
+                if (GitModel.RamaLBSeleccionada == null)
+                {
+                    handler.MensajeError("Seleccione una rama de línea base.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(GitModel.NuevaRama))
+                {
+                    handler.MensajeError("Ingrese un nuevo nombre para la rama.");
+                    return;
+                }
+
+                handler.CursorWait();
+                RepoGit.pRenombrar(handler, GitModel.RamaLBSeleccionada.Text, GitModel.NuevaRama);
+                handler.CursorNormal();
+                handler.MensajeOk("Rama Renombrada con éxito");
+                pLimpiar(null);
+            }
+            catch(Exception ex)
+            {
+                handler.CursorNormal();
+                handler.MensajeError(ex.Message);
+            }
+        }
+
+        internal void pCreaRama(Archivo archivo)
+        {
+            try
+            {
+                handler.CursorWait();
+
+                if (archivo.FileName.EndsWith("DLL"))
+                    RepoGit.pCreaRamaRepo(handler, res.RamaDesarrollo, archivo.FileName);
+                else if (archivo.FileName.EndsWith("PRU"))
+                    RepoGit.pCreaRamaRepo(handler, res.RamaPruebas, archivo.FileName);
+                else if (archivo.FileName.EndsWith("PDN"))
+                    RepoGit.pCreaRamaRepo(handler, res.RamaProduccion, archivo.FileName);
+
+                handler.CursorNormal();
+                handler.MensajeOk("Rama Creada!");
+            }
+            catch(Exception ex)
+            {
+                handler.CursorNormal();
+                handler.MensajeError(ex.Message);
+            }
+        }
+
+        public void pEjecutaGitBash(object commandParameter)
+        {
+            RepoGit.ExecuteGitBash(handler.RutaGitBash+"\\"+res.GitBashExe,handler.RutaGitObjetos);
+        }
+
+        public void pArmarArbol(SelectListItem tipo, Archivo itemModif)
         {
             string usuario = "-";
             Folder CarpetaPadre;
+            string carpetaDespliegue = res.Despliegues+"\\" + GitModel.RamaLBSeleccionada.Text;
 
-            foreach (Archivo archivo in GitModel.ListaArchivos)
+            Folder raiz = new Folder { FolderLabel = res.Carpetas, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+            Folder despliegue = new Folder { FolderLabel = carpetaDespliegue, FullPath = "", Folders = new List<Folder>() };
+
+            raiz.Folders.Add(despliegue);
+
+            var usuarios = GitModel.ListaArchivos.Select(x => x.Usuario).Distinct();
+
+            foreach (var archivo in usuarios)
+            {
+                CarpetaPadre = new Folder { FolderLabel = archivo, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+                raiz.Folders.Add(CarpetaPadre);
+            }
+
+           foreach (Archivo archivo in GitModel.ListaArchivos)
             {
                 if (tipo != null)
                 {
                     archivo.Usuario = !string.IsNullOrEmpty(tipo.Usuario) ? tipo.Usuario : archivo.Usuario;
                 }
 
+                if(itemModif != null && archivo.FileName.Equals(itemModif.FileName))
+                {
+                    archivo.NombreObjeto = itemModif.NombreObjeto;
+                }
+
                 if (!string.IsNullOrEmpty(archivo.Usuario))
                 {
-                    if (!usuario.Equals(archivo.Usuario))
-                    {
-                        usuario = archivo.Usuario;
-
-                        if (!GitModel.ListaCarpetas.ToList().Exists(x => x.FolderLabel.Equals(usuario)))
-                        {
-                            /*Folder carpetap = new Folder();
-                            carpetap.FolderLabel = archivo.Usuario;
-                            pGeneraHijos(archivo, carpetap);
-                            GitModel.ListaCarpetas.Add(carpetap);*/
-                            GitModel.ListaCarpetas.Add(new Folder { FolderLabel = archivo.Usuario, IsNodeExpanded = true });
-                        }
-                    }
-
-                    CarpetaPadre = GitModel.ListaCarpetas.ToList().Find(x => x.FolderLabel.Equals(usuario));
+                    CarpetaPadre = raiz.Folders.Find(x => x.FolderLabel.Equals(archivo.Usuario)); 
 
                     if (CarpetaPadre != null)
                     {
                         pGeneraHijos(archivo, CarpetaPadre);
                     }
                 }
+
+                despliegue.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
             }
+
+            GitModel.ListaCarpetas.Add(raiz);
+
         }
 
         public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)
@@ -213,10 +356,14 @@ namespace Cygnus2_0.ViewModel.Git
 
             Folder carpetaHija;
             string path;
+
+            if (string.IsNullOrEmpty(archivo.SelectItemTipo.Path))
+                return;
+
             path = archivo.SelectItemTipo.Path.Replace("[nombre]", archivo.NombreObjeto);
             Boolean blExistePath = true;
 
-            archivo.RutaRepo = path + archivo.FileName;
+            archivo.RutaRepo = Path.Combine(path, archivo.FileName);
             string carpetaPadreRepo = handler.pObtCarpetaPadre(archivo.RutaRepo);
 
             List<String> Carpetashijas = new List<String>();
@@ -253,7 +400,7 @@ namespace Cygnus2_0.ViewModel.Git
 
                         if (i == Carpetashijas.Count - 2)
                         {
-                            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false });
+                            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
                         }
 
                         carpetaPadre.Folders.Add(carpetaHija);
@@ -266,7 +413,7 @@ namespace Cygnus2_0.ViewModel.Git
 
             if (blExistePath)
             {
-                carpetaPadre.Folders.Add(new Folder { FolderLabel = archivo.FileName });
+                carpetaPadre.Folders.Add(new Folder { FolderLabel = archivo.FileName, FullPath = archivo.RutaConArchivo });
             }
 
         }
@@ -274,7 +421,7 @@ namespace Cygnus2_0.ViewModel.Git
         public void ListarArchivos(string[] DropPath)
         {
             List<Archivo> archivos = new List<Archivo>();
-            handler.pListaArchivos(DropPath, archivos);
+            handler.pListaArchivos(DropPath, archivos,res.GIT);
 
             foreach (Archivo archivo in archivos)
             {

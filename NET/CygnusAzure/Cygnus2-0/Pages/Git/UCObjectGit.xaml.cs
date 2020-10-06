@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -17,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Git
 {
@@ -27,6 +29,7 @@ namespace Cygnus2_0.Pages.Git
     {
         private Handler handler;
         private ObjectGitViewModel objectViewModel;
+        private Brush Colobk;
         public UCObjectGit()
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
@@ -37,6 +40,8 @@ namespace Cygnus2_0.Pages.Git
             InitializeComponent();
 
             chAprobar.IsEnabled = false;
+
+            dataGridArch.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -140,7 +145,8 @@ namespace Cygnus2_0.Pages.Git
         {
             comboBox = sender as ComboBox;
             SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
-            objectViewModel.pArmarArbol(tipo);
+            objectViewModel.GitModel.ListaCarpetas.Clear();
+            objectViewModel.pArmarArbol(tipo,null);
             //dataGridArch.ItemsSource = objectViewModel.GitModel.ListaArchivos;
 
             /*var comboBox = sender as ComboBox;
@@ -162,7 +168,8 @@ namespace Cygnus2_0.Pages.Git
 
         private void UsuarioSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            objectViewModel.pArmarArbol(null);
+            objectViewModel.GitModel.ListaCarpetas.Clear();
+            objectViewModel.pArmarArbol(null, null);
 
             /*var comboBox = sender as ComboBox;
             SelectListItem usuario = (SelectListItem)comboBox.SelectedItem;
@@ -176,7 +183,7 @@ namespace Cygnus2_0.Pages.Git
 
         private void BtnProcesar_Click(object sender, RoutedEventArgs e)
         {
-            chAprobar.IsEnabled = false;
+            chAprobar.IsChecked = false;
         }
 
         private void ChAprobar_Checked(object sender, RoutedEventArgs e)
@@ -189,5 +196,67 @@ namespace Cygnus2_0.Pages.Git
             chAprobar.IsEnabled = true;
         }
 
+        private void DataGridArch_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            //Only handles cases where the cell contains a TextBox
+            var editedTextbox = e.EditingElement as TextBox;
+
+            if (editedTextbox != null)
+            {
+                Archivo item = (Archivo)e.Row.Item;
+
+                //if (editedTextbox != null)
+                //    MessageBox.Show("Value after edit: " + editedTextbox.Text);
+
+                item.NombreObjeto = editedTextbox.Text;
+                objectViewModel.GitModel.ListaCarpetas.Clear();
+                objectViewModel.pArmarArbol(null, item);
+            }
+        }
+
+        private void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
+        {
+            if (dataGridArch.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
+            {
+                pCambiarColorFila();
+            }
+        }
+        private void pCambiarColorFila()
+        {
+            foreach (Archivo item in dataGridArch.ItemsSource)
+            {
+                var row = dataGridArch.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+
+                if (row != null)
+                {
+                    if (row.Background != Brushes.Red)
+                        Colobk = row.Background;
+
+                    if (item.Tipo == null || string.IsNullOrEmpty(item.Usuario) || string.IsNullOrEmpty(item.NombreObjeto))
+                    {
+                        row.Background = Brushes.Red;
+                    }
+                    else
+                    {
+                        row.Background = Colobk;
+                    }
+
+                    if(item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    {
+                        row.Background = Colobk;
+                    }
+                }
+            }
+        }
+
+        private void MenuItemCr_Click(object sender, RoutedEventArgs e)
+        {
+            Archivo archivo = dataGridRamas.SelectedItem as Archivo;
+
+            if (archivo != null)
+            {
+                objectViewModel.pCreaRama(archivo);
+            }
+        }
     }
 }

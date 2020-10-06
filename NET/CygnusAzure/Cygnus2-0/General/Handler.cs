@@ -293,10 +293,11 @@ namespace Cygnus2_0.General
                 return "N";
         }
 
-        public void ObtenerTipoArchivo(Archivo archivo)
+        public void ObtenerTipoArchivo(Archivo archivo,string llamado)
         {
             string sbLine = "";
             string sbLineSpace = "";
+            bool existeOn = false;
             Int64 nuMenosUno = Convert.ToInt64(res.MenosUno);
 
             string nombreArchivo = archivo.NombreSinExt;
@@ -311,22 +312,31 @@ namespace Cygnus2_0.General
                     {
                         sbLineSpace = Regex.Replace(sbLine, @"\s+", " ");
 
-                        foreach (SelectListItem prefijo in this.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
+                        if (!string.IsNullOrEmpty(archivo.Tipo) && archivo.Tipo.Equals(res.TipoObjetoTrigger.ToLower()) && !existeOn)
                         {
-                            if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
-                            {
-                                archivo.Tipo = prefijo.Value;
-                                archivo.SelectItemTipo = ListaTiposObjetos.ToList().Find(x=>x.Text.Equals(archivo.Tipo));
-                                archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace);
-                                archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
-                                archivo.InicioArchivo = prefijo.Text.ToLower();
-
-                                if (archivo.Tipo.ToLower().Equals(res.Script.ToLower()))
-                                    archivo.NombreObjeto = "";
-
-                                break;
-                            }
+                            archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace, out existeOn);
+                            break;                            
                         }
+                        else
+                            foreach (SelectListItem prefijo in this.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
+                            {
+                                if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
+                                {
+                                    archivo.Tipo = prefijo.Value;
+                                    archivo.SelectItemTipo = ListaTiposObjetos.ToList().Find(x => x.Text.Equals(archivo.Tipo));
+                                    archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace, out existeOn);
+                                    archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
+                                    archivo.InicioArchivo = prefijo.Text.ToLower();
+
+                                    if (archivo.Tipo.ToLower().Equals(res.Script.ToLower()) && llamado.Equals(res.GIT))
+                                    {
+                                        archivo.NombreObjeto = "";
+                                        archivo.Tipo = "";
+                                    }
+
+                                    break;
+                                }
+                            }
 
                         if (string.IsNullOrEmpty(archivo.Tipo))
                         {
@@ -334,13 +344,18 @@ namespace Cygnus2_0.General
                         }
                         else
                         {
-                            break;
+                            if(archivo.Tipo.Equals(res.TipoObjetoTrigger.ToLower()) && !existeOn)
+                            {
+                                sbLine = streamReader.ReadLine();
+                            }
+                            else
+                                break;
                         }
                     }
                 }
             }
         }
-        public string pObtenerNombreObjeto(string sbLineSpace)
+        public string pObtenerNombreObjeto(string sbLineSpace, out bool existeOn)
         {
             string[] split;
             string[] splitCualificado;
@@ -348,6 +363,7 @@ namespace Cygnus2_0.General
             string sbPalabra = "";
             int indice;
             Boolean blIndex = false;
+            existeOn = false;
 
             split = sbLineSpace.Split();
 
@@ -364,10 +380,15 @@ namespace Cygnus2_0.General
                     }
                 }
 
-                if(blIndex && blPalabraReservada)
-                    blIndex = false;
+                if (sbPalabra.ToLower().Equals("on"))
+                    existeOn = true;
 
-                if (blPalabraReservada && sbPalabra.Equals("index"))
+                if (blIndex && blPalabraReservada)
+                {
+                    blIndex = false;
+                }
+
+                if (blPalabraReservada && (sbPalabra.Equals("index") || sbPalabra.ToLower().Equals(res.TipoObjetoTrigger.ToLower())))
                     blIndex = true;
 
                 if (!blPalabraReservada && sbPalabra.Length > 0 && !blIndex)
@@ -1160,14 +1181,14 @@ namespace Cygnus2_0.General
                 pListaArchivosCarpeta(subdirectory, archivos);
         }
 
-        public void pListaArchivos(string[] DropPath, List<Archivo> archivos)
+        public void pListaArchivos(string[] DropPath, List<Archivo> archivos,string llamado)
         {
             foreach (string dropfilepath in DropPath)
             {
                 if (string.IsNullOrEmpty(System.IO.Path.GetExtension(dropfilepath)))
                 {
                     string[] DropPath1 = System.IO.Directory.GetFiles(dropfilepath + "\\", "*", System.IO.SearchOption.AllDirectories);
-                    pListaArchivos(DropPath1, archivos);
+                    pListaArchivos(DropPath1, archivos, llamado);
                 }
                 else
                 {
@@ -1179,9 +1200,14 @@ namespace Cygnus2_0.General
                     archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
                     archivo.ListaTipos = this.ListaTiposObjetos;
                     archivo.ListaUsuarios = this.ListaUsuarios;
-                    archivo.NombreObjeto = archivo.NombreSinExt;
+
+                    if(llamado.Equals(res.GIT))
+                        archivo.NombreObjeto = "";
+                    else
+                        archivo.NombreObjeto = archivo.NombreSinExt;
+
                     archivo.CarpetaPadre = pObtCarpetaPadre(archivo.RutaConArchivo);
-                    this.ObtenerTipoArchivo(archivo);
+                    this.ObtenerTipoArchivo(archivo, llamado);
                     archivo.BloquesCodigo = new List<string>();
 
                     if (archivo.ListaUsuarios.ToList().Exists(x => x.Text.ToUpper().Equals(archivo.CarpetaPadre.Trim().ToUpper())))
@@ -1195,6 +1221,12 @@ namespace Cygnus2_0.General
                         {
                             archivo.Tipo = res.TipoObjetoPaquete.ToLower();
                             archivo.NombreObjeto = archivo.NombreSinExt;
+                        }
+
+                        if (archivo.Extension.Equals(res.ExtensionExcel) || archivo.Extension.Equals(res.ExtensionExcelX) || archivo.Extension.Equals(res.ExtensionWord) || archivo.Extension.Equals(res.ExtensionWordX) || archivo.Extension.Equals(res.ExtensionXLSM))
+                        {
+                            archivo.Tipo = res.TipoOtros.ToLower();
+                            archivo.NombreObjeto = "-";
                         }
                     }
 

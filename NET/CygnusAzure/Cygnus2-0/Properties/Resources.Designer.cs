@@ -236,6 +236,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Carpetas.
+        /// </summary>
+        public static string Carpetas {
+            get {
+                return ResourceManager.GetString("Carpetas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sonar.
         /// </summary>
         public static string CarpetaSonar {
@@ -403,12 +412,30 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a OpenEPM10_AnalisisyDiseno.
+        /// </summary>
+        public static string DocuArquitecturaObjetos {
+            get {
+                return ResourceManager.GetString("DocuArquitecturaObjetos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         public static byte[] DocumentacionHtml {
             get {
                 object obj = ResourceManager.GetObject("DocumentacionHtml", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PRUEBAS.
+        /// </summary>
+        public static string DocuPruebasObj {
+            get {
+                return ResourceManager.GetString("DocuPruebasObj", resourceCulture);
             }
         }
         
@@ -727,6 +754,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a .xlsm.
+        /// </summary>
+        public static string ExtensionXLSM {
+            get {
+                return ResourceManager.GetString("ExtensionXLSM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a .zip.
         /// </summary>
         public static string ExtensionZIP {
@@ -850,6 +886,15 @@ namespace Cygnus2_0.Properties {
         public static string function {
             get {
                 return ResourceManager.GetString("function", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a G.
+        /// </summary>
+        public static string GIT {
+            get {
+                return ResourceManager.GetString("GIT", resourceCulture);
             }
         }
         
@@ -1536,6 +1581,15 @@ namespace Cygnus2_0.Properties {
         public static string No_aplica {
             get {
                 return ResourceManager.GetString("No_aplica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No_Repositorio.
+        /// </summary>
+        public static string NO_REPO {
+            get {
+                return ResourceManager.GetString("NO_REPO", resourceCulture);
             }
         }
         
@@ -2360,6 +2414,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a desarrollo.
+        /// </summary>
+        public static string RamaDesarrollo {
+            get {
+                return ResourceManager.GetString("RamaDesarrollo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a master-datos.
         /// </summary>
         public static string RamaMasterDatos {
@@ -2374,6 +2437,15 @@ namespace Cygnus2_0.Properties {
         public static string RamaProduccion {
             get {
                 return ResourceManager.GetString("RamaProduccion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a pruebas.
+        /// </summary>
+        public static string RamaPruebas {
+            get {
+                return ResourceManager.GetString("RamaPruebas", resourceCulture);
             }
         }
         

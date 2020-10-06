@@ -76,7 +76,7 @@ namespace Cygnus2_0.Model.Aplica
                 archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                 archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
                 archivo.ListaTipos = handler.ListaTiposObjetos;
-                handler.ObtenerTipoArchivo(archivo);
+                handler.ObtenerTipoArchivo(archivo,res.No_aplica);
                 view.ListaArchivosCargados.Add(archivo);
                 archivo.OrdenAplicacion = view.ListaArchivosCargados.IndexOf(archivo);
             }
@@ -139,14 +139,18 @@ namespace Cygnus2_0.Model.Aplica
         {
             foreach (Archivo archivo in view.ListaArchivosCargados)
             {
-
-                if (!string.IsNullOrEmpty(archivo.NombreObjeto))
+                try
                 {
-                    //Valida que el objeto no se encuentra aplicado en más de un esquema
-                    handler.DAO.pValidaUsuarioCompila(archivo, handler);
-                    //Valida que solo se aplique en un esquema
-                    handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
+                    if (!string.IsNullOrEmpty(archivo.NombreObjeto))
+                    {
+                        //Valida que el objeto no se encuentra aplicado en más de un esquema
+                        handler.DAO.pValidaUsuarioCompila(archivo, handler);
+                        //Valida que solo se aplique en un esquema
+                        handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
+                    }
                 }
+                catch
+                { }
 
                 //Se instancian las listas del archivo
                 archivo.DocumentacionSinDepurar = new List<StringBuilder>();
