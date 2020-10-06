@@ -91,15 +91,9 @@ namespace Cygnus2_0.Pages.Settings.Git
                         return;
                     }
 
-                    if (string.IsNullOrEmpty(txtRutaInstall2.Text))
+                    if (string.IsNullOrEmpty(txtRutaInstall2.Text) && string.IsNullOrEmpty(txtRutaInstallObj2.Text))
                     {
-                        handler.MensajeError("Ingresa la ruta para clonar el respositorio de DATOS");
-                        return;
-                    }
-
-                    if (string.IsNullOrEmpty(txtRutaInstallObj2.Text))
-                    {
-                        handler.MensajeError("Ingresa la ruta para clonar el respositorio de OBJETOS");
+                        handler.MensajeError("Ingresa la ruta del repositorio que desea clonar.");
                         return;
                     }
 
@@ -107,28 +101,36 @@ namespace Cygnus2_0.Pages.Settings.Git
 
                     handler.RutaGitBash = txtRutaGitBash2.Text;
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaGitBash, handler.RutaGitBash);
+                    txtRutaGitBash1.Text = handler.RutaGitBash;
 
-                    handler.RutaGitDatos = txtRutaInstall2.Text;
-                    RepoGit.pCreaDirectorios(handler.RutaGitDatos);
+                    if (!string.IsNullOrEmpty(txtRutaInstall2.Text))
+                    {
+                        handler.RutaGitDatos = txtRutaInstall2.Text;
+                        RepoGit.pCreaDirectorios(handler.RutaGitDatos);
 
-                    RepoGit.pClonarRepo(handler.RutaGitDatos, res.RepoDATOS, handler.RutaGitBash);
+                        RepoGit.pClonarRepo(handler.RutaGitDatos, res.RepoDATOS, handler.RutaGitBash);
 
-                    handler.RutaGitDatos = Path.Combine(handler.RutaGitDatos, res.CarpetaDatosGIT);
-                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);
+                        handler.RutaGitDatos = Path.Combine(handler.RutaGitDatos, res.CarpetaDatosGIT);
+                        SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);
+                        txtRutaInstall1.Text = handler.RutaGitDatos;
+                    }
 
-                    handler.RutaGitObjetos = txtRutaInstallObj2.Text;
-                    RepoGit.pCreaDirectorios(handler.RutaGitObjetos);
+                    if (!string.IsNullOrEmpty(txtRutaInstallObj2.Text))
+                    {
+                        handler.RutaGitObjetos = txtRutaInstallObj2.Text;
+                        RepoGit.pCreaDirectorios(handler.RutaGitObjetos);
 
-                    RepoGit.pClonarRepo(handler.RutaGitObjetos, res.RepoOBJETOS, handler.RutaGitBash);
+                        RepoGit.pClonarRepo(handler.RutaGitObjetos, res.RepoOBJETOS, handler.RutaGitBash);
 
-                    handler.RutaGitObjetos = Path.Combine(handler.RutaGitDatos, res.CarpetaObjetosGIT);
-                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitObjetos, handler.RutaGitObjetos);
+                        handler.RutaGitObjetos = Path.Combine(handler.RutaGitDatos, res.CarpetaObjetosGIT);
+                        SqliteDAO.pCreaConfiguracion(res.KeyRutaGitObjetos, handler.RutaGitObjetos);
+                        txtRutaInstallObj.Text = handler.RutaGitObjetos;
+                    }
 
                     handler.CursorNormal();
 
                     handler.MensajeOk("Proceso terminó con éxito!");
-                    txtRutaGitBash1.Text = handler.RutaGitBash;
-                    txtRutaInstall1.Text = handler.RutaGitDatos;
+                   
                 }
             }
             catch (Exception ex)
@@ -152,6 +154,7 @@ namespace Cygnus2_0.Pages.Settings.Git
             if (!string.IsNullOrEmpty(handler.RutaGitBash))
             {
                 txtRutaGitBash1.Text = handler.RutaGitBash;
+                txtRutaGitBash2.Text = handler.RutaGitBash;
             }
 
             if (!string.IsNullOrEmpty(handler.RutaGitObjetos))

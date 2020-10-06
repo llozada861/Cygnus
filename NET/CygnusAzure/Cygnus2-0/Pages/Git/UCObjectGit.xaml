@@ -427,6 +427,6 @@
             </Grid>
             <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Command="{Binding Path=Entrega}" Grid.Column="7" Grid.Row="9"  Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnProcesar_Click" />
             <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Command="{Binding Path=Limpiar}" Grid.Column="8" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
-            <Button x:Name="btnGitBash" Content="GitBash"  VerticalAlignment="Center" Command="{Binding Path=GitBash}" Grid.Column="9" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
+            <!--<Button x:Name="btnGitBash" Content="GitBash"  VerticalAlignment="Center" Command="{Binding Path=GitBash}" Grid.Column="9" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />-->
       </Grid>
 </UserControl>
