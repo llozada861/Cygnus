@@ -20,6 +20,7 @@ namespace Cygnus2_0.ViewModel.Compila
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
         private readonly DelegateCommand _conectar;
+        private readonly DelegateCommand _examinar;
         private CompilaModel model;
         private SelectListItem _usuario;
         private string archivosDescomp;
@@ -35,11 +36,13 @@ namespace Cygnus2_0.ViewModel.Compila
         public ICommand Process => _process;
         public ICommand Clean => _clean;
         public ICommand Conectar => _conectar;
+        public ICommand Examinar => _examinar;
         public CompilaViewModel(Handler hand)
         {
             _process = new DelegateCommand(OnProcess);
             _clean = new DelegateCommand(OnClean);
             _conectar = new DelegateCommand(OnConection);
+            _examinar = new DelegateCommand(pExaminar);
 
             handler = hand;
             model = new CompilaModel(handler, this);
@@ -144,6 +147,12 @@ namespace Cygnus2_0.ViewModel.Compila
 
             this.EstadoConn = handler.fsbValidaConexion();
         }
+        public void pExaminar(object commandParameter)
+        {
+            string[] archivos = handler.pCargarArchivos();
+            pListaArchivos(archivos,"");
+        }
+
         public void pListaArchivos(string[] DropPath,string from)
         {
             try

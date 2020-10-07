@@ -32,7 +32,35 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <GroupBox x:Name="groupBox" Header="Arrastre aquí los archivos que desea compilar" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="5">
-            <DataGrid x:Name="dataGridArchCompila" 
+            <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+
+                    <DataGrid x:Name="dataGridArchCompila" 
                 IsReadOnly="false" 
                 AllowDrop="True" 
                 Drop="listBox1_Drop"
@@ -42,6 +70,7 @@
                 CanUserAddRows="False"
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
+                              Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
                 ItemsSource="{Binding Path=ListaArchivosCargados}" MouseDoubleClick="DataGridArchCompila_MouseDoubleClick"
                   >
                 <DataGrid.Columns>
@@ -69,6 +98,7 @@
                     </DataGridComboBoxColumn>
                 </DataGrid.Columns>
             </DataGrid>
+                </Grid>
         </GroupBox>
         <GroupBox x:Name="groupBox1" Header="Resultados" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="6" Grid.RowSpan="5">
             <DataGrid x:Name="dataGridMensajes"
