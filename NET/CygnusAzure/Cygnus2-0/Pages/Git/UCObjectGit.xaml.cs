@@ -145,7 +145,14 @@ namespace Cygnus2_0.Pages.Git
         {
             comboBox = sender as ComboBox;
             SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
-            objectViewModel.pArmarArbol(tipo,null);
+
+            if (tipo != null)
+            {
+                Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
+                objectViewModel.pArmarArbol(tipo, selectedItem);
+            }
+
+
             //dataGridArch.ItemsSource = objectViewModel.GitModel.ListaArchivos;
 
             /*var comboBox = sender as ComboBox;
@@ -167,7 +174,7 @@ namespace Cygnus2_0.Pages.Git
 
         private void UsuarioSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            objectViewModel.pArmarArbol(null, null);
+            objectViewModel.pArmarArbol(null, null);            
 
             /*var comboBox = sender as ComboBox;
             SelectListItem usuario = (SelectListItem)comboBox.SelectedItem;

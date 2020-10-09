@@ -181,6 +181,8 @@ namespace Cygnus2_0.Model.Aplica
                         }
 
                         archivo.OrdenAplicacion = tipo.Prioridad;
+
+                        if (archivo.ObjetoSql) break;
                     }
                 }
             }

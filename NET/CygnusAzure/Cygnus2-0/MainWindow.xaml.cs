@@ -373,7 +373,9 @@ namespace Cygnus2_0
                         "insert into words values('before')",
                         "insert into words values('after')",
                         "insert into words values('for')",
-                        "INSERT INTO user_grants (user,company) VALUES ('OPENSIRIUS',99)"
+                        "INSERT INTO user_grants (user,company) VALUES ('OPENSIRIUS',99)",
+                        "INSERT INTO object_head (head, type, priority, end) VALUES ('grant', 'grant', '10', 'pc');",
+                        "update object_type set path = 'server\\sql\\10grt' where object = 'grant'",
                 };
 
                 foreach (string sql in query)

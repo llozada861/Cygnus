@@ -164,6 +164,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         public void pExaminar(object commandParameter)
         {
             string[] archivos = handler.pCargarArchivos();
+            //model.pListaArchivos(archivos);
             ListarArchivos(archivos);
         }
         public void ListarArchivos(string[] DropPath)

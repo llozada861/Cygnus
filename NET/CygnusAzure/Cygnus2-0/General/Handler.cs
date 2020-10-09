@@ -320,7 +320,7 @@ namespace Cygnus2_0.General
                         else
                             foreach (SelectListItem prefijo in this.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
                             {
-                                if (sbLineSpace.ToUpper().StartsWith("PROMPT") || sbLineSpace.ToUpper().StartsWith("SPOOL") || sbLineSpace.ToUpper().StartsWith("@"))
+                                if (archivo.FileName.ToLower().IndexOf(res.NombreAplica) > nuMenosUno || archivo.FileName.ToLower().IndexOf(res.NombreArchivoGrant) > nuMenosUno)
                                 {
                                     archivo.NombreObjeto = "";
                                     archivo.Tipo = res.TipoAplica;
@@ -1198,6 +1198,11 @@ namespace Cygnus2_0.General
                 }
                 else
                 {
+                    this.LoadPath = System.IO.Path.GetDirectoryName(dropfilepath) + "\\";
+                    this.SavePath = this.LoadPath;
+                    SavePathAplica = LoadPath;
+                    PathArchivos = this.SavePathAplica;
+
                     Archivo archivo = new Archivo();
                     archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
                     archivo.RutaConArchivo = dropfilepath;

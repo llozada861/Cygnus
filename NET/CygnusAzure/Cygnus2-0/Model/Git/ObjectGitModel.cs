@@ -40,32 +40,32 @@ namespace Cygnus2_0.Model.Git
         {
             get { return codigo; }
             set {
-                SetProperty(ref codigo, value);
+                SetProperty(ref codigo, value.Trim());
             }
         }
         public string ObjetoBuscar
         {
             get { return objetoBuscar; }
-            set { SetProperty(ref objetoBuscar, value); }
+            set { SetProperty(ref objetoBuscar, value.Trim()); }
         }
         public string HU
         {
             get { return hu; }
             set
             {
-                SetProperty(ref hu, value);
+                SetProperty(ref hu, value.Trim());
                 pCreaRamas();
             }
         }
         public string Comentario
         {
             get { return comentario; }
-            set { SetProperty(ref comentario, value); }
+            set { SetProperty(ref comentario, value.Trim()); }
         }
         public string NuevaRama
         {
             get { return nuevaRama; }
-            set { SetProperty(ref nuevaRama, value); }
+            set { SetProperty(ref nuevaRama, value.Trim()); }
         }
         public SelectListItem RamaLBSeleccionada
         {

@@ -158,12 +158,6 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                if(!GitModel.ActivaAprobRamas)
-                {
-                    handler.MensajeError("Por favor revise y apruebe la estructura de archivos que detectó la aplicación.");
-                    return;
-                }
-
                 foreach(Archivo archivo in GitModel.ListaArchivos)
                 {
                     if (archivo.Tipo == null && string.IsNullOrEmpty(archivo.Tipo))
@@ -178,27 +172,21 @@ namespace Cygnus2_0.ViewModel.Git
                         break;
                     }
 
-                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && (!archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) || !archivo.Tipo.ToLower().Equals(res.TipoAplica.ToLower())))
+                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) && !archivo.Tipo.ToLower().Equals(res.TipoAplica.ToLower()))
                     {
                         archivosNoRepo = true;
                         break;
                     }
 
-
                     if (archivo.FileName.ToUpper().StartsWith(res.DocuArquitecturaObjetos.ToUpper()))
                     {
                         blDocArquitectura = true;
-                    }
-
-                    if (archivo.FileName.ToUpper().IndexOf(res.DocuPruebasObj) > -1)
-                    {
-                        blDocPruebas = true;
                     }
                 }
 
                 if(archivosNoRepo)
                 {
-                    handler.MensajeError("Todos los archivos deben tener TIPO, USUARIO y REPOSITORIO. Por favor revisar.");
+                    handler.MensajeError("Los registros resaltados en ROJO deben tener TIPO, USUARIO y REPOSITORIO. Por favor revisar.");
                     return;
                 }
 
@@ -208,9 +196,9 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                if (!blDocPruebas)
+                if (!GitModel.ActivaAprobRamas)
                 {
-                    handler.MensajeError("Debe adicionar el archivo pruebas.");
+                    handler.MensajeError("Por favor revise y apruebe la estructura de archivos que detectó la aplicación.");
                     return;
                 }
 
@@ -303,6 +291,12 @@ namespace Cygnus2_0.ViewModel.Git
         {
             string usuario = "-";
             Folder CarpetaPadre;
+
+            if(GitModel.RamaLBSeleccionada == null)
+            {
+                return;
+            }
+
             string carpetaDespliegue = res.Despliegues+"\\" + GitModel.RamaLBSeleccionada.Text;
 
             GitModel.ListaCarpetas.Clear();
@@ -316,13 +310,16 @@ namespace Cygnus2_0.ViewModel.Git
 
             foreach (var archivo in usuarios)
             {
-                CarpetaPadre = new Folder { FolderLabel = archivo, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
-                raiz.Folders.Add(CarpetaPadre);
+                if (!string.IsNullOrEmpty(archivo))
+                {
+                    CarpetaPadre = new Folder { FolderLabel = archivo, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+                    raiz.Folders.Add(CarpetaPadre);
+                }
             }
 
            foreach (Archivo archivo in GitModel.ListaArchivos)
             {
-                if (tipo != null)
+                if (tipo != null && itemModif != null && archivo.FileName.Equals(itemModif.FileName))
                 {
                     archivo.Usuario = !string.IsNullOrEmpty(tipo.Usuario) ? tipo.Usuario : archivo.Usuario;
                 }
