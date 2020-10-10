@@ -477,14 +477,21 @@ namespace Cygnus2_0.Pages.Time
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
-            view.pLimpiarTareas();
+            try
+            {
+                view.pLimpiarTareas();
 
-            view.ListaTareas.Clear();
-            view.ListaHojas.Clear();
-            view.pRefrescaTareas();
+                view.ListaTareas.Clear();
+                view.ListaHojas.Clear();
+                view.pRefrescaTareas();
 
-            pSeteaFechaActual();
-            pRefrescaEncabezado();
+                pSeteaFechaActual();
+                pRefrescaEncabezado();
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
         }
 
         public void pSeteaFechaActual()
