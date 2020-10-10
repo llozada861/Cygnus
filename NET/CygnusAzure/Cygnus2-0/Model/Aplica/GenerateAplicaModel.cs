@@ -89,30 +89,21 @@ namespace Cygnus2_0.Model.Aplica
 
         public void pProcesar()
         {
-            view.ListaArchivosGenerados.Clear();
-                           
-            //handler.Desarrollador = Environment.UserName;
+            try
+            {
+                view.ListaArchivosGenerados.Clear();
 
-            //pGeneraCheckList();
-                                        
-            //Se genera el aplica
-            ProcesaArchivos();
 
-            //Se genera el archivo zip
-            //pGenerarZip();
+                ProcesaArchivos();
 
-            //Copia al repositorio los archivos
-            //pRepositorio();
 
-            //pGeneraLineaBase();
+                view.ArchivosGenerados = view.ListaArchivosGenerados.Count().ToString();
+            }
+            catch(Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
 
-            //System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
-
-            view.ArchivosGenerados = view.ListaArchivosGenerados.Count().ToString();
-
-            //var word = new WordGDO();
-            //word.WordDocument(handler);
-            //handler.Formulario.ListaArchivosGenerados.Add(new Archivo { NombreSinExt = handler.ArchivoSalida, Tipo = res.TipoWord, Observacion = "Se actualiza el documento." });
         }
 
         public void pCleanView()

@@ -68,23 +68,30 @@ namespace Cygnus2_0.ViewModel.Documentation
 
         public void OnProcess(object commandParameter)
         {
-            foreach(Archivo archivo in ListaArchivosCargados)
+            try
             {
-                //Se instancian las listas del archivo
-                archivo.DocumentacionSinDepurar = new List<StringBuilder>();
-                archivo.Modificaciones = new List<ModificacionModel>();
-                archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
-                handler.ObtenerTipoArchivo(archivo, res.No_aplica);
-                if (handler.pDepuraDocumentacion(archivo))
+                foreach (Archivo archivo in ListaArchivosCargados)
                 {
-                    pAdicionarArchivo
-                    (
-                        archivo.NombreObjeto + res.ExtensionHtml,
-                        res.TipoHtml,
-                        "Documentación HTML",
-                        archivo.Ruta
-                    );
+                    //Se instancian las listas del archivo
+                    archivo.DocumentacionSinDepurar = new List<StringBuilder>();
+                    archivo.Modificaciones = new List<ModificacionModel>();
+                    archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
+                    handler.ObtenerTipoArchivo(archivo, res.No_aplica);
+                    if (handler.pDepuraDocumentacion(archivo))
+                    {
+                        pAdicionarArchivo
+                        (
+                            archivo.NombreObjeto + res.ExtensionHtml,
+                            res.TipoHtml,
+                            "Documentación HTML",
+                            archivo.Ruta
+                        );
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                handler.MensajeError(ex.Message);
             }
         }
 
