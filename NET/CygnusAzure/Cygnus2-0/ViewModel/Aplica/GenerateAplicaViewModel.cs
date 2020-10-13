@@ -49,7 +49,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         public string Codigo
         {
             get { return codigo; }
-            set { SetProperty(ref codigo, value); }
+            set { SetProperty(ref codigo, value.ToUpper()); }
         }
         public SelectListItem Usuario
         {

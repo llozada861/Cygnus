@@ -320,6 +320,7 @@ namespace Cygnus2_0.Model.Aplica
             if (handler.ConfGeneralViewModel.Grant)
             {
                 pGeneraArchivosPermisos();
+                pGeneraArchivosPermisosOA();
             }
 
             rutaGeneracion = Path.Combine(handler.SavePathAplica, nombreAplica);
@@ -601,6 +602,70 @@ namespace Cygnus2_0.Model.Aplica
                         FileName = nombreGrant,
                         Tipo = res.TipoAplica,
                         Observacion = "Archivo Grant",
+                        Ruta = handler.SavePath,
+                        RutaDentroAplica = res.Slash
+                    };
+
+                    //pInsertaCuerpo(archivoGrant);
+                    view.ListaArchivosGenerados.Add(archivoGrant);
+                }
+            }
+        }
+        public void pGeneraArchivosPermisosOA()
+        {
+            StringBuilder grant = new StringBuilder();
+            string rutaGeneracion;
+            string nombreGrant = "SFOA_"+view.Codigo + res.NombreArchivoGrant + view.Usuario.Text + res.ExtensionSQL;
+            rutaGeneracion = Path.Combine(handler.SavePath, nombreGrant);
+
+            foreach (Archivo archivo in view.ListaArchivosCargados)
+            {
+                foreach (SelectListItem tipo in handler.ListaTiposObjetos)
+                {
+                    //Si el tipo aplica para grant
+                    if (archivo.Tipo.Equals(tipo.Text) && !tipo.Grant.Equals(res.No))
+                    {
+                        //Permisos execute
+                        if (tipo.Grant.Equals(res.TipoGrantExecute))
+                        {
+                            grant.AppendLine(res.PlantillaGrant);
+                            grant.Replace(res.TagGrantUsuario, "EJECUTA_TODOS_LOS_PROC");
+                            grant.Replace(res.TagGrantPermiso, res.GrantEXECUTE);
+                            grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                            grant.AppendLine();
+                        }
+
+                        if (tipo.Grant.Equals(res.TipoGrantSIUD))
+                        {
+                            grant.AppendLine(res.PlantillaGrant);
+                            grant.Replace(res.TagGrantUsuario, "MODIFICA_TODAS_LAS_TABLAS");
+                            grant.Replace(res.TagGrantPermiso, res.GrantSIUD);
+                            grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                            grant.AppendLine();
+                        }
+
+                        grant.AppendLine();
+                    }
+                }
+                
+
+                if (grant.Length > 0)
+                {
+                    using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+                    {
+                        StringBuilder encabezado = new StringBuilder();
+                        encabezado.Append(res.EncabezadoAplicaGrant);
+                        encabezado.Replace(res.Tag_numero_oc, view.Codigo);
+                        versionIns.WriteLine(encabezado);
+                        versionIns.Write(grant);
+                        versionIns.WriteLine(res.FinAplicaGrant);
+                    }
+
+                    Archivo archivoGrant = new Archivo
+                    {
+                        FileName = nombreGrant,
+                        Tipo = res.TipoAplica,
+                        Observacion = "Archivo Grant OA",
                         Ruta = handler.SavePath,
                         RutaDentroAplica = res.Slash
                     };
