@@ -647,32 +647,31 @@ namespace Cygnus2_0.Model.Aplica
                         grant.AppendLine();
                     }
                 }
-                
+            }
 
-                if (grant.Length > 0)
+            if (grant.Length > 0)
+            {
+                using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
                 {
-                    using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
-                    {
-                        StringBuilder encabezado = new StringBuilder();
-                        encabezado.Append(res.EncabezadoAplicaGrant);
-                        encabezado.Replace(res.Tag_numero_oc, view.Codigo);
-                        versionIns.WriteLine(encabezado);
-                        versionIns.Write(grant);
-                        versionIns.WriteLine(res.FinAplicaGrant);
-                    }
-
-                    Archivo archivoGrant = new Archivo
-                    {
-                        FileName = nombreGrant,
-                        Tipo = res.TipoAplica,
-                        Observacion = "Archivo Grant OA",
-                        Ruta = handler.SavePath,
-                        RutaDentroAplica = res.Slash
-                    };
-
-                    //pInsertaCuerpo(archivoGrant);
-                    view.ListaArchivosGenerados.Add(archivoGrant);
+                    StringBuilder encabezado = new StringBuilder();
+                    encabezado.Append(res.EncabezadoAplicaGrant);
+                    encabezado.Replace(res.Tag_numero_oc, view.Codigo);
+                    versionIns.WriteLine(encabezado);
+                    versionIns.Write(grant);
+                    versionIns.WriteLine(res.FinAplicaGrant);
                 }
+
+                Archivo archivoGrant = new Archivo
+                {
+                    FileName = nombreGrant,
+                    Tipo = res.TipoAplica,
+                    Observacion = "Archivo Grant OA",
+                    Ruta = handler.SavePath,
+                    RutaDentroAplica = res.Slash
+                };
+
+                //pInsertaCuerpo(archivoGrant);
+                view.ListaArchivosGenerados.Add(archivoGrant);
             }
         }
 
