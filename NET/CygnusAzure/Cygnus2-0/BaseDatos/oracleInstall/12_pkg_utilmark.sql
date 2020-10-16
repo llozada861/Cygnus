@@ -1393,7 +1393,7 @@ AS
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
                hist_usuario = isbIdHU,
-               fecha_inicio = nvl(dtFechaCreaAzure,dtFechaInCygnus)
+               fecha_inicio = nvl(dtFechaCreaAzure,fecha_inicio)
            WHERE codigo = nucodigo;
            
            COMMIT;
@@ -1498,7 +1498,7 @@ AS
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
                hist_usuario = isbIdHU,
-               fecha_inicio = nvl(dtFechaCreaAzure,dtFechaInCygnus)
+               fecha_inicio = nvl(dtFechaCreaAzure,fecha_inicio)
            WHERE codigo = nucodigo
            AND usuario = isbUsuario;
        END IF;
@@ -2136,9 +2136,13 @@ AS
             CASE UPPER(isbTipoDato) 
                 WHEN 'NUMBER' THEN
                     sbToken := 'inu';
+                WHEN 'INTEGER' THEN
+                    sbToken := 'inu';
                 WHEN 'VARCHAR2' THEN
                     sbToken := 'isb';
                 WHEN 'CHAR' THEN
+                    sbToken := 'isb';
+                WHEN 'NCHAR' THEN
                     sbToken := 'isb';
                 WHEN 'DATE' THEN
                     sbToken := 'idt';
