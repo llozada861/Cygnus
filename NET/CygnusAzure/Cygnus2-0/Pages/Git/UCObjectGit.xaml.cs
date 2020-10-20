@@ -151,7 +151,8 @@ namespace Cygnus2_0.Pages.Git
                 Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
                 objectViewModel.pArmarArbol(tipo, selectedItem);
             }
-
+            
+            //CollectionViewSource.GetDefaultView(objectViewModel.GitModel.ListaArchivos).Refresh();
 
             //dataGridArch.ItemsSource = objectViewModel.GitModel.ListaArchivos;
 
