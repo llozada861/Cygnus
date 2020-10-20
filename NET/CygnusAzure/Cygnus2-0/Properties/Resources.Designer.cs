@@ -718,6 +718,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a .log.
+        /// </summary>
+        public static string ExtensionLog {
+            get {
+                return ResourceManager.GetString("ExtensionLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a .txt.
         /// </summary>
         public static string ExtensionPlantilla {

@@ -75,8 +75,16 @@ namespace Cygnus2_0.Model.Aplica
                 archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
                 archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                 archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+
+                if (archivo.Extension.ToLower().Equals(res.ExtensionHtml) || archivo.Extension.ToLower().Equals(res.ExtensionLog) || archivo.Extension.ToLower().Equals(res.ExtensionZIP))
+                    continue;
+
                 archivo.ListaTipos = handler.ListaTiposObjetos;
                 handler.ObtenerTipoArchivo(archivo,res.No_aplica);
+
+                if (archivo.Tipo.Equals(res.TipoAplica))
+                    continue;
+
                 view.ListaArchivosCargados.Add(archivo);
                 archivo.OrdenAplicacion = view.ListaArchivosCargados.IndexOf(archivo);
             }

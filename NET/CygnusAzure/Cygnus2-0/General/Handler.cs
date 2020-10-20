@@ -1209,6 +1209,11 @@ namespace Cygnus2_0.General
                     archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
                     archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                     archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
+
+                    if(llamado.Equals(res.TipoAplica))
+                        if (archivo.Extension.ToLower().Equals(res.ExtensionHtml) || archivo.Extension.ToLower().Equals(res.ExtensionLog))
+                            continue;
+
                     archivo.ListaTipos = this.ListaTiposObjetos;
                     archivo.ListaUsuarios = this.ListaUsuarios;
 

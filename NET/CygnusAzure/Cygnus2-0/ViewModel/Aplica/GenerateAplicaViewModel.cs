@@ -170,7 +170,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         public void ListarArchivos(string[] DropPath)
         {
             List<Archivo> archivos = new List<Archivo>();
-            handler.pListaArchivos(DropPath, archivos, res.No_aplica);
+            handler.pListaArchivos(DropPath, archivos, res.TipoAplica);
 
             foreach (Archivo archivo in archivos)
             {

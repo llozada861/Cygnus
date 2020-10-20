@@ -322,6 +322,7 @@ namespace Cygnus2_0.ViewModel.Git
                 if (tipo != null && itemModif != null && archivo.FileName.Equals(itemModif.FileName))
                 {
                     archivo.Usuario = !string.IsNullOrEmpty(tipo.Usuario) ? tipo.Usuario : archivo.Usuario;
+                    archivo.NombreObjeto = !string.IsNullOrEmpty(tipo.Usuario) ? archivo.NombreSinExt.ToLower() : "";
                 }
 
                 if(itemModif != null && archivo.FileName.Equals(itemModif.FileName))
