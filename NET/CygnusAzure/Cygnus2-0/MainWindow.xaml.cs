@@ -281,7 +281,7 @@ namespace Cygnus2_0
         {
             if (!SqliteDAO.pblValidaVersion(handler))
             {
-                string[] query = {"drop table comments",
+                string[] query = {/*"drop table comments",
                         "drop table comment_type",
                         "drop table packages_comments",
                         "drop table packages",
@@ -375,7 +375,8 @@ namespace Cygnus2_0
                         "insert into words values('for')",
                         "INSERT INTO user_grants (user,company) VALUES ('OPENSIRIUS',99)",
                         "INSERT INTO object_head (head, type, priority, end) VALUES ('grant', 'grant', '10', 'pc');",
-                        "update object_type set path = 'server\\sql\\10grt' where object = 'grant'",
+                        "update object_type set path = 'server\\sql\\10grt' where object = 'grant'",*/
+                        "insert into words values('from')"
                 };
 
                 foreach (string sql in query)

@@ -131,6 +131,7 @@ namespace Cygnus2_0.ViewModel.Git
             bool archivosNoRepo = false;
             bool blDocArquitectura = false;
             bool blDocPruebas = false;
+            string archivoRojo = "";
 
             try
             {
@@ -160,13 +161,9 @@ namespace Cygnus2_0.ViewModel.Git
 
                 foreach(Archivo archivo in GitModel.ListaArchivos)
                 {
-                    if (archivo.Tipo == null && string.IsNullOrEmpty(archivo.Tipo))
-                    {
-                        archivosNoRepo = true;
-                        break;
-                    }
+                    archivoRojo = archivo.FileName;
 
-                    if (string.IsNullOrEmpty(archivo.Usuario) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                    if (archivo.Tipo == null && string.IsNullOrEmpty(archivo.Tipo))
                     {
                         archivosNoRepo = true;
                         break;
@@ -174,8 +171,11 @@ namespace Cygnus2_0.ViewModel.Git
 
                     if (string.IsNullOrEmpty(archivo.NombreObjeto) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) && !archivo.Tipo.ToLower().Equals(res.TipoAplica.ToLower()))
                     {
-                        archivosNoRepo = true;
-                        break;
+                        if (string.IsNullOrEmpty(archivo.Usuario) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                        {
+                            archivosNoRepo = true;
+                            break;
+                        }
                     }
 
                     if (archivo.FileName.ToUpper().StartsWith(res.DocuArquitecturaObjetos.ToUpper()))
@@ -186,7 +186,7 @@ namespace Cygnus2_0.ViewModel.Git
 
                 if(archivosNoRepo)
                 {
-                    handler.MensajeError("Los registros resaltados en ROJO deben tener TIPO, USUARIO y REPOSITORIO. Por favor revisar.");
+                    handler.MensajeError("El archivo ["+archivoRojo+"] debe tener TIPO, USUARIO y REPOSITORIO. Por favor revisar.");
                     return;
                 }
 
