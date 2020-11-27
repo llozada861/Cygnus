@@ -39,7 +39,7 @@ namespace Cygnus2_0.Pages.Git
             DataContext = objectViewModel;
             InitializeComponent();
 
-            chAprobar.IsEnabled = false;
+            //chAprobar.IsEnabled = false;
 
             dataGridArch.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
         }
