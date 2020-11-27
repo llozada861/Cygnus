@@ -115,10 +115,6 @@
                   Header="Objeto"
                   Binding="{Binding Path=Text}" />
                     <DataGridTextColumn
-                  Header="Tipo"
-                  IsReadOnly="True"
-                  Binding="{Binding Path=Observacion}" />
-                    <DataGridTextColumn
                   Header="Línea"
                   IsReadOnly="True"
                   Binding="{Binding Path=Prioridad}" />

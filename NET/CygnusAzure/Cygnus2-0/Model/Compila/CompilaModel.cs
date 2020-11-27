@@ -175,6 +175,11 @@ namespace Cygnus2_0.Model.Compila
             pExeSqlplus();
 
             view.ArchivosDescompilados = pObtCantObjsInvalidos();
+
+            if (Convert.ToInt64(view.ArchivosCompilados) < Convert.ToInt64(view.ArchivosDescompilados))
+            {
+                throw new Exception("Nuevos Objetos Descompilados. Antes [" + view.ArchivosCompilados + "]. Ahora [" + view.ArchivosDescompilados + "]. Por favor revisar lo que se aplicó!");
+            }
         }
 
         public void pCompilaObjetosBD(Archivo archivo)
@@ -214,7 +219,7 @@ namespace Cygnus2_0.Model.Compila
                 view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.NombreObjeto, Value = "Sin Errores.", Observacion = archivo.Ruta });
             else
                 if (!string.IsNullOrEmpty(archivo.AplicaTemporal))
-                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.AplicaTemporal, Value = "Ver log de la aplicación.", Observacion=archivo.Ruta });
+                    view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.AplicaTemporal, Value = "Ver log de la aplicación.", Observacion=archivo.Ruta });
 
             view.ListaObservaciones = view.ListaObservaciones;
         }
@@ -254,11 +259,6 @@ namespace Cygnus2_0.Model.Compila
                     handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
                 }
                 catch { }
-            }
-
-            if (Convert.ToInt64(view.ArchivosCompilados) < Convert.ToInt64(view.ArchivosDescompilados))
-            {
-                throw new Exception("Los scritps aplicados descompilaron objetos en la base de datos. Antes [" + view.ArchivosCompilados + " objetos descompilados]. Ahora [" + view.ArchivosDescompilados + " objetos descompilados]");
             }
         }
 
