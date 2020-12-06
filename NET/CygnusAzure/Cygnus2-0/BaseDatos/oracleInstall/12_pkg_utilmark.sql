@@ -329,14 +329,6 @@ AS
         osbErrorMessage OUT VARCHAR2 
     );
     
-    PROCEDURE pEliminarAreaAzure
-    (        
-        isbArea          IN  VARCHAR2,
-        isbUsuario       IN  VARCHAR2,
-        onuErrorCode    OUT NUMBER,
-        osbErrorMessage OUT VARCHAR2
-    );
-    
     PROCEDURE pCombinarTareas
     (
         inuOrigen       IN NUMBER,
@@ -651,7 +643,13 @@ AS
             OR JUEVES > 0
             OR VIERNES > 0
             OR SABADO > 0
-            OR DOMINGO > 0;    
+            OR DOMINGO > 0
+            UNION
+            SELECT valor FROM (
+            SELECT 'INSERT INTO flex.ll_version (version,fecha_ini,fecha_fin) values ('''||version||''','''||fecha_ini||''','''||fecha_fin||''');' valor
+            FROM ll_version
+            ORDER BY fecha_ini DESC)
+            WHERE rownum < 2;   
         
         SELECT flex.seq_ll_objetosbl.nextval
         INTO onuSeqObjBl
@@ -1910,32 +1908,6 @@ AS
             onuErrorCode := SQLCODE;
             osbErrorMessage := SQLERRM;     
     END pActualizaCorreo;
-    
-    PROCEDURE pEliminarAreaAzure
-    (        
-        isbArea          IN  VARCHAR2,
-        isbUsuario       IN  VARCHAR2,
-        onuErrorCode    OUT NUMBER,
-        osbErrorMessage OUT VARCHAR2
-    )
-    IS
-    BEGIN
-        pInicializaError(onuErrorCode,osbErrorMessage);
-        
-        DELETE flex.ll_azure
-        WHERE usuario = isbUsuario
-        AND area = isbArea;
-                
-        COMMIT;
-        
-    EXCEPTION
-        WHEN DUP_VAL_ON_INDEX THEN 
-            onuErrorCode := SQLCODE;
-            osbErrorMessage := SQLERRM; 
-        WHEN OTHERS THEN
-            onuErrorCode := SQLCODE;
-            osbErrorMessage := SQLERRM;     
-    END pEliminarAreaAzure; 
     
     PROCEDURE pObtAreaAzure
     (
