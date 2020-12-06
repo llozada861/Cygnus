@@ -56,58 +56,6 @@ namespace Cygnus2_0.Model.Refresh
             ZipFile.CreateFromDirectory(startPath, zipPath);
             byte[] bytes = File.ReadAllBytes(zipPath);
             handler.pGeneraArchivoRuta(nombreOut, bytes);
-
-            /*nombre = "AA_Cygnus_apl_FLEX.sql";
-            myFile = res.AA_Cygnus_apl_FLEX;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "crll_credmark.sql";
-            myFile = res.crll_credmark;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "crll_logapli.sql";
-            myFile = res.crll_logapli;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "crll_objetosbl.sql";
-            myFile = res.crll_objetosbl;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "crll_usuarios.sql";
-            myFile = res.crll_usuarios;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "crseq_ll_logapli.sql";
-            myFile = res.crseq_ll_logapli;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "Grants_usuarios_epm_cygnus.sql";
-            myFile = res.Grants_usuarios_epm_cygnus;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "pkg_utilmark.sql";
-            myFile = res.pkg_utilmark;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "crea_usua_sql_asig_permisos_mvm.sql";
-            myFile = res.crea_usua_sql_asig_permisos_mvm;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "Crea_Usuarios_Aplicacion.docx";
-            myFile = res.Crea_Usuarios_Aplicacion;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "LEEME.txt";
-            myFile = res.LEEME;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "crll_version.sql";
-            myFile = res.crll_version;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);
-
-            nombre = "insepm_parametrCY_GRUPO_CORREO.sql";
-            myFile = res.insepm_parametrCY_GRUPO_CORREO;
-            handler.pCreaArchivoBD(handler.RutaBk, nombre, myFile);*/
         }
 
         public void pObtBackup(RefreshViewModel view)
@@ -175,6 +123,8 @@ namespace Cygnus2_0.Model.Refresh
                     {
                         tempFile.WriteLine(item.Text);
                     }
+
+                    tempFile.WriteLine("commit;");
                 }
             }
         }
