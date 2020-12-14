@@ -32,7 +32,17 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="7" >
+
+        <RadioButton x:Name="rdbDatos" Content="Datos" 
+                     Grid.Column="0" 
+                     Grid.ColumnSpan="2" 
+                     Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Datos}"  />
+        <RadioButton x:Name="rdbObjetos" Content="Objetos" 
+                     Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Objetos}"/>
+
+        <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="5" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+        
+        <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="7" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -59,8 +69,6 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
-                
                 <DataGrid
                 x:Name="dataGridArchivosCargados" 
                 IsReadOnly="false" 
@@ -76,7 +84,7 @@
                 local:VisualHelper.EnableRowsMove="True"            
                 VerticalContentAlignment="Center"
                     SelectionChanged="dataGridArchivosCargados_SelectionChanged" MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
-                    Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
+                    Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="9"
                     >
                     <DataGrid.Columns>
                         <DataGridTextColumn                  
@@ -105,7 +113,7 @@
                 </DataGrid>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Column="0" Grid.Row="5" Grid.RowSpan="5" Grid.ColumnSpan="7">
+        <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Column="0" Grid.Row="6" Grid.RowSpan="5" Grid.ColumnSpan="7">
             <DataGrid 
             x:Name="dataGridArchivosGen" 
             IsReadOnly="True" 
