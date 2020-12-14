@@ -24,6 +24,8 @@ namespace Cygnus2_0.ViewModel.Aplica
         private SelectListItem _usuario;
         private string archivosGenerados;
         private string archivosCargados;
+        private Boolean objetos;
+        private Boolean datos;
         private ObservableCollection<Archivo> listaArchivosGenerados;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
@@ -81,9 +83,25 @@ namespace Cygnus2_0.ViewModel.Aplica
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }
         }
+        public Boolean Datos
+        {
+            get { return datos; }
+            set { SetProperty(ref datos, value); }
+        }
+        public Boolean Objetos
+        {
+            get { return objetos; }
+            set { SetProperty(ref objetos, value); }
+        }
         public void OnProcess(object commandParameter)
         {
             bool Noselec = false;
+
+            if (!this.Datos && !this.Objetos)
+            {
+                handler.MensajeError("Selecciona el tipo de entrega Datos u Objetos.");
+                return;
+            }
 
             if (String.IsNullOrEmpty(this.Codigo))
             {

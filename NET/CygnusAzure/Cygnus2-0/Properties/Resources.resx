@@ -1943,4 +1943,69 @@ sonar.plsql.file.suffixes=sql,pkg</value>
   <data name="ExtensionLog" xml:space="preserve">
     <value>.log</value>
   </data>
+  <data name="EncabezadoAplicaDatos" xml:space="preserve">
+    <value>ALTER SESSION SET CURRENT_SCHEMA = &lt;usuario&gt;;
+SET appinfo ON
+SET echo OFF
+SET serveroutput ON
+SET timing OFF
+SET verify OFF
+SET heading OFF
+SET feedback ON
+
+COLUMN file_script new_val file_script;
+COLUMN instance_name new_val instance_name;
+COLUMN fecha_exec new_val fecha_exec;
+COLUMN spool_file new_val spool_file;
+COLUMN usuario_exec new_val usuario_exec;
+COLUMN usuario_os new_val usuario_os;
+COLUMN esquema new_val esquema;
+
+DEFINE OC=&lt;numero_oc&gt;
+
+SELECT SUBSTR(SYS_CONTEXT('USERENV','MODULE'),INSTR(SYS_CONTEXT('USERENV','MODULE'),'@')+2) file_script,
+       SYS_CONTEXT('USERENV', 'DB_NAME') instance_name,
+       TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS') fecha_exec,
+	   SYS_CONTEXT('USERENV','CURRENT_SCHEMA') esquema,
+       USER usuario_exec,
+       SYS_CONTEXT('USERENV', 'OS_USER') usuario_os,
+       '&amp;OC'||'_'||'apl_'||USER||'_'||SUBSTR(SYS_CONTEXT('USERENV', 'DB_NAME'),1,4)||
+       '_'||TO_CHAR(SYSDATE, 'YYYYMMDD_HH24MISS')  spool_file  FROM DUAL;
+
+PROMPT
+PROMPT =========================================
+PROMPT  ****   Información de Ejecución    ****
+PROMPT =========================================
+PROMPT Archivo ejecutado: &amp;file_script
+PROMPT Instancia        : &amp;instance_name
+PROMPT Fecha ejecución  : &amp;fecha_exec
+PROMPT Usuario DB       : &amp;usuario_exec
+PROMPT Usuario O.S      : &amp;usuario_os
+PROMPT Esquema          : &amp;esquema
+PROMPT WO               : &amp;OC
+PROMPT =========================================
+PROMPT
+PROMPT **** Aplica de objetos ****
+
+SET define OFF
+
+PROMPT INICIA PROCESO ....</value>
+  </data>
+  <data name="EncabezadoAplicaGenDatos" xml:space="preserve">
+    <value>PROMPT Script de aplicacion General
+PROMPT Inicia Ejecucion WO:&lt;numero_oc&gt;</value>
+  </data>
+  <data name="FinAplicaDatos" xml:space="preserve">
+    <value>PROMPT **** Termina aplica de objetos ****
+
+SET SERVEROUTPUT OFF</value>
+  </data>
+  <data name="FinAplicaGenDatos" xml:space="preserve">
+    <value>PROMPT Termina Ejecucion aplicacion General
+
+EXIT</value>
+  </data>
+  <data name="NombreAplicaDatos" xml:space="preserve">
+    <value>aplica01</value>
+  </data>
 </root>

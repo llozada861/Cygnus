@@ -487,6 +487,34 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ALTER SESSION SET CURRENT_SCHEMA = &lt;usuario&gt;;
+        ///SET appinfo ON
+        ///SET echo OFF
+        ///SET serveroutput ON
+        ///SET timing OFF
+        ///SET verify OFF
+        ///SET heading OFF
+        ///SET feedback ON
+        ///
+        ///COLUMN file_script new_val file_script;
+        ///COLUMN instance_name new_val instance_name;
+        ///COLUMN fecha_exec new_val fecha_exec;
+        ///COLUMN spool_file new_val spool_file;
+        ///COLUMN usuario_exec new_val usuario_exec;
+        ///COLUMN usuario_os new_val usuario_os;
+        ///COLUMN esquema new_val esquema;
+        ///
+        ///DEFINE OC=&lt;numero_oc&gt;
+        ///
+        ///SELECT SUBSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MOD [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string EncabezadoAplicaDatos {
+            get {
+                return ResourceManager.GetString("EncabezadoAplicaDatos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a column dt new_value vdt
         ///column db new_value vdb
         ///select to_char(sysdate,&apos;yyyymmdd_hh24miss&apos;) dt, sys_context(&apos;userenv&apos;,&apos;db_name&apos;) db from dual;
@@ -504,6 +532,16 @@ namespace Cygnus2_0.Properties {
         public static string EncabezadoAplicaGDO {
             get {
                 return ResourceManager.GetString("EncabezadoAplicaGDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PROMPT Script de aplicacion General
+        ///PROMPT Inicia Ejecucion WO:&lt;numero_oc&gt;.
+        /// </summary>
+        public static string EncabezadoAplicaGenDatos {
+            get {
+                return ResourceManager.GetString("EncabezadoAplicaGenDatos", resourceCulture);
             }
         }
         
@@ -812,6 +850,17 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PROMPT **** Termina aplica de objetos ****
+        ///
+        ///SET SERVEROUTPUT OFF.
+        /// </summary>
+        public static string FinAplicaDatos {
+            get {
+                return ResourceManager.GetString("FinAplicaDatos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a prompt &quot;------------------------------------------------------&quot;
         ///prompt &quot; FIN DE APLICA &lt;nombre_aplica&gt; &quot;
         ///prompt &quot;------------------------------------------------------&quot;
@@ -826,6 +875,17 @@ namespace Cygnus2_0.Properties {
         public static string FinAplicaGDO {
             get {
                 return ResourceManager.GetString("FinAplicaGDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PROMPT Termina Ejecucion aplicacion General
+        ///
+        ///EXIT.
+        /// </summary>
+        public static string FinAplicaGenDatos {
+            get {
+                return ResourceManager.GetString("FinAplicaGenDatos", resourceCulture);
             }
         }
         
@@ -1617,6 +1677,15 @@ namespace Cygnus2_0.Properties {
         public static string NombreAplicaCus {
             get {
                 return ResourceManager.GetString("NombreAplicaCus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a aplica01.
+        /// </summary>
+        public static string NombreAplicaDatos {
+            get {
+                return ResourceManager.GetString("NombreAplicaDatos", resourceCulture);
             }
         }
         

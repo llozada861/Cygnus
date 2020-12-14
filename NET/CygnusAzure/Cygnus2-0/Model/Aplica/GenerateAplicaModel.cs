@@ -101,9 +101,7 @@ namespace Cygnus2_0.Model.Aplica
             {
                 view.ListaArchivosGenerados.Clear();
 
-
                 ProcesaArchivos();
-
 
                 view.ArchivosGenerados = view.ListaArchivosGenerados.Count().ToString();
             }
@@ -132,6 +130,8 @@ namespace Cygnus2_0.Model.Aplica
             view.ArchivosGenerados = "0";
             view.ListaUsuarios = null;
             view.ListaUsuarios = handler.ListaUsuarios;
+            view.Objetos = false;
+            view.Datos = false;
         }
 
         internal void ProcesaArchivos()
@@ -232,7 +232,7 @@ namespace Cygnus2_0.Model.Aplica
                 {
                     if (archivo.OrdenAplicacion > 0 && !archivo.Tipo.Equals(res.TipoPlantilla))
                     {
-                        pInsertaCuerpo(archivo);
+                        pInsertaCuerpo(archivo, objetosAplica);
                     }
                 }
             }
@@ -241,7 +241,7 @@ namespace Cygnus2_0.Model.Aplica
                 foreach (Archivo archivo in view.ListaArchivosCargados)
                 {
                     if (!archivo.Tipo.Equals(res.TipoPlantilla))
-                        pInsertaCuerpo(archivo);
+                        pInsertaCuerpo(archivo, objetosAplica);
                 }
             }
 
@@ -305,7 +305,16 @@ namespace Cygnus2_0.Model.Aplica
             }
             else
             {
-                encabezadoAplica.Append(res.EncabezadoAplica);
+                if (view.Datos)
+                {
+                    encabezadoAplica.Append(res.EncabezadoAplicaDatos);
+                    finAplica.Append(res.FinAplicaDatos);
+                }
+                else
+                {
+                    encabezadoAplica.Append(res.EncabezadoAplica);
+                    finAplica.Append(res.FinAplica);
+                }
 
                 //Genera los archivos de versión
                /* if (this.Formulario.GeneraVersion)
@@ -315,13 +324,14 @@ namespace Cygnus2_0.Model.Aplica
                 }*/
 
                 //Fin aplica
-                finAplica.Append(res.FinAplica);
+
                 finAplica.Replace(res.TagNombreAplica, nombreAplica);
             }
 
             //Genera encabezado            
             encabezadoAplica.Replace(res.TagNombreAplica, nombreAplica);
             encabezadoAplica.Replace(res.Tag_numero_oc, view.Codigo);
+            encabezadoAplica.Replace(res.TagGrantUsuario, view.Usuario.Text);
             encabezadoAplica.AppendLine();
 
             //Genera el archivo con los permisos
@@ -329,6 +339,12 @@ namespace Cygnus2_0.Model.Aplica
             {
                 pGeneraArchivosPermisos();
                 pGeneraArchivosPermisosOA();
+            }
+
+            //Si es de datos, se genera el nuevo archivo
+            if (view.Datos)
+            {
+                pGeneraAplicaDatos(nombreAplica);
             }
 
             rutaGeneracion = Path.Combine(handler.SavePathAplica, nombreAplica);
@@ -349,7 +365,7 @@ namespace Cygnus2_0.Model.Aplica
             );
         }
 
-        public void pInsertaCuerpo(Archivo archivo)
+        public void pInsertaCuerpo(Archivo archivo, StringBuilder objetosAplica)
         {
             cuerpo = null;
             objetosAplica.AppendLine(res.CuerpoAplica);
@@ -681,6 +697,40 @@ namespace Cygnus2_0.Model.Aplica
                 //pInsertaCuerpo(archivoGrant);
                 view.ListaArchivosGenerados.Add(archivoGrant);
             }
+        }
+        public void pGeneraAplicaDatos(string aplica)
+        {
+            StringBuilder grant = new StringBuilder();
+            string rutaGeneracion;
+            string nombre = res.NombreAplicaDatos+ res.ExtensionSQL;
+            rutaGeneracion = Path.Combine(handler.SavePath, nombre);
+            StringBuilder objetosApl = new StringBuilder();
+
+            objetosApl.AppendLine(res.CuerpoAplica);
+            objetosApl.Replace(res.TagObjetoAplica, "/"+aplica);
+            objetosApl.AppendLine();
+
+            using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+            {
+                StringBuilder encabezado = new StringBuilder();
+                encabezado.Append(res.EncabezadoAplicaGenDatos);
+                encabezado.Replace(res.Tag_numero_oc, view.Codigo);
+                encabezado.AppendLine();
+                versionIns.WriteLine(encabezado);
+                versionIns.Write(objetosApl);
+                versionIns.WriteLine(res.FinAplicaGenDatos);
+            }
+
+            Archivo archivoGrant = new Archivo
+            {
+                FileName = nombre,
+                Tipo = res.TipoAplica,
+                Observacion = "Aplica Datos",
+                Ruta = handler.SavePath,
+                RutaDentroAplica = res.Slash
+            };
+
+            view.ListaArchivosGenerados.Add(archivoGrant);            
         }
 
         #endregion Grants
