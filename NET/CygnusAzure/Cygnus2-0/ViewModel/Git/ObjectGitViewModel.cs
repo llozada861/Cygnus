@@ -318,7 +318,7 @@ namespace Cygnus2_0.ViewModel.Git
             }
 
            foreach (Archivo archivo in GitModel.ListaArchivos)
-            {
+           {
                 if (tipo != null && itemModif != null && archivo.FileName.Equals(itemModif.FileName))
                 {
                     archivo.Usuario = !string.IsNullOrEmpty(tipo.Usuario) ? tipo.Usuario : archivo.Usuario;
@@ -340,11 +340,15 @@ namespace Cygnus2_0.ViewModel.Git
                     }
                 }
 
+                if (archivo.Tipo == "PB" || archivo.Tipo == "PI" || archivo.Tipo == "MD" || archivo.Tipo == "OB" || archivo.Tipo == "EA" || archivo.Tipo == "GI" || archivo.Tipo == "GR" || archivo.Tipo == "OP" || archivo.Tipo == "RU" || archivo.Tipo == "TC"
+                    //|| archivo.Tipo != res.TipoAplica || archivo.Tipo.Equals(res.TipoOtros) 
+                    )
+                    continue;
+
                 despliegue.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
-            }
+           }
 
             GitModel.ListaCarpetas.Add(raiz);
-
         }
 
         public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)
