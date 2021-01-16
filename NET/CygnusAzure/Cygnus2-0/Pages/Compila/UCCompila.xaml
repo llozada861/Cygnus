@@ -71,7 +71,7 @@
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
                               Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
-                ItemsSource="{Binding Path=ListaArchivosCargados}" MouseDoubleClick="DataGridArchCompila_MouseDoubleClick"
+                ItemsSource="{Binding Path=Model.ListaArchivosCargados}" MouseDoubleClick="DataGridArchCompila_MouseDoubleClick"
                   >
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
@@ -102,7 +102,7 @@
         </GroupBox>
         <GroupBox x:Name="groupBox1" Header="Resultados" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="6" Grid.RowSpan="5">
             <DataGrid x:Name="dataGridMensajes"
-                      ItemsSource="{Binding Path=ListaObservaciones}"
+                      ItemsSource="{Binding Path=Model.ListaObservaciones}"
                       AutoGenerateColumns="False"
                     SelectionMode="Single"
                     CanUserDeleteRows="True"
@@ -135,8 +135,8 @@
                 </Grid.RowDefinitions>
 
                 <ComboBox x:Name="comboBox" 
-                  ItemsSource="{Binding Path=ListaUsuarios}" 
-                  SelectedItem="{Binding Path=Usuario}"
+                  ItemsSource="{Binding Path=Model.ListaUsuarios}" 
+                  SelectedItem="{Binding Path=Model.Usuario}"
                   DisplayMemberPath="Text"  Grid.Row="0" VerticalAlignment="Center"/>
                 
                 <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
@@ -147,12 +147,12 @@
         </GroupBox>
         <GroupBox x:Name="grbObjDescomAntes" Header="Objetos Descompilados Antes" Grid.Column="6" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="4">
             <Grid>
-                <Label x:Name="Descom1" Content="{Binding Path=ArchivosCompilados}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontWeight="Bold" FontSize="80" />
+                <Label x:Name="Descom1" Content="{Binding Path=Model.ArchivosCompilados}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  FontWeight="Bold" FontSize="80" />
             </Grid>
         </GroupBox>
         <GroupBox x:Name="grbDescomDes" Header="Objetos Descompilados Después" Grid.Column="6" Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="4">
             <Grid>
-                <Label x:Name="Descom2" Content="{Binding Path=ArchivosDescompilados}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="80" FontWeight="Bold" />
+                <Label x:Name="Descom2" Content="{Binding Path=Model.ArchivosDescompilados}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="80" FontWeight="Bold" />
             </Grid>
         </GroupBox>
 

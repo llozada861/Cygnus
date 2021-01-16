@@ -42,7 +42,7 @@ namespace Cygnus2_0.Pages.Compila
             DataContext = compilaViewModel;
             InitializeComponent();
 
-            compilaViewModel.ArchivosDescompilados = "0";
+            compilaViewModel.Model.ArchivosDescompilados = "0";
         }
 
         private void listBox1_Drop(object sender, DragEventArgs e)
@@ -86,31 +86,31 @@ namespace Cygnus2_0.Pages.Compila
         {
             try
             {
-                if (compilaViewModel.Codigo == null)
+                if (compilaViewModel.Model.Codigo == null)
                 {
                     handler.MensajeError("Debe ingresar el número de caso.");
                     return;
                 }
 
-                if (compilaViewModel.HU == null)
+                if (compilaViewModel.Model.HU == null)
                 {
                     handler.MensajeError("Debe ingresar el número de la HU.");
                     return;
                 }
 
-                if (compilaViewModel.Comentario == null)
+                if (compilaViewModel.Model.Comentario == null)
                 {
                     handler.MensajeError("Debe ingresar el comentrio para el commit.");
                     return;
                 }
 
-                if (compilaViewModel.ListaArchivosCargados.Count == 0)
+                if (compilaViewModel.Model.ListaArchivosCargados.Count == 0)
                 {
                     handler.MensajeError("No hay archivos para versionar");
                     return;
                 }
 
-                if (!compilaViewModel.ListaArchivosCargados.ToList().Exists(x => x.FileName.ToUpper().StartsWith("OPENDATOSEPM")))
+                if (!compilaViewModel.Model.ListaArchivosCargados.ToList().Exists(x => x.FileName.ToUpper().StartsWith("OPENDATOSEPM")))
                 {
                     handler.MensajeError("Es importante entregar el documento de arquitectura. Por favor adicionar.");
                     return;
@@ -120,12 +120,12 @@ namespace Cygnus2_0.Pages.Compila
 
                 List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
 
-                foreach (Archivo archivo in compilaViewModel.ListaArchivosCargados)
+                foreach (Archivo archivo in compilaViewModel.Model.ListaArchivosCargados)
                 {
                     archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
                 }
 
-                string rama = RepoGit.pVersionarDatos(compilaViewModel.HU, compilaViewModel.Codigo,compilaViewModel.Comentario,handler.ConnViewModel.Correo, archivosEvaluar, handler);
+                string rama = RepoGit.pVersionarDatos(compilaViewModel.Model.HU, compilaViewModel.Model.Codigo,compilaViewModel.Model.Comentario,handler.ConnViewModel.Correo, archivosEvaluar, handler);
 
                 handler.CursorNormal();
                 handler.MensajeOk("Rama creada ["+ rama+"]");

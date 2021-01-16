@@ -1,7 +1,9 @@
 ﻿using Cygnus2_0.General;
+using Cygnus2_0.Interface;
 using Cygnus2_0.ViewModel.Compila;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,265 +14,74 @@ using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Model.Compila
 {
-    public class CompilaModel
+    public class CompilaModel: ViewModelBase
     {
         private Handler handler;
         private CompilaViewModel view;
+        private SelectListItem _usuario;
+        private string archivosDescomp;
+        private string archivosCompila;
+        private string estadoConn;
+        private string _codigo;
+        private string _hu;
+        private string _comentario;
+        private ObservableCollection<SelectListItem> listaObservaciones;
+        private ObservableCollection<Archivo> listaArchivosCargados;
+        private ObservableCollection<SelectListItem> listaUsuarios;
         public CompilaModel(Handler hand, CompilaViewModel view)
         {
             handler = hand;
             this.view = view;
         }
-
-        public void pListaArchivos(string[] DropPath, string from)
+        public SelectListItem Usuario
         {
-            foreach (string dropfilepath in DropPath)
-            {
-                if (string.IsNullOrEmpty(System.IO.Path.GetExtension(dropfilepath)))
-                {
-                    string[] DropPath1 = System.IO.Directory.GetFiles(dropfilepath + "\\", "*", System.IO.SearchOption.AllDirectories);
-                    //pListaArchivosCarpeta(dropfilepath, from);
-                    pListaArchivos(DropPath1, from);
-                }
-                else
-                {
-                    Archivo archivo = new Archivo();
-                    archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
-                    archivo.RutaConArchivo = dropfilepath;
-                    archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
-                    archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
-                    archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
-                    archivo.ListaTipos = handler.ListaTiposObjetos;
-                    ObtenerTipoArchivoComp(archivo);
-                    archivo.BloquesCodigo = new List<string>();
-
-                    if (!archivo.Observacion.Equals(res.No_aplica))
-                        archivo.TipoAplicacion = res.SQLPLUS;
-
-                    view.ListaArchivosCargados.Add(archivo);
-                }
-            }
+            get { return _usuario; }
+            set { SetProperty(ref _usuario, value); }
         }
-
-        private void pListaArchivosCarpeta(string path, string from)
+        public string Codigo
         {
-            string[] DropPath = System.IO.Directory.GetFiles(path + "\\", "*", System.IO.SearchOption.AllDirectories);
-
-            if (from.Equals("G"))
-            {
-                foreach (string dropfilepath in DropPath)
-                {
-                    Archivo archivo = new Archivo();
-                    archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
-                    archivo.RutaConArchivo = dropfilepath;
-                    archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
-                    archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
-                    archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
-                    archivo.ListaTipos = handler.ListaTiposObjetos;
-                    handler.ObtenerTipoArchivo(archivo, res.No_aplica);
-                    view.ListaArchivosCargados.Add(archivo);
-                }
-            }
+            get { return _codigo; }
+            set { SetProperty(ref _codigo, value); }
         }
-
-        public void ObtenerTipoArchivoComp(Archivo archivo)
+        public string Comentario
         {
-            string sbLine = "";
-            bool existeOn;
-            string sbLineSpace = "";
-            Int64 nuMenosUno = Convert.ToInt64(res.MenosUno);
-
-            string nombreArchivo = archivo.NombreSinExt;
-            archivo.Observacion = "";
-
-            if (res.Extensiones.IndexOf(archivo.Extension.ToLower()) > -1)
-            {
-                using (StreamReader streamReader = new StreamReader(archivo.RutaConArchivo))
-                {
-                    sbLine = streamReader.ReadLine();
-
-                    while (sbLine != null)
-                    {
-                        sbLineSpace = Regex.Replace(sbLine, @"\s+", " ");
-
-                        if (sbLineSpace.StartsWith(res.Arroa))
-                        {
-                            archivo.Tipo = res.TipoAplica;
-                            archivo.Observacion = res.No_aplica;
-                            break;
-                        }
-
-                        archivo.TipoAplicacion = res.SQLPLUS;
-
-                        foreach (SelectListItem prefijo in handler.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
-                        {
-                            if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
-                            {
-                                archivo.Tipo = prefijo.Value;
-                                archivo.SelectItemTipo = prefijo;
-                                archivo.NombreObjeto = handler.pObtenerNombreObjeto(sbLineSpace, out existeOn);
-                                archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
-                                archivo.TipoAplicacion = archivo.FinArchivo.Equals(res.END) ? res.SQL : res.SQLPLUS;
-                                archivo.InicioArchivo = prefijo.Text.ToLower();
-                                break;
-                            }
-                        }
-
-                        if (string.IsNullOrEmpty(archivo.Tipo))
-                        {
-                            sbLine = streamReader.ReadLine();
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-
-            //Sino se encuentra el tipo dentro del archivo
-            if (string.IsNullOrEmpty(archivo.Tipo))
-            {
-                /*foreach (SelectListItem prefijo in handler.ListaTipoArchivos)
-                {
-                    if (archivo.FileName.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
-                    {
-                        archivo.Tipo = prefijo.Value;
-                        handler.SavePath = archivo.Ruta + "\\";
-                        break;
-                    }
-                }*/
-
-                if (string.IsNullOrEmpty(archivo.NombreObjeto))
-                {
-                    archivo.NombreObjeto = nombreArchivo;
-                }
-            }
+            get { return _comentario; }
+            set { SetProperty(ref _comentario, value); }
         }
-
-        public string pObtCantObjsInvalidos()
+        public string HU
         {
-            return handler.DAO.pObtCantObjsInvalidos();
+            get { return _hu; }
+            set { SetProperty(ref _hu, value); }
         }
-
-        public void pCompilarObjetos()
+        public string ArchivosCompilados
         {
-            handler.pObtenerUsuarioCompilacion(view.Usuario.Text);
-
-            foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQL)))
-            {
-                if (archivo.TipoAplicacion != res.SQLPLUS)
-                {
-                    handler.pObtieneBloquesCodigo(archivo);
-                    pCompilaObjetosBD(archivo);
-                    handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
-                }
-            }
-
-            if (handler.ConexionOracle.ConexionOracleCompila.State == System.Data.ConnectionState.Open)
-            {
-                handler.ConexionOracle.ConexionOracleCompila.Close();
-            }
-
-            pExeSqlplus();
-
-            view.ArchivosDescompilados = pObtCantObjsInvalidos();
-
-            if (Convert.ToInt64(view.ArchivosCompilados) < Convert.ToInt64(view.ArchivosDescompilados))
-            {
-                throw new Exception("Nuevos Objetos Descompilados. Antes [" + view.ArchivosCompilados + "]. Ahora [" + view.ArchivosDescompilados + "]. Por favor revisar lo que se aplicó!");
-            }
+            get { return archivosCompila; }
+            set { SetProperty(ref archivosCompila, value); }
         }
-
-        public void pCompilaObjetosBD(Archivo archivo)
+        public string ArchivosDescompilados
         {
-            if (!string.IsNullOrEmpty(archivo.NombreObjeto))
-            {
-                //Valida que el objeto no se encuentra aplicado en más de un esquema
-                handler.DAO.pValidaUsuarioCompila(archivo, handler);
-                //Valida que solo se aplique en un esquema
-                handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
-            }
-
-            view.ArchivosCompilados = handler.DAO.pObtCantObjsInvalidos();
-
-            //Se guarda el estado de los objetos compilados antes de la ejecución
-            //dao.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, stObjetosInvalidosAntes, res.Antes, handler.DatosConexion.UsuarioCompila);
-            handler.pGuardaLogCompilacion(archivo, view.ArchivosCompilados, res.Antes);
-
-            for (int i = archivo.BloquesCodigo.Count - 1; i >= 0; i--)
-            {
-                //Console.WriteLine(archivo.BloquesCodigo.ElementAt(i));
-                handler.DAO.pEjecutarScriptBD(archivo.BloquesCodigo.ElementAt(i));
-            }
-
-            view.ArchivosDescompilados = handler.DAO.pObtCantObjsInvalidos();
-
-            //dao.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, stObjetosInvalidosDespues, res.Despues, handler.DatosConexion.UsuarioCompila);
-            handler.pGuardaLogCompilacion(archivo, view.ArchivosDescompilados, res.Despues);
-            pObtieneErroresAplicacion(archivo);
+            get { return archivosDescomp; }
+            set { SetProperty(ref archivosDescomp, value); }
         }
-
-        public void pObtieneErroresAplicacion(Archivo archivo)
+        public string EstadoConn
         {
-            handler.DAO.pObtErrores(archivo, view);
-
-            if (!view.ListaObservaciones.ToList().Exists(x => x.Text.Equals(archivo.NombreObjeto)) && string.IsNullOrEmpty(archivo.AplicaTemporal))
-                view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.NombreObjeto, Value = "Sin Errores.", Observacion = archivo.Ruta });
-            else
-                if (!string.IsNullOrEmpty(archivo.AplicaTemporal))
-                    view.ListaObservaciones.Add(new SelectListItem() { Text = archivo.AplicaTemporal, Value = "Ver log de la aplicación.", Observacion=archivo.Ruta });
-
-            view.ListaObservaciones = view.ListaObservaciones;
+            get { return handler.EstadoConn; }
+            set { SetProperty(ref estadoConn, handler.EstadoConn); }
         }
-
-        public void pExeSqlplus()
+        public ObservableCollection<Archivo> ListaArchivosCargados
         {
-            string credenciales;
-
-            if (view.ListaArchivosCargados.Count > 0)
-            {
-                handler.pObtenerUsuarioCompilacion(view.Usuario.Text);
-                credenciales = handler.ConnViewModel.UsuarioCompila + "/" + handler.ConnViewModel.PassCompila + "@" + handler.ConnViewModel.BaseDatos;
-
-                foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
-                {
-                    if (!string.IsNullOrEmpty(archivo.NombreObjeto))
-                    {
-                        //Valida que el objeto no se encuentra aplicado en más de un esquema
-                        handler.DAO.pValidaUsuarioCompila(archivo, handler);
-                        //Valida que solo se aplique en un esquema
-                        handler.DAO.pValidaObjEsquema(archivo, view.Usuario.Text);
-                    }
-
-                    handler.pGuardaLogCompilacion(archivo, view.ArchivosCompilados, res.Antes);
-                    handler.DAO.pExecuteSqlplus(credenciales, archivo);
-                }
-            }
-
-            Thread.Sleep(3000);
-
-            foreach (Archivo archivo in view.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
-            {
-                try
-                {
-                    pObtieneErroresAplicacion(archivo);
-                    handler.pGuardaLogCompilacion(archivo, view.ArchivosDescompilados, res.Despues);
-                    handler.pGeneraArchivosPermisosArchivo(archivo, view.Usuario.Text);
-                }
-                catch { }
-            }
+            get { return listaArchivosCargados; }
+            set { SetProperty(ref listaArchivosCargados, value); }
         }
-
-        public void pCleanView()
+        public ObservableCollection<SelectListItem> ListaObservaciones
         {
-            view.ListaArchivosCargados.Clear();
-            view.ListaObservaciones.Clear();
-            view.ArchivosCompilados = pObtCantObjsInvalidos();
-            view.ArchivosDescompilados = "0";
-            view.ListaUsuarios = null;
-            view.ListaUsuarios = handler.ListaUsuarios;
-            view.EstadoConn = "1";
+            get { return listaObservaciones; }
+            set { SetProperty(ref listaObservaciones, value); }
+        }
+        public ObservableCollection<SelectListItem> ListaUsuarios
+        {
+            get { return listaUsuarios; }
+            set { SetProperty(ref listaUsuarios, value); }
         }
     }
 }

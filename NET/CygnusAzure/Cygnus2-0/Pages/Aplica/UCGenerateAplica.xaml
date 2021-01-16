@@ -36,9 +36,9 @@
         <RadioButton x:Name="rdbDatos" Content="Datos" 
                      Grid.Column="0" 
                      Grid.ColumnSpan="2" 
-                     Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Datos}"  />
+                     Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Datos}"  />
         <RadioButton x:Name="rdbObjetos" Content="Objetos" 
-                     Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Objetos}"/>
+                     Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}"/>
 
         <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="5" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
         
@@ -80,7 +80,7 @@
                 CanUserAddRows="False"
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
-                ItemsSource="{Binding Path=ListaArchivosCargados}"
+                ItemsSource="{Binding Path=Model.ListaArchivosCargados}"
                 local:VisualHelper.EnableRowsMove="True"            
                 VerticalContentAlignment="Center"
                     SelectionChanged="dataGridArchivosCargados_SelectionChanged" MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
@@ -124,7 +124,7 @@
             CanUserAddRows="False"
             CanUserReorderColumns="False"
             CanUserSortColumns="False"
-            ItemsSource="{Binding Path=ListaArchivosGenerados}" MouseDoubleClick="DataGridArchivosGen_MouseDoubleClick">
+            ItemsSource="{Binding Path=Model.ListaArchivosGenerados}" MouseDoubleClick="DataGridArchivosGen_MouseDoubleClick">
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
                   IsReadOnly="True"
@@ -154,7 +154,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBox x:Name="CasoText" 
-                         Text="{Binding Path=Codigo}" 
+                         Text="{Binding Path=Model.Codigo}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" 
@@ -164,8 +164,8 @@
                          Style="{StaticResource placeHolder}" Tag="# de caso"/>
                 
                 <ComboBox x:Name="comboBox" 
-                  ItemsSource="{Binding Path=ListaUsuarios}" 
-                  SelectedItem="{Binding Path=Usuario}"
+                  ItemsSource="{Binding Path=Model.ListaUsuarios}" 
+                  SelectedItem="{Binding Path=Model.Usuario}"
                   DisplayMemberPath="Text" Grid.Row="1" VerticalAlignment="Center"
                   >
                 </ComboBox>
@@ -178,12 +178,12 @@
 
         <GroupBox x:Name="grbTotal" Header="Archivos Cargados" Grid.Column="7" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="3" >
             <Grid >
-                <Label x:Name="labelTotal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=ArchivosCargados}" FontWeight="Bold" FontSize="80" />
+                <Label x:Name="labelTotal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosCargados}" FontWeight="Bold" FontSize="80" />
             </Grid>
         </GroupBox>
         <GroupBox x:Name="grbGen" Header="Archivos Generados" Grid.Column="7" Grid.Row="6" Grid.ColumnSpan="3" Grid.RowSpan="3" >
             <Grid>
-                <Label x:Name="labelGen" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=ArchivosGenerados}" FontWeight="Bold" FontSize="80"/>
+                <Label x:Name="labelGen" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosGenerados}" FontWeight="Bold" FontSize="80"/>
             </Grid>
         </GroupBox>
 
