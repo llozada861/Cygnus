@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Audit.TbAuditoria"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cygnus2_0.Pages.Audit"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="9" HorizontalAlignment="Center" VerticalAlignment="Center">Generación de tablas de auditoría</Label>
+
+        <GroupBox x:Name="grbArrastre" Header="Datos Requeridos" Grid.Column="2" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="txtTabla" Text="{Binding Path=Model.Tabla}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Row="0"
+                         Style="{StaticResource placeHolder}" Tag="Tabla a Auditar" Margin="0,10"
+                         />
+                <TextBox x:Name="txtPrimaria" Text="{Binding Path=Model.Primaria}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Row="1"
+                         Style="{StaticResource placeHolder}" Tag="Llave Primaria" Margin="0,10"
+                         />
+                <TextBox x:Name="txtTicket" Text="{Binding Path=Model.Ticket}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Row="2"
+                         Style="{StaticResource placeHolder}" Tag="Código HU ó WO" Margin="0,10"
+                         />
+                <TextBox x:Name="txtAutor" Text="{Binding Path=Model.Autor}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Row="3"
+                         Style="{StaticResource placeHolder}" Tag="Autor" Margin="0,10"
+                         />
+                <TextBox x:Name="txtLogin" Text="{Binding Path=Model.Login}" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" Grid.Row="4"
+                         Style="{StaticResource placeHolder}" Tag="Login" Margin="0,10"
+                         />
+            </Grid>
+        </GroupBox>
+
+        <Button x:Name="btnProcesar" Content="Procesar" Command="{Binding Path=Procesar}" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>
