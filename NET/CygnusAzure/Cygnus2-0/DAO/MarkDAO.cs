@@ -17,6 +17,7 @@ using res = Cygnus2_0.Properties.Resources;
 using Cygnus2_0.General.Times;
 using Cygnus2_0.ViewModel.Time;
 using System.Collections.ObjectModel;
+using Cygnus2_0.Model.Audit;
 
 namespace Cygnus2_0.DAO
 {
@@ -1441,7 +1442,7 @@ namespace Cygnus2_0.DAO
         }
         #endregion Azure
 
-        #region
+        #region Reporte
         public List<TareaHoja> pObtListaTareas(ReportViewModel view)
         {
             List<TareaHoja> listaTareas = new List<TareaHoja>();
@@ -1621,7 +1622,42 @@ namespace Cygnus2_0.DAO
 
             return listaTareas;
         }
-        #endregion
+        #endregion Reporte
+
+        #region Auditoria
+        internal void pGeneraAuditoria(TbAuditoriaModel model, out OracleClob tabla, out OracleClob trigger)
+        {
+            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("flex.p_DC_GeneraAudit"))
+            {
+                handler.ConexionOracle.AddInParameter(cmd, "isbTableName", OracleDbType.Varchar2, model.Tabla.ToUpper().Trim());
+                handler.ConexionOracle.AddInParameter(cmd, "isbAutor", OracleDbType.Varchar2, model.Autor.Trim());
+                handler.ConexionOracle.AddInParameter(cmd, "isbLogin", OracleDbType.Varchar2, model.Login.Trim());
+                handler.ConexionOracle.AddInParameter(cmd, "isbTicket", OracleDbType.Varchar2, model.Ticket.ToUpper().Trim());
+                handler.ConexionOracle.AddInParameter(cmd, "isbPK", OracleDbType.Varchar2, model.Primaria.ToUpper().Trim());
+                handler.ConexionOracle.AddOutParameter(cmd, "osbScript", OracleDbType.Clob);
+                handler.ConexionOracle.AddOutParameter(cmd, "osbTrgScript", OracleDbType.Clob);
+                //handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
+                //handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (InvalidCastException)
+                {
+                }
+
+                /*handler.EvaluateErrorCode
+                (
+                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
+                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
+                );*/
+
+                tabla = (OracleClob)cmd.Parameters["osbScript"].Value;
+                trigger = (OracleClob)cmd.Parameters["osbTrgScript"].Value;
+            }
+        }
+        #endregion Auditoria
         public string prueba()
         {
             string sql = "select * from ll_prueba";

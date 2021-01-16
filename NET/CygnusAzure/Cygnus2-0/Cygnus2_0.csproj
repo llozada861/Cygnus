@@ -226,6 +226,7 @@
     <Compile Include="General\Times\TareaHoja.cs" />
     <Compile Include="Interface\IViews.cs" />
     <Compile Include="Model\Aplica\GenerateAplicaModel.cs" />
+    <Compile Include="Model\Audit\TbAuditoriaModel.cs" />
     <Compile Include="Model\Compila\CompilaModel.cs" />
     <Compile Include="Model\Git\ObjectGitModel.cs" />
     <Compile Include="Model\Index\IndexModel.cs" />
@@ -242,6 +243,9 @@
       <DependentUpon>UCGenerateAplica.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Aplica\VisualHelper.cs" />
+    <Compile Include="Pages\Audit\TbAuditoria.xaml.cs">
+      <DependentUpon>TbAuditoria.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Compila\UCCompila.xaml.cs">
       <DependentUpon>UCCompila.xaml</DependentUpon>
     </Compile>
@@ -409,6 +413,7 @@
     <Compile Include="Security\CustomPrincipal.cs" />
     <Compile Include="TotalSumConverter.cs" />
     <Compile Include="ViewModel\Aplica\GenerateAplicaViewModel.cs" />
+    <Compile Include="ViewModel\Audit\TbAudiViewModel.cs" />
     <Compile Include="ViewModel\Compila\CompilaViewModel.cs" />
     <Compile Include="ViewModel\Data\MessageViewModel.cs" />
     <Compile Include="ViewModel\Data\ParameterViewModel.cs" />
@@ -513,6 +518,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Aplica\UCGenerateAplica.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Audit\TbAuditoria.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
