@@ -38,8 +38,8 @@ namespace Cygnus2_0.Pages.Aplica
             DataContext = generateAplicaViewModel;
             InitializeComponent();
 
-            generateAplicaViewModel.ArchivosCargados = "0";
-            generateAplicaViewModel.ArchivosGenerados = "0";
+            generateAplicaViewModel.Model.ArchivosCargados = "0";
+            generateAplicaViewModel.Model.ArchivosGenerados = "0";
             btnSqlPlus.Visibility = Visibility.Hidden;
         }
 
@@ -100,14 +100,14 @@ namespace Cygnus2_0.Pages.Aplica
         private void BotonLimpiar_Click(object sender, RoutedEventArgs e)
         {
             btnSqlPlus.Visibility = Visibility.Hidden;
-            generateAplicaViewModel.Objetos = false;
-            generateAplicaViewModel.Datos = false;
+            generateAplicaViewModel.Model.Objetos = false;
+            generateAplicaViewModel.Model.Datos = false;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             btnSqlPlus.Visibility = Visibility.Hidden;
-            generateAplicaViewModel.Codigo = "";
+            generateAplicaViewModel.Model.Codigo = "";
         }
 
         private void DataGridArchivosCargados_MouseDoubleClick(object sender, MouseButtonEventArgs e)

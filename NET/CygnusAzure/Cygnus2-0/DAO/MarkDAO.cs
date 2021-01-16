@@ -18,6 +18,7 @@ using Cygnus2_0.General.Times;
 using Cygnus2_0.ViewModel.Time;
 using System.Collections.ObjectModel;
 using Cygnus2_0.Model.Audit;
+using Cygnus2_0.Model.Compila;
 
 namespace Cygnus2_0.DAO
 {
@@ -654,7 +655,7 @@ namespace Cygnus2_0.DAO
         #endregion GetionUsuarios
 
         #region CompilacionObjetos
-        public void pObtErrores(Archivo archivo, CompilaViewModel view)
+        public void pObtErrores(Archivo archivo, CompilaModel model)
         {
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtErrores"))
             {
@@ -691,7 +692,7 @@ namespace Cygnus2_0.DAO
                         dato.Value = Convert.ToString(reader["TEXT"]);
                         dato.Observacion = Convert.ToString(reader["TYPE"]);
                         dato.Prioridad = Convert.ToInt32(reader["LINE"].ToString());
-                        view.ListaObservaciones.Add(dato);
+                        model.ListaObservaciones.Add(dato);
                     }
                 }
                 finally

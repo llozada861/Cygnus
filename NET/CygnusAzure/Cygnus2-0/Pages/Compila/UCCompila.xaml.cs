@@ -41,8 +41,8 @@ namespace Cygnus2_0.Pages.Compila
             DataContext = compilaViewModel;
             InitializeComponent();
 
-            compilaViewModel.ArchivosCompilados = "0";
-            compilaViewModel.ArchivosDescompilados = "0";
+            compilaViewModel.Model.ArchivosCompilados = "0";
+            compilaViewModel.Model.ArchivosDescompilados = "0";
         }
 
         private void listBox1_Drop(object sender, DragEventArgs e)
@@ -90,13 +90,13 @@ namespace Cygnus2_0.Pages.Compila
 
             try
             {
-                if (compilaViewModel.Usuario == null)
+                if (compilaViewModel.Model.Usuario == null)
                 {
                     handler.MensajeError("Debe ingresar el usuario.");
                     return;
                 }
 
-                foreach (Archivo archivo in compilaViewModel.ListaArchivosCargados)
+                foreach (Archivo archivo in compilaViewModel.Model.ListaArchivosCargados)
                 {
                     if (string.IsNullOrEmpty(archivo.Tipo))
                     {
@@ -110,7 +110,7 @@ namespace Cygnus2_0.Pages.Compila
                     return;
                 }
 
-                if(compilaViewModel.ListaArchivosCargados.Count == 0)
+                if(compilaViewModel.Model.ListaArchivosCargados.Count == 0)
                 {
                     handler.MensajeError("No hay archivos para compilar");
                     return;
