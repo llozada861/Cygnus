@@ -36,7 +36,7 @@ namespace Cygnus2_0.ViewModel.Compila
             _examinar = new DelegateCommand(pExaminar);
 
             handler = hand;
-            this.Model = new CompilaModel(handler, this);
+            this.Model = new CompilaModel(handler);
 
             this.Model.ListaObservaciones = new ObservableCollection<SelectListItem>();
             this.Model.ListaArchivosCargados = new ObservableCollection<Archivo>();
