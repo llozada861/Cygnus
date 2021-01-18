@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +11,18 @@ using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Data
 {
-    public class ParameterViewModel : ViewModelBase, IViews
+    public class ParameterViewModel : IViews
     {
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
         private readonly DelegateCommand _conection;
+        private List<SelectListItem> listaTipoDatos2;
+
         public ICommand Process => _process;
         public ICommand Clean => _clean;
         public ICommand Conectar => _conection;
 
         private Handler handler;
-        private string parameterId;
-        private string descripcion;
-        private string valor;
-        private string funcion;
-        private string tittle;
-        private List<SelectListItem> listaTipoDatos;
-        private List<SelectListItem> listaTipoDatos2;
-        private SelectListItem tipo;
 
         public ParameterViewModel(Handler hand)
         {
@@ -36,14 +31,17 @@ namespace Cygnus2_0.ViewModel.Data
             _conection = new DelegateCommand(OnConection);
 
             handler = hand;
+
+            this.Model = new ParameterModel();
+
             this.listaTipoDatos2 = new List<SelectListItem>();
 
             this.listaTipoDatos2.Add(new SelectListItem { Text = "NUMBER" });
             this.listaTipoDatos2.Add(new SelectListItem { Text = "VARCHAR2" });
             this.listaTipoDatos2.Add(new SelectListItem { Text = "DATE" });
-            this.ListaTipoDatos = listaTipoDatos2;
+            this.Model.ListaTipoDatos = listaTipoDatos2;
 
-            this.Tipo = new SelectListItem();
+            this.Model.Tipo = new SelectListItem();
 
             /*tittle = "Este tipo de parámetro es para la forma EPMPAR." +
                      "Se utiliza así:" +
@@ -53,51 +51,16 @@ namespace Cygnus2_0.ViewModel.Data
                      "Valor cadena: pkg_epm_boparametr.fsbget('PARAMETRO')";*/
         }
 
-        public string Tittle
-        {
-            get { return tittle; }
-            set { SetProperty(ref tittle, value); }
-        }
-
-        public string ParameterId
-        {
-            get { return parameterId; }
-            set { SetProperty(ref parameterId, value); }
-        }
-        public string Descripcion
-        {
-            get { return descripcion; }
-            set { SetProperty(ref descripcion, value); }
-        }
-        public string Valor
-        {
-            get { return valor; }
-            set { SetProperty(ref valor, value); }
-        }
-        public SelectListItem Tipo
-        {
-            get { return tipo; }
-            set { SetProperty(ref tipo, value); }
-        }
-        public string Funcion
-        {
-            get { return funcion; }
-            set { SetProperty(ref funcion, value); }
-        }
-        public List<SelectListItem> ListaTipoDatos
-        {
-            get { return listaTipoDatos; }
-            set { SetProperty(ref listaTipoDatos, value); }
-        }
+        public ParameterModel Model { get; set; }
 
         public void OnClean(object commandParameter)
         {
-            this.ParameterId = "";
-            this.Funcion = "";
-            this.Valor = "";
-            this.ListaTipoDatos = null;
-            this.ListaTipoDatos = listaTipoDatos2;
-            this.Tipo = new SelectListItem();
+            this.Model.ParameterId = "";
+            this.Model.Funcion = "";
+            this.Model.Valor = "";
+            this.Model.ListaTipoDatos = null;
+            this.Model.ListaTipoDatos = listaTipoDatos2;
+            this.Model.Tipo = new SelectListItem();
         }
 
         public void OnConection(object commandParameter)
@@ -106,13 +69,13 @@ namespace Cygnus2_0.ViewModel.Data
 
         public void OnProcess(object commandParameter)
         {
-            if (String.IsNullOrEmpty(this.ParameterId))
+            if (String.IsNullOrEmpty(this.Model.ParameterId))
             {
                 handler.MensajeError("Ingrese el identificador del parámetro");
                 return;
             }
 
-            if (String.IsNullOrEmpty(this.Tipo.Text))
+            if (String.IsNullOrEmpty(this.Model.Tipo.Text))
             {
                 handler.MensajeError("Ingrese el tipo del parámetro");
                 return;
@@ -125,7 +88,7 @@ namespace Cygnus2_0.ViewModel.Data
         {
             try
             {
-                handler.DAO.pCreaParametro(this);
+                handler.DAO.pCreaParametro(this.Model);
             }
             catch (Exception ex)
             {
@@ -137,13 +100,13 @@ namespace Cygnus2_0.ViewModel.Data
             StringBuilder insParam = new StringBuilder();
 
             insParam.Append(res.PlantillaInsParametr);
-            insParam.Replace(res.Tag_parametro, this.ParameterId);
-            insParam.Replace(res.Tag_paramvalo, this.Valor);
-            insParam.Replace(res.Tag_paramtipo, this.Tipo.Text);
-            insParam.Replace(res.Tag_paramdesc, this.Descripcion);
-            insParam.Replace(res.Tag_parafunc, this.Funcion);
+            insParam.Replace(res.Tag_parametro, this.Model.ParameterId);
+            insParam.Replace(res.Tag_paramvalo, this.Model.Valor);
+            insParam.Replace(res.Tag_paramtipo, this.Model.Tipo.Text);
+            insParam.Replace(res.Tag_paramdesc, this.Model.Descripcion);
+            insParam.Replace(res.Tag_parafunc, this.Model.Funcion);
 
-            handler.pGuardaArchivo(res.NombreArchivoInsepm_parametr + this.ParameterId + res.ExtensionSQL, insParam.ToString());
+            handler.pGuardaArchivo(res.NombreArchivoInsepm_parametr + this.Model.ParameterId + res.ExtensionSQL, insParam.ToString());
         }
     }
 }

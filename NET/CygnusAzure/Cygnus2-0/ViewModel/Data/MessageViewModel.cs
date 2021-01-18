@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Data
 {
-    public class MessageViewModel: ViewModelBase, IViews
+    public class MessageViewModel: IViews
     {
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
@@ -19,44 +20,24 @@ namespace Cygnus2_0.ViewModel.Data
         public ICommand Clean => _clean;
         public ICommand Conectar => _conection;
         private Handler handler;
-        private string descripcion;
-        private string causa;
-        private string solucion;
-        private string codigo;
-        public MessageViewModel(Handler Hand)
+        public MessageViewModel(Handler handler)
         {
             _process = new DelegateCommand(OnProcess);
             _clean = new DelegateCommand(OnClean);
             _conection = new DelegateCommand(OnConection);
-            handler = Hand;
-        }
-        public string Codigo
-        {
-            get { return codigo; }
-            set { SetProperty(ref codigo, value); }
-        }
-        public string Descripcion
-        {
-            get { return descripcion; }
-            set { SetProperty(ref descripcion, value); }
-        }
-        public string Causa
-        {
-            get { return causa; }
-            set { SetProperty(ref causa, value); }
-        }
-        public string Solucion
-        {
-            get { return solucion; }
-            set { SetProperty(ref solucion, value); }
+            this.handler = handler;
+
+            this.Model = new MessageModel(handler);
         }
         public void OnClean(object commandParameter)
         {
-            this.Codigo = "";
-            this.Causa = "";
-            this.Descripcion = "";
-            this.Solucion = "";
+            this.Model.Codigo = "";
+            this.Model.Causa = "";
+            this.Model.Descripcion = "";
+            this.Model.Solucion = "";
         }
+
+        public MessageModel Model { get; set; }
 
         public void OnConection(object commandParameter)
         {
@@ -66,14 +47,14 @@ namespace Cygnus2_0.ViewModel.Data
         {
             try
             {
-                if(string.IsNullOrEmpty(this.Descripcion))
+                if(string.IsNullOrEmpty(this.Model.Descripcion))
                 {
                     handler.MensajeError("Debe ingresar una descripción para el mensaje.");
                     return;
                 }
 
-                this.Codigo = handler.DAO.pObtCodigoMensaje();
-                handler.DAO.pCreaMensaje(this);
+                this.Model.Codigo = handler.DAO.pObtCodigoMensaje();
+                handler.DAO.pCreaMensaje(this.Model);
                 pGenerarArchivo();
             }
             catch(Exception ex)
@@ -87,12 +68,12 @@ namespace Cygnus2_0.ViewModel.Data
             StringBuilder insParam = new StringBuilder();
 
             insParam.Append(res.PlantillaInsMensaje);
-            insParam.Replace(res.Tag_codigo, this.Codigo);
-            insParam.Replace(res.Tag_descripcion, this.Descripcion);
-            insParam.Replace(res.Tag_causa, this.Causa);
-            insParam.Replace(res.Tag_solucion, this.Solucion);
+            insParam.Replace(res.Tag_codigo, this.Model.Codigo);
+            insParam.Replace(res.Tag_descripcion, this.Model.Descripcion);
+            insParam.Replace(res.Tag_causa, this.Model.Causa);
+            insParam.Replace(res.Tag_solucion, this.Model.Solucion);
 
-            handler.pGuardaArchivo(res.NombreArchivoInsMensaje + this.Codigo + res.ExtensionSQL, insParam.ToString());
+            handler.pGuardaArchivo(res.NombreArchivoInsMensaje + this.Model.Codigo + res.ExtensionSQL, insParam.ToString());
         }
     }
 }

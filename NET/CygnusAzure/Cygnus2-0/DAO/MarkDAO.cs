@@ -19,6 +19,7 @@ using Cygnus2_0.ViewModel.Time;
 using System.Collections.ObjectModel;
 using Cygnus2_0.Model.Audit;
 using Cygnus2_0.Model.Compila;
+using Cygnus2_0.Model.Data;
 
 namespace Cygnus2_0.DAO
 {
@@ -36,7 +37,7 @@ namespace Cygnus2_0.DAO
         #endregion Constructor
 
         #region GestionDatos
-        public void pCreaParametro(ParameterViewModel parametro)
+        public void pCreaParametro(ParameterModel parametro)
         {
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pCreaParametro"))
             {
@@ -64,7 +65,7 @@ namespace Cygnus2_0.DAO
             }
         }
 
-        public void pCreaMensaje(MessageViewModel mensajesModel)
+        public void pCreaMensaje(MessageModel mensajesModel)
         {
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pCreaMensaje"))
             {

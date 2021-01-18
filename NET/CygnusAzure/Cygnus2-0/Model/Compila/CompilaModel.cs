@@ -28,10 +28,9 @@ namespace Cygnus2_0.Model.Compila
         private ObservableCollection<SelectListItem> listaObservaciones;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
-        public CompilaModel(Handler hand, CompilaViewModel view)
+        public CompilaModel(Handler handler)
         {
-            handler = hand;
-            this.view = view;
+            this.handler = handler;
         }
         public SelectListItem Usuario
         {
