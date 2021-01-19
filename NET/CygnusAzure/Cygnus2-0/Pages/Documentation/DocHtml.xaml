@@ -42,7 +42,7 @@
                 CanUserAddRows="False"
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
-                ItemsSource="{Binding Path=ListaArchivosCargados}"
+                ItemsSource="{Binding Path=Model.ListaArchivosCargados}"
                   >
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
@@ -58,7 +58,7 @@
         </GroupBox>
         <GroupBox x:Name="groupBox1" Header="Resultados" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="10" Grid.RowSpan="4">
             <DataGrid x:Name="dataGridMensajes"
-                      ItemsSource="{Binding Path=ListaObservaciones}"
+                      ItemsSource="{Binding Path=Model.ListaObservaciones}"
                       AutoGenerateColumns="False"
                     SelectionMode="Single"
                     CanUserDeleteRows="True"
