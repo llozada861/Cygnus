@@ -32,13 +32,13 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <TextBox x:Name="txDesc" TextWrapping="Wrap" Text="{Binding Path=Descripcion}" Grid.ColumnSpan="5" Grid.Column="2"  Grid.Row="0" VerticalAlignment="Center"/>
-        <TextBox x:Name="txUser" TextWrapping="Wrap" Text="{Binding Path=Usuario}" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" />
-        <TextBox x:Name="txtWo" TextWrapping="Wrap"  Text="{Binding Path=Wo}" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
-        <Label x:Name="lblDesc" Content="Descripción" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-        <Label x:Name="lblUser" Content="Usuario" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-        <Label x:Name="lblWo" Content="Wo" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                
+        <TextBox x:Name="txDesc" TextWrapping="Wrap" Text="{Binding Path=Model.Descripcion}" Grid.ColumnSpan="5" Grid.Column="1"  Grid.Row="0" VerticalAlignment="Center"
+                 Style="{StaticResource placeHolder}" Tag="Descripción"/>
+        <TextBox x:Name="txUser" TextWrapping="Wrap" Text="{Binding Path=Model.Usuario}" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" 
+                 Style="{StaticResource placeHolder}" Tag="Usuario"/>
+        <TextBox x:Name="txtWo" TextWrapping="Wrap"  Text="{Binding Path=Model.Wo}" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                 Style="{StaticResource placeHolder}" Tag="Ticket"/>
+
         <Button x:Name="btnProcess" Grid.Row="0" Grid.ColumnSpan="3" Content="Generar" Grid.Column="7" Click="button_Click" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <Button x:Name="btnClear" Grid.Row="1" Grid.ColumnSpan="3" Content="Limpiar" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnClear_Click"/>
 
@@ -81,7 +81,7 @@
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
-                    ItemsSource="{Binding Path=ListaParametros}"
+                    ItemsSource="{Binding Path=Model.ListaParametros}"
                       >
                         <DataGrid.Columns>
                             <DataGridTextColumn                  

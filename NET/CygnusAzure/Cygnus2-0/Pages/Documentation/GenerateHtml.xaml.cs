@@ -38,7 +38,7 @@ namespace Cygnus2_0.Pages.Documentation
             
             InitializeComponent();
 
-            view.Usuario = Cygnus2_0.Properties.Cygnus.Default.UserName; 
+            view.Model.Usuario = Cygnus2_0.Properties.Cygnus.Default.UserName; 
             docModel = new DocumentacionModel();
         }
 
@@ -52,27 +52,27 @@ namespace Cygnus2_0.Pages.Documentation
 
             try
             {
-                if (String.IsNullOrEmpty(view.Descripcion))
+                if (String.IsNullOrEmpty(view.Model.Descripcion))
                 {
                     handler.MensajeError("Debe ingresar una descripción para el proceso.");
                     return;
                 }
 
-                if (String.IsNullOrEmpty(view.Usuario))
+                if (String.IsNullOrEmpty(view.Model.Usuario))
                 {
                     handler.MensajeError("Debe ingresar un usuario para el proceso.");
                     return;
                 }
 
-                if (String.IsNullOrEmpty(view.Wo))
+                if (String.IsNullOrEmpty(view.Model.Wo))
                 {
                     handler.MensajeError("Debe ingresar la WO para el proceso.");
                     return;
                 }
 
-                if (view.ListaParametros.Count > 0)
+                if (view.Model.ListaParametros.Count > 0)
                 {
-                    foreach (ParametrosModel parametro in view.ListaParametros)
+                    foreach (ParametrosModel parametro in view.Model.ListaParametros)
                     {
                         if (String.IsNullOrEmpty(parametro.Descripcion))
                         {
@@ -90,8 +90,8 @@ namespace Cygnus2_0.Pages.Documentation
 
                 handler.CursorWait();
 
-                docModel.Descripcion = view.Descripcion;
-                docModel.Autor = view.Usuario;
+                docModel.Descripcion = view.Model.Descripcion;
+                docModel.Autor = view.Model.Usuario;
                 docModel.Fecha = DateTime.Now.ToShortDateString();
 
                 if (docModel.Fuente != null && docModel.Fuente.ToLower().Equals(res.TipoObjetoPaquete.ToLower()))
@@ -102,7 +102,7 @@ namespace Cygnus2_0.Pages.Documentation
                     metodoBuilder.Replace(res.TagHtml_autor, docModel.Autor);
                     metodoBuilder.Replace(res.TagHtml_desarrollador, Environment.UserName);
                     metodoBuilder.Replace(res.TagHtml_fecha, docModel.Fecha);
-                    metodoBuilder.Replace(res.TagHtml_numeroOC, view.Wo);
+                    metodoBuilder.Replace(res.TagHtml_numeroOC, view.Model.Wo);
                 }
                 else
                 {
@@ -113,7 +113,7 @@ namespace Cygnus2_0.Pages.Documentation
                     metodoBuilder.Replace(res.TagHtml_autor, docModel.Autor);
                     metodoBuilder.Replace(res.TagHtml_desarrollador, Environment.UserName);
                     metodoBuilder.Replace(res.TagHtml_fecha, docModel.Fecha);
-                    metodoBuilder.Replace(res.TagHtml_numeroOC, view.Wo);
+                    metodoBuilder.Replace(res.TagHtml_numeroOC, view.Model.Wo);
                     metodoBuilder.AppendLine();
 
                     if (docModel.Parametros != null && docModel.Parametros.Count > 0)
@@ -171,7 +171,7 @@ namespace Cygnus2_0.Pages.Documentation
 
                 richTextBoxResult.Document.Blocks.Clear();
                 richTextBoxResult.Document.Blocks.Add(new Paragraph(new Run(metodoBuilder.ToString())));
-                Cygnus2_0.Properties.Cygnus.Default.UserName = view.Usuario;
+                Cygnus2_0.Properties.Cygnus.Default.UserName = view.Model.Usuario;
                 Cygnus2_0.Properties.Cygnus.Default.Save();
 
                 handler.CursorNormal();
@@ -201,7 +201,7 @@ namespace Cygnus2_0.Pages.Documentation
             int nuIndexType=1;
 
             //Clean the list view
-            view.ListaParametros.Clear();
+            view.Model.ListaParametros.Clear();
 
             if (richTextBoxResult != null && richTextBoxResult.Document.Blocks.Count > 0)
             {
@@ -270,7 +270,7 @@ namespace Cygnus2_0.Pages.Documentation
                                         paramtype = descparam[nuIndexType];
                                     }
 
-                                    view.ListaParametros.Add(new ParametrosModel { Nombre = paramdesc, Tipo = paramtype, Direccion = paramdirection, Descripcion = "" });
+                                    view.Model.ListaParametros.Add(new ParametrosModel { Nombre = paramdesc, Tipo = paramtype, Direccion = paramdirection, Descripcion = "" });
                                 }
                             }
 
@@ -283,11 +283,11 @@ namespace Cygnus2_0.Pages.Documentation
                             {
                                 docModel.Retorno = new RetornoModel();
                                 docModel.Retorno.Tipo = endDoc[1];
-                                view.ListaParametros.Add(new ParametrosModel { Nombre = "Var. Retorno", Tipo = res.NameReturn, Direccion = null, Descripcion = "" });
-                                view.ListaParametros.Add(new ParametrosModel { Nombre = "Desc. Retorno", Tipo = res.DescReturn, Direccion = null, Descripcion = "" });
+                                view.Model.ListaParametros.Add(new ParametrosModel { Nombre = "Var. Retorno", Tipo = res.NameReturn, Direccion = null, Descripcion = "" });
+                                view.Model.ListaParametros.Add(new ParametrosModel { Nombre = "Desc. Retorno", Tipo = res.DescReturn, Direccion = null, Descripcion = "" });
                             }
 
-                            docModel.Parametros = view.ListaParametros.ToList<ParametrosModel>();
+                            docModel.Parametros = view.Model.ListaParametros.ToList<ParametrosModel>();
                         }
                         else
                         {
@@ -299,11 +299,11 @@ namespace Cygnus2_0.Pages.Documentation
                             {
                                 docModel.Retorno = new RetornoModel();
                                 docModel.Retorno.Tipo = encabezado[3];
-                                view.ListaParametros.Add(new ParametrosModel { Nombre = "Var. Retorno", Tipo = res.NameReturn, Direccion = null, Descripcion = "" });
-                                view.ListaParametros.Add(new ParametrosModel { Nombre = "Desc. Retorno", Tipo = res.DescReturn, Direccion = null, Descripcion = "" });
+                                view.Model.ListaParametros.Add(new ParametrosModel { Nombre = "Var. Retorno", Tipo = res.NameReturn, Direccion = null, Descripcion = "" });
+                                view.Model.ListaParametros.Add(new ParametrosModel { Nombre = "Desc. Retorno", Tipo = res.DescReturn, Direccion = null, Descripcion = "" });
                             }
 
-                            docModel.Parametros = view.ListaParametros.ToList<ParametrosModel>();
+                            docModel.Parametros = view.Model.ListaParametros.ToList<ParametrosModel>();
                         }
                     }
                     else
@@ -334,9 +334,9 @@ namespace Cygnus2_0.Pages.Documentation
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            view.Descripcion = "";
-            view.Wo = "";
-            view.Usuario = Cygnus2_0.Properties.Cygnus.Default.UserName;
+            view.Model.Descripcion = "";
+            view.Model.Wo = "";
+            view.Model.Usuario = Cygnus2_0.Properties.Cygnus.Default.UserName;
             richTextBoxResult.Document.Blocks.Clear();
             richTextBoxProce.Document.Blocks.Clear();
         }
