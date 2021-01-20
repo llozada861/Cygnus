@@ -30,7 +30,7 @@
             <RowDefinition Height="10*" />
         </Grid.RowDefinitions>
         <TextBlock Text="Acerca de Cygnus" Style="{StaticResource Heading2}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5"/>
-        <TextBlock Text="Herramienta desarrollada para facilitar el proceso de entregas de software, así como el control de objetos. Cuenta con diversas utilidades que harán más práctico el proceso de desarrollo. El objetivo es evolucionarla hasta automatizar en gran parte el proceso de entrega, documentación y despliegue." TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="7" TextAlignment="Justify"/>
+        <TextBlock Text="Herramienta de software libre, desarrollada para facilitar el proceso de entregas de software, así como el control de objetos. Cuenta con diversas utilidades que harán más práctico el proceso de desarrollo. El objetivo es evolucionarla hasta automatizar en gran parte el proceso de entrega, documentación y despliegue." TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="7" TextAlignment="Justify"/>
         <TextBlock Text="2018 Llozada ©" TextWrapping="Wrap" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="7" />
     </Grid>
 </UserControl>

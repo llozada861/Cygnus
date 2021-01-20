@@ -42,7 +42,7 @@
                 CanUserAddRows="False"
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
-                ItemsSource="{Binding Path=ListaArchivosCargados}" 
+                ItemsSource="{Binding Path=Model.ListaArchivosCargados}" 
                       MouseDoubleClick="DataGridArchCompila_MouseDoubleClick"
                   >
                 <DataGrid.Columns>
@@ -83,7 +83,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBox x:Name="CasoText" 
-                         Text="{Binding Path=Codigo}" 
+                         Text="{Binding Path=Model.Codigo}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
@@ -92,7 +92,7 @@
                          Style="{StaticResource placeHolder}" Tag="# de caso" AcceptsTab="false" TabIndex="1" IsTabStop="False"/>
 
                 <TextBox x:Name="HU" 
-                         Text="{Binding Path=HU}" 
+                         Text="{Binding Path=Model.HU}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
@@ -101,7 +101,7 @@
                          Style="{StaticResource placeHolder}" Tag="Historia de Usuario" TabIndex="2" AcceptsTab="False"/>
 
                 <TextBox x:Name="Comment" 
-                         Text="{Binding Path=Comentario}" 
+                         Text="{Binding Path=Model.Comentario}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"

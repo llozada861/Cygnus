@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Threats;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,16 +12,9 @@ using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Threats
 {
-    public class ThreatsViewModel : ViewModelBase, IViews
+    public class ThreatsViewModel : IViews
     {
         private Handler handler;
-        private ObservableCollection<SelectListItem> listaParametros;
-        private string nombre;
-        private string hilos;
-        private string parametro;
-        private string tipo;
-        private string vistaPrevia;
-        private string descripcion;
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _add;
         private readonly DelegateCommand _ejecutar;
@@ -33,7 +27,10 @@ namespace Cygnus2_0.ViewModel.Threats
         public ThreatsViewModel(Handler handler)
         {
             this.handler = handler;
-            this.ListaParametros = new ObservableCollection<SelectListItem>();
+
+            this.Model = new ThreatsModel();
+
+            this.Model.ListaParametros = new ObservableCollection<SelectListItem>();
             _process = new DelegateCommand(OnProcess);
             _add = new DelegateCommand(OnAdd);
             _ejecutar = new DelegateCommand(OnExecute);
@@ -43,6 +40,8 @@ namespace Cygnus2_0.ViewModel.Threats
             _reg = new DelegateCommand(OnReg);
             _cant = new DelegateCommand(OnCant);
         }
+        public ThreatsModel Model { get; set; }
+
         public ICommand Process => _process;
         public ICommand Add => _add;
         public ICommand Ejecutar => _ejecutar;
@@ -51,45 +50,6 @@ namespace Cygnus2_0.ViewModel.Threats
         public ICommand Post => _post;
         public ICommand Registrar => _reg;
         public ICommand Cantidad => _cant;
-
-        public ObservableCollection<SelectListItem> ListaParametros
-        {
-            get { return listaParametros; }
-            set { SetProperty(ref listaParametros, value); }
-        }
-        public string Nombre
-        {
-            get { return nombre; }
-            set { SetProperty(ref nombre, value); }
-        }
-        public string Descripcion
-        {
-            get { return descripcion; }
-            set { SetProperty(ref descripcion, value); }
-        }
-        public string Hilos
-        {
-            get { return hilos; }
-            set { SetProperty(ref hilos, value); }
-        }
-        public string Parametro
-        {
-            get { return parametro; }
-            set { SetProperty(ref parametro, value); }
-        }
-        public string Tipo
-        {
-            get { return tipo; }
-            set { SetProperty(ref tipo, value); }
-        }
-        public string VistaPrevia
-        {
-            get { return vistaPrevia; }
-            set { SetProperty(ref vistaPrevia, value); }
-        }
-        public Boolean ApiPre { get; set; }
-        public Boolean ApiPost { get; set; }
-        public Boolean ApiCantidad { get; set; }
 
         public void OnClean(object commandParameter)
         {
@@ -109,97 +69,97 @@ namespace Cygnus2_0.ViewModel.Threats
         {
             if (!Validaciones()) return;
 
-            VistaPrevia = pObtPre();
+            this.Model.VistaPrevia = pObtPre();
         }
         public void OnPrincipal(object commandParameter)
         {
             if (!Validaciones()) return;
-            
-            VistaPrevia = pObtPrincipal();
+
+            this.Model.VistaPrevia = pObtPrincipal();
         }
         public void OnExecute(object commandParameter)
         {
             StringBuilder ejecucion = new StringBuilder();
-            VistaPrevia = "";
+            this.Model.VistaPrevia = "";
 
             if (!Validaciones()) return;
 
             ejecucion.AppendLine();
             ejecucion.AppendLine();
             ejecucion.Append(res.EjecutaHilos);
-            ejecucion.Replace(res.TagNombreHilos, Nombre.ToUpper());            
+            ejecucion.Replace(res.TagNombreHilos, this.Model.Nombre.ToUpper());            
             ejecucion.Replace(res.TagParametrosHilos, fsbParametros(0));
 
-            VistaPrevia = ejecucion.ToString();
+            this.Model.VistaPrevia = ejecucion.ToString();
         }
         public void OnPost(object commandParameter)
         {
             if (!Validaciones()) return;
 
-            VistaPrevia = pObtPost();
+            this.Model.VistaPrevia = pObtPost();
         }
         public void OnCant(object commandParameter)
         {
             if (!Validaciones()) return;
 
             StringBuilder ejecucion = new StringBuilder();
-            VistaPrevia = "";
+            this.Model.VistaPrevia = "";
             string parametros = fsbParametros(1);
 
             if (!Validaciones()) return;
 
             ejecucion.Append(res.PlantillaCantidadHilos);
-            ejecucion.Replace(res.TagNombreHilos, Nombre.ToUpper());
+            ejecucion.Replace(res.TagNombreHilos, this.Model.Nombre.ToUpper());
             ejecucion.Replace(res.TagHtml_desarrollador, Environment.UserName);
             ejecucion.Replace(res.TagHtml_fecha, DateTime.Now.ToShortDateString());
             ejecucion.Replace(res.TagParametrosHilos, parametros.Substring(0, parametros.Length - 1));
             ejecucion.Replace(res.TagPARAMETROS_HTML, fsbParametrosHTML());
 
-            VistaPrevia = ejecucion.ToString();
+            this.Model.VistaPrevia = ejecucion.ToString();
         }
         public void OnAdd(object commandParameter)
         {
-            if(string.IsNullOrEmpty(Parametro))
+            if(string.IsNullOrEmpty(this.Model.Parametro))
             {
                 handler.MensajeError("Ingrese el nombre del parámetro");
                 return;
             }
 
-            if (string.IsNullOrEmpty(Tipo))
+            if (string.IsNullOrEmpty(this.Model.Tipo))
             {
                 handler.MensajeError("Ingrese el tipo del parámetro");
                 return;
             }
 
-            if(ListaParametros.ToList().Exists(x=>x.Text.Equals(Parametro) && x.Observacion.Equals(Tipo)))
+            if(this.Model.ListaParametros.ToList().Exists(x=>x.Text.Equals(this.Model.Parametro) && x.Observacion.Equals(this.Model.Tipo)))
             {
                 handler.MensajeError("El parámetro ya existe");
                 return;
             }
 
-            ListaParametros.Add(new SelectListItem { Text=Parametro,Observacion=Tipo});
-            Parametro = "";
-            Tipo = "";
-            VistaPrevia = "";
+            this.Model.ListaParametros.Add(new SelectListItem { Text= this.Model.Parametro, Observacion= this.Model.Tipo });
+            this.Model.Parametro = "";
+            this.Model.Tipo = "";
+            this.Model.VistaPrevia = "";
         }
         public void OnReg(object commandParameter)
         {
             if (!Validaciones()) return;
 
             StringBuilder ejecucion = new StringBuilder();
-            VistaPrevia = "";
+            this.Model.VistaPrevia = "";
             string parametros = fsbParametros(1);
 
             ejecucion.Append(res.PlantillaInsertHilos);
-            ejecucion.Replace(res.TagNombreHilos, Nombre.ToUpper());
-            ejecucion.Replace(res.TagHTML_Desc, Descripcion.ToUpper());
-            ejecucion.Replace(res.TagCantidadHilos, Hilos);
-            ejecucion.Replace(res.TagApiPrin, "PAQUETE.pProcesoMasivo" + Nombre.ToUpper());
+            ejecucion.Replace(res.TagNombreHilos, this.Model.Nombre.ToUpper());
+            ejecucion.Replace(res.TagHTML_Desc, this.Model.Descripcion.ToUpper());
+            ejecucion.Replace(res.TagCantidadHilos, this.Model.Hilos);
+            ejecucion.Replace(res.TagApiPrin, "PAQUETE.pProcesoMasivo" + this.Model.Nombre.ToUpper());
 
-            if (ApiPre)
+            if (this.Model.ApiPre)
             {
                 ejecucion.Replace(res.TagApiPre, ",API_CANT_GENERAL");
-                ejecucion.Replace(res.TagApiPreVal, ",'PAQUETE.pProcesoPre" + Nombre.ToUpper()+"'");
+                ejecucion.Replace(res.TagApiPreVal, ",'PAQUETE.pProcesoPre" + this.Model.Nombre.ToUpper()+"'");
             }
             else
             {
@@ -207,10 +167,10 @@ namespace Cygnus2_0.ViewModel.Threats
                 ejecucion.Replace(res.TagApiPreVal, "");
             }
 
-            if (ApiPost)
+            if (this.Model.ApiPost)
             {
                 ejecucion.Replace(res.TagApiPost, ",API_POST");
-                ejecucion.Replace(res.TagApiPostVal, ",'PAQUETE.pProcesoPost" + Nombre.ToUpper()+"'");
+                ejecucion.Replace(res.TagApiPostVal, ",'PAQUETE.pProcesoPost" + this.Model.Nombre.ToUpper()+"'");
             }
             else
             {
@@ -218,10 +178,10 @@ namespace Cygnus2_0.ViewModel.Threats
                 ejecucion.Replace(res.TagApiPostVal, "");
             }
 
-            if (ApiCantidad)
+            if (this.Model.ApiCantidad)
             {
                 ejecucion.Replace(res.TagApiCant, ",API_CANTIDAD");
-                ejecucion.Replace(res.TagApiCantVal, ",'PAQUETE.fnuObtCantidad" + Nombre.ToUpper()+"'");
+                ejecucion.Replace(res.TagApiCantVal, ",'PAQUETE.fnuObtCantidad" + this.Model.Nombre.ToUpper()+"'");
             }
             else
             {
@@ -229,24 +189,24 @@ namespace Cygnus2_0.ViewModel.Threats
                 ejecucion.Replace(res.TagApiCantVal, "");
             }
 
-            VistaPrevia = ejecucion.ToString();
+            this.Model.VistaPrevia = ejecucion.ToString();
         }
 
         private Boolean Validaciones()
         {
-            if (string.IsNullOrEmpty(Nombre))
+            if (string.IsNullOrEmpty(this.Model.Nombre))
             {
                 handler.MensajeError("Ingrese el nombre del proceso");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(Hilos))
+            if (string.IsNullOrEmpty(this.Model.Hilos))
             {
                 handler.MensajeError("Ingrese la cantidad de hilos");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(Descripcion))
+            if (string.IsNullOrEmpty(this.Model.Descripcion))
             {
                 handler.MensajeError("Ingrese una descripción para el proceso");
                 return false;
@@ -259,27 +219,27 @@ namespace Cygnus2_0.ViewModel.Threats
         {
             string parametros = "";
 
-            if (ListaParametros.Count > 0)
+            if (this.Model.ListaParametros.Count > 0)
             {
-                for (int i = 0; i < ListaParametros.Count; i++)
+                for (int i = 0; i < this.Model.ListaParametros.Count; i++)
                 {
                     if (tipo == 0)
                     {
-                        if (i == ListaParametros.Count - 1)
-                            parametros = parametros + "[Valor " + ListaParametros.ElementAt(i).Text + "]";
+                        if (i == this.Model.ListaParametros.Count - 1)
+                            parametros = parametros + "[Valor " + this.Model.ListaParametros.ElementAt(i).Text + "]";
                         else
-                            parametros = parametros + "[Valor " + ListaParametros.ElementAt(i).Text + "],";
+                            parametros = parametros + "[Valor " + this.Model.ListaParametros.ElementAt(i).Text + "],";
                     }
                     else
                     {
-                        if (i == ListaParametros.Count - 1)
-                            parametros = parametros + ListaParametros.ElementAt(i).Text + "   IN " + ListaParametros.ElementAt(i).Observacion + ",";
+                        if (i == this.Model.ListaParametros.Count - 1)
+                            parametros = parametros + this.Model.ListaParametros.ElementAt(i).Text + "   IN " + this.Model.ListaParametros.ElementAt(i).Observacion + ",";
                         else
                         {
                             if (i == 0)
-                                parametros = parametros + ListaParametros.ElementAt(i).Text + "   IN " + ListaParametros.ElementAt(i).Observacion + ",\n";
+                                parametros = parametros + this.Model.ListaParametros.ElementAt(i).Text + "   IN " + this.Model.ListaParametros.ElementAt(i).Observacion + ",\n";
                             else
-                                parametros = parametros + "        " + ListaParametros.ElementAt(i).Text + "   IN " + ListaParametros.ElementAt(i).Observacion + ",\n";
+                                parametros = parametros + "        " + this.Model.ListaParametros.ElementAt(i).Text + "   IN " + this.Model.ListaParametros.ElementAt(i).Observacion + ",\n";
                         }
                     }
                 }
@@ -299,15 +259,15 @@ namespace Cygnus2_0.ViewModel.Threats
         {
             StringBuilder ejecucion = new StringBuilder();
 
-            if (ListaParametros.Count > 0)
+            if (this.Model.ListaParametros.Count > 0)
             {
-                for (int i = 0; i < ListaParametros.Count; i++)
+                for (int i = 0; i < this.Model.ListaParametros.Count; i++)
                 {
                     ejecucion.Append(handler.HtmlMetodoParam);
-                    ejecucion.Replace(res.TagHtmlParamName, ListaParametros.ElementAt(i).Text);
-                    ejecucion.Replace(res.TagHtmlParamType, ListaParametros.ElementAt(i).Observacion);
+                    ejecucion.Replace(res.TagHtmlParamName, this.Model.ListaParametros.ElementAt(i).Text);
+                    ejecucion.Replace(res.TagHtmlParamType, this.Model.ListaParametros.ElementAt(i).Observacion);
                     ejecucion.Replace(res.TagHtmlParamDir, res.IN);
-                    ejecucion.Replace(res.TagHtmlParaDesc, ListaParametros.ElementAt(i).Text);
+                    ejecucion.Replace(res.TagHtmlParaDesc, this.Model.ListaParametros.ElementAt(i).Text);
                 }
             }
             else
@@ -324,10 +284,10 @@ namespace Cygnus2_0.ViewModel.Threats
         public string pObtPrincipal()
         {
             StringBuilder ejecucion = new StringBuilder();
-            VistaPrevia = "";
+            this.Model.VistaPrevia = "";
 
             ejecucion.Append(res.PlantillaProcesoMasivo);
-            ejecucion.Replace(res.TagNombreHilos, Nombre.ToUpper());
+            ejecucion.Replace(res.TagNombreHilos, this.Model.Nombre.ToUpper());
             ejecucion.Replace(res.TagHtml_desarrollador, Environment.UserName);
             ejecucion.Replace(res.TagHtml_fecha, DateTime.Now.ToShortDateString());
             ejecucion.Replace(res.TagParametrosHilos, fsbParametros(1));
@@ -339,11 +299,11 @@ namespace Cygnus2_0.ViewModel.Threats
         public string pObtPre()
         {
             StringBuilder ejecucion = new StringBuilder();
-            VistaPrevia = "";
+            this.Model.VistaPrevia = "";
             string parametros = fsbParametros(1);
 
             ejecucion.Append(res.PlantillaProcesoPre);
-            ejecucion.Replace(res.TagNombreHilos, Nombre.ToUpper());
+            ejecucion.Replace(res.TagNombreHilos, this.Model.Nombre.ToUpper());
             ejecucion.Replace(res.TagHtml_desarrollador, Environment.UserName);
             ejecucion.Replace(res.TagHtml_fecha, DateTime.Now.ToShortDateString());
             ejecucion.Replace(res.TagParametrosHilos, parametros.Substring(0,parametros.Length-1));
@@ -354,11 +314,11 @@ namespace Cygnus2_0.ViewModel.Threats
         public string pObtPost()
         {
             StringBuilder ejecucion = new StringBuilder();
-            VistaPrevia = "";
+            this.Model.VistaPrevia = "";
             string parametros = fsbParametros(1);
 
             ejecucion.Append(res.PlantillaProcesoPost);
-            ejecucion.Replace(res.TagNombreHilos, Nombre.ToUpper());
+            ejecucion.Replace(res.TagNombreHilos, this.Model.Nombre.ToUpper());
             ejecucion.Replace(res.TagHtml_desarrollador, Environment.UserName);
             ejecucion.Replace(res.TagHtml_fecha, DateTime.Now.ToShortDateString());
             ejecucion.Replace(res.TagParametrosHilos, parametros.Substring(0, parametros.Length - 1));
