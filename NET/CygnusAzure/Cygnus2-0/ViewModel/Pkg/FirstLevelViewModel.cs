@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Package;
 using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Windows.Input;
 
 namespace Cygnus2_0.ViewModel.Pkg
 {
-    public class FirstLevelViewModel : ViewModelBase, IViews
+    public class FirstLevelViewModel : IViews
     {
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
@@ -22,10 +23,7 @@ namespace Cygnus2_0.ViewModel.Pkg
         public ICommand Clean => _clean;
         public ICommand Conectar => _conection;
         private Handler handler;
-        private string tabla;
-        private string caso;
-        private SelectListItem usuario;
-        private ObservableCollection<SelectListItem> listaUsuarios;
+
         public FirstLevelViewModel(Handler hand)
         {
             _process = new DelegateCommand(OnProcess);
@@ -33,36 +31,20 @@ namespace Cygnus2_0.ViewModel.Pkg
             _conection = new DelegateCommand(OnConection);
             handler = hand;
 
-            this.ListaUsuarios = handler.ListaUsuarios;
-            this.Usuario = new SelectListItem();
+            this.Model = new pkgModel();
+
+            this.Model.ListaUsuarios = handler.ListaUsuarios;
+            this.Model.Usuario = new SelectListItem();
         }
-        public string Tabla
-        {
-            get { return tabla; }
-            set { SetProperty(ref tabla, value); }
-        }
-        public string Caso
-        {
-            get { return caso; }
-            set { SetProperty(ref caso, value); }
-        }
-        public SelectListItem Usuario
-        {
-            get { return usuario; }
-            set { SetProperty(ref usuario, value); }
-        }
-        public ObservableCollection<SelectListItem> ListaUsuarios
-        {
-            get { return listaUsuarios; }
-            set { SetProperty(ref listaUsuarios, value); }
-        }
+
+        public pkgModel Model { get; set; }
 
         public void OnClean(object commandParameter)
         {
-            this.Caso = "";
-            this.Tabla = "";
-            this.Usuario = new SelectListItem();
-            this.ListaUsuarios = handler.ListaUsuarios;
+            this.Model.Caso = "";
+            this.Model.Tabla = "";
+            this.Model.Usuario = new SelectListItem();
+            this.Model.ListaUsuarios = handler.ListaUsuarios;
         }
 
         public void OnConection(object commandParameter)
@@ -86,10 +68,10 @@ namespace Cygnus2_0.ViewModel.Pkg
         {
             handler.CursorWait();
 
-            OracleClob pktbl = handler.DAO.pGeneraPktbl(this.Tabla, this.Usuario, this.Caso);
+            OracleClob pktbl = handler.DAO.pGeneraPktbl(this.Model.Tabla, this.Model.Usuario, this.Model.Caso);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = "pktbl" + this.Tabla.ToLower().Trim() + ".sql";
+            saveFileDialog.FileName = "pktbl" + this.Model.Tabla.ToLower().Trim() + ".sql";
 
             handler.CursorNormal();
 

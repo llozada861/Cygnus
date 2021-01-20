@@ -45,7 +45,7 @@
                 </Grid.RowDefinitions>
 
                 <Label x:Name="lblNombre" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox x:Name="txtNombre" Text="{Binding Path=Nombre}" 
+                <TextBox x:Name="txtNombre" Text="{Binding Path=Model.Nombre}" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" Grid.Column="2" Grid.Row="0"
                          Grid.ColumnSpan="3" 
@@ -53,7 +53,7 @@
                          Style="{StaticResource placeHolder}" Tag="Nombre máximo 6 letras" TextChanged="TxtNombre_TextChanged"
                          />
 
-                <TextBox x:Name="txtDescripcion" Text="{Binding Path=Descripcion}" 
+                <TextBox x:Name="txtDescripcion" Text="{Binding Path=Model.Descripcion}" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" Grid.Column="2" Grid.Row="1"
                          Grid.ColumnSpan="3" 
@@ -61,7 +61,7 @@
                          Style="{StaticResource placeHolder}" Tag="Descripción"
                          />
                 
-                <TextBox x:Name="txtHilos" Text="{Binding Path=Hilos}" 
+                <TextBox x:Name="txtHilos" Text="{Binding Path=Model.Hilos}" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" Grid.Column="2" Grid.Row="2" 
                          Grid.ColumnSpan="3" 
@@ -88,14 +88,14 @@
                 </Grid.RowDefinitions>
 
                 <TextBox x:Name="txtParam" 
-                         Text="{Binding Path=Parametro}" 
+                         Text="{Binding Path=Model.Parametro}" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" Grid.Column="0" Grid.Row="0" 
                          Grid.ColumnSpan="2" Margin="0,0,5,0" 
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Nombre Parámetro"
                          />
-                <TextBox x:Name="txtTipo" Text="{Binding Path=Tipo}" 
+                <TextBox x:Name="txtTipo" Text="{Binding Path=Model.Tipo}" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" 
                          Grid.ColumnSpan="2" Margin="5,0" 
@@ -111,7 +111,7 @@
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
-                    ItemsSource="{Binding Path=ListaParametros}"
+                    ItemsSource="{Binding Path=Model.ListaParametros}"
                     Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="4"
                       >
                     <DataGrid.Columns>
@@ -168,7 +168,7 @@
         </GroupBox>
 
         <GroupBox x:Name="grbEjecuta" Header="Vista Previa" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="7" Grid.RowSpan="6">
-            <RichTextBox x:Name="richTextBoxResult" IsReadOnly="True">
+            <RichTextBox x:Name="richTextBoxResult" >
                 <RichTextBox.Resources>
                     <Style TargetType="{x:Type Paragraph}">
                         <Setter Property="Margin" Value="0" />
@@ -176,7 +176,7 @@
                 </RichTextBox.Resources>
                 <FlowDocument>
                     <Paragraph>
-                        <Run Text="{Binding Path=VistaPrevia}"/>
+                        <Run Text="{Binding Path=Model.VistaPrevia}"/>
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>

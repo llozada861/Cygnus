@@ -235,12 +235,14 @@
     <Compile Include="Model\Index\IndexModel.cs" />
     <Compile Include="Model\Objects\BlockModel.cs" />
     <Compile Include="Model\Objects\DesblockModel.cs" />
+    <Compile Include="Model\Package\pkgModel.cs" />
     <Compile Include="Model\Refresh\RefreshModel.cs" />
     <Compile Include="Model\Security\EncryptModel.cs" />
     <Compile Include="Model\Security\RoleModel.cs" />
     <Compile Include="Model\Settings\ConexionModel.cs" />
     <Compile Include="Model\Settings\ConfGeneralModel.cs" />
     <Compile Include="Model\Settings\UpdateModel.cs" />
+    <Compile Include="Model\Threats\ThreatsModel.cs" />
     <Compile Include="Model\Time\TimeModel.cs" />
     <Compile Include="Pages\Aplica\UCGenerateAplica.xaml.cs">
       <DependentUpon>UCGenerateAplica.xaml</DependentUpon>

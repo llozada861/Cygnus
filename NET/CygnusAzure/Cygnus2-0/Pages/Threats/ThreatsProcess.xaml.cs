@@ -67,12 +67,12 @@ namespace Cygnus2_0.Pages.Threats
             if (chkPre.IsChecked == true)
             {
                 btnPre.Visibility = Visibility.Visible;
-                view.ApiPre = true;
+                view.Model.ApiPre = true;
             }
             else
             {
                 btnPre.Visibility = Visibility.Hidden;
-                view.ApiPre = false;
+                view.Model.ApiPre = false;
             }
         }
 
@@ -81,12 +81,12 @@ namespace Cygnus2_0.Pages.Threats
             if (chkPost.IsChecked == true)
             {
                 btnPost.Visibility = Visibility.Visible;
-                view.ApiPost = true;
+                view.Model.ApiPost = true;
             }
             else
             {
                 btnPost.Visibility = Visibility.Hidden;
-                view.ApiPost = false;
+                view.Model.ApiPost = false;
             }
         }
 
@@ -108,7 +108,7 @@ namespace Cygnus2_0.Pages.Threats
 
         private void TxtNombre_TextChanged(object sender, TextChangedEventArgs e)
         {
-            view.VistaPrevia = "";
+            view.Model.VistaPrevia = "";
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -120,12 +120,12 @@ namespace Cygnus2_0.Pages.Threats
             if (chkCant.IsChecked == true)
             {
                 btnCant.Visibility = Visibility.Visible;
-                view.ApiCantidad = true;
+                view.Model.ApiCantidad = true;
             }
             else
             {
                 btnCant.Visibility = Visibility.Hidden;
-                view.ApiCantidad = false;
+                view.Model.ApiCantidad = false;
             }
         }
 

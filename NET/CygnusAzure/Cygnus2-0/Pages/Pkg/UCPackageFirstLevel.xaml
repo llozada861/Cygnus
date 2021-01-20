@@ -59,19 +59,25 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label x:Name="label" Content="Usuario" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0,0,5,0"/>
                 <ComboBox x:Name="comboBox" VerticalAlignment="Center" 
-                  ItemsSource="{Binding Path=ListaUsuarios}"  
-                  SelectedItem="{Binding Path=Usuario}" 
+                  ItemsSource="{Binding Path=Model.ListaUsuarios}"  
+                  SelectedItem="{Binding Path=Model.Usuario}" 
                   DisplayMemberPath="Text" 
-                  Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="2" Margin="0,0,0,5"/>
-                <Label x:Name="labelTabla" Content="Tabla" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0,0,5,0"/>
-                <TextBox x:Name="TablaText" Text="{Binding Path=Tabla}"  TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="3" Margin="0,0,0,5"/>
-                <Label x:Name="SaoLabel" Content="Código" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0,0,5,0"/>
-                <TextBox x:Name="CasoText" Text="{Binding Path=Funcion}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="3" Grid.ColumnSpan="7" Grid.Row="5" Grid.RowSpan="2"/>
+                  Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="2" Margin="0,0,0,5"
+                          />
+                <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+                   Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="7" Grid.RowSpan="2" VerticalAlignment="Center" Margin="0,0,0,5"
+                   Text="Usuario" 
+                   Style="{StaticResource ComboBoxSelectOverlay}"/>
+
+                <TextBox x:Name="TablaText" Text="{Binding Path=Model.Tabla}"  TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="7" Grid.RowSpan="3" Margin="0,0,0,5"
+                         Style="{StaticResource placeHolder}" Tag="Tabla"/>
+
+                <TextBox x:Name="CasoText" Text="{Binding Path=Model.Caso}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.ColumnSpan="7" Grid.Row="5" Grid.RowSpan="2"
+                         Style="{StaticResource placeHolder}" Tag="Ticket"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="buttonGenerar" Content="Generar" Command="{Binding Path=Process}" Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Center" />
+        <Button x:Name="buttonGenerar" Content="Generar" Command="{Binding Path=Process}" Grid.Column="4" Grid.Row="3" Grid.ColumnSpan="3" VerticalAlignment="Center" />
 
     </Grid>
 </UserControl>
