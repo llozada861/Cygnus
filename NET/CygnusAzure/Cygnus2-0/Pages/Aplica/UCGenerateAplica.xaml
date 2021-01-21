@@ -92,8 +92,8 @@
                       Header="Archivo"
                       Binding="{Binding Path=FileName}" />
 
-                        <DataGridComboBoxColumn Width="200"
-                             DisplayMemberPath="Text"
+                        <DataGridComboBoxColumn Width="150" 
+                             DisplayMemberPath="Text" 
                                                 SelectedValuePath="Text"
                                                 Header="Tipo"
                                                 SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -109,6 +109,11 @@
                                 </Style>
                             </DataGridComboBoxColumn.EditingElementStyle>
                         </DataGridComboBoxColumn>
+
+                        <DataGridTextColumn                  
+                      IsReadOnly="false"
+                      Header="Objeto Para Grant"
+                      Binding="{Binding Path=NombreObjeto}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

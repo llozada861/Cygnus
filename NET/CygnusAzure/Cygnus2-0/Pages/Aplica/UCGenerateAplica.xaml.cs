@@ -117,7 +117,7 @@ namespace Cygnus2_0.Pages.Aplica
                 return; // return if there's no row selected
 
             Archivo archivo = (Archivo)dataGridArchivosCargados.SelectedItem;
-            handler.pAbrirArchivo(archivo.RutaConArchivo);
+            //handler.pAbrirArchivo(archivo.RutaConArchivo);
         }
 
         private void DataGridArchivosGen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
