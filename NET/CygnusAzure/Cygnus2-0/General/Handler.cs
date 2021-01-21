@@ -334,6 +334,11 @@ namespace Cygnus2_0.General
                                     archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
                                     archivo.InicioArchivo = prefijo.Text.ToLower();
 
+                                    if(llamado.Equals(res.No_aplica) && archivo.SelectItemTipo.Grant.Equals(res.No))
+                                    {
+                                        archivo.NombreObjeto = res.No_aplica;
+                                    }
+
                                     if (archivo.Tipo.ToLower().Equals(res.Script.ToLower()) && llamado.Equals(res.GIT))
                                     {
                                         archivo.NombreObjeto = "";
@@ -403,6 +408,7 @@ namespace Cygnus2_0.General
                     {
                         indice = sbPalabra.IndexOf("(");
                         sbPalabra = sbPalabra.Substring(0, indice); //(indice - 1));
+                        break;
                     }
                     else
                         break;
