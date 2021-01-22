@@ -967,6 +967,10 @@ namespace Cygnus2_0.General
                     if (TablaPrincipal.Length == 0)
                     {
                         pGeneraMetodoHTML(TablaPrincipal, docu, res.Text_Paquete);
+                        //Se adionan los retornos del método
+                        pGeneraRetornosHTML(TablaPrincipal, docu);
+                        //Se adicionan los parámetros si el método tiene
+                        pGeneraParametrosHTML(TablaPrincipal, docu);
                         TablaPrincipal.Append(res.HTMLHistorialHeadModif);
                         pGeneraHistorialHTML(TablaPrincipal, docu);
                     }
@@ -1062,22 +1066,25 @@ namespace Cygnus2_0.General
             Boolean blParametros = false;
             Parametros.Append(res.HTMLHeadParametros);
 
-            //Obtiene la descripción del paquete y sus modificaciones
-            foreach (ParametrosModel parametro in docu.Parametros)
+            if (docu.Parametros.Count > 0)
             {
-                Parametros.Append(res.HTMLParametros);
-                Parametros.Replace(res.TagHTML_parametro, parametro.Nombre);
-                Parametros.Replace(res.TagHTML_tipo, parametro.Tipo);
-                Parametros.Replace(res.TagHTML_in, parametro.Direccion.ToUpper().IndexOf("IN") >= 0 ? "X" : "");
-                Parametros.Replace(res.TagHTML_out, parametro.Direccion.ToUpper().IndexOf("OUT") >= 0 ? "X" : "");
-                Parametros.Replace(res.TagHTML_default, "");
-                Parametros.Replace(res.TagHTML_Desc, parametro.Descripcion);
-                blParametros = true;
-            }
+                //Obtiene la descripción del paquete y sus modificaciones
+                foreach (ParametrosModel parametro in docu.Parametros)
+                {
+                    Parametros.Append(res.HTMLParametros);
+                    Parametros.Replace(res.TagHTML_parametro, parametro.Nombre);
+                    Parametros.Replace(res.TagHTML_tipo, parametro.Tipo);
+                    Parametros.Replace(res.TagHTML_in, parametro.Direccion.ToUpper().IndexOf("IN") >= 0 ? "X" : "");
+                    Parametros.Replace(res.TagHTML_out, parametro.Direccion.ToUpper().IndexOf("OUT") >= 0 ? "X" : "");
+                    Parametros.Replace(res.TagHTML_default, "");
+                    Parametros.Replace(res.TagHTML_Desc, parametro.Descripcion);
+                    blParametros = true;
+                }
 
-            if (blParametros)
-            {
-                cadena.Append(Parametros);
+                if (blParametros)
+                {
+                    cadena.Append(Parametros);
+                }
             }
         }
         public void pGeneraRetornosHTML(StringBuilder cadena, DocumentacionModel docu)
@@ -1093,10 +1100,6 @@ namespace Cygnus2_0.General
                 Retornos.Replace(res.TagHTML_tipo, docu.Retorno.Tipo);
                 Retornos.Replace(res.TagHTML_Desc, docu.Retorno.Descripcion);
                 blRetornos = true;
-            }
-
-            if (blRetornos)
-            {
                 cadena.Append(Retornos);
             }
         }
