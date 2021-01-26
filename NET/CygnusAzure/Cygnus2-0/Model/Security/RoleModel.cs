@@ -1,40 +1,50 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using Cygnus2_0.Interface;
 using Cygnus2_0.ViewModel.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Model.Security
 {
-    public class RoleModel
+    public class RoleModel: ViewModelBase
     {
-        private Handler handler;
-        private RoleViewModel view;
-        public RoleModel(Handler hand, RoleViewModel view)
+        private string usuario;
+        private string email;
+        private List<SelectListItem> listaRoles;
+        private SelectListItem rol;
+        private string password;
+        public RoleModel()
         {
-            this.view = view;
-            this.handler = hand;
         }
 
-        public void pGuardaRol()
+        public List<SelectListItem> ListaRoles
         {
-            string pass = view.Usuario.Trim()+"-"+view.Rol.Value;
-            handler.DAO.pGuardaRol(view.Usuario.Trim(), EncriptaPass.Encriptar(pass), view.Email);
-            SqliteDAO.pCreaConfiguracion(res.KeyEmail, view.Email);
-            handler.ConnViewModel.Correo = view.Email;
+            get { return listaRoles; }
+            set { SetProperty(ref listaRoles, value); }
         }
-
-        public void pLimpiar()
+        public SelectListItem Rol
         {
-            view.Rol = new SelectListItem();
-            view.Usuario = "";
-            view.ListaRoles = null;
-            view.ListaRoles = handler.ListaRoles;
-            view.Email = "";
+            get { return rol; }
+            set { SetProperty(ref rol, value); }
+        }
+        public string Usuario
+        {
+            get { return usuario; }
+            set { SetProperty(ref usuario, value.ToUpper().Trim()); }
+        }
+        public string Email
+        {
+            get { return email; }
+            set { SetProperty(ref email, value); }
+        }
+        public string Password
+        {
+            get { return password; }
+            set { SetProperty(ref password, value); }
         }
     }
 }

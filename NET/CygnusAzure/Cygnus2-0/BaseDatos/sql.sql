@@ -466,3 +466,9 @@ ORDER BY fecha_registro DESC
 "WHERE usuario = :usuario "+
 "AND fecha_inicio >= :fecha_i "+
 "AND fecha_inicio <= :fecha_f "
+/
+SELECT * FROM flex.ll_usuarios
+/
+SELECT * FROM dba_users WHERE username = 'SQL_LLOZA2'
+/
+SELECT 

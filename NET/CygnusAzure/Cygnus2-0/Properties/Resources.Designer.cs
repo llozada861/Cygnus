@@ -2730,6 +2730,30 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a SET SERVEROUTPUT ON
+        ////*
+        ///  
+        ///   Autor:        Llozada
+        ///   Fecha:        16-01-2019 
+        ///   Descripcion:  Script para creacion de usuarios SQL_&lt;LOGIN_RED&gt;                 
+        ///
+        ///*/
+        ///DECLARE
+        ///    ---Archivos planos de salida
+        ///    sbArchivoSalidaDatos              VARCHAR2 (200);
+        ///    iflFileHandle_out                 UTL_FILE.FILE_TYPE;     -- Tipo archivo del sistema
+        ///    
+        ///    ---Archivos planos de salida
+        ///    sbArchivoSalidaDatos_err          VARCHAR2 (200);
+        ///    iflFileHandle_err                 UTL_FILE.FILE_T [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string ScriptCreaUsuario {
+            get {
+                return ResourceManager.GetString("ScriptCreaUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a sq.
         /// </summary>
         public static string Secuencia {

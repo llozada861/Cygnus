@@ -772,14 +772,13 @@ AS
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN 
             UPDATE flex.ll_usuarios
-            SET rol = isbCodigo,
-                email = isbEmail
+            SET rol = isbCodigo
             WHERE usuario = isbUsuario;
             commit;
         WHEN OTHERS THEN
             onuErrorCode := SQLCODE;
             osbErrorMessage := SQLERRM;     
-    END pGuardaRol; 
+    END pGuardaRol;
     
     /*Obtiene*/
     PROCEDURE pObtieneCodigo

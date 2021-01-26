@@ -44,15 +44,31 @@
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label x:Name="txUser" Content="Usuario" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox x:Name="CasoText" Text="{Binding Path=Codigo}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,4" VerticalAlignment="Center"/>
-                <Button x:Name="btnCreateUser" Content="Crear" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox x:Name="CasoText" Text="{Binding Path=Model.Usuario}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,0,4" VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Usuario"/>
+                
+                <TextBox x:Name="CasoPass" Text="{Binding Path=Model.Password}" TextWrapping="Wrap" VerticalContentAlignment="Center" CharacterCasing="Upper" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,4" VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Password"/>
+                
+                <ComboBox x:Name="comboBox" 
+                  ItemsSource="{Binding Path=Model.ListaRoles}" 
+                  SelectedItem="{Binding Path=Model.Rol}"
+                  DisplayMemberPath="Text"
+                  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Center"/>
+                <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+                   Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="6" VerticalAlignment="Center"
+                   Text="Rol" 
+                   Style="{StaticResource ComboBoxSelectOverlay}"/>
+
+                <Button x:Name="btnCreateUser" Command="{Binding Path=CreateUser}" Content="Crear" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="grbUsers" Header="Listado de usuarios SQL" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" Grid.RowSpan="7">
+        <!--<GroupBox x:Name="grbUsers" Header="Listado de usuarios SQL" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" Grid.RowSpan="7">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -81,6 +97,6 @@
 
                 <Button x:Name="btnCreateUsers" Content="Crear" Grid.Column="8" Grid.Row="10" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             </Grid>
-        </GroupBox>
+        </GroupBox>-->
     </Grid>
 </UserControl>

@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using Cygnus2_0.Model.Audit;
 using Cygnus2_0.Model.Compila;
 using Cygnus2_0.Model.Data;
+using Cygnus2_0.Model.Security;
 
 namespace Cygnus2_0.DAO
 {
