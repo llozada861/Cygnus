@@ -312,6 +312,11 @@ namespace Cygnus2_0.General
                     {
                         sbLineSpace = Regex.Replace(sbLine, @"\s+", " ");
 
+                        if (sbLineSpace.StartsWith("--"))
+                        {
+                            sbLine = streamReader.ReadLine();
+                        }
+
                         if (!string.IsNullOrEmpty(archivo.Tipo) && archivo.Tipo.Equals(res.TipoObjetoTrigger.ToLower()) && !existeOn)
                         {
                             archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace, out existeOn);

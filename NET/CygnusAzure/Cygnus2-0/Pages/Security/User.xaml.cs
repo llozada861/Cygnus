@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Cygnus2_0.General;
+using Cygnus2_0.ViewModel.Security;
+using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +22,35 @@ namespace Cygnus2_0.Pages.Security
     /// <summary>
     /// Interaction logic for User.xaml
     /// </summary>
-    public partial class User : UserControl
+    public partial class User : UserControl, IContent
     {
+        private Handler handler;
+        private MainWindow myWin;
+        private RoleViewModel roleViewModel;
         public User()
         {
+            myWin = (MainWindow)Application.Current.MainWindow;
+            handler = myWin.Handler;
+
+            roleViewModel = new RoleViewModel(handler);
+            DataContext = roleViewModel;
             InitializeComponent();
+        }
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
         }
     }
 }
