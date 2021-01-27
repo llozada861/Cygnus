@@ -892,14 +892,28 @@ namespace Cygnus2_0.General
 
                             for (int i = 0; i < parametros.Count; i++)
                             {
-                                doc.Parametros.Add(new ParametrosModel
+                                try
                                 {
-                                    Nombre = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "nombre")).InnerText,
-                                    Tipo = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "tipo")).InnerText,
-                                    Direccion = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "direccion")).InnerText,
-                                    Descripcion = parametros[i].InnerText
-                                });
+                                    doc.Parametros.Add(new ParametrosModel
+                                    {
+                                        Nombre = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "nombre")).InnerText,
+                                        Tipo = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "tipo")).InnerText,
+                                        Direccion = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "direccion")).InnerText,
+                                        Descripcion = parametros[i].InnerText,
+                                        Default = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "default")).InnerText
+                                    });
+                                }
+                                catch {
+                                    doc.Parametros.Add(new ParametrosModel
+                                    {
+                                        Nombre = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "nombre")).InnerText,
+                                        Tipo = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "tipo")).InnerText,
+                                        Direccion = parametros[i].SelectSingleNode(String.Format(AtributoNodo, "direccion")).InnerText,
+                                        Descripcion = parametros[i].InnerText
+                                    });
+                                }
                             }
+
                         }
                         catch
                         {
@@ -1081,7 +1095,7 @@ namespace Cygnus2_0.General
                     Parametros.Replace(res.TagHTML_tipo, parametro.Tipo);
                     Parametros.Replace(res.TagHTML_in, parametro.Direccion.ToUpper().IndexOf("IN") >= 0 ? "X" : "");
                     Parametros.Replace(res.TagHTML_out, parametro.Direccion.ToUpper().IndexOf("OUT") >= 0 ? "X" : "");
-                    Parametros.Replace(res.TagHTML_default, "");
+                    Parametros.Replace(res.TagHTML_default, string.IsNullOrEmpty(parametro.Default) ? "" : parametro.Default.ToUpper());
                     Parametros.Replace(res.TagHTML_Desc, parametro.Descripcion);
                     blParametros = true;
                 }

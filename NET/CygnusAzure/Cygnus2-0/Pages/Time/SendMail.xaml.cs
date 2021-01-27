@@ -40,8 +40,8 @@ namespace Cygnus2_0.Pages.Time
 
             txtCuerpo.IsEnabled = false;
 
-            view.MailCreaRq.Asunto = "Creación Historia de Usuario AzureDevops [" + tarea.Descripcion + "]";
-            view.MailCreaRq.Cuerpo = "<p>Buen d&iacute;a, <br/><br/> Se solicita su amable colaboraci&oacute;n para que por favor sea creada la siguiente historia de usuario:</p>"+
+            view.Model.MailCreaRq.Asunto = "Creación Historia de Usuario AzureDevops [" + tarea.Descripcion + "]";
+            view.Model.MailCreaRq.Cuerpo = "<p>Buen d&iacute;a, <br/><br/> Se solicita su amable colaboraci&oacute;n para que por favor sea creada la siguiente historia de usuario:</p>"+
                                      "   <ul>"+
                                      "   <li><strong>" + tarea.Descripcion +" </strong></li>" +
                                      "   </ul>" +
@@ -62,30 +62,30 @@ namespace Cygnus2_0.Pages.Time
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.PARACREAACTKEY)))
             {
-                view.MailCreaRq.Para = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.PARACREAACTKEY)).Value;
+                view.Model.MailCreaRq.Para = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.PARACREAACTKEY)).Value;
             }
             else
             {
-                view.MailCreaRq.Para = "";
+                view.Model.MailCreaRq.Para = "";
             }
         }
 
         private void btnEnviar_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(view.MailCreaRq.Para))
+            if (string.IsNullOrEmpty(view.Model.MailCreaRq.Para))
             {
                 this.handler.MensajeError("Debe ingresar un correo.");
                 return;
             }
 
-            if(string.IsNullOrEmpty(view.MailCreaRq.Asunto))
+            if(string.IsNullOrEmpty(view.Model.MailCreaRq.Asunto))
             {
                 handler.MensajeError("Debe ingresar un asunto para el correo");
                 return;
             }
 
-            this.handler.pEnviarCorreo(view.MailCreaRq.Para,view.MailCreaRq.Asunto,view.MailCreaRq.Cuerpo);
-            SqliteDAO.pCreaConfiguracion(res.PARACREAACTKEY, view.MailCreaRq.Para);
+            this.handler.pEnviarCorreo(view.Model.MailCreaRq.Para, view.Model.MailCreaRq.Asunto, view.Model.MailCreaRq.Cuerpo);
+            SqliteDAO.pCreaConfiguracion(res.PARACREAACTKEY, view.Model.MailCreaRq.Para);
             this.Close();
         }
 

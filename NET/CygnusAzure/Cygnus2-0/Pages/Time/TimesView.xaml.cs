@@ -102,12 +102,12 @@ namespace Cygnus2_0.Pages.Time
 
         private void btnAdn_Click(object sender, RoutedEventArgs e)
         {
-            view.DescWindow = "";
-            view.IdAzureWindow = 0;
+            view.Model.DescWindow = "";
+            view.Model.IdAzureWindow = 0;
             upTask ven = new upTask(view,handler,null);
             ven.ShowDialog();
 
-            if(!string.IsNullOrEmpty(view.DescWindow) || view.TareaPred != null)
+            if(!string.IsNullOrEmpty(view.Model.DescWindow) || view.Model.TareaPred != null)
                 pActivarBtnGuardar();
         }
         
@@ -117,17 +117,17 @@ namespace Cygnus2_0.Pages.Time
             double TotalHojaActual = 0;
             try
             {
-                if (view.ListaTareasEliminar.Count > 0)
+                if (view.Model.ListaTareasEliminar.Count > 0)
                 {
-                    foreach (TareaHoja tarea in view.ListaTareasEliminar)
+                    foreach (TareaHoja tarea in view.Model.ListaTareasEliminar)
                     {
                         handler.DAO.pEliminaTareaAzure(tarea);
                     }
 
-                    view.ListaTareasEliminar.Clear();
+                    view.Model.ListaTareasEliminar.Clear();
                 }
 
-                foreach (TareaHoja tarea in view.HojaActual.ListaTareas)
+                foreach (TareaHoja tarea in view.Model.HojaActual.ListaTareas)
                 {
                     if(tarea.Tipo.Equals("L") && tarea.Total == 0)
                     {
@@ -138,15 +138,15 @@ namespace Cygnus2_0.Pages.Time
 
                     if (SeqNegativa < 0)
                     {
-                        view.HojaActual.ListaTareas.ElementAt(view.HojaActual.ListaTareas.IndexOf(tarea)).IdAzure = SeqNegativa;
+                        view.Model.HojaActual.ListaTareas.ElementAt(view.Model.HojaActual.ListaTareas.IndexOf(tarea)).IdAzure = SeqNegativa;
                     }
 
                     TotalHojaActual = TotalHojaActual + tarea.Total;
                 }
                 
                 handler.MensajeOk("Hoja guardada con éxito");
-                view.ListaTareas.Clear();
-                view.ListaHojas.Clear();
+                view.Model.ListaTareas.Clear();
+                view.Model.ListaHojas.Clear();
                 view.pRefrescaTareas();
             }
             catch (Exception ex)
@@ -170,8 +170,8 @@ namespace Cygnus2_0.Pages.Time
             color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.keyThemeColor)).Value);
             brush = new SolidColorBrush(color);
 
-            if(view.HojaActual != null)
-                pintarGrilla(view.HojaActual.FechaIni);
+            if(view.Model.HojaActual != null)
+                pintarGrilla(view.Model.HojaActual.FechaIni);
         }
 
         private void pCargarTareasAzure()
@@ -226,9 +226,9 @@ namespace Cygnus2_0.Pages.Time
             {
                 if (handler.MensajeConfirmacion("Está seguro que desea eliminar la tarea [ " + tarea.Descripcion + " ]?") == "Y")
                 {
-                    view.HojaActual.ListaTareas.Remove(tarea);
-                    view.ListaTareas.Remove(tarea);
-                    view.ListaTareasEliminar.Add(tarea);
+                    view.Model.HojaActual.ListaTareas.Remove(tarea);
+                    view.Model.ListaTareas.Remove(tarea);
+                    view.Model.ListaTareasEliminar.Add(tarea);
                     pActivarBtnGuardar();
                 }
             }            
@@ -255,7 +255,7 @@ namespace Cygnus2_0.Pages.Time
                 view.pObtTareasPorHoja();
                 view.pCalcularTotales();
 
-                if (DateTime.Now.Date >= view.HojaActual.FechaIni && DateTime.Now.Date <= view.HojaActual.FechaFin)
+                if (DateTime.Now.Date >= view.Model.HojaActual.FechaIni && DateTime.Now.Date <= view.Model.HojaActual.FechaFin)
                 {
                     txtTitulo.FontStyle = FontStyles.Italic;
                     txtTitulo.FontWeight = FontWeights.UltraBold;
@@ -270,16 +270,16 @@ namespace Cygnus2_0.Pages.Time
                     txtTitulo.FontWeight = FontWeights.SemiBold;
                 }
 
-                fecha_ini = view.HojaActual.FechaIni;
+                fecha_ini = view.Model.HojaActual.FechaIni;
 
-                dataGridObjetos.Columns[3].Header = "Lun/" + fecha_ini.Day + "\n    [" + view.TotalMon + "]";
-                dataGridObjetos.Columns[4].Header = "Mar/" + fecha_ini.AddDays(1).Day + "\n    [" + view.TotalTue + "]";
-                dataGridObjetos.Columns[5].Header = "Mie/" + fecha_ini.AddDays(2).Day + "\n    [" + view.TotalWed + "]";
-                dataGridObjetos.Columns[6].Header = "Jue/" + fecha_ini.AddDays(3).Day + "\n    [" + view.TotalThu + "]";
-                dataGridObjetos.Columns[7].Header = "Vie/" + fecha_ini.AddDays(4).Day + "\n    [" + view.TotalFri + "]";
-                dataGridObjetos.Columns[8].Header = "Sab/" + fecha_ini.AddDays(5).Day + "\n    [" + view.TotalSat + "]";
-                dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(6).Day + "\n    [" + view.TotalSun + "]";
-                dataGridObjetos.Columns[10].Header = "Total" + "\n  [" + view.Total + "]";
+                dataGridObjetos.Columns[3].Header = "Lun/" + fecha_ini.Day + "\n    [" + view.Model.TotalMon + "]";
+                dataGridObjetos.Columns[4].Header = "Mar/" + fecha_ini.AddDays(1).Day + "\n    [" + view.Model.TotalTue + "]";
+                dataGridObjetos.Columns[5].Header = "Mie/" + fecha_ini.AddDays(2).Day + "\n    [" + view.Model.TotalWed + "]";
+                dataGridObjetos.Columns[6].Header = "Jue/" + fecha_ini.AddDays(3).Day + "\n    [" + view.Model.TotalThu + "]";
+                dataGridObjetos.Columns[7].Header = "Vie/" + fecha_ini.AddDays(4).Day + "\n    [" + view.Model.TotalFri + "]";
+                dataGridObjetos.Columns[8].Header = "Sab/" + fecha_ini.AddDays(5).Day + "\n    [" + view.Model.TotalSat + "]";
+                dataGridObjetos.Columns[9].Header = "Dom/" + fecha_ini.AddDays(6).Day + "\n    [" + view.Model.TotalSun + "]";
+                dataGridObjetos.Columns[10].Header = "Total" + "\n  [" + view.Model.Total + "]";
 
                 pintarGrilla(fecha_ini);
 
@@ -411,16 +411,16 @@ namespace Cygnus2_0.Pages.Time
 
             if (tarea != null)
             {
-                view.DescWindow = tarea.Descripcion;
-                view.IdAzureWindow = tarea.IdAzure;
+                view.Model.DescWindow = tarea.Descripcion;
+                view.Model.IdAzureWindow = tarea.IdAzure;
                 upTask ven = new upTask(view, handler, tarea);
                 ven.ShowDialog();
 
                 if (ven.Modifica)
                 {
                     pActivarBtnGuardar();
-                    view.HojaActual.ListaTareas.ElementAt(view.HojaActual.ListaTareas.IndexOf(tarea)).IdAzure = view.IdAzureWindow;
-                    view.HojaActual.ListaTareas.ElementAt(view.HojaActual.ListaTareas.IndexOf(tarea)).Descripcion = view.DescWindow;
+                    view.Model.HojaActual.ListaTareas.ElementAt(view.Model.HojaActual.ListaTareas.IndexOf(tarea)).IdAzure = view.Model.IdAzureWindow;
+                    view.Model.HojaActual.ListaTareas.ElementAt(view.Model.HojaActual.ListaTareas.IndexOf(tarea)).Descripcion = view.Model.DescWindow;
                     dataGridObjetos.Items.Refresh();
                 }
             }
@@ -477,16 +477,27 @@ namespace Cygnus2_0.Pages.Time
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
+            int nuIndex;
             try
             {
-                view.pLimpiarTareas();
+                nuIndex = comboBoxHojas.SelectedIndex;
 
-                view.ListaTareas.Clear();
-                view.ListaHojas.Clear();
+                view.pLimpiarTareas();
+                view.Model.ListaTareas.Clear();
+                view.Model.ListaHojas.Clear();
                 view.pRefrescaTareas();
 
-                pSeteaFechaActual();
-                pRefrescaEncabezado();
+                if (nuIndex != 1 && handler.MensajeConfirmacion("Desea ir a la Semana Actual?") == "N")
+                {
+                    comboBoxHojas.SelectedIndex = nuIndex;
+                    view.pCalcularTotales();
+                    pRefrescaEncabezado();
+                }
+                else
+                {
+                    pSeteaFechaActual();
+                    pRefrescaEncabezado();
+                }
             }
             catch (Exception ex)
             {
@@ -535,8 +546,8 @@ namespace Cygnus2_0.Pages.Time
 
                 if (combine.Modifica)
                 {
-                    view.ListaHojas.Clear();
-                    view.ListaTareas.Clear();
+                    view.Model.ListaHojas.Clear();
+                    view.Model.ListaTareas.Clear();
                     view.pRefrescaTareas();
                     pSeteaFechaActual();
                 }

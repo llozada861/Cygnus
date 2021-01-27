@@ -37,8 +37,8 @@ namespace Cygnus2_0.Pages.Time
             this.tarea = tarea;
             InitializeComponent();
 
-            view.TareaOrigen = tarea;
-            txtOrigen.Text = view.TareaOrigen.DescripcionPlus;
+            view.Model.TareaOrigen = tarea;
+            txtOrigen.Text = view.Model.TareaOrigen.DescripcionPlus;
             txtOrigen.IsEnabled = false;
         }
 
@@ -64,13 +64,13 @@ namespace Cygnus2_0.Pages.Time
 
         private void btnProcesar_Click(object sender, RoutedEventArgs e)
         {
-            if (view.TareaDestino == null)
+            if (view.Model.TareaDestino == null)
             {
                 handler.MensajeError("Debe seleccionar una tarea destino.");
                 return;
             }
 
-            if(view.TareaOrigen.IdAzure.Equals(view.TareaDestino.IdAzure))
+            if(view.Model.TareaOrigen.IdAzure.Equals(view.Model.TareaDestino.IdAzure))
             {
                 handler.MensajeError("Debe seleccionar una tarea destino diferente al origen.");
                 return;
@@ -78,9 +78,9 @@ namespace Cygnus2_0.Pages.Time
 
             try
             {
-                if (handler.MensajeConfirmacion("Está seguro que desea combinar la tarea Origen: "+view.TareaOrigen.DescripcionPlus+" con la tarea Destino: "+view.TareaDestino.DescripcionPlus+" ?") == "Y")
+                if (handler.MensajeConfirmacion("Está seguro que desea combinar la tarea Origen: "+ view.Model.TareaOrigen.DescripcionPlus+" con la tarea Destino: "+ view.Model.TareaDestino.DescripcionPlus+" ?") == "Y")
                 {
-                    handler.DAO.pCombinarTareas(view.TareaOrigen, view.TareaDestino);
+                    handler.DAO.pCombinarTareas(view.Model.TareaOrigen, view.Model.TareaDestino);
                     this.Close();
                 }
             }

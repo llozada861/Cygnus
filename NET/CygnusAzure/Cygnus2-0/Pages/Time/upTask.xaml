@@ -32,13 +32,13 @@
             <RadioButton x:Name="rdbNueva" Content="Nueva" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="rdbNueva_Checked" />
 
             <Label x:Name="lblTarea" Margin="20,10" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontWeight="Bold"  >Tarea</Label>
-            <TextBox x:Name="CasoText" Text="{Binding Path=DescWindow}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+            <TextBox x:Name="CasoText" Text="{Binding Path=Model.DescWindow}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" />
             <CheckBox x:Name="chkAzure" Content="Tengo el código de la tarea de Azure" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="20,0,20,10" VerticalAlignment="Bottom" Checked="chkAzure_Checked" Unchecked="chkAzure_Unchecked"/>
             <Label x:Name="lblAzureText" Margin="20,10" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontWeight="Bold"  >Id Task Azure</Label>
-            <TextBox x:Name="txAzureText" Text="{Binding Path=IdAzureWindow}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" />
+            <TextBox x:Name="txAzureText" Text="{Binding Path=Model.IdAzureWindow}" TextWrapping="Wrap" Margin="20,0,20,10" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" />
 
             <ComboBox x:Name="comboBoxPred" 
-                  ItemsSource="{Binding Path=ListaTareasPred}" 
+                  ItemsSource="{Binding Path=Model.ListaTareasPred}" 
                   SelectedItem="{Binding Path=TareaPred}"
                   DisplayMemberPath="Text" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="15,0" VerticalAlignment="Center"/>
 

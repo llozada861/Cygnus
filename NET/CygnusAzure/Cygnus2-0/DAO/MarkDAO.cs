@@ -21,6 +21,7 @@ using Cygnus2_0.Model.Audit;
 using Cygnus2_0.Model.Compila;
 using Cygnus2_0.Model.Data;
 using Cygnus2_0.Model.Security;
+using Cygnus2_0.Model.Time;
 
 namespace Cygnus2_0.DAO
 {
@@ -1165,7 +1166,7 @@ namespace Cygnus2_0.DAO
             }
         }
         
-        public void pObtTareasBD(TimesViewModel view)
+        public void pObtTareasBD(TimeModel view)
         {
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtTareasBD"))
             {
@@ -1236,7 +1237,7 @@ namespace Cygnus2_0.DAO
                 }
             }
         }
-        public void pObtHojasBD(TimesViewModel view)
+        public void pObtHojasBD(TimeModel view)
         {
             if (handler.ConexionOracle.ConexionOracleSQL != null)
             {
@@ -1294,7 +1295,7 @@ namespace Cygnus2_0.DAO
                 }
             }
         }
-        public void pObtDetalleRq(TimesViewModel view, TareaHoja tarea)
+        public void pObtDetalleRq(TimeModel view, TareaHoja tarea)
         {
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtDetalleRq"))
             {
@@ -1349,7 +1350,7 @@ namespace Cygnus2_0.DAO
                 }
             }
         }
-        public void pCargarTareasPred(TimesViewModel view)
+        public void pCargarTareasPred(TimeModel view)
         {
             if (handler.ConexionOracle.ConexionOracleSQL != null)
             {
