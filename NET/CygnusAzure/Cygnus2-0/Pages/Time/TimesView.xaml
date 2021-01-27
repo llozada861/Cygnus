@@ -44,8 +44,8 @@
         <GroupBox Header="Seleccione Hoja" Margin="0" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="5">
             <Grid>
                 <ComboBox x:Name="comboBoxHojas" 
-                  ItemsSource="{Binding Path=ListaHojas}" 
-                  SelectedItem="{Binding Path=HojaActual, Mode=TwoWay}"
+                  ItemsSource="{Binding Path=Model.ListaHojas}" 
+                  SelectedItem="{Binding Path=Model.HojaActual, Mode=TwoWay}"
                   DisplayMemberPath="Text" 
                           VerticalAlignment="Center" 
                           SelectionChanged="comboBoxHojas_SelectionChanged"
@@ -53,7 +53,7 @@
             </Grid>
         </GroupBox>
 
-        <TextBlock x:Name="txtTitulo" Text="{Binding Path=HojaActual.Text}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" VerticalAlignment="Bottom"/>
+        <TextBlock x:Name="txtTitulo" Text="{Binding Path=Model.HojaActual.Text}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" VerticalAlignment="Bottom"/>
         
         <!--CurrentCellChanged="dataGridObjetos_CurrentCellChanged" 
                             CellEditEnding="dataGridObjetos_CellEditEnding" -->
@@ -70,7 +70,7 @@
                 CanUserReorderColumns="false"
                 CanUserSortColumns="True" 
                 ClipboardCopyMode="ExcludeHeader"
-                ItemsSource="{Binding Path=HojaActual.ListaTareas, Mode=TwoWay }"
+                ItemsSource="{Binding Path=Model.HojaActual.ListaTareas, Mode=TwoWay }"
                             GridLinesVisibility="All"
                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
                             ScrollViewer.VerticalScrollBarVisibility="Auto"                          

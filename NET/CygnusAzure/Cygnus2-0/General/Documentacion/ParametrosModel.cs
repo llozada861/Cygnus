@@ -12,5 +12,6 @@ namespace Cygnus2_0.General.Documentacion
         public string Tipo { get; set; }
         public string Direccion { get; set; }
         public string Descripcion { get; set; }
+        public string Default { get; set; }
     }
 }

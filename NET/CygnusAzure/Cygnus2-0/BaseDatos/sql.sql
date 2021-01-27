@@ -469,6 +469,6 @@ ORDER BY fecha_registro DESC
 /
 SELECT * FROM flex.ll_usuarios
 /
-SELECT * FROM dba_users WHERE username = 'SQL_LLOZA2'
+SELECT * FROM dba_users WHERE username = 'SQL_LLOZA6'
 /
 SELECT 
