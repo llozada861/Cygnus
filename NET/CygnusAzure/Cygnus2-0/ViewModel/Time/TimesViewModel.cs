@@ -243,9 +243,12 @@ namespace Cygnus2_0.ViewModel.Time
                     tarea.Thu = new Day();
                     tarea.Fri = new Day();
                     tarea.Sat = new Day();
-                    tarea.HU = await pObtenerHU(tarea.IdAzure);
 
-                    /*if (tarea.IdAzure == 167561)
+                    WorkItem historiaUsuario = await pObtenerHU(tarea.IdAzure);
+                    tarea.HU = (int)historiaUsuario.Id;
+                    tarea.DescripcionHU = historiaUsuario.Fields.Last().Value.ToString();
+
+                    /*if (tarea.IdAzure == 272078)
                     {
                         int pru = 1;
                     }*/
@@ -283,7 +286,7 @@ namespace Cygnus2_0.ViewModel.Time
 
                 foreach (TareaHoja tareaAzure in this.listaTareaAzure)
                 {
-                    /*if(tareaAzure.IdAzure == 167587)
+                    /*if(tareaAzure.IdAzure == 272078)
                     {
                         int pru = 1;
                     }*/
@@ -296,18 +299,18 @@ namespace Cygnus2_0.ViewModel.Time
                         }
                         else
                         {
+                            handler.DAO.pActualizaTareaAzure(tareaAzure);
+
                             hojaActual = this.Model.HojaActual.ListaTareas.ToList().Find(x => x.IdAzure.Equals(tareaAzure.IdAzure));
 
                             if (hojaActual != null)
                             {
-                                if (hojaActual.Completed != tareaAzure.Completed || !hojaActual.Descripcion.Equals(tareaAzure.Descripcion) || hojaActual.HU != tareaAzure.HU || hojaActual.IniFecha != tareaAzure.IniFecha)
-                                {
-                                    hojaActual.Completed = tareaAzure.Completed;
-                                    hojaActual.Descripcion = tareaAzure.Descripcion;
-                                    hojaActual.HU = tareaAzure.HU;
-                                    hojaActual.IniFecha = tareaAzure.IniFecha;
-                                    handler.DAO.pActualizaTareaAzure(hojaActual);
-                                }
+                                hojaActual.Completed = tareaAzure.Completed;
+                                hojaActual.Descripcion = tareaAzure.Descripcion;
+                                hojaActual.HU = tareaAzure.HU;
+                                hojaActual.IniFecha = tareaAzure.IniFecha;
+                                hojaActual.DescripcionHU = tareaAzure.DescripcionHU;
+                                handler.DAO.pActualizaTareaAzure(hojaActual);                                
                             }
                         }
                     }
@@ -328,6 +331,7 @@ namespace Cygnus2_0.ViewModel.Time
         {
             string areas = "";
             string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
+            List<WorkItem> tareasAzure = new List<WorkItem>();
 
             VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
             VssConnection connection = null;
@@ -358,14 +362,17 @@ namespace Cygnus2_0.ViewModel.Time
                 var fields = new[] { "System.Id", "System.Title", "System.State", "System.AssignedTo", "Microsoft.VSTS.Scheduling.CompletedWork", "System.CreatedDate", "Microsoft.VSTS.Scheduling.StartDate" };
 
                 // get work items for the ids found in query
-                return await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
+                tareasAzure =  await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
             }
+
+            return tareasAzure;
         }
 
-        public async Task<int> pObtenerHU(int idTask)
+        public async Task<WorkItem> pObtenerHU(int idTask)
         {
             int HU = 0;
             string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
+            WorkItem historiaUsuario = new WorkItem();
 
             VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
             VssConnection connection = null;
@@ -376,25 +383,34 @@ namespace Cygnus2_0.ViewModel.Time
             {
 
                 // NOTE: Even if other columns are specified, only the ID & URL will be available in the WorkItemReference
-                Query = String.Format("SELECT [System.Id] FROM WorkItemLinks WHERE ([Source].[System.WorkItemType] = 'User Story') And ([System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward') And ([Target].[System.Id] = {0}  AND  [Target].[System.WorkItemType] = 'Task') ORDER BY [System.Id] mode(Recursive,ReturnMatchingChildren)", idTask.ToString()),
+                Query = String.Format("SELECT [System.Id],[System.Title] FROM WorkItemLinks WHERE ([Source].[System.WorkItemType] = 'User Story') And ([System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward') And ([Target].[System.Id] = {0}  AND  [Target].[System.WorkItemType] = 'Task') ORDER BY [System.Id] mode(Recursive,ReturnMatchingChildren)", idTask.ToString()),
             };
 
             using (var httpClient = new WorkItemTrackingHttpClient(new Uri(handler.ConnViewModel.UrlAzure), credentials))
             {
                 // execute the query to get the list of work items in the results
                 var result = await httpClient.QueryByWiqlAsync(wiql).ConfigureAwait(false);
+                                             
                 var ids = result.WorkItemRelations.Select(item => item.Target.Id).ToArray();
 
-                for (int i = 0; i < ids.Length; i++)
+                // build a list of the fields we want to see
+                var fields = new[] { "System.Id", "System.Title" };
+
+                // get work items for the ids found in query
+                List<WorkItem> hus =  await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
+
+                historiaUsuario = hus.First();
+
+                /*for (int i = 0; i < ids.Length; i++)
                 {
                     if (ids[i] == idTask)
                     {
                         HU = ids[i - 1];
                     }
-                }
+                }*/
             }
 
-            return HU;
+            return historiaUsuario;
         }
 
         public void pGeneraLog(string mensaje)

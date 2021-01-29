@@ -237,7 +237,8 @@ AS
         isbFechaCreacion IN VARCHAR2,
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2,
-        isbIdHU         IN NUMBER DEFAULT 0
+        isbIdHU         IN NUMBER DEFAULT 0,
+        isbDescHU       IN VARCHAR2 DEFAULT NULL
     );
     
     PROCEDURE pinshorashoja
@@ -279,7 +280,8 @@ AS
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2,
         isbIdHU         IN NUMBER DEFAULT 0,
-        isbFechaIni     IN VARCHAR2 DEFAULT NULL 
+        isbFechaIni     IN VARCHAR2 DEFAULT NULL,
+        isbDescHU       IN VARCHAR2 DEFAULT NULL 
     );
     
     PROCEDURE pEliminaTarea
@@ -1255,7 +1257,8 @@ AS
         isbFechaCreacion IN VARCHAR2,
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2,
-        isbIdHU         IN NUMBER DEFAULT 0
+        isbIdHU         IN NUMBER DEFAULT 0,
+        isbDescHU       IN VARCHAR2 DEFAULT NULL
     )
     IS
        nucodigo NUMBER(10);
@@ -1330,9 +1333,9 @@ AS
            nucodigo := flex.seq_ll_requerimiento.nextval;
             
            INSERT INTO flex.ll_requerimiento
-           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario,fecha_inicio)       
+           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario,fecha_inicio,descripcion_hu)       
            VALUES 
-           (nucodigo,isbDescripcion,isbIdAzure,isbEstado,isbUsuario,NULL,(dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU,dtFechaCreaAzure);
+           (nucodigo,isbDescripcion,isbIdAzure,isbEstado,isbUsuario,NULL,(dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU,dtFechaCreaAzure,isbDescHU);
            
            COMMIT;
            
@@ -1380,7 +1383,8 @@ AS
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
                hist_usuario = isbIdHU,
-               fecha_inicio = nvl(dtFechaCreaAzure,fecha_inicio)
+               fecha_inicio = nvl(dtFechaCreaAzure,fecha_inicio),
+               descripcion_hu = isbDescHU
            WHERE codigo = nucodigo;
            
            COMMIT;
@@ -1413,7 +1417,8 @@ AS
         onuErrorCode    OUT NUMBER,
         osbErrorMessage OUT VARCHAR2,
         isbIdHU         IN NUMBER DEFAULT 0,
-        isbFechaIni     IN VARCHAR2 DEFAULT NULL
+        isbFechaIni     IN VARCHAR2 DEFAULT NULL,
+        isbDescHU       IN VARCHAR2 DEFAULT NULL
     )
     IS
        nucodigo NUMBER(10);
@@ -1473,9 +1478,9 @@ AS
            CLOSE cuDatosHoja;
                
            INSERT INTO flex.ll_requerimiento
-           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario,fecha_inicio)       
+           (codigo,descripcion,id_azure,estado,usuario,fecha_actualiza,fecha_display,completado,fecha_registro,hist_usuario,fecha_inicio,descripcion_hu)       
            VALUES 
-           (nucodigo,isbDescripcion,nuIdAzure,isbEstado,isbUsuario,NULL, (dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU,dtFechaCreaAzure);
+           (nucodigo,isbDescripcion,nuIdAzure,isbEstado,isbUsuario,NULL, (dtFechaFin+7),inuCompletado,SYSDATE,isbIdHU,dtFechaCreaAzure,isbDescHU);
        ELSE
                
            UPDATE flex.ll_requerimiento
@@ -1485,7 +1490,8 @@ AS
                estado = isbEstado,
                fecha_actualiza = SYSDATE,
                hist_usuario = isbIdHU,
-               fecha_inicio = nvl(dtFechaCreaAzure,fecha_inicio)
+               fecha_inicio = nvl(dtFechaCreaAzure,fecha_inicio),
+               descripcion_hu = isbDescHU
            WHERE codigo = nucodigo
            AND usuario = isbUsuario;
        END IF;

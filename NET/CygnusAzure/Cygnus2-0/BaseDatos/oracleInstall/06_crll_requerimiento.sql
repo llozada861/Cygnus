@@ -27,3 +27,5 @@ create index idxll_requerimiento03 on ll_requerimiento(fecha_display);
 ALTER TABLE ll_requerimiento ADD(hist_usuario NUMBER(15));
 
 ALTER TABLE ll_requerimiento ADD(fecha_inicio DATE);
+
+ALTER TABLE ll_requerimiento ADD(descripcion_hu VARCHAR2(1000));
