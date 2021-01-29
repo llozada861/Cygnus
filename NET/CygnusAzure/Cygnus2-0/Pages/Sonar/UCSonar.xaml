@@ -80,14 +80,25 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBox x:Name="HU" 
+                <!--<TextBox x:Name="HU" 
                          Text="{Binding Path=GitModel.HU}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
                          Grid.Row="0" Grid.Column="0" Margin="5,5,5,5"
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario"/>
+                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario"/>-->
+
+                <ComboBox x:Name="comboBoxHU" 
+                  ItemsSource="{Binding Path=GitModel.ListaHU}" 
+                  SelectedItem="{Binding Path=GitModel.HU}"
+                  DisplayMemberPath="Text"  Grid.Row="0" Grid.Column="0" Margin="5,5,5,5" VerticalAlignment="Center"/>
+
+                <TextBlock DataContext="{Binding ElementName=comboBoxHU,Path=SelectedItem}"
+                   Grid.Row="0" Grid.Column="0" Margin="5,5,5,5" VerticalAlignment="Center"
+                   Text="Historia de Usuario" 
+                   Style="{StaticResource ComboBoxSelectOverlay}"/>
+                
             </Grid>
         </GroupBox>
         

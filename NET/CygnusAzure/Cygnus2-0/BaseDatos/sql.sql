@@ -350,10 +350,11 @@ AND fecha_inicio >= '01/06/2020'
 AND fecha_inicio <= '30/06/2020'
 ORDER BY fecha_inicio DESC
 /
+--SELECT DISTINCT hist_usuario FROM (
 SELECT *
 FROM flex.ll_requerimiento
 WHERE usuario = 'SQL_LLOZADA'
-ORDER BY fecha_registro DESC
+ORDER BY fecha_registro DESC --)
 /
 --C#
 "SELECT * FROM ("+
@@ -471,4 +472,8 @@ SELECT * FROM flex.ll_usuarios
 /
 SELECT * FROM dba_users WHERE username = 'SQL_LLOZA6'
 /
-SELECT 
+SELECT * FROM flex.ll_requerimiento 
+WHERE usuario = 'SQL_LLOZADA' 
+--AND descripcion_hu IS NOT  NULL
+ORDER BY fecha_registro DESC
+/

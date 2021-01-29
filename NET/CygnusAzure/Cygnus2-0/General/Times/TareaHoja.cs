@@ -30,6 +30,12 @@ namespace Cygnus2_0.General.Times
             get { return hu; }
             set { hu = value; }
         }
+        private string descripcionHU;
+        public string DescripcionHU
+        {
+            get { return descripcionHU; }
+            set { descripcionHU = value; }
+        }
         private int idHoja;
         public int IdHoja
         {
