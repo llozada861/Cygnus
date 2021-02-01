@@ -1,13 +1,18 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Git;
+using Cygnus2_0.Pages.General;
 using Cygnus2_0.Pages.Git;
+using Cygnus2_0.ViewModel.Sonar;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using res = Cygnus2_0.Properties.Resources;
 
@@ -24,7 +29,7 @@ namespace Cygnus2_0.ViewModel.Git
         private readonly DelegateCommand _renombrar;
         private readonly DelegateCommand _gitBash;
 
-        public ICommand Process => _process;
+        public ICommand Procesar => _process;
         public ICommand Buscar => _buscar;
         public ICommand Limpiar => _limpiar;
         public ICommand Entrega => _entrega;
@@ -130,7 +135,6 @@ namespace Cygnus2_0.ViewModel.Git
         {
             bool archivosNoRepo = false;
             bool blDocArquitectura = false;
-            bool blDocPruebas = false;
             string archivoRojo = "";
 
             try
@@ -204,9 +208,10 @@ namespace Cygnus2_0.ViewModel.Git
 
                 handler.CursorWait();
                 RepoGit.pVersionarObjetos(GitModel,handler);
-                handler.CursorNormal();
-
+                
                 GitModel.ActivaAprobRamas = false;
+
+                pEjecutarSonar();
 
                 handler.MensajeOk("Continue creando manualmente las ramas Feature!");
             }
@@ -215,6 +220,48 @@ namespace Cygnus2_0.ViewModel.Git
                 handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
+        }
+
+        private void pEjecutarSonar()
+        {
+            ObservableCollection<Archivo> archivosSonar = new ObservableCollection<Archivo>();
+
+            foreach(Archivo item in GitModel.ListaArchivos)
+            {
+                if( item.SelectItemTipo != null && res.Extensiones.IndexOf(item.Extension.ToLower()) > -1 && !String.IsNullOrEmpty(item.SelectItemTipo.Path) && !string.IsNullOrEmpty(item.NombreObjeto))
+                {
+                    item.Ruta = handler.RutaGitObjetos +"\\"+item.Usuario+ "\\" + item.SelectItemTipo.Path;
+                    item.Ruta = item.Ruta.Replace(res.TagHTML_nombre,item.NombreObjeto);
+                    archivosSonar.Add(item);
+                }
+            }
+
+            if (archivosSonar.Count == 0)
+                return;
+
+            List<string> salida = SonarViewModel.pSonar(GitModel.RamaLBSeleccionada.Text, handler, archivosSonar);
+
+            string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
+
+            StringBuilder salidaBuild = new StringBuilder();
+
+            foreach (string linea in salida)
+            {
+                salidaBuild.AppendLine(linea);
+            }
+
+            if (exito != null)
+            {
+                string[] vecExito = exito.Split(' ');
+                string url = vecExito[vecExito.Length - 1];
+                Process.Start(url);
+            }
+
+            handler.CursorNormal();
+
+            UserControl log = new UserControlLog(salidaBuild);
+            WinImage request = new WinImage(log, "Traza");
+            request.ShowDialog();
         }
 
         public void pExaminar(object commandParameter)

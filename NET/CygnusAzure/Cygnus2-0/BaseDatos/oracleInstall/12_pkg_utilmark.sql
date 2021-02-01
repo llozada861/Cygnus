@@ -1455,14 +1455,14 @@ AS
        
        nuCodHoja := NULL;
        
-       IF(isbIdAzure = 0)THEN
+       IF(nvl(isbIdAzure,0) = 0)THEN
             onuSeqNeg := flex.seq_ll_negativa.nextval*-1;
             nuIdAzure := onuSeqNeg;
        ELSE
             nuIdAzure := isbIdAzure;
        END IF;
        
-       IF(inuRq = 0)THEN
+       IF(nvl(inuRq,0) = 0)THEN
            OPEN cuRq;
            FETCH cuRq INTO nucodigo,dtFechaInCygnus;
            CLOSE cuRq;

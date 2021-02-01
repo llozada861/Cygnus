@@ -299,8 +299,6 @@ namespace Cygnus2_0.ViewModel.Time
                         }
                         else
                         {
-                            handler.DAO.pActualizaTareaAzure(tareaAzure);
-
                             hojaActual = this.Model.HojaActual.ListaTareas.ToList().Find(x => x.IdAzure.Equals(tareaAzure.IdAzure));
 
                             if (hojaActual != null)

@@ -14,11 +14,11 @@ namespace Cygnus2_0.General
 {
     public static class SonarQube
     {
-        public static List<string> pEjecutarSonar(string codigo, string hu,string ruta, List<SelectListItem> listaArchivosCargados, string rutaGitObj)
+        public static List<string> pEjecutarSonar(string codigo, string ruta, List<SelectListItem> listaArchivosCargados, string rutaGitObj)
         {
             List<string> salida = new List<string>();
 
-            pCrearArchivoConf(ruta, codigo, hu, rutaGitObj, listaArchivosCargados);
+            pCrearArchivoConf(ruta, codigo, rutaGitObj, listaArchivosCargados);
 
             //pCopiarArchivos(Path.Combine(ruta,res.CarpetaObjetos),listaArchivosCargados);
 
@@ -102,7 +102,7 @@ namespace Cygnus2_0.General
             }
         }
 
-        private static void pCrearArchivoConf(string path, string codigo, string hu, string rutaObjGit, List<SelectListItem> listaArchivos)
+        private static void pCrearArchivoConf(string path, string codigo, string rutaObjGit, List<SelectListItem> listaArchivos)
         {
             StringBuilder SonarProperties = new StringBuilder();
             string RutaObjetos = "";
@@ -114,7 +114,7 @@ namespace Cygnus2_0.General
 
             RutaObjetos = RutaObjetos.Substring(0, RutaObjetos.Length - 1);
 
-            string rama = res.Feature + hu + "_" + codigo + "_" + Environment.UserName.ToUpper();
+            string rama = res.Feature + codigo + "_" + Environment.UserName.ToUpper();
             string archivConf = Path.Combine(rutaObjGit, res.NombreSonarProperties);
 
             //Se configuran los archivos

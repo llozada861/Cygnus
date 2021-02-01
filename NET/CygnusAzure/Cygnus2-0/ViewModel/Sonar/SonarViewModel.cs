@@ -4,6 +4,7 @@ using Cygnus2_0.Model.Git;
 using Cygnus2_0.Pages.General;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -49,12 +50,6 @@ namespace Cygnus2_0.ViewModel.Sonar
         {
             try
             {
-                if (string.IsNullOrEmpty(GitModel.HU))
-                {
-                    handler.MensajeError("Debe seleccionar la HU.");
-                    return;
-                }
-
                 if (GitModel.ListaArchivos.Count == 0)
                 {
                     handler.MensajeError("No hay archivos para analizar");
@@ -63,7 +58,7 @@ namespace Cygnus2_0.ViewModel.Sonar
 
                 handler.CursorWait();
 
-                List<string> salida = pSonar(GitModel.RamaLBSeleccionada.Text, GitModel.HU);
+                List<string> salida = pSonar(GitModel.RamaLBSeleccionada.Text, handler, GitModel.ListaArchivos);
                 System.Console.WriteLine(salida);
 
                 string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
@@ -97,6 +92,7 @@ namespace Cygnus2_0.ViewModel.Sonar
 
         public void pBuscar(object commandParameter)
         {
+            List<Archivo> archivosAux;
             try
             {
                 if (GitModel.RamaLBSeleccionada == null)
@@ -117,12 +113,19 @@ namespace Cygnus2_0.ViewModel.Sonar
                 RepoGit.pSetearLineaBase(GitModel.RamaLBSeleccionada.Text, handler);
                 List<Archivo> archivos = new List<Archivo>();
                 handler.pListaArchivosCarpeta(handler.RutaGitObjetos, archivos);
-                archivos = archivos.FindAll(x => x.FileName.ToUpper().IndexOf(GitModel.ObjetoBuscar.ToUpper()) > -1);
 
-                foreach (Archivo archivo in archivos)
+                string[] objetosBuscar = GitModel.ObjetoBuscar.Trim().Split(',');
+
+                for(int i = 0; i< objetosBuscar.Length; i++)
                 {
-                    GitModel.ListaArchivosEncontrados.Add(archivo);
-                }
+                    archivosAux = archivos.FindAll(x => x.FileName.ToUpper().IndexOf(objetosBuscar[i].ToUpper()) > -1);
+
+                    foreach (Archivo archivo in archivosAux)
+                    {
+                        if(!archivo.Extension.Equals(res.ExtensionHtml))
+                            GitModel.ListaArchivosEncontrados.Add(archivo);
+                    }
+                }                
 
                 handler.CursorNormal();
             }
@@ -142,11 +145,10 @@ namespace Cygnus2_0.ViewModel.Sonar
             if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
                 GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
             GitModel.Comentario = "";
-            GitModel.HU = "";
             GitModel.ListaArchivos.Clear();
         }
 
-        public List<string> pSonar(string codigo, string HU)
+        public static List<string> pSonar(string codigo,Handler handler, ObservableCollection<Archivo> ListaArchivos)
         {
             string rutaRel = "";
             List<string> salida = null;
@@ -154,7 +156,7 @@ namespace Cygnus2_0.ViewModel.Sonar
 
             if (!string.IsNullOrEmpty(handler.RutaSonar))
             {
-                foreach (Archivo archivo in GitModel.ListaArchivos)
+                foreach (Archivo archivo in ListaArchivos)
                 {
                     int nuIndex = archivo.Ruta.IndexOf(res.CarpetaObjetosGIT);
                     int nuIndex2 = (nuIndex + res.CarpetaObjetosGIT.Length);
@@ -165,7 +167,7 @@ namespace Cygnus2_0.ViewModel.Sonar
                     archivosEvaluar.Add(new SelectListItem { Text = rutaRel, Value = archivo.FileName });
                 }
 
-                salida = SonarQube.pEjecutarSonar(codigo, HU, handler.RutaSonar, archivosEvaluar,handler.RutaGitObjetos);
+                salida = SonarQube.pEjecutarSonar(codigo, handler.RutaSonar, archivosEvaluar,handler.RutaGitObjetos);
             }
 
             return salida;

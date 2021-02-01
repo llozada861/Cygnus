@@ -829,7 +829,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a feature/HU.
+        ///   Busca una cadena traducida similar a feature/.
         /// </summary>
         public static string Feature {
             get {
