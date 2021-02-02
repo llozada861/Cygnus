@@ -472,8 +472,35 @@ SELECT * FROM flex.ll_usuarios
 /
 SELECT * FROM dba_users WHERE username = 'SQL_LLOZA6'
 /
-SELECT * FROM flex.ll_requerimiento 
+SELECT * 
+FROM flex.ll_requerimiento 
 WHERE usuario = 'SQL_LLOZADA' 
 --AND descripcion_hu IS NOT  NULL
 ORDER BY fecha_registro DESC
 /
+SELECT hist_usuario,descripcion_hu FROM 
+(
+    SELECT * FROM 
+    (
+        SELECT DISTINCT hist_usuario,descripcion_hu
+        FROM flex.ll_requerimiento 
+        WHERE usuario = 'SQL_LLOZADA' 
+        AND descripcion_hu IS NOT  NULL
+    )
+    ORDER BY hist_usuario DESC
+)
+WHERE ROWNUM < 30
+/
+"SELECT hist_usuario,descripcion_hu FROM "+
+"("+
+"    SELECT * FROM "+
+"    ("+
+"        SELECT DISTINCT hist_usuario,descripcion_hu"+
+"        FROM flex.ll_requerimiento "+
+"        WHERE usuario = 'SQL_LLOZADA' "+
+"        AND descripcion_hu IS NOT  NULL"+
+"    )"+
+"    ORDER BY hist_usuario DESC"+
+")"+
+"WHERE ROWNUM < 30"+
+

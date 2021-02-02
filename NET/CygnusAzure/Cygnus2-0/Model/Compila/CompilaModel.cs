@@ -19,6 +19,7 @@ namespace Cygnus2_0.Model.Compila
         private Handler handler;
         private CompilaViewModel view;
         private SelectListItem _usuario;
+        private SelectListItem _selectHU;
         private string archivosDescomp;
         private string archivosCompila;
         private string estadoConn;
@@ -28,6 +29,7 @@ namespace Cygnus2_0.Model.Compila
         private ObservableCollection<SelectListItem> listaObservaciones;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
+        private ObservableCollection<SelectListItem> listaHU;
         public CompilaModel(Handler handler)
         {
             this.handler = handler;
@@ -81,6 +83,16 @@ namespace Cygnus2_0.Model.Compila
         {
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }
+        }
+        public ObservableCollection<SelectListItem> ListaHU
+        {
+            get { return listaHU; }
+            set { SetProperty(ref listaHU, value); }
+        }
+        public SelectListItem SelectHU
+        {
+            get { return _selectHU; }
+            set { SetProperty(ref _selectHU, value); }
         }
     }
 }

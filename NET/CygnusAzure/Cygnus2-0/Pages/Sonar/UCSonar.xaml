@@ -70,7 +70,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>-->
-        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="1">
+        <!--<GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -80,14 +80,14 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <!--<TextBox x:Name="HU" 
+                <TextBox x:Name="HU" 
                          Text="{Binding Path=GitModel.HU}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
                          Grid.Row="0" Grid.Column="0" Margin="5,5,5,5"
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario"/>-->
+                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario"/>
 
                 <ComboBox x:Name="comboBoxHU" 
                   ItemsSource="{Binding Path=GitModel.ListaHU}" 
@@ -100,9 +100,9 @@
                    Style="{StaticResource ComboBoxSelectOverlay}"/>
                 
             </Grid>
-        </GroupBox>
+        </GroupBox>-->
         
-        <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="2">
+        <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -145,7 +145,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Resultado"  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4" Grid.RowSpan="6">
+        <GroupBox Header="Resultado"  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" Grid.RowSpan="6">
             <DataGrid
                         x:Name="dataGridResultado" 
                         IsReadOnly="false" 
@@ -157,7 +157,7 @@
                         CanUserReorderColumns="False"
                         CanUserSortColumns="False"
                         ItemsSource="{Binding Path=GitModel.ListaArchivosEncontrados}" 
-                        Grid.Row="1" Grid.ColumnSpan="10"  Grid.RowSpan="9" >
+                        Grid.Row="1" Grid.ColumnSpan="10"  Grid.RowSpan="9" MouseDoubleClick="DataGridResultado_MouseDoubleClick" >
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
@@ -173,9 +173,9 @@
             </DataGrid>
         </GroupBox>
 
-        <Button x:Name="btnPasar" Content=">"  VerticalAlignment="Center" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Center" Click="BtnPasar_Click" />
+        <Button x:Name="btnPasar" Content=">"  VerticalAlignment="Center" Grid.Column="4" Grid.Row="4" HorizontalAlignment="Center" Click="BtnPasar_Click" />
 
-        <GroupBox Header="Objetos para analizar"  Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="5" Grid.RowSpan="6">
+        <GroupBox Header="Objetos para analizar"  Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="5" Grid.RowSpan="6">
             <DataGrid
                         x:Name="dataGridAnalizar" 
                         IsReadOnly="false" 

@@ -100,5 +100,19 @@ namespace Cygnus2_0.Pages.Compila
             Archivo archivo = (Archivo)dataGridAnalizar.SelectedItem;
             handler.pAbrirArchivo(archivo.RutaConArchivo);
         }
+
+        private void DataGridResultado_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var listaSel = dataGridResultado.SelectedItem;
+
+            if (listaSel == null)
+                return;
+
+            Archivo archivo = (Archivo)listaSel;
+
+            if(!view.GitModel.ListaArchivos.ToList().Exists(x=>x.FileName.Equals(archivo.FileName)) && archivo.Extension != res.ExtensionHtml)
+                view.GitModel.ListaArchivos.Add(archivo);
+            
+        }
     }
 }

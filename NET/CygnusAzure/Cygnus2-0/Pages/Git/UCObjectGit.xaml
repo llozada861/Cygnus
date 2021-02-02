@@ -84,7 +84,7 @@
                          Text="{Binding Path=GitModel.Codigo}" 
                          Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Línea Base"
                          />
-                    <Button Content="Generar" Command="{Binding Path=Process}" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Button Content="Generar" Command="{Binding Path=Procesar}" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
                     <ComboBox x:Name="comboBoxRn" 
                       ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
