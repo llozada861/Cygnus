@@ -92,7 +92,7 @@ namespace Cygnus2_0.Pages.Compila
                     return;
                 }
 
-                if (compilaViewModel.Model.HU == null)
+                if (compilaViewModel.Model.SelectHU.Value == null)
                 {
                     handler.MensajeError("Debe ingresar el número de la HU.");
                     return;
@@ -125,7 +125,7 @@ namespace Cygnus2_0.Pages.Compila
                     archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
                 }
 
-                string rama = RepoGit.pVersionarDatos(compilaViewModel.Model.HU, compilaViewModel.Model.Codigo,compilaViewModel.Model.Comentario,handler.ConnViewModel.Correo, archivosEvaluar, handler);
+                string rama = RepoGit.pVersionarDatos(compilaViewModel.Model.SelectHU.Value, compilaViewModel.Model.Codigo,compilaViewModel.Model.Comentario,handler.ConnViewModel.Correo, archivosEvaluar, handler);
 
                 handler.CursorNormal();
                 handler.MensajeOk("Rama creada ["+ rama+"]");
@@ -144,6 +144,18 @@ namespace Cygnus2_0.Pages.Compila
 
             Archivo archivo = (Archivo)dataGridArchCompila.SelectedItem;
             handler.pAbrirArchivo(archivo.RutaConArchivo);
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                this.compilaViewModel.Model.ListaHU = handler.DAO.pObtListaHUAzure();
+            }
+            catch(Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
         }
     }
 }

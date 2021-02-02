@@ -41,7 +41,7 @@ namespace Cygnus2_0.ViewModel.Sonar
             else
                 this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
 
-            this.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
+            //this.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
         }
 
         public ObjectGitModel GitModel { get; set; }

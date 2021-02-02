@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -91,14 +91,24 @@
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="# de caso" AcceptsTab="false" TabIndex="1" IsTabStop="False"/>
 
-                <TextBox x:Name="HU" 
+                <ComboBox x:Name="comboBoxHU" 
+                  ItemsSource="{Binding Path=Model.ListaHU}" 
+                  SelectedItem="{Binding Path=Model.SelectHU}"
+                  DisplayMemberPath="Text"  Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Center"/>
+
+                <TextBlock DataContext="{Binding ElementName=comboBoxHU,Path=SelectedItem}"
+                   Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Center"
+                   Text="Historia de Usuario" 
+                   Style="{StaticResource ComboBoxSelectOverlay}"/>
+                
+                <!--<TextBox x:Name="HU" 
                          Text="{Binding Path=Model.HU}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
                          Grid.Row="0" Grid.Column="1" Margin="5,5,5,5"
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario" TabIndex="2" AcceptsTab="False"/>
+                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario" TabIndex="2" AcceptsTab="False"/>-->
 
                 <TextBox x:Name="Comment" 
                          Text="{Binding Path=Model.Comentario}" 

@@ -46,6 +46,7 @@ namespace Cygnus2_0.ViewModel.Compila
             {
                 this.Model.ArchivosCompilados = pObtCantObjsInvalidos();
                 this.Model.ArchivosDescompilados = this.Model.ArchivosCompilados;
+                this.Model.ListaHU = handler.DAO.pObtListaHUAzure();
             }
             catch(Exception ex)
             {
@@ -74,6 +75,10 @@ namespace Cygnus2_0.ViewModel.Compila
                 this.Model.ListaUsuarios = null;
                 this.Model.ListaUsuarios = handler.ListaUsuarios;
                 this.Model.EstadoConn = "1";
+                this.Model.ListaHU = null;
+                this.Model.ListaHU = handler.DAO.pObtListaHUAzure();
+                this.Model.Comentario = "";
+                this.Model.Codigo = "";
             }
             catch (Exception ex)
             {
