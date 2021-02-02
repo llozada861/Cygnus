@@ -130,6 +130,15 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.ActivaAprobRamas = false;
             GitModel.NuevaRama = "";
             GitModel.ListaRamasCreadas.Clear();
+            try
+            {
+                this.GitModel.ListaHU = null;
+                this.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
         }
         public void pEntrega(object commandParameter)
         {
@@ -145,9 +154,9 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                if (string.IsNullOrEmpty(GitModel.HU))
+                if (string.IsNullOrEmpty(GitModel.SelectHU.Value))
                 {
-                    handler.MensajeError("Ingrese la historia de usuario.");
+                    handler.MensajeError("Seleccione la historia de usuario.");
                     return;
                 }
 

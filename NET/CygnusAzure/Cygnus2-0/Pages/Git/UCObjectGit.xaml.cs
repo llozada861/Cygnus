@@ -49,6 +49,15 @@ namespace Cygnus2_0.Pages.Git
             rdbLineaBase.IsChecked = true;
             LineaBase.Visibility = Visibility.Visible;
             Entrega.Visibility = Visibility.Hidden;
+
+            try
+            {
+                this.objectViewModel.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
         }
 
         private void RdbLineaBase_Checked(object sender, RoutedEventArgs e)
