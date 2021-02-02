@@ -24,6 +24,7 @@ namespace Cygnus2_0.Model.Git
         private string objetoBuscar;
         private string hu;
         private string comentario;
+        private SelectListItem _selectHU;
         private SelectListItem ramaLBSeleccionada;
         private bool activaAprobRamas;
         private string nuevaRama;
@@ -56,6 +57,15 @@ namespace Cygnus2_0.Model.Git
             set
             {
                 SetProperty(ref hu, value.Trim());
+                pCreaRamas();
+            }
+        }
+
+        public SelectListItem SelectHU
+        {
+            get { return _selectHU; }
+            set {
+                SetProperty(ref _selectHU, value);
                 pCreaRamas();
             }
         }
@@ -123,11 +133,11 @@ namespace Cygnus2_0.Model.Git
         {
             if(RamaLBSeleccionada != null)
             { 
-                string ramaDll = res.Feature + HU + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_DLL";
-                string ramaPru = res.Feature + HU + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PRU";
-                string ramaPdn = res.Feature + HU + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PDN";
+                string ramaDll = res.Feature + this.SelectHU.Value + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_DLL";
+                string ramaPru = res.Feature + this.SelectHU.Value + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PRU";
+                string ramaPdn = res.Feature + this.SelectHU.Value + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PDN";
 
-                if (!string.IsNullOrEmpty(HU) && !string.IsNullOrEmpty(RamaLBSeleccionada.Text))
+                if (!string.IsNullOrEmpty(this.SelectHU.Value) && !string.IsNullOrEmpty(RamaLBSeleccionada.Text))
                 {
                     ListaRamasCreadas.Clear();
                     ListaRamasCreadas.Add(new Archivo { FileName = ramaDll });
