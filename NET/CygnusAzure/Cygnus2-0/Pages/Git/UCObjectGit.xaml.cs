@@ -130,6 +130,12 @@ namespace Cygnus2_0.Pages.Git
         {
             string[] DropPath;
 
+            if(objectViewModel.GitModel.RamaLBSeleccionada == null)
+            {
+                handler.MensajeError("Seleccione una rama de línea base.");
+                return;
+            }
+
             try
             {
                 if (e.Data.GetDataPresent(DataFormats.FileDrop))
