@@ -511,6 +511,8 @@ namespace Cygnus2_0.ViewModel.Git
                     }
                 }
             }
+
+            pArmarArbol(null, null);
         }
 
         public void pPonerUsuarioArchivos(Archivo archivo, SelectListItem usuario)
