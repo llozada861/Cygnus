@@ -315,6 +315,7 @@ namespace Cygnus2_0.General
                         if (sbLineSpace.StartsWith("--"))
                         {
                             sbLine = streamReader.ReadLine();
+                            continue;
                         }
 
                         if (!string.IsNullOrEmpty(archivo.Tipo) && archivo.Tipo.Equals(res.TipoObjetoTrigger.ToLower()) && !existeOn)
@@ -1253,6 +1254,15 @@ namespace Cygnus2_0.General
                     archivo.CarpetaPadre = pObtCarpetaPadre(archivo.RutaConArchivo);
                     this.ObtenerTipoArchivo(archivo, llamado);
                     archivo.BloquesCodigo = new List<string>();
+
+                    if (llamado.Equals(res.TipoAplica))
+                    {
+                        if (archivo.Tipo != null && archivo.Tipo.Equals(res.TipoAplica))
+                            continue;
+
+                        if(archivo.Tipo == null)
+                            archivo.NombreObjeto = "";
+                    }
 
                     if (archivo.ListaUsuarios.ToList().Exists(x => x.Text.ToUpper().Equals(archivo.CarpetaPadre.Trim().ToUpper())))
                     {

@@ -449,7 +449,7 @@ AS
         FROM flex.mensaje 
         WHERE mensdivi = 'EPM'
         AND mensmodu = 'CUZ'
-        AND instr(','||sbValoresExcluir||',',','||menscodi||',') = 0;
+        AND menscodi < 900196;
         
         IF(NVL(nuCodigo,0) > 0) THEN
             nuCodigo := nuCodigo + 1;

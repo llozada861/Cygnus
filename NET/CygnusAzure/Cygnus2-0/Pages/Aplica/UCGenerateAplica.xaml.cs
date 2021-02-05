@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 using System.Security.Permissions;
+using System.Windows.Controls.Primitives;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Aplica
 {
@@ -28,6 +30,7 @@ namespace Cygnus2_0.Pages.Aplica
     {
         private Handler handler;
         private GenerateAplicaViewModel generateAplicaViewModel;
+        private Brush Colobk;
         public UCGenerateAplica()
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
@@ -41,6 +44,8 @@ namespace Cygnus2_0.Pages.Aplica
             generateAplicaViewModel.Model.ArchivosCargados = "0";
             generateAplicaViewModel.Model.ArchivosGenerados = "0";
             btnSqlPlus.Visibility = Visibility.Hidden;
+
+            dataGridArchivosCargados.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
         }
 
         private void listBox1_Drop(object sender, DragEventArgs e)
@@ -59,6 +64,8 @@ namespace Cygnus2_0.Pages.Aplica
             {
                 handler.MensajeError(ex.Message);
             }
+
+            //dataGridArchivosCargados.ItemsSource = generateAplicaViewModel.Model.ListaArchivosCargados.OrderBy(x=>x.OrdenAplicacion);
         }
 
         private void dataGridArchivosCargados_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -127,6 +134,66 @@ namespace Cygnus2_0.Pages.Aplica
 
             Archivo archivo = (Archivo)dataGridArchivosGen.SelectedItem;
             handler.pAbrirArchivo(archivo.Ruta+"\\"+archivo.FileName);
+        }
+
+        private void ChAprobar_Checked(object sender, RoutedEventArgs e)
+        {
+            generateAplicaViewModel.Model.AprobarOrden = (bool)chAprobar.IsChecked;
+        }
+
+        private void RdbObjetos_Click(object sender, RoutedEventArgs e)
+        {
+            chAprobar.Visibility = Visibility.Visible;                
+        }
+
+        private void RdbDatos_Click(object sender, RoutedEventArgs e)
+        {
+            chAprobar.Visibility = Visibility.Hidden;
+        }
+        private void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
+        {
+            if (dataGridArchivosCargados.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
+            {
+                pCambiarColorFila();
+            }
+        }
+
+        private void pCambiarColorFila()
+        {
+            foreach (Archivo item in dataGridArchivosCargados.ItemsSource)
+            {
+                var row = dataGridArchivosCargados.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+
+                if (row != null)
+                {
+                    if (row.Background != Brushes.Red)
+                        Colobk = row.Background;
+
+                    if (item.Tipo == null || string.IsNullOrEmpty(item.NombreObjeto))
+                    {
+                        row.Background = Brushes.Red;
+                    }
+                    else
+                    {
+                        row.Background = Colobk;
+                    }
+
+                    if (item.Tipo != null && (item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) || item.Tipo.ToLower().Equals(res.TipoAplica.ToLower())))
+                    {
+                        row.Background = Colobk;
+                    }
+                }
+            }
+        }
+
+        private void BtnExaminar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                generateAplicaViewModel.pExaminar(null);
+                dataGridArchivosCargados.Items.Refresh();
+            }
+            catch { }
         }
     }
 }
