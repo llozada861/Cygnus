@@ -12,6 +12,7 @@ namespace Cygnus2_0.General
 {
     public class Archivo
     {
+        public int Index { get; set; }
         public string NombreSinExt { set; get; }
         public string Tipo { get; set; }
         public string RutaConArchivo { get; set; }

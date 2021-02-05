@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cygnus2_0.General;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,6 +92,8 @@ namespace Cygnus2_0.Pages.Aplica
 
         private static void ExchangeItems(object sender, object targetItem)
         {
+            int nuIndex = 1;
+
             var draggeditem = VisualHelper.GetDraggedItem(sender as DependencyObject);
             if (draggeditem == null) return;
             if (targetItem != null && !ReferenceEquals(draggeditem, targetItem))
@@ -100,10 +103,26 @@ namespace Cygnus2_0.Pages.Aplica
                     throw new ApplicationException("EnableRowsMoveProperty requires the ItemsSource property of DataGrid to be at least IList inherited collection. Use ObservableCollection to have movements reflected in UI.");
                 //get target index
                 var targetIndex = list.IndexOf(targetItem);
+
                 //remove the source from the list
-                list.Remove(draggeditem);               
+                list.Remove(draggeditem);
+
+                ((Archivo)draggeditem).Index = ((Archivo)targetItem).Index;
+
                 //move source at the target's location
                 list.Insert(targetIndex, draggeditem);
+
+                foreach (Archivo item in list)
+                {
+                    item.Index = nuIndex;
+                    nuIndex++;
+                }
+
+                try
+                {
+                    (sender as DataGrid).Items.Refresh();
+                }
+                catch { }
             }
         }
 

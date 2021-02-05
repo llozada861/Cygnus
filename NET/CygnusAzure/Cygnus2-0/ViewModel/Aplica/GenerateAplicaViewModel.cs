@@ -93,7 +93,13 @@ namespace Cygnus2_0.ViewModel.Aplica
                     handler.MensajeError("Todos los archivos deben tener un tipo. Seleccione un tipo para el archivo.");
                     return;
                 }
-            
+
+                if (this.Model.Objetos && !this.Model.AprobarOrden)
+                {
+                    handler.MensajeError("Debe aprobar el orden de los archivos para el aplica!");
+                    return;
+                }
+
                 this.Model.ListaArchivosGenerados.Clear();
 
                 ProcesaArchivos();
@@ -241,12 +247,16 @@ namespace Cygnus2_0.ViewModel.Aplica
             {
                 this.Model.ListaArchivosCargados.Add(archivo);
             }
+
+            pEstablecerOrdenAplica();
         }
         private void pListaArchivosCarpeta(string path)
         {
             string[] DropPath = System.IO.Directory.GetFiles(path + "\\", "*", System.IO.SearchOption.AllDirectories);
 
-            foreach (string dropfilepath in DropPath)
+            ListarArchivos(DropPath);
+
+            /*foreach (string dropfilepath in DropPath)
             {
                 Archivo archivo = new Archivo();
                 archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
@@ -267,6 +277,8 @@ namespace Cygnus2_0.ViewModel.Aplica
                 this.Model.ListaArchivosCargados.Add(archivo);
                 archivo.OrdenAplicacion = this.Model.ListaArchivosCargados.IndexOf(archivo);
             }
+
+            pEstablecerOrdenAplica();*/
         }
         internal void ProcesaArchivos()
         {
@@ -281,7 +293,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                 }
 
                 //Se instancian las listas del archivo
-                archivo.DocumentacionSinDepurar = new List<StringBuilder>();
+                /*archivo.DocumentacionSinDepurar = new List<StringBuilder>();
                 archivo.Modificaciones = new List<ModificacionModel>();
                 archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
                 archivo.ObjetoSql = false;
@@ -317,11 +329,73 @@ namespace Cygnus2_0.ViewModel.Aplica
 
                         if (archivo.ObjetoSql) break;
                     }
-                }
+                }*/
             }
 
             //Se genera el aplica de los objetos entregados
             pGeneraAplica();
+        }
+
+        private void pEstablecerOrdenAplica()
+        {
+            foreach (Archivo archivo in this.Model.ListaArchivosCargados)
+            {
+                //Se instancian las listas del archivo
+                archivo.DocumentacionSinDepurar = new List<StringBuilder>();
+                archivo.Modificaciones = new List<ModificacionModel>();
+                archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
+                archivo.ObjetoSql = false;
+                pObtenerRutaDentroAplica(archivo);
+
+                foreach (SelectListItem tipo in handler.ListaTiposObjetos)
+                {
+                    //Si el tipo aplica para obtener las modificaciones
+                    if (archivo.Tipo != null && archivo.Tipo.Trim().Equals(tipo.Text))
+                    {
+                        if (tipo.Value.Equals(res.Si))
+                        {
+                            //Se lee el archivo
+                            pValidaSlashArchivo(archivo);
+
+                            if (tipo.CantidadSlash > 0 && archivo.CantidadSlahs == 0)
+                            {
+                                archivo.CantidadSlahs = -1;
+                            }
+
+                            //Se obtiene la documentación del método
+                            if (handler.pDepuraDocumentacion(archivo))
+                            {
+                                pAdicionarArchivo
+                                (
+                                    archivo.NombreObjeto + res.ExtensionHtml,
+                                    res.TipoHtml,
+                                    "Documentación HTML",
+                                    archivo.Ruta
+                                );
+                            }
+
+                            archivo.ObjetoSql = true;
+                        }
+
+                        archivo.OrdenAplicacion = tipo.Prioridad;
+
+                        if (archivo.ObjetoSql) break;
+                    }
+                }
+            }
+
+            pGenerarIndices();
+         }
+
+        public void pGenerarIndices()
+        {
+            int nuIndex = 1;
+
+            foreach (Archivo archivo in this.Model.ListaArchivosCargados.OrderBy(x => x.OrdenAplicacion))
+            {
+                archivo.Index = nuIndex;
+                nuIndex++;
+            }
         }
 
         public void pObtenerRutaDentroAplica(Archivo archivo)
@@ -361,7 +435,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             string nombreAplica = this.Model.Codigo + res.NombreAplica + this.Model.Usuario.Text.Trim() + res.ExtensionSQL;
 
-            if (handler.ConfGeneralViewModel.OrdenAutomatico)
+            /*if (handler.ConfGeneralViewModel.OrdenAutomatico)
             {
                 foreach (Archivo archivo in this.Model.ListaArchivosCargados.OrderBy(x => x.OrdenAplicacion))
                 {
@@ -372,13 +446,14 @@ namespace Cygnus2_0.ViewModel.Aplica
                 }
             }
             else
+            {*/
+
+            foreach (Archivo archivo in this.Model.ListaArchivosCargados.OrderBy(x => x.Index))
             {
-                foreach (Archivo archivo in this.Model.ListaArchivosCargados)
-                {
-                    if (!archivo.Tipo.Equals(res.TipoPlantilla))
-                        pInsertaCuerpo(archivo, objetosAplica);
-                }
+                if (!archivo.Tipo.Equals(res.TipoPlantilla))
+                    pInsertaCuerpo(archivo, objetosAplica);
             }
+            
 
             if (handler.ConfGeneralViewModel.EntregaPlantilla)
             {
@@ -542,26 +617,28 @@ namespace Cygnus2_0.ViewModel.Aplica
                 archivo.CantidadSlahs = cantidadSlash;
 
                 //Se valida los archivos enviados no tienen el slash
-                foreach (SelectListItem tipoObjeto in handler.ListaTiposObjetos)
+                 /*foreach (SelectListItem tipoObjeto in handler.ListaTiposObjetos)
                 {
                     if (archivo.Tipo.Trim().Equals(tipoObjeto.Text))
                     {
-                        if (tipoObjeto.CantidadSlash > 0 && archivo.CantidadSlahs == 0)
+                        nuTieneSlash = tipoObjeto.CantidadSlash;
+
+                       if (tipoObjeto.CantidadSlash > 0 && archivo.CantidadSlahs == 0)
                         {
-                            handler.MensajeError("El archivo [" + archivo.NombreObjeto + "] no tiene el / al final. Por favor ajustar.");
-                        }
+                            boTieneSlash = false;
+                            //handler.MensajeError("El archivo [" + archivo.NombreObjeto + "] no tiene el / al final. Por favor ajustar.");
+                        }*/
 
                         /*if (archivo.CantidadSlahs < tipoObjeto.CantidadSlash)
                         {
                             //Si no cumple con los slash, los agrega y crea el nuevo archivo.
                             pGenerarSlashArchivo(archivo, tipoObjeto.CantidadSlash);
-                        }*/
+                        }
                     }
-                }
+                }*/
             }
             catch (Exception ex)
             {
-                //No hacer nada para evitar el error.
                 throw ex;
             }
         }

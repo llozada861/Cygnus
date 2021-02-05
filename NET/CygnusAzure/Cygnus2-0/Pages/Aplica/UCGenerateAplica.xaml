@@ -36,11 +36,14 @@
         <RadioButton x:Name="rdbDatos" Content="Datos" 
                      Grid.Column="0" 
                      Grid.ColumnSpan="2" 
-                     Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Datos}"  />
+                     Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Datos}" Click="RdbDatos_Click"  />
+        
         <RadioButton x:Name="rdbObjetos" Content="Objetos" 
-                     Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}"/>
+                     Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}" Click="RdbObjetos_Click"/>
 
-        <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="5" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+        <CheckBox Name="chAprobar" Content="Aprobar Orden Aplica!" Grid.Row="0" Grid.Column="4"  Checked="ChAprobar_Checked" Visibility="Hidden" />
+        
+        <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Grid.Column="5" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="BtnExaminar_Click" />
         
         <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="7" >
             <Grid>
@@ -78,21 +81,28 @@
                 SelectionMode="Single"
                 CanUserDeleteRows="True"
                 CanUserAddRows="False"
-                CanUserReorderColumns="False"
-                CanUserSortColumns="False"
                 ItemsSource="{Binding Path=Model.ListaArchivosCargados}"
                 local:VisualHelper.EnableRowsMove="True"            
                 VerticalContentAlignment="Center"
-                    SelectionChanged="dataGridArchivosCargados_SelectionChanged" MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
-                    Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="9"
+                    SelectionChanged="dataGridArchivosCargados_SelectionChanged" 
+                    MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
+                    Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" 
+                    
                     >
+                                            
                     <DataGrid.Columns>
+
+                        <DataGridTextColumn          
+                      IsReadOnly="True"
+                      Header="Orden"
+                      Binding="{Binding Path=Index}" SortDirection="Ascending"/>
+                        
                         <DataGridTextColumn                  
                       IsReadOnly="True"
                       Header="Archivo"
                       Binding="{Binding Path=FileName}" />
 
-                        <DataGridComboBoxColumn Width="150" 
+                        <DataGridComboBoxColumn Width="100" 
                              DisplayMemberPath="Text" 
                                                 SelectedValuePath="Text"
                                                 Header="Tipo"
@@ -112,7 +122,7 @@
 
                         <DataGridTextColumn                  
                       IsReadOnly="false"
-                      Header="Objeto Para Grant"
+                      Header="Obj. Grant"
                       Binding="{Binding Path=NombreObjeto}" />
                     </DataGrid.Columns>
                 </DataGrid>

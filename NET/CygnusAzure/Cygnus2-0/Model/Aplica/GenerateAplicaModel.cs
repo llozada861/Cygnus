@@ -24,6 +24,7 @@ namespace Cygnus2_0.Model.Aplica
         private string archivosCargados;
         private Boolean objetos;
         private Boolean datos;
+        private Boolean aprobarOrden;
         private string codigo;
         private ObservableCollection<Archivo> listaArchivosGenerados;
         private ObservableCollection<Archivo> listaArchivosCargados;
@@ -78,6 +79,11 @@ namespace Cygnus2_0.Model.Aplica
         {
             get { return objetos; }
             set { SetProperty(ref objetos, value); }
+        }
+        public Boolean AprobarOrden
+        {
+            get { return aprobarOrden; }
+            set { SetProperty(ref aprobarOrden, value); }
         }
     }
 }
