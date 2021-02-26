@@ -2064,12 +2064,15 @@ AS
         sbVariablesPK           VARCHAR2(2000);
         -- Listado de variables de entrada que componen la PK, para imprimirse en mensajes
         sbCamposPKParaOutput    VARCHAR2(2000);
+        -- Listado de variables de entrada que componen la PK, para imprimirse en mensajes (Encomillada)
+        sbCamposPKParaOutputCom VARCHAR2(2000);
         -- Campos igualados a la variable
-        sbWherePorPK            VARCHAR2(2000);
+        sbWherePorPK            VARCHAR2(2000);                
         
         -- Cascarón para la especificación de una función
         csbSpecTemplateFunction   VARCHAR2(32000) :=
 '
+    -- Obtención del campo <Campo>
     FUNCTION <Type>Get<Campo>
     (
         <ParamPK>
@@ -2081,6 +2084,7 @@ AS
         -- Cascarón para una función de obtención por campo
         csbTemplateFunction   VARCHAR2(32000) := 
 '
+    -- Obtención del campo <Campo>
     FUNCTION <Type>Get<Campo>
     (
         <ParamPK>
@@ -2092,6 +2096,7 @@ AS
         pkErrors.Push(''pktbl<Tabla>.<Type>Get<Campo>'');
         
         -- Valida si el dato está en memoria
+        
         AccKey
         ( 
             <pk>    INUCACHE 
@@ -2111,6 +2116,7 @@ AS
         -- Cascarón para la especificación de un procedimiento update
         csbSpecTemplateProc   VARCHAR2(32000) :=
 '
+    -- Actualización del campo <Campo>
     PROCEDURE pUpd<Campo>
     (
         <ParamPK>
@@ -2121,6 +2127,7 @@ AS
         -- Cascarón para un procedimiento de actualización por campo
         csbTemplateUpdate   VARCHAR2(32000) := 
 '
+    -- Actualización del campo <Campo>
     PROCEDURE pUpd<Campo>
     (
         <ParamPK>
@@ -2147,7 +2154,7 @@ AS
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_NO_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') ( PK [<sbCamposPKParaOutput>] )'||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csbTABLA_PK||'||'<sbCamposPKParaOutputSinCom>||'''||'] )'||CHR(39)||');
             RAISE LOGIN_DENIED;
     END pUpd<Campo>;
 ';
@@ -2406,13 +2413,14 @@ IS
     );');
         end if;
     
-        --------------------------------------------
-        -- Constants
-        --------------------------------------------
-    
-        --------------------------------------------
-        -- Variables
-        --------------------------------------------');
+    DBMS_LOB.APPEND(oclFile,'
+    --------------------------------------------
+    -- Constants
+    --------------------------------------------
+        
+    --------------------------------------------
+    -- Variables
+    --------------------------------------------');
         
         
         if( tbPrimaria.first is not null ) then
@@ -2461,19 +2469,21 @@ IS
     --------------------------------------------
     -- Funciones y Procedimientos
     --------------------------------------------
-    
+    -- Insertar un registro
     PROCEDURE InsRecord
     (
         ircRecord in ' || lower( csbTABLA ) || '%rowtype
     );');
         
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '
+    -- Insertar colección de registros
     PROCEDURE InsRecords
     (
         irctbRecord  IN OUT NOCOPY   tytb'||gsbTableCap||'
     );');
             
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '
+    -- Insertar un record de tablas por columna
     PROCEDURE InsForEachColumn
     (');
         
@@ -2492,6 +2502,7 @@ IS
 '    );');
         
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '
+    -- Insertar un record de tablas por columna masivamente
     PROCEDURE InsForEachColumnBulk
     (');
         
@@ -2512,8 +2523,10 @@ IS
         if( tbPrimaria.first is not null ) then
         
             DBMS_LOB.APPEND(oclFile, CHR(10)|| '
+    -- Limpiar la memoria
     PROCEDURE ClearMemory;
-        
+
+    -- Eliminar un registro
     PROCEDURE DelRecord
     (');
         
@@ -2527,12 +2540,14 @@ IS
     
             DBMS_LOB.APPEND(oclFile, CHR(10)||
 '    );
-        
+
+    -- Actualizar un registro
     PROCEDURE UpRecord
     (
         ircRecord in ' || lower( csbTABLA ) || '%rowtype
     );
         
+    -- Eliminar un grupo de registros
     PROCEDURE DelRecords
     (');
             for i in tbPrimaria.first .. tbPrimaria.last loop
@@ -2546,6 +2561,7 @@ IS
         DBMS_LOB.APPEND(oclFile, '     
     );
                 
+    -- Indica si el registro existe
     FUNCTION fblExist
     (');
         
@@ -2556,6 +2572,7 @@ IS
     )
     RETURN BOOLEAN;
     
+    -- Obtiene registro
     FUNCTION frcGetRecord
     (');
         
@@ -2567,6 +2584,7 @@ IS
     )
     RETURN ' || lower( csbTABLA ) || '%ROWTYPE;
     
+    -- Valida si existe un registro
     PROCEDURE AccKey
     (');
         
@@ -2577,6 +2595,7 @@ IS
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '        inuCACHE IN NUMBER DEFAULT 1
     );
     
+    -- Valida si está duplicad
     PROCEDURE ValidateDupValues
     (');
         
@@ -2632,7 +2651,7 @@ IS
         END LOOP;
         
         /* Prepara la variable para incrustarse en texto */
-        sbCamposPKParaOutput := CHR(39)||'||'||sbCamposPKParaOutput||'||'||CHR(39);
+        sbCamposPKParaOutputCom := CHR(39)||'||'||sbCamposPKParaOutput||'||'||CHR(39);
         
         /* Recorre los campos creando las funciones para obtener campos puntuales */
         FOR i in tbCampos.FIRST .. tbCampos.LAST LOOP    
@@ -2757,10 +2776,15 @@ IS
     -- Division
     csbDIVISION                CONSTANT VARCHAR2(20) := pkConstante.csbDIVISION;
     -- Modulo
-    csbMODULE                  CONSTANT VARCHAR2(20) := pkConstante.csbMOD_CUZ;');
+    csbMODULE                  CONSTANT VARCHAR2(20) := pkConstante.csbMOD_CUZ;
+    -- Texto adicionar para mensaje de error
+    csbTABLA_PK                CONSTANT VARCHAR2(200):= ''(Tabla '||upper( csbTABLA )||') ( PK ['';
+    csb_TABLA                  CONSTANT VARCHAR2(200):= ''(Tabla '||upper( csbTABLA )||')'';');
+
         
         if( tbPrimaria.first is not null ) then
             DBMS_LOB.APPEND(oclFile, CHR(10)|| '
+    -- Carga
     PROCEDURE Load
     (');
         
@@ -2796,11 +2820,12 @@ IS
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_NO_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') ( PK ['||sbCamposPKParaOutput||'] )'||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csbTABLA_PK||'||sbCamposPKParaOutput||'||''] )'||CHR(39)||');
             pkErrors.Pop;
             RAISE LOGIN_DENIED;
     END Load;
-        
+    
+    -- Carga    
     PROCEDURE LoadRecord
     (');
         
@@ -2832,16 +2857,14 @@ IS
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '        );
         FETCH cu' || gsbTableCap || ' INTO rc' || gsbTableCap || ';
         IF ( cu' || gsbTableCap || '%NOTFOUND ) then
-            CLOSE cu' || gsbTableCap || ';
-            pkErrors.Pop;
             rc' || gsbTableCap || ' := rcRecordNull;
-            RETURN;
         END IF;
         CLOSE cu' || gsbTableCap || ';
         pkErrors.Pop;
     
     END LoadRecord;    
-        
+    
+    -- Indica si está en memoria  
     FUNCTION fblInMemory
     (');
         
@@ -2881,6 +2904,7 @@ IS
     
     END fblInMemory;
     
+    -- Valida si existe registro
     PROCEDURE AccKey
     (');
         
@@ -2895,8 +2919,7 @@ IS
         pkErrors.Push( ''pktbl' || gsbTableCap || '.AccKey'' );
             
         --Valida si debe buscar primero en memoria Cache
-        IF ( inuCACHE = CACHE ) THEN
-            IF ( fblInMemory(');
+        IF NOT (inuCACHE = CACHE AND fblInMemory(');
             
         for i in tbPrimaria.first .. tbPrimaria.last loop
             sbCadena := tbPrimaria( i ).alias;
@@ -2907,22 +2930,20 @@ IS
         end loop;
             
         DBMS_LOB.APPEND(oclFile, ') ) THEN
-                pkErrors.Pop;
-                RETURN;
-            END IF;
+        
+            Load
+            (');
+                
+            for i in tbPrimaria.first .. tbPrimaria.last loop
+                sbCadena := tbPrimaria( i ).alias;
+                if ( i <> tbPrimaria.last ) then
+                    sbCadena := sbCadena || ',';
+                end if;
+                DBMS_LOB.APPEND(oclFile, CHR(10)|| '                ' || sbCadena);
+            end loop;
+                
+            DBMS_LOB.APPEND(oclFile, CHR(10)|| '            );
         END IF;
-        Load
-        (');
-            
-        for i in tbPrimaria.first .. tbPrimaria.last loop
-            sbCadena := tbPrimaria( i ).alias;
-            if ( i <> tbPrimaria.last ) then
-                sbCadena := sbCadena || ',';
-            end if;
-            DBMS_LOB.APPEND(oclFile, CHR(10)|| '            ' || sbCadena);
-        end loop;
-            
-        DBMS_LOB.APPEND(oclFile, CHR(10)|| '        );
         pkErrors.Pop;
     EXCEPTION
         WHEN LOGIN_DENIED THEN
@@ -2930,6 +2951,7 @@ IS
             RAISE LOGIN_DENIED;
     END AccKey;
     
+    -- Limpia memoria
     PROCEDURE ClearMemory 
     IS
     BEGIN
@@ -2937,7 +2959,8 @@ IS
         rc' || gsbTableCap || ' := rcRecordNull;
         pkErrors.Pop;
     END ClearMemory;
-        
+    
+    -- Elimina registro    
     PROCEDURE DelRecord
     (');
         
@@ -2980,12 +3003,13 @@ IS
         EXCEPTION
             WHEN NO_DATA_FOUND THEN
                 pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_NO_EXISTE );
-                pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') ( PK ['||sbCamposPKParaOutput||'] )'||CHR(39)||');
+                pkErrors.ADDSUFFIXTOMESSAGE ( csbTABLA_PK||'||sbCamposPKParaOutput||'||''] )'||CHR(39)||');
                 pkErrors.Pop;
                 RAISE LOGIN_DENIED;
     END DelRecord;');
         
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '    
+    -- Elimina registros
     PROCEDURE DelRecords
     (');
         for i in tbPrimaria.first .. tbPrimaria.last loop
@@ -3032,8 +3056,8 @@ IS
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_NO_EXISTE );   
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') '||CHR(39)||');
-            pkErrors.Pop;         
+            pkErrors.ADDSUFFIXTOMESSAGE ( csb_TABLA );
+            pkErrors.Pop;
             RAISE LOGIN_DENIED;
     END DelRecords;');
         
@@ -3041,6 +3065,7 @@ IS
         
         
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '    
+    -- Inserta registro por columna
     PROCEDURE InsForEachColumn
     (');
         
@@ -3058,7 +3083,7 @@ IS
     DBMS_LOB.APPEND(oclFile, CHR(10)|| '
     )
     IS
-      rcRecord ' || lower( csbTABLA ) || '%ROWTYPE;   /* Record de la Tabla '||lower( csbTABLA )||' */
+      rcRecord ' || lower( csbTABLA ) || '%ROWTYPE;   -- Record de la Tabla '||lower( csbTABLA )||'
     BEGIN
        pkErrors.Push( ''pktbl'||lower( csbTABLA )||'.InsForEachColumn '');');
            
@@ -3085,6 +3110,7 @@ IS
         
         
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '    
+    -- Inserta registro de tablas por campo masivamente
     PROCEDURE InsForEachColumnBulk
     (');
         
@@ -3150,13 +3176,14 @@ IS
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_YA_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') '||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csb_TABLA );
             pkErrors.Pop;
             RAISE LOGIN_DENIED;
     END InsForEachColumnBulk;');
         
         
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '    
+    -- Inserta un registro
     PROCEDURE InsRecord
     (
         ircRecord in ' || lower( csbTABLA ) || '%ROWTYPE
@@ -3198,13 +3225,14 @@ IS
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_YA_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') '||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csb_TABLA );
             pkErrors.Pop;
             RAISE LOGIN_DENIED;
     END InsRecord;');
         
         
         DBMS_LOB.APPEND(oclFile, CHR(10)|| '    
+    -- Inserta tabla de registros
     PROCEDURE InsRecords
     (
         irctbRecord  IN OUT NOCOPY   tytb'||csbTABLA||
@@ -3255,7 +3283,7 @@ IS
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_YA_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') '||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csb_TABLA );
             pkErrors.Pop;
             RAISE LOGIN_DENIED;
     END InsRecords;');
@@ -3264,6 +3292,7 @@ IS
         if( tbPrimaria.first is not null ) then
         
             DBMS_LOB.APPEND(oclFile, CHR(10)|| '    
+    -- Actualiza registro
     PROCEDURE UpRecord
     (
         ircRecord IN ' || lower( csbTABLA ) || '%ROWTYPE
@@ -3314,16 +3343,17 @@ IS
     EXCEPTION
         WHEN DUP_VAL_ON_INDEX THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_YA_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') '||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csb_TABLA );
             pkErrors.Pop;
             RAISE LOGIN_DENIED;
         WHEN NO_DATA_FOUND THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_NO_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') '||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csb_TABLA );
             pkErrors.Pop;
             RAISE LOGIN_DENIED;
     END UpRecord;
     
+    -- Valida duplicados
     PROCEDURE ValidateDupValues
     (');
         
@@ -3347,7 +3377,7 @@ IS
             
         DBMS_LOB.APPEND(oclFile, 'inuCACHE ) ) THEN
             pkErrors.SetErrorCode( csbDIVISION, csbMODULE, cnuRECORD_YA_EXISTE );
-            pkErrors.ADDSUFFIXTOMESSAGE ('||CHR(39)||'(Tabla '||upper( csbTABLA )||') ( PK ['||sbCamposPKParaOutput||'] )'||CHR(39)||');
+            pkErrors.ADDSUFFIXTOMESSAGE ( csbTABLA_PK||'||sbCamposPKParaOutput||'||''] )'||CHR(39)||');
             RAISE LOGIN_DENIED;
         END IF;
             
@@ -3359,6 +3389,7 @@ IS
             RAISE LOGIN_DENIED;
     END ValidateDupValues;
     
+    -- Valida si el registro existe
     FUNCTION fblExist
     (');
         
@@ -3374,8 +3405,7 @@ IS
         pkErrors.Push( ''pktbl' || gsbTableCap || '.fblExist'' );
             
         --Valida si debe buscar primero en memoria Caché
-        IF ( inuCACHE = CACHE ) THEN
-            IF ( fblInMemory( ');
+        IF (inuCACHE = CACHE AND fblInMemory( ');
             
         for i in tbPrimaria.first .. tbPrimaria.last loop
             sbCadena := tbPrimaria( i ).alias;
@@ -3388,7 +3418,6 @@ IS
         DBMS_LOB.APPEND(oclFile, ' ) ) THEN
                 pkErrors.Pop;
                 RETURN( TRUE );
-            END IF;
         END IF;
         LoadRecord
         (');
@@ -3415,6 +3444,7 @@ IS
         
     END fblExist;
     
+    -- Obtiene el registro
     FUNCTION frcGetRecord
     (');
         
@@ -3511,7 +3541,10 @@ IS
         sbFunction := REPLACE(sbFunction, '<Condicion>', sbWherePorPK);
 
         -- Reemplaza los campos de la pk en el mensaje de error
-        sbFunction := REPLACE(sbFunction, '<sbCamposPKParaOutput>', sbCamposPKParaOutput);        
+        sbFunction := REPLACE(sbFunction, '<sbCamposPKParaOutput>', sbCamposPKParaOutputCom);
+
+        -- Reemplaza los campos de la pk en el mensaje de error
+        sbFunction := REPLACE(sbFunction, '<sbCamposPKParaOutputSinCom>', sbCamposPKParaOutput);
 
         -- Escribe la función
         DBMS_LOB.APPEND(oclFile, sbFunction);

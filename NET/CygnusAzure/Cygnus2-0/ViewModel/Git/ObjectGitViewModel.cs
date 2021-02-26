@@ -270,6 +270,7 @@ namespace Cygnus2_0.ViewModel.Git
 
             UserControl log = new UserControlLog(salidaBuild);
             WinImage request = new WinImage(log, "Traza");
+            RepoGit.pRemoverCambiosSonar(GitModel, handler);
             request.ShowDialog();
         }
 

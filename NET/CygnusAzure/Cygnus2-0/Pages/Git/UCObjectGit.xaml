@@ -220,7 +220,7 @@
             </GroupBox>
         </Grid>
 
-        <Grid x:Name="Entrega" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="8">
+        <Grid x:Name="Entrega" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -267,7 +267,7 @@
                       SelectedItem="{Binding Path=GitModel.SelectHU}"
                       DisplayMemberPath="Text"  Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Center"/>
 
-                        <TextBlock DataContext="{Binding ElementName=comboBoxHU,Path=SelectedItem}"
+                    <TextBlock DataContext="{Binding ElementName=comboBoxHU,Path=SelectedItem}"
                        Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Center"
                        Text="Historia de Usuario" 
                        Style="{StaticResource ComboBoxSelectOverlay}"/>
@@ -429,7 +429,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Row="3" Grid.Column="3" Grid.RowSpan="7">
+            <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Row="3" Grid.Column="3" Grid.RowSpan="6">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -460,7 +460,6 @@
                     </TreeView>
                 </Grid>
             </GroupBox>
-
             <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Center" Command="{Binding Path=Entrega}" Grid.Column="8" Grid.Row="9"  Margin="10,0,5,0" HorizontalAlignment="Left" Click="BtnProcesar_Click" />
             <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Command="{Binding Path=Limpiar}" Grid.Column="8" Grid.Row="9" Margin="0,0,5,0" HorizontalAlignment="Center" />
         </Grid>
