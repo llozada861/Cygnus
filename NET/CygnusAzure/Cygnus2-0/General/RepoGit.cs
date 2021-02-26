@@ -105,7 +105,6 @@ namespace Cygnus2_0.General
             using (var repo = new Repository(@handler.RutaGitObjetos))
             {
                 Commands.Checkout(repo, ramaPrincipal);
-                pActualizarRepo(handler, ramaPrincipal);
                 //Commands.Pull(repo, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new PullOptions());
 
                 var branches = repo.Branches;
@@ -122,6 +121,7 @@ namespace Cygnus2_0.General
 
                 if (!blRama)
                 {
+                    pActualizarRepo(handler, ramaPrincipal);
                     repo.CreateBranch(ramaCrear);
                 }
 
@@ -143,7 +143,6 @@ namespace Cygnus2_0.General
             using (var repo = new Repository(@handler.RutaGitObjetos))
             {
                 Commands.Checkout(repo, res.RamaProduccion);
-                pActualizarRepo(handler, res.RamaProduccion);
                 //Commands.Pull(repo, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new PullOptions());
 
                 var branches = repo.Branches;
@@ -157,12 +156,11 @@ namespace Cygnus2_0.General
                     }
                 }
 
-                if (blRama)
+                if (!blRama)
                 {
-                    throw new Exception("La línea base ya existe.");
+                    pActualizarRepo(handler, res.RamaProduccion);
+                    repo.CreateBranch(model.Codigo.ToUpper());
                 }
-
-                repo.CreateBranch(model.Codigo.ToUpper());
             }
         }
 
@@ -205,6 +203,16 @@ namespace Cygnus2_0.General
             using (var repo = new Repository(@handler.RutaGitObjetos))
             {
                 Commands.Checkout(repo, rama);
+            }
+        }
+
+        internal static void pRemoverCambiosSonar(ObjectGitModel gitModel, Handler handler)
+        {
+            using (var repo = new Repository(@handler.RutaGitObjetos))
+            {
+                string command = "git stash -u";
+                string RutagitBash = handler.RutaGitBash + "\\" + res.GitBashExe;
+                ExecuteGitBashCommand(RutagitBash, command, handler.RutaGitObjetos);
             }
         }
 

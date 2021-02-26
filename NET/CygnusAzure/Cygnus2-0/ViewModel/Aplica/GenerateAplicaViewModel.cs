@@ -235,8 +235,16 @@ namespace Cygnus2_0.ViewModel.Aplica
         }
         public void pExaminar(object commandParameter)
         {
-            string[] archivos = handler.pCargarArchivos();
-            ListarArchivos(archivos);
+            try
+            {
+                string[] archivos = handler.pCargarArchivos();
+                ListarArchivos(archivos);
+            }
+            catch(Exception ex)
+            {
+                this.Model.ListaArchivosCargados.Clear();
+                handler.MensajeError(ex.Message);
+            }
         }
         public void ListarArchivos(string[] DropPath)
         {
@@ -255,30 +263,6 @@ namespace Cygnus2_0.ViewModel.Aplica
             string[] DropPath = System.IO.Directory.GetFiles(path + "\\", "*", System.IO.SearchOption.AllDirectories);
 
             ListarArchivos(DropPath);
-
-            /*foreach (string dropfilepath in DropPath)
-            {
-                Archivo archivo = new Archivo();
-                archivo.FileName = System.IO.Path.GetFileName(dropfilepath);
-                archivo.RutaConArchivo = dropfilepath;
-                archivo.NombreSinExt = System.IO.Path.GetFileNameWithoutExtension(dropfilepath);
-                archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
-                archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
-
-                if (archivo.Extension.ToLower().Equals(res.ExtensionHtml) || archivo.Extension.ToLower().Equals(res.ExtensionLog) || archivo.Extension.ToLower().Equals(res.ExtensionZIP))
-                    continue;
-
-                archivo.ListaTipos = handler.ListaTiposObjetos;
-                handler.ObtenerTipoArchivo(archivo, res.No_aplica);
-
-                if (archivo.Tipo.Equals(res.TipoAplica))
-                    continue;
-
-                this.Model.ListaArchivosCargados.Add(archivo);
-                archivo.OrdenAplicacion = this.Model.ListaArchivosCargados.IndexOf(archivo);
-            }
-
-            pEstablecerOrdenAplica();*/
         }
         internal void ProcesaArchivos()
         {
@@ -291,45 +275,6 @@ namespace Cygnus2_0.ViewModel.Aplica
                     //Valida que solo se aplique en un esquema
                     handler.DAO.pValidaObjEsquema(archivo, this.Model.Usuario.Text);
                 }
-
-                //Se instancian las listas del archivo
-                /*archivo.DocumentacionSinDepurar = new List<StringBuilder>();
-                archivo.Modificaciones = new List<ModificacionModel>();
-                archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
-                archivo.ObjetoSql = false;
-                pObtenerRutaDentroAplica(archivo);
-
-                foreach (SelectListItem tipo in handler.ListaTiposObjetos)
-                {
-                    //Si el tipo aplica para obtener las modificaciones
-                    if (archivo.Tipo.Trim().Equals(tipo.Text))
-                    {
-                        if (tipo.Value.Equals(res.Si))
-                        {
-                            //Se lee el archivo
-                            pValidaSlashArchivo(archivo);
-
-                            //Se obtiene la documentación del método
-                            if (handler.pDepuraDocumentacion(archivo))
-                            {
-                                pAdicionarArchivo
-                                (
-                                    archivo.NombreObjeto + res.ExtensionHtml,
-                                    res.TipoHtml,
-                                    "Documentación HTML",
-                                    archivo.Ruta
-                                );
-                            }
-
-                            //archivo.NombreSinExt = archivo.FileName.Substring(0, archivo.FileName.Length - 4);
-                            archivo.ObjetoSql = true;
-                        }
-
-                        archivo.OrdenAplicacion = tipo.Prioridad;
-
-                        if (archivo.ObjetoSql) break;
-                    }
-                }*/
             }
 
             //Se genera el aplica de los objetos entregados

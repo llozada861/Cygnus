@@ -62,6 +62,7 @@ namespace Cygnus2_0.Pages.Aplica
             }
             catch (Exception ex)
             {
+                generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
                 handler.MensajeError(ex.Message);
             }
 
