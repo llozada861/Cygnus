@@ -375,8 +375,12 @@ namespace Cygnus2_0
                         "insert into words values('for')",
                         "INSERT INTO user_grants (user,company) VALUES ('OPENSIRIUS',99)",
                         "INSERT INTO object_head (head, type, priority, end) VALUES ('grant', 'grant', '10', 'pc');",
-                        "update object_type set path = 'server\\sql\\10grt' where object = 'grant'",*/
-                        "insert into words values('from')"
+                        "update object_type set path = 'server\\sql\\10grt' where object = 'grant'",
+                        "insert into words values('from')"*/
+                        "insert into object_type (object,count_slash,priority,grant,path) values('Type_head',0,115,'No','server\\sql\\08typ\\01obj\\[nombre]')",
+                        "insert into object_type (object,count_slash,priority,grant,path) values('Type_body',0,115,'No','server\\sql\\08typ\\02col\\[nombre]')",
+                        "insert into object_type (object,count_slash,priority,grant,path) values('Migra',0,115,'No','server\\sql\\21mig\\[nombre]')",
+                        "insert into object_type (object,count_slash,priority,grant,path) values('Java',0,500,'No','server\\sql\\22java\\[nombre]')"
                 };
 
                 foreach (string sql in query)
