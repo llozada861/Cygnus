@@ -504,11 +504,11 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             rutaGeneracion = Path.Combine(handler.SavePathAplica, nombreAplica);
 
-            using (StreamWriter aplica = new StreamWriter(rutaGeneracion))
+            using (StreamWriter aplica = new StreamWriter(rutaGeneracion,false,Encoding.Default))
             {
-                aplica.Write(encabezadoAplica);
-                aplica.Write(objetosAplica);
-                aplica.Write(finAplica);
+                aplica.Write(encabezadoAplica.ToString());
+                aplica.Write(objetosAplica.ToString());
+                aplica.Write(finAplica.ToString());
             }
 
             this.pAdicionarArchivo
@@ -596,7 +596,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             string file = archivo.RutaConArchivo;
             string nuevoNombre = "new_" + archivo.FileName.Trim();
 
-            StreamWriter nuevoArchivo = new StreamWriter(handler.SavePath + nuevoNombre);
+            StreamWriter nuevoArchivo = new StreamWriter(handler.SavePath + nuevoNombre, false, Encoding.Default);
 
             using (StreamReader streamReader = new StreamReader(file, Encoding.Default))
             {
@@ -730,7 +730,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
                 if (grant.Length > 0)
                 {
-                    using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+                    using (StreamWriter versionIns = new StreamWriter(rutaGeneracion, false, Encoding.Default))
                     {
                         StringBuilder encabezado = new StringBuilder();
                         encabezado.Append(res.EncabezadoAplicaGrant);
@@ -758,7 +758,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         {
             StringBuilder grant = new StringBuilder();
             string rutaGeneracion;
-            string nombreGrant = "SFOA_" + this.Model.Codigo + res.NombreArchivoGrant + this.Model.Usuario.Text + res.ExtensionSQL;
+            string nombreGrant = "DESPLAUTO_" + this.Model.Codigo + res.NombreArchivoGrant + this.Model.Usuario.Text + res.ExtensionSQL;
             rutaGeneracion = Path.Combine(handler.SavePath, nombreGrant);
 
             foreach (Archivo archivo in this.Model.ListaArchivosCargados)
@@ -794,7 +794,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             if (grant.Length > 0)
             {
-                using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+                using (StreamWriter versionIns = new StreamWriter(rutaGeneracion, false, Encoding.Default))
                 {
                     StringBuilder encabezado = new StringBuilder();
                     encabezado.Append(res.EncabezadoAplicaGrant);
@@ -829,7 +829,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             objetosApl.Replace(res.TagObjetoAplica, "/" + aplica);
             objetosApl.AppendLine();
 
-            using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+            using (StreamWriter versionIns = new StreamWriter(rutaGeneracion, false, Encoding.Default))
             {
                 StringBuilder encabezado = new StringBuilder();
                 encabezado.Append(res.EncabezadoAplicaGenDatos);
