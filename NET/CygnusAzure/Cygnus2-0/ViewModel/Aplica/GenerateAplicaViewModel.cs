@@ -45,6 +45,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             this.Model.ListaArchivosGenerados = new ObservableCollection<Archivo>();
             this.Model.ListaArchivosCargados = new ObservableCollection<Archivo>();
+            this.Model.ListaArchivosNoOrden = new ObservableCollection<Archivo>();
             this.Model.ListaUsuarios = handler.ListaUsuarios;
         }
 
@@ -122,6 +123,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             try
             {
                 this.Model.ListaArchivosCargados.Clear();
+                this.Model.ListaArchivosNoOrden.Clear();
 
                 if (this.Model.ListaArchivosGenerados.Count() > 0)
                 {
@@ -243,20 +245,28 @@ namespace Cygnus2_0.ViewModel.Aplica
             catch(Exception ex)
             {
                 this.Model.ListaArchivosCargados.Clear();
+                this.Model.ListaArchivosNoOrden.Clear();
                 handler.MensajeError(ex.Message);
             }
         }
         public void ListarArchivos(string[] DropPath)
         {
+            this.Model.ListaArchivosCargados.Clear();
+
             List<Archivo> archivos = new List<Archivo>();
             handler.pListaArchivos(DropPath, archivos, res.TipoAplica);
 
             foreach (Archivo archivo in archivos)
             {
-                this.Model.ListaArchivosCargados.Add(archivo);
+                this.Model.ListaArchivosNoOrden.Add(archivo);
             }
 
             pEstablecerOrdenAplica();
+
+            foreach(Archivo archivo in this.Model.ListaArchivosNoOrden.OrderBy(x=>x.Index))
+            {
+                this.Model.ListaArchivosCargados.Add(archivo);
+            }
         }
         private void pListaArchivosCarpeta(string path)
         {
@@ -283,7 +293,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
         private void pEstablecerOrdenAplica()
         {
-            foreach (Archivo archivo in this.Model.ListaArchivosCargados)
+            foreach (Archivo archivo in this.Model.ListaArchivosNoOrden)
             {
                 //Se instancian las listas del archivo
                 archivo.DocumentacionSinDepurar = new List<StringBuilder>();
@@ -336,7 +346,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         {
             int nuIndex = 1;
 
-            foreach (Archivo archivo in this.Model.ListaArchivosCargados.OrderBy(x => x.OrdenAplicacion))
+            foreach (Archivo archivo in this.Model.ListaArchivosNoOrden.OrderBy(x => x.OrdenAplicacion))
             {
                 archivo.Index = nuIndex;
                 nuIndex++;
@@ -493,7 +503,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             if (handler.ConfGeneralViewModel.Grant)
             {
                 pGeneraArchivosPermisos();
-                pGeneraArchivosPermisosOA();
+                //pGeneraArchivosPermisosOA();
             }
 
             //Si es de datos, se genera el nuevo archivo
@@ -504,11 +514,11 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             rutaGeneracion = Path.Combine(handler.SavePathAplica, nombreAplica);
 
-            using (StreamWriter aplica = new StreamWriter(rutaGeneracion))
+            using (StreamWriter aplica = new StreamWriter(rutaGeneracion,false,Encoding.Default))
             {
-                aplica.Write(encabezadoAplica);
-                aplica.Write(objetosAplica);
-                aplica.Write(finAplica);
+                aplica.Write(encabezadoAplica.ToString());
+                aplica.Write(objetosAplica.ToString());
+                aplica.Write(finAplica.ToString());
             }
 
             this.pAdicionarArchivo
@@ -596,7 +606,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             string file = archivo.RutaConArchivo;
             string nuevoNombre = "new_" + archivo.FileName.Trim();
 
-            StreamWriter nuevoArchivo = new StreamWriter(handler.SavePath + nuevoNombre);
+            StreamWriter nuevoArchivo = new StreamWriter(handler.SavePath + nuevoNombre, false, Encoding.Default);
 
             using (StreamReader streamReader = new StreamReader(file, Encoding.Default))
             {
@@ -697,6 +707,12 @@ namespace Cygnus2_0.ViewModel.Aplica
                                         grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
                                         grant.AppendLine();
                                     }
+
+                                    grant.AppendLine(res.PlantillaGrant);
+                                    grant.Replace(res.TagGrantUsuario, "EJECUTA_TODOS_LOS_PROC");
+                                    grant.Replace(res.TagGrantPermiso, res.GrantEXECUTE);
+                                    grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                                    grant.AppendLine();
                                 }
 
                                 if (tipo.Grant.Equals(res.TipoGrantSIUD))
@@ -717,6 +733,12 @@ namespace Cygnus2_0.ViewModel.Aplica
                                         grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
                                         grant.AppendLine();
                                     }
+
+                                    grant.AppendLine(res.PlantillaGrant);
+                                    grant.Replace(res.TagGrantUsuario, "MODIFICA_TODAS_LAS_TABLAS");
+                                    grant.Replace(res.TagGrantPermiso, res.GrantSIUD);
+                                    grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                                    grant.AppendLine();
                                 }
                             }
 
@@ -730,7 +752,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
                 if (grant.Length > 0)
                 {
-                    using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+                    using (StreamWriter versionIns = new StreamWriter(rutaGeneracion, false, Encoding.Default))
                     {
                         StringBuilder encabezado = new StringBuilder();
                         encabezado.Append(res.EncabezadoAplicaGrant);
@@ -758,7 +780,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         {
             StringBuilder grant = new StringBuilder();
             string rutaGeneracion;
-            string nombreGrant = "SFOA_" + this.Model.Codigo + res.NombreArchivoGrant + this.Model.Usuario.Text + res.ExtensionSQL;
+            string nombreGrant = "DESPLAUTO_" + this.Model.Codigo + res.NombreArchivoGrant + this.Model.Usuario.Text + res.ExtensionSQL;
             rutaGeneracion = Path.Combine(handler.SavePath, nombreGrant);
 
             foreach (Archivo archivo in this.Model.ListaArchivosCargados)
@@ -794,7 +816,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             if (grant.Length > 0)
             {
-                using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+                using (StreamWriter versionIns = new StreamWriter(rutaGeneracion, false, Encoding.Default))
                 {
                     StringBuilder encabezado = new StringBuilder();
                     encabezado.Append(res.EncabezadoAplicaGrant);
@@ -829,7 +851,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             objetosApl.Replace(res.TagObjetoAplica, "/" + aplica);
             objetosApl.AppendLine();
 
-            using (StreamWriter versionIns = new StreamWriter(rutaGeneracion))
+            using (StreamWriter versionIns = new StreamWriter(rutaGeneracion, false, Encoding.Default))
             {
                 StringBuilder encabezado = new StringBuilder();
                 encabezado.Append(res.EncabezadoAplicaGenDatos);

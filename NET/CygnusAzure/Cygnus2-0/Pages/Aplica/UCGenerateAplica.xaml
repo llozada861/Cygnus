@@ -74,7 +74,7 @@
 
                 <DataGrid
                 x:Name="dataGridArchivosCargados" 
-                IsReadOnly="false" 
+                IsReadOnly="False" 
                 AllowDrop="True" 
                 Drop="listBox1_Drop"
                 AutoGenerateColumns="False"
@@ -93,7 +93,7 @@
                     <DataGrid.Columns>
 
                         <DataGridTextColumn          
-                      IsReadOnly="True"
+                      IsReadOnly="False"
                       Header="Orden"
                       Binding="{Binding Path=Index}" SortDirection="Ascending"/>
                         
@@ -121,7 +121,7 @@
                         </DataGridComboBoxColumn>
 
                         <DataGridTextColumn                  
-                      IsReadOnly="false"
+                      IsReadOnly="True"
                       Header="Obj. Grant"
                       Binding="{Binding Path=NombreObjeto}" />
                     </DataGrid.Columns>

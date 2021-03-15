@@ -60,7 +60,7 @@ namespace Cygnus2_0.General
                 sourceFile = Path.Combine(archivo.Text, archivo.Value);
                 destFile = Path.Combine(ruta, archivo.Value);
 
-                System.IO.File.Copy(sourceFile, destFile, true);
+                System.IO.File.Copy(sourceFile, destFile,true);
             }
         }
 

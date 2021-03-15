@@ -29,6 +29,7 @@ namespace Cygnus2_0.Model.Aplica
         private ObservableCollection<Archivo> listaArchivosGenerados;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
+        private ObservableCollection<Archivo> listaArchivosNoOrden;
 
         public GenerateAplicaModel(Handler handler)
         {
@@ -85,5 +86,7 @@ namespace Cygnus2_0.Model.Aplica
             get { return aprobarOrden; }
             set { SetProperty(ref aprobarOrden, value); }
         }
+
+        public ObservableCollection<Archivo> ListaArchivosNoOrden { get; set; }
     }
 }
