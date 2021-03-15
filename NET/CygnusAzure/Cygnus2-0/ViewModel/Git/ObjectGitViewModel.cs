@@ -397,9 +397,7 @@ namespace Cygnus2_0.ViewModel.Git
                     }
                 }
 
-                if (archivo.Tipo == "PB" || archivo.Tipo == "PI" || archivo.Tipo == "MD" || archivo.Tipo == "OB" || archivo.Tipo == "EA" || archivo.Tipo == "GI" || archivo.Tipo == "GR" || archivo.Tipo == "OP" || archivo.Tipo == "RU" || archivo.Tipo == "TC"
-                    //|| archivo.Tipo != res.TipoAplica || archivo.Tipo.Equals(res.TipoOtros) 
-                    )
+                if (archivo.SelectItemTipo != null && archivo.SelectItemTipo.Path != null || archivo.Extension.ToLower().Equals(res.ExtensionHtml))
                     continue;
 
                 despliegue.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });

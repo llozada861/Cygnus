@@ -707,12 +707,6 @@ namespace Cygnus2_0.ViewModel.Aplica
                                         grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
                                         grant.AppendLine();
                                     }
-
-                                    grant.AppendLine(res.PlantillaGrant);
-                                    grant.Replace(res.TagGrantUsuario, "EJECUTA_TODOS_LOS_PROC");
-                                    grant.Replace(res.TagGrantPermiso, res.GrantEXECUTE);
-                                    grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                    grant.AppendLine();
                                 }
 
                                 if (tipo.Grant.Equals(res.TipoGrantSIUD))
@@ -733,13 +727,26 @@ namespace Cygnus2_0.ViewModel.Aplica
                                         grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
                                         grant.AppendLine();
                                     }
-
-                                    grant.AppendLine(res.PlantillaGrant);
-                                    grant.Replace(res.TagGrantUsuario, "MODIFICA_TODAS_LAS_TABLAS");
-                                    grant.Replace(res.TagGrantPermiso, res.GrantSIUD);
-                                    grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                    grant.AppendLine();
                                 }
+                            }
+
+                            //Permisos execute
+                            if (tipo.Grant.Equals(res.TipoGrantExecute))
+                            {
+                                grant.AppendLine(res.PlantillaGrant);
+                                grant.Replace(res.TagGrantUsuario, "EJECUTA_TODOS_LOS_PROC");
+                                grant.Replace(res.TagGrantPermiso, res.GrantEXECUTE);
+                                grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                                grant.AppendLine();
+                            }
+
+                            if (tipo.Grant.Equals(res.TipoGrantSIUD))
+                            {
+                                grant.AppendLine(res.PlantillaGrant);
+                                grant.Replace(res.TagGrantUsuario, "MODIFICA_TODAS_LAS_TABLAS");
+                                grant.Replace(res.TagGrantPermiso, res.GrantSIUD);
+                                grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                                grant.AppendLine();
                             }
 
                             grant.AppendLine(res.PlantillaSinonimo);
