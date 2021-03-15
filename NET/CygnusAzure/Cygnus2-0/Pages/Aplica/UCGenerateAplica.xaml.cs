@@ -58,11 +58,13 @@ namespace Cygnus2_0.Pages.Aplica
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
                     generateAplicaViewModel.pListaArchivos(DropPath);
+                    dataGridArchivosCargados.Items.Refresh();
                 }
             }
             catch (Exception ex)
             {
                 generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
+                generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
                 handler.MensajeError(ex.Message);
             }
 
@@ -110,6 +112,8 @@ namespace Cygnus2_0.Pages.Aplica
             btnSqlPlus.Visibility = Visibility.Hidden;
             generateAplicaViewModel.Model.Objetos = false;
             generateAplicaViewModel.Model.Datos = false;
+            chAprobar.Visibility = Visibility.Hidden;
+            chAprobar.IsChecked = false;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
