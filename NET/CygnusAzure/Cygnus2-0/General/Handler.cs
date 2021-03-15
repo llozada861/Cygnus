@@ -300,6 +300,8 @@ namespace Cygnus2_0.General
             bool existeOn = false;
             Int64 nuMenosUno = Convert.ToInt64(res.MenosUno);
 
+            archivo.SelectItemTipo = null;
+
             string nombreArchivo = archivo.NombreSinExt;
 
             if (res.Extensiones.IndexOf(archivo.Extension.ToLower()) > -1)
