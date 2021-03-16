@@ -397,7 +397,7 @@ namespace Cygnus2_0.ViewModel.Git
                     }
                 }
 
-                if (archivo.SelectItemTipo != null && archivo.SelectItemTipo.Path != null || archivo.Extension.ToLower().Equals(res.ExtensionHtml))
+                if (archivo.SelectItemTipo != null && !string.IsNullOrEmpty(archivo.SelectItemTipo.Path) || archivo.Extension.ToLower().Equals(res.ExtensionHtml))
                     continue;
 
                 despliegue.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
