@@ -1,4 +1,5 @@
 ﻿using Cygnus2_0.General;
+using Cygnus2_0.Pages.General;
 using Cygnus2_0.ViewModel.Git;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
@@ -38,8 +39,6 @@ namespace Cygnus2_0.Pages.Git
 
             DataContext = objectViewModel;
             InitializeComponent();
-
-            //chAprobar.IsEnabled = false;
 
             dataGridArch.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
         }
@@ -158,7 +157,7 @@ namespace Cygnus2_0.Pages.Git
 
         private void TipoSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            comboBox = sender as ComboBox;
+            ComboBox comboBox = sender as ComboBox;
             SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
 
             if (tipo != null)
@@ -282,6 +281,15 @@ namespace Cygnus2_0.Pages.Git
         private void DataGridArch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             objectViewModel.pArmarArbol(null, null);
+        }
+
+        protected void AuListaRamasLB_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = objectViewModel.GitModel.ListaRamasLB.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+        }
+        protected void AucomboBoxHU_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = objectViewModel.GitModel.ListaHU.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
         }
     }
 }

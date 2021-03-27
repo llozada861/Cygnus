@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
                 <ResourceDictionary Source="/Assets/ModernUI.Theme.xaml"/>
                 <ResourceDictionary Source="/Assets/HintTextTheme.xaml"/>
+                <ResourceDictionary Source="/Assets/AutoComplete.Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>              
     </Application.Resources>

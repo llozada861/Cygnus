@@ -114,5 +114,9 @@ namespace Cygnus2_0.Pages.Compila
                 view.GitModel.ListaArchivos.Add(archivo);
             
         }
+        protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = view.GitModel.ListaRamasLB.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+        }
     }
 }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Aplica" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:general="clr-namespace:Cygnus2_0.Pages.General"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
     <Grid>
@@ -150,10 +151,6 @@
                   Header="Observación"
                   IsReadOnly="True"
                   Binding="{Binding Path=Observacion}" />
-                    <!--<DataGridTextColumn
-                  Header="Ruta"
-                  IsReadOnly="True"
-                  Binding="{Binding Path=Ruta}" />-->
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -164,6 +161,8 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
@@ -177,17 +176,14 @@
                          Margin="0,0,0,4"
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="# de caso"/>
-                
-                <ComboBox x:Name="comboBox" 
-                  ItemsSource="{Binding Path=Model.ListaUsuarios}" 
-                  SelectedItem="{Binding Path=Model.Usuario}"
-                  DisplayMemberPath="Text" Grid.Row="1" VerticalAlignment="Center"
-                  >
-                </ComboBox>
-                <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
-                   Grid.Row="1" VerticalAlignment="Center"
-                   Text="Usuario" 
-                   Style="{StaticResource ComboBoxSelectOverlay}"/>
+
+                <general:AutoComplete x:Name="AucomboBox" Grid.Row="1"
+                        ItemsSource="{Binding Path=Model.ListaUsuarios}" 
+                        SelectedItem="{Binding Path=Model.Usuario}"
+                        DisplayMemberPath="Text" 
+                        PatternChanged="AucomboBox_PatternChanged"
+                        Style="{StaticResource AutoCompleteComboBox}"
+                        Delay="500" Tag="Usuario" />
             </Grid>
         </GroupBox>
 

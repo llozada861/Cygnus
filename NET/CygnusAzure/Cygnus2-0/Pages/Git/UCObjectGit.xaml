@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Git"
+             xmlns:general="clr-namespace:Cygnus2_0.Pages.General"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <Grid>
@@ -102,31 +103,28 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox x:Name="comboBoxRn" 
-                      ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
-                      SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
-                      DisplayMemberPath="Text" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
-                      Margin="0,0,10,0" SelectionChanged="ComboBox_SelectionChanged"
-                      />
-
-                    <TextBlock DataContext="{Binding ElementName=comboBoxRn,Path=SelectedItem}"
-                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,0,10,0"
-                       Text="Seleccione Línea Base" 
-                       Style="{StaticResource ComboBoxSelectOverlay}"/>
+                    <general:AutoComplete x:Name="AuListaRamasLB" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,5,5,5"
+                                 ItemsSource="{Binding Path=GitModel.ListaRamasLB}"
+                                          SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}" DisplayMemberPath="Text" 
+                                      PatternChanged="AuListaRamasLB_PatternChanged"
+                           Style="{StaticResource AutoCompleteComboBox}"
+                          Delay="500" Tag="Línea Base" />
 
                     <TextBox x:Name="txtRenombrar" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" 
-                         Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="5"
+                         Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="5"
                          VerticalAlignment="Center"
                          Text="{Binding Path=GitModel.NuevaRama}" 
                          Style="{StaticResource placeHolder}" Tag="Nuevo nombre para la rama"
                              Margin="10,0,0,0" 
                          />
 
-                    <Button Content="Renombrar" Command="{Binding Path=Renombrar}" Grid.Row="0" Grid.Column="8"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Content="Renombrar" Command="{Binding Path=Renombrar}" Grid.Row="1" Grid.Column="8"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                 </Grid>
             </GroupBox>
@@ -157,16 +155,12 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox x:Name="comboBox" 
-                      ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
-                      SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
-                      DisplayMemberPath="Text" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center"
-                      Margin="0,0,10,0" SelectionChanged="ComboBox_SelectionChanged"
-                      />
-                    <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
-                       Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,0,10,0"
-                       Text="Seleccione Línea Base" 
-                       Style="{StaticResource ComboBoxSelectOverlay}"/>
+                    <general:AutoComplete x:Name="AuListaRamasLBbus" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5,5,5,5"
+                                ItemsSource="{Binding Path=GitModel.ListaRamasLB}"
+                                          SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}" DisplayMemberPath="Text" 
+                                      PatternChanged="AuListaRamasLB_PatternChanged"
+                           Style="{StaticResource AutoCompleteComboBox}"
+                          Delay="500" Tag="Línea Base"  />
 
                     <TextBox x:Name="txtBuscar" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
@@ -251,35 +245,19 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox x:Name="comboBoxLB" 
-                      ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
-                      SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
-                      DisplayMemberPath="Text" Grid.Row="0"  Grid.Column="0" VerticalAlignment="Center"
-                      Margin="0,0,10,0" SelectionChanged="ComboBox_SelectionChanged"
-                      />
-                    <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
-                       Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="0,0,10,0"
-                       Text="Seleccione Línea Base" 
-                       Style="{StaticResource ComboBoxSelectOverlay}"/>
+                    <general:AutoComplete x:Name="AucomboBoxLB" Grid.Row="0"  Grid.Column="0" Margin="0,0,10,0"
+                                 ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
+                                          SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}" DisplayMemberPath="Text" 
+                                      PatternChanged="AuListaRamasLB_PatternChanged"
+                           Style="{StaticResource AutoCompleteComboBox}"
+                          Delay="500" Tag="Seleccione Línea Base" SelectionChanged="ComboBox_SelectionChanged"  />
 
-                    <ComboBox x:Name="comboBoxHU" 
-                      ItemsSource="{Binding Path=GitModel.ListaHU}" 
-                      SelectedItem="{Binding Path=GitModel.SelectHU}"
-                      DisplayMemberPath="Text"  Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Center"/>
-
-                    <TextBlock DataContext="{Binding ElementName=comboBoxHU,Path=SelectedItem}"
-                       Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" VerticalAlignment="Center"
-                       Text="Historia de Usuario" 
-                       Style="{StaticResource ComboBoxSelectOverlay}"/>
-
-                    <!--<TextBox x:Name="HU" 
-                         Text="{Binding Path=GitModel.HU}" 
-                         TextWrapping="Wrap" 
-                         VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper"
-                         Grid.Row="0" Grid.Column="1" Margin="0,0,10,0"
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Historia de Usuario" TabIndex="2" AcceptsTab="False"/>-->
+                    <general:AutoComplete x:Name="AucomboBoxHU" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5"
+                                 ItemsSource="{Binding Path=GitModel.ListaHU}" 
+                                          SelectedItem="{Binding Path=GitModel.SelectHU}" DisplayMemberPath="Text" 
+                                      PatternChanged="AucomboBoxHU_PatternChanged"
+                           Style="{StaticResource AutoCompleteComboBox}"
+                          Delay="500" Tag="Historia de Usuario" />
 
                     <TextBox x:Name="Comment" 
                          Text="{Binding Path=GitModel.Comentario}" 

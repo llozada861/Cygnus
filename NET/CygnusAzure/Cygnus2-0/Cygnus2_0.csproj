@@ -272,6 +272,9 @@
     <Compile Include="Pages\Documentation\GenerateHtml.xaml.cs">
       <DependentUpon>GenerateHtml.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\General\AutoComplete.xaml.cs">
+      <DependentUpon>AutoComplete.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\General\UserControlLog.xaml.cs">
       <DependentUpon>UserControlLog.xaml</DependentUpon>
     </Compile>
@@ -441,6 +444,7 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <Resource Include="img\LookupGlass.png" />
     <EmbeddedResource Include="Libs\git2-106a5f2.dll" />
     <EmbeddedResource Include="Libs\LibGit2Sharp.dll" />
     <EmbeddedResource Include="Libs\Updater.exe" />
@@ -471,6 +475,14 @@
     <EmbeddedResource Include="Libs\LibGit2Sharp.dll.config" />
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\sonar-scanner-cli-4.4.0.2170-windows.zip" />
+    <Page Include="Assets\AutoComplete.Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\ComboBox.Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\HintTextTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -558,6 +570,10 @@
     <Page Include="Pages\Documentation\GenerateHtml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\General\AutoComplete.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\General\UserControlLog.xaml">
       <SubType>Designer</SubType>

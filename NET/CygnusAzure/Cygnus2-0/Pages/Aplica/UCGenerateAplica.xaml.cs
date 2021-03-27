@@ -19,6 +19,7 @@ using FirstFloor.ModernUI.Windows.Navigation;
 using System.Security.Permissions;
 using System.Windows.Controls.Primitives;
 using res = Cygnus2_0.Properties.Resources;
+using Cygnus2_0.Pages.General;
 
 namespace Cygnus2_0.Pages.Aplica
 {
@@ -199,6 +200,11 @@ namespace Cygnus2_0.Pages.Aplica
                 dataGridArchivosCargados.Items.Refresh();
             }
             catch { }
+        }
+
+        protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = generateAplicaViewModel.Model.ListaUsuarios.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
         }
     }
 }
