@@ -152,5 +152,9 @@ namespace Cygnus2_0.Pages.Compila
             {
             }
         }
+        protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = compilaViewModel.Model.ListaUsuarios.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+        }
     }
 }

@@ -43,6 +43,7 @@ namespace Cygnus2_0.Pages.Compila
             InitializeComponent();
 
             compilaViewModel.Model.ArchivosDescompilados = "0";
+            AuListaHus.ItemsSource = compilaViewModel.Model.ListaHU;
         }
 
         private void listBox1_Drop(object sender, DragEventArgs e)
@@ -156,6 +157,10 @@ namespace Cygnus2_0.Pages.Compila
             {
                 handler.MensajeError(ex.Message);
             }
+        }
+        protected void AuListaHus_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = compilaViewModel.Model.ListaHU.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
         }
     }
 }
