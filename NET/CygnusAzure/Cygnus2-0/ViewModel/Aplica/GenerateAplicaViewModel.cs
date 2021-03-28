@@ -130,11 +130,6 @@ namespace Cygnus2_0.ViewModel.Aplica
                     this.Model.ListaArchivosGenerados.Clear();
                 }
 
-                /*if (view.ListaArchivosRepositorio.Count() > 0)
-                {
-                    view.ListaArchivosRepositorio.Clear();
-                }*/
-
                 this.Model.ArchivosCargados = "0";
                 this.Model.ArchivosGenerados = "0";
                 this.Model.ListaUsuarios = null;
@@ -149,8 +144,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         }
         public void OnSqlplus(object commandParameter)
         {
-            Boolean blAplica = false;
-
+            string rutaLog = "";
             try
             {
                 handler.pObtenerUsuarioCompilacion(this.Model.Usuario.Text);
@@ -162,7 +156,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                     process.Kill();
                 }
 
-                if (string.IsNullOrEmpty(handler.ConfGeneralViewModel.RutaSqlplus))
+                if (string.IsNullOrEmpty(handler.ConfGeneralViewModel.RutaSqlplus) || handler.ConfGeneralViewModel.RutaSqlplus.Equals(res.RutaSqlplusDefault))
                 {
                     throw new Exception("No ha configurado la ruta para el Sqlplus. Vaya a Ajustes/General/Rutas.");
                 }
@@ -171,6 +165,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                 {
                     if (!string.IsNullOrEmpty(archivo.NombreObjeto))
                     {
+                        rutaLog = archivo.Ruta;
                         //Valida que el objeto no se encuentra aplicado en más de un esquema
                         handler.DAO.pValidaUsuarioCompila(archivo, handler);
                         //Valida que solo se aplique en un esquema
@@ -178,14 +173,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                     }
                 }
 
-                foreach (Archivo archivo in this.Model.ListaArchivosGenerados)
-                {
-                    if (archivo.Tipo.Equals(res.TipoAplica))
-                    {
-                        blAplica = true;
-                        handler.DAO.pExecuteSqlplus(credenciales, archivo);
-                    }
-                }
+                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosGenerados.ToList().Where(x => x.Tipo.Equals(res.TipoAplica)).ToList(), rutaLog, handler.ConnViewModel.UsuarioCompila);
             }
             catch(Exception ex)
             {

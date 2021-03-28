@@ -115,7 +115,6 @@ namespace Cygnus2_0.ViewModel.Compila
                     if (string.IsNullOrEmpty(System.IO.Path.GetExtension(dropfilepath)))
                     {
                         string[] DropPath1 = System.IO.Directory.GetFiles(dropfilepath + "\\", "*", System.IO.SearchOption.AllDirectories);
-                        //pListaArchivosCarpeta(dropfilepath, from);
                         pListaArchivos(DropPath1, from);
                     }
                     else
@@ -184,6 +183,12 @@ namespace Cygnus2_0.ViewModel.Compila
                     {
                         sbLineSpace = Regex.Replace(sbLine, @"\s+", " ");
 
+                        if (sbLineSpace.StartsWith("--"))
+                        {
+                            sbLine = streamReader.ReadLine();
+                            continue;
+                        }
+
                         if (sbLineSpace.StartsWith(res.Arroa))
                         {
                             archivo.Tipo = res.TipoAplica;
@@ -222,16 +227,6 @@ namespace Cygnus2_0.ViewModel.Compila
             //Sino se encuentra el tipo dentro del archivo
             if (string.IsNullOrEmpty(archivo.Tipo))
             {
-                /*foreach (SelectListItem prefijo in handler.ListaTipoArchivos)
-                {
-                    if (archivo.FileName.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
-                    {
-                        archivo.Tipo = prefijo.Value;
-                        handler.SavePath = archivo.Ruta + "\\";
-                        break;
-                    }
-                }*/
-
                 if (string.IsNullOrEmpty(archivo.NombreObjeto))
                 {
                     archivo.NombreObjeto = nombreArchivo;
@@ -252,9 +247,9 @@ namespace Cygnus2_0.ViewModel.Compila
             {
                 if (archivo.TipoAplicacion != res.SQLPLUS)
                 {
+                    handler.pGeneraArchivosPermisosArchivo(archivo, this.Model.Usuario.Text);
                     handler.pObtieneBloquesCodigo(archivo);
                     pCompilaObjetosBD(archivo);
-                    handler.pGeneraArchivosPermisosArchivo(archivo, this.Model.Usuario.Text);
                 }
             }
 
@@ -308,16 +303,12 @@ namespace Cygnus2_0.ViewModel.Compila
 
             if (!this.Model.ListaObservaciones.ToList().Exists(x => x.Text.Equals(archivo.NombreObjeto)) && string.IsNullOrEmpty(archivo.AplicaTemporal))
                 this.Model.ListaObservaciones.Add(new SelectListItem() { Text = archivo.NombreObjeto, Value = "Sin Errores.", Observacion = archivo.Ruta });
-            else
-                if (!string.IsNullOrEmpty(archivo.AplicaTemporal))
-                this.Model.ListaObservaciones.Add(new SelectListItem() { Text = archivo.AplicaTemporal, Value = "Ver log de la aplicación.", Observacion = archivo.Ruta });
-
-            this.Model.ListaObservaciones = this.Model.ListaObservaciones;
         }
 
         public void pExeSqlplus()
         {
             string credenciales;
+            string rutaLog = "";
 
             if (this.Model.ListaArchivosCargados.Count > 0)
             {
@@ -328,6 +319,7 @@ namespace Cygnus2_0.ViewModel.Compila
                 {
                     if (!string.IsNullOrEmpty(archivo.NombreObjeto))
                     {
+                        rutaLog = archivo.Ruta;
                         //Valida que el objeto no se encuentra aplicado en más de un esquema
                         handler.DAO.pValidaUsuarioCompila(archivo, handler);
                         //Valida que solo se aplique en un esquema
@@ -335,21 +327,25 @@ namespace Cygnus2_0.ViewModel.Compila
                     }
 
                     handler.pGuardaLogCompilacion(archivo, this.Model.ArchivosCompilados, res.Antes);
-                    handler.DAO.pExecuteSqlplus(credenciales, archivo);
                 }
+
+                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)).ToList(),rutaLog, handler.ConnViewModel.UsuarioCompila);
             }
 
-            Thread.Sleep(3000);
+            Thread.Sleep(4000);
 
             foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
             {
                 try
                 {
+                    handler.pGeneraArchivosPermisosArchivo(archivo, this.Model.Usuario.Text);
                     pObtieneErroresAplicacion(archivo);
                     handler.pGuardaLogCompilacion(archivo, this.Model.ArchivosDescompilados, res.Despues);
-                    handler.pGeneraArchivosPermisosArchivo(archivo, this.Model.Usuario.Text);
                 }
-                catch { }
+                catch(Exception ex)
+                {
+                    handler.MensajeError(ex.Message);
+                }
             }
         }
 

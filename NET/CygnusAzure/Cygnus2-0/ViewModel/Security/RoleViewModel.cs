@@ -106,7 +106,6 @@ namespace Cygnus2_0.ViewModel.Security
             string credenciales;
             string sbNombreAplica;
             string sbAplica;
-            Archivo archivo;
             StringBuilder sbAplicaBody = new StringBuilder();
 
             handler.pObtenerUsuarioCompilacion("FLEX");
@@ -129,8 +128,8 @@ namespace Cygnus2_0.ViewModel.Security
                 str.Write(sbAplicaBody.ToString());
             }
 
-            archivo = new Archivo { FileName = sbNombreAplica, Ruta = handler.PathTempAplica,  Tipo = res.TipoAplica };
-            handler.DAO.pExecuteSqlplus(credenciales, archivo);            
+            List<Archivo> archivos = new List<Archivo>{ new Archivo { FileName = sbNombreAplica, Ruta = handler.PathTempAplica, Tipo = res.TipoAplica }};
+            handler.DAO.pExecuteSqlplus(credenciales, archivos, handler.PathTempAplica, handler.ConnViewModel.UsuarioCompila);            
         }
 
         public void OnProcess(object commandParameter)

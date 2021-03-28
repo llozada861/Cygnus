@@ -250,14 +250,15 @@
                                           SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}" DisplayMemberPath="Text" 
                                       PatternChanged="AuListaRamasLB_PatternChanged"
                            Style="{StaticResource AutoCompleteComboBox}"
-                          Delay="500" Tag="Seleccione Línea Base" SelectionChanged="ComboBox_SelectionChanged"  />
+                          Delay="500" Tag="Seleccione Línea Base" SelectionChanged="ComboBox_SelectionChanged" 
+                                          KeyboardNavigation.TabIndex="0"/>
 
                     <general:AutoComplete x:Name="AucomboBoxHU" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5"
                                  ItemsSource="{Binding Path=GitModel.ListaHU}" 
                                           SelectedItem="{Binding Path=GitModel.SelectHU}" DisplayMemberPath="Text" 
                                       PatternChanged="AucomboBoxHU_PatternChanged"
                            Style="{StaticResource AutoCompleteComboBox}"
-                          Delay="500" Tag="Historia de Usuario" />
+                          Delay="500" Tag="Historia de Usuario" KeyboardNavigation.TabIndex="1" />
 
                     <TextBox x:Name="Comment" 
                          Text="{Binding Path=GitModel.Comentario}" 

@@ -914,19 +914,20 @@ namespace Cygnus2_0.DAO
                 }
             }
         }
-        public string pExecuteSqlplus(string credentials, Archivo archivo)
+        public string pExecuteSqlplus(string credentials, List<Archivo> archivos,string ruta,string usuario)
         {
-            string scriptDir = archivo.Ruta;
+            string scriptDir = ruta;
             string sbNombreAplica;
-            string sbAplica;
+            string sbAplica = "";
             string rutaLog;
             string nombreLog;
             StringBuilder sbAplicaBody = new StringBuilder();
             Process process = new Process();
+            string output = null;
 
-            if (!archivo.Tipo.Equals(res.TipoAplica))
+            if (archivos.Count > 0)
             {
-                sbNombreAplica = "apl_temp_" + archivo.NombreSinExt + ".apl";
+                sbNombreAplica = "apl_temp_" + usuario + ".apl";
 
                 sbAplica = Path.Combine(handler.PathTempAplica, sbNombreAplica);
 
@@ -935,8 +936,8 @@ namespace Cygnus2_0.DAO
                     File.Delete(sbAplica);
                 }
 
-                nombreLog = DateTime.Now.ToString("ddMMyyyy") +"_Log_" + archivo.NombreSinExt + ".log";
-                rutaLog = Path.Combine(archivo.Ruta, nombreLog);
+                nombreLog = "Log_" + usuario + "_" + DateTime.Now.ToString("ddMMyyyy") + ".log";
+                rutaLog = Path.Combine(ruta, nombreLog);
 
                 if (File.Exists(rutaLog))
                 {
@@ -947,35 +948,43 @@ namespace Cygnus2_0.DAO
                 sbAplicaBody.Replace("<nombre_spool>", "'" + rutaLog + "'");
                 sbAplicaBody.Append(Environment.NewLine);
                 sbAplicaBody.Append(Environment.NewLine);
-                sbAplicaBody.Append("@" + "'" + archivo.RutaConArchivo + "'");
-                sbAplicaBody.Append(Environment.NewLine);
-                sbAplicaBody.Append(Environment.NewLine);
-                sbAplicaBody.Append(res.FinAplSqlplus);
 
-                using (StreamWriter str = new StreamWriter(sbAplica))
+                foreach (Archivo archivo in archivos)
                 {
-                    str.Write(sbAplicaBody.ToString());
+                    if (!archivo.Tipo.Equals(res.TipoAplica))
+                    {
+                        sbAplicaBody.Append("@" + "'" + archivo.RutaConArchivo + "'");
+                        sbAplicaBody.Append(Environment.NewLine);
+                        sbAplicaBody.Append(Environment.NewLine);
+
+                        using (StreamWriter str = new StreamWriter(sbAplica))
+                        {
+                            str.Write(sbAplicaBody.ToString());
+                        }
+
+                        archivo.AplicaTemporal = nombreLog;
+                    }
+                    else
+                    {
+                        sbAplica = archivo.FileName;
+                    }
                 }
 
-                archivo.AplicaTemporal = nombreLog;
-            }
-            else
-            {
-                sbAplica = archivo.FileName;
-            }
+                sbAplicaBody.Append(res.FinAplSqlplus);
 
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.WorkingDirectory = scriptDir;
-            process.StartInfo.RedirectStandardOutput = false;
-            process.StartInfo.RedirectStandardInput = false; 
-            process.StartInfo.FileName = Path.Combine(handler.ConfGeneralViewModel.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
-            process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
-            process.StartInfo.CreateNoWindow = false;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.WorkingDirectory = scriptDir;
+                process.StartInfo.RedirectStandardOutput = false;
+                process.StartInfo.RedirectStandardInput = false;
+                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralViewModel.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
+                process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
+                process.StartInfo.CreateNoWindow = false;
 
-            process.Start();
-            string output = null; //process.StandardOutput.ReadToEnd();
-            //process.StandardInput.WriteLine("exit;");
-            process.Close();
+                process.Start();
+                //string output = null; //process.StandardOutput.ReadToEnd();
+                //process.StandardInput.WriteLine("exit;");
+                process.Close();
+            }
 
             return output;
         }
