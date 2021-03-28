@@ -299,6 +299,7 @@ namespace Cygnus2_0.General
             string sbLineSpace = "";
             bool existeOn = false;
             Int64 nuMenosUno = Convert.ToInt64(res.MenosUno);
+            archivo.Observacion = "";
 
             archivo.SelectItemTipo = null;
 
@@ -581,6 +582,7 @@ namespace Cygnus2_0.General
                 }
             }
         }
+
         public string fsbValidaConexion()
         {
             if (this.ConexionOracle.ConexionOracleSQL.State == System.Data.ConnectionState.Open)
