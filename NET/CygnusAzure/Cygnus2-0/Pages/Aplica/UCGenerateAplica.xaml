@@ -34,19 +34,63 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <RadioButton x:Name="rdbDatos" Content="Datos" 
-                     Grid.Column="0" 
-                     Grid.ColumnSpan="2" 
-                     Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Datos}" Click="RdbDatos_Click"  />
-        
-        <RadioButton x:Name="rdbObjetos" Content="Objetos" 
-                     Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}" Click="RdbObjetos_Click"/>
+        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-        <CheckBox Name="chAprobar" Content="Aprobar Orden Aplica!" Grid.Row="0" Grid.Column="4"  Checked="ChAprobar_Checked" Visibility="Hidden" />
-        
-        <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Grid.Column="5" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="BtnExaminar_Click" />
-        
-        <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="7" >
+                <TextBox x:Name="CasoText" 
+                         Text="{Binding Path=Model.Codigo}" 
+                         TextWrapping="Wrap" 
+                         VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" 
+                         Grid.Row="0" 
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"
+                         Margin="0,5,10,0"
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="# de caso"/>
+
+                <general:AutoComplete x:Name="AucomboBox" 
+                                      Grid.Row="0"
+                                      Grid.Column="3"
+                                      Grid.ColumnSpan="3"
+                        ItemsSource="{Binding Path=Model.ListaUsuarios}" 
+                        SelectedItem="{Binding Path=Model.Usuario}"
+                        DisplayMemberPath="Text" 
+                        PatternChanged="AucomboBox_PatternChanged"
+                        Style="{StaticResource AutoCompleteComboBox}"
+                        Delay="500" Tag="Usuario" Margin="0,5,10,0" />
+
+                <RadioButton x:Name="rdbDatos" Content="Datos" 
+                     Grid.Column="6" 
+                     Grid.ColumnSpan="2" 
+                     Grid.Row="0" HorizontalAlignment="Center" 
+                             VerticalAlignment="Center" IsChecked="{Binding Path=Model.Datos}" Click="RdbDatos_Click" Margin="0,5,0,0"  />
+
+                <RadioButton x:Name="rdbObjetos" Content="Objetos" 
+                     Grid.Column="8" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}" Click="RdbObjetos_Click" Margin="0,5,0,0"/>
+
+                <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2" Click="BtnExaminar_Click" Margin="0,5,0,0" />
+                <CheckBox Name="chAprobar" Content="Aprobar Orden Aplica!" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Checked="ChAprobar_Checked" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,5,0,0" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Grid.ColumnSpan="10" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -73,6 +117,16 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
+                <Label x:Name="labelTotalText" Content="Total:"  HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" 
+                       FontWeight="Bold"
+                       Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="2"
+                       HorizontalAlignment="Right" />
+                <Label x:Name="labelTotal"  HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosCargados}" 
+                       FontWeight="Bold"
+                       Grid.Column="10" Grid.Row="0" />
+                
                 <DataGrid
                 x:Name="dataGridArchivosCargados" 
                 IsReadOnly="False" 
@@ -87,12 +141,10 @@
                 VerticalContentAlignment="Center"
                     SelectionChanged="dataGridArchivosCargados_SelectionChanged" 
                     MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
-                    Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" 
-                    
-                    >
-                                            
+                    Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"    
+                    >                                            
                     <DataGrid.Columns>
-
+                        
                         <DataGridTextColumn          
                       IsReadOnly="False"
                       Header="Orden"
@@ -129,80 +181,81 @@
                 </DataGrid>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Column="0" Grid.Row="6" Grid.RowSpan="5" Grid.ColumnSpan="7">
-            <DataGrid 
-            x:Name="dataGridArchivosGen" 
-            IsReadOnly="True" 
-            AutoGenerateColumns="False"
-            AllowDrop="False" 
-            SelectionMode="Single"
-            CanUserDeleteRows="False"
-            CanUserAddRows="False"
-            CanUserReorderColumns="False"
-            CanUserSortColumns="False"
-            ItemsSource="{Binding Path=Model.ListaArchivosGenerados}" MouseDoubleClick="DataGridArchivosGen_MouseDoubleClick">
-                <DataGrid.Columns>
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Archivo"
-                  Foreground="Red"
-                  Binding="{Binding Path=FileName}" />
-                    <DataGridTextColumn
-                  Header="Observación"
-                  IsReadOnly="True"
-                  Binding="{Binding Path=Observacion}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
-
-        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
+        
+        <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Column="0" Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="10">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBox x:Name="CasoText" 
-                         Text="{Binding Path=Model.Codigo}" 
-                         TextWrapping="Wrap" 
-                         VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" 
-                         Grid.Row="0" 
-                         Margin="0,0,0,4"
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="# de caso"/>
-
-                <general:AutoComplete x:Name="AucomboBox" Grid.Row="1"
-                        ItemsSource="{Binding Path=Model.ListaUsuarios}" 
-                        SelectedItem="{Binding Path=Model.Usuario}"
-                        DisplayMemberPath="Text" 
-                        PatternChanged="AucomboBox_PatternChanged"
-                        Style="{StaticResource AutoCompleteComboBox}"
-                        Delay="500" Tag="Usuario" />
-            </Grid>
-        </GroupBox>
-
-        <GroupBox x:Name="grbTotal" Header="Archivos Cargados" Grid.Column="7" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="3" >
-            <Grid >
-                <Label x:Name="labelTotal" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosCargados}" FontWeight="Bold" FontSize="80" />
-            </Grid>
-        </GroupBox>
-        <GroupBox x:Name="grbGen" Header="Archivos Generados" Grid.Column="7" Grid.Row="6" Grid.ColumnSpan="3" Grid.RowSpan="3" >
-            <Grid>
-                <Label x:Name="labelGen" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosGenerados}" FontWeight="Bold" FontSize="80"/>
+                <Label x:Name="labelGenText" Content="Total:"  HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" 
+                       FontWeight="Bold"
+                       Grid.Column="7" Grid.Row="0" 
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Right" />
+                <Label x:Name="labelGen"  HorizontalContentAlignment="Center" 
+                       VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosGenerados}"
+                       FontWeight="Bold"
+                       Grid.Column="10" Grid.Row="0" />
+                <DataGrid 
+                x:Name="dataGridArchivosGen" 
+                IsReadOnly="True" 
+                AutoGenerateColumns="False"
+                AllowDrop="False" 
+                SelectionMode="Single"
+                CanUserDeleteRows="False"
+                CanUserAddRows="False"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="False"
+                ItemsSource="{Binding Path=Model.ListaArchivosGenerados}" 
+                        MouseDoubleClick="DataGridArchivosGen_MouseDoubleClick"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="10"
+                    Grid.RowSpan="9">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn                  
+                      IsReadOnly="True"
+                      Header="Archivo"
+                      Foreground="Red"
+                      Binding="{Binding Path=FileName}" />
+                        <DataGridTextColumn
+                      Header="Observación"
+                      IsReadOnly="True"
+                      Binding="{Binding Path=Observacion}"
+                            Width="200" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </GroupBox>
 
         <Label x:Name="label3" Visibility="Hidden" Content="Ruta Apl." HorizontalAlignment="Left" Margin="6,65,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBoxPlant" IsChecked="{Binding Handl.Formulario.EntregaPlantilla, Mode = TwoWay}" Content="Plantillas?" HorizontalAlignment="Left" Margin="22,71,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Visibility="Hidden"/>
 
-        <Button x:Name="btnSqlPlus" Content="Sqlplus" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Sqlplus}" Grid.Column="7" Grid.Row="9" Margin="0,0,5,0"/>
-        <Button x:Name="BotonGenerar" Content="Procesar" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="8" Grid.Row="9" Margin="0,0,5,0" Click="BotonGenerar_Click"/>
+        <Button x:Name="btnSqlPlus" Content="Sqlplus" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Sqlplus}" Grid.Column="6" Grid.Row="9" Margin="0,0,5,0"/>
+        <Button x:Name="BotonGenerar" Content="Procesar" VerticalAlignment="Center" Grid.Column="7" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" Click="BotonGenerar_Click"/>
         <Button x:Name="BotonLimpiar" Content="Limpiar" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Clean}" Grid.Column="9" Grid.Row="9" Click="BotonLimpiar_Click"/>
     </Grid>
 </UserControl>

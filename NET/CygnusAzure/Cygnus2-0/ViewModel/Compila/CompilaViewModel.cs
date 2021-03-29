@@ -317,9 +317,10 @@ namespace Cygnus2_0.ViewModel.Compila
 
                 foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
                 {
+                    rutaLog = archivo.Ruta;
+
                     if (!string.IsNullOrEmpty(archivo.NombreObjeto))
                     {
-                        rutaLog = archivo.Ruta;
                         //Valida que el objeto no se encuentra aplicado en más de un esquema
                         handler.DAO.pValidaUsuarioCompila(archivo, handler);
                         //Valida que solo se aplique en un esquema
