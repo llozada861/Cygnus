@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Estandar.EstandarUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cygnus2_0.Pages.Estandar"
+             xmlns:general="clr-namespace:Cygnus2_0.Pages.General"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <general:AutoComplete x:Name="AucomboBox" 
+                                      Grid.Row="0"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="4"
+                        ItemsSource="{Binding Path=Model.ListaEstandar}" 
+                        SelectedItem="{Binding Path=Model.Estandar}"
+                        DisplayMemberPath="Text" 
+                        PatternChanged="AucomboBox_PatternChanged"
+                        Style="{StaticResource AutoCompleteComboBox}"
+                        Delay="500" Tag="Seleccione o busque" Margin="0,5,10,0" />
+
+        <GroupBox Header="Lineamiento" Grid.Row="1" Grid.Column="0" Grid.RowSpan="10" Grid.ColumnSpan="10">
+        <WebBrowser Name="Browser"
+                    general:WebBrowserBehavior.Body="{Binding Path=Model.Estandar.Observacion}" Margin="5" />
+        </GroupBox>
+    </Grid>
+</UserControl>

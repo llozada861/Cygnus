@@ -1,7 +1,9 @@
-﻿using Cygnus2_0.Pages.Settings.AdminGeneral;
+﻿using Cygnus2_0.General;
+using Cygnus2_0.Pages.Settings.AdminGeneral;
 using Cygnus2_0.Pages.Settings.AzureData;
 using Cygnus2_0.Pages.Settings.Database;
 using Cygnus2_0.Pages.Settings.Documentation;
+using Cygnus2_0.Pages.Settings.Estandar;
 using Cygnus2_0.Pages.Settings.General;
 using Cygnus2_0.Pages.Settings.Git;
 using Cygnus2_0.Pages.Settings.Sonar;
@@ -27,10 +29,16 @@ namespace Cygnus2_0.Pages.Settings.Treeview
     /// </summary>
     public partial class TreeViewWpf : UserControl
     {
+        private Handler handler;
+        private MainWindow myWin;
         TabItem _tabUserPage;
 
         public TreeViewWpf()
         {
+            myWin = (MainWindow)Application.Current.MainWindow;
+            handler = myWin.Handler;
+
+            DataContext = handler;
             InitializeComponent();
             TreeViewItem itemA = (TreeViewItem)TreeViewApp.Items[0];
             itemA.IsSelected = true;
@@ -102,6 +110,10 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                     break;
                 case 63:
                     userControls = new HtmlUserControl();
+                    GridMain.Children.Add(userControls);
+                    break;
+                case 64:
+                    userControls = new CRUDEstandarUserControl();
                     GridMain.Children.Add(userControls);
                     break;
                 case 90:

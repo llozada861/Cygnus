@@ -122,7 +122,7 @@
                             Width="300"/>
                         <DataGridTextColumn
                             IsReadOnly="True"
-                            Header="Tipo"
+                            Header="Descripción"
                             Binding="{Binding Path=Observacion}" 
                             Width="200"
                             />

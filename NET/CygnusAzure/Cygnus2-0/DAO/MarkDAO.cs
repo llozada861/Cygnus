@@ -263,6 +263,36 @@ namespace Cygnus2_0.DAO
                 view.onuSeqNeg = handler.ConexionOracle.GetParameterValue(cmd, "onuSeqNeg");
             }
         }
+        internal void pObtBackupNuevo(RefreshViewModel view)
+        {
+            ObservableCollection<SelectListItem> listaEstandar = new ObservableCollection<SelectListItem>();
+
+            string sql = "SELECT token,descripcion,valor FROM flex.ll_estandar";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Connection = con;
+
+                using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it
+                {
+                    while (rdr.Read()) // loop through each row from oracle
+                    {
+                        listaEstandar.Add(new SelectListItem
+                        {
+                            Value = rdr["token"].ToString(),
+                            Text = rdr["descripcion"].ToString(),
+                            Observacion = rdr["valor"].ToString()
+                        });
+                    }
+                    rdr.Close(); // close the oracle reader
+                }
+            }
+
+            return listaEstandar;
+        }
         #endregion Refrescamiento
 
         #region Updater
@@ -297,18 +327,14 @@ namespace Cygnus2_0.DAO
         }
         internal void pCargaVersion(byte[] bytes, string archivo, string version)
         {
-            //using (OracleConnection con = handler.ConexionOracle.ConexionOracleSQL)
+            string query = "insert into ll_version values (:version,sysdate,sysdate,:data)";
 
+            //using (OracleCommand cmd = new OracleCommand(query))
+            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
             {
-                string query = "insert into ll_version values (:version,sysdate,sysdate,:data)";
-
-                //using (OracleCommand cmd = new OracleCommand(query))
-                using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
-                {
-                    cmd.Parameters.Add(":version", version);
-                    cmd.Parameters.Add(":data", bytes);
-                    cmd.ExecuteNonQuery();
-                }
+                cmd.Parameters.Add(":version", version);
+                cmd.Parameters.Add(":data", bytes);
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -1715,6 +1741,76 @@ namespace Cygnus2_0.DAO
             }
         }
         #endregion Auditoria
+
+        #region Estandar
+        internal ObservableCollection<SelectListItem> pObtListaEstandar()
+        {
+            ObservableCollection<SelectListItem> listaEstandar = new ObservableCollection<SelectListItem>();
+
+            string sql = "SELECT token,descripcion,valor FROM flex.ll_estandar";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Connection = con;
+
+                using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it
+                {
+                    while (rdr.Read()) // loop through each row from oracle
+                    {
+                        listaEstandar.Add(new SelectListItem
+                        {
+                            Value = rdr["token"].ToString(),
+                            Text = rdr["descripcion"].ToString(),
+                            Observacion = rdr["valor"].ToString()
+                        });
+                    }
+                    rdr.Close(); // close the oracle reader
+                }
+            }
+
+            return listaEstandar;
+        }
+        internal void pAdicionarEstandar(string value1, string text, string value2)
+        {
+            string query = "insert into flex.ll_estandar (token,descripcion,valor) values (:token,:descripcion,:valor)";
+
+            //using (OracleCommand cmd = new OracleCommand(query))
+            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
+            {
+                cmd.Parameters.Add(":token", value1);
+                cmd.Parameters.Add(":descripcion", text);
+                cmd.Parameters.Add(":valor", value2);
+                cmd.ExecuteNonQuery();
+            }
+        }
+        internal void pModificarEstandar(string value1, string text, string value2)
+        {
+            string query = "update flex.ll_estandar set descripcion = :descripcion,valor = :valor where token = :token";
+
+            //using (OracleCommand cmd = new OracleCommand(query))
+            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
+            {
+                cmd.Parameters.Add(":descripcion", text);
+                cmd.Parameters.Add(":valor", value2);
+                cmd.Parameters.Add(":token", value1);
+                cmd.ExecuteNonQuery();
+            }
+        }
+        internal void pEliminarEstandar(string value)
+        {
+            string query = "delete from flex.ll_estandar where token = :token";
+
+            //using (OracleCommand cmd = new OracleCommand(query))
+            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
+            {
+                cmd.Parameters.Add(":token", value);
+                cmd.ExecuteNonQuery();
+            }
+        }
+        #endregion Estandar
         public string prueba()
         {
             string sql = "select * from ll_prueba";

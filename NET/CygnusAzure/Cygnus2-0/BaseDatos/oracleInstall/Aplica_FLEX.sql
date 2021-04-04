@@ -62,6 +62,9 @@ prompt "Aplicando /07_crll_hoja.sql"
 prompt "Aplicando /08_crll_horashoja.sql"
 @./08_crll_horashoja.sql
 
+prompt "Aplicando /08_crll_estandar.sql"
+@./08_crll_estandar.sql
+
 prompt "Aplicando /09_crSequences.sql"
 @./09_crSequences.sql
 
