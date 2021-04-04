@@ -2826,7 +2826,7 @@ namespace Cygnus2_0.Properties {
         ///# --- optional properties ---
         ///
         ///# defaults to project key
-        ///sonar.projectName=Open
+        ///sonar.projectName=Open.BaseDatos
         ///# defaults to &apos;not provided&apos;
         ///#sonar.projectVersion=1.0
         /// 
@@ -2836,8 +2836,7 @@ namespace Cygnus2_0.Properties {
         ///#sonar.branch=desarrollo
         ///sonar.branch.name=[rama]
         ///# Encoding of the source code. Default is default system encoding
-        ///#sonar.sourceEncoding=UTF-8
-        ///sona [resto de la cadena truncado]&quot;;.
+        ///#sonar.sourceEncoding=U [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string SonarProperties {
             get {

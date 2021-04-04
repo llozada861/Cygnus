@@ -12,7 +12,7 @@
             <ColumnDefinition Width="5" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="groupBox1" Header="Palabras reservadas" >
+        <GroupBox x:Name="groupBox1" Header="Encabezados" >
             <DataGrid x:Name="dataGridDatos"
                       ItemsSource="{Binding Path=ListaHTML}"
                       AutoGenerateColumns="False"

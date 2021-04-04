@@ -216,6 +216,14 @@
     <Compile Include="General\EncriptaPass.cs" />
     <Compile Include="General\Handler.cs" />
     <Compile Include="General\Folder.cs" />
+    <Compile Include="General\HtmlConverter\HtmlCssParser.cs" />
+    <Compile Include="General\HtmlConverter\HtmlFromXamlConverter.cs" />
+    <Compile Include="General\HtmlConverter\HtmlLexicalAnalyzer.cs" />
+    <Compile Include="General\HtmlConverter\HtmlParser.cs" />
+    <Compile Include="General\HtmlConverter\HtmlSchema.cs" />
+    <Compile Include="General\HtmlConverter\HtmlTokenType.cs" />
+    <Compile Include="General\HtmlConverter\HtmlToXamlConverter.cs" />
+    <Compile Include="General\HtmlRichTextBoxBehavior.cs" />
     <Compile Include="General\LocUtil.cs" />
     <Compile Include="General\Mail.cs" />
     <Compile Include="General\RepoGit.cs" />
@@ -224,6 +232,7 @@
     <Compile Include="General\Times\Day.cs" />
     <Compile Include="General\Times\Hoja.cs" />
     <Compile Include="General\Times\TareaHoja.cs" />
+    <Compile Include="General\WebBrowserBehavior.cs" />
     <Compile Include="Interface\IViews.cs" />
     <Compile Include="Model\Aplica\GenerateAplicaModel.cs" />
     <Compile Include="Model\Audit\TbAuditoriaModel.cs" />
@@ -231,6 +240,7 @@
     <Compile Include="Model\Data\MessageModel.cs" />
     <Compile Include="Model\Data\ParameterModel.cs" />
     <Compile Include="Model\Documentation\HtmlModel.cs" />
+    <Compile Include="Model\Estandar\EstandarModel.cs" />
     <Compile Include="Model\Git\ObjectGitModel.cs" />
     <Compile Include="Model\Index\IndexModel.cs" />
     <Compile Include="Model\Objects\BlockModel.cs" />
@@ -271,6 +281,9 @@
     </Compile>
     <Compile Include="Pages\Documentation\GenerateHtml.xaml.cs">
       <DependentUpon>GenerateHtml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Estandar\EstandarUserControl.xaml.cs">
+      <DependentUpon>EstandarUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\General\AutoComplete.xaml.cs">
       <DependentUpon>AutoComplete.xaml</DependentUpon>
@@ -337,6 +350,9 @@
     </Compile>
     <Compile Include="Pages\Settings\Documentation\HtmlUserControl.xaml.cs">
       <DependentUpon>HtmlUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Estandar\CRUDEstandarUserControl.xaml.cs">
+      <DependentUpon>CRUDEstandarUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\General\HeadUserControl.xaml.cs">
       <DependentUpon>HeadUserControl.xaml</DependentUpon>
@@ -426,6 +442,7 @@
     <Compile Include="ViewModel\Data\MessageViewModel.cs" />
     <Compile Include="ViewModel\Data\ParameterViewModel.cs" />
     <Compile Include="ViewModel\Documentation\GeneratHtmlViewModel.cs" />
+    <Compile Include="ViewModel\Estandar\EstandarViewModel.cs" />
     <Compile Include="ViewModel\Git\ObjectGitViewModel.cs" />
     <Compile Include="ViewModel\Home\HomeViewModel.cs" />
     <Compile Include="ViewModel\Index\IndexViewModel.cs" />
@@ -571,6 +588,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Estandar\EstandarUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\General\AutoComplete.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -652,6 +673,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings\Documentation\HtmlUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Estandar\CRUDEstandarUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

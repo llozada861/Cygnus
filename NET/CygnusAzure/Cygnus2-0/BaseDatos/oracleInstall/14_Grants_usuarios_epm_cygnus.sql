@@ -23,6 +23,7 @@ BEGIN
             execute immediate 'grant select, insert, update, delete on ll_horashoja to '||sbUsuario;
             execute immediate 'grant select, insert, update, delete on ll_requerimiento to '||sbUsuario;
             execute immediate 'grant select, insert on ll_version to '||sbUsuario;
+			execute immediate 'grant select,insert, update, delete on ll_estandar to '||sbUsuario;
         EXCEPTION
             WHEN OTHERS THEN
                 dbms_output.put_line(SQLERRM);

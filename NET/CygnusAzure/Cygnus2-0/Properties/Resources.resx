@@ -1854,7 +1854,7 @@ sonar.projectKey=Open
 # --- optional properties ---
 
 # defaults to project key
-sonar.projectName=Open
+sonar.projectName=Open.BaseDatos
 # defaults to 'not provided'
 #sonar.projectVersion=1.0
  

@@ -21,9 +21,10 @@
                 <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
                 <mui:Link DisplayName="Data" Source="/Pages/Data/AdminData.xaml" />
-                <mui:Link DisplayName="Documentación" Source="/Pages/Documentation/AdminDoc.xaml" />
+                <mui:Link DisplayName="Docu HTML" Source="/Pages/Documentation/AdminDoc.xaml" />
                 <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
                 <mui:Link DisplayName="Auditoria" Source="/Pages/Audit/TbAuditoria.xaml" />
+                <mui:Link DisplayName="Estándar EPM" Source="/Pages/Estandar/EstandarUserControl.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
@@ -37,9 +38,10 @@
                 <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
                 <mui:Link DisplayName="Data" Source="/Pages/Data/AdminData.xaml" />
-                <mui:Link DisplayName="Documentación" Source="/Pages/Documentation/AdminDoc.xaml" />
+                <mui:Link DisplayName="Docu HTML" Source="/Pages/Documentation/AdminDoc.xaml" />
                 <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
                 <mui:Link DisplayName="Auditoria" Source="/Pages/Audit/TbAuditoria.xaml" />
+                <mui:Link DisplayName="Estándar EPM" Source="/Pages/Estandar/EstandarUserControl.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
                 <mui:Link DisplayName="Seguridad" Source="/Pages/Security/AdminUser.xaml" />
                 <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />
@@ -55,9 +57,10 @@
                 <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
                 <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml"/>
                 <mui:Link DisplayName="Data" Source="/Pages/Data/AdminData.xaml" />
-                <mui:Link DisplayName="Documentación" Source="/Pages/Documentation/AdminDoc.xaml" />
+                <mui:Link DisplayName="Docu HTML" Source="/Pages/Documentation/AdminDoc.xaml" />
                 <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
                 <mui:Link DisplayName="Auditoria" Source="/Pages/Audit/TbAuditoria.xaml" />
+                <mui:Link DisplayName="Estándar EPM" Source="/Pages/Estandar/EstandarUserControl.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
                 <mui:Link DisplayName="Seguridad" Source="/Pages/Security/AdminUser.xaml" />
                 <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />

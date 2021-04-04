@@ -229,6 +229,9 @@ SELECT 'INSERT INTO flex.ll_horashoja (CODIGO, ID_HOJA, FECHA_REGISTRO, USUARIO,
             OR SABADO > 0
             OR DOMINGO > 0;
 /
+SELECT 'INSERT INTO flex.ll_estandar (token,descripcion,valor) VALUES('''||token||''','''||descripcion||''','''||to_char(valor)||''');'
+FROM flex.ll_estandar            
+/
 SELECT *
             FROM flex.ll_horashoja 
 /                        

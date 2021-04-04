@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Settings.Treeview"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -60,6 +63,7 @@
                 <TreeViewItem Header="Documentación" IsExpanded="True" Uid="60">
                     <TreeViewItem Header="Configuración" Uid="62"/>
                     <TreeViewItem Header="HTML" Uid="63"/>
+                    <TreeViewItem Header="Estándar" Uid="64" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Ayuda" IsExpanded="True" Uid="90">
                     <TreeViewItem Header="Acerca De" Uid="91"/>

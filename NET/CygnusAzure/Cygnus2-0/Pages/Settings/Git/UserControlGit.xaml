@@ -35,7 +35,7 @@
                      Grid.ColumnSpan="2" 
                      Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RdbExiste_Checked" />
         
-        <RadioButton x:Name="rdbNuevo" Content="Clonar Repo Datos" 
+        <RadioButton x:Name="rdbNuevo" Content="Clonar Repo Datos" Visibility="Hidden"
                      Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RdbNuevo_Checked" />
 
         <GroupBox x:Name="grbDatosRequeridos" Header="Ruta Git" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="4">
