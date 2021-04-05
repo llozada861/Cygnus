@@ -290,8 +290,6 @@ namespace Cygnus2_0.DAO
                     rdr.Close(); // close the oracle reader
                 }
             }
-
-            return listaEstandar;
         }
         #endregion Refrescamiento
 

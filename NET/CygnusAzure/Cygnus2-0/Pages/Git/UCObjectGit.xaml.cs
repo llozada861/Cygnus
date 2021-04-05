@@ -31,6 +31,7 @@ namespace Cygnus2_0.Pages.Git
         private Handler handler;
         private ObjectGitViewModel objectViewModel;
         private Brush Colobk;
+        private UserControl userControls;
         public UCObjectGit()
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
@@ -39,41 +40,22 @@ namespace Cygnus2_0.Pages.Git
 
             DataContext = objectViewModel;
             InitializeComponent();
-
-            dataGridArch.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             rdbLineaBase.IsChecked = true;
-            LineaBase.Visibility = Visibility.Visible;
-            Entrega.Visibility = Visibility.Hidden;
-
-            try
-            {
-                this.objectViewModel.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
+            pMostrarLB();
         }
 
         private void RdbLineaBase_Checked(object sender, RoutedEventArgs e)
         {
-            LineaBase.Visibility = Visibility.Visible;
-            Entrega.Visibility = Visibility.Hidden;
+            pMostrarLB();
         }
 
         private void RdbEntrega_Checked(object sender, RoutedEventArgs e)
         {
-            LineaBase.Visibility = Visibility.Hidden;
-            Entrega.Visibility = Visibility.Visible;
-        }
-
-        private void DataGridResultado_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
+            pMostrarEntrega();
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
@@ -91,205 +73,19 @@ namespace Cygnus2_0.Pages.Git
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
         }
-        private void CopyCommand(object sender, ExecutedRoutedEventArgs e)
+
+        private void pMostrarLB()
         {
-            StringCollection paths = new StringCollection();
-            List<String> archivos = new List<string>();
-
-            IList<DataGridCellInfo> filas = dataGridResultado.SelectedCells;
-
-            foreach (DataGridCellInfo fila in filas)
-            {
-                Archivo archivo = (Archivo)fila.Item;
-
-                if (!archivos.Exists(x => x.Equals(archivo.RutaConArchivo)))
-                {
-                    paths.Add(archivo.RutaConArchivo);
-                    archivos.Add(archivo.RutaConArchivo);
-                }
-            }
-
-            Clipboard.SetFileDropList(paths);
+            GridMain.Children.Clear();
+            userControls = new LBUserControl();
+            GridMain.Children.Add(userControls);
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void pMostrarEntrega()
         {
-            objectViewModel.GitModel.ListaArchivosEncontrados.Clear();
-        }
-
-        private void TxtBuscar_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter)
-            {
-                objectViewModel.GitModel.ObjetoBuscar = txtBuscar.Text;
-                objectViewModel.pBuscar(null);
-            }
-        }
-        private void listBox1_Drop(object sender, DragEventArgs e)
-        {
-            string[] DropPath;
-
-            if(objectViewModel.GitModel.RamaLBSeleccionada == null)
-            {
-                handler.MensajeError("Seleccione una rama de línea base.");
-                return;
-            }
-
-            try
-            {
-                if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                {
-                    DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
-
-                    objectViewModel.ListarArchivos(DropPath);
-
-                    if(objectViewModel.GitModel.ListaCarpetas.Count() > 0)
-                    {
-                        chAprobar.IsEnabled = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
-        }
-
-        private void TipoSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox comboBox = sender as ComboBox;
-            SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
-
-            if (tipo != null)
-            {
-                Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
-                objectViewModel.pArmarArbol(tipo, selectedItem);
-            }
-            
-            //CollectionViewSource.GetDefaultView(objectViewModel.GitModel.ListaArchivos).Refresh();
-
-            //dataGridArch.ItemsSource = objectViewModel.GitModel.ListaArchivos;
-
-            /*var comboBox = sender as ComboBox;
-            SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
-
-            if (tipo != null)
-            {
-                if(tipo.Text.Equals("paquete"))
-                {
-                    Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
-
-                    if (selectedItem.FileName.EndsWith(".html"))
-                    {
-                        selectedItem.NombreObjeto = selectedItem.NombreSinExt;
-                    }
-                }
-            }*/
-        }
-
-        private void UsuarioSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            objectViewModel.pArmarArbol(null, null);            
-
-            /*var comboBox = sender as ComboBox;
-            SelectListItem usuario = (SelectListItem)comboBox.SelectedItem;
-
-            if (usuario != null)
-            {
-                Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
-                objectViewModel.pPonerUsuarioArchivos(selectedItem, usuario);
-            }*/
-        }
-
-        private void BtnProcesar_Click(object sender, RoutedEventArgs e)
-        {
-            chAprobar.IsChecked = false;
-        }
-
-        private void ChAprobar_Checked(object sender, RoutedEventArgs e)
-        {
-            objectViewModel.GitModel.ActivaAprobRamas = (bool)chAprobar.IsChecked;
-        }
-
-        private void BtnExaminar_Click(object sender, RoutedEventArgs e)
-        {
-            chAprobar.IsEnabled = true;
-        }
-
-        private void DataGridArch_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            //Only handles cases where the cell contains a TextBox
-            var editedTextbox = e.EditingElement as TextBox;
-
-            if (editedTextbox != null)
-            {
-                Archivo item = (Archivo)e.Row.Item;
-
-                //if (editedTextbox != null)
-                //    MessageBox.Show("Value after edit: " + editedTextbox.Text);
-
-                item.NombreObjeto = editedTextbox.Text;
-                objectViewModel.pArmarArbol(null, item);
-            }
-        }
-
-        private void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
-        {
-            if (dataGridArch.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
-            {
-                pCambiarColorFila();
-            }
-        }
-        private void pCambiarColorFila()
-        {
-            foreach (Archivo item in dataGridArch.ItemsSource)
-            {
-                var row = dataGridArch.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-
-                if (row != null)
-                {
-                    if (row.Background != Brushes.Red)
-                        Colobk = row.Background;
-
-                    if (item.Tipo == null || string.IsNullOrEmpty(item.Usuario) || string.IsNullOrEmpty(item.NombreObjeto))
-                    {
-                        row.Background = Brushes.Red;
-                    }
-                    else
-                    {
-                        row.Background = Colobk;
-                    }
-
-                    if(item.Tipo != null && (item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) || item.Tipo.ToLower().Equals(res.TipoAplica.ToLower())))
-                    {
-                        row.Background = Colobk;
-                    }
-                }
-            }
-        }
-
-        private void MenuItemCr_Click(object sender, RoutedEventArgs e)
-        {
-            Archivo archivo = dataGridRamas.SelectedItem as Archivo;
-
-            if (archivo != null)
-            {
-                objectViewModel.pCreaRama(archivo);
-            }
-        }
-
-        private void DataGridArch_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            objectViewModel.pArmarArbol(null, null);
-        }
-
-        protected void AuListaRamasLB_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
-        {
-            args.DataSource = objectViewModel.GitModel.ListaRamasLB.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
-        }
-        protected void AucomboBoxHU_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
-        {
-            args.DataSource = objectViewModel.GitModel.ListaHU.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+            GridMain.Children.Clear();
+            userControls = new EntregaUserControl();
+            GridMain.Children.Add(userControls);
         }
     }
 }

@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "UpdaterOD\Update
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQ", "SonarQ\SonarQ.csproj", "{6D1D37A9-385D-4B2B-B677-CDE9617CC764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichTextBlockSample", "..\..\..\..\Net\RichTextBlockSample\RichTextBlockSample.csproj", "{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,26 +105,6 @@ Global
 		{6D1D37A9-385D-4B2B-B677-CDE9617CC764}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D1D37A9-385D-4B2B-B677-CDE9617CC764}.Release|x86.ActiveCfg = Release|Any CPU
 		{6D1D37A9-385D-4B2B-B677-CDE9617CC764}.Release|x86.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Debug|x86.Build.0 = Debug|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.0|Any CPU.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.0|Any CPU.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.0|x86.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.0|x86.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.5|Any CPU.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.5|Any CPU.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.5|x86.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.5|x86.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.6.1|Any CPU.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.6.1|Any CPU.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.6.1|x86.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release 4.6.1|x86.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release|x86.ActiveCfg = Release|Any CPU
-		{01E1D2F7-EB95-45A4-92CE-1DCE0097E5DD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

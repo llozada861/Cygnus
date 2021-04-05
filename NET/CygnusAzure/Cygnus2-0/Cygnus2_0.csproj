@@ -297,6 +297,12 @@
     <Compile Include="Pages\Git\AdminGit.xaml.cs">
       <DependentUpon>AdminGit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Git\EntregaUserControl.xaml.cs">
+      <DependentUpon>EntregaUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Git\LBUserControl.xaml.cs">
+      <DependentUpon>LBUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Git\UCObjectGit.xaml.cs">
       <DependentUpon>UCObjectGit.xaml</DependentUpon>
     </Compile>
@@ -605,6 +611,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Git\AdminGit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Git\EntregaUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Git\LBUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
