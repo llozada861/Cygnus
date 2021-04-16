@@ -40,6 +40,11 @@ namespace Cygnus2_0.Pages.Git
 
             DataContext = objectViewModel;
             InitializeComponent();
+
+            if (string.IsNullOrEmpty(handler.RutaGitObjetos))
+            {
+                handler.MensajeAdvertencia("Configure la ruta del repositorio de Git BaseDeDatos en Ajustes/Herramientas Gestión/Git");
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

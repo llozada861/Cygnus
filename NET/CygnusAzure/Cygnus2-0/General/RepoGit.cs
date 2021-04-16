@@ -184,14 +184,17 @@ namespace Cygnus2_0.General
         {
             ObservableCollection<SelectListItem> listaRamas = new ObservableCollection<SelectListItem>();
 
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
             {
-                BranchCollection branches = repo.Branches;
-
-                foreach (Branch b in branches)
+                using (var repo = new Repository(@handler.RutaGitObjetos))
                 {
-                    if(b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
-                        listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
+                    BranchCollection branches = repo.Branches;
+
+                    foreach (Branch b in branches)
+                    {
+                        if (b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
+                            listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
+                    }
                 }
             }
 

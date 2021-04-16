@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Settings.General"
+             xmlns:general="clr-namespace:Cygnus2_0.Pages.General"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -48,20 +49,20 @@
                   Binding="{Binding Path=Text}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Slash?"
-                  Binding="{Binding Path=Value}" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Cantidad Slash"
-                  Binding="{Binding Path=CantidadSlash}" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
                   Header="Prioridad"
                   Binding="{Binding Path=Prioridad}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Permiso"
+                  Header="Grant"
                   Binding="{Binding Path=Grant}" />
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Ruta"
+                  Binding="{Binding Path=Path}" />
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Cantida Slash"
+                  Binding="{Binding Path=CantidadSlash}" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -82,25 +83,39 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 
-                <Label Content="Objeto" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                <TextBox Name="txtObject" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" />
-                <Label Content="Slash?" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                
-                <ComboBox x:Name="cbSlash" 
-                  ItemsSource="{Binding Path=ListaSiNO}" 
-                  SelectedItem="{Binding Path=Generico}"
-                  DisplayMemberPath="Text" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
-                
-                <Label Content="Cantidad" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                <TextBox Name="txtCantidad" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" />
-                <Label Content="Prioridad" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                <TextBox Name="txtPriodad" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" />
-                <Label Content="Permiso" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                
-                <ComboBox x:Name="cbPrioridad" 
-                  ItemsSource="{Binding Path=ListaComboGrantTO}" 
+                <TextBox x:Name="txtObject" 
+                         Text="{Binding Path=Model.Codigo}" 
+                         TextWrapping="Wrap" 
+                         VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper" 
+                         Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Tipo Objeto"/>
+
+                <TextBox x:Name="txtPriodad" 
+                         Text="{Binding Path=Model.Codigo}" 
+                         TextWrapping="Wrap" 
+                         VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" 
+                         Style="{StaticResource placeHolder}" Tag="Prioridad"/>
+
+                <general:AutoComplete x:Name="AucomboBox" 
+                                     ItemsSource="{Binding Path=ListaComboGrantTO}" 
                   SelectedItem="{Binding Path=Generico2}"
-                  DisplayMemberPath="Text" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
+                  DisplayMemberPath="Text" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
+                        PatternChanged="AucomboBox_PatternChanged"
+                        Style="{StaticResource AutoCompleteComboBox}"
+                        Delay="500" Tag="Permiso" Margin="0,5,10,0" />
+
+                <TextBox x:Name="txtCantidad" 
+                         Text="{Binding Path=Model.Codigo}" 
+                         Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Cantidad Slash"/>
+
+                <TextBox x:Name="txtEmpresa" 
+                         Text="{Binding Path=ConfGeneralViewModel.Model.Empresa.Text}" 
+                         TextWrapping="Wrap" 
+                         VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" IsReadOnly="true"/>
 
                 <Button Name="btnGuardar"  Content="Guardar" VerticalAlignment="Top" Click="btnGuardar_Click" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" Grid.ColumnSpan="3"/>
             </Grid>

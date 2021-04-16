@@ -52,6 +52,7 @@ DECLARE
                                             'GRANT CREATE SEQUENCE TO %usuario',
                                             'GRANT CREATE PROCEDURE TO %usuario',
                                             'grant SELECT ANY DICTIONARY to %usuario'
+											'GRANT SELECT_CATALOG_ROLE,CONSULTA_TODAS_LAS_TABLAS,ROL_AUDITORIA_OPEN,CONSULTA_OPENSIRIUS,CONSULTA_OPENSIRIUSWM TO %usuario'
                                      );
   
 	  CURSOR CuExistUsuario

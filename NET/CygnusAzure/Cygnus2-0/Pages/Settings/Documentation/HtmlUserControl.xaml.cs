@@ -54,7 +54,7 @@ namespace Cygnus2_0.Pages.Settings.Documentation
 
             try
             {
-                SqliteDAO.pActualizaHtml(key, value);
+                SqliteDAO.pActualizaHtml(key, value,handler);
                 pCargarLista();
 
                 richTextBoxProce.Document.Blocks.Clear();

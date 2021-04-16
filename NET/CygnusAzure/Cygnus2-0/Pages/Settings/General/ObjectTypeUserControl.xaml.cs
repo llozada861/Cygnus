@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using Cygnus2_0.Pages.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -141,6 +142,10 @@ namespace Cygnus2_0.Pages.Settings.General
         {
             handler.ListaTiposObjetos.Clear();
             SqliteDAO.pListaTiposObjetos(handler);
+        }
+        protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = handler.ListaComboGrantTO.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
         }
     }
 }

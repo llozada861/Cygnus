@@ -31,30 +31,8 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <GroupBox x:Name="groupBox1" Header="Rutas" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="10">
-            <DataGrid x:Name="dataGridDatos"
-                      ItemsSource="{Binding Path=ListaRutas}"
-                      AutoGenerateColumns="False"
-                    SelectionMode="Single"
-                    CanUserDeleteRows="True"
-                    CanUserAddRows="False"
-                    CanUserReorderColumns="False"
-                    CanUserSortColumns="False"
-                      SelectionChanged="dataGridDatos_SelectionChanged" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Tag"
-                  Binding="{Binding Path=Text}" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Ruta"
-                  Binding="{Binding Path=Value}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
 
-        <GroupBox Header="Modificar" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="5">
+        <GroupBox Header="Modificar" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

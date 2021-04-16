@@ -54,6 +54,10 @@ namespace Cygnus2_0.General
 
         public Handler()
         {
+        }
+
+        public void pInicializar()
+        {
             //Se crean las rutas generales
             this.RutaBaseDatos = Path.Combine(Environment.CurrentDirectory, res.CarpetaBD);
             this.PathTempAplica = Path.Combine(Environment.CurrentDirectory, res.CarpetaAplTemp);
@@ -69,7 +73,7 @@ namespace Cygnus2_0.General
             //Se instancian los view models generales           
             conexionViewModel = new ConexionViewModel(this);
             confGeneralViewModel = new ConfGeneralViewModel(this);
-            indexViewModel = new IndexViewModel(this);
+            pRegeneraIndexListas();
             #endregion ViewModels
 
             #region Appareance
@@ -158,7 +162,6 @@ namespace Cygnus2_0.General
                         Text = "Secundario", Value = res.MetodoSecuencia
                     }
             };
-
             #endregion Listas
         }
 
@@ -667,22 +670,6 @@ namespace Cygnus2_0.General
             //Se obtiene el usuario azure
             this.DAO.pObtAreaAzure();
             SqliteDAO.pCreaConfiguracion(res.KeyEmail, ConnViewModel.Correo);
-
-            if (!SqliteDAO.pblValidaVersion(this))
-            {
-                try
-                {
-                    //Se insertan los datos en la bd
-                    //dao.pObtCodigoSql();
-
-                    //Se actualiza la versión
-                    SqliteDAO.pActualizaVersion(this.fsbVersion);
-
-                    indexViewModel = new IndexViewModel(this);
-                }
-                catch
-                { }
-            }
         }
 
         public void pCreaArchivoBD(string path, string nombre, byte[] myFile)
@@ -801,7 +788,7 @@ namespace Cygnus2_0.General
 
             StringBuilder documentacion = new StringBuilder();
 
-            if (this.ConfGeneralViewModel.GeneraHtml)
+            if (this.ConfGeneralViewModel.Model.GeneraHtml)
             {
                 using (StreamReader streamReader = new StreamReader(archivo.RutaConArchivo, Encoding.Default))
                 {
@@ -1310,6 +1297,11 @@ namespace Cygnus2_0.General
                 archivos = openFileDialog.FileNames;
 
             return archivos;
+        }
+
+        public void pRegeneraIndexListas()
+        {
+            indexViewModel = new IndexViewModel(this);
         }
     }
 }

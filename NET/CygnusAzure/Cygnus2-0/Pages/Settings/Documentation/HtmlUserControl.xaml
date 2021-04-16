@@ -22,6 +22,12 @@
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
                       SelectionChanged="dataGridDatos_SelectionChanged" >
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Height" Value="20"/>
+                        <Setter Property="Background" Value="{DynamicResource WindowBackgroundColor}"/>
+                    </Style>
+                </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
                   IsReadOnly="True"

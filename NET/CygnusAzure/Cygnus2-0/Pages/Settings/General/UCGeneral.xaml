@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:general="clr-namespace:Cygnus2_0.Pages.General"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -33,11 +34,22 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <CheckBox x:Name="checkBoxOrden" Content="Orden automático?" IsChecked="{Binding Path=OrdenAutomatico}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5"/>
-                <CheckBox x:Name="checkBoxGrant" Content="Genera grants?" IsChecked="{Binding Path=Grant}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5"/>
-                <CheckBox x:Name="checkBoxDocu" Content="Genera doc html?" IsChecked="{Binding Path=GeneraHtml}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5"/>
-                <CheckBox x:Name="checkBoxProxy" Content="Desactivar proxy?" IsChecked="{Binding Path=Proxy}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5"/>
+                <general:AutoComplete x:Name="AucomboBox" 
+                                      Grid.Row="1"
+                                      Grid.Column="1"
+                                      Grid.ColumnSpan="5"
+                        ItemsSource="{Binding Path=Model.ListaEmpresas}" 
+                        SelectedItem="{Binding Path=Model.Empresa, Mode=TwoWay}"
+                        DisplayMemberPath="Text" 
+                        PatternChanged="AucomboBox_PatternChanged"
+                        Style="{StaticResource AutoCompleteComboBox}"
+                        Delay="500" Tag="Seleccione la Empresa" Margin="0,5,10,0" SelectionChanged="AucomboBox_SelectionChanged" />
+
+                <CheckBox x:Name="checkBoxGrant" Content="Genera grants?" IsChecked="{Binding Path=Model.Grant}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5"/>
+                <CheckBox x:Name="checkBoxDocu" Content="Genera doc html?" IsChecked="{Binding Path=Model.GeneraHtml}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5"/>
+                <CheckBox x:Name="checkBoxProxy" Content="Desactivar proxy?" IsChecked="{Binding Path=Model.Proxy}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5"/>
                 <!--
+                <CheckBox x:Name="checkBoxOrden" Content="Orden automático?" IsChecked="{Binding Path=OrdenAutomatico}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5"/>
                 <CheckBox x:Name="checkBoxVersion" IsEnabled="false" Content="Ejecutar sqlplus?" IsChecked="{Binding Handl.Formulario.GeneraVersion, Mode = TwoWay}"/>
                 <CheckBox x:Name="checkBoxCarpApl" IsEnabled="false" Content="Generar aplica una capeta arriba?" IsChecked="{Binding Handl.Formulario.AplicaCarpetaArriba, Mode = TwoWay}" />
                 <CheckBox x:Name="checkBox" IsEnabled="false" IsChecked="{Binding Handl.Formulario.CopiaRepo, Mode = TwoWay}" Content="Guardar objetos en el repositorio?" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Checked="checkBox_Checked"/>

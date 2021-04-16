@@ -103,7 +103,7 @@ namespace Cygnus2_0.Pages.Settings.General
 
             try
             {
-                SqliteDAO.pGuardarEncabezado(sbEncabezado, tipo, prioridad, fin);
+                SqliteDAO.pGuardarEncabezado(sbEncabezado, tipo, prioridad, fin,handler);
                 pCargarLista();
             }
             catch (Exception ex)

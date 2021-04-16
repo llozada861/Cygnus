@@ -44,6 +44,11 @@ namespace Cygnus2_0.Pages.Compila
 
             compilaViewModel.Model.ArchivosDescompilados = "0";
             AuListaHus.ItemsSource = compilaViewModel.Model.ListaHU;
+
+            if (string.IsNullOrEmpty(handler.RutaGitDatos))
+            {
+                handler.MensajeAdvertencia("Configure la ruta del repositorio de Git Datos en Ajustes/Herramientas Gestión/Git");
+            }
         }
 
         private void listBox1_Drop(object sender, DragEventArgs e)

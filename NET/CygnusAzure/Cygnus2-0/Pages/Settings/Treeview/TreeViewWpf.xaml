@@ -55,7 +55,7 @@
                     <TreeViewItem Header="Grants" Uid="32"/>
                     <TreeViewItem Header="Usuarios" Uid="33"/>
                 </TreeViewItem>
-                <TreeViewItem Header="Mvm" IsExpanded="True" Uid="104">
+                <TreeViewItem Header="Herramientas Gestión" IsExpanded="True" Uid="104">
                     <TreeViewItem Header="Azure" Uid="100"/>
                     <TreeViewItem Header="Sonar" Uid="101"/>
                     <TreeViewItem Header="Git" Uid="102"/>
