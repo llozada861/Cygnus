@@ -27,6 +27,7 @@ namespace Cygnus2_0.Model.Git
         private SelectListItem _selectHU;
         private SelectListItem ramaLBSeleccionada;
         private bool activaAprobRamas;
+        private bool ejecutarSonar;
         private string nuevaRama;
         public ObjectGitModel()
         {
@@ -127,6 +128,10 @@ namespace Cygnus2_0.Model.Git
         {
             get { return activaAprobRamas; }
             set { SetProperty(ref activaAprobRamas, value); }
+        }
+        public bool EjecutaSonar {
+            get { return ejecutarSonar; }
+            set { SetProperty(ref ejecutarSonar, value); }
         }
 
         public void pCreaRamas()

@@ -1,4 +1,5 @@
 ﻿using Cygnus2_0.General;
+using Cygnus2_0.Pages.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,15 @@ namespace Cygnus2_0.Pages.Settings.AdminGeneral
 
             DataContext = handler.ConfGeneralViewModel;
             InitializeComponent();
+        }
+        protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = handler.ConfGeneralViewModel.Model.ListaEmpresas.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+        }
+
+        private void AucomboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            handler.pInicializar();
         }
     }
 }

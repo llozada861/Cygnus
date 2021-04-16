@@ -114,7 +114,7 @@ namespace Cygnus2_0.Pages
 
         public void desactivaProxy()
         {
-            if (handler.ConfGeneralViewModel.Proxy)
+            if (handler.ConfGeneralViewModel.Model.Proxy)
             {
                 RegistryKey registry = Registry.CurrentUser.OpenSubKey
                    ("Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings", true);

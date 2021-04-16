@@ -290,8 +290,6 @@ namespace Cygnus2_0.DAO
                     rdr.Close(); // close the oracle reader
                 }
             }
-
-            return listaEstandar;
         }
         #endregion Refrescamiento
 
@@ -1002,7 +1000,7 @@ namespace Cygnus2_0.DAO
                 process.StartInfo.WorkingDirectory = scriptDir;
                 process.StartInfo.RedirectStandardOutput = false;
                 process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralViewModel.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
+                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralViewModel.Model.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
                 process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
                 process.StartInfo.CreateNoWindow = false;
 

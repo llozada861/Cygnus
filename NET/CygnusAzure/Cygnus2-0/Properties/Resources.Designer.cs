@@ -264,6 +264,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a CONEXION_BD.
+        /// </summary>
+        public static string CONEXION_BD {
+            get {
+                return ResourceManager.GetString("CONEXION_BD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         public static byte[] Configuracion {
@@ -1263,6 +1272,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a EMPRESA.
+        /// </summary>
+        public static string KEY_EMPRESA {
+            get {
+                return ResourceManager.GetString("KEY_EMPRESA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a DISPLAYNAME.
         /// </summary>
         public static string keyDisplayName {
@@ -1636,7 +1654,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No.
+        ///   Busca una cadena traducida similar a N.
         /// </summary>
         public static string No {
             get {
@@ -2772,7 +2790,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Si.
+        ///   Busca una cadena traducida similar a S.
         /// </summary>
         public static string Si {
             get {
@@ -3985,6 +4003,15 @@ namespace Cygnus2_0.Properties {
             get {
                 object obj = ResourceManager.GetObject("XXXXXXXX_ICB_SubVersion__solicitud_obj_SAO_XXXXXX_", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Y.
+        /// </summary>
+        public static string YES {
+            get {
+                return ResourceManager.GetString("YES", resourceCulture);
             }
         }
         

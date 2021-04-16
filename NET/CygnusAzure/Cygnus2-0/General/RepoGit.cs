@@ -133,7 +133,7 @@ namespace Cygnus2_0.General
         {
             string command = "git pull origin " + rama;
             string RutagitBash = handler.RutaGitBash + "\\" + res.GitBashExe;
-            ExecuteGitBashCommand(RutagitBash, command, handler.RutaGitObjetos);
+            ExecuteGitBashCommand(RutagitBash, command, handler.RutaGitObjetos,true);
         }
 
         public static void pCreaLineaBase(ObjectGitModel model, Handler handler)
@@ -184,14 +184,17 @@ namespace Cygnus2_0.General
         {
             ObservableCollection<SelectListItem> listaRamas = new ObservableCollection<SelectListItem>();
 
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
             {
-                BranchCollection branches = repo.Branches;
-
-                foreach (Branch b in branches)
+                using (var repo = new Repository(@handler.RutaGitObjetos))
                 {
-                    if(b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
-                        listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
+                    BranchCollection branches = repo.Branches;
+
+                    foreach (Branch b in branches)
+                    {
+                        if (b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
+                            listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
+                    }
                 }
             }
 
@@ -212,7 +215,7 @@ namespace Cygnus2_0.General
             {
                 string command = "git stash -u";
                 string RutagitBash = handler.RutaGitBash + "\\" + res.GitBashExe;
-                ExecuteGitBashCommand(RutagitBash, command, handler.RutaGitObjetos);
+                ExecuteGitBashCommand(RutagitBash, command, handler.RutaGitObjetos,false);
             }
         }
 
@@ -233,7 +236,7 @@ namespace Cygnus2_0.General
             pCreaDirectorios(ruta);
 
             string command = "Git clone " + url;
-            ExecuteGitBashCommand(rutaGitBash+"\\"+res.GitBashExe, command, ruta);
+            ExecuteGitBashCommand(rutaGitBash+"\\"+res.GitBashExe, command, ruta,true);
 
             return ruta + res.CarpetaDatosGIT;
         }
@@ -248,7 +251,7 @@ namespace Cygnus2_0.General
             }
         }
 
-        public static void ExecuteGitBashCommand(string fileName, string command, string workingDir)
+        public static void ExecuteGitBashCommand(string fileName, string command, string workingDir, bool blMostrar)
         {
             ProcessStartInfo processStartInfo = new ProcessStartInfo(fileName, "-c \" " + command + " \"")
             {
@@ -257,7 +260,7 @@ namespace Cygnus2_0.General
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
                 UseShellExecute = false,
-                CreateNoWindow = true
+                CreateNoWindow = blMostrar
             };
 
             var process = Process.Start(processStartInfo);

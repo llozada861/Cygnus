@@ -50,7 +50,7 @@ namespace Cygnus2_0.Pages.Settings.Database
 
             try
             {
-                SqliteDAO.pGuardarUsuario(palabra);
+                SqliteDAO.pGuardarUsuario(palabra,handler);
                 pCargarLista();
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace Cygnus2_0.Pages.Settings.Database
                 {
                     if (handler.MensajeConfirmacion("Está seguro que desea borrar el usuario [" + sbPalabra + "]") == "Y")
                     {
-                        SqliteDAO.pEliminaUsuario(sbPalabra);
+                        SqliteDAO.pEliminaUsuario(sbPalabra,handler);
                         pCargarLista();
                         txtEliminar.Text = "";
                     }

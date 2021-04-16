@@ -2,6 +2,7 @@
 using Cygnus2_0.General;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,20 +27,13 @@ namespace Cygnus2_0.Pages.Settings.General
         private Handler handler;
         public PathsUserControl()
         {
-            InitializeComponent();
-            handler = ((MainWindow)Application.Current.MainWindow).Handler;
+            var myWin = (MainWindow)Application.Current.MainWindow;
+            handler = myWin.Handler;
             DataContext = handler;
+            InitializeComponent();
+            txtName.Text = res.SQLPLUS;
+            txtPath.Text = handler.ConfGeneralViewModel.Model.RutaSqlplus;
         }
-
-        private void dataGridDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (dataGridDatos.SelectedItem == null)
-                return;
-
-            txtName.Text = ((SelectListItem)dataGridDatos.SelectedItem).Text;
-            txtPath.Text = ((SelectListItem)dataGridDatos.SelectedItem).Value;
-        }
-
         private void btnModif_Click(object sender, RoutedEventArgs e)
         {
             string key = txtName.Text;
@@ -53,20 +47,14 @@ namespace Cygnus2_0.Pages.Settings.General
 
             try
             {
-                SqliteDAO.pActualizaRuta(key,ruta);
-                pCargarLista();
+                SqliteDAO.pCreaConfiguracion(key,ruta);
+                handler.ConfGeneralViewModel.Model.RutaSqlplus = ruta;
+                handler.MensajeOk("Proceso terminó con éxito.");
             }
             catch (Exception ex)
             {
                 handler.MensajeError(ex.Message);
             }
-        }
-
-        public void pCargarLista()
-        {
-            handler.ListaRutas.Clear();
-            SqliteDAO.pListaRutas(handler);
-            handler.ConfGeneralViewModel.RutaSqlplus = handler.ListaRutas.ToList().Find(x => x.Text.Equals(res.SQLPLUS)).Value;
         }
     }
 }

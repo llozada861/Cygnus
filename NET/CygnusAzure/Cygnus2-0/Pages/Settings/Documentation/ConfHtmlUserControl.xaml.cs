@@ -66,7 +66,7 @@ namespace Cygnus2_0.Pages.Settings.Documentation
 
             try
             {
-                SqliteDAO.pGuardarConfHtml(inicio, fin, atributos, finEnca, tipo);
+                SqliteDAO.pGuardarConfHtml(inicio, fin, atributos, finEnca, tipo,handler);
                 pCargarLista();
             }
             catch (Exception ex)
@@ -85,7 +85,7 @@ namespace Cygnus2_0.Pages.Settings.Documentation
                 {
                     if (handler.MensajeConfirmacion("Está seguro que desea borrar la documentación [" + sbPalabra + "]") == "Y")
                     {
-                        SqliteDAO.pEliminaConfHtml(sbPalabra);
+                        SqliteDAO.pEliminaConfHtml(sbPalabra,handler);
                         pCargarLista();
                         txtEliminar.Text = "";
                     }

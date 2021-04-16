@@ -163,7 +163,6 @@ namespace Cygnus2_0.Pages.Aplica
                 pCambiarColorFila();
             }
         }
-
         private void pCambiarColorFila()
         {
             foreach (Archivo item in dataGridArchivosCargados.ItemsSource)
@@ -191,7 +190,6 @@ namespace Cygnus2_0.Pages.Aplica
                 }
             }
         }
-
         private void BtnExaminar_Click(object sender, RoutedEventArgs e)
         {
             try

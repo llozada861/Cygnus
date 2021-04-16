@@ -1,7 +1,9 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using Cygnus2_0.Interface;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,58 +12,61 @@ using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Model.Settings
 {
-    public class ConfGeneralModel
+    public class ConfGeneralModel: ViewModelBase
     {
-        Handler handler;
-        public ConfGeneralModel(Handler hand)
+        private Boolean ordenAutomatico;
+        private Boolean generaHtml;
+        private Boolean grant;
+        private Boolean entregaPlantilla;
+        private Boolean proxy;
+        private string rutaSqlplus;
+        private SelectListItem empresa;
+        private ObservableCollection<SelectListItem> listaEmpresa;
+        public ConfGeneralModel()
         {
-            handler = hand;
+        }
+        public Boolean OrdenAutomatico
+        {
+            get { return ordenAutomatico; }
+            set { SetProperty(ref ordenAutomatico, value); }
         }
 
-        public void SaveData()
+        public Boolean GeneraHtml
         {
-            SqliteDAO.pCreaConfiguracion(res.KeyOrdenAutomatico, "" + handler.ConfGeneralViewModel.OrdenAutomatico);
-            SqliteDAO.pCreaConfiguracion(res.KeyGeneraGrants, "" + handler.ConfGeneralViewModel.Grant);
-            SqliteDAO.pCreaConfiguracion(res.KeyProxy, "" + handler.ConfGeneralViewModel.Proxy);
+            get { return generaHtml; }
+            set { SetProperty(ref generaHtml, value); }
+        }
 
-            /*string filename = Path.Combine(handler.RutaBaseDatos, res.NombreArchivoConfiguracion);
-            string nombre;
+        public Boolean Grant
+        {
+            get { return grant; }
+            set { SetProperty(ref grant, value); }
+        }
+        public String RutaSqlplus
+        {
+            get { return rutaSqlplus; }
+            set { SetProperty(ref rutaSqlplus, value); }
+        }
 
-            if (File.Exists((string)filename))
-            {
-                File.Delete((string)filename);
-            }
-
-            nombre = res.NombreArchivoConfiguracion;
-
-            using (StreamWriter tempFile = new StreamWriter(Path.Combine(handler.RutaBaseDatos, nombre)))
-            {
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(0).Text + ";" + "false");
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(1).Text + ";" + "false");
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(2).Text + ";" + handler.ConfGeneralViewModel.OrdenAutomatico);
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(3).Text + ";" + handler.ConfGeneralViewModel.Grant);
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(4).Text + ";" + "false");
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(5).Text + ";" + "false");
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(6).Text + ";" + "false");
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(7).Text + ";" + "false");
-                tempFile.WriteLine(handler.ListaConfiguracion.ElementAt(8).Text + ";" + "false");
-            }
-
-            /*this.Formulario.MantenimientoCorrectivo.Text = Formulario.RutaCopiaRepoMantCorr;
-            this.Formulario.MantenimientoCorrectivo.Value = res.CORRECTIVO;
-            this.Formulario.MantenimientoCorrectivo.Observacion = res.RutaRepoMantCorrectivo;
-
-            this.Formulario.MantenimientoPreventivo.Text = Formulario.RutaCopiaRepoMantPrev;
-            this.Formulario.MantenimientoPreventivo.Value = res.PREVENTIVO;
-            this.Formulario.MantenimientoPreventivo.Observacion = res.RutaRepoMantPreventivo;*/
-
-
-            /*nombre = res.NombreArchivoRutaSqlplus;
-
-            using (StreamWriter tempFile = new StreamWriter(Path.Combine(handler.RutaBaseDatos, nombre)))
-            {
-                tempFile.WriteLine(handler.ConfGeneralViewModel.RutaSqlplus);
-            }*/
+        public Boolean EntregaPlantilla
+        {
+            get { return entregaPlantilla; }
+            set { SetProperty(ref entregaPlantilla, value); }
+        }
+        public Boolean Proxy
+        {
+            get { return proxy; }
+            set { SetProperty(ref proxy, value); }
+        }
+        public SelectListItem Empresa
+        {
+            get { return empresa; }
+            set { SetProperty(ref empresa, value); }
+        }
+        public ObservableCollection<SelectListItem> ListaEmpresas
+        {
+            get { return listaEmpresa; }
+            set { SetProperty(ref listaEmpresa, value); }
         }
     }
 }

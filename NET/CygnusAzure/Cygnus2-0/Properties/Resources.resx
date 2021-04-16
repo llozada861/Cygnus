@@ -714,10 +714,10 @@
     <value>-1</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>N</value>
   </data>
   <data name="Si" xml:space="preserve">
-    <value>Si</value>
+    <value>S</value>
   </data>
   <data name="TipoObjetoAnonimo" xml:space="preserve">
     <value>Declare</value>
@@ -2208,5 +2208,14 @@ EXCEPTION
         utl_file.fclose(iflFileHandle_err);
 END;
 /</value>
+  </data>
+  <data name="KEY_EMPRESA" xml:space="preserve">
+    <value>EMPRESA</value>
+  </data>
+  <data name="YES" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="CONEXION_BD" xml:space="preserve">
+    <value>CONEXION_BD</value>
   </data>
 </root>

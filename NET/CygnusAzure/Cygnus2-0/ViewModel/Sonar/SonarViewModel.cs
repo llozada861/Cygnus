@@ -36,12 +36,10 @@ namespace Cygnus2_0.ViewModel.Sonar
 
             if(string.IsNullOrEmpty(handler.RutaGitObjetos))
             {
-                handler.MensajeAdvertencia("Configure la ruta del repositorio de Git BaseDeDatos en Ajustes/Mvm/Git");
+                handler.MensajeAdvertencia("Configure la ruta del repositorio de Git BaseDeDatos en Ajustes/Herramientas Gestión/Git");
             }
             else
                 this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
-
-            //this.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
         }
 
         public ObjectGitModel GitModel { get; set; }

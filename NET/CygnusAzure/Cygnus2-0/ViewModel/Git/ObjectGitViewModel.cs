@@ -154,12 +154,6 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                if (string.IsNullOrEmpty(GitModel.SelectHU.Value))
-                {
-                    handler.MensajeError("Seleccione la historia de usuario.");
-                    return;
-                }
-
                 if (string.IsNullOrEmpty(GitModel.Comentario))
                 {
                     handler.MensajeError("Ingrese un comentario para el commit.");
@@ -220,8 +214,10 @@ namespace Cygnus2_0.ViewModel.Git
                 
                 GitModel.ActivaAprobRamas = false;
 
-                pEjecutarSonar();
+                if(GitModel.EjecutaSonar)
+                    pEjecutarSonar();
 
+                handler.CursorNormal();
                 handler.MensajeOk("Continue creando manualmente las ramas Feature!");
             }
             catch(Exception ex)

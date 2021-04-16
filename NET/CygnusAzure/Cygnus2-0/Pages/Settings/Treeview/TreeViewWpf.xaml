@@ -55,7 +55,7 @@
                     <TreeViewItem Header="Grants" Uid="32"/>
                     <TreeViewItem Header="Usuarios" Uid="33"/>
                 </TreeViewItem>
-                <TreeViewItem Header="Mvm" IsExpanded="True" Uid="104">
+                <TreeViewItem Header="Herramientas Gestión" IsExpanded="True" Uid="104">
                     <TreeViewItem Header="Azure" Uid="100"/>
                     <TreeViewItem Header="Sonar" Uid="101"/>
                     <TreeViewItem Header="Git" Uid="102"/>
@@ -63,7 +63,7 @@
                 <TreeViewItem Header="Documentación" IsExpanded="True" Uid="60">
                     <TreeViewItem Header="Configuración" Uid="62"/>
                     <TreeViewItem Header="HTML" Uid="63"/>
-                    <TreeViewItem Header="Estándar" Uid="64" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}"/>
+                    <TreeViewItem Header="Lineamientos PLSQL" Uid="64" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Ayuda" IsExpanded="True" Uid="90">
                     <TreeViewItem Header="Acerca De" Uid="91"/>

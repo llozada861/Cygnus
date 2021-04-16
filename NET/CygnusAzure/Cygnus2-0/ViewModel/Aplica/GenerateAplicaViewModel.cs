@@ -156,7 +156,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                     process.Kill();
                 }
 
-                if (string.IsNullOrEmpty(handler.ConfGeneralViewModel.RutaSqlplus) || handler.ConfGeneralViewModel.RutaSqlplus.Equals(res.RutaSqlplusDefault))
+                if (string.IsNullOrEmpty(handler.ConfGeneralViewModel.Model.RutaSqlplus) || handler.ConfGeneralViewModel.Model.RutaSqlplus.Equals(res.RutaSqlplusDefault))
                 {
                     throw new Exception("No ha configurado la ruta para el Sqlplus. Vaya a Ajustes/General/Rutas.");
                 }
@@ -398,7 +398,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             }
             
 
-            if (handler.ConfGeneralViewModel.EntregaPlantilla)
+            if (handler.ConfGeneralViewModel.Model.EntregaPlantilla)
             {
                 pathBin = Path.Combine(handler.SavePathAplica, "bin");
 
@@ -488,7 +488,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             encabezadoAplica.AppendLine();
 
             //Genera el archivo con los permisos
-            if (handler.ConfGeneralViewModel.Grant)
+            if (handler.ConfGeneralViewModel.Model.Grant)
             {
                 pGeneraArchivosPermisos();
                 //pGeneraArchivosPermisosOA();

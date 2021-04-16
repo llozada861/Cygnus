@@ -1,8 +1,10 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Settings;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,77 +13,41 @@ using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Settings
 {
-    public class ConfGeneralViewModel: ViewModelBase
+    public class ConfGeneralViewModel
     {
         private readonly DelegateCommand _process;
         private Handler handler;
-        private Boolean ordenAutomatico;
-        private Boolean generaHtml;
-        private Boolean grant;
-        private Boolean entregaPlantilla;
-        private Boolean proxy;
-        private string rutaSqlplus;
-        private ConfGeneralModel confGeneralModel;
+
         public ICommand Process => _process;
         public ConfGeneralViewModel(Handler hand)
         {
             _process = new DelegateCommand(OnProcess);
             handler = hand;
-            confGeneralModel = new ConfGeneralModel(handler);
-            this.GeneraHtml = true;
+            this.Model = new ConfGeneralModel();
+            this.Model.GeneraHtml = true;
+            this.Model.ListaEmpresas = new ObservableCollection<SelectListItem>();
+            this.Model.Empresa = new SelectListItem();
         }
-
-        public Boolean OrdenAutomatico
-        {
-            get { return ordenAutomatico; }
-            set { SetProperty(ref ordenAutomatico, value); }
-        }
-
-        public Boolean GeneraHtml
-        {
-            get { return generaHtml; }
-            set { SetProperty(ref generaHtml, value); }
-        }
-
-        public Boolean Grant
-        {
-            get { return grant; }
-            set { SetProperty(ref grant, value); }
-        }
-        public String RutaSqlplus
-        {
-            get { return rutaSqlplus; }
-            set { SetProperty(ref rutaSqlplus, value); }
-        }
-
-        public Boolean EntregaPlantilla
-        {
-            get { return entregaPlantilla; }
-            set { SetProperty(ref entregaPlantilla, value); }
-        }
-        public Boolean Proxy
-        {
-            get { return proxy; }
-            set { SetProperty(ref proxy, value); }
-        }
-
+        public ConfGeneralModel Model { get; set; }
         public void OnProcess(object commandParameter)
         {
             try
             {
-                /*if(string.IsNullOrEmpty(RutaSqlplus))
-                {
-                    handler.MensajeError("Ingrese la ruta dónde se encuentra el sqlplus.exe.");
-                    return;
-                }*/
-
-                this.confGeneralModel.SaveData();
+                SaveData();
                 handler.MensajeOk(res.MensajeExito);
             }
             catch(Exception ex)
             {
                 handler.MensajeError(ex.Message);
             }
+        }
+        public void SaveData()
+        {
+            SqliteDAO.pCreaConfiguracion(res.KeyOrdenAutomatico, "" + Model.OrdenAutomatico);
+            SqliteDAO.pCreaConfiguracion(res.KeyGeneraGrants, "" + Model.Grant);
+            SqliteDAO.pCreaConfiguracion(res.KeyProxy, "" + Model.Proxy);
+            SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "" + Model.Empresa.Value);
+            handler.ConfGeneralViewModel.Model.Empresa = handler.ConfGeneralViewModel.Model.ListaEmpresas.ToList().Find(x => x.Value.Equals(Model.Empresa.Value));
         }
     }
 }
