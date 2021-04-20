@@ -39,24 +39,7 @@ namespace Cygnus2_0.ViewModel.Documentation
         {
             try
             {
-                foreach (Archivo archivo in this.Model.ListaArchivosCargados)
-                {
-                    //Se instancian las listas del archivo
-                    archivo.DocumentacionSinDepurar = new List<StringBuilder>();
-                    archivo.Modificaciones = new List<ModificacionModel>();
-                    archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
-                    handler.ObtenerTipoArchivo(archivo, res.No_aplica);
-                    if (handler.pDepuraDocumentacion(archivo))
-                    {
-                        pAdicionarArchivo
-                        (
-                            archivo.NombreObjeto + res.ExtensionHtml,
-                            res.TipoHtml,
-                            "Documentación HTML",
-                            archivo.Ruta
-                        );
-                    }
-                }
+                handler.pGeneraArchivoHtml(this.Model.ListaArchivosCargados, this.Model.ListaObservaciones);
             }
             catch(Exception ex)
             {
@@ -88,10 +71,6 @@ namespace Cygnus2_0.ViewModel.Documentation
 
                 this.Model.ListaArchivosCargados.Add(archivo);
             }
-        }
-        internal void pAdicionarArchivo(string archivoSalida, string tipo, string observacion, string ruta)
-        {
-            this.Model.ListaObservaciones.Add(new SelectListItem { Text = archivoSalida });
         }
     }
 }

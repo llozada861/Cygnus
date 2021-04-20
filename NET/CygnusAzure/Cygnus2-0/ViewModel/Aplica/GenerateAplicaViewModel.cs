@@ -277,6 +277,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             //Se genera el aplica de los objetos entregados
             pGeneraAplica();
+            handler.pGeneraArchivoHtml(this.Model.ListaArchivosCargados, null);
         }
 
         private void pEstablecerOrdenAplica()
@@ -292,29 +293,17 @@ namespace Cygnus2_0.ViewModel.Aplica
 
                 foreach (SelectListItem tipo in handler.ListaTiposObjetos)
                 {
-                    //Si el tipo aplica para obtener las modificaciones
+                    //Si el tipo aplica
                     if (archivo.Tipo != null && archivo.Tipo.Trim().Equals(tipo.Text))
                     {
-                        if (tipo.Value.Equals(res.Si))
+                        if (tipo.CantidadSlash > 0)
                         {
                             //Se lee el archivo
                             pValidaSlashArchivo(archivo);
 
-                            if (tipo.CantidadSlash > 0 && archivo.CantidadSlahs == 0)
+                            if (archivo.CantidadSlahs == 0)
                             {
                                 archivo.CantidadSlahs = -1;
-                            }
-
-                            //Se obtiene la documentación del método
-                            if (handler.pDepuraDocumentacion(archivo))
-                            {
-                                pAdicionarArchivo
-                                (
-                                    archivo.NombreObjeto + res.ExtensionHtml,
-                                    res.TipoHtml,
-                                    "Documentación HTML",
-                                    archivo.Ruta
-                                );
                             }
 
                             archivo.ObjetoSql = true;
