@@ -43,6 +43,7 @@ namespace Cygnus2_0.General
         private ConfGeneralViewModel confGeneralViewModel;
         private AppearanceViewModel settings;
         private MarkDAO dao;
+
         private string estadoConn;
         private bool roleAdmin;
         private bool roleEspecialist;
@@ -375,6 +376,23 @@ namespace Cygnus2_0.General
                                 break;
                         }
                     }
+                }
+            }
+        }
+
+        internal void pGeneraArchivoHtml(ObservableCollection<Archivo> listaArchivosCargados, ObservableCollection<SelectListItem> listaObs)
+        {
+            foreach (Archivo archivo in listaArchivosCargados)
+            {
+                //Se instancian las listas del archivo
+                archivo.DocumentacionSinDepurar = new List<StringBuilder>();
+                archivo.Modificaciones = new List<ModificacionModel>();
+                archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
+                this.ObtenerTipoArchivo(archivo, res.No_aplica);
+
+                if (this.pDepuraDocumentacion(archivo) && listaObs != null)
+                {
+                    listaObs.Add(new SelectListItem { Text = archivo.NombreObjeto + res.ExtensionHtml });
                 }
             }
         }
