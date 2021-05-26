@@ -21,5 +21,6 @@ namespace Cygnus2_0.General
         public string Azure { set; get; }
         public string Git { set; get; }
         public string Sonar { set; get; }
+        public string DocumentoAD { set; get; }
     }
 }

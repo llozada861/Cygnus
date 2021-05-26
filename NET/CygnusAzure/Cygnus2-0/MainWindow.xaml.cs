@@ -307,7 +307,7 @@ namespace Cygnus2_0
             {
                 string[] query = 
                     {
-                        "DROP table object_type",
+                        /*"DROP table object_type",
                         "CREATE TABLE object_type (    codigo  INTEGER PRIMARY KEY AUTOINCREMENT,    object  TEXT,    slash   TEXT,    count_slash INTEGER,    priority    TEXT,    grant   BLOB)",
                         "CREATE TABLE object_path (    codigo  INTEGER PRIMARY KEY AUTOINCREMENT,    object_type INTEGER,    path    TEXT,    user_default    TEXT,    company INTEGER,    FOREIGN KEY(object_type) REFERENCES object_type(codigo))",
                         "insert into object_type (codigo,object,slash,count_slash,priority,grant) values (1,'Funcion','S',1,300,'E')",
@@ -386,7 +386,9 @@ namespace Cygnus2_0
                         "INSERT INTO conection SELECT * FROM old_conection",
                         "update conection set company = 99",
                         "drop table paths",
-                        "drop table old_conection"
+                        "drop table old_conection",*/
+                        "alter table company add documentoad TEXT",
+                        "update company set documentoad = 'OpenEPM10_Analisis_Diseno' where codigo = 99"
                     };
 
                 foreach (string sql in query)

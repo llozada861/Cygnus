@@ -185,7 +185,7 @@ namespace Cygnus2_0.ViewModel.Git
                         }
                     }
 
-                    if (archivo.FileName.ToUpper().StartsWith(res.DocuArquitecturaObjetos.ToUpper()))
+                    if (archivo.FileName.ToUpper().StartsWith(handler.ConfGeneralViewModel.Model.Empresa.DocumentoAD.ToUpper()))
                     {
                         blDocArquitectura = true;
                     }
@@ -199,7 +199,7 @@ namespace Cygnus2_0.ViewModel.Git
 
                 if (!blDocArquitectura)
                 {
-                    handler.MensajeError("Debe adicionar el documento de arquitectura.");
+                    handler.MensajeError("Debe adicionar el documento de arquitectura con prefijo ["+ handler.ConfGeneralViewModel.Model.Empresa+"]");
                     return;
                 }
 

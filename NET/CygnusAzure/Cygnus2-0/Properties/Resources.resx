@@ -1849,12 +1849,12 @@ sonar.password=[pass]</value>
   <data name="SonarProperties" xml:space="preserve">
     <value>#sonar-project.properties
 # must be unique in a given SonarQube instance
-sonar.projectKey=Open
+sonar.projectKey=Open.BaseDeDatos
 
 # --- optional properties ---
 
 # defaults to project key
-sonar.projectName=Open.BaseDatos
+#sonar.projectName=Open.BaseDatos
 # defaults to 'not provided'
 #sonar.projectVersion=1.0
  
