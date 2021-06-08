@@ -13,7 +13,7 @@
         <!-- Especialista-->
         <mui:ModernTab Layout="Tab" SelectedSource="/Pages/Security/User.xaml" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}">
             <mui:ModernTab.Links>
-                <!--<mui:Link DisplayName="Encriptar" Source="/Pages/Security/EncryptPass.xaml" />-->
+                <mui:Link DisplayName="Encriptar" Source="/Pages/Security/EncryptPass.xaml" />
                 <mui:Link DisplayName="Crear Usuario" Source="/Pages/Security/User.xaml" />
                 <mui:Link DisplayName="Rol" Source="/Pages/Security/Role.xaml" />
                 <mui:Link DisplayName="Version Cygnus" Source="/Pages/Security/Version.xaml" />
@@ -22,8 +22,8 @@
 
         <!-- Admin -->
         <mui:ModernTab Layout="Tab" SelectedSource="/Pages/Security/User.xaml" Visibility="{Binding IsAdmin, Converter={StaticResource booleanToVisibilityConverter}}">
-            <mui:ModernTab.Links>                
-                <!--<mui:Link DisplayName="Encriptar" Source="/Pages/Security/EncryptPass.xaml" />-->
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="Encriptar" Source="/Pages/Security/EncryptPass.xaml" />
                 <mui:Link DisplayName="Crear Usuario" Source="/Pages/Security/User.xaml" />
                 <mui:Link DisplayName="Rol" Source="/Pages/Security/Role.xaml" />
                 <mui:Link DisplayName="Version Cygnus" Source="/Pages/Security/Version.xaml" />

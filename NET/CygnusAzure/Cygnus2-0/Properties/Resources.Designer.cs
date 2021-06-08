@@ -2839,12 +2839,12 @@ namespace Cygnus2_0.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a #sonar-project.properties
         ///# must be unique in a given SonarQube instance
-        ///sonar.projectKey=Open
+        ///sonar.projectKey=Open.BaseDeDatos
         ///
         ///# --- optional properties ---
         ///
         ///# defaults to project key
-        ///sonar.projectName=Open.BaseDatos
+        ///#sonar.projectName=Open.BaseDatos
         ///# defaults to &apos;not provided&apos;
         ///#sonar.projectVersion=1.0
         /// 
@@ -2854,7 +2854,7 @@ namespace Cygnus2_0.Properties {
         ///#sonar.branch=desarrollo
         ///sonar.branch.name=[rama]
         ///# Encoding of the source code. Default is default system encoding
-        ///#sonar.sourceEncoding=U [resto de la cadena truncado]&quot;;.
+        ///#sonar.sou [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string SonarProperties {
             get {

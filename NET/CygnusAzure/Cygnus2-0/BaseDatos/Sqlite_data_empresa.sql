@@ -103,3 +103,10 @@ CREATE TABLE company (
 );
 
 insert into company (codigo,descripcion,azure,git,sonar) values (99,'EPM','Y','Y','Y');
+
+CREATE TABLE conf_empresa (
+	key	INTEGER,
+	empresa	INTEGER,
+	valor	TEXT,
+	PRIMARY KEY(key,empresa)
+);

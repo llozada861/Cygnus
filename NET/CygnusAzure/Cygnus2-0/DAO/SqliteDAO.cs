@@ -198,20 +198,16 @@ namespace Cygnus2_0.DAO
             if (apply.Equals("Y"))
                 blResultado = true;
             else
-            {
-                if (blExists)
-                    blResultado = true;
-                else
+            {                
+                if (blNuevo)
                 {
-                    if (blNuevo)
-                    {
-                        //Se actualiza la versión
-                        SqliteDAO.pActualizaVersion(handler.fsbVersion);
-                        blResultado = true;
-                    }
-                    else
-                        blResultado = false;
+                    //Se actualiza la versión
+                    SqliteDAO.pActualizaVersion(handler.fsbVersion);
+                    blResultado = true;
                 }
+                else
+                    blResultado = false;
+                
             }
 
             return blResultado;
@@ -473,7 +469,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pListaEmpresas(Handler handler)
         {
-            string query = "select codigo, descripcion, azure,git,sonar from company";
+            string query = "select codigo, descripcion, azure,git,sonar,documentoad from company";
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -501,6 +497,11 @@ namespace Cygnus2_0.DAO
                             item.Sonar = reader.GetString(4);
                         else
                             item.Sonar = "";
+
+                        if (!reader.IsDBNull(5))
+                            item.DocumentoAD = reader.GetString(5);
+                        else
+                            item.DocumentoAD = "";
 
                         handler.ConfGeneralViewModel.Model.ListaEmpresas.Add(item);
                     }

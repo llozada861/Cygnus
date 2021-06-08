@@ -357,6 +357,9 @@
     <Compile Include="Pages\Settings\Documentation\HtmlUserControl.xaml.cs">
       <DependentUpon>HtmlUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Settings\Empresa\EmpresaUserControl.xaml.cs">
+      <DependentUpon>EmpresaUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Settings\Estandar\CRUDEstandarUserControl.xaml.cs">
       <DependentUpon>CRUDEstandarUserControl.xaml</DependentUpon>
     </Compile>
@@ -687,6 +690,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings\Documentation\HtmlUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Empresa\EmpresaUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
