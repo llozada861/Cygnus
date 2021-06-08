@@ -199,7 +199,7 @@ namespace Cygnus2_0.ViewModel.Git
 
                 if (!blDocArquitectura)
                 {
-                    handler.MensajeError("Debe adicionar el documento de arquitectura con prefijo ["+ handler.ConfGeneralViewModel.Model.Empresa+"]");
+                    handler.MensajeError("Debe adicionar el documento de arquitectura con prefijo ["+ handler.ConfGeneralViewModel.Model.Empresa.DocumentoAD+"]");
                     return;
                 }
 

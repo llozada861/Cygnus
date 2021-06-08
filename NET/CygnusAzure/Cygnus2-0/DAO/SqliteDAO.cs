@@ -198,20 +198,16 @@ namespace Cygnus2_0.DAO
             if (apply.Equals("Y"))
                 blResultado = true;
             else
-            {
-                if (blExists)
-                    blResultado = true;
-                else
+            {                
+                if (blNuevo)
                 {
-                    if (blNuevo)
-                    {
-                        //Se actualiza la versión
-                        SqliteDAO.pActualizaVersion(handler.fsbVersion);
-                        blResultado = true;
-                    }
-                    else
-                        blResultado = false;
+                    //Se actualiza la versión
+                    SqliteDAO.pActualizaVersion(handler.fsbVersion);
+                    blResultado = true;
                 }
+                else
+                    blResultado = false;
+                
             }
 
             return blResultado;
@@ -503,7 +499,7 @@ namespace Cygnus2_0.DAO
                             item.Sonar = "";
 
                         if (!reader.IsDBNull(5))
-                            item.DocumentoAD = reader.GetString(4);
+                            item.DocumentoAD = reader.GetString(5);
                         else
                             item.DocumentoAD = "";
 

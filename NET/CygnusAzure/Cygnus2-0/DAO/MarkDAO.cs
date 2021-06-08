@@ -1676,8 +1676,7 @@ namespace Cygnus2_0.DAO
                             "        AND descripcion_hu IS NOT  NULL" +
                             "    )" +
                             "    ORDER BY hist_usuario DESC" +
-                            ")" +
-                            "WHERE ROWNUM < 30" ;
+                            ")";
 
             OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
 
