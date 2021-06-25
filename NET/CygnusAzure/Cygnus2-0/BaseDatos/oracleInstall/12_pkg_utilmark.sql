@@ -2186,7 +2186,8 @@ AS
                     'i' || decode( data_type, 'NUMBER', 'nu', 'VARCHAR2', 'sb', 'DATE', 'dt', 'BOOLEAN', 'bo', 'CLOB', 'cl', 'BLOB', 'bl', 'XMLTYPE', 'xm' ) || substr( tcol.column_name, 1, 1 ) || lower( substr( tcol.column_name, 2 ) ) || ' ' || 'IN' || ' ' || lower( tcol.table_name || '.' || tcol.column_name) || '%TYPE'  param_entrada
             from    all_tab_columns tcol
             where   tcol.table_name = upper( csbTABLA )
-            and     tcol.owner = upper( csbOWNER );
+            and     tcol.owner = upper( csbOWNER )
+            ORDER BY column_id;
                     
         TYPE tytbPrimaria IS TABLE OF cuPrimaria%rowtype INDEX BY binary_integer;
         TYPE tytbCampos IS TABLE OF cuCampos%rowtype INDEX BY binary_integer;
