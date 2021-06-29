@@ -22,5 +22,10 @@ namespace Cygnus2_0.General
         public string Git { set; get; }
         public string Sonar { set; get; }
         public string DocumentoAD { set; get; }
+        public string Activo { set; get; }
+        public string Servidor { set; get; }
+        public string Puerto { set; get; }
+        public string Bd { set; get; }
+        public string Pass { set; get; }
     }
 }

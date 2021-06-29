@@ -84,7 +84,6 @@ namespace Cygnus2_0.Model.Git
         {
             get { return ramaLBSeleccionada; }
             set { SetProperty(ref ramaLBSeleccionada, value);
-                pCreaRamas();
             }
         }
         public ObservableCollection<SelectListItem> ListaRamasLB
@@ -136,19 +135,16 @@ namespace Cygnus2_0.Model.Git
 
         public void pCreaRamas()
         {
-            if(RamaLBSeleccionada != null)
-            { 
-                string ramaDll = res.Feature + this.SelectHU.Value + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_DLL";
-                string ramaPru = res.Feature + this.SelectHU.Value + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PRU";
-                string ramaPdn = res.Feature + this.SelectHU.Value + "_" + RamaLBSeleccionada.Text + "_" + Environment.UserName.ToUpper() + "_PDN";
+            string ramaDll = res.Feature + "HU"+ this.SelectHU.Value + "_" + Environment.UserName.ToUpper() + "_DLL";
+            string ramaPru = res.Feature + "HU" + this.SelectHU.Value + "_" + Environment.UserName.ToUpper() + "_PRU";
+            string ramaPdn = res.Feature + "HU" + this.SelectHU.Value +"_" + Environment.UserName.ToUpper() + "_PDN";
 
-                if (!string.IsNullOrEmpty(this.SelectHU.Value) && !string.IsNullOrEmpty(RamaLBSeleccionada.Text))
-                {
-                    ListaRamasCreadas.Clear();
-                    ListaRamasCreadas.Add(new Archivo { FileName = ramaDll });
-                    ListaRamasCreadas.Add(new Archivo { FileName = ramaPru });
-                    ListaRamasCreadas.Add(new Archivo { FileName = ramaPdn });
-                }
+            if (!string.IsNullOrEmpty(this.SelectHU.Value))
+            {
+                ListaRamasCreadas.Clear();
+                ListaRamasCreadas.Add(new Archivo { FileName = ramaDll });
+                ListaRamasCreadas.Add(new Archivo { FileName = ramaPru });
+                ListaRamasCreadas.Add(new Archivo { FileName = ramaPdn });
             }
         }
     }

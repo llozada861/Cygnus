@@ -19,9 +19,9 @@ namespace Cygnus2_0.Model.Settings
             handler = hand;
         }
 
-        public void SaveData()
+        public void SaveData(string pass)
         {
-            SqliteDAO.pCreaConexion(handler);
+            SqliteDAO.pCreaConexion(handler, pass);
             handler.pRealizaConexion();
 
             /*string filename;
