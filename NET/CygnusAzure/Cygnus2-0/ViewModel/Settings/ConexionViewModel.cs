@@ -92,6 +92,8 @@ namespace Cygnus2_0.ViewModel.Settings
             get { return _passcompila; }
             set { SetProperty(ref _passcompila, value); }
         }
+        public string BdCompila{ set; get; }
+        
         public string Correo
         {
             get { return correo; }

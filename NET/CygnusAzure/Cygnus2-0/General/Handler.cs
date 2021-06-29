@@ -1167,6 +1167,7 @@ namespace Cygnus2_0.General
 
             ConnViewModel.UsuarioCompila = split[0];
             ConnViewModel.PassCompila = split[1];
+            ConnViewModel.BdCompila = split[2];
 
             ConexionOracle.RealizarConexionCompilacion();
         }
