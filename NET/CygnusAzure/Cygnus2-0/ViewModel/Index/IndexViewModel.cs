@@ -229,7 +229,7 @@ namespace Cygnus2_0.ViewModel.Index
 
             try
             {
-                SqliteDAO.pDatosBd(handler);
+                SqliteDAO.pDatosBd(handler,null);
             }
             catch (Exception ex)
             {

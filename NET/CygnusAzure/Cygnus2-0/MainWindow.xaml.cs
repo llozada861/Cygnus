@@ -79,7 +79,7 @@ namespace Cygnus2_0
                             
             try
             {
-                this.Title = "Cygnus [" + fieVersionInfo.FileVersion + "] - Empresa [" + handler.ConfGeneralViewModel.Model.Empresa.Text + "]";
+                this.Title = "Cygnus [" + fieVersionInfo.FileVersion + "] - Empresa [" + handler.ConfGeneralViewModel.Model.Empresa.Text + "] - Base Datos ["+ handler.ConnViewModel.Usuario +" - "+handler.ConnViewModel.BaseDatos+" - "+ handler.ConnViewModel.Servidor+ "]";
             }
             catch
             {
@@ -386,9 +386,14 @@ namespace Cygnus2_0
                         "INSERT INTO conection SELECT * FROM old_conection",
                         "update conection set company = 99",
                         "drop table paths",
-                        "drop table old_conection",*/
+                        "drop table old_conection",
                         "alter table company add documentoad TEXT",
-                        "update company set documentoad = 'OpenEPM10_Analisis_Diseno' where codigo = 99"
+                        "update company set documentoad = 'OpenEPM10_Analisis_Diseno' where codigo = 99"*/
+                        "ALTER TABLE conection RENAME TO old_conection",
+                        "CREATE TABLE conection (user  TEXT,pass TEXT,bd TEXT,server TEXT,port TEXT,active TEXT,company INTEGER, PRIMARY KEY(user,bd,server))",
+                        "INSERT INTO conection SELECT * FROM old_conection",
+                        "drop table old_conection",
+                        "update conection set active = 'S' WHERE rowid=1"
                     };
 
                 foreach (string sql in query)
@@ -400,8 +405,8 @@ namespace Cygnus2_0
                     catch(Exception ex) { }
                 }
 
-                SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "99");
-                handler.pRegeneraIndexListas();
+                //SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "99");
+                //handler.pRegeneraIndexListas();
 
                 //Se actualiza la versión
                 SqliteDAO.pActualizaVersion(handler.fsbVersion);                

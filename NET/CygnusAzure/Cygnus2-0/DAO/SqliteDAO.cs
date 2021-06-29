@@ -124,35 +124,53 @@ namespace Cygnus2_0.DAO
             }
         }
 
-        public static void pCreaConexion(Handler handler)
+        public static void pCreaConexion(Handler handler,string pass)
         {
             string query;
-            string user = handler.ConnViewModel.Usuario;
-            string pass = handler.ConnViewModel.Pass;
-            string serv = handler.ConnViewModel.Servidor;
-            string bd = handler.ConnViewModel.BaseDatos;
-            string port = handler.ConnViewModel.Puerto;
+            string user = handler.ConnViewModel.Conexion.Usuario;
+            string serv = handler.ConnViewModel.Conexion.Servidor;
+            string bd = handler.ConnViewModel.Conexion.Bd;
+            string port = handler.ConnViewModel.Conexion.Puerto;
+
+            handler.ConnViewModel.Usuario = user;
+            handler.ConnViewModel.Pass = pass;
+            handler.ConnViewModel.BaseDatos = bd;
+            handler.ConnViewModel.Servidor = serv;
+            handler.ConnViewModel.Puerto = port;
+
+            string defecto = handler.ConnViewModel.Conexion.BlValor ? "S" : "N";
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
 
                 try
                 {
-                    query = "insert into conection (user,pass,bd,server,port,company) VALUES('" + user + "','" + pass + "','" + bd + "','" + serv + "','" + port + "'," + handler.ConfGeneralViewModel.Model.Empresa.Value + ")";
+                    query = "insert into conection (user,pass,bd,server,port,company,active) VALUES('" + user + "','" + pass + "','" + bd + "','" + serv + "','" + port + "'," + handler.ConfGeneralViewModel.Model.Empresa.Value + ",'"+ defecto+"')";
                     ExecuteNonQuery(query, conn);
                 }
                 catch
                 {
                     query = "update conection set pass ='" + pass + "'," +
-                                                 "bd ='" + bd + "'," +
-                                                 "server = '" + serv + "'," +
-                                                 "port = '" + port + 
-                                                 "' where user = '" + user + "'"+
+                                                 "port = '" + port + "'," +
+                                                 "active = '" + defecto + "'" +
+                                                " where user = '" + user + "'"+
+                                                " and bd = '"+bd+"'"+
+                                                " and server = '"+serv+"'"+
                                                  " and company = "+handler.ConfGeneralViewModel.Model.Empresa.Value;
                     ExecuteNonQuery(query, conn);
                 }
             }
         }
+
+        internal static void pEliminarConexion(SelectListItem conexion)
+        {
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+                string query = "delete from conection where user = '"+conexion.Usuario+"' and bd = '"+conexion.Bd+"'";
+                ExecuteNonQuery(query, conn);
+            }
+        }
+
         public static Boolean pblValidaVersion(Handler handler)
         {
             string query = "select * from version where version_name = '"+handler.fsbVersion+"'";
@@ -508,9 +526,12 @@ namespace Cygnus2_0.DAO
                 }
             }
         }
-        public static void pDatosBd(Handler handler)
+        public static void pDatosBd(Handler handler, SelectListItem conexionActual)
         {
             string query = "select * from conection where company = "+handler.ConfGeneralViewModel.Model.Empresa.Value;
+
+            handler.ConnViewModel.ListaConexiones.Clear();
+            handler.ConnViewModel.Conexion = new SelectListItem();
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -520,11 +541,52 @@ namespace Cygnus2_0.DAO
 
                     while (reader.Read())
                     {
-                        handler.ConnViewModel.Usuario = reader.GetString(0);
-                        handler.ConnViewModel.Pass = reader.GetString(1);
-                        handler.ConnViewModel.BaseDatos = reader.GetString(2);
-                        handler.ConnViewModel.Servidor = reader.GetString(3);
-                        handler.ConnViewModel.Puerto = reader.GetString(4);
+                        SelectListItem item = new SelectListItem();
+                        item.Usuario = reader.GetString(0);
+                        item.Pass = reader.GetString(1);
+                        item.Bd = reader.GetString(2);
+                        item.Servidor = reader.GetString(3);
+                        item.Puerto = reader.GetString(4);
+                        item.Activo = reader.GetString(5);
+                        item.Text = item.Usuario + " - " + item.Bd + " - " + item.Servidor;
+                        item.BlValor = false;
+
+                        if(item.Activo == res.Si)
+                            item.BlValor = true;
+
+                        if (item.BlValor && conexionActual == null)
+                        {
+                            handler.ConnViewModel.Usuario = item.Usuario;
+                            handler.ConnViewModel.Pass = item.Pass;
+                            handler.ConnViewModel.BaseDatos = item.Bd;
+                            handler.ConnViewModel.Servidor = item.Servidor;
+                            handler.ConnViewModel.Puerto = item.Puerto;
+                            handler.ConnViewModel.Conexion.Usuario = handler.ConnViewModel.Usuario;
+                            handler.ConnViewModel.Conexion.Pass = handler.ConnViewModel.Pass;
+                            handler.ConnViewModel.Conexion.Bd = handler.ConnViewModel.BaseDatos;
+                            handler.ConnViewModel.Conexion.Puerto = handler.ConnViewModel.Puerto;
+                            handler.ConnViewModel.Conexion.Servidor = handler.ConnViewModel.Servidor;
+                            handler.ConnViewModel.Conexion.BlValor = item.BlValor;
+                        }
+                        else
+                        {
+                            if (conexionActual != null && conexionActual.Usuario.Equals(item.Usuario) && conexionActual.Bd.Equals(item.Bd) && conexionActual.Servidor.Equals(item.Servidor))
+                            {
+                                handler.ConnViewModel.Usuario = item.Usuario;
+                                handler.ConnViewModel.Pass = item.Pass;
+                                handler.ConnViewModel.BaseDatos = item.Bd;
+                                handler.ConnViewModel.Servidor = item.Servidor;
+                                handler.ConnViewModel.Puerto = item.Puerto;
+                                handler.ConnViewModel.Conexion.Usuario = handler.ConnViewModel.Usuario;
+                                handler.ConnViewModel.Conexion.Pass = handler.ConnViewModel.Pass;
+                                handler.ConnViewModel.Conexion.Bd = handler.ConnViewModel.BaseDatos;
+                                handler.ConnViewModel.Conexion.Puerto = handler.ConnViewModel.Puerto;
+                                handler.ConnViewModel.Conexion.Servidor = handler.ConnViewModel.Servidor;
+                                handler.ConnViewModel.Conexion.BlValor = item.BlValor;
+                            }
+                        }
+
+                        handler.ConnViewModel.ListaConexiones.Add(item);
                     }
                 }
             }

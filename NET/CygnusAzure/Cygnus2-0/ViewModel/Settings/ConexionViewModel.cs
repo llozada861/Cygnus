@@ -1,4 +1,5 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Security;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using res = Cygnus2_0.Properties.Resources;
@@ -32,19 +34,26 @@ namespace Cygnus2_0.ViewModel.Settings
         private string usuarioAzure;
         private string urlAzure;
         ObservableCollection<SelectListItem> listaAreaAzure;
+        ObservableCollection<SelectListItem> listaConexiones;
+        private SelectListItem conexion;
 
         private readonly DelegateCommand _process;
         public readonly DelegateCommand _test;
+        public readonly DelegateCommand _eliminar;
         public ICommand Process => _process;        
         public ICommand Test => _test;
+        public ICommand Eliminar => _eliminar;
 
         public ConexionViewModel(Handler hand)
         {
             _process = new DelegateCommand(OnProcess);
             _test = new DelegateCommand(OnTest);
+            _eliminar = new DelegateCommand(OnEliminar);
             handler = hand;
             conexionModel = new ConexionModel(handler);
             UrlAzure = "https://grupoepm.visualstudio.com";
+            ListaConexiones = new ObservableCollection<SelectListItem>();
+            Conexion = new SelectListItem();
         }
 
         public string Usuario
@@ -104,6 +113,16 @@ namespace Cygnus2_0.ViewModel.Settings
             get { return listaAreaAzure; }
             set { SetProperty(ref listaAreaAzure, value); }
         }
+        public ObservableCollection<SelectListItem> ListaConexiones
+        {
+            get { return listaConexiones; }
+            set { SetProperty(ref listaConexiones, value); }
+        }
+        public SelectListItem Conexion
+        {
+            get { return conexion; }
+            set { SetProperty(ref conexion, value);}
+        }
 
         public void OnProcess(object commandParameter)
         {
@@ -111,9 +130,9 @@ namespace Cygnus2_0.ViewModel.Settings
             {
                 this.Pass = ((PasswordBox)commandParameter).Password;
 
-                if (string.IsNullOrEmpty(Usuario))
+                if (string.IsNullOrEmpty(Conexion.Usuario))
                 {
-                    handler.MensajeError("Ingrese una usuario.");
+                    handler.MensajeError("Ingrese un usuario.");
                     return;
                 }
                 
@@ -123,29 +142,36 @@ namespace Cygnus2_0.ViewModel.Settings
                     return;
                 }
 
-                if (string.IsNullOrEmpty(BaseDatos))
+                if (string.IsNullOrEmpty(Conexion.Bd))
                 {
-                    handler.MensajeError("Ingrese una usuario.");
+                    handler.MensajeError("Ingrese una base de datos.");
                     return;
                 }
 
-                if (string.IsNullOrEmpty(Puerto))
+                if (string.IsNullOrEmpty(Conexion.Puerto))
                 {
                     handler.MensajeError("Ingrese un puerto.");
                     return;
                 }
 
-                if (string.IsNullOrEmpty(Servidor))
+                if (string.IsNullOrEmpty(Conexion.Servidor))
                 {
                     handler.MensajeError("Ingrese un servidor.");
                     return;
                 }
 
-                this.conexionModel.SaveData();
+                handler.CursorWait();
+                this.conexionModel.SaveData(this.Pass);
+                SqliteDAO.pDatosBd(handler, Conexion);
+                handler.CursorNormal();
+                var myWin = (MainWindow)Application.Current.MainWindow;
+                myWin.pVersion();
                 handler.MensajeOk("Conexión éxitosa.");
+                onClean();
             }
             catch(Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }
@@ -162,6 +188,48 @@ namespace Cygnus2_0.ViewModel.Settings
             {
                 handler.MensajeError(ex.Message);
             }
-        } 
+        }
+
+        public void OnEliminar(object commandParameter)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(Conexion.Usuario))
+                {
+                    handler.MensajeError("Ingrese un usuario.");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Conexion.Bd))
+                {
+                    handler.MensajeError("Ingrese una base de datos.");
+                    return;
+                }
+
+                if(handler.MensajeConfirmacion("Seguro que desea eliminar la conexión ["+ Conexion.Usuario+" - "+ Conexion.Bd+"]?") == "Y")
+                {
+                    handler.CursorWait();
+                    SqliteDAO.pEliminarConexion(Conexion);
+                    SqliteDAO.pDatosBd(handler, null);
+                    handler.CursorNormal();
+                    handler.MensajeOk("Proceso terminó con éxito.");
+                }
+            }
+            catch (Exception ex)
+            {
+                handler.CursorNormal();
+                handler.MensajeError(ex.Message);
+            }
+        }
+
+        public void onClean()
+        {
+            handler.ConnViewModel.Conexion.Usuario = "";
+            handler.ConnViewModel.Conexion.Servidor = "";
+            handler.ConnViewModel.Conexion.Bd = "";
+            handler.ConnViewModel.Conexion.BlValor = false;
+            handler.ConnViewModel.Conexion.Puerto = "";
+            handler.ConnViewModel.Conexion.Pass = "";
+        }
     }
 }

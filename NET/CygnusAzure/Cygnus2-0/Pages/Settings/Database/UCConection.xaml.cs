@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 using Cygnus2_0.General;
+using Cygnus2_0.Pages.General;
 
 namespace Cygnus2_0.Pages.Settings
 {
@@ -34,6 +35,32 @@ namespace Cygnus2_0.Pages.Settings
             InitializeComponent();
 
             passwordBox.Password = handler.ConnViewModel.Pass;
+        }
+        protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = handler.ConnViewModel.ListaConexiones.Where((hu, match) => hu.Usuario.ToLower().Contains(args.Pattern.ToLower()));
+        }
+
+        private void AucomboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (handler.ConnViewModel.Conexion != null)
+                    passwordBox.Password = handler.ConnViewModel.Conexion.Pass;
+            }
+            catch { }
+        }
+
+        private void BtnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            handler.ConnViewModel.OnEliminar(null);
+            passwordBox.Password = "";
+        }
+
+        private void BtnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            handler.ConnViewModel.OnProcess(passwordBox);
+            passwordBox.Password = "";
         }
     }
 }
