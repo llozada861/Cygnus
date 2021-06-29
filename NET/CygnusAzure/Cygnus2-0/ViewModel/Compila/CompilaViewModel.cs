@@ -313,7 +313,7 @@ namespace Cygnus2_0.ViewModel.Compila
             if (this.Model.ListaArchivosCargados.Count > 0)
             {
                 handler.pObtenerUsuarioCompilacion(this.Model.Usuario.Text);
-                credenciales = handler.ConnViewModel.UsuarioCompila + "/" + handler.ConnViewModel.PassCompila + "@" + handler.ConnViewModel.BaseDatos;
+                credenciales = handler.ConnViewModel.UsuarioCompila + "/" + handler.ConnViewModel.PassCompila + "@" + handler.ConnViewModel.BdCompila;
 
                 foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
                 {

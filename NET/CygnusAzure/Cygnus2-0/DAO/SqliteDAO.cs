@@ -166,7 +166,7 @@ namespace Cygnus2_0.DAO
         {
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                string query = "delete from conection where user = '"+conexion.Usuario+"' and bd = '"+conexion.Bd+"'";
+                string query = "delete from conection where user = '"+conexion.Usuario+"' and bd = '"+conexion.Bd+"' and server = '"+conexion.Servidor+"'";
                 ExecuteNonQuery(query, conn);
             }
         }
