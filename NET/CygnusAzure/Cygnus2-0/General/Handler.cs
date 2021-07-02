@@ -166,6 +166,18 @@ namespace Cygnus2_0.General
             #endregion Listas
         }
 
+        internal void ModificaLlaveRegistro()
+        {
+            if (!string.IsNullOrEmpty(this.ConfGeneralViewModel.Model.ValorW))
+            {
+                if (this.ConnViewModel.Conexion.Servidor.ToLower().Equals("epm-do13") || this.ConnViewModel.Conexion.Servidor.ToLower().Equals("10.1.16.32"))
+                {
+                    string valorW = "\"" + this.ConfGeneralViewModel.Model.ValorW + "\\SAEAP.exe \"%1\"";
+                    Microsoft.Win32.Registry.SetValue(this.ConfGeneralViewModel.Model.LlaveW, null, valorW, Microsoft.Win32.RegistryValueKind.String);
+                }
+            }
+        }
+
         #region AtrViewModels
         public ConexionViewModel ConnViewModel
         {

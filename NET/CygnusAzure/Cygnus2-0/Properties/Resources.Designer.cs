@@ -1281,6 +1281,24 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a LLAVE_WINDOWS.
+        /// </summary>
+        public static string KEY_LLAVEW {
+            get {
+                return ResourceManager.GetString("KEY_LLAVEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a VALOR_WINDOWS.
+        /// </summary>
+        public static string KEY_VALORW {
+            get {
+                return ResourceManager.GetString("KEY_VALORW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a DISPLAYNAME.
         /// </summary>
         public static string keyDisplayName {
@@ -3890,7 +3908,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a scet7yovwwxs62bnzvvzalhyinqtqdldy2em2kmqyb4bt2xpsucq.
+        ///   Busca una cadena traducida similar a o7ue2wxhuejoo4dshlr5kxpypjvmrfi6udami4fe4psmzgbe62ka.
         /// </summary>
         public static string TokenAzureConn {
             get {

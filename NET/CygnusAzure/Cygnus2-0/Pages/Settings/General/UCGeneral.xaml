@@ -48,6 +48,12 @@
                 <CheckBox x:Name="checkBoxGrant" Content="Genera grants?" IsChecked="{Binding Path=Model.Grant}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5"/>
                 <CheckBox x:Name="checkBoxDocu" Content="Genera doc html?" IsChecked="{Binding Path=Model.GeneraHtml}" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="5"/>
                 <CheckBox x:Name="checkBoxProxy" Content="Desactivar proxy?" IsChecked="{Binding Path=Model.Proxy}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="5"/>
+
+                <TextBox x:Name="textBoxLlave" Text="{Binding Path=Model.LlaveW}" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="7" VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Llave Windows" IsEnabled="False"/>
+                <TextBox x:Name="textBoxValor" Text="{Binding Path=Model.ValorW}" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="7" VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Ruta Instalación Open Smartflex V8"/>
+                
                 <!--
                 <CheckBox x:Name="checkBoxOrden" Content="Orden automático?" IsChecked="{Binding Path=OrdenAutomatico}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5"/>
                 <CheckBox x:Name="checkBoxVersion" IsEnabled="false" Content="Ejecutar sqlplus?" IsChecked="{Binding Handl.Formulario.GeneraVersion, Mode = TwoWay}"/>

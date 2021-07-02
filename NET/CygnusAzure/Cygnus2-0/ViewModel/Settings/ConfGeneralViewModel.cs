@@ -47,6 +47,8 @@ namespace Cygnus2_0.ViewModel.Settings
             SqliteDAO.pCreaConfiguracion(res.KeyGeneraGrants, "" + Model.Grant);
             SqliteDAO.pCreaConfiguracion(res.KeyProxy, "" + Model.Proxy);
             SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "" + Model.Empresa.Value);
+            //SqliteDAO.pCreaConfiguracion(res.KEY_LLAVEW, "" + Model.LlaveW);
+            SqliteDAO.pCreaConfiguracion(res.KEY_VALORW, "" + Model.ValorW);
             handler.ConfGeneralViewModel.Model.Empresa = handler.ConfGeneralViewModel.Model.ListaEmpresas.ToList().Find(x => x.Value.Equals(Model.Empresa.Value));
         }
     }

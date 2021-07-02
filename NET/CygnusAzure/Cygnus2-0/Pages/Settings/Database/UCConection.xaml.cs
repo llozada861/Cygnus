@@ -46,7 +46,11 @@ namespace Cygnus2_0.Pages.Settings
             try
             {
                 if (handler.ConnViewModel.Conexion != null)
+                {
                     passwordBox.Password = handler.ConnViewModel.Conexion.Pass;
+
+                    handler.ModificaLlaveRegistro();
+                }
             }
             catch { }
         }
