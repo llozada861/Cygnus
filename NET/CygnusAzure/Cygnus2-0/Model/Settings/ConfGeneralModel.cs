@@ -20,6 +20,8 @@ namespace Cygnus2_0.Model.Settings
         private Boolean entregaPlantilla;
         private Boolean proxy;
         private string rutaSqlplus;
+        private string valorW;
+        private string llaveW;
         private SelectListItem empresa;
         private ObservableCollection<SelectListItem> listaEmpresa;
         public ConfGeneralModel()
@@ -67,6 +69,18 @@ namespace Cygnus2_0.Model.Settings
         {
             get { return listaEmpresa; }
             set { SetProperty(ref listaEmpresa, value); }
+        }
+
+        public String LlaveW
+        {
+            get { return llaveW; }
+            set { SetProperty(ref llaveW, value); }
+        }
+
+        public String ValorW
+        {
+            get { return valorW; }
+            set { SetProperty(ref valorW, value); }
         }
     }
 }

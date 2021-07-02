@@ -1816,7 +1816,7 @@ COMMIT;</value>
     <value>[hilos]</value>
   </data>
   <data name="TokenAzureConn" xml:space="preserve">
-    <value>scet7yovwwxs62bnzvvzalhyinqtqdldy2em2kmqyb4bt2xpsucq</value>
+    <value>o7ue2wxhuejoo4dshlr5kxpypjvmrfi6udami4fe4psmzgbe62ka</value>
   </data>
   <data name="KeyRutaSonar" xml:space="preserve">
     <value>RUTASONAR</value>
@@ -2217,5 +2217,11 @@ END;
   </data>
   <data name="CONEXION_BD" xml:space="preserve">
     <value>CONEXION_BD</value>
+  </data>
+  <data name="KEY_LLAVEW" xml:space="preserve">
+    <value>LLAVE_WINDOWS</value>
+  </data>
+  <data name="KEY_VALORW" xml:space="preserve">
+    <value>VALOR_WINDOWS</value>
   </data>
 </root>

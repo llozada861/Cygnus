@@ -413,6 +413,16 @@ namespace Cygnus2_0.ViewModel.Index
                 string codEmpresa = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_EMPRESA)).Value;
                 handler.ConfGeneralViewModel.Model.Empresa = handler.ConfGeneralViewModel.Model.ListaEmpresas.ToList().Find(x=>x.Value.Equals(codEmpresa));
             }
+
+            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_LLAVEW)))
+            {
+                handler.ConfGeneralViewModel.Model.LlaveW = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_LLAVEW)).Value;
+            }
+
+            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_VALORW)))
+            {
+                handler.ConfGeneralViewModel.Model.ValorW = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_VALORW)).Value;
+            }
         }
         #endregion Configuracion
     }
