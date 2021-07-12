@@ -527,7 +527,7 @@ namespace Cygnus2_0.DAO
             }
         }
         public static void pDatosBd(Handler handler, SelectListItem conexionActual)
-        {
+        { 
             string query = "select * from conection where company = "+handler.ConfGeneralViewModel.Model.Empresa.Value;
 
             handler.ConnViewModel.ListaConexiones.Clear();
