@@ -527,7 +527,7 @@ namespace Cygnus2_0.DAO
             }
         }
         public static void pDatosBd(Handler handler, SelectListItem conexionActual)
-        {
+        { 
             string query = "select * from conection where company = "+handler.ConfGeneralViewModel.Model.Empresa.Value;
 
             handler.ConnViewModel.ListaConexiones.Clear();
@@ -543,34 +543,21 @@ namespace Cygnus2_0.DAO
                     {
                         SelectListItem item = new SelectListItem();
                         item.Usuario = reader.GetString(0);
-                        item.Pass = reader.GetString(1);
-                        item.Bd = reader.GetString(2);
-                        item.Servidor = reader.GetString(3);
-                        item.Puerto = reader.GetString(4);
-                        item.Activo = reader.GetString(5);
-                        item.Text = item.Usuario + " - " + item.Bd + " - " + item.Servidor;
-                        item.BlValor = false;
 
-                        if(item.Activo == res.Si)
-                            item.BlValor = true;
+                        if (!item.Usuario.ToLower().Equals("sql_usuario"))
+                        {
+                            item.Pass = reader.GetString(1);
+                            item.Bd = reader.GetString(2);
+                            item.Servidor = reader.GetString(3);
+                            item.Puerto = reader.GetString(4);
+                            item.Activo = reader.GetString(5);
+                            item.Text = item.Usuario + " - " + item.Bd + " - " + item.Servidor;
+                            item.BlValor = false;
 
-                        if (item.BlValor && conexionActual == null)
-                        {
-                            handler.ConnViewModel.Usuario = item.Usuario;
-                            handler.ConnViewModel.Pass = item.Pass;
-                            handler.ConnViewModel.BaseDatos = item.Bd;
-                            handler.ConnViewModel.Servidor = item.Servidor;
-                            handler.ConnViewModel.Puerto = item.Puerto;
-                            handler.ConnViewModel.Conexion.Usuario = handler.ConnViewModel.Usuario;
-                            handler.ConnViewModel.Conexion.Pass = handler.ConnViewModel.Pass;
-                            handler.ConnViewModel.Conexion.Bd = handler.ConnViewModel.BaseDatos;
-                            handler.ConnViewModel.Conexion.Puerto = handler.ConnViewModel.Puerto;
-                            handler.ConnViewModel.Conexion.Servidor = handler.ConnViewModel.Servidor;
-                            handler.ConnViewModel.Conexion.BlValor = item.BlValor;
-                        }
-                        else
-                        {
-                            if (conexionActual != null && conexionActual.Usuario.Equals(item.Usuario) && conexionActual.Bd.Equals(item.Bd) && conexionActual.Servidor.Equals(item.Servidor))
+                            if (item.Activo == res.Si)
+                                item.BlValor = true;
+
+                            if (item.BlValor && conexionActual == null)
                             {
                                 handler.ConnViewModel.Usuario = item.Usuario;
                                 handler.ConnViewModel.Pass = item.Pass;
@@ -584,9 +571,26 @@ namespace Cygnus2_0.DAO
                                 handler.ConnViewModel.Conexion.Servidor = handler.ConnViewModel.Servidor;
                                 handler.ConnViewModel.Conexion.BlValor = item.BlValor;
                             }
-                        }
+                            else
+                            {
+                                if (conexionActual != null && conexionActual.Usuario.Equals(item.Usuario) && conexionActual.Bd.Equals(item.Bd) && conexionActual.Servidor.Equals(item.Servidor))
+                                {
+                                    handler.ConnViewModel.Usuario = item.Usuario;
+                                    handler.ConnViewModel.Pass = item.Pass;
+                                    handler.ConnViewModel.BaseDatos = item.Bd;
+                                    handler.ConnViewModel.Servidor = item.Servidor;
+                                    handler.ConnViewModel.Puerto = item.Puerto;
+                                    handler.ConnViewModel.Conexion.Usuario = handler.ConnViewModel.Usuario;
+                                    handler.ConnViewModel.Conexion.Pass = handler.ConnViewModel.Pass;
+                                    handler.ConnViewModel.Conexion.Bd = handler.ConnViewModel.BaseDatos;
+                                    handler.ConnViewModel.Conexion.Puerto = handler.ConnViewModel.Puerto;
+                                    handler.ConnViewModel.Conexion.Servidor = handler.ConnViewModel.Servidor;
+                                    handler.ConnViewModel.Conexion.BlValor = item.BlValor;
+                                }
+                            }
 
-                        handler.ConnViewModel.ListaConexiones.Add(item);
+                            handler.ConnViewModel.ListaConexiones.Add(item);
+                        }
                     }
                 }
             }
