@@ -28,7 +28,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <RadioButton x:Name="rdbPreder" Content="Predeterminada" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="rdbPreder_Checked"/>
+            <RadioButton x:Name="rdbPreder" Content="Predeterminada" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="rdbPreder_Checked" />
             <RadioButton x:Name="rdbNueva" Content="Nueva" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="rdbNueva_Checked" />
 
             <Label x:Name="lblTarea" Margin="20,10" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" FontWeight="Bold"  >Tarea</Label>
@@ -39,7 +39,7 @@
 
             <ComboBox x:Name="comboBoxPred" 
                   ItemsSource="{Binding Path=Model.ListaTareasPred}" 
-                  SelectedItem="{Binding Path=TareaPred}"
+                  SelectedItem="{Binding Path=Model.TareaPred}"
                   DisplayMemberPath="Text" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="15,0" VerticalAlignment="Center"/>
 
             <Button x:Name="btnAdd" Content="Guardar"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" Grid.Column="0" Grid.Row="8" Click="btnAdd_Click" />

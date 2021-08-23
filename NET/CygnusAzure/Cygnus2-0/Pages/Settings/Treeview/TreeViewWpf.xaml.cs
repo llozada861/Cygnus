@@ -3,6 +3,7 @@ using Cygnus2_0.Pages.Settings.AdminGeneral;
 using Cygnus2_0.Pages.Settings.AzureData;
 using Cygnus2_0.Pages.Settings.Database;
 using Cygnus2_0.Pages.Settings.Documentation;
+using Cygnus2_0.Pages.Settings.Empresa;
 using Cygnus2_0.Pages.Settings.Estandar;
 using Cygnus2_0.Pages.Settings.General;
 using Cygnus2_0.Pages.Settings.Git;
@@ -138,6 +139,10 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                     break;
                 case 102:
                     userControls = new UserControlGit();
+                    GridMain.Children.Add(userControls);
+                    break;
+                case 103:
+                    userControls = new EmpresaUserControl();
                     GridMain.Children.Add(userControls);
                     break;
                 default:

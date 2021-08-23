@@ -1,4 +1,5 @@
 ﻿using Cygnus2_0.General;
+using Cygnus2_0.ViewModel.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,10 +48,14 @@ namespace Cygnus2_0.Pages.Settings.Empresa
                 return;
             }
 
-            btnModif.Content = cstModificar;
-            grAddMod.Header = cstModificar;
-            txtKey.IsEnabled = false;
-            btnElimi.Visibility = Visibility.Visible;
+            if (btnModif != null)
+            {
+                btnModif.Content = cstModificar;
+                grAddMod.Header = cstModificar;
+                txtKey.IsEnabled = false;
+                btnElimi.Visibility = Visibility.Visible;
+            }
+                
         }
         public void pLimpiar()
         {
@@ -58,8 +63,21 @@ namespace Cygnus2_0.Pages.Settings.Empresa
             grAddMod.Header = cstAdicionar;
             txtKey.IsEnabled = true;
             btnElimi.Visibility = Visibility.Hidden;
-            //view = new EstandarViewModel(handler);
-            //DataContext = view;
+        }
+
+        private void BtnElimi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnModif_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
