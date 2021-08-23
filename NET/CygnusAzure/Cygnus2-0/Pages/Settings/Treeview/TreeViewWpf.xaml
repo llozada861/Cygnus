@@ -44,6 +44,7 @@
 
             <TreeView Name="TreeViewApp" SelectedItemChanged="TreeView_SelectedItemChanged" Grid.Column="0" >
                 <TreeViewItem Header="General" IsExpanded="True" Uid="0">
+                    <!--<TreeViewItem Header="Empresas" Uid="103"/>-->
                     <TreeViewItem Header="Apariencia" Uid="1"/>
                     <TreeViewItem Header="Configuración" Uid="2"/>
                     <TreeViewItem Header="Palabras reservadas" Uid="3"/>

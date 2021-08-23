@@ -22,7 +22,8 @@
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
-                      SelectionChanged="dataGridDatos_SelectionChanged"  >
+                      SelectionChanged="dataGridDatos_SelectionChanged" 
+                      >
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
                   IsReadOnly="True"
@@ -34,20 +35,20 @@
                   Binding="{Binding Path=Text}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
+                  Header="Documento AD"
+                  Binding="{Binding Path=DocumentoAD}" />
+                   <DataGridTextColumn                  
+                  IsReadOnly="True"
                   Header="Azure"
-                  Binding="{Binding Path=Observacion}" Width="600" />
+                  Binding="{Binding Path=Azure}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
                   Header="Git"
-                  Binding="{Binding Path=Observacion}" Width="600" />
+                  Binding="{Binding Path=Git}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
                   Header="Sonar"
-                  Binding="{Binding Path=Observacion}" Width="600" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Documento AD"
-                  Binding="{Binding Path=Observacion}" Width="600" />
+                  Binding="{Binding Path=Sonar}" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -76,34 +77,37 @@
                 </Grid.RowDefinitions>
                 <TextBox Name="txtKey" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
                          Text="{Binding Path=Model.Empresa.Value}" 
-                         Style="{StaticResource placeHolder}" Tag="Key" Margin="10,0" CharacterCasing="Upper"/>
+                         Style="{StaticResource placeHolder}" Tag="Código" Margin="10,0" CharacterCasing="Upper"/>
                 <TextBox Name="txtDesc" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"
                          Text="{Binding Path=Model.Empresa.Text}"
-                         Style="{StaticResource placeHolder}" Tag="Descripción" Margin="10,0"/>
-                <TextBox Name="txtAzure" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4"
-                         Text="{Binding Path=Model.Empresa.Text}"
-                         Style="{StaticResource placeHolder}" Tag="Descripción" Margin="10,0"/>
-                <TextBox Name="txtGit" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4"
-                         Text="{Binding Path=Model.Empresa.Text}"
-                         Style="{StaticResource placeHolder}" Tag="Descripción" Margin="10,0"/>
-                <TextBox Name="txtSonar" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4"
-                         Text="{Binding Path=Model.Empresa.Text}"
-                         Style="{StaticResource placeHolder}" Tag="Descripción" Margin="10,0"/>
-                <TextBox Name="txtDocumentoAD" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4"
-                         Text="{Binding Path=Model.Empresa.Text}"
-                         Style="{StaticResource placeHolder}" Tag="Descripción" Margin="10,0"/>
+                         Style="{StaticResource placeHolder}" Tag="Empresa" Margin="10,0"/>
+                <TextBox Name="txtDocu" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4"
+                         Text="{Binding Path=Model.Empresa.DocumentoAD}"
+                         Style="{StaticResource placeHolder}" Tag="Documento AD" Margin="10,0"/>
+
+                <CheckBox x:Name="checkBoxAzure" Content="Azure?" IsChecked="{Binding Path=Model.Empresa.Azure}" 
+                          Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0"/>
+
+                <CheckBox x:Name="checkBoxGit" Content="Git?" IsChecked="{Binding Path=Model.Empresa.Git}" 
+                          Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="10,0"/>
+
+                <CheckBox x:Name="checkBoxSonar" Content="Sonar?" IsChecked="{Binding Path=Model.Empresa.Sonar}" 
+                          Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="10,0"/>
+
+                <CheckBox x:Name="checkBoxDefault" Content="Empresa Por Defecto?" IsChecked="{Binding Path=Model.Empresa.BlValor}" 
+                          Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="10,0"/>
 
                 <Button Name="btnElimi" Content="Eliminar" VerticalAlignment="Center" 
-                         Grid.Column="1" Grid.Row="10" 
-                        HorizontalAlignment="Right" Visibility="Hidden"/>
+                         Grid.Column="0" Grid.Row="10" 
+                        HorizontalAlignment="Right" Visibility="Hidden" Click="BtnElimi_Click" />
 
                 <Button Name="btnModif" Content="Modificar" VerticalAlignment="Center" 
                          Grid.Column="2" Grid.Row="10" 
-                        HorizontalAlignment="Right" />
+                        HorizontalAlignment="Right" Click="BtnModif_Click" />
 
                 <Button Name="btnLimpiar" Content="Limpiar" VerticalAlignment="Center" 
                          Grid.Column="3" Grid.Row="10" 
-                        HorizontalAlignment="Right" />
+                        HorizontalAlignment="Right" Click="BtnLimpiar_Click" />
             </Grid>
         </GroupBox>
     </Grid>

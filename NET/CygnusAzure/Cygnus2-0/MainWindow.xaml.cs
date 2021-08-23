@@ -123,14 +123,14 @@ namespace Cygnus2_0
                     request.ShowDialog();
                 }
 
-                if (handler.ConfGeneralViewModel.Model.Empresa.Git == res.YES && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
+                if (handler.ConfGeneralViewModel.Model.Empresa.Git && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
                 {
                     userControls = new UserControlGit();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el repositorio Git...",null);
                     request.ShowDialog();
                 }
 
-                if (handler.ConfGeneralViewModel.Model.Empresa.Sonar == res.YES && string.IsNullOrEmpty(handler.RutaSonar))
+                if (handler.ConfGeneralViewModel.Model.Empresa.Sonar && string.IsNullOrEmpty(handler.RutaSonar))
                 {
                     userControls = new UserControlSonar();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura o instala el Sonar...",null);
@@ -146,7 +146,7 @@ namespace Cygnus2_0
             {
                 handler.pRealizaConexion();
 
-                if (handler.ConfGeneralViewModel.Model.Empresa.Azure == res.YES && Next && string.IsNullOrEmpty(handler.ConnViewModel.UsuarioAzure)) 
+                if (handler.ConfGeneralViewModel.Model.Empresa.Azure && Next && string.IsNullOrEmpty(handler.ConnViewModel.UsuarioAzure)) 
                 {
                     userControls = new Azure();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el acceso a AzureDevops",null);

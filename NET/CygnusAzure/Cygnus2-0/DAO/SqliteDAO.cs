@@ -502,19 +502,19 @@ namespace Cygnus2_0.DAO
                         item.Text = reader.GetString(1);
 
                         if (!reader.IsDBNull(2))
-                            item.Azure = reader.GetString(2);
+                            item.Azure = reader.GetString(2) == res.Si ? true : false; 
                         else
-                            item.Azure = "";
+                            item.Azure = false;
 
                         if (!reader.IsDBNull(3))
-                            item.Git = reader.GetString(3);
+                            item.Git = reader.GetString(3) == res.Si ? true : false; 
                         else
-                            item.Git = "";
+                            item.Git = false;
 
                         if (!reader.IsDBNull(4))
-                            item.Sonar = reader.GetString(4);
+                            item.Sonar = reader.GetString(4) == res.Si ? true : false; 
                         else
-                            item.Sonar = "";
+                            item.Sonar = false;
 
                         if (!reader.IsDBNull(5))
                             item.DocumentoAD = reader.GetString(5);

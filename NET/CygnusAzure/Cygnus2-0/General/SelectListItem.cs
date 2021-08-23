@@ -18,9 +18,9 @@ namespace Cygnus2_0.General
         public Boolean BlValor { set; get; }
         public string Path { set; get; }
         public string Usuario { set; get; }
-        public string Azure { set; get; }
-        public string Git { set; get; }
-        public string Sonar { set; get; }
+        public Boolean Azure { set; get; }
+        public Boolean Git { set; get; }
+        public Boolean Sonar { set; get; }
         public string DocumentoAD { set; get; }
         public string Activo { set; get; }
         public string Servidor { set; get; }
