@@ -122,9 +122,9 @@ BEGIN
     dtTiempoInicia := SYSTIMESTAMP;
     
     sbArchivoSalidaDatos      := sbNumeroOC||'_CREA_USUA_ASIG_PERMISOS_POR_USUARIO_'||TO_CHAR(SYSDATE,'yyyymmdd_hh24miss')||'.txt';
-    iflFileHandle_out         := UTL_FILE.FOPEN (sbRuta, sbArchivoSalidaDatos, 'w');
+    iflFileHandle_out         := PKG_EPM_GestionArchivos.fflAbrirArchivo (sbRuta, sbArchivoSalidaDatos, 'w');
     sbArchivoSalidaDatos_err  := sbNumeroOC||'_CREA_USUA_ASIG_PERMISOS_POR_USUARIO_ERR_'||TO_CHAR(SYSDATE,'yyyymmdd_hh24miss')||'.txt';
-    iflFileHandle_err         := UTL_FILE.FOPEN (sbRuta, sbArchivoSalidaDatos_err, 'w');
+    iflFileHandle_err         := PKG_EPM_GestionArchivos.fflAbrirArchivo (sbRuta, sbArchivoSalidaDatos_err, 'w');
 	
 	open cuUsuarios;
 	fetch cuUsuarios bulk collect into tblUsuarios;

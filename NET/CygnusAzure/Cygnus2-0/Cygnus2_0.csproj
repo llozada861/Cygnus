@@ -494,6 +494,7 @@
     <EmbeddedResource Include="BaseDatos\oracleInstall\Aplica_FLEX.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\FENIX.sql" />
     <None Include="BaseDatos\scriptCreaUsuario.sql" />
+    <Content Include="BaseDatos\oracleInstall\p_DC_GeneraAudit.sql" />
     <Content Include="img\Fullname.png" />
     <EmbeddedResource Include="Libs\Newtonsoft.Json.dll" />
     <EmbeddedResource Include="Libs\FirstFloor.ModernUI.dll" />
