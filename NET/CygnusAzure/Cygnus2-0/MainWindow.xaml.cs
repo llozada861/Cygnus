@@ -79,7 +79,7 @@ namespace Cygnus2_0
                             
             try
             {
-                this.Title = "Cygnus [" + fieVersionInfo.FileVersion + "] - Empresa [" + handler.ConfGeneralViewModel.Model.Empresa.Text + "] - Base Datos ["+ handler.ConnViewModel.Usuario +" - "+handler.ConnViewModel.BaseDatos+" - "+ handler.ConnViewModel.Servidor+ "]";
+                this.Title = "Cygnus [" + fieVersionInfo.FileVersion + "] - Empresa [" + handler.ConfGeneralView.Model.Empresa.Text + "] - Base Datos ["+ handler.ConnView.Model.Conexion.Etiqueta + "]";
             }
             catch
             {
@@ -102,35 +102,35 @@ namespace Cygnus2_0
 
             try
             {
-                if (handler.ConfGeneralViewModel.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralViewModel.Model.Empresa.Value) || handler.ConfGeneralViewModel.Model.Empresa.Value == "-")
+                if (handler.ConfGeneralView.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value) || handler.ConfGeneralView.Model.Empresa.Value == "-")
                 {
                     userControls = new UCGeneral();
                     RequetInfo request = new RequetInfo(userControls,handler, this, "Antes de empezar, configure la Empresa...",res.KEY_EMPRESA);
                     request.ShowDialog();
                 }
 
-                if (Next && handler.ConnViewModel.Usuario == null || handler.ConnViewModel.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) || string.IsNullOrEmpty(handler.ConnViewModel.Usuario))
+                if (Next && handler.ConnView.Model.Usuario == null || handler.ConnView.Model.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) || string.IsNullOrEmpty(handler.ConnView.Model.Usuario))
                 {
-                    userControls = new UCConection();
+                    userControls = new UCConection(res.Nuevo);
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura la conexión a la base de datos...",res.CONEXION_BD);
                     request.ShowDialog();
                 }
 
-                if (Next && handler.ConfGeneralViewModel.Model.RutaSqlplus.Equals(res.RutaSqlplusDefault))
+                if (Next && handler.ConfGeneralView.Model.RutaSqlplus.Equals(res.RutaSqlplusDefault))
                 {
                     userControls = new PathsUserControl();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura la ruta del sqlplus...",res.SQLPLUS);
                     request.ShowDialog();
                 }
 
-                if (handler.ConfGeneralViewModel.Model.Empresa.Git && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
+                if (handler.ConfGeneralView.Model.Empresa.Git && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
                 {
                     userControls = new UserControlGit();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el repositorio Git...",null);
                     request.ShowDialog();
                 }
 
-                if (handler.ConfGeneralViewModel.Model.Empresa.Sonar && string.IsNullOrEmpty(handler.RutaSonar))
+                if (handler.ConfGeneralView.Model.Empresa.Sonar && string.IsNullOrEmpty(handler.RutaSonar))
                 {
                     userControls = new UserControlSonar();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura o instala el Sonar...",null);
@@ -146,7 +146,7 @@ namespace Cygnus2_0
             {
                 handler.pRealizaConexion();
 
-                if (handler.ConfGeneralViewModel.Model.Empresa.Azure && Next && string.IsNullOrEmpty(handler.ConnViewModel.UsuarioAzure)) 
+                if (handler.ConfGeneralView.Model.Empresa.Azure && Next && string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure)) 
                 {
                     userControls = new Azure();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el acceso a AzureDevops",null);
@@ -166,7 +166,7 @@ namespace Cygnus2_0
                             {
                                 actualiza = true;
 
-                                UpdateModel.pDescargarActualizacion(handler.ConnViewModel.Usuario,handler.ConnViewModel.Pass, version,handler.ConnViewModel.Servidor, handler.ConnViewModel.BaseDatos, handler.ConnViewModel.Puerto);
+                                UpdateModel.pDescargarActualizacion(handler.ConnView.Model.Usuario,handler.ConnView.Model.Pass, version,handler.ConnView.Model.Servidor, handler.ConnView.Model.BaseDatos, handler.ConnView.Model.Puerto);
                                 this.Close();
                             }
                             catch { }
@@ -394,6 +394,11 @@ namespace Cygnus2_0
                         "INSERT INTO conection SELECT * FROM old_conection",
                         "drop table old_conection",
                         "update conection set active = 'S' WHERE rowid=1"*/
+                        "ALTER TABLE conection RENAME TO old_conection",
+                        "CREATE TABLE conection (user  TEXT,pass TEXT,bd TEXT,server TEXT,port TEXT,active TEXT,company INTEGER,name_ text, PRIMARY KEY(name_))",
+                        "INSERT INTO conection (name_,user,pass,bd,server,port,active,company) SELECT 'OSF_7',user,pass,bd,server,port,active,company FROM old_conection where lower(server) like '%epm-do08%'",
+                        "INSERT INTO conection (name_,user,pass,bd,server,port,active,company) SELECT 'OSF_8',user,pass,bd,server,port,active,company FROM old_conection where lower(server) like '%epm-do13%'",
+                        "drop table old_conection",
                     };
 
                 foreach (string sql in query)

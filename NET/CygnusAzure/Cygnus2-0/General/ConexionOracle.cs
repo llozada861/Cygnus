@@ -29,11 +29,11 @@ namespace Cygnus2_0.Conn
         {
             string connectionstring = OracleConnString
                                         (
-                                            conexion.Servidor,
-                                            conexion.Puerto,
-                                            conexion.BaseDatos,
-                                            conexion.Usuario,
-                                            conexion.Pass
+                                            conexion.Model.Servidor,
+                                            conexion.Model.Puerto,
+                                            conexion.Model.BaseDatos,
+                                            conexion.Model.Usuario,
+                                            conexion.Model.Pass
                                         );
 
             conexionOracleSql = new OracleConnection(connectionstring);
@@ -44,11 +44,11 @@ namespace Cygnus2_0.Conn
         {
             string connectionstring = OracleConnString
                                         (
-                                            conexion.Servidor,
-                                            conexion.Puerto,
-                                            conexion.BaseDatos,
-                                            conexion.UsuarioCompila,
-                                            conexion.PassCompila
+                                            conexion.Model.Servidor,
+                                            conexion.Model.Puerto,
+                                            conexion.Model.BaseDatos,
+                                            conexion.Model.UsuarioCompila,
+                                            conexion.Model.PassCompila
                                         );
 
             conexionOracleCompila = new OracleConnection(connectionstring);

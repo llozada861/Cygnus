@@ -205,7 +205,7 @@ namespace Cygnus2_0.ViewModel.Time
 
         public void ConsultarAzure(SynchronizationContext uiContext, string sbDiasAtras)
         {
-            if (string.IsNullOrEmpty(handler.ConnViewModel.UsuarioAzure))
+            if (string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure))
             {
                 return;
             }
@@ -333,7 +333,7 @@ namespace Cygnus2_0.ViewModel.Time
 
             VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
             VssConnection connection = null;
-            connection = new VssConnection(new Uri(handler.ConnViewModel.UrlAzure), credentials);
+            connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), credentials);
 
             // create a wiql object and build our query
             var wiql = new Wiql()
@@ -344,13 +344,13 @@ namespace Cygnus2_0.ViewModel.Time
                         "From WorkItems " +
                         "Where [System.WorkItemType] = 'Task' " +
                         "And [System.State] not in ('Removed') " +
-                        "And [System.AssignedTo] = '" + handler.ConnViewModel.UsuarioAzure + "'" +
+                        "And [System.AssignedTo] = '" + handler.ConnView.Model.UsuarioAzure + "'" +
                         "And [System.CreatedDate] > @today-" + sbDiasAtras
             };
             //"And [System.TeamProject] = '" + project + "' " +
 
             // create instance of work item tracking http client
-            using (var httpClient = new WorkItemTrackingHttpClient(new Uri(handler.ConnViewModel.UrlAzure), credentials))
+            using (var httpClient = new WorkItemTrackingHttpClient(new Uri(handler.ConnView.Model.UrlAzure), credentials))
             {
                 // execute the query to get the list of work items in the results
                 var result = await httpClient.QueryByWiqlAsync(wiql).ConfigureAwait(false);
@@ -374,7 +374,7 @@ namespace Cygnus2_0.ViewModel.Time
 
             VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
             VssConnection connection = null;
-            connection = new VssConnection(new Uri(handler.ConnViewModel.UrlAzure), credentials);
+            connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), credentials);
 
             // create a wiql object and build our query
             var wiql = new Wiql()
@@ -384,7 +384,7 @@ namespace Cygnus2_0.ViewModel.Time
                 Query = String.Format("SELECT [System.Id],[System.Title] FROM WorkItemLinks WHERE ([Source].[System.WorkItemType] = 'User Story') And ([System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward') And ([Target].[System.Id] = {0}  AND  [Target].[System.WorkItemType] = 'Task') ORDER BY [System.Id] mode(Recursive,ReturnMatchingChildren)", idTask.ToString()),
             };
 
-            using (var httpClient = new WorkItemTrackingHttpClient(new Uri(handler.ConnViewModel.UrlAzure), credentials))
+            using (var httpClient = new WorkItemTrackingHttpClient(new Uri(handler.ConnView.Model.UrlAzure), credentials))
             {
                 // execute the query to get the list of work items in the results
                 var result = await httpClient.QueryByWiqlAsync(wiql).ConfigureAwait(false);

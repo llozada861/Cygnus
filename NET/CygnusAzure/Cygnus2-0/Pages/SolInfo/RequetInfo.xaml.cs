@@ -44,19 +44,19 @@ namespace Cygnus2_0.Pages.SolInfo
 
             try
             {
-                if (validacion == res.KEY_EMPRESA && handler.ConfGeneralViewModel.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralViewModel.Model.Empresa.Value) || handler.ConfGeneralViewModel.Model.Empresa.Value == "-")
+                if (validacion == res.KEY_EMPRESA && handler.ConfGeneralView.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value) || handler.ConfGeneralView.Model.Empresa.Value == "-")
                 {
                     MessageBox.Show("Seleccione un Empresa para continuar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
-                if (validacion == res.CONEXION_BD && handler.ConnViewModel.Usuario == null || handler.ConnViewModel.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) || string.IsNullOrEmpty(handler.ConnViewModel.Usuario))
+                if (validacion == res.CONEXION_BD && handler.ConnView.Model.Usuario == null || handler.ConnView.Model.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) || string.IsNullOrEmpty(handler.ConnView.Model.Usuario))
                 {
                     MessageBox.Show("Configure la conexión a la BD para continuar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
-                if (validacion == res.SQLPLUS && handler.ConfGeneralViewModel.Model.RutaSqlplus.Equals(res.RutaSqlplusDefault))
+                if (validacion == res.SQLPLUS && handler.ConfGeneralView.Model.RutaSqlplus.Equals(res.RutaSqlplusDefault))
                 {
                     MessageBox.Show("Configure la ruta del SQLPLUS para continuar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;

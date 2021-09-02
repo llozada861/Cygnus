@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 using Cygnus2_0.General;
 using Cygnus2_0.Pages.General;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Settings
 {
@@ -26,28 +27,32 @@ namespace Cygnus2_0.Pages.Settings
     public partial class UCConection : UserControl
     {
         Handler handler;
-        public UCConection()
+        public UCConection(string tipo)
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
             handler = myWin.Handler;
 
-            DataContext = handler.ConnViewModel;
+            DataContext = handler.ConnView;
             InitializeComponent();
 
-            passwordBox.Password = handler.ConnViewModel.Pass;
+            passwordBox.Password = handler.ConnView.Model.Pass;
+
+            if(!tipo.Equals(res.Nuevo))
+                txtEtiqueta.IsEnabled = false;
         }
         protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
         {
-            args.DataSource = handler.ConnViewModel.ListaConexiones.Where((hu, match) => hu.Usuario.ToLower().Contains(args.Pattern.ToLower()));
+            args.DataSource = handler.ConnView.Model.ListaConexiones.Where((hu, match) => hu.Usuario.ToLower().Contains(args.Pattern.ToLower()));
         }
 
         private void AucomboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                if (handler.ConnViewModel.Conexion != null)
+                if (handler.ConnView.Model.Conexion != null)
                 {
-                    passwordBox.Password = handler.ConnViewModel.Conexion.Pass;
+                    txtEtiqueta.IsEnabled = false;
+                    passwordBox.Password = handler.ConnView.Model.Conexion.Pass;
 
                     handler.ModificaLlaveRegistro();
                 }
@@ -57,14 +62,22 @@ namespace Cygnus2_0.Pages.Settings
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            handler.ConnViewModel.OnEliminar(null);
+            handler.ConnView.OnEliminar(null);
             passwordBox.Password = "";
+            txtEtiqueta.IsEnabled = true;
         }
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            handler.ConnViewModel.OnProcess(passwordBox);
+            handler.ConnView.OnProcess(passwordBox);
             passwordBox.Password = "";
+        }
+
+        private void BtnNueva_Click(object sender, RoutedEventArgs e)
+        {
+            txtEtiqueta.IsEnabled = true;
+            passwordBox.Password = "";
+            AucomboBox.SelectedIndex = -1;
         }
     }
 }

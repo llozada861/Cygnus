@@ -27,5 +27,6 @@ namespace Cygnus2_0.General
         public string Puerto { set; get; }
         public string Bd { set; get; }
         public string Pass { set; get; }
+        public string Etiqueta { set; get; }
     }
 }

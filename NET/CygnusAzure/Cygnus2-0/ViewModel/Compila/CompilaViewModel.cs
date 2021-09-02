@@ -313,7 +313,7 @@ namespace Cygnus2_0.ViewModel.Compila
             if (this.Model.ListaArchivosCargados.Count > 0)
             {
                 handler.pObtenerUsuarioCompilacion(this.Model.Usuario.Text);
-                credenciales = handler.ConnViewModel.UsuarioCompila + "/" + handler.ConnViewModel.PassCompila + "@" + handler.ConnViewModel.BdCompila;
+                credenciales = handler.ConnView.Model.UsuarioCompila + "/" + handler.ConnView.Model.PassCompila + "@" + handler.ConnView.Model.BdCompila;
 
                 foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
                 {
@@ -330,7 +330,7 @@ namespace Cygnus2_0.ViewModel.Compila
                     handler.pGuardaLogCompilacion(archivo, this.Model.ArchivosCompilados, res.Antes);
                 }
 
-                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)).ToList(),rutaLog, handler.ConnViewModel.UsuarioCompila);
+                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)).ToList(),rutaLog, handler.ConnView.Model.UsuarioCompila);
             }
 
             Thread.Sleep(4000);

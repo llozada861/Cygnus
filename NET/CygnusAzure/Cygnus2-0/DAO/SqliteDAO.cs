@@ -47,7 +47,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into user_grants (user,company) VALUES('" + value + "',"+ handler.ConfGeneralViewModel.Model.Empresa.Value+ ")";
+                query = "insert into user_grants (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Value+ ")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -57,7 +57,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into userbd (user,company) VALUES('" + value + "',"+ handler.ConfGeneralViewModel.Model.Empresa.Value+")";
+                query = "insert into userbd (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Value+")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -78,7 +78,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into object_head (head,type,priority,end,company) VALUES('" + sbEncabezado + "','" + tipo + "'," + proridad + ",'" + fin + "',"+ handler.ConfGeneralViewModel.Model.Empresa.Value+")";
+                query = "insert into object_head (head,type,priority,end,company) VALUES('" + sbEncabezado + "','" + tipo + "'," + proridad + ",'" + fin + "',"+ handler.ConfGeneralView.Model.Empresa.Value+")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -88,7 +88,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into documentation (tag_ini,tag_fin,attributes,type,end,company) VALUES('" + inicio + "','" + fin + "','" + atributos + "','" + tipo+ "','"+finEnca+ "',"+ handler.ConfGeneralViewModel.Model.Empresa.Value+")";
+                query = "insert into documentation (tag_ini,tag_fin,attributes,type,end,company) VALUES('" + inicio + "','" + fin + "','" + atributos + "','" + tipo+ "','"+finEnca+ "',"+ handler.ConfGeneralView.Model.Empresa.Value+")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -98,7 +98,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "update object_path set path ='" + path + "' where object_type =" + tipo_objeto + " and company = "+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+                query = "update object_path set path ='" + path + "' where object_type =" + tipo_objeto + " and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -119,7 +119,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "update html set documentation ='" + value + "' where name ='" + key + "' and company = "+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+                query = "update html set documentation ='" + value + "' where name ='" + key + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -127,36 +127,37 @@ namespace Cygnus2_0.DAO
         public static void pCreaConexion(Handler handler,string pass)
         {
             string query;
-            string user = handler.ConnViewModel.Conexion.Usuario;
-            string serv = handler.ConnViewModel.Conexion.Servidor;
-            string bd = handler.ConnViewModel.Conexion.Bd;
-            string port = handler.ConnViewModel.Conexion.Puerto;
+            string etiqueta = handler.ConnView.Model.Conexion.Etiqueta.ToUpper();
+            string user = handler.ConnView.Model.Conexion.Usuario;
+            string serv = handler.ConnView.Model.Conexion.Servidor;
+            string bd = handler.ConnView.Model.Conexion.Bd;
+            string port = handler.ConnView.Model.Conexion.Puerto;
 
-            handler.ConnViewModel.Usuario = user;
-            handler.ConnViewModel.Pass = pass;
-            handler.ConnViewModel.BaseDatos = bd;
-            handler.ConnViewModel.Servidor = serv;
-            handler.ConnViewModel.Puerto = port;
+            handler.ConnView.Model.Usuario = user;
+            handler.ConnView.Model.Pass = pass;
+            handler.ConnView.Model.BaseDatos = bd;
+            handler.ConnView.Model.Servidor = serv;
+            handler.ConnView.Model.Puerto = port;
 
-            string defecto = handler.ConnViewModel.Conexion.BlValor ? "S" : "N";
+            string defecto = handler.ConnView.Model.Conexion.BlValor ? "S" : "N";
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
 
                 try
                 {
-                    query = "insert into conection (user,pass,bd,server,port,company,active) VALUES('" + user + "','" + pass + "','" + bd + "','" + serv + "','" + port + "'," + handler.ConfGeneralViewModel.Model.Empresa.Value + ",'"+ defecto+"')";
+                    query = "insert into conection (user,pass,bd,server,port,company,active,name_) VALUES('" + user + "','" + pass + "','" + bd + "','" + serv + "','" + port + "'," + handler.ConfGeneralView.Model.Empresa.Value + ",'"+ defecto+"','"+etiqueta.ToUpper()+"')";
                     ExecuteNonQuery(query, conn);
                 }
                 catch
                 {
                     query = "update conection set pass ='" + pass + "'," +
                                                  "port = '" + port + "'," +
-                                                 "active = '" + defecto + "'" +
-                                                " where user = '" + user + "'"+
-                                                " and bd = '"+bd+"'"+
-                                                " and server = '"+serv+"'"+
-                                                 " and company = "+handler.ConfGeneralViewModel.Model.Empresa.Value;
+                                                 "active = '" + defecto + "'," +
+                                                 "user = '" + user + "'," +
+                                                 "bd = '" + bd + "'," +
+                                                 "server = '" + serv + "'" +
+                                                " where name_ = '" + etiqueta + "'";
                     ExecuteNonQuery(query, conn);
                 }
             }
@@ -166,7 +167,7 @@ namespace Cygnus2_0.DAO
         {
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                string query = "delete from conection where user = '"+conexion.Usuario+"' and bd = '"+conexion.Bd+"' and server = '"+conexion.Servidor+"'";
+                string query = "delete from conection where name_ = '" + conexion.Etiqueta+"'";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -292,7 +293,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select codigo,object,slash,count_slash,priority,grant from object_type order by priority";
 
-            if (!string.IsNullOrEmpty(handler.ConfGeneralViewModel.Model.Empresa.Value))
+            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value))
             {
                 using (SQLiteConnection conn = DbContext.GetInstance())
                 {
@@ -350,7 +351,7 @@ namespace Cygnus2_0.DAO
 
         public static void pListaUsGrants(Handler handler)
         {
-            string query = "select * from user_grants where company ="+handler.ConfGeneralViewModel.Model.Empresa.Value;
+            string query = "select * from user_grants where company ="+handler.ConfGeneralView.Model.Empresa.Value;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -396,7 +397,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pListaUsuarios(Handler handler)
         {
-            string query = "select * from userbd where company = "+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+            string query = "select * from userbd where company = "+ handler.ConfGeneralView.Model.Empresa.Value;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -420,9 +421,9 @@ namespace Cygnus2_0.DAO
 
         public static void pListaRutas(Handler handler)
         {
-            string query = "select object_type,path,user_default,company from object_path where company = "+handler.ConfGeneralViewModel.Model.Empresa.Value;
+            string query = "select object_type,path,user_default,company from object_path where company = "+handler.ConfGeneralView.Model.Empresa.Value;
 
-            if (!string.IsNullOrEmpty(handler.ConfGeneralViewModel.Model.Empresa.Value))
+            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value))
             {
                 using (SQLiteConnection conn = DbContext.GetInstance())
                 {
@@ -463,7 +464,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pListaHTML(Handler handler)
         {
-            string query = "select * from html where company = "+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+            string query = "select * from html where company = "+ handler.ConfGeneralView.Model.Empresa.Value;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -521,17 +522,17 @@ namespace Cygnus2_0.DAO
                         else
                             item.DocumentoAD = "";
 
-                        handler.ConfGeneralViewModel.Model.ListaEmpresas.Add(item);
+                        handler.ConfGeneralView.Model.ListaEmpresas.Add(item);
                     }
                 }
             }
         }
         public static void pDatosBd(Handler handler, SelectListItem conexionActual)
         { 
-            string query = "select * from conection where company = "+handler.ConfGeneralViewModel.Model.Empresa.Value;
+            string query = "select * from conection where company = "+handler.ConfGeneralView.Model.Empresa.Value;
 
-            handler.ConnViewModel.ListaConexiones.Clear();
-            handler.ConnViewModel.Conexion = new SelectListItem();
+            handler.ConnView.Model.ListaConexiones.Clear();
+            handler.ConnView.Model.Conexion = new SelectListItem();
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -551,7 +552,10 @@ namespace Cygnus2_0.DAO
                             item.Servidor = reader.GetString(3);
                             item.Puerto = reader.GetString(4);
                             item.Activo = reader.GetString(5);
-                            item.Text = item.Usuario + " - " + item.Bd + " - " + item.Servidor;
+
+                            if (!reader.IsDBNull(7))
+                                item.Etiqueta = reader.GetString(7);
+
                             item.BlValor = false;
 
                             if (item.Activo == res.Si)
@@ -559,37 +563,39 @@ namespace Cygnus2_0.DAO
 
                             if (item.BlValor && conexionActual == null)
                             {
-                                handler.ConnViewModel.Usuario = item.Usuario;
-                                handler.ConnViewModel.Pass = item.Pass;
-                                handler.ConnViewModel.BaseDatos = item.Bd;
-                                handler.ConnViewModel.Servidor = item.Servidor;
-                                handler.ConnViewModel.Puerto = item.Puerto;
-                                handler.ConnViewModel.Conexion.Usuario = handler.ConnViewModel.Usuario;
-                                handler.ConnViewModel.Conexion.Pass = handler.ConnViewModel.Pass;
-                                handler.ConnViewModel.Conexion.Bd = handler.ConnViewModel.BaseDatos;
-                                handler.ConnViewModel.Conexion.Puerto = handler.ConnViewModel.Puerto;
-                                handler.ConnViewModel.Conexion.Servidor = handler.ConnViewModel.Servidor;
-                                handler.ConnViewModel.Conexion.BlValor = item.BlValor;
+                                handler.ConnView.Model.Usuario = item.Usuario;
+                                handler.ConnView.Model.Pass = item.Pass;
+                                handler.ConnView.Model.BaseDatos = item.Bd;
+                                handler.ConnView.Model.Servidor = item.Servidor;
+                                handler.ConnView.Model.Puerto = item.Puerto;
+                                handler.ConnView.Model.Conexion.Usuario = handler.ConnView.Model.Usuario;
+                                handler.ConnView.Model.Conexion.Pass = handler.ConnView.Model.Pass;
+                                handler.ConnView.Model.Conexion.Bd = handler.ConnView.Model.BaseDatos;
+                                handler.ConnView.Model.Conexion.Puerto = handler.ConnView.Model.Puerto;
+                                handler.ConnView.Model.Conexion.Servidor = handler.ConnView.Model.Servidor;
+                                handler.ConnView.Model.Conexion.BlValor = item.BlValor;
+                                handler.ConnView.Model.Conexion.Etiqueta = item.Etiqueta;
                             }
                             else
                             {
                                 if (conexionActual != null && conexionActual.Usuario.Equals(item.Usuario) && conexionActual.Bd.Equals(item.Bd) && conexionActual.Servidor.Equals(item.Servidor))
                                 {
-                                    handler.ConnViewModel.Usuario = item.Usuario;
-                                    handler.ConnViewModel.Pass = item.Pass;
-                                    handler.ConnViewModel.BaseDatos = item.Bd;
-                                    handler.ConnViewModel.Servidor = item.Servidor;
-                                    handler.ConnViewModel.Puerto = item.Puerto;
-                                    handler.ConnViewModel.Conexion.Usuario = handler.ConnViewModel.Usuario;
-                                    handler.ConnViewModel.Conexion.Pass = handler.ConnViewModel.Pass;
-                                    handler.ConnViewModel.Conexion.Bd = handler.ConnViewModel.BaseDatos;
-                                    handler.ConnViewModel.Conexion.Puerto = handler.ConnViewModel.Puerto;
-                                    handler.ConnViewModel.Conexion.Servidor = handler.ConnViewModel.Servidor;
-                                    handler.ConnViewModel.Conexion.BlValor = item.BlValor;
+                                    handler.ConnView.Model.Usuario = item.Usuario;
+                                    handler.ConnView.Model.Pass = item.Pass;
+                                    handler.ConnView.Model.BaseDatos = item.Bd;
+                                    handler.ConnView.Model.Servidor = item.Servidor;
+                                    handler.ConnView.Model.Puerto = item.Puerto;
+                                    handler.ConnView.Model.Conexion.Usuario = handler.ConnView.Model.Usuario;
+                                    handler.ConnView.Model.Conexion.Pass = handler.ConnView.Model.Pass;
+                                    handler.ConnView.Model.Conexion.Bd = handler.ConnView.Model.BaseDatos;
+                                    handler.ConnView.Model.Conexion.Puerto = handler.ConnView.Model.Puerto;
+                                    handler.ConnView.Model.Conexion.Servidor = handler.ConnView.Model.Servidor;
+                                    handler.ConnView.Model.Conexion.BlValor = item.BlValor;
+                                    handler.ConnView.Model.Conexion.Etiqueta = item.Etiqueta;
                                 }
                             }
 
-                            handler.ConnViewModel.ListaConexiones.Add(item);
+                            handler.ConnView.Model.ListaConexiones.Add(item);
                         }
                     }
                 }
@@ -597,7 +603,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pDocumentacionHtml(Handler handler)
         {
-            string query = "select * from documentation where company ="+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+            string query = "select * from documentation where company ="+ handler.ConfGeneralView.Model.Empresa.Value;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -652,7 +658,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "delete from user_grants where user = '" + value + "' and company = "+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+                query = "delete from user_grants where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -662,7 +668,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "delete from userbd where user = '" + value + "' and company = "+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+                query = "delete from userbd where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -694,7 +700,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "delete from documentation where tag_ini = '" + value + "' and company = "+ handler.ConfGeneralViewModel.Model.Empresa.Value;
+                query = "delete from documentation where tag_ini = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
                 ExecuteNonQuery(query, conn);
             }
         }

@@ -22,6 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.Pages.Settings.Treeview
 {
@@ -86,11 +87,11 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                     GridMain.Children.Add(userControls);
                     break;
                 case 30:
-                    userControls = new UCConection();
+                    userControls = new UCConection(res.No_aplica);
                     GridMain.Children.Add(userControls);
                     break;
                 case 31:
-                    userControls = new UCConection();
+                    userControls = new UCConection(res.No_aplica);
                     GridMain.Children.Add(userControls);
                     break;
                 case 32:

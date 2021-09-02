@@ -79,7 +79,7 @@ namespace Cygnus2_0.ViewModel.Audit
                     File.WriteAllText(saveFileDialog.FileName, tabla.Value, Encoding.Default);
 
                 saveFileDialog = new SaveFileDialog();
-                saveFileDialog.FileName = "trg_aud_epm_aiud_" + Model.Tabla + ".sql";
+                saveFileDialog.FileName = "trg_aud_" + Model.Tabla.ToLower() + ".sql";
 
                 if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     File.WriteAllText(saveFileDialog.FileName, trigger.Value, Encoding.Default);

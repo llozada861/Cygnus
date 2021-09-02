@@ -94,7 +94,7 @@ namespace Cygnus2_0.General
                 pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), handler.RutaGitObjetos);
 
                 Commands.Stage(repo, "*");
-                Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now));
+                Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.ConnView.Model.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.ConnView.Model.Correo, DateTimeOffset.Now));
             }
         }
 
@@ -105,7 +105,7 @@ namespace Cygnus2_0.General
             using (var repo = new Repository(@handler.RutaGitObjetos))
             {
                 Commands.Checkout(repo, ramaPrincipal);
-                //Commands.Pull(repo, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new PullOptions());
+                //Commands.Pull(repo, new Signature(Environment.UserName, handler.View.Correo, DateTimeOffset.Now), new PullOptions());
 
                 var branches = repo.Branches;
                 foreach (Branch b in branches)
@@ -143,7 +143,7 @@ namespace Cygnus2_0.General
             using (var repo = new Repository(@handler.RutaGitObjetos))
             {
                 Commands.Checkout(repo, res.RamaProduccion);
-                //Commands.Pull(repo, new Signature(Environment.UserName, handler.ConnViewModel.Correo, DateTimeOffset.Now), new PullOptions());
+                //Commands.Pull(repo, new Signature(Environment.UserName, handler.View.Correo, DateTimeOffset.Now), new PullOptions());
 
                 var branches = repo.Branches;
 

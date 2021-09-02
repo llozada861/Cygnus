@@ -30,7 +30,7 @@ namespace Cygnus2_0.Pages.Settings.Empresa
             var myWin = (MainWindow)Application.Current.MainWindow;
             handler = myWin.Handler;
             
-            DataContext = handler.ConfGeneralViewModel;
+            DataContext = handler.ConfGeneralView;
             InitializeComponent();
             btnModif.Content = cstAdicionar;
             grAddMod.Header = cstAdicionar;

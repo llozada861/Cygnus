@@ -140,7 +140,7 @@ namespace Cygnus2_0.ViewModel.Index
                 archivoBD = Path.Combine(res.CarpetaBD, res.NombreArchivoEncabezadoObj);
                 file = Path.Combine(path, archivoBD);
 
-                handler.ConfGeneralViewModel.Model.ListaEmpresas = new ObservableCollection<SelectListItem>();
+                handler.ConfGeneralView.Model.ListaEmpresas = new ObservableCollection<SelectListItem>();
 
                 SqliteDAO.pListaEmpresas(handler);
             }
@@ -246,7 +246,7 @@ namespace Cygnus2_0.ViewModel.Index
             using (StreamReader streamReader = new StreamReader(file, Encoding.UTF8))
             {
                 sbLine = streamReader.ReadLine();
-                handler.ConfGeneralViewModel.Model.RutaSqlplus = sbLine;
+                handler.ConfGeneralView.Model.RutaSqlplus = sbLine;
             }
         }
 
@@ -366,16 +366,16 @@ namespace Cygnus2_0.ViewModel.Index
         #region Configuracion
         public void pCargarConfiguracion()
         {
-            handler.ConfGeneralViewModel.Model.OrdenAutomatico = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyOrdenAutomatico)).Value);
-            handler.ConfGeneralViewModel.Model.Grant = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyGeneraGrants)).Value);
+            handler.ConfGeneralView.Model.OrdenAutomatico = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyOrdenAutomatico)).Value);
+            handler.ConfGeneralView.Model.Grant = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyGeneraGrants)).Value);
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyProxy)))
             {
-                handler.ConfGeneralViewModel.Model.Proxy = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyProxy)).Value);
+                handler.ConfGeneralView.Model.Proxy = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyProxy)).Value);
             }
             else
             {
-                handler.ConfGeneralViewModel.Model.Proxy = false;
+                handler.ConfGeneralView.Model.Proxy = false;
             }
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaSonar)))
@@ -395,7 +395,7 @@ namespace Cygnus2_0.ViewModel.Index
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyEmail)))
             {
-                handler.ConnViewModel.Correo = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyEmail)).Value;
+                handler.ConnView.Model.Correo = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyEmail)).Value;
             }
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaGitObjetos)))
@@ -405,23 +405,23 @@ namespace Cygnus2_0.ViewModel.Index
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.SQLPLUS)))
             {
-                handler.ConfGeneralViewModel.Model.RutaSqlplus = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.SQLPLUS)).Value;
+                handler.ConfGeneralView.Model.RutaSqlplus = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.SQLPLUS)).Value;
             }
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_EMPRESA)))
             {
                 string codEmpresa = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_EMPRESA)).Value;
-                handler.ConfGeneralViewModel.Model.Empresa = handler.ConfGeneralViewModel.Model.ListaEmpresas.ToList().Find(x=>x.Value.Equals(codEmpresa));
+                handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x=>x.Value.Equals(codEmpresa));
             }
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_LLAVEW)))
             {
-                handler.ConfGeneralViewModel.Model.LlaveW = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_LLAVEW)).Value;
+                handler.ConfGeneralView.Model.LlaveW = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_LLAVEW)).Value;
             }
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_VALORW)))
             {
-                handler.ConfGeneralViewModel.Model.ValorW = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_VALORW)).Value;
+                handler.ConfGeneralView.Model.ValorW = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_VALORW)).Value;
             }
         }
         #endregion Configuracion

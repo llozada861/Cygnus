@@ -149,14 +149,14 @@ namespace Cygnus2_0.ViewModel.Aplica
             {
                 handler.pObtenerUsuarioCompilacion(this.Model.Usuario.Text);
 
-                string credenciales = handler.ConnViewModel.UsuarioCompila + "/" + handler.ConnViewModel.PassCompila + "@" + handler.ConnViewModel.BaseDatos;
+                string credenciales = handler.ConnView.Model.UsuarioCompila + "/" + handler.ConnView.Model.PassCompila + "@" + handler.ConnView.Model.BaseDatos;
 
                 foreach (var process in Process.GetProcessesByName("sqlplus"))
                 {
                     process.Kill();
                 }
 
-                if (string.IsNullOrEmpty(handler.ConfGeneralViewModel.Model.RutaSqlplus) || handler.ConfGeneralViewModel.Model.RutaSqlplus.Equals(res.RutaSqlplusDefault))
+                if (string.IsNullOrEmpty(handler.ConfGeneralView.Model.RutaSqlplus) || handler.ConfGeneralView.Model.RutaSqlplus.Equals(res.RutaSqlplusDefault))
                 {
                     throw new Exception("No ha configurado la ruta para el Sqlplus. Vaya a Ajustes/General/Rutas.");
                 }
@@ -173,7 +173,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                     }
                 }
 
-                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosGenerados.ToList().Where(x => x.Tipo.Equals(res.TipoAplica)).ToList(), rutaLog, handler.ConnViewModel.UsuarioCompila);
+                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosGenerados.ToList().Where(x => x.Tipo.Equals(res.TipoAplica)).ToList(), rutaLog, handler.ConnView.Model.UsuarioCompila);
             }
             catch(Exception ex)
             {
@@ -387,7 +387,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             }
             
 
-            if (handler.ConfGeneralViewModel.Model.EntregaPlantilla)
+            if (handler.ConfGeneralView.Model.EntregaPlantilla)
             {
                 pathBin = Path.Combine(handler.SavePathAplica, "bin");
 
@@ -477,7 +477,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             encabezadoAplica.AppendLine();
 
             //Genera el archivo con los permisos
-            if (handler.ConfGeneralViewModel.Model.Grant)
+            if (handler.ConfGeneralView.Model.Grant)
             {
                 pGeneraArchivosPermisos();
                 //pGeneraArchivosPermisosOA();
