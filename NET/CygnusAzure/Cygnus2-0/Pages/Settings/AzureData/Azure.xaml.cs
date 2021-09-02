@@ -43,19 +43,19 @@ namespace Cygnus2_0.Pages.Settings.AzureData
         {
             try
             {
-                if (string.IsNullOrEmpty(handler.ConnViewModel.UsuarioAzure))
+                if (string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure))
                 {
                     handler.MensajeError("Debe ingresar el usuario de Azure.");
                     return;
                 }
 
-                if (string.IsNullOrEmpty(handler.ConnViewModel.Correo))
+                if (string.IsNullOrEmpty(handler.ConnView.Model.Correo))
                 {
                     handler.MensajeError("Debe ingresar el correo empresarial.");
                     return;
                 }
 
-                SqliteDAO.pCreaConfiguracion(res.KeyEmail, handler.ConnViewModel.Correo);
+                SqliteDAO.pCreaConfiguracion(res.KeyEmail, handler.ConnView.Model.Correo);
                 handler.DAO.pActualizaCorreo();
 
                 handler.MensajeOk("Proceso terminó con éxito");

@@ -32,7 +32,7 @@ namespace Cygnus2_0.Pages.Settings.General
             DataContext = handler;
             InitializeComponent();
             txtName.Text = res.SQLPLUS;
-            txtPath.Text = handler.ConfGeneralViewModel.Model.RutaSqlplus;
+            txtPath.Text = handler.ConfGeneralView.Model.RutaSqlplus;
         }
         private void btnModif_Click(object sender, RoutedEventArgs e)
         {
@@ -48,7 +48,7 @@ namespace Cygnus2_0.Pages.Settings.General
             try
             {
                 SqliteDAO.pCreaConfiguracion(key,ruta);
-                handler.ConfGeneralViewModel.Model.RutaSqlplus = ruta;
+                handler.ConfGeneralView.Model.RutaSqlplus = ruta;
                 handler.MensajeOk("Proceso terminó con éxito.");
             }
             catch (Exception ex)

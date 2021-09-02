@@ -38,7 +38,7 @@ namespace Cygnus2_0.General
     public class Handler : ViewModelBase
     {
         //View models
-        private ConexionViewModel conexionViewModel;
+        private ConexionViewModel view;
         private IndexViewModel indexViewModel;
         private ConfGeneralViewModel confGeneralViewModel;
         private AppearanceViewModel settings;
@@ -72,7 +72,7 @@ namespace Cygnus2_0.General
 
             #region ViewModels
             //Se instancian los view models generales           
-            conexionViewModel = new ConexionViewModel(this);
+            view = new ConexionViewModel(this);
             confGeneralViewModel = new ConfGeneralViewModel(this);
             pRegeneraIndexListas();
             #endregion ViewModels
@@ -92,7 +92,7 @@ namespace Cygnus2_0.General
             #endregion Appareance
 
             #region Conexion
-            conectionOracle = new ConexionOracle(conexionViewModel);
+            conectionOracle = new ConexionOracle(view);
             dao = new MarkDAO(this);
             #endregion Conexion
 
@@ -168,23 +168,23 @@ namespace Cygnus2_0.General
 
         internal void ModificaLlaveRegistro()
         {
-            if (!string.IsNullOrEmpty(this.ConfGeneralViewModel.Model.ValorW))
+            if (!string.IsNullOrEmpty(this.ConfGeneralView.Model.ValorW))
             {
-                if (this.ConnViewModel.Conexion.Servidor.ToLower().Equals("epm-do13") || this.ConnViewModel.Conexion.Servidor.ToLower().Equals("10.1.16.32"))
+                if (this.ConnView.Model.Conexion.Servidor.ToLower().Equals("epm-do13") || this.ConnView.Model.Conexion.Servidor.ToLower().Equals("10.1.16.32"))
                 {
-                    string valorW = "\"" + this.ConfGeneralViewModel.Model.ValorW + "\\SAEAP.exe\" \"%1\"";
-                    Microsoft.Win32.Registry.SetValue(this.ConfGeneralViewModel.Model.LlaveW, null, valorW, Microsoft.Win32.RegistryValueKind.String);
+                    string valorW = "\"" + this.ConfGeneralView.Model.ValorW + "\\SAEAP.exe\" \"%1\"";
+                    Microsoft.Win32.Registry.SetValue(this.ConfGeneralView.Model.LlaveW, null, valorW, Microsoft.Win32.RegistryValueKind.String);
                 }
             }
         }
 
         #region AtrViewModels
-        public ConexionViewModel ConnViewModel
+        public ConexionViewModel ConnView
         {
-            get { return conexionViewModel; }
-            set { conexionViewModel = value; }
+            get { return view; }
+            set { view = value; }
         }
-        public ConfGeneralViewModel ConfGeneralViewModel
+        public ConfGeneralViewModel ConfGeneralView
         {
             get { return confGeneralViewModel; }
             set { confGeneralViewModel = value; }
@@ -544,7 +544,7 @@ namespace Cygnus2_0.General
 
         public void pGuardaLogCompilacion(Archivo archivo, string objetosInvalidos, string tiempo)
         {
-            DAO.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, objetosInvalidos, tiempo, this.ConnViewModel.UsuarioCompila);
+            DAO.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, objetosInvalidos, tiempo, this.ConnView.Model.UsuarioCompila);
         }
 
         public void pGeneraArchivosPermisosArchivo(Archivo archivo, string usuario)
@@ -684,22 +684,22 @@ namespace Cygnus2_0.General
 
             //string cred = EncriptaPass.Encriptar("SQL_LLOZADA-2");
 
-            int rol = this.DAO.pObtRol(conexionViewModel.Usuario);
+            int rol = this.DAO.pObtRol(view.Model.Usuario);
 
             if (rol > 0)
             {
                 //Authenticate the user
-                customPrincipal.Identity = new CustomIdentity(conexionViewModel.Usuario, "", rol);
+                customPrincipal.Identity = new CustomIdentity(view.Model.Usuario, "", rol);
             }
             else
             {
-                string pass = conexionViewModel.Usuario.Trim() + "-0";
-                this.DAO.pGuardaRol(conexionViewModel.Usuario.Trim().ToUpper(), EncriptaPass.Encriptar(pass), "");
+                string pass = view.Model.Usuario.Trim() + "-0";
+                this.DAO.pGuardaRol(view.Model.Usuario.Trim().ToUpper(), EncriptaPass.Encriptar(pass), "");
             }
 
             //Se obtiene el usuario azure
             this.DAO.pObtAreaAzure();
-            SqliteDAO.pCreaConfiguracion(res.KeyEmail, ConnViewModel.Correo);
+            SqliteDAO.pCreaConfiguracion(res.KeyEmail, ConnView.Model.Correo);
         }
 
         public void pCreaArchivoBD(string path, string nombre, byte[] myFile)
@@ -818,7 +818,7 @@ namespace Cygnus2_0.General
 
             StringBuilder documentacion = new StringBuilder();
 
-            if (this.ConfGeneralViewModel.Model.GeneraHtml)
+            if (this.ConfGeneralView.Model.GeneraHtml)
             {
                 using (StreamReader streamReader = new StreamReader(archivo.RutaConArchivo, Encoding.Default))
                 {
@@ -1177,9 +1177,9 @@ namespace Cygnus2_0.General
             string credenciales = EncriptaPass.Desencriptar(passEncrypt);
             string[] split = credenciales.Split('-');
 
-            ConnViewModel.UsuarioCompila = split[0];
-            ConnViewModel.PassCompila = split[1];
-            ConnViewModel.BdCompila = split[2];
+            ConnView.Model.UsuarioCompila = split[0];
+            ConnView.Model.PassCompila = split[1];
+            ConnView.Model.BdCompila = split[2];
 
             ConexionOracle.RealizarConexionCompilacion();
         }

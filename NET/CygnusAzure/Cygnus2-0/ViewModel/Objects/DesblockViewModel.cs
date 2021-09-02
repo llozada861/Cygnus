@@ -44,7 +44,7 @@ namespace Cygnus2_0.ViewModel.Objects
 
             try
             {
-                if(!handler.ConnViewModel.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) && handler.ConexionOracle.ConexionOracleSQL != null)
+                if(!handler.ConnView.Model.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) && handler.ConexionOracle.ConexionOracleSQL != null)
                     handler.DAO.pObtObjetosBloqueados(this);
             }
             catch(Exception ex)
@@ -97,7 +97,7 @@ namespace Cygnus2_0.ViewModel.Objects
         {
             try
             {
-                if(!handler.ConnViewModel.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) && handler.ConexionOracle.ConexionOracleSQL != null)
+                if(!handler.ConnView.Model.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) && handler.ConexionOracle.ConexionOracleSQL != null)
                     model.pLimpiar();
             }
             catch (Exception ex)

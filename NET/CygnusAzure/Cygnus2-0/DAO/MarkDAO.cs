@@ -383,7 +383,7 @@ namespace Cygnus2_0.DAO
             {
                 handler.ConexionOracle.AddInParameter(cmd, "isbNombreObj", OracleDbType.Varchar2, archivo.FileName);
                 handler.ConexionOracle.AddInParameter(cmd, "isbOwnerObj", OracleDbType.Varchar2, archivo.Owner);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddInParameter(cmd, "isbFechaLib", OracleDbType.Varchar2, fecha.Day + "-" + fecha.Month + "-" + fecha.Year);
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
@@ -439,7 +439,7 @@ namespace Cygnus2_0.DAO
                 handler.ConexionOracle.AddInParameter(cmd, "isbNombreObj", OracleDbType.Varchar2, archivo.FileName);
                 handler.ConexionOracle.AddInParameter(cmd, "isbOwnerObj", OracleDbType.Varchar2, archivo.Owner);
                 handler.ConexionOracle.AddInParameter(cmd, "isbNumCaso", OracleDbType.Varchar2, view.Codigo);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddInParameter(cmd, "isbFechaLib", OracleDbType.Varchar2, view.Fecha.Day + "-" + view.Fecha.Month + "-" + view.Fecha.Year);
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
@@ -464,7 +464,7 @@ namespace Cygnus2_0.DAO
         {
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtObjetosBloqueados"))
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddParameterRefCursor(cmd, "");
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
@@ -514,7 +514,7 @@ namespace Cygnus2_0.DAO
             {
                 handler.ConexionOracle.AddInParameter(cmd, "isbNombreObj", OracleDbType.Varchar2, archivo.FileName);
                 handler.ConexionOracle.AddInParameter(cmd, "isbOwnerObj", OracleDbType.Varchar2, archivo.Owner);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
 
@@ -688,7 +688,7 @@ namespace Cygnus2_0.DAO
             {
                 cmd.Connection = handler.ConexionOracle.ConexionOracleCompila;
                 handler.ConexionOracle.AddInParameter(cmd, "isbObjeto", OracleDbType.Varchar2, archivo.NombreObjeto.ToUpper());
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddParameterRefCursor(cmd, "");
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
@@ -1000,7 +1000,7 @@ namespace Cygnus2_0.DAO
                 process.StartInfo.WorkingDirectory = scriptDir;
                 process.StartInfo.RedirectStandardOutput = false;
                 process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralViewModel.Model.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
+                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralView.Model.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
                 process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
                 process.StartInfo.CreateNoWindow = false;
 
@@ -1053,7 +1053,7 @@ namespace Cygnus2_0.DAO
                 handler.ConexionOracle.AddInParameter(cmd, "isbDescripcion", OracleDbType.Varchar2, tareaAzure.Descripcion);
                 handler.ConexionOracle.AddInParameter(cmd, "isbIdAzure", OracleDbType.Int64, tareaAzure.IdAzure.ToString());
                 handler.ConexionOracle.AddInParameter(cmd, "isbEstado", OracleDbType.Varchar2, tareaAzure.Estado);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddInParameter(cmd, "inuCompletado", OracleDbType.BinaryDouble, tareaAzure.Completed.ToString(System.Globalization.CultureInfo.InvariantCulture));
                 handler.ConexionOracle.AddInParameter(cmd, "isbFechaCreacion", OracleDbType.Varchar2, string.IsNullOrEmpty(tareaAzure.IniFecha) ? tareaAzure.FechaCreacion : tareaAzure.IniFecha);
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
@@ -1083,7 +1083,7 @@ namespace Cygnus2_0.DAO
             {
                 handler.ConexionOracle.AddInParameter(cmd, "inuOrigen", OracleDbType.Int64, tareaOrigen.IdAzure.ToString());
                 handler.ConexionOracle.AddInParameter(cmd, "inuDestino", OracleDbType.Int64, tareaDestino.IdAzure.ToString());
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
 
@@ -1115,7 +1115,7 @@ namespace Cygnus2_0.DAO
                 handler.ConexionOracle.AddInParameter(cmd, "isbDescripcion", OracleDbType.Varchar2, tareaAzure.Descripcion);
                 handler.ConexionOracle.AddInParameter(cmd, "isbIdAzure", OracleDbType.Int64, tareaAzure.IdAzure.ToString());
                 handler.ConexionOracle.AddInParameter(cmd, "isbEstado", OracleDbType.Varchar2, tareaAzure.Estado);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 //handler.ConexionOracle.AddInParameter(cmd, "idtFechaDis", OracleDbType.Date, tareaAzure.FechaDisplay.ToShortDateString());
                 handler.ConexionOracle.AddInParameter(cmd, "inuMon", OracleDbType.BinaryDouble, tareaAzure.Mon.Horas.ToString(System.Globalization.CultureInfo.InvariantCulture));
                 handler.ConexionOracle.AddInParameter(cmd, "inuTue", OracleDbType.BinaryDouble, tareaAzure.Tue.Horas.ToString(System.Globalization.CultureInfo.InvariantCulture));
@@ -1179,9 +1179,9 @@ namespace Cygnus2_0.DAO
         {
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pActualizaCorreo"))
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
-                handler.ConexionOracle.AddInParameter(cmd, "isbCorreo", OracleDbType.Varchar2, handler.ConnViewModel.Correo.Trim());
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuarioAzure", OracleDbType.Varchar2, handler.ConnViewModel.UsuarioAzure.Trim());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbCorreo", OracleDbType.Varchar2, handler.ConnView.Model.Correo.Trim());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuarioAzure", OracleDbType.Varchar2, handler.ConnView.Model.UsuarioAzure.Trim());
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
 
@@ -1206,7 +1206,7 @@ namespace Cygnus2_0.DAO
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtTareasBD"))
             {
                 handler.ConexionOracle.AddInParameter(cmd, "inuHoja", OracleDbType.Int32, view.HojaActual.Id.ToString());
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddParameterRefCursor(cmd, "");
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
@@ -1278,7 +1278,7 @@ namespace Cygnus2_0.DAO
             {
                 using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtHojasBD"))
                 {
-                    handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                    handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                     handler.ConexionOracle.AddParameterRefCursor(cmd, "");
                     handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
                     handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
@@ -1436,11 +1436,11 @@ namespace Cygnus2_0.DAO
 
         public void pObtAreaAzure()
         {
-            handler.ConnViewModel.ListaAreaAzure = new ObservableCollection<SelectListItem>();
+            handler.ConnView.Model.ListaAreaAzure = new ObservableCollection<SelectListItem>();
 
             using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtAreaAzure"))
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnViewModel.Usuario.ToUpper());
+                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
                 handler.ConexionOracle.AddOutParameter(cmd, "osbCorreo", OracleDbType.Varchar2);
                 handler.ConexionOracle.AddOutParameter(cmd, "osbUsuarioAzure", OracleDbType.Varchar2);
                 handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
@@ -1464,12 +1464,12 @@ namespace Cygnus2_0.DAO
 
                 try
                 {
-                    handler.ConnViewModel.Correo = handler.ConexionOracle.GetParameterValue(cmd, "osbCorreo");
-                    handler.ConnViewModel.UsuarioAzure = handler.ConexionOracle.GetParameterValue(cmd, "osbUsuarioAzure");
+                    handler.ConnView.Model.Correo = handler.ConexionOracle.GetParameterValue(cmd, "osbCorreo");
+                    handler.ConnView.Model.UsuarioAzure = handler.ConexionOracle.GetParameterValue(cmd, "osbUsuarioAzure");
 
-                    if(handler.ConnViewModel.UsuarioAzure == "null")
+                    if(handler.ConnView.Model.UsuarioAzure == "null")
                     {
-                        handler.ConnViewModel.UsuarioAzure = "";
+                        handler.ConnView.Model.UsuarioAzure = "";
                     }
                 }
                 finally
@@ -1592,7 +1592,7 @@ namespace Cygnus2_0.DAO
             using (OracleCommand cmd = new OracleCommand())
             {
                 cmd.CommandText = sql;
-                cmd.Parameters.Add(":usuario", handler.ConnViewModel.Usuario.ToUpper());
+                cmd.Parameters.Add(":usuario", handler.ConnView.Model.Usuario.ToUpper());
                 cmd.Parameters.Add(":fecha_i", view.FechaDesde.ToShortDateString());
                 cmd.Parameters.Add(":fecha_f", view.FechaHasta.ToShortDateString());
                 cmd.Connection = con;
@@ -1636,7 +1636,7 @@ namespace Cygnus2_0.DAO
             using (OracleCommand cmd = new OracleCommand())
             {
                 cmd.CommandText = sql;
-                cmd.Parameters.Add(":usuario", handler.ConnViewModel.Usuario.ToUpper());
+                cmd.Parameters.Add(":usuario", handler.ConnView.Model.Usuario.ToUpper());
                 cmd.Parameters.Add(":fecha_i", view.FechaDesde.ToShortDateString());
                 cmd.Parameters.Add(":fecha_f", view.FechaHasta.ToShortDateString());
                 cmd.Connection = con;
@@ -1683,7 +1683,7 @@ namespace Cygnus2_0.DAO
             using (OracleCommand cmd = new OracleCommand())
             {
                 cmd.CommandText = sql;
-                cmd.Parameters.Add(":usuario", handler.ConnViewModel.Usuario.ToUpper());
+                cmd.Parameters.Add(":usuario", handler.ConnView.Model.Usuario.ToUpper());
                 cmd.Connection = con;
 
                 using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it

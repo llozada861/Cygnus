@@ -131,7 +131,7 @@ namespace Cygnus2_0.Pages.Compila
                     archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
                 }
 
-                string rama = RepoGit.pVersionarDatos(compilaViewModel.Model.SelectHU.Value, compilaViewModel.Model.Codigo,compilaViewModel.Model.Comentario,handler.ConnViewModel.Correo, archivosEvaluar, handler);
+                string rama = RepoGit.pVersionarDatos(compilaViewModel.Model.SelectHU.Value, compilaViewModel.Model.Codigo,compilaViewModel.Model.Comentario,handler.ConnView.Model.Correo, archivosEvaluar, handler);
 
                 handler.CursorNormal();
                 handler.MensajeOk("Rama creada ["+ rama+"]");

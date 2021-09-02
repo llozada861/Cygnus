@@ -109,7 +109,7 @@ namespace Cygnus2_0.ViewModel.Security
             StringBuilder sbAplicaBody = new StringBuilder();
 
             handler.pObtenerUsuarioCompilacion("FLEX");
-            credenciales = handler.ConnViewModel.UsuarioCompila + "/" + handler.ConnViewModel.PassCompila + "@" + handler.ConnViewModel.BaseDatos;
+            credenciales = handler.ConnView.Model.UsuarioCompila + "/" + handler.ConnView.Model.PassCompila + "@" + handler.ConnView.Model.BaseDatos;
 
             sbNombreAplica = this.Model.Usuario.Trim() + ".sql";
             sbAplica = Path.Combine(handler.PathTempAplica, sbNombreAplica);
@@ -129,7 +129,7 @@ namespace Cygnus2_0.ViewModel.Security
             }
 
             List<Archivo> archivos = new List<Archivo>{ new Archivo { FileName = sbNombreAplica, Ruta = handler.PathTempAplica, Tipo = res.TipoAplica }};
-            handler.DAO.pExecuteSqlplus(credenciales, archivos, handler.PathTempAplica, handler.ConnViewModel.UsuarioCompila);            
+            handler.DAO.pExecuteSqlplus(credenciales, archivos, handler.PathTempAplica, handler.ConnView.Model.UsuarioCompila);            
         }
 
         public void OnProcess(object commandParameter)
@@ -165,7 +165,7 @@ namespace Cygnus2_0.ViewModel.Security
             if (!string.IsNullOrEmpty(this.Model.Email))
             {
                 SqliteDAO.pCreaConfiguracion(res.KeyEmail, this.Model.Email);
-                handler.ConnViewModel.Correo = this.Model.Email;
+                handler.ConnView.Model.Correo = this.Model.Email;
             }
         }
 
