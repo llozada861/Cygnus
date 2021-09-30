@@ -121,12 +121,12 @@ IS
     csbSLASH            VARCHAR2(2) := CHR(47);
     nuIdxCampos         BINARY_INTEGER;
 
-    sbTemplate_Campo    VARCHAR2(200) := '[{FIELD}] [{TYPE}]([{PRECISION}],[{SCALE}])';
-    sbTemplate_No_Pre   VARCHAR2(200) := '[{FIELD}] [{TYPE}]';
-    sbCampo             VARCHAR2(200);
-    sbCampos            VARCHAR2(2000);
+    sbTemplate_Campo    VARCHAR2(2000) := '[{FIELD}] [{TYPE}]([{PRECISION}],[{SCALE}])';
+    sbTemplate_No_Pre   VARCHAR2(2000) := '[{FIELD}] [{TYPE}]';
+    sbCampo             VARCHAR2(2000);
+    sbCampos            VARCHAR2(32000);
     sbTemplate_Comment  VARCHAR2(1000) := 'COMMENT ON COLUMN audit_[{TABLE}].[{FIELD}] IS ''[{COMMENT}]'''||csbENTER||'/'||csbENTER;
-    sbComment           VARCHAR2(200);
+    sbComment           VARCHAR2(32000);
     sbComments          VARCHAR2(32767);
     sbScript            CLOB :=
 '-- ************************************************************************
