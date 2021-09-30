@@ -74,8 +74,11 @@ prompt "Aplicando /11_crseq_ll_logapli.sql"
 prompt "Aplicando /12_pkg_utilmark.sql"
 @./12_pkg_utilmark.sql
 
-prompt "Aplicando /p_DC_GeneraAudit.sql.sql"
-@./p_DC_GeneraAudit.sql.sql
+prompt "Aplicando /p_DC_CreaTriggerAudit.sql"
+@./p_DC_CreaTriggerAudit.sql
+
+prompt "Aplicando /p_DC_GeneraAudit.sql"
+@./p_DC_GeneraAudit.sql
 
 prompt "Aplicando /14_Grants_usuarios_epm_cygnus.sql"
 @./14_Grants_usuarios_epm_cygnus.sql

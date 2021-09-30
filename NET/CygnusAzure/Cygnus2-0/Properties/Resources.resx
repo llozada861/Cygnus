@@ -788,7 +788,8 @@
   </data>
   <data name="CuerpoAplica" xml:space="preserve">
     <value>prompt "Aplicando &lt;objeto&gt;"
-@.&lt;objeto&gt;</value>
+@.&lt;objeto&gt;
+show errors;</value>
   </data>
   <data name="EncabezadoAplica" xml:space="preserve">
     <value>SET appinfo ON

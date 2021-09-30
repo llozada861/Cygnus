@@ -312,7 +312,8 @@ namespace Cygnus2_0.Properties {
         
         /// <summary>
         ///   Busca una cadena traducida similar a prompt &quot;Aplicando &lt;objeto&gt;&quot;
-        ///@.&lt;objeto&gt;.
+        ///@.&lt;objeto&gt;
+        ///show errors;.
         /// </summary>
         public static string CuerpoAplica {
             get {
