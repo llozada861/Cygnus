@@ -19,7 +19,7 @@ namespace Cygnus2_0.Properties {
     // a través de una herramienta como ResGen o Visual Studio.
     // Para agregar o quitar un miembro, edite el archivo .ResX y, a continuación, vuelva a ejecutar ResGen
     // con la opción /str o recompile su proyecto de VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -478,6 +478,7 @@ namespace Cygnus2_0.Properties {
         ///SET verify OFF
         ///SET heading OFF 
         ///SET feedback ON
+        ///SET define ON
         ///
         ///COLUMN file_script new_val file_script;
         ///COLUMN instance_name new_val instance_name;
@@ -488,7 +489,7 @@ namespace Cygnus2_0.Properties {
         ///DEFINE OC=&lt;numero_oc&gt;
         ///
         ///SELECT SUBSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),INSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),&apos;@&apos;)+2) file_script,
-        ///       SYS_CONT [resto de la cadena truncado]&quot;;.
+        /// [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string EncabezadoAplica {
             get {
@@ -557,6 +558,7 @@ namespace Cygnus2_0.Properties {
         
         /// <summary>
         ///   Busca una cadena traducida similar a SET feedback ON
+        ///SET define ON
         ///
         ///COLUMN file_script new_val file_script;
         ///COLUMN instance_name new_val instance_name;
@@ -568,7 +570,7 @@ namespace Cygnus2_0.Properties {
         ///
         ///SELECT SUBSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),INSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),&apos;@&apos;)+2) file_script,
         ///       SYS_CONTEXT(&apos;USERENV&apos;, &apos;DB_NAME&apos;) instance_name,
-        ///       TO_CHAR(SYSDATE, &apos;DD-MM-YYYY HH24:MI:SS&apos;) fecha_exec [resto de la cadena truncado]&quot;;.
+        ///       TO_CHAR(SYSDATE, &apos;DD-MM-YYYY HH24:MI: [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string EncabezadoAplicaGrant {
             get {
@@ -2273,15 +2275,15 @@ namespace Cygnus2_0.Properties {
         ///BEGIN
         ///    --realiza la insercción del mensaje EPM - CUZ - &lt;codigo&gt;
         ///    INSERT INTO mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo ) 
-        ///	VALUES
-        ///	(
-        ///		&lt;codigo&gt;,
-        ///		&apos;&lt;descripcion&gt;&apos;,
-        ///		&apos;EPM&apos;,
-        ///		&apos;CUZ&apos;,
-        ///		&apos;&lt;causa&gt;&apos;,
-        ///		&apos;&lt;solucion&gt;&apos;
-        ///	);
+        ///    VALUES
+        ///    (
+        ///        &lt;codigo&gt;,
+        ///        &apos;&lt;descripcion&gt;&apos;,
+        ///        &apos;EPM&apos;,
+        ///        &apos;CUZ&apos;,
+        ///        &apos;&lt;causa&gt;&apos;,
+        ///        &apos;&lt;solucion&gt;&apos;
+        ///    );
         ///    COMMIT;    
         ///END;
         ////.
