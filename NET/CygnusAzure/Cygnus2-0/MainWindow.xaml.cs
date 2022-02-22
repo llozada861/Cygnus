@@ -183,20 +183,6 @@ namespace Cygnus2_0
             {
                 ContentSource = new Uri("/Pages/Home.xaml", UriKind.Relative);                
             }
-
-            try
-            {
-                string fechaExp = "31/12/2022";
-
-                if (DateTime.Today > Convert.ToDateTime(fechaExp))
-                {
-                    this.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-            }
         }
 
         private Boolean next;
@@ -393,12 +379,12 @@ namespace Cygnus2_0
                         "CREATE TABLE conection (user  TEXT,pass TEXT,bd TEXT,server TEXT,port TEXT,active TEXT,company INTEGER, PRIMARY KEY(user,bd,server))",
                         "INSERT INTO conection SELECT * FROM old_conection",
                         "drop table old_conection",
-                        "update conection set active = 'S' WHERE rowid=1"*/
+                        "update conection set active = 'S' WHERE rowid=1"
                         "ALTER TABLE conection RENAME TO old_conection",
                         "CREATE TABLE conection (user  TEXT,pass TEXT,bd TEXT,server TEXT,port TEXT,active TEXT,company INTEGER,name_ text, PRIMARY KEY(name_))",
                         "INSERT INTO conection (name_,user,pass,bd,server,port,active,company) SELECT 'OSF_7',user,pass,bd,server,port,active,company FROM old_conection where lower(server) like '%epm-do08%'",
                         "INSERT INTO conection (name_,user,pass,bd,server,port,active,company) SELECT 'OSF_8',user,pass,bd,server,port,active,company FROM old_conection where lower(server) like '%epm-do13%'",
-                        "drop table old_conection",
+                        "drop table old_conection",*/
                     };
 
                 foreach (string sql in query)

@@ -386,7 +386,7 @@ AS
              isbDescrip,
              isbValor,
              isbFuncion,
-             201,
+             -99,
              isbTipo,
              'Y'
          );

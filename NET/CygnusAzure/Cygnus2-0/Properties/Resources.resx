@@ -799,6 +799,7 @@ SET timing OFF
 SET verify OFF
 SET heading OFF 
 SET feedback ON
+SET define ON
 
 COLUMN file_script new_val file_script;
 COLUMN instance_name new_val instance_name;
@@ -1083,6 +1084,7 @@ spool off</value>
   </data>
   <data name="EncabezadoAplicaGrant" xml:space="preserve">
     <value>SET feedback ON
+SET define ON
 
 COLUMN file_script new_val file_script;
 COLUMN instance_name new_val instance_name;
@@ -1113,7 +1115,9 @@ PROMPT Usuario O.S      : &amp;usuario_os
 PROMPT OC               : &amp;OC
 PROMPT ========================================= 
 PROMPT
-PROMPT **** Aplica de permisos para los objetos ****</value>
+PROMPT **** Aplica de permisos para los objetos ****
+
+SET define OFF</value>
   </data>
   <data name="FinAplicaGrant" xml:space="preserve">
     <value>PROMPT **** Termina aplica de permisos para los objetos **** 
@@ -1186,15 +1190,15 @@ REM Autor       : @Llozada
 BEGIN
     --realiza la insercción del mensaje EPM - CUZ - &lt;codigo&gt;
     INSERT INTO mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo ) 
-	VALUES
-	(
-		&lt;codigo&gt;,
-		'&lt;descripcion&gt;',
-		'EPM',
-		'CUZ',
-		'&lt;causa&gt;',
-		'&lt;solucion&gt;'
-	);
+    VALUES
+    (
+        &lt;codigo&gt;,
+        '&lt;descripcion&gt;',
+        'EPM',
+        'CUZ',
+        '&lt;causa&gt;',
+        '&lt;solucion&gt;'
+    );
     COMMIT;    
 END;
 /</value>
