@@ -54,22 +54,22 @@ namespace Cygnus2_0.Pages.Time
         {
             if (rdbNueva.IsChecked == true)
             {
-                //view.OnAdd(tarea,"N");
+                view.OnAdd(tarea,"N");
 
-                string _credentials;
+                /*string _credentials;
                 string batchRequests;
 
                 batchRequests = "[{ \"op\": \"add\", \"path\": \"/fields/System.Title\", \"from\": null, \"value\": \"PRUEBA_LLOZADA\"}]";
 
                 //"[{ \"op\": \"add\", \"path\": \"/fields/System.Title\", \"value\": \"Prueba__LOZADA\" }]";
 
-                /*"[" +
+                "[" +
                               "  {" +
                               "  \"op\": \"add\", " +
                               "  \"path\": \"/fields/System.Title\" ," +
                               "  \"value\": \"Prueba_LLOZADA\" " +
                               "  } " +
-                           " ]";*/
+                           " ]";
 
                 string json = JsonConvert.SerializeObject(batchRequests, Formatting.Indented);
                 HttpContent content = new StringContent(json, Encoding.UTF8, "application/json-patch+json");
@@ -97,7 +97,7 @@ namespace Cygnus2_0.Pages.Time
                         //WorkItemBatchPostResponse batchResponse = response.Content.ReadAsAsync<WorkItemBatchPostResponse>().Result;
                         //return batchResponse;
                     }
-                }
+                }*/
             }
             else
             {

@@ -30,11 +30,11 @@
             <RowDefinition Height="10*" />
         </Grid.RowDefinitions>
         <Label x:Name="lblUsuario" Content="Usuario Azure" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtUsuario" Text="{Binding Path=ConnViewModel.UsuarioAzure}"  TextWrapping="Wrap" Grid.Column="2" Grid.Row="0" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="txtUsuario" Text="{Binding Path=ConnView.Model.UsuarioAzure}"  TextWrapping="Wrap" Grid.Column="2" Grid.Row="0" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
         <Button Name="btnAyudaFullName"  ToolTip="Ayuda"  Content="Ayuda" VerticalAlignment="Center" Grid.Column="7" Grid.Row="0" HorizontalAlignment="Center" Click="btnAyudaFullName_Click" ></Button>
         
         <Label x:Name="lblCorreo" Content="Correo Empresarial" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtCorreo" Text="{Binding Path=ConnViewModel.Correo}"  TextWrapping="Wrap" Grid.Column="2" Grid.Row="1" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="txtCorreo" Text="{Binding Path=ConnView.Model.Correo}"  TextWrapping="Wrap" Grid.Column="2" Grid.Row="1" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
 
         <Button Name="btnGuardar"  Content="Guardar" VerticalAlignment="Center" Click="btnGuardar_Click" Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="3" Margin="5,0"/>
     </Grid>
