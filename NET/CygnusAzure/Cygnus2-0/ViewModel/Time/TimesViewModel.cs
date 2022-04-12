@@ -213,13 +213,45 @@ namespace Cygnus2_0.ViewModel.Time
             PrintOpenBugsAsync(uiContext, sbDiasAtras);
         }
 
-        public async Task PrintOpenBugsAsync(SynchronizationContext uiContext, string sbDiasAtras)
+        public IList<WorkItem> pObtItemsAzure(string sbDiasAtras)
+        {
+            List<WorkItem> tareasAzure = new List<WorkItem>();
+
+            var connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), new VssBasicCredential(string.Empty, res.TokenAzureConn));
+            var workItemTrackingHttpClient = connection.GetClient<WorkItemTrackingHttpClient>();
+
+            var wiql = new Wiql()
+            {
+
+                // NOTE: Even if other columns are specified, only the ID & URL will be available in the WorkItemReference
+                Query = "Select [Id] " +
+                        "From WorkItems " +
+                        "Where [System.WorkItemType] = 'Task' " +
+                        "And [System.State] not in ('Removed') " +
+                        "And [System.AssignedTo] = '" + handler.ConnView.Model.UsuarioAzure + "'" +
+                        "And [System.CreatedDate] > @today-" + sbDiasAtras
+            };
+
+            var worItemsIds = workItemTrackingHttpClient.QueryByWiqlAsync(wiql, "OPEN").Result;
+
+            var ids = worItemsIds.WorkItems.Select(item => item.Id).ToArray();
+
+            // build a list of the fields we want to see
+            var fields = new[] { "System.Id", "System.Title", "System.State", "System.AssignedTo", "Microsoft.VSTS.Scheduling.CompletedWork", "System.CreatedDate", "Microsoft.VSTS.Scheduling.StartDate" };
+
+            // get work items for the ids found in query
+            tareasAzure = workItemTrackingHttpClient.GetWorkItemsAsync(ids, fields).Result;
+
+            return tareasAzure;
+        }
+
+        public void PrintOpenBugsAsync(SynchronizationContext uiContext, string sbDiasAtras)
         {
             string log = "Antes de traer los items - ";
             CultureInfo culture = new CultureInfo("es-CO");
             //pGeneraLog(log);
 
-            var workItems = await this.QueryOpenBugs(sbDiasAtras).ConfigureAwait(false);
+            var workItems = pObtItemsAzure(sbDiasAtras);
             listaTareaAzure = new List<TareaHoja>();
 
             /*log = log +"Query Results: " + workItems.Count+" - ";
@@ -244,7 +276,144 @@ namespace Cygnus2_0.ViewModel.Time
                     tarea.Fri = new Day();
                     tarea.Sat = new Day();
 
-                    WorkItem historiaUsuario = await pObtenerHU(tarea.IdAzure);
+                    WorkItem historiaUsuario = pObtenerHU(tarea.IdAzure);
+                    tarea.HU = (int)historiaUsuario.Id;
+                    tarea.DescripcionHU = historiaUsuario.Fields.Last().Value.ToString();
+
+                    /*if (tarea.IdAzure == 272078)
+                    {
+                        int pru = 1;
+                    }*/
+
+                    try
+                    {
+                        tarea.Completed = Math.Round(double.Parse(workItem.Fields["Microsoft.VSTS.Scheduling.CompletedWork"].ToString()), 1);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("{0}\t NO tiene horas en Azure: " + ex.Message, workItem.Id);
+                        tarea.Completed = 0;
+                    }
+
+                    try
+                    {
+                        tarea.IniFecha = Convert.ToDateTime(workItem.Fields["Microsoft.VSTS.Scheduling.StartDate"]).ToShortDateString().ToString(culture);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("{0}\t NO tiene fecha en Azure: " + ex.Message, workItem.Id);
+                    }
+
+                    this.listaTareaAzure.Add(tarea);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("{0}\t Error: " + ex.Message, workItem.Id);
+                }
+            }
+
+            if (this.listaTareaAzure.Count > 0)
+            {
+                TareaHoja hojaActual = null;
+
+                foreach (TareaHoja tareaAzure in this.listaTareaAzure)
+                {
+                    /*if(tareaAzure.IdAzure == 272078)
+                    {
+                        int pru = 1;
+                    }*/
+
+                    try
+                    {
+                        if (!this.Model.HojaActual.ListaTareas.ToList().Exists(x => x.IdAzure.Equals(tareaAzure.IdAzure)))
+                        {
+                            handler.DAO.pInsertaTareaAzure(tareaAzure);
+                        }
+                        else
+                        {
+                            hojaActual = this.Model.HojaActual.ListaTareas.ToList().Find(x => x.IdAzure.Equals(tareaAzure.IdAzure));
+
+                            if (hojaActual != null)
+                            {
+                                hojaActual.Completed = tareaAzure.Completed;
+                                hojaActual.Descripcion = tareaAzure.Descripcion;
+                                hojaActual.HU = tareaAzure.HU;
+                                hojaActual.IniFecha = tareaAzure.IniFecha;
+                                hojaActual.DescripcionHU = tareaAzure.DescripcionHU;
+                                handler.DAO.pActualizaTareaAzure(hojaActual);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        handler.MensajeError(ex.Message);
+                    }
+                }
+            }
+
+            uiContext.Send(x => pObtTareasPorHoja(), null);
+            uiContext.Send(x => pCalcularTotales(), null);
+        }
+        public WorkItem pObtenerHU(int idTask)
+        {
+            WorkItem historiaUsuario = new WorkItem();
+            var connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), new VssBasicCredential(string.Empty, res.TokenAzureConn));
+            var workItemTrackingHttpClient = connection.GetClient<WorkItemTrackingHttpClient>();
+
+            var wiql = new Wiql()
+            {
+
+                // NOTE: Even if other columns are specified, only the ID & URL will be available in the WorkItemReference
+                Query = String.Format("SELECT [System.Id],[System.Title] FROM WorkItemLinks WHERE ([Source].[System.WorkItemType] = 'User Story') And ([System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward') And ([Target].[System.Id] = {0}  AND  [Target].[System.WorkItemType] = 'Task') ORDER BY [System.Id] mode(Recursive,ReturnMatchingChildren)", idTask.ToString()),
+            };
+
+            var worItemsIds = workItemTrackingHttpClient.QueryByWiqlAsync(wiql, "OPEN").Result;
+
+            var ids = worItemsIds.WorkItemRelations.Select(item => item.Target.Id).ToArray();
+
+            // build a list of the fields we want to see
+            var fields = new[] { "System.Id", "System.Title" };
+
+            // get work items for the ids found in query
+            List<WorkItem> hus = workItemTrackingHttpClient.GetWorkItemsAsync(ids, fields).Result;
+
+            historiaUsuario = hus.First();
+
+            return historiaUsuario;
+        }
+
+        public async Task PrintOpenBugsAsyncOld(SynchronizationContext uiContext, string sbDiasAtras)
+        {
+            string log = "Antes de traer los items - ";
+            CultureInfo culture = new CultureInfo("es-CO");
+            //pGeneraLog(log);
+
+            var workItems = await this.QueryOpenBugsOld(sbDiasAtras).ConfigureAwait(false);
+            listaTareaAzure = new List<TareaHoja>();
+
+            /*log = log +"Query Results: " + workItems.Count+" - ";
+            Console.WriteLine("Query Results: {0} items found", workItems.Count);
+            pGeneraLog(log);*/
+
+            // loop though work items and write to console
+            foreach (var workItem in workItems)
+            {
+                try
+                {
+                    TareaHoja tarea = new TareaHoja();
+                    tarea.IdAzure = Convert.ToInt32(workItem.Id.ToString());
+                    tarea.Descripcion = workItem.Fields["System.Title"].ToString();
+                    tarea.Estado = workItem.Fields["System.State"].ToString();
+                    tarea.FechaCreacion = Convert.ToDateTime(workItem.Fields["System.CreatedDate"]).ToShortDateString().ToString(culture);
+                    tarea.Sun = new Day();
+                    tarea.Mon = new Day();
+                    tarea.Tue = new Day();
+                    tarea.Wed = new Day();
+                    tarea.Thu = new Day();
+                    tarea.Fri = new Day();
+                    tarea.Sat = new Day();
+
+                    WorkItem historiaUsuario = await pObtenerHUOld(tarea.IdAzure);
                     tarea.HU = (int)historiaUsuario.Id;
                     tarea.DescripcionHU = historiaUsuario.Fields.Last().Value.ToString();
 
@@ -325,7 +494,7 @@ namespace Cygnus2_0.ViewModel.Time
             //uiContext.Send(x => pSeteaFechaActual(), null);
         }
 
-        public async Task<IList<WorkItem>> QueryOpenBugs(string sbDiasAtras)
+        public async Task<IList<WorkItem>> QueryOpenBugsOld(string sbDiasAtras)
         {
             string areas = "";
             string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
@@ -366,7 +535,7 @@ namespace Cygnus2_0.ViewModel.Time
             return tareasAzure;
         }
 
-        public async Task<WorkItem> pObtenerHU(int idTask)
+        public async Task<WorkItem> pObtenerHUOld(int idTask)
         {
             int HU = 0;
             string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
