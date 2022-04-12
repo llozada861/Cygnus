@@ -183,6 +183,7 @@ namespace Cygnus2_0.Pages.Time
             {
                 uiContext = SynchronizationContext.Current;
 
+
                 pbStatus.Visibility = Visibility.Visible;
                 txtProgressBar.Visibility = Visibility.Visible;
 
@@ -443,13 +444,12 @@ namespace Cygnus2_0.Pages.Time
             (sender as BackgroundWorker).ReportProgress(20);
 
             view.ObtTareasAzure(uiContext, sbDiasAtras);
-            Thread.Sleep(nuTiempoEsperaAz1);
 
             (sender as BackgroundWorker).ReportProgress(40);
-            Thread.Sleep(nuTiempoEsperaAz2);
+            Thread.Sleep(100);
 
             (sender as BackgroundWorker).ReportProgress(60);
-            Thread.Sleep(nuTiempoEsperaAz3);
+            Thread.Sleep(100);
 
             //uiContext.Send(x => view.pObtTareasPorHoja(), null);
             //uiContext.Send(x => view.pCalcularTotales(), null);
