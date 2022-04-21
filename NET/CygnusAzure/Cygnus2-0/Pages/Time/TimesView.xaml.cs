@@ -23,6 +23,7 @@ using System.Threading;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
 using res = Cygnus2_0.Properties.Resources;
+using Cygnus2_0.DAO;
 
 namespace Cygnus2_0.Pages.Time
 {
@@ -67,7 +68,7 @@ namespace Cygnus2_0.Pages.Time
             txtProgressBar.Visibility = Visibility.Hidden;
 
             blConsultaAsure = true;
-            sbDiasAtras = "90";
+            sbDiasAtras = "7"; //"90";
             nuTiempoEsperaAz1 = 20000;
             nuTiempoEsperaAz2 = 10000;
             nuTiempoEsperaAz3 = 5000;
@@ -115,13 +116,15 @@ namespace Cygnus2_0.Pages.Time
         {
             int SeqNegativa;
             double TotalHojaActual = 0;
+
             try
             {
                 if (view.Model.ListaTareasEliminar.Count > 0)
                 {
                     foreach (TareaHoja tarea in view.Model.ListaTareasEliminar)
                     {
-                        handler.DAO.pEliminaTareaAzure(tarea);
+                        SqliteDAO.pEliminaTareaAzure(tarea);
+                        //handler.DAO.pEliminaTareaAzure(tarea);
                     }
 
                     view.Model.ListaTareasEliminar.Clear();
@@ -129,17 +132,28 @@ namespace Cygnus2_0.Pages.Time
 
                 foreach (TareaHoja tarea in view.Model.HojaActual.ListaTareas)
                 {
-                    if(tarea.Tipo.Equals("L") && tarea.Total == 0)
+                    SeqNegativa = 0;
+
+                    if (tarea.Tipo.Equals("L") && tarea.Total == 0)
                     {
                         continue;
                     }
 
-                    SeqNegativa = handler.DAO.pActualizaTareaAzure(tarea);
-
-                    if (SeqNegativa < 0)
+                    if(tarea.IdAzure == 0)
                     {
+                        SeqNegativa = SqliteDAO.pObtSecuencia();
+                        tarea.Id = SeqNegativa.ToString();
                         view.Model.HojaActual.ListaTareas.ElementAt(view.Model.HojaActual.ListaTareas.IndexOf(tarea)).IdAzure = SeqNegativa;
+                        tarea.HU = SeqNegativa;
+                        tarea.IniFecha = view.Model.HojaActual.FechaIni.ToString("yyyy-MM-dd");
+                        tarea.DescripcionHU = tarea.Descripcion;
+                        SqliteDAO.pInsertaTareaAzure(tarea, handler, "I");
                     }
+
+                    if (SeqNegativa == 0)                    
+                        SqliteDAO.pInsertaTareaAzure(tarea, handler, "A");
+                    
+                    tarea.pCalcularTotal();
 
                     TotalHojaActual = TotalHojaActual + tarea.Total;
                 }
@@ -443,7 +457,7 @@ namespace Cygnus2_0.Pages.Time
         {
             (sender as BackgroundWorker).ReportProgress(20);
 
-            view.ObtTareasAzure(uiContext, sbDiasAtras);
+            view.ObtTareasAzure(uiContext);
 
             (sender as BackgroundWorker).ReportProgress(40);
             Thread.Sleep(100);
@@ -568,7 +582,7 @@ namespace Cygnus2_0.Pages.Time
 
         private void pSetTiemposNuevos()
         {
-            sbDiasAtras = "15";
+            sbDiasAtras = "7";
             nuTiempoEsperaAz1 = 8000;
             nuTiempoEsperaAz2 = 3000;
             nuTiempoEsperaAz3 = 1000;

@@ -32,6 +32,8 @@ using System.Xml;
 using Cygnus2_0.Pages.Settings.General;
 using System.Reflection;
 using System.Windows.Input;
+using Cygnus2_0.Model.Azure;
+using Cygnus2_0.ViewModel.Azure;
 
 namespace Cygnus2_0.General
 {
@@ -277,6 +279,8 @@ namespace Cygnus2_0.General
         public StringBuilder HtmlMetodoReturn { set; get; }
         public StringBuilder HtmlScript { set; get; }
         public Boolean GuardarTiempos { set; get; }
+        public ObservableCollection<AzureModel> ListaAzure { get; set; }
+        public AzureModel Azure { set; get; }
         public void MensajeError(string mensaje)
         {
             try

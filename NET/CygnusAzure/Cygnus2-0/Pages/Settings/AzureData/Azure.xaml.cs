@@ -3,6 +3,8 @@ using Cygnus2_0.General;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.Pages.SolInfo;
 using Cygnus2_0.Pages.Time;
+using Cygnus2_0.ViewModel.Azure;
+using FirstFloor.ModernUI.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +26,21 @@ namespace Cygnus2_0.Pages.Settings.AzureData
     /// <summary>
     /// Interaction logic for Azure.xaml
     /// </summary>
-    public partial class Azure : UserControl
+    public partial class Azure : UserControl, IContent
     {
         private Handler handler;
+        private AzureViewModel view;
+        private const string cstAdicionar = "Adicionar";
+        private const string cstModificar = "Modificar";
         public Azure()
         {
-            InitializeComponent();
             handler = ((MainWindow)Application.Current.MainWindow).Handler;
-            DataContext = handler;
+            view = new AzureViewModel(handler);
+            DataContext = view;
+
+            InitializeComponent();
+            btnModif.Content = cstAdicionar;
+            grAddMod.Header = cstAdicionar;
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -78,6 +87,58 @@ namespace Cygnus2_0.Pages.Settings.AzureData
             UserControl help = new HelpArea("\\img\\Fullname.png", "Del profile de AzureDevops debe tomar el FULL NAME (recuadro ROJO):");
             WinImage request = new WinImage(help, "FulName");
             request.ShowDialog();
+        }
+
+        private void dataGridDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataGridDatos.SelectedItem == null)
+            {
+                btnModif.Content = cstAdicionar;
+                grAddMod.Header = cstAdicionar;
+                txtKey.IsEnabled = true;
+                btnElimi.Visibility = Visibility.Hidden;
+                return;
+            }
+
+            btnModif.Content = cstModificar;
+            grAddMod.Header = cstModificar;
+            txtKey.IsEnabled = false;
+            btnElimi.Visibility = Visibility.Visible;
+        }
+
+        private void btnModif_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnElimi_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+            
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+            
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+            
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+            
         }
     }
 }
