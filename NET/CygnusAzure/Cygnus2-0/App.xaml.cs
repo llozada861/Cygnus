@@ -37,9 +37,13 @@ namespace Cygnus2_0
             string[] dlls = Assembly.GetExecutingAssembly().GetManifestResourceNames();
             string nombre;
             int nuIndex;
+            string[] carpetas = { "x86", "x64"};
+            string libSobreescribir = "System.Data.SQLite.dll";
+            string path;
 
             for (int i = 0; i < dlls.Length; i++)
             {
+                path = Environment.CurrentDirectory;
                 nombre = dlls[i];
 
                 if (nombre.IndexOf("Libs") > 0) //(nombre.EndsWith(".dll") || nombre.EndsWith(".config") || nombre.EndsWith(".exe") || nombre.Equals("od.txt"))
@@ -48,9 +52,27 @@ namespace Cygnus2_0
 
                     nombre = nombre.Substring(nuIndex, nombre.Length - nuIndex);
 
-                    file = System.IO.Path.Combine(Environment.CurrentDirectory, nombre);
+                    for (int j = 0; j < carpetas.Length; j++)
+                    {
+                        if (nombre.IndexOf(carpetas[j]) >= 0)
+                        {
+                            path = Environment.CurrentDirectory;
 
-                    if (!File.Exists((string)file))
+                            nuIndex = nombre.IndexOf(carpetas[j]) + carpetas[j].Length+1;
+                            nombre = nombre.Substring(nuIndex, nombre.Length - nuIndex);
+                            path = Path.Combine(path,carpetas[j]);
+
+                            if (!Directory.Exists(path))
+                            {
+                                // Try to create the directory.
+                                DirectoryInfo di = Directory.CreateDirectory(path);
+                            }
+                        }
+                    }
+
+                    file = System.IO.Path.Combine(path, nombre);
+
+                    if (!File.Exists((string)file) || nombre.Equals(libSobreescribir))
                     {
                         CopyResource(dlls[i], file);
                     }

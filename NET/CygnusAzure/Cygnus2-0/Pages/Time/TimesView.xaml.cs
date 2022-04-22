@@ -39,7 +39,6 @@ namespace Cygnus2_0.Pages.Time
         private Brush foregroudnBtn;
         SynchronizationContext uiContext;
         private Boolean blConsultaAsure;
-        private string sbDiasAtras;
         private int nuTiempoEsperaAz1;
         private int nuTiempoEsperaAz2;
         private int nuTiempoEsperaAz3;
@@ -68,7 +67,6 @@ namespace Cygnus2_0.Pages.Time
             txtProgressBar.Visibility = Visibility.Hidden;
 
             blConsultaAsure = true;
-            sbDiasAtras = "7"; //"90";
             nuTiempoEsperaAz1 = 20000;
             nuTiempoEsperaAz2 = 10000;
             nuTiempoEsperaAz3 = 5000;
@@ -193,23 +191,19 @@ namespace Cygnus2_0.Pages.Time
             view.pLimpiarTareas();
             pSeteaFechaActual();
 
-            if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
-            {
-                uiContext = SynchronizationContext.Current;
+            uiContext = SynchronizationContext.Current;
 
+            pbStatus.Visibility = Visibility.Visible;
+            txtProgressBar.Visibility = Visibility.Visible;
 
-                pbStatus.Visibility = Visibility.Visible;
-                txtProgressBar.Visibility = Visibility.Visible;
+            BackgroundWorker bw = new BackgroundWorker();
 
-                BackgroundWorker bw = new BackgroundWorker();
-
-                bw.DoWork -= new DoWorkEventHandler(backgroundWorker);
-                bw.DoWork += new DoWorkEventHandler(backgroundWorker);
-                bw.ProgressChanged += worker_ProgressChanged;
-                bw.WorkerSupportsCancellation = true;
-                bw.WorkerReportsProgress = true;
-                bw.RunWorkerAsync();
-            }
+            bw.DoWork -= new DoWorkEventHandler(backgroundWorker);
+            bw.DoWork += new DoWorkEventHandler(backgroundWorker);
+            bw.ProgressChanged += worker_ProgressChanged;
+            bw.WorkerSupportsCancellation = true;
+            bw.WorkerReportsProgress = true;
+            bw.RunWorkerAsync();            
         }
 
         private void dataGridObjetos_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
@@ -582,7 +576,6 @@ namespace Cygnus2_0.Pages.Time
 
         private void pSetTiemposNuevos()
         {
-            sbDiasAtras = "7";
             nuTiempoEsperaAz1 = 8000;
             nuTiempoEsperaAz2 = 3000;
             nuTiempoEsperaAz3 = 1000;

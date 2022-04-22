@@ -80,9 +80,9 @@ namespace Cygnus2_0.ViewModel.Index
             handler.pCreaArchivoBD(path, nombre, myFile);
 
             //se crea la base de datos si no existe
-            nombre = "Cygnus.db";
+            /*nombre = "Cygnus.db";
             myFile = res.Cygnus;
-            handler.pCreaArchivoBD(Environment.CurrentDirectory, nombre, myFile);
+            handler.pCreaArchivoBD(Environment.CurrentDirectory, nombre, myFile);*/
 
             //se crea la base de datos si no existe
             nombre = "ayudaAzure.png";

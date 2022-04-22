@@ -734,8 +734,16 @@ namespace Cygnus2_0.DAO
             string fecha;
             DateTime fechaParseada;
             string fecha_inicio, fecha_actualiza;
-            string usuario = handler.ConnView.Model.Usuario.ToUpper();
+
+            if(string.IsNullOrEmpty(handler.Azure.Usuario))
+            {
+                handler.MensajeError("Configure el usuario para Azure en [Ajustes/Herramientas Gestión/Azure]");
+                return;
+            }
+
+            string usuario = handler.Azure.Usuario.ToUpper();
             string completado = tareaAzure.Completed.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -886,7 +894,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
             string fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
-            string usuario = handler.ConnView.Model.Usuario.ToUpper();
+            string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -973,7 +981,7 @@ namespace Cygnus2_0.DAO
             string query;
             string fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
             string fechaSiguiente = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
-            string usuario = handler.ConnView.Model.Usuario.ToUpper();
+            string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -1075,7 +1083,7 @@ namespace Cygnus2_0.DAO
         public static void pObtDetalleRq(TimeModel view, TareaHoja tarea, Handler handler)
         {
             string query;
-            string usuario = handler.ConnView.Model.Usuario.ToUpper();
+            string usuario = handler.Azure.Usuario.ToUpper();
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {

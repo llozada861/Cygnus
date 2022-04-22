@@ -118,7 +118,6 @@ namespace Cygnus2_0.ViewModel.Time
                         tarea.Descripcion = this.Model.DescWindow;
                         tarea.IdAzure = this.Model.IdAzureWindow;
                         SqliteDAO.pInsertaTareaAzure(tarea, handler,"I");
-                        //handler.DAO.pActualizaTareaAzure(tarea);
                     }
                 }
                 else
@@ -162,12 +161,10 @@ namespace Cygnus2_0.ViewModel.Time
         }
         public void OnClean(object commandParameter)
         {
-            throw new NotImplementedException();
         }
 
         public void OnConection(object commandParameter)
         {
-            throw new NotImplementedException();
         }
 
         public void OnRefresh(object commandParameter)
@@ -191,24 +188,18 @@ namespace Cygnus2_0.ViewModel.Time
 
         public void pRefrescaTareas()
         {
-            if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
-            {
-                SqliteDAO.pObtHojasBD(this.Model, handler);
-            }
+            SqliteDAO.pObtHojasBD(this.Model, handler);
         }
 
         public void pCargarTareasPred()
         {
-            if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
-            {
-                SqliteDAO.pCargarTareasPred(this.Model);
-            }
+            SqliteDAO.pCargarTareasPred(this.Model);            
         }
 
         public void ConsultarAzure(SynchronizationContext uiContext)
         {
             if (string.IsNullOrEmpty(handler.Azure.Usuario))
-            {
+            { 
                 return;
             }
 

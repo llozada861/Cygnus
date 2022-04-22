@@ -95,14 +95,12 @@ namespace Cygnus2_0.Pages.Settings.AzureData
             {
                 btnModif.Content = cstAdicionar;
                 grAddMod.Header = cstAdicionar;
-                txtKey.IsEnabled = true;
                 btnElimi.Visibility = Visibility.Hidden;
                 return;
             }
 
             btnModif.Content = cstModificar;
             grAddMod.Header = cstModificar;
-            txtKey.IsEnabled = false;
             btnElimi.Visibility = Visibility.Visible;
         }
 
