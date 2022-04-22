@@ -72,7 +72,7 @@ namespace Cygnus2_0.Pages.Time
 
             if (called)
             {
-                view.PrintOpenBugsAsync(uiContext,"1");
+                view.pDescargarTareasAzure(uiContext);
                 Thread.Sleep(3200);
 
                 (sender as BackgroundWorker).ReportProgress(40);

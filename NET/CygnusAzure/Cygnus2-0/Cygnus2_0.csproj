@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +54,12 @@
     <ApplicationIcon>icons8-código-fuente-64.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="FirstFloor.ModernUI, Version=1.0.9.0, Culture=neutral, PublicKeyToken=bc9b0c37bf06c6a9, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernUI.WPF.1.0.9\lib\net45\FirstFloor.ModernUI.dll</HintPath>
       <Private>True</Private>
@@ -162,8 +169,14 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\lib\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.115.5\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.115.5\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -236,6 +249,7 @@
     <Compile Include="Interface\IViews.cs" />
     <Compile Include="Model\Aplica\GenerateAplicaModel.cs" />
     <Compile Include="Model\Audit\TbAuditoriaModel.cs" />
+    <Compile Include="Model\Azure\AzureModel.cs" />
     <Compile Include="Model\Compila\CompilaModel.cs" />
     <Compile Include="Model\Data\MessageModel.cs" />
     <Compile Include="Model\Data\ParameterModel.cs" />
@@ -447,6 +461,7 @@
     <Compile Include="TotalSumConverter.cs" />
     <Compile Include="ViewModel\Aplica\GenerateAplicaViewModel.cs" />
     <Compile Include="ViewModel\Audit\TbAudiViewModel.cs" />
+    <Compile Include="ViewModel\Azure\AzureViewModel.cs" />
     <Compile Include="ViewModel\Compila\CompilaViewModel.cs" />
     <Compile Include="ViewModel\Data\MessageViewModel.cs" />
     <Compile Include="ViewModel\Data\ParameterViewModel.cs" />
@@ -470,6 +485,10 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <EmbeddedResource Include="Libs\x64\SQLite.Interop.dll" />
+    <EmbeddedResource Include="Libs\x86\SQLite.Interop.dll" />
+    <EmbeddedResource Include="Libs\System.Data.SQLite.EF6.dll" />
+    <EmbeddedResource Include="Libs\System.Data.SQLite.Linq.dll" />
     <Resource Include="img\LookupGlass.png" />
     <EmbeddedResource Include="Libs\git2-106a5f2.dll" />
     <EmbeddedResource Include="Libs\LibGit2Sharp.dll" />
@@ -500,6 +519,7 @@
     <EmbeddedResource Include="Libs\FirstFloor.ModernUI.dll" />
     <EmbeddedResource Include="Libs\Cygnus.exe.config" />
     <EmbeddedResource Include="Libs\LibGit2Sharp.dll.config" />
+    <EmbeddedResource Include="Libs\Cygnus.db" />
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\sonar-scanner-cli-4.4.0.2170-windows.zip" />
     <Page Include="Assets\AutoComplete.Styles.xaml">
@@ -834,7 +854,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="BaseDatos\Cygnus.db" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\Crea_Usuarios_Aplicacion.docx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -935,7 +954,12 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.2.0.306\build\net46\LibGit2Sharp.NativeBinaries.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

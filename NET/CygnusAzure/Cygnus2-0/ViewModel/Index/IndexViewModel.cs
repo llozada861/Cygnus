@@ -12,6 +12,7 @@ using res = Cygnus2_0.Properties.Resources;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using Cygnus2_0.DAO;
+using Cygnus2_0.Model.Azure;
 
 namespace Cygnus2_0.ViewModel.Index
 {
@@ -79,9 +80,9 @@ namespace Cygnus2_0.ViewModel.Index
             handler.pCreaArchivoBD(path, nombre, myFile);
 
             //se crea la base de datos si no existe
-            nombre = "Cygnus.db";
+            /*nombre = "Cygnus.db";
             myFile = res.Cygnus;
-            handler.pCreaArchivoBD(Environment.CurrentDirectory, nombre, myFile);
+            handler.pCreaArchivoBD(Environment.CurrentDirectory, nombre, myFile);*/
 
             //se crea la base de datos si no existe
             nombre = "ayudaAzure.png";
@@ -102,7 +103,7 @@ namespace Cygnus2_0.ViewModel.Index
             ListaConfiguracion();
             //Carga la configuración
             pCargarConfiguracion();
-
+            ListaAzure();
             ListaEncabezadoObjetos();
             ListaTiposObjetos();
             ListaUsGrants();
@@ -117,20 +118,25 @@ namespace Cygnus2_0.ViewModel.Index
 
         public void pBorrarListas()
         {
-            handler.ListaEncabezadoObjetos.Clear();
-            handler.ListaTiposObjetos.Clear();
-            handler.ListaUsGrants.Clear();
-            handler.ListaPalabrasReservadas.Clear();
-            handler.ListaConfiguracion.Clear();
-            handler.ListaUsuarios.Clear();
-            handler.ListaDocHtml.Clear();
-            handler.ListaRutas.Clear();
-            handler.ListaHTML.Clear();
-            handler.HtmlEspecificacion.Clear();
-            handler.HtmlMetodo.Clear();
-            handler.HtmlMetodoParam.Clear();
-            handler.HtmlMetodoReturn.Clear();
-            handler.HtmlScript.Clear();
+            try
+            {
+                handler.ListaEncabezadoObjetos.Clear();
+                handler.ListaTiposObjetos.Clear();
+                handler.ListaUsGrants.Clear();
+                handler.ListaPalabrasReservadas.Clear();
+                handler.ListaConfiguracion.Clear();
+                handler.ListaUsuarios.Clear();
+                handler.ListaDocHtml.Clear();
+                handler.ListaRutas.Clear();
+                handler.ListaHTML.Clear();
+                handler.HtmlEspecificacion.Clear();
+                handler.HtmlMetodo.Clear();
+                handler.HtmlMetodoParam.Clear();
+                handler.HtmlMetodoReturn.Clear();
+                handler.HtmlScript.Clear();
+            }
+            catch (Exception ex)
+            { }
         }
         public void ListaEmpresas()
         {
@@ -299,6 +305,20 @@ namespace Cygnus2_0.ViewModel.Index
             catch(Exception ex)
             {
                 //handler.MensajeError(ex.Message);
+            }
+        }
+
+        public void ListaAzure()
+        {
+            try
+            {
+                handler.ListaAzure= new ObservableCollection<AzureModel>();
+                handler.Azure = new AzureModel();
+                SqliteDAO.pObtListaAzure(handler);
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
             }
         }
 

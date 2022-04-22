@@ -1,4 +1,5 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.General.Times;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Time;
@@ -86,7 +87,7 @@ namespace Cygnus2_0.ViewModel.Time
 
         internal void pObtDetalleRq(TareaHoja tarea)
         {
-            handler.DAO.pObtDetalleRq(this.Model,tarea);
+            SqliteDAO.pObtDetalleRq(this.Model, tarea,handler);
         }
 
         public void OnProcess(object commandParameter)
@@ -116,7 +117,7 @@ namespace Cygnus2_0.ViewModel.Time
                         TareaHoja tarea = (TareaHoja)commandParameter;
                         tarea.Descripcion = this.Model.DescWindow;
                         tarea.IdAzure = this.Model.IdAzureWindow;
-                        handler.DAO.pActualizaTareaAzure(tarea);
+                        SqliteDAO.pInsertaTareaAzure(tarea, handler,"I");
                     }
                 }
                 else
@@ -160,22 +161,20 @@ namespace Cygnus2_0.ViewModel.Time
         }
         public void OnClean(object commandParameter)
         {
-            throw new NotImplementedException();
         }
 
         public void OnConection(object commandParameter)
         {
-            throw new NotImplementedException();
         }
 
         public void OnRefresh(object commandParameter)
         {
-            ConsultarAzure((SynchronizationContext)commandParameter,"1");
+            ConsultarAzure((SynchronizationContext)commandParameter);
         }
 
-        public void ObtTareasAzure(SynchronizationContext context,string sbDiasAtras)
+        public void ObtTareasAzure(SynchronizationContext context)
         {
-            ConsultarAzure(context, sbDiasAtras);
+            ConsultarAzure(context);
         }
 
         public void pLimpiarTareas()
@@ -189,35 +188,29 @@ namespace Cygnus2_0.ViewModel.Time
 
         public void pRefrescaTareas()
         {
-            if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
-            {
-                handler.DAO.pObtHojasBD(this.Model);
-            }
+            SqliteDAO.pObtHojasBD(this.Model, handler);
         }
 
         public void pCargarTareasPred()
         {
-            if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
-            {
-                handler.DAO.pCargarTareasPred(this.Model);
-            }
+            SqliteDAO.pCargarTareasPred(this.Model);            
         }
 
-        public void ConsultarAzure(SynchronizationContext uiContext, string sbDiasAtras)
+        public void ConsultarAzure(SynchronizationContext uiContext)
         {
-            if (string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure))
-            {
+            if (string.IsNullOrEmpty(handler.Azure.Usuario))
+            { 
                 return;
             }
 
-            PrintOpenBugsAsync(uiContext, sbDiasAtras);
+            pDescargarTareasAzure(uiContext);
         }
 
-        public IList<WorkItem> pObtItemsAzure(string sbDiasAtras)
+        public IList<WorkItem> pObtItemsAzure()
         {
             List<WorkItem> tareasAzure = new List<WorkItem>();
 
-            var connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), new VssBasicCredential(string.Empty, res.TokenAzureConn));
+            var connection = new VssConnection(new Uri(handler.Azure.Url), new VssBasicCredential(string.Empty, handler.Azure.Token));
             var workItemTrackingHttpClient = connection.GetClient<WorkItemTrackingHttpClient>();
 
             var wiql = new Wiql()
@@ -228,11 +221,12 @@ namespace Cygnus2_0.ViewModel.Time
                         "From WorkItems " +
                         "Where [System.WorkItemType] = 'Task' " +
                         "And [System.State] not in ('Removed') " +
-                        "And [System.AssignedTo] = '" + handler.ConnView.Model.UsuarioAzure + "'" +
-                        "And [System.CreatedDate] > @today-" + sbDiasAtras
+                        "And [System.AssignedTo] = '" + handler.Azure.Usuario + "'" +
+                        "And [System.CreatedDate] > @today-" + handler.Azure.Dias
             };
 
-            var worItemsIds = workItemTrackingHttpClient.QueryByWiqlAsync(wiql, "OPEN").Result;
+            //Proyecto = "OPEN"
+            var worItemsIds = workItemTrackingHttpClient.QueryByWiqlAsync(wiql, handler.Azure.Proyecto).Result;
 
             var ids = worItemsIds.WorkItems.Select(item => item.Id).ToArray();
 
@@ -245,13 +239,13 @@ namespace Cygnus2_0.ViewModel.Time
             return tareasAzure;
         }
 
-        public void PrintOpenBugsAsync(SynchronizationContext uiContext, string sbDiasAtras)
+        public void pDescargarTareasAzure(SynchronizationContext uiContext)
         {
             string log = "Antes de traer los items - ";
             CultureInfo culture = new CultureInfo("es-CO");
             //pGeneraLog(log);
 
-            var workItems = pObtItemsAzure(sbDiasAtras);
+            var workItems = pObtItemsAzure();
             listaTareaAzure = new List<TareaHoja>();
 
             /*log = log +"Query Results: " + workItems.Count+" - ";
@@ -327,7 +321,8 @@ namespace Cygnus2_0.ViewModel.Time
                     {
                         if (!this.Model.HojaActual.ListaTareas.ToList().Exists(x => x.IdAzure.Equals(tareaAzure.IdAzure)))
                         {
-                            handler.DAO.pInsertaTareaAzure(tareaAzure);
+                            SqliteDAO.pInsertaTareaAzure(tareaAzure, handler,"I");
+                            //handler.DAO.pInsertaTareaAzure(tareaAzure);
                         }
                         else
                         {
@@ -340,7 +335,8 @@ namespace Cygnus2_0.ViewModel.Time
                                 hojaActual.HU = tareaAzure.HU;
                                 hojaActual.IniFecha = tareaAzure.IniFecha;
                                 hojaActual.DescripcionHU = tareaAzure.DescripcionHU;
-                                handler.DAO.pActualizaTareaAzure(hojaActual);
+                                //handler.DAO.pActualizaTareaAzure(hojaActual);
+                                SqliteDAO.pInsertaTareaAzure(hojaActual, handler,"A");
                             }
                         }
                     }
@@ -354,10 +350,11 @@ namespace Cygnus2_0.ViewModel.Time
             uiContext.Send(x => pObtTareasPorHoja(), null);
             uiContext.Send(x => pCalcularTotales(), null);
         }
+
         public WorkItem pObtenerHU(int idTask)
         {
             WorkItem historiaUsuario = new WorkItem();
-            var connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), new VssBasicCredential(string.Empty, res.TokenAzureConn));
+            var connection = new VssConnection(new Uri(handler.Azure.Url), new VssBasicCredential(string.Empty, handler.Azure.Token));
             var workItemTrackingHttpClient = connection.GetClient<WorkItemTrackingHttpClient>();
 
             var wiql = new Wiql()
@@ -367,7 +364,7 @@ namespace Cygnus2_0.ViewModel.Time
                 Query = String.Format("SELECT [System.Id],[System.Title] FROM WorkItemLinks WHERE ([Source].[System.WorkItemType] = 'User Story') And ([System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward') And ([Target].[System.Id] = {0}  AND  [Target].[System.WorkItemType] = 'Task') ORDER BY [System.Id] mode(Recursive,ReturnMatchingChildren)", idTask.ToString()),
             };
 
-            var worItemsIds = workItemTrackingHttpClient.QueryByWiqlAsync(wiql, "OPEN").Result;
+            var worItemsIds = workItemTrackingHttpClient.QueryByWiqlAsync(wiql, handler.Azure.Proyecto).Result;
 
             var ids = worItemsIds.WorkItemRelations.Select(item => item.Target.Id).ToArray();
 
@@ -378,204 +375,6 @@ namespace Cygnus2_0.ViewModel.Time
             List<WorkItem> hus = workItemTrackingHttpClient.GetWorkItemsAsync(ids, fields).Result;
 
             historiaUsuario = hus.First();
-
-            return historiaUsuario;
-        }
-
-        public async Task PrintOpenBugsAsyncOld(SynchronizationContext uiContext, string sbDiasAtras)
-        {
-            string log = "Antes de traer los items - ";
-            CultureInfo culture = new CultureInfo("es-CO");
-            //pGeneraLog(log);
-
-            var workItems = await this.QueryOpenBugsOld(sbDiasAtras).ConfigureAwait(false);
-            listaTareaAzure = new List<TareaHoja>();
-
-            /*log = log +"Query Results: " + workItems.Count+" - ";
-            Console.WriteLine("Query Results: {0} items found", workItems.Count);
-            pGeneraLog(log);*/
-
-            // loop though work items and write to console
-            foreach (var workItem in workItems)
-            {
-                try
-                {
-                    TareaHoja tarea = new TareaHoja();
-                    tarea.IdAzure = Convert.ToInt32(workItem.Id.ToString());
-                    tarea.Descripcion = workItem.Fields["System.Title"].ToString();
-                    tarea.Estado = workItem.Fields["System.State"].ToString();
-                    tarea.FechaCreacion = Convert.ToDateTime(workItem.Fields["System.CreatedDate"]).ToShortDateString().ToString(culture);
-                    tarea.Sun = new Day();
-                    tarea.Mon = new Day();
-                    tarea.Tue = new Day();
-                    tarea.Wed = new Day();
-                    tarea.Thu = new Day();
-                    tarea.Fri = new Day();
-                    tarea.Sat = new Day();
-
-                    WorkItem historiaUsuario = await pObtenerHUOld(tarea.IdAzure);
-                    tarea.HU = (int)historiaUsuario.Id;
-                    tarea.DescripcionHU = historiaUsuario.Fields.Last().Value.ToString();
-
-                    /*if (tarea.IdAzure == 272078)
-                    {
-                        int pru = 1;
-                    }*/
-
-                    try
-                    {
-                        tarea.Completed = Math.Round(double.Parse(workItem.Fields["Microsoft.VSTS.Scheduling.CompletedWork"].ToString()), 1);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("{0}\t NO tiene horas en Azure: " + ex.Message, workItem.Id);
-                        tarea.Completed = 0;
-                    }
-
-                    try
-                    {
-                        tarea.IniFecha = Convert.ToDateTime(workItem.Fields["Microsoft.VSTS.Scheduling.StartDate"]).ToShortDateString().ToString(culture);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("{0}\t NO tiene fecha en Azure: " + ex.Message, workItem.Id);
-                    }
-
-                    this.listaTareaAzure.Add(tarea);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("{0}\t Error: " + ex.Message, workItem.Id);
-                }
-            }
-
-            if (this.listaTareaAzure.Count > 0)
-            {
-                TareaHoja hojaActual = null;
-
-                foreach (TareaHoja tareaAzure in this.listaTareaAzure)
-                {
-                    /*if(tareaAzure.IdAzure == 272078)
-                    {
-                        int pru = 1;
-                    }*/
-
-                    try
-                    {
-                        if (!this.Model.HojaActual.ListaTareas.ToList().Exists(x => x.IdAzure.Equals(tareaAzure.IdAzure)))
-                        {
-                            handler.DAO.pInsertaTareaAzure(tareaAzure);
-                        }
-                        else
-                        {
-                            hojaActual = this.Model.HojaActual.ListaTareas.ToList().Find(x => x.IdAzure.Equals(tareaAzure.IdAzure));
-
-                            if (hojaActual != null)
-                            {
-                                hojaActual.Completed = tareaAzure.Completed;
-                                hojaActual.Descripcion = tareaAzure.Descripcion;
-                                hojaActual.HU = tareaAzure.HU;
-                                hojaActual.IniFecha = tareaAzure.IniFecha;
-                                hojaActual.DescripcionHU = tareaAzure.DescripcionHU;
-                                handler.DAO.pActualizaTareaAzure(hojaActual);                                
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        handler.MensajeError(ex.Message);
-                    }
-                }
-            }
-
-            uiContext.Send(x => pObtTareasPorHoja(), null);
-            uiContext.Send(x => pCalcularTotales(), null);
-            //uiContext.Send(x => view.pRefrescaTareas(), null);
-            //uiContext.Send(x => pSeteaFechaActual(), null);
-        }
-
-        public async Task<IList<WorkItem>> QueryOpenBugsOld(string sbDiasAtras)
-        {
-            string areas = "";
-            string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
-            List<WorkItem> tareasAzure = new List<WorkItem>();
-
-            VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
-            VssConnection connection = null;
-            connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), credentials);
-
-            // create a wiql object and build our query
-            var wiql = new Wiql()
-            {
-
-                // NOTE: Even if other columns are specified, only the ID & URL will be available in the WorkItemReference
-                Query = "Select [Id] " +
-                        "From WorkItems " +
-                        "Where [System.WorkItemType] = 'Task' " +
-                        "And [System.State] not in ('Removed') " +
-                        "And [System.AssignedTo] = '" + handler.ConnView.Model.UsuarioAzure + "'" +
-                        "And [System.CreatedDate] > @today-" + sbDiasAtras
-            };
-            //"And [System.TeamProject] = '" + project + "' " +
-
-            // create instance of work item tracking http client
-            using (var httpClient = new WorkItemTrackingHttpClient(new Uri(handler.ConnView.Model.UrlAzure), credentials))
-            {
-                // execute the query to get the list of work items in the results
-                var result = await httpClient.QueryByWiqlAsync(wiql).ConfigureAwait(false);
-                var ids = result.WorkItems.Select(item => item.Id).ToArray();
-
-                // build a list of the fields we want to see
-                var fields = new[] { "System.Id", "System.Title", "System.State", "System.AssignedTo", "Microsoft.VSTS.Scheduling.CompletedWork", "System.CreatedDate", "Microsoft.VSTS.Scheduling.StartDate" };
-
-                // get work items for the ids found in query
-                tareasAzure =  await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
-            }
-
-            return tareasAzure;
-        }
-
-        public async Task<WorkItem> pObtenerHUOld(int idTask)
-        {
-            int HU = 0;
-            string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
-            WorkItem historiaUsuario = new WorkItem();
-
-            VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
-            VssConnection connection = null;
-            connection = new VssConnection(new Uri(handler.ConnView.Model.UrlAzure), credentials);
-
-            // create a wiql object and build our query
-            var wiql = new Wiql()
-            {
-
-                // NOTE: Even if other columns are specified, only the ID & URL will be available in the WorkItemReference
-                Query = String.Format("SELECT [System.Id],[System.Title] FROM WorkItemLinks WHERE ([Source].[System.WorkItemType] = 'User Story') And ([System.Links.LinkType] = 'System.LinkTypes.Hierarchy-Forward') And ([Target].[System.Id] = {0}  AND  [Target].[System.WorkItemType] = 'Task') ORDER BY [System.Id] mode(Recursive,ReturnMatchingChildren)", idTask.ToString()),
-            };
-
-            using (var httpClient = new WorkItemTrackingHttpClient(new Uri(handler.ConnView.Model.UrlAzure), credentials))
-            {
-                // execute the query to get the list of work items in the results
-                var result = await httpClient.QueryByWiqlAsync(wiql).ConfigureAwait(false);
-                                             
-                var ids = result.WorkItemRelations.Select(item => item.Target.Id).ToArray();
-
-                // build a list of the fields we want to see
-                var fields = new[] { "System.Id", "System.Title" };
-
-                // get work items for the ids found in query
-                List<WorkItem> hus =  await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
-
-                historiaUsuario = hus.First();
-
-                /*for (int i = 0; i < ids.Length; i++)
-                {
-                    if (ids[i] == idTask)
-                    {
-                        HU = ids[i - 1];
-                    }
-                }*/
-            }
 
             return historiaUsuario;
         }
@@ -598,37 +397,7 @@ namespace Cygnus2_0.ViewModel.Time
         {
             try
             {
-                handler.DAO.pObtTareasBD(this.Model);
-
-                /*foreach (TareaHoja tareahoja in this.Model.HojaActual.ListaTareas)
-                {
-                    if (!this.Model.ListaTareas.ToList().Exists(x => x.IdAzure.Equals(tareahoja.IdAzure)))
-                    {
-                        this.Model.ListaTareas.Add(tareahoja);
-                    }
-                }
-
-                if (this.Model.ListaTareas.Count > 0)
-                {
-                    foreach (TareaHoja nuevaTarea in this.Model.ListaTareas)
-                    {
-                        if (!this.Model.HojaActual.ListaTareas.ToList().Exists(x => x.IdAzure.Equals(nuevaTarea.IdAzure)))
-                        {
-                            nuevaTarea.Mon.Horas = 0;
-                            nuevaTarea.Tue.Horas = 0;
-                            nuevaTarea.Wed.Horas = 0;
-                            nuevaTarea.Thu.Horas = 0;
-                            nuevaTarea.Fri.Horas = 0;
-                            nuevaTarea.Sat.Horas = 0;
-                            nuevaTarea.Sun.Horas = 0;
-                            nuevaTarea.pCalcularTotal();
-                            nuevaTarea.Id = "0";
-                            nuevaTarea.IdHoja = this.Model.HojaActual.Id;
-                            nuevaTarea.Tipo = "L";
-                            this.Model.ListaHojas.ToList().Find(x => x.Id == this.Model.HojaActual.Id).ListaTareas.Add(nuevaTarea);
-                        }
-                    }
-                }*/
+                SqliteDAO.pObtTareasBD(this.Model, handler);
             }
             catch (Exception ex)
             {

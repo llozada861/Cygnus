@@ -7,35 +7,121 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-        </Grid.RowDefinitions>
-        <Label x:Name="lblUsuario" Content="Usuario Azure" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtUsuario" Text="{Binding Path=ConnView.Model.UsuarioAzure}"  TextWrapping="Wrap" Grid.Column="2" Grid.Row="0" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
-        <Button Name="btnAyudaFullName"  ToolTip="Ayuda"  Content="Ayuda" VerticalAlignment="Center" Grid.Column="7" Grid.Row="0" HorizontalAlignment="Center" Click="btnAyudaFullName_Click" ></Button>
-        
-        <Label x:Name="lblCorreo" Content="Correo Empresarial" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtCorreo" Text="{Binding Path=ConnView.Model.Correo}"  TextWrapping="Wrap" Grid.Column="2" Grid.Row="1" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
+        <GroupBox x:Name="groupBox1" Header="Lista Azure" >
+            <DataGrid x:Name="dataGridDatos"
+                      ItemsSource="{Binding Path=ListaAzure}"
+                      SelectedItem="{Binding Path=Model}"
+                      AutoGenerateColumns="False"
+                    SelectionMode="Single"
+                    CanUserDeleteRows="True"
+                    CanUserAddRows="False"
+                    CanUserReorderColumns="False"
+                    CanUserSortColumns="False"
+                      SelectionChanged="dataGridDatos_SelectionChanged"  >
 
-        <Button Name="btnGuardar"  Content="Guardar" VerticalAlignment="Center" Click="btnGuardar_Click" Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="3" Margin="5,0"/>
+                <DataGrid.Columns>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Url"
+                  Binding="{Binding Path=Url}" />
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Proyecto"
+                  Binding="{Binding Path=Proyecto}"/>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Usuario"
+                  Binding="{Binding Path=Usuario}" />
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Correo"
+                  Binding="{Binding Path=Correo}"/>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Días Descarga"
+                  Binding="{Binding Path=Dias}"/>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Token"
+                  Binding="{Binding Path=Token}"/>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Defecto?"
+                  Binding="{Binding Path=Defecto}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+
+        <GroupBox x:Name="grAddMod" Grid.Column="2" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBox Name="txtCodigo" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
+                         Text="{Binding Path=Model.Codigo}" 
+                         Style="{StaticResource placeHolder}" Tag="Código" Margin="10,0" IsReadOnly="True"/>
+                
+                <TextBox Name="txtKey" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"
+                         Text="{Binding Path=Model.Url}" 
+                         Style="{StaticResource placeHolder}" Tag="Url Azure" Margin="10,0"/>
+                
+                <TextBox Name="txtDesUsc" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
+                         Text="{Binding Path=Model.Usuario}"
+                         Style="{StaticResource placeHolder}" Tag="Usuario" Margin="10,0"/>
+
+                <Button Name="btnAyudaFullName"  ToolTip="Ayuda"  Content="Ayuda" VerticalAlignment="Center" Grid.Column="7" Grid.Row="2" HorizontalAlignment="Center" Click="btnAyudaFullName_Click" ></Button>
+
+                <TextBox Name="txtDescProy" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4"
+                         Text="{Binding Path=Model.Proyecto}"
+                         Style="{StaticResource placeHolder}" Tag="Proyecto" Margin="10,0"/>
+
+                <TextBox Name="txtDescCo" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4"
+                         Text="{Binding Path=Model.Correo}"
+                         Style="{StaticResource placeHolder}" Tag="Correo" Margin="10,0"/>
+
+                <TextBox Name="txtDescDi" VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="4"
+                         Text="{Binding Path=Model.Dias}"
+                         Style="{StaticResource placeHolder}" Tag="Días Descarga" Margin="10,0"/>
+
+                <TextBox Name="txtDescToken" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="4"
+                         Text="{Binding Path=Model.Token}"
+                         Style="{StaticResource placeHolder}" Tag="Token" Margin="10,0"/>
+
+                <CheckBox x:Name="checkBoxDefec" Content="Defecto?" IsChecked="{Binding Path=Model.Defecto}" Grid.Column="0" Grid.Row="7" Margin="10,0,0,0" Grid.ColumnSpan="4"/>
+
+                <Button Name="btnElimi" Content="Eliminar" VerticalAlignment="Center" 
+                        Click="btnElimi_Click" Grid.Column="1" Grid.Row="10" 
+                        HorizontalAlignment="Right" Visibility="Hidden"/>
+
+                <Button Name="btnModif" Content="Modificar" VerticalAlignment="Center" 
+                        Command="{Binding Path=Process}" Grid.Column="2" Grid.Row="10" 
+                        HorizontalAlignment="Right" />
+
+                <Button Name="btnLimpiar" Content="Limpiar" VerticalAlignment="Center" 
+                        Click="btnLimpiar_Click" Grid.Column="3" Grid.Row="10" 
+                        HorizontalAlignment="Right" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>
