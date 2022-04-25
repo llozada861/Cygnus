@@ -1331,6 +1331,42 @@ namespace Cygnus2_0.DAO
 
             return nuSecuencia;
         }
+
+        public static ObservableCollection<SelectListItem> pObtListaHUAzure(Handler handler)
+        {
+            ObservableCollection<SelectListItem> listaTareas = new ObservableCollection<SelectListItem>();
+
+            string query;
+            string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
+
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+                query =     "    SELECT * FROM " +
+                            "    (" +
+                            "        SELECT codigo,descripcion" +
+                            "        FROM story_user " +
+                            "        WHERE usuario = '" + usuario + "'"+
+                            "        AND descripcion IS NOT  NULL" +
+                            "    )" +
+                            "    ORDER BY codigo DESC";
+
+                using (var command = new SQLiteCommand(query, conn))
+                {
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) // loop through each row from oracle
+                    {
+                        listaTareas.Add(new SelectListItem
+                        {
+                            Text = reader["codigo"].ToString() + " - " + reader["descripcion"].ToString(),
+                            Value = reader["codigo"].ToString()
+                        });
+                    }
+                }
+            }
+
+            return listaTareas;
+        }
         #endregion Azure
     }
 }

@@ -21,6 +21,7 @@ using System.IO;
 using System.Diagnostics;
 using Cygnus2_0.Pages.General;
 using res = Cygnus2_0.Properties.Resources;
+using Cygnus2_0.DAO;
 
 namespace Cygnus2_0.Pages.Compila
 {
@@ -156,7 +157,7 @@ namespace Cygnus2_0.Pages.Compila
         {
             try
             {
-                this.compilaViewModel.Model.ListaHU = handler.DAO.pObtListaHUAzure();
+                this.compilaViewModel.Model.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
             }
             catch(Exception ex)
             {
