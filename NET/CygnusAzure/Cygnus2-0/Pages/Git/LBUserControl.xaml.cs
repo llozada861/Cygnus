@@ -1,4 +1,5 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.ViewModel.Git;
 using FirstFloor.ModernUI.Windows;
@@ -43,7 +44,7 @@ namespace Cygnus2_0.Pages.Git
         {
             try
             {
-                this.objectViewModel.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
+                this.objectViewModel.GitModel.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
             }
             catch (Exception ex)
             {

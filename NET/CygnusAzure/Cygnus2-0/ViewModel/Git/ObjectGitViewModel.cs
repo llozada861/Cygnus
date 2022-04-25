@@ -1,4 +1,5 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Git;
 using Cygnus2_0.Pages.General;
@@ -133,7 +134,7 @@ namespace Cygnus2_0.ViewModel.Git
             try
             {
                 this.GitModel.ListaHU = null;
-                this.GitModel.ListaHU = handler.DAO.pObtListaHUAzure();
+                this.GitModel.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
             }
             catch (Exception ex)
             {

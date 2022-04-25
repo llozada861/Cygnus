@@ -11,7 +11,7 @@
         <mui:ModernTab Name="UserTab" Layout="Tab" SelectedSource="/Pages/Time/TimesView.xaml">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="Tiempos" Source="/Pages/Time/TimesView.xaml" />
-                <mui:Link DisplayName="Reporte" Source="/Pages/Time/Report.xaml" />
+                <!--<mui:Link DisplayName="Reporte" Source="/Pages/Time/Report.xaml" />-->
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

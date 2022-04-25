@@ -702,7 +702,6 @@ namespace Cygnus2_0.General
             }
 
             //Se obtiene el usuario azure
-            this.DAO.pObtAreaAzure();
             SqliteDAO.pCreaConfiguracion(res.KeyEmail, ConnView.Model.Correo);
         }
 

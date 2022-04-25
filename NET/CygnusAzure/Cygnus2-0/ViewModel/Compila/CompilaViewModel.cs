@@ -1,4 +1,5 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Compila;
 using Cygnus2_0.Model.Git;
@@ -46,7 +47,7 @@ namespace Cygnus2_0.ViewModel.Compila
             {
                 this.Model.ArchivosCompilados = pObtCantObjsInvalidos();
                 this.Model.ArchivosDescompilados = this.Model.ArchivosCompilados;
-                this.Model.ListaHU = handler.DAO.pObtListaHUAzure();
+                this.Model.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
             }
             catch(Exception ex)
             {
@@ -76,7 +77,7 @@ namespace Cygnus2_0.ViewModel.Compila
                 this.Model.ListaUsuarios = handler.ListaUsuarios;
                 this.Model.EstadoConn = "1";
                 this.Model.ListaHU = null;
-                this.Model.ListaHU = handler.DAO.pObtListaHUAzure();
+                this.Model.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
                 this.Model.Comentario = "";
                 this.Model.Codigo = "";
             }

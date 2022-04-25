@@ -83,9 +83,6 @@
                             <ContextMenu>
                                 <MenuItem x:Name="MenuItemDeta" Header="Ver detalle" Click="MenuItemDeta_Click"  />
                                 <MenuItem x:Name="MenuItemModif" Header="Modificar" Click="MenuItemModif_Click" />
-                                <MenuItem x:Name="MenuItemCombi" Header="Combinar" Click="MenuItemCombi_Click" />
-                                <Separator />
-                                <MenuItem x:Name="MenuItemCorre" Header="Enviar Correo" Click="MenuItemCorre_Click" />
                                 <Separator />
                                 <MenuItem Header="Eliminar" Click="Eliminar_Click" />
                             </ContextMenu>

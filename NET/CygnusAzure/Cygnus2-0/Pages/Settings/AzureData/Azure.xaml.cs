@@ -43,38 +43,6 @@ namespace Cygnus2_0.Pages.Settings.AzureData
             grAddMod.Header = cstAdicionar;
         }
 
-        private void btnGuardar_Click(object sender, RoutedEventArgs e)
-        {
-            pGuardar();
-        }
-
-        public void pGuardar()
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure))
-                {
-                    handler.MensajeError("Debe ingresar el usuario de Azure.");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(handler.ConnView.Model.Correo))
-                {
-                    handler.MensajeError("Debe ingresar el correo empresarial.");
-                    return;
-                }
-
-                SqliteDAO.pCreaConfiguracion(res.KeyEmail, handler.ConnView.Model.Correo);
-                handler.DAO.pActualizaCorreo();
-
-                handler.MensajeOk("Proceso terminó con éxito");
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
-        }
-
         private void btnAyuda_Click(object sender, RoutedEventArgs e)
         {
             UserControl help = new HelpArea("\\img\\ayudaAzure.png", "De AzureDevops debe tomar la info de la columna Area Path (recuadro ROJO):");

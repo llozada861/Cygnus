@@ -80,7 +80,7 @@ namespace Cygnus2_0.Pages.Time
             {
                 if (handler.MensajeConfirmacion("Está seguro que desea combinar la tarea Origen: "+ view.Model.TareaOrigen.DescripcionPlus+" con la tarea Destino: "+ view.Model.TareaDestino.DescripcionPlus+" ?") == "Y")
                 {
-                    handler.DAO.pCombinarTareas(view.Model.TareaOrigen, view.Model.TareaDestino);
+                    //handler.DAO.pCombinarTareas(view.Model.TareaOrigen, view.Model.TareaDestino);
                     this.Close();
                 }
             }
