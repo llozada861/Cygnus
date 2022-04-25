@@ -728,7 +728,7 @@ namespace Cygnus2_0.DAO
         }
 
         #region Azure
-        public static void pInsertaTareaAzure(TareaHoja tareaAzure, Handler handler, string accion)
+        public static void pInsertaTareaAzure(TareaHoja tareaAzure, Handler handler, string accion,string desde)
         {
             string query;
             string fecha;
@@ -784,19 +784,19 @@ namespace Cygnus2_0.DAO
                     ExecuteNonQuery(query, conn);
 
                     //Se crea el registro inicial para la hoja
-                    pActualizaHorasHoja(tareaAzure, fechaParseada, handler, usuario);
+                    pActualizaHorasHoja(tareaAzure, fechaParseada, handler, usuario,null);
                 }
 
                 //solo aplica para la actualización
                 if(accion == "A")
                 {
                     //Se crea el registro inicial para la hoja
-                    pActualizaHorasHoja(tareaAzure, fechaParseada, handler, usuario);
+                    pActualizaHorasHoja(tareaAzure, fechaParseada, handler, usuario,desde);
                 }
             }
         }
 
-        public static void pActualizaHorasHoja(TareaHoja tareaAzure,DateTime fechaParseada, Handler handler,string usuario)
+        public static void pActualizaHorasHoja(TareaHoja tareaAzure,DateTime fechaParseada, Handler handler,string usuario,string desde)
         {
             string query;
             int codigoHoja = 0;
@@ -826,8 +826,8 @@ namespace Cygnus2_0.DAO
 
                 if(codigoHoja > 0)
                 {
-                    if (tareaAzure.HU > 0)
-                    {
+                    if (tareaAzure.HU > 0 && string.IsNullOrEmpty(desde))
+                    {                       
                         switch (diadelasemana)
                         {
                             case 1:

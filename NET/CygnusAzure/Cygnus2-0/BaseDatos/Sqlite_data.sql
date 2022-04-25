@@ -97,3 +97,5 @@ insert into task_pred (CODIGO, DESCRIPCION) values (-5, 'Permiso');
 insert into task_pred (CODIGO, DESCRIPCION) values (-6, 'Compensatorio');
 insert into task_pred (CODIGO, DESCRIPCION) values (-7, 'Día Familia');
 
+INSERT INTO azure (usuario, correo, dias, url, empresa, defecto, token, proyecto) VALUES ('', '', '10', 'https://grupoepm.visualstudio.com', '99', 'S', 'o7ue2wxhuejoo4dshlr5kxpypjvmrfi6udami4fe4psmzgbe62ka', 'OPEN');
+

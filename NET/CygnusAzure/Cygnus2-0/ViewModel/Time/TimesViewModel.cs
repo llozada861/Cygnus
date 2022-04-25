@@ -117,7 +117,7 @@ namespace Cygnus2_0.ViewModel.Time
                         TareaHoja tarea = (TareaHoja)commandParameter;
                         tarea.Descripcion = this.Model.DescWindow;
                         tarea.IdAzure = this.Model.IdAzureWindow;
-                        SqliteDAO.pInsertaTareaAzure(tarea, handler,"I");
+                        SqliteDAO.pInsertaTareaAzure(tarea, handler,"I",null);
                     }
                 }
                 else
@@ -321,8 +321,7 @@ namespace Cygnus2_0.ViewModel.Time
                     {
                         if (!this.Model.HojaActual.ListaTareas.ToList().Exists(x => x.IdAzure.Equals(tareaAzure.IdAzure)))
                         {
-                            SqliteDAO.pInsertaTareaAzure(tareaAzure, handler,"I");
-                            //handler.DAO.pInsertaTareaAzure(tareaAzure);
+                            SqliteDAO.pInsertaTareaAzure(tareaAzure, handler,"I",null);
                         }
                         else
                         {
@@ -335,8 +334,7 @@ namespace Cygnus2_0.ViewModel.Time
                                 hojaActual.HU = tareaAzure.HU;
                                 hojaActual.IniFecha = tareaAzure.IniFecha;
                                 hojaActual.DescripcionHU = tareaAzure.DescripcionHU;
-                                //handler.DAO.pActualizaTareaAzure(hojaActual);
-                                SqliteDAO.pInsertaTareaAzure(hojaActual, handler,"A");
+                                SqliteDAO.pInsertaTareaAzure(hojaActual, handler,"A","G");
                             }
                         }
                     }
