@@ -122,7 +122,6 @@ namespace Cygnus2_0.Pages.Time
                     foreach (TareaHoja tarea in view.Model.ListaTareasEliminar)
                     {
                         SqliteDAO.pEliminaTareaAzure(tarea);
-                        //handler.DAO.pEliminaTareaAzure(tarea);
                     }
 
                     view.Model.ListaTareasEliminar.Clear();
@@ -145,11 +144,11 @@ namespace Cygnus2_0.Pages.Time
                         tarea.HU = SeqNegativa;
                         tarea.IniFecha = view.Model.HojaActual.FechaIni.ToString("yyyy-MM-dd");
                         tarea.DescripcionHU = tarea.Descripcion;
-                        SqliteDAO.pInsertaTareaAzure(tarea, handler, "I");
+                        SqliteDAO.pInsertaTareaAzure(tarea, handler, "I", "G");
                     }
 
                     if (SeqNegativa == 0)                    
-                        SqliteDAO.pInsertaTareaAzure(tarea, handler, "A");
+                        SqliteDAO.pInsertaTareaAzure(tarea, handler, "A","G");
                     
                     tarea.pCalcularTotal();
 
