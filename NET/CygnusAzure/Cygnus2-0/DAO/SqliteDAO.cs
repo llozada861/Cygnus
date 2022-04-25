@@ -1308,6 +1308,29 @@ namespace Cygnus2_0.DAO
                 ExecuteNonQuery(query, conn);
             }
         }
+
+        public static int pContarSemanas()
+        {
+            string query;
+            int nuSecuencia = 0;
+
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+                query = "select count(1) from week";
+
+                using (var command = new SQLiteCommand(query, conn))
+                {
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        nuSecuencia = reader.GetInt16(0);
+                    }
+                }
+            }
+
+            return nuSecuencia;
+        }
         #endregion Azure
     }
 }
