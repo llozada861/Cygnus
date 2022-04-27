@@ -143,33 +143,12 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                     GridMain.Children.Add(userControls);
                     break;
                 case 103:
-                    userControls = new EmpresaUserControl();
+                    userControls = new EmpresaUC();
                     GridMain.Children.Add(userControls);
                     break;
                 default:
                     break;                      
             }
-
-            
-            /*if (item.Uid.Equals("0") || item.Uid.Equals("1"))
-            {    
-                var userControls = new Appearance();
-                GridMain.Children.Add(userControls);
-            }
-
-            if ( item.Uid.Equals("2"))
-            {
-                var userControls = new UCGeneral();
-                GridMain.Children.Add(userControls);
-            }
-
-            if (item.Header.Equals("Conexión"))
-            {
-                var userControls = new UCConection();
-                GridMain.Children.Add(userControls);
-            }*/
-
-
         }
     }
 }

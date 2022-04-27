@@ -82,7 +82,7 @@ namespace Cygnus2_0
                             
             try
             {
-                this.Title = "Cygnus [" + fieVersionInfo.FileVersion + "] - Empresa [" + handler.ConfGeneralView.Model.Empresa.Text + "] - Base Datos ["+ handler.ConnView.Model.Conexion.Etiqueta + "]";
+                this.Title = "Cygnus [" + fieVersionInfo.FileVersion + "] - Empresa [" + handler.ConfGeneralView.Model.Empresa.Descripcion + "] - Base Datos ["+ handler.ConnView.Model.Conexion.Etiqueta + "]";
             }
             catch
             {
@@ -103,7 +103,7 @@ namespace Cygnus2_0
 
             try
             {
-                if (handler.ConfGeneralView.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value) || handler.ConfGeneralView.Model.Empresa.Value == "-")
+                if (handler.ConfGeneralView.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo) || handler.ConfGeneralView.Model.Empresa.Codigo == "-")
                 {
                     userControls = new UCGeneral();
                     RequetInfo request = new RequetInfo(userControls,handler, this, "Antes de empezar, configure la Empresa...",res.KEY_EMPRESA);
@@ -124,14 +124,14 @@ namespace Cygnus2_0
                     request.ShowDialog();
                 }
 
-                if (handler.ConfGeneralView.Model.Empresa.Git && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
+                if (handler.ConfGeneralView.Model.Empresa.Git == res.No && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
                 {
                     userControls = new UserControlGit();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el repositorio Git...",null);
                     request.ShowDialog();
                 }
 
-                if (handler.ConfGeneralView.Model.Empresa.Sonar && string.IsNullOrEmpty(handler.RutaSonar))
+                if (handler.ConfGeneralView.Model.Empresa.Sonar == res.No && string.IsNullOrEmpty(handler.RutaSonar))
                 {
                     userControls = new UserControlSonar();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura o instala el Sonar...",null);
@@ -154,7 +154,7 @@ namespace Cygnus2_0
             {
                 handler.pRealizaConexion();
 
-                if (handler.ConfGeneralView.Model.Empresa.Azure && Next && string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure)) 
+                if (handler.ConfGeneralView.Model.Empresa.Azure == res.No && Next && string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure)) 
                 {
                     userControls = new Azure();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el acceso a AzureDevops",null);
@@ -321,7 +321,9 @@ namespace Cygnus2_0
                         "insert into task_pred (CODIGO, DESCRIPCION) values (-5, 'Permiso')",
                         "insert into task_pred (CODIGO, DESCRIPCION) values (-6, 'Compensatorio')",
                         "insert into task_pred (CODIGO, DESCRIPCION) values (-7, 'Día Familia')",
-                        "INSERT INTO azure (codigo,usuario, correo, dias, url, empresa, defecto, token, proyecto) VALUES (1,'', '', '10', 'https://grupoepm.visualstudio.com', '99', 'S', '"+res.TokenAzureConn+"', 'OPEN')"
+                        "INSERT INTO azure (codigo,usuario, correo, dias, url, empresa, defecto, token, proyecto) VALUES (1,'', '', '10', 'https://grupoepm.visualstudio.com', '99', 'S', '"+res.TokenAzureConn+"', 'OPEN')",
+                        "alter table company add defecto text",
+                        "update company set defecto = 'Y' where codigo = 99"
                         /*"DROP table object_type",
                         "CREATE TABLE object_type (    codigo  INTEGER PRIMARY KEY AUTOINCREMENT,    object  TEXT,    slash   TEXT,    count_slash INTEGER,    priority    TEXT,    grant   BLOB)",
                         "CREATE TABLE object_path (    codigo  INTEGER PRIMARY KEY AUTOINCREMENT,    object_type INTEGER,    path    TEXT,    user_default    TEXT,    company INTEGER,    FOREIGN KEY(object_type) REFERENCES object_type(codigo))",

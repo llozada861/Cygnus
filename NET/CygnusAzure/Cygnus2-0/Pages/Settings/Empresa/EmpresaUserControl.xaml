@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Cygnus2_0.Pages.Settings.Empresa"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -22,33 +21,32 @@
                     CanUserAddRows="False"
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
-                      SelectionChanged="dataGridDatos_SelectionChanged" 
-                      >
+                      SelectionChanged="dataGridDatos_SelectionChanged" Loaded="dataGridDatos_Loaded"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Código"
-                  Binding="{Binding Path=Value}" />
+                  Header="Url"
+                  Binding="{Binding Path=Codigo}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Empresa"
-                  Binding="{Binding Path=Text}" />
+                  Header="Proyecto"
+                  Binding="{Binding Path=Descripcion}"/>
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Documento AD"
-                  Binding="{Binding Path=DocumentoAD}" />
-                   <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Azure"
-                  Binding="{Binding Path=Azure}" />
+                  Header="Usuario"
+                  Binding="{Binding Path=DocumentoAd}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Git"
-                  Binding="{Binding Path=Git}" />
+                  Header="Correo"
+                  Binding="{Binding Path=Azure}"/>
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Sonar"
-                  Binding="{Binding Path=Sonar}" />
+                  Header="Token"
+                  Binding="{Binding Path=Git}"/>
+                    <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Defecto?"
+                  Binding="{Binding Path=Sonar}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -76,16 +74,16 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBox Name="txtKey" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
-                         Text="{Binding Path=Model.Empresa.Value}" 
+                         Text="{Binding Path=Model.Empresa.Codigo}" 
                          Style="{StaticResource placeHolder}" Tag="Código" Margin="10,0" CharacterCasing="Upper"/>
                 <TextBox Name="txtDesc" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"
-                         Text="{Binding Path=Model.Empresa.Text}"
+                         Text="{Binding Path=Model.Empresa.Descripcion}"
                          Style="{StaticResource placeHolder}" Tag="Empresa" Margin="10,0"/>
                 <TextBox Name="txtDocu" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4"
-                         Text="{Binding Path=Model.Empresa.DocumentoAD}"
+                         Text="{Binding Path=Model.Empresa.DocumentoAd}"
                          Style="{StaticResource placeHolder}" Tag="Documento AD" Margin="10,0"/>
 
-                <CheckBox x:Name="checkBoxAzure" Content="Azure?" IsChecked="{Binding Path=Model.Empresa.Azure}" 
+                <!--<CheckBox x:Name="checkBoxAzure" Content="Azure?" IsChecked="{Binding Path=Model.Empresa.Azure}" 
                           Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,0"/>
 
                 <CheckBox x:Name="checkBoxGit" Content="Git?" IsChecked="{Binding Path=Model.Empresa.Git}" 
@@ -94,8 +92,8 @@
                 <CheckBox x:Name="checkBoxSonar" Content="Sonar?" IsChecked="{Binding Path=Model.Empresa.Sonar}" 
                           Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="10,0"/>
 
-                <CheckBox x:Name="checkBoxDefault" Content="Empresa Por Defecto?" IsChecked="{Binding Path=Model.Empresa.BlValor}" 
-                          Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="10,0"/>
+                <CheckBox x:Name="checkBoxDefault" Content="Empresa Por Defecto?"  
+                          Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="10,0"/>-->
 
                 <Button Name="btnElimi" Content="Eliminar" VerticalAlignment="Center" 
                          Grid.Column="0" Grid.Row="10" 

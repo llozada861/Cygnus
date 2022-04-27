@@ -34,7 +34,7 @@ namespace Cygnus2_0.Pages.Settings.AdminGeneral
         }
         protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
         {
-            args.DataSource = handler.ConfGeneralView.Model.ListaEmpresas.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+            args.DataSource = handler.ConfGeneralView.Model.ListaEmpresas.Where((hu, match) => hu.Descripcion.ToLower().Contains(args.Pattern.ToLower()));
         }
 
         private void AucomboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

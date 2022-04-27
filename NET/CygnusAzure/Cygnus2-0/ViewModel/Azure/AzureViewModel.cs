@@ -86,7 +86,7 @@ namespace Cygnus2_0.ViewModel.Azure
                 }
 
                 handler.CursorWait();
-                SqliteDAO.pCreaRegistroAzure(this.Model,handler.ConfGeneralView.Model.Empresa.Value);
+                SqliteDAO.pCreaRegistroAzure(this.Model,handler.ConfGeneralView.Model.Empresa.Codigo);
                 handler.CursorNormal();
 
                 handler.MensajeOk("Proceso terminó con éxito");

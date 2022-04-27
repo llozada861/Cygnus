@@ -40,7 +40,7 @@
                                       Grid.ColumnSpan="5"
                         ItemsSource="{Binding Path=Model.ListaEmpresas}" 
                         SelectedItem="{Binding Path=Model.Empresa, Mode=TwoWay}"
-                        DisplayMemberPath="Text" 
+                        DisplayMemberPath="Descripcion" 
                         PatternChanged="AucomboBox_PatternChanged"
                         Style="{StaticResource AutoCompleteComboBox}"
                         Delay="500" Tag="Seleccione la Empresa" Margin="0,5,10,0" SelectionChanged="AucomboBox_SelectionChanged" />

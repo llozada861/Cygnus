@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Empresa;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,8 +23,9 @@ namespace Cygnus2_0.Model.Settings
         private string rutaSqlplus;
         private string valorW;
         private string llaveW;
-        private SelectListItem empresa;
-        private ObservableCollection<SelectListItem> listaEmpresa;
+        private EmpresaModel empresa;
+        private EmpresaModel empresaSel;
+        private ObservableCollection<EmpresaModel> listaEmpresa;
         public ConfGeneralModel()
         {
         }
@@ -60,12 +62,17 @@ namespace Cygnus2_0.Model.Settings
             get { return proxy; }
             set { SetProperty(ref proxy, value); }
         }
-        public SelectListItem Empresa
+        public EmpresaModel Empresa
         {
             get { return empresa; }
             set { SetProperty(ref empresa, value); }
         }
-        public ObservableCollection<SelectListItem> ListaEmpresas
+        public EmpresaModel EmpresaSeleccionada
+        {
+            get { return empresaSel; }
+            set { SetProperty(ref empresaSel, value); }
+        }
+        public ObservableCollection<EmpresaModel> ListaEmpresas
         {
             get { return listaEmpresa; }
             set { SetProperty(ref listaEmpresa, value); }
