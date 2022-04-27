@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using Cygnus2_0.DAO;
 using Cygnus2_0.Model.Azure;
+using Cygnus2_0.Model.Empresa;
 
 namespace Cygnus2_0.ViewModel.Index
 {
@@ -146,7 +147,7 @@ namespace Cygnus2_0.ViewModel.Index
                 archivoBD = Path.Combine(res.CarpetaBD, res.NombreArchivoEncabezadoObj);
                 file = Path.Combine(path, archivoBD);
 
-                handler.ConfGeneralView.Model.ListaEmpresas = new ObservableCollection<SelectListItem>();
+                handler.ConfGeneralView.Model.ListaEmpresas = new ObservableCollection<EmpresaModel>();
 
                 SqliteDAO.pListaEmpresas(handler);
             }
@@ -431,7 +432,7 @@ namespace Cygnus2_0.ViewModel.Index
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_EMPRESA)))
             {
                 string codEmpresa = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_EMPRESA)).Value;
-                handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x=>x.Value.Equals(codEmpresa));
+                handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x=>x.Codigo.Equals(codEmpresa));
             }
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_LLAVEW)))

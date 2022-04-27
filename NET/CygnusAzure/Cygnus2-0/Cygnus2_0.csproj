@@ -254,6 +254,7 @@
     <Compile Include="Model\Data\MessageModel.cs" />
     <Compile Include="Model\Data\ParameterModel.cs" />
     <Compile Include="Model\Documentation\HtmlModel.cs" />
+    <Compile Include="Model\Empresa\EmpresaModel.cs" />
     <Compile Include="Model\Estandar\EstandarModel.cs" />
     <Compile Include="Model\Git\ObjectGitModel.cs" />
     <Compile Include="Model\Index\IndexModel.cs" />
@@ -370,6 +371,9 @@
     </Compile>
     <Compile Include="Pages\Settings\Documentation\HtmlUserControl.xaml.cs">
       <DependentUpon>HtmlUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\Empresa\EmpresaUC.xaml.cs">
+      <DependentUpon>EmpresaUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\Empresa\EmpresaUserControl.xaml.cs">
       <DependentUpon>EmpresaUserControl.xaml</DependentUpon>
@@ -711,6 +715,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Settings\Documentation\HtmlUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\Empresa\EmpresaUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

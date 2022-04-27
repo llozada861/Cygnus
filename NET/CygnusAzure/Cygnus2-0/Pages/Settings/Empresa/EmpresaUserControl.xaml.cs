@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.ViewModel.Settings;
+using FirstFloor.ModernUI.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Cygnus2_0.Pages.Settings.Empresa
     /// <summary>
     /// Lógica de interacción para EmpresaUserControl.xaml
     /// </summary>
-    public partial class EmpresaUserControl : UserControl
+    public partial class EmpresaUserControl : UserControl, IContent
     {
         private const string cstAdicionar = "Adicionar";
         private const string cstModificar = "Modificar";
@@ -47,15 +48,6 @@ namespace Cygnus2_0.Pages.Settings.Empresa
                 btnElimi.Visibility = Visibility.Hidden;
                 return;
             }
-
-            if (btnModif != null)
-            {
-                btnModif.Content = cstModificar;
-                grAddMod.Header = cstModificar;
-                txtKey.IsEnabled = false;
-                btnElimi.Visibility = Visibility.Visible;
-            }
-                
         }
         public void pLimpiar()
         {
@@ -78,6 +70,30 @@ namespace Cygnus2_0.Pages.Settings.Empresa
         private void BtnLimpiar_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+        }
+
+        private void dataGridDatos_Loaded(object sender, RoutedEventArgs e)
+        {
+            btnModif.Content = cstModificar;
+            grAddMod.Header = cstModificar;
+            txtKey.IsEnabled = false;
+            btnElimi.Visibility = Visibility.Visible;
         }
     }
 }

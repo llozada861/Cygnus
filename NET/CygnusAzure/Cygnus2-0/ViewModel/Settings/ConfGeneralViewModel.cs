@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Empresa;
 using Cygnus2_0.Model.Settings;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,8 @@ namespace Cygnus2_0.ViewModel.Settings
             handler = hand;
             this.Model = new ConfGeneralModel();
             this.Model.GeneraHtml = true;
-            this.Model.ListaEmpresas = new ObservableCollection<SelectListItem>();
-            this.Model.Empresa = new SelectListItem();
+            this.Model.ListaEmpresas = new ObservableCollection<EmpresaModel>();
+            this.Model.Empresa = new EmpresaModel();
         }
         public ConfGeneralModel Model { get; set; }
         public void OnProcess(object commandParameter)
@@ -46,10 +47,10 @@ namespace Cygnus2_0.ViewModel.Settings
             SqliteDAO.pCreaConfiguracion(res.KeyOrdenAutomatico, "" + Model.OrdenAutomatico);
             SqliteDAO.pCreaConfiguracion(res.KeyGeneraGrants, "" + Model.Grant);
             SqliteDAO.pCreaConfiguracion(res.KeyProxy, "" + Model.Proxy);
-            SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "" + Model.Empresa.Value);
+            SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "" + Model.Empresa.Codigo);
             //SqliteDAO.pCreaConfiguracion(res.KEY_LLAVEW, "" + Model.LlaveW);
             SqliteDAO.pCreaConfiguracion(res.KEY_VALORW, "" + Model.ValorW);
-            handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x => x.Value.Equals(Model.Empresa.Value));
+            handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x => x.Codigo.Equals(Model.Empresa.Codigo));
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Cygnus2_0.Pages.SolInfo
 
             try
             {
-                if (validacion == res.KEY_EMPRESA && handler.ConfGeneralView.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value) || handler.ConfGeneralView.Model.Empresa.Value == "-")
+                if (validacion == res.KEY_EMPRESA && handler.ConfGeneralView.Model.Empresa == null || string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo) || handler.ConfGeneralView.Model.Empresa.Codigo == "-")
                 {
                     MessageBox.Show("Seleccione un Empresa para continuar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;

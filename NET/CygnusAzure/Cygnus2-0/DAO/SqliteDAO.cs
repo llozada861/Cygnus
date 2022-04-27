@@ -3,6 +3,7 @@ using Cygnus2_0.General;
 using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.General.Times;
 using Cygnus2_0.Model.Azure;
+using Cygnus2_0.Model.Empresa;
 using Cygnus2_0.Model.Time;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into user_grants (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Value+ ")";
+                query = "insert into user_grants (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+ ")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -62,7 +63,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into userbd (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Value+")";
+                query = "insert into userbd (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -83,7 +84,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into object_head (head,type,priority,end,company) VALUES('" + sbEncabezado + "','" + tipo + "'," + proridad + ",'" + fin + "',"+ handler.ConfGeneralView.Model.Empresa.Value+")";
+                query = "insert into object_head (head,type,priority,end,company) VALUES('" + sbEncabezado + "','" + tipo + "'," + proridad + ",'" + fin + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -93,7 +94,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "insert into documentation (tag_ini,tag_fin,attributes,type,end,company) VALUES('" + inicio + "','" + fin + "','" + atributos + "','" + tipo+ "','"+finEnca+ "',"+ handler.ConfGeneralView.Model.Empresa.Value+")";
+                query = "insert into documentation (tag_ini,tag_fin,attributes,type,end,company) VALUES('" + inicio + "','" + fin + "','" + atributos + "','" + tipo+ "','"+finEnca+ "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -103,7 +104,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "update object_path set path ='" + path + "' where object_type =" + tipo_objeto + " and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
+                query = "update object_path set path ='" + path + "' where object_type =" + tipo_objeto + " and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -124,7 +125,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "update html set documentation ='" + value + "' where name ='" + key + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
+                query = "update html set documentation ='" + value + "' where name ='" + key + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -151,7 +152,7 @@ namespace Cygnus2_0.DAO
 
                 try
                 {
-                    query = "insert into conection (user,pass,bd,server,port,company,active,name_) VALUES('" + user + "','" + pass + "','" + bd + "','" + serv + "','" + port + "'," + handler.ConfGeneralView.Model.Empresa.Value + ",'"+ defecto+"','"+etiqueta.ToUpper()+"')";
+                    query = "insert into conection (user,pass,bd,server,port,company,active,name_) VALUES('" + user + "','" + pass + "','" + bd + "','" + serv + "','" + port + "'," + handler.ConfGeneralView.Model.Empresa.Codigo + ",'"+ defecto+"','"+etiqueta.ToUpper()+"')";
                     ExecuteNonQuery(query, conn);
                 }
                 catch
@@ -298,7 +299,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select codigo,object,slash,count_slash,priority,grant from object_type order by priority";
 
-            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value))
+            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo))
             {
                 using (SQLiteConnection conn = DbContext.GetInstance())
                 {
@@ -356,7 +357,7 @@ namespace Cygnus2_0.DAO
 
         public static void pListaUsGrants(Handler handler)
         {
-            string query = "select * from user_grants where company ="+handler.ConfGeneralView.Model.Empresa.Value;
+            string query = "select * from user_grants where company ="+handler.ConfGeneralView.Model.Empresa.Codigo;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -402,7 +403,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pListaUsuarios(Handler handler)
         {
-            string query = "select * from userbd where company = "+ handler.ConfGeneralView.Model.Empresa.Value;
+            string query = "select * from userbd where company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -426,9 +427,9 @@ namespace Cygnus2_0.DAO
 
         public static void pListaRutas(Handler handler)
         {
-            string query = "select object_type,path,user_default,company from object_path where company = "+handler.ConfGeneralView.Model.Empresa.Value;
+            string query = "select object_type,path,user_default,company from object_path where company = "+handler.ConfGeneralView.Model.Empresa.Codigo;
 
-            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Value))
+            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo))
             {
                 using (SQLiteConnection conn = DbContext.GetInstance())
                 {
@@ -469,7 +470,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pListaHTML(Handler handler)
         {
-            string query = "select * from html where company = "+ handler.ConfGeneralView.Model.Empresa.Value;
+            string query = "select * from html where company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -491,50 +492,9 @@ namespace Cygnus2_0.DAO
                 }
             }
         }
-        public static void pListaEmpresas(Handler handler)
-        {
-            string query = "select codigo, descripcion, azure,git,sonar,documentoad from company";
-
-            using (SQLiteConnection conn = DbContext.GetInstance())
-            {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        SelectListItem item = new SelectListItem();
-                        item.Value = reader.GetInt32(0).ToString();
-                        item.Text = reader.GetString(1);
-
-                        if (!reader.IsDBNull(2))
-                            item.Azure = reader.GetString(2) == res.Si ? true : false; 
-                        else
-                            item.Azure = false;
-
-                        if (!reader.IsDBNull(3))
-                            item.Git = reader.GetString(3) == res.Si ? true : false; 
-                        else
-                            item.Git = false;
-
-                        if (!reader.IsDBNull(4))
-                            item.Sonar = reader.GetString(4) == res.Si ? true : false; 
-                        else
-                            item.Sonar = false;
-
-                        if (!reader.IsDBNull(5))
-                            item.DocumentoAD = reader.GetString(5);
-                        else
-                            item.DocumentoAD = "";
-
-                        handler.ConfGeneralView.Model.ListaEmpresas.Add(item);
-                    }
-                }
-            }
-        }
         public static void pDatosBd(Handler handler, SelectListItem conexionActual)
         { 
-            string query = "select * from conection where company = "+handler.ConfGeneralView.Model.Empresa.Value;
+            string query = "select * from conection where company = "+handler.ConfGeneralView.Model.Empresa.Codigo;
 
             handler.ConnView.Model.ListaConexiones.Clear();
             handler.ConnView.Model.Conexion = new SelectListItem();
@@ -608,7 +568,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pDocumentacionHtml(Handler handler)
         {
-            string query = "select * from documentation where company ="+ handler.ConfGeneralView.Model.Empresa.Value;
+            string query = "select * from documentation where company ="+ handler.ConfGeneralView.Model.Empresa.Codigo;
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
@@ -663,7 +623,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "delete from user_grants where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
+                query = "delete from user_grants where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -673,7 +633,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "delete from userbd where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
+                query = "delete from userbd where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -705,7 +665,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "delete from documentation where tag_ini = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Value;
+                query = "delete from documentation where tag_ini = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
             }
         }
@@ -761,7 +721,7 @@ namespace Cygnus2_0.DAO
                 else
                 {
                     query = "insert into story_user (codigo,descripcion,usuario,empresa) "+
-                            "VALUES(" + tareaAzure.HU + ",'" + tareaAzure.DescripcionHU + "','"+ usuario + "',"+ handler.ConfGeneralView.Model.Empresa.Value+")";
+                            "VALUES(" + tareaAzure.HU + ",'" + tareaAzure.DescripcionHU + "','"+ usuario + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                     ExecuteNonQuery(query, conn);
                 }
 
@@ -780,7 +740,7 @@ namespace Cygnus2_0.DAO
                 else
                 {
                     query = "insert into task_user (codigo,descripcion,estado,usuario,completado,fecha_registro,hist_usuario,fecha_inicio,empresa) " +
-                            "VALUES(" + tareaAzure.IdAzure + ",'" + tareaAzure.Descripcion + "','"+tareaAzure.Estado+"','" + usuario + "',"+ completado + ",'" + fecha_actualiza + "',"+ tareaAzure.HU+",'"+ fecha_inicio +"',"+ handler.ConfGeneralView.Model.Empresa.Value + ")";
+                            "VALUES(" + tareaAzure.IdAzure + ",'" + tareaAzure.Descripcion + "','"+tareaAzure.Estado+"','" + usuario + "',"+ completado + ",'" + fecha_actualiza + "',"+ tareaAzure.HU+",'"+ fecha_inicio +"',"+ handler.ConfGeneralView.Model.Empresa.Codigo + ")";
                     ExecuteNonQuery(query, conn);
 
                     //Se crea el registro inicial para la hoja
@@ -1237,7 +1197,7 @@ namespace Cygnus2_0.DAO
 
             using (SQLiteConnection conn = DbContext.GetInstance())
             {
-                query = "select * from azure where empresa = "+handler.ConfGeneralView.Model.Empresa.Value;
+                query = "select * from azure where empresa = "+handler.ConfGeneralView.Model.Empresa.Codigo;
 
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -1368,5 +1328,121 @@ namespace Cygnus2_0.DAO
             return listaTareas;
         }
         #endregion Azure
+
+        #region Empresa
+        public static bool pExisteEmpresa(string value)
+        {
+            string query;
+            int valor = 0;
+
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+                string codigo = value == null ? "0" : value;
+                query = " SELECT codigo FROM company where codigo = " + codigo;
+
+                using (var command = new SQLiteCommand(query, conn))
+                {
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) 
+                    {
+                        valor = Convert.ToInt32(reader["codigo"]);
+                    }
+                }
+            }
+
+            return valor > 0 ? true:false;
+        }
+
+        public static void pInsertaEmpresa(EmpresaModel empresa)
+        {
+            string query;
+            string defecto;
+
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+                defecto = empresa.Azure;
+
+                query = "insert into company (codigo,descripcion,azure,git,sonar,defecto) values (" + empresa.Codigo + ",'" + empresa.Descripcion + "','" + empresa.Azure + "','"+ empresa.Git + "','"  + empresa.Sonar + "','" + empresa.Defecto + "')";
+
+                ExecuteNonQuery(query, conn);
+            }
+        }
+        public static void pEliminaEmpresa(EmpresaModel empresa)
+        {
+            string query;
+            string defecto;
+
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+                defecto = empresa.Azure;
+
+                query = "delete from company where codigo = " + empresa.Codigo;
+
+                ExecuteNonQuery(query, conn);
+            }
+        }
+        public static void pActualizaEmpresa(EmpresaModel empresa)
+        {
+            string query;
+
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+
+                query = "update company set "+ 
+                        "descripcion = '" + empresa.Descripcion + "'"+
+                        ",azure = '" + empresa.Azure + "'" +
+                        ",git = '" +empresa.Git+ "'" +
+                        ",sonar = '" + empresa.Sonar + "'" +
+                        ",defecto = '" + empresa.Defecto + "'" +
+                        " where codigo = " + empresa.Codigo;
+
+                ExecuteNonQuery(query, conn);
+            }
+        }
+        public static void pListaEmpresas(Handler handler)
+        {
+            string query = "select codigo, descripcion, azure,git,sonar,defecto from company";
+            handler.ConfGeneralView.Model.ListaEmpresas.Clear();
+
+            using (SQLiteConnection conn = DbContext.GetInstance())
+            {
+                using (var command = new SQLiteCommand(query, conn))
+                {
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        EmpresaModel item = new EmpresaModel();
+                        item.Codigo = reader.GetInt32(0).ToString();
+                        item.Descripcion = reader.GetString(1);
+                        item.Azure = res.No;
+                        item.Git = res.No;
+                        item.Sonar = res.No;
+                        item.Defecto = "";
+
+                        if (!reader.IsDBNull(2))
+                            item.Azure = reader.GetString(2);
+
+                        if (!reader.IsDBNull(3))
+                            item.Git = reader.GetString(3);                            
+
+                        if (!reader.IsDBNull(4))
+                            item.Sonar = reader.GetString(4);
+
+                        if (!reader.IsDBNull(5))
+                            item.Defecto = reader.GetString(5);
+
+                        if(item.Defecto.Equals(res.YES))
+                        {
+                            handler.ConfGeneralView.Model.Empresa = item;
+                        }
+
+                        handler.ConfGeneralView.Model.ListaEmpresas.Add(item);
+                    }
+                }
+            }
+        }
+        #endregion Empresa
     }
 }
