@@ -1,6 +1,9 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Pages.Git;
+using Cygnus2_0.ViewModel.Git;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +19,7 @@ namespace Cygnus2_0.Model.Git
         private ObservableCollection<SelectListItem> listaRamasLB;
         private ObservableCollection<Archivo> listaArchivosEncontrados;
         private ObservableCollection<Archivo> listaArchivos;
-        private ObservableCollection<Archivo> listaRamasCreadas;
+        private ObservableCollection<RamaRepositorio> listaRamasCreadas;
         private ObservableCollection<Archivo> listaArchivosRamas;
         private ObservableCollection<Folder> listacarpetas;
         private ObservableCollection<SelectListItem> listaHU;
@@ -29,16 +32,17 @@ namespace Cygnus2_0.Model.Git
         private bool activaAprobRamas;
         private bool ejecutarSonar;
         private string nuevaRama;
-        public ObjectGitModel()
+        private ObjectGitViewModel view_;
+        public ObjectGitModel(ObjectGitViewModel view)
         {
             this.ListaRamasLB = new ObservableCollection<SelectListItem>();
             this.ListaArchivosEncontrados = new ObservableCollection<Archivo>();
             this.ListaArchivos = new ObservableCollection<Archivo>();
-            this.ListaRamasCreadas = new ObservableCollection<Archivo>();
+            this.ListaRamasCreadas = new ObservableCollection<RamaRepositorio>();
             this.ListaArchivosRamas = new ObservableCollection<Archivo>();
             this.ListaCarpetas = new ObservableCollection<Folder>();
             this.ListaHU = new ObservableCollection<SelectListItem>();
-
+            this.view_ = view;
         }
         public string Codigo
         {
@@ -57,8 +61,9 @@ namespace Cygnus2_0.Model.Git
             get { return hu; }
             set
             {
-                SetProperty(ref hu, value.Trim());
-                pCreaRamas();
+                SetProperty(ref hu, value.Trim().ToUpper());
+                view_.pCreaRamas();
+                view_.pArmarArbol(null, null);
             }
         }
 
@@ -67,7 +72,6 @@ namespace Cygnus2_0.Model.Git
             get { return _selectHU; }
             set {
                 SetProperty(ref _selectHU, value);
-                pCreaRamas();
             }
         }
         public string Comentario
@@ -106,7 +110,7 @@ namespace Cygnus2_0.Model.Git
             get { return listaArchivos; }
             set { SetProperty(ref listaArchivos, value); }
         }
-        public ObservableCollection<Archivo> ListaRamasCreadas
+        public ObservableCollection<RamaRepositorio> ListaRamasCreadas
         {
             get { return listaRamasCreadas; }
             set { SetProperty(ref listaRamasCreadas, value); }
@@ -131,21 +135,6 @@ namespace Cygnus2_0.Model.Git
         public bool EjecutaSonar {
             get { return ejecutarSonar; }
             set { SetProperty(ref ejecutarSonar, value); }
-        }
-
-        public void pCreaRamas()
-        {
-            string ramaDll = res.Feature + "HU"+ this.SelectHU.Value + "_" + Environment.UserName.ToUpper() + "_DLL";
-            string ramaPru = res.Feature + "HU" + this.SelectHU.Value + "_" + Environment.UserName.ToUpper() + "_PRU";
-            string ramaPdn = res.Feature + "HU" + this.SelectHU.Value +"_" + Environment.UserName.ToUpper() + "_PDN";
-
-            if (!string.IsNullOrEmpty(this.SelectHU.Value))
-            {
-                ListaRamasCreadas.Clear();
-                ListaRamasCreadas.Add(new Archivo { FileName = ramaDll });
-                ListaRamasCreadas.Add(new Archivo { FileName = ramaPru });
-                ListaRamasCreadas.Add(new Archivo { FileName = ramaPdn });
-            }
         }
     }
 }

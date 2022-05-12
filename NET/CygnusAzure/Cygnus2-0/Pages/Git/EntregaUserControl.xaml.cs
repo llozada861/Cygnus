@@ -47,7 +47,7 @@ namespace Cygnus2_0.Pages.Git
             this.objectViewModel.GitModel.EjecutaSonar = true;
             try
             {
-                this.objectViewModel.GitModel.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
+                this.objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
             }
             catch (Exception ex)
             {
@@ -57,6 +57,14 @@ namespace Cygnus2_0.Pages.Git
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             objectViewModel.GitModel.ListaArchivosEncontrados.Clear();
+            objectViewModel.pArmarArbol(null, null);
+        }
+        private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(objectViewModel.GitSeleccionado != null)
+            {
+                objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
+            }
         }
         private void listBox1_Drop(object sender, DragEventArgs e)
         {
@@ -97,39 +105,10 @@ namespace Cygnus2_0.Pages.Git
                 Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
                 objectViewModel.pArmarArbol(tipo, selectedItem);
             }
-
-            //CollectionViewSource.GetDefaultView(objectViewModel.GitModel.ListaArchivos).Refresh();
-
-            //dataGridArch.ItemsSource = objectViewModel.GitModel.ListaArchivos;
-
-            /*var comboBox = sender as ComboBox;
-            SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
-
-            if (tipo != null)
-            {
-                if(tipo.Text.Equals("paquete"))
-                {
-                    Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
-
-                    if (selectedItem.FileName.EndsWith(".html"))
-                    {
-                        selectedItem.NombreObjeto = selectedItem.NombreSinExt;
-                    }
-                }
-            }*/
         }
         private void UsuarioSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             objectViewModel.pArmarArbol(null, null);
-
-            /*var comboBox = sender as ComboBox;
-            SelectListItem usuario = (SelectListItem)comboBox.SelectedItem;
-
-            if (usuario != null)
-            {
-                Archivo selectedItem = (Archivo)this.dataGridArch.CurrentItem;
-                objectViewModel.pPonerUsuarioArchivos(selectedItem, usuario);
-            }*/
         }
         private void BtnProcesar_Click(object sender, RoutedEventArgs e)
         {
@@ -151,9 +130,6 @@ namespace Cygnus2_0.Pages.Git
             if (editedTextbox != null)
             {
                 Archivo item = (Archivo)e.Row.Item;
-
-                //if (editedTextbox != null)
-                //    MessageBox.Show("Value after edit: " + editedTextbox.Text);
 
                 item.NombreObjeto = editedTextbox.Text;
                 objectViewModel.pArmarArbol(null, item);
@@ -195,11 +171,9 @@ namespace Cygnus2_0.Pages.Git
         }
         private void MenuItemCr_Click(object sender, RoutedEventArgs e)
         {
-            Archivo archivo = dataGridRamas.SelectedItem as Archivo;
-
-            if (archivo != null)
+            if (objectViewModel.RamaSeleccionada != null)
             {
-                objectViewModel.pCreaRama(archivo);
+                objectViewModel.pCreaRama();
             }
         }
         private void DataGridArch_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -209,6 +183,10 @@ namespace Cygnus2_0.Pages.Git
         protected void AucomboBoxHU_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
         {
             args.DataSource = objectViewModel.GitModel.ListaHU.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+        }
+        protected void AuListaRepoGit_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = objectViewModel.ListaGit.Where((hu, match) => hu.Descripcion.ToLower().Contains(args.Pattern.ToLower()));
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

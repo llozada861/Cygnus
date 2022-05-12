@@ -10,6 +10,7 @@
     <Grid x:Name="LineaBase" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -24,7 +25,19 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <GroupBox Header="Generar" Grid.Row="0" Grid.RowSpan="2">
+        <GroupBox Header="Repositorio" Grid.Row="0"  Grid.ColumnSpan="2">
+            <Grid>
+                <general:AutoComplete x:Name="AucomboBoxRepo" 
+                                 ItemsSource="{Binding Path=ListaGit}" Width="500"
+                                          SelectedItem="{Binding Path=GitSeleccionado}" DisplayMemberPath="Descripcion" 
+                                      PatternChanged="AuListaRepoGit_PatternChanged"
+                           Style="{StaticResource AutoCompleteComboBox}" SelectionChanged="AucomboBoxRepo_SelectionChanged" 
+                          Delay="500" Tag="Seleccione el Repositorio GIT" 
+                                          KeyboardNavigation.TabIndex="0" HorizontalAlignment="Left"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Generar" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -51,10 +64,10 @@
                          Text="{Binding Path=GitModel.Codigo}" 
                          Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Línea Base"
                          />
-                <Button Content="Generar" Command="{Binding Path=Procesar}" Grid.Column="8" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Button Content="Generar" Command="{Binding Path=Procesar}" Grid.Column="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Renombrar Línea Base" Grid.Row="2" Grid.RowSpan="2">
+        <GroupBox Header="Renombrar Línea Base" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -91,11 +104,11 @@
                              Margin="10,0,0,0" 
                          />
 
-                <Button Content="Renombrar" Command="{Binding Path=Renombrar}" Grid.Row="1" Grid.Column="8"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Content="Renombrar" Command="{Binding Path=Renombrar}" Grid.Row="1" Grid.Column="8" Grid.ColumnSpan="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0"/>
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="4" Grid.RowSpan="8">
+        <GroupBox Header="Buscar Objetos en Línea Base" Grid.Row="3" Grid.RowSpan="8" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

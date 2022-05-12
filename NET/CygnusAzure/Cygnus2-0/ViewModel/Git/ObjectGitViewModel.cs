@@ -2,6 +2,7 @@
 using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Git;
+using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.Pages.Git;
 using Cygnus2_0.ViewModel.Sonar;
@@ -41,7 +42,7 @@ namespace Cygnus2_0.ViewModel.Git
         public ObjectGitViewModel(Handler handler)
         {
             this.handler = handler;
-            this.GitModel = new ObjectGitModel();
+            this.GitModel = new ObjectGitModel(this);
             _process = new DelegateCommand(OnProcess);
             _buscar = new DelegateCommand(pBuscar);
             _limpiar = new DelegateCommand(pLimpiar);
@@ -49,10 +50,21 @@ namespace Cygnus2_0.ViewModel.Git
             _examinar = new DelegateCommand(pExaminar);
             _renombrar = new DelegateCommand(pRenombrar);
             _gitBash = new DelegateCommand(pEjecutaGitBash);
-
-            this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
         }
         public ObjectGitModel GitModel { get; set; }
+        public List<SelectListItem> ListaSino
+        {
+            get { return handler.ListaSiNO; }
+            set { handler.ListaSiNO = value; }
+        }
+        public ObservableCollection<Repositorio> ListaGit
+        {
+            get { return handler.RepositorioVM.ListaGit; }
+            set { handler.RepositorioVM.ListaGit = value; }
+        }
+
+        public Repositorio GitSeleccionado { get; set; }
+        public RamaRepositorio RamaSeleccionada { get; set; }
 
         public void OnProcess(object commandParameter)
         {
@@ -65,8 +77,8 @@ namespace Cygnus2_0.ViewModel.Git
             try
             {
                 handler.CursorWait();
-                RepoGit.pCreaLineaBase(GitModel, handler);
-                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
+                RepoGit.pCreaLineaBase(GitModel, handler, GitSeleccionado);
+                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler,GitSeleccionado);
                 handler.CursorNormal();
                 GitModel.ListaArchivosEncontrados.Clear();
                 handler.MensajeOk("Línea Base ["+ GitModel.Codigo.ToUpper()+"] Creada con Éxito!");
@@ -122,8 +134,12 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.ObjetoBuscar = "";
             GitModel.ListaArchivosEncontrados.Clear();
             GitModel.ListaRamasLB = null;
-            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
-                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
+            ListaGit.Clear();
+            ListaGit = SqliteDAO.pListaRepositorios();
+
+            //if (GitSeleccionado != null)
+            //    GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler,GitSeleccionado);
+
             GitModel.Comentario = "";
             GitModel.HU = "";
             GitModel.ListaArchivos.Clear();
@@ -149,21 +165,27 @@ namespace Cygnus2_0.ViewModel.Git
 
             try
             {
+                if (GitSeleccionado == null)
+                {
+                    handler.MensajeError("Seleccione un repositorio");
+                    return;
+                }
+
                 if (GitModel.RamaLBSeleccionada == null)
                 {
-                    handler.MensajeError("Seleccione una rama de línea base.");
+                    handler.MensajeError("Seleccione una rama de línea base");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(GitModel.Comentario))
                 {
-                    handler.MensajeError("Ingrese un comentario para el commit.");
+                    handler.MensajeError("Ingrese un comentario para el commit");
                     return;
                 }
 
                 if (GitModel.ListaArchivos.Count() == 0)
                 {
-                    handler.MensajeError("Debe colocar los objetos que se van a versionar.");
+                    handler.MensajeError("Debe colocar los objetos que se van a versionar");
                     return;
                 }
 
@@ -186,7 +208,7 @@ namespace Cygnus2_0.ViewModel.Git
                         }
                     }
 
-                    if (archivo.FileName.ToUpper().StartsWith(handler.ConfGeneralView.Model.Empresa.DocumentoAd.ToUpper()))
+                    if (string.IsNullOrEmpty(GitSeleccionado.Documento) || archivo.FileName.ToUpper().StartsWith(GitSeleccionado.Documento.ToUpper()))
                     {
                         blDocArquitectura = true;
                     }
@@ -200,7 +222,7 @@ namespace Cygnus2_0.ViewModel.Git
 
                 if (!blDocArquitectura)
                 {
-                    handler.MensajeError("Debe adicionar el documento de arquitectura con prefijo ["+ handler.ConfGeneralView.Model.Empresa.DocumentoAd +"]");
+                    handler.MensajeError("Debe adicionar el documento de arquitectura con prefijo ["+ GitSeleccionado.Documento + "]");
                     return;
                 }
 
@@ -210,8 +232,13 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
+                if (handler.MensajeConfirmacion("Seguro que quiere procesar el repositorio [ " + GitSeleccionado.Descripcion.ToUpper() + " ]?") == res.No)
+                {
+                    return;
+                }
+
                 handler.CursorWait();
-                RepoGit.pVersionarObjetos(GitModel,handler);
+                RepoGit.pVersionarObjetos(GitModel,handler,GitSeleccionado);
                 
                 GitModel.ActivaAprobRamas = false;
 
@@ -219,7 +246,7 @@ namespace Cygnus2_0.ViewModel.Git
                     pEjecutarSonar();
 
                 handler.CursorNormal();
-                handler.MensajeOk("Continue creando manualmente las ramas Feature!");
+                handler.MensajeOk("Proceso terminó!");
             }
             catch(Exception ex)
             {
@@ -236,7 +263,9 @@ namespace Cygnus2_0.ViewModel.Git
             {
                 if( item.SelectItemTipo != null && res.Extensiones.IndexOf(item.Extension.ToLower()) > -1 && !String.IsNullOrEmpty(item.SelectItemTipo.Path) && !string.IsNullOrEmpty(item.NombreObjeto))
                 {
-                    item.Ruta = handler.RutaGitObjetos +"\\"+item.Usuario+ "\\" + item.SelectItemTipo.Path;
+                    item.Ruta = GitSeleccionado.Ruta + "\\" + item.SelectItemTipo.Path;
+
+                    item.Ruta = item.Ruta.Replace("[usuario]", item.Usuario != null ? item.Usuario : "");
                     item.Ruta = item.Ruta.Replace(res.TagHTML_nombre,item.NombreObjeto);
                     archivosSonar.Add(item);
                 }
@@ -245,7 +274,7 @@ namespace Cygnus2_0.ViewModel.Git
             if (archivosSonar.Count == 0)
                 return;
 
-            List<string> salida = SonarViewModel.pSonar(GitModel.RamaLBSeleccionada.Text, handler, archivosSonar);
+            List<string> salida = SonarViewModel.pSonar(GitModel.RamaLBSeleccionada.Text, handler, archivosSonar,GitSeleccionado);
 
             string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
 
@@ -267,7 +296,7 @@ namespace Cygnus2_0.ViewModel.Git
 
             UserControl log = new UserControlLog(salidaBuild);
             WinImage request = new WinImage(log, "Traza");
-            RepoGit.pRemoverCambiosSonar(GitModel, handler);
+            RepoGit.pRemoverCambiosSonar(handler,GitSeleccionado);
             request.ShowDialog();
         }
 
@@ -313,18 +342,13 @@ namespace Cygnus2_0.ViewModel.Git
             }
         }
 
-        internal void pCreaRama(Archivo archivo)
+        internal void pCreaRama()
         {
             try
             {
                 handler.CursorWait();
 
-                if (archivo.FileName.EndsWith("DLL"))
-                    RepoGit.pCreaRamaRepo(handler, res.RamaDesarrollo, archivo.FileName);
-                else if (archivo.FileName.EndsWith("PRU"))
-                    RepoGit.pCreaRamaRepo(handler, res.RamaPruebas, archivo.FileName);
-                else if (archivo.FileName.EndsWith("PDN"))
-                    RepoGit.pCreaRamaRepo(handler, res.RamaProduccion, archivo.FileName);
+                RepoGit.pCreaRamaRepo(handler,GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar);
 
                 handler.CursorNormal();
                 handler.MensajeOk("Rama Creada!");
@@ -338,108 +362,68 @@ namespace Cygnus2_0.ViewModel.Git
 
         public void pEjecutaGitBash(object commandParameter)
         {
-            RepoGit.ExecuteGitBash(handler.RutaGitBash+"\\"+res.GitBashExe,handler.RutaGitObjetos);
+            RepoGit.ExecuteGitBash(handler.RepositorioVM.RutaGitBash+"\\"+res.GitBashExe,handler.RutaGitObjetos);
         }
 
         public void pArmarArbol(SelectListItem tipo, Archivo itemModif)
         {
-            string usuario = "-";
-            Folder CarpetaPadre;
+            Folder raiz;
 
-            if(GitModel.RamaLBSeleccionada == null)
+            GitModel.ListaCarpetas.Clear();
+
+            if (GitModel.RamaLBSeleccionada == null)
             {
                 return;
             }
 
-            string carpetaDespliegue = res.Despliegues+"\\" + GitModel.RamaLBSeleccionada.Text;
+            raiz  = new Folder { FolderLabel = GitSeleccionado.Descripcion, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
 
-            GitModel.ListaCarpetas.Clear();
-
-            Folder raiz = new Folder { FolderLabel = res.Carpetas, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
-            Folder despliegue = new Folder { FolderLabel = carpetaDespliegue, FullPath = "", Folders = new List<Folder>() };
-
-            raiz.Folders.Add(despliegue);
-
-            var usuarios = GitModel.ListaArchivos.Select(x => x.Usuario).Distinct();
-
-            foreach (var archivo in usuarios)
+            foreach (Archivo archivo in GitModel.ListaArchivos)
             {
-                if (!string.IsNullOrEmpty(archivo))
-                {
-                    CarpetaPadre = new Folder { FolderLabel = archivo, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
-                    raiz.Folders.Add(CarpetaPadre);
-                }
-            }
-
-           foreach (Archivo archivo in GitModel.ListaArchivos)
-           {
                 if (tipo != null && itemModif != null && archivo.FileName.Equals(itemModif.FileName))
                 {
                     archivo.Usuario = !string.IsNullOrEmpty(tipo.Usuario) ? tipo.Usuario : archivo.Usuario;
                     archivo.NombreObjeto = !string.IsNullOrEmpty(tipo.Usuario) ? archivo.NombreSinExt.ToLower() : "";
                 }
 
-                if(itemModif != null && archivo.FileName.Equals(itemModif.FileName))
+                if (itemModif != null && archivo.FileName.Equals(itemModif.FileName))
                 {
                     archivo.NombreObjeto = itemModif.NombreObjeto;
                 }
 
-                if (!string.IsNullOrEmpty(archivo.Usuario))
-                {
-                    CarpetaPadre = raiz.Folders.Find(x => x.FolderLabel.Equals(archivo.Usuario)); 
-
-                    if (CarpetaPadre != null)
-                    {
-                        pGeneraHijos(archivo, CarpetaPadre);
-                    }
-                }
-
-                if (archivo.SelectItemTipo != null && !string.IsNullOrEmpty(archivo.SelectItemTipo.Path) || archivo.Extension.ToLower().Equals(res.ExtensionHtml))
-                    continue;
-
-                despliegue.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
-           }
+                pGeneraHijos(archivo, raiz);
+            }
 
             GitModel.ListaCarpetas.Add(raiz);
         }
-
         public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)
         {
             if (archivo.SelectItemTipo == null)
                 return;
 
-            Folder carpetaHija;
+            Folder carpetaHija = new Folder();
             string path;
 
             if (string.IsNullOrEmpty(archivo.SelectItemTipo.Path))
                 return;
 
             path = archivo.SelectItemTipo.Path.Replace("[nombre]", archivo.NombreObjeto);
-            Boolean blExistePath = true;
+            path = path.Replace("[usuario]", archivo.Usuario != null ? archivo.Usuario : "");
+            path = path.Replace("[hu]", GitModel.HU);
 
             archivo.RutaRepo = Path.Combine(path, archivo.FileName);
             string carpetaPadreRepo = handler.pObtCarpetaPadre(archivo.RutaRepo);
 
             List<String> Carpetashijas = new List<String>();
 
-            int nuIndex = path.IndexOf(carpetaPadreRepo);
+            string[] carpetas = path.Split('\\');
 
-            if (nuIndex < 0)
-                return;
-
-            string rutaparcial = path.Substring(0, nuIndex);
-            string rutaparcial2 = archivo.RutaRepo.Substring(nuIndex);
-
-            Carpetashijas.Add(rutaparcial);
-
-            string[] carpetas = rutaparcial2.Split('\\');
-
-            for (int i=0;i< carpetas.Length;i++)
+            for (int i = 0; i < carpetas.Length; i++)
             {
                 Carpetashijas.Add(carpetas[i]);
             }
 
-            for (int i=0;i<Carpetashijas.Count-1;i++)
+            for (int i = 0; i < Carpetashijas.Count; i++)
             {
                 path = Carpetashijas[i];
 
@@ -451,25 +435,14 @@ namespace Cygnus2_0.ViewModel.Git
                     {
                         carpetaHija = new Folder();
                         carpetaHija.FolderLabel = path;
-
-                        if (i == Carpetashijas.Count - 2)
-                        {
-                            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
-                        }
-
                         carpetaPadre.Folders.Add(carpetaHija);
-                        blExistePath = false;
                     }
 
                     carpetaPadre = carpetaHija;
                 }
             }
 
-            if (blExistePath)
-            {
-                carpetaPadre.Folders.Add(new Folder { FolderLabel = archivo.FileName, FullPath = archivo.RutaConArchivo });
-            }
-
+            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
         }
 
         public void ListarArchivos(string[] DropPath)
@@ -518,6 +491,19 @@ namespace Cygnus2_0.ViewModel.Git
                 if(fila.CarpetaPadre.Equals(archivo.CarpetaPadre))
                 {
                     fila.Usuario = usuario.Text;
+                }
+            }
+        }
+        public void pCreaRamas()
+        {
+            if(GitSeleccionado != null)
+            {
+                GitModel.ListaRamasCreadas = SqliteDAO.pListaRamaRepositorios(GitSeleccionado);
+
+                foreach (RamaRepositorio rama in GitModel.ListaRamasCreadas)
+                {
+                    rama.Estandar = rama.Estandar.Replace(res.TagHU, GitModel.HU);
+                    rama.Estandar = rama.Estandar.Replace(res.TagUsuario, Environment.UserName.ToUpper());
                 }
             }
         }

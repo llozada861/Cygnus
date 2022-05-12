@@ -216,7 +216,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BaseDatos\sqlite\DbContext.cs" />
+    <Compile Include="BaseDatos\sqlite\DataBaseContext.cs" />
+    <Compile Include="BaseDatos\sqlite\SQLiteConfiguration.cs" />
     <Compile Include="DAO\MarkDAO.cs" />
     <Compile Include="DAO\SqliteDAO.cs" />
     <Compile Include="General\Archivo.cs" />
@@ -262,10 +263,13 @@
     <Compile Include="Model\Objects\DesblockModel.cs" />
     <Compile Include="Model\Package\pkgModel.cs" />
     <Compile Include="Model\Refresh\RefreshModel.cs" />
+    <Compile Include="Model\Repository\RamaRepositorio.cs" />
+    <Compile Include="Model\Repository\Repositorio.cs" />
     <Compile Include="Model\Security\EncryptModel.cs" />
     <Compile Include="Model\Security\RoleModel.cs" />
     <Compile Include="Model\Settings\ConexionModel.cs" />
     <Compile Include="Model\Settings\ConfGeneralModel.cs" />
+    <Compile Include="Model\Settings\Configuracion.cs" />
     <Compile Include="Model\Settings\UpdateModel.cs" />
     <Compile Include="Model\Threats\ThreatsModel.cs" />
     <Compile Include="Model\Time\TimeModel.cs" />
@@ -478,6 +482,7 @@
     <Compile Include="ViewModel\Objects\DesblockViewModel.cs" />
     <Compile Include="ViewModel\Pkg\FirstLevelViewModel.cs" />
     <Compile Include="ViewModel\Refresh\RefreshViewModel.cs" />
+    <Compile Include="ViewModel\Repository\RepositorioViewModel.cs" />
     <Compile Include="ViewModel\Security\AuthenticationViewModel.cs" />
     <Compile Include="ViewModel\Security\EncryptViewModel.cs" />
     <Compile Include="ViewModel\Security\RoleViewModel.cs" />
@@ -489,6 +494,7 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <EmbeddedResource Include="Libs\EntityFramework.dll" />
     <EmbeddedResource Include="Libs\x64\SQLite.Interop.dll" />
     <EmbeddedResource Include="Libs\x86\SQLite.Interop.dll" />
     <EmbeddedResource Include="Libs\System.Data.SQLite.EF6.dll" />

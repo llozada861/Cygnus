@@ -118,5 +118,18 @@ namespace Cygnus2_0.Pages.Compila
         {
             args.DataSource = view.GitModel.ListaRamasLB.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
         }
+
+        protected void AuListaRepoGit_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = view.ListaGit.Where((hu, match) => hu.Descripcion.ToLower().Contains(args.Pattern.ToLower()));
+        }
+
+        private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (view.GitSeleccionado != null)
+            {
+                view.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, view.GitSeleccionado);
+            }
+        }
     }
 }

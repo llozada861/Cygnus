@@ -34,6 +34,7 @@ using System.Reflection;
 using System.Windows.Input;
 using Cygnus2_0.Model.Azure;
 using Cygnus2_0.ViewModel.Azure;
+using Cygnus2_0.ViewModel.Repository;
 
 namespace Cygnus2_0.General
 {
@@ -45,6 +46,7 @@ namespace Cygnus2_0.General
         private ConfGeneralViewModel confGeneralViewModel;
         private AppearanceViewModel settings;
         private MarkDAO dao;
+        private RepositorioViewModel repositorioVM;
 
         private string estadoConn;
         private bool roleAdmin;
@@ -76,6 +78,7 @@ namespace Cygnus2_0.General
             //Se instancian los view models generales           
             view = new ConexionViewModel(this);
             confGeneralViewModel = new ConfGeneralViewModel(this);
+            repositorioVM = new RepositorioViewModel(this);
             pRegeneraIndexListas();
             #endregion ViewModels
 
@@ -191,6 +194,12 @@ namespace Cygnus2_0.General
             get { return confGeneralViewModel; }
             set { confGeneralViewModel = value; }
         }
+
+        public RepositorioViewModel RepositorioVM
+        {
+            get { return repositorioVM; }
+            set { repositorioVM = value; }
+        }
         #endregion AtrViewModels
 
         #region Conexion Oracle
@@ -250,7 +259,6 @@ namespace Cygnus2_0.General
         public string PathArchivos { set; get; }
         public string CarpetaPadre { set; get; }
         public string RutaSonar { set; get; }
-        public string RutaGitBash { set; get; }
         public string RutaGitDatos { set; get; }
         public string RutaGitObjetos { set; get; }
         public string EsLlamadoDesdeUpdater { set; get; }

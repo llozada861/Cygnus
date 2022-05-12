@@ -409,10 +409,10 @@ namespace Cygnus2_0.ViewModel.Index
                 handler.RutaGitDatos = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaGitDatos)).Value;
             }
 
-            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaGitBash)))
+            /*if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaGitBash)))
             {
                 handler.RutaGitBash = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaGitBash)).Value;
-            }
+            }*/
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyEmail)))
             {

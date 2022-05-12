@@ -3496,6 +3496,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [HU].
+        /// </summary>
+        public static string TagHU {
+            get {
+                return ResourceManager.GetString("TagHU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &lt;nombre_aplica&gt;.
         /// </summary>
         public static string TagNombreAplica {
@@ -3537,6 +3546,15 @@ namespace Cygnus2_0.Properties {
         public static string TagParametrosHilos {
             get {
                 return ResourceManager.GetString("TagParametrosHilos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [USUARIO].
+        /// </summary>
+        public static string TagUsuario {
+            get {
+                return ResourceManager.GetString("TagUsuario", resourceCulture);
             }
         }
         

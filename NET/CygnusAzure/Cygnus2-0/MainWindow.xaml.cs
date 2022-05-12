@@ -124,12 +124,12 @@ namespace Cygnus2_0
                     request.ShowDialog();
                 }
 
-                if (handler.ConfGeneralView.Model.Empresa.Git == res.No && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
+                /*if (handler.ConfGeneralView.Model.Empresa.Git == res.No && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
                 {
                     userControls = new UserControlGit();
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el repositorio Git...",null);
                     request.ShowDialog();
-                }
+                }*/
 
                 if (handler.ConfGeneralView.Model.Empresa.Sonar == res.No && string.IsNullOrEmpty(handler.RutaSonar))
                 {
@@ -302,12 +302,58 @@ namespace Cygnus2_0
 
             if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
+                string RepoObj = "insert into repositories (codigo,descripcion,documento,ruta_local,empresa) values(1,'BaseDeDatos','OpenEPM10_Analisis_Diseno','" + SqliteDAO.pObtValorConfiguracion(res.KeyRutaGitObjetos)+ "',99)";
+                string RepoDat = "insert into repositories (codigo,descripcion,documento,ruta_local,empresa) values(2,'ActualizacionDatos','OpenDatosEPM01_Analisis','" + SqliteDAO.pObtValorConfiguracion(res.KeyRutaGitDatos) + "',99)";
+
                 string[] query = 
                  {
-                        "CREATE TABLE azure ( 	codigo	INTEGER PRIMARY KEY AUTOINCREMENT, 	usuario	TEXT, 	correo	TEXT, 	dias	INTEGER, 	url	TEXT, 	empresa	INTEGER, 	defecto	TEXT, 	token	TEXT, 	proyecto	TEXT, 	FOREIGN KEY(empresa) REFERENCES company(codigo) )",
-                        "CREATE TABLE repositories ( 	codigo	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 	descripcion	TEXT, 	url	TEXT, 	ruta	TEXT, 	empresa	INTEGER, 	FOREIGN KEY(empresa) REFERENCES company(codigo) )",
-                        "CREATE TABLE repository_branch ( 	repositorio_id	INTEGER, 	rama	TEXT, 	PRIMARY KEY(repositorio_id,rama) )",
-                        "CREATE TABLE story_user ( 	codigo	INTEGER, 	descripcion	TEXT, 	usuario	TEXT, 	empresa	INTEGER, 	FOREIGN KEY(empresa) REFERENCES company(codigo), 	PRIMARY KEY(codigo) )",
+                        "drop table repositories",
+                        "CREATE TABLE repositories (codigo	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,	descripcion	TEXT,	documento	TEXT,	ruta_local	TEXT,empresa	INTEGER,	FOREIGN KEY(empresa) REFERENCES company(codigo))",
+                        "drop table repository_branch",
+                        "CREATE TABLE repository_branch (codigo	INTEGER PRIMARY KEY AUTOINCREMENT,repositorio_id	INTEGER,rama	TEXT,estandar TEXT, lbase TEXT)",
+                        RepoObj,
+                        RepoDat,
+                        "insert into repository_branch (repositorio_id,rama,estandar,lbase) values (1,'desarrollo','feature/[HU]_[USUARIO]_DLL','N')",
+                        "insert into repository_branch (repositorio_id,rama,estandar,lbase) values (1,'pruebas','feature/[HU]_[USUARIO]_PRU','N')",
+                        "insert into repository_branch (repositorio_id,rama,estandar,lbase) values (1,'produccion','feature/[HU]_[USUARIO]_PDN','S')",
+                        "insert into repository_branch (repositorio_id,rama,estandar,lbase) values (2,'master-datos','feature/[HU]_[USUARIO]','S')",
+                        "delete from object_path",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('1', '1', '[usuario]\\server\\sql\\03fnc\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('2', '2', '[usuario]\\server\\sql\\04proc\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('3', '3', '[usuario]\\server\\sql\\05pkg\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('4', '4', '[usuario]\\server\\sql\\02tbls\\[nombre]\\05trg', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('5', '5', '[usuario]\\server\\sql\\02tbls\\[nombre]\\00tbl', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('6', '6', '[usuario]\\server\\sql\\01seq\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('7', '7', '[usuario]\\server\\sql\\06view\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('8', '8', '[usuario]\\server\\sql\\02tbls\\[nombre]\\02idx', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('9', '9', '[usuario]\\server\\sql\\02tbls\\[nombre]\\11syn', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('10', '10', '[usuario]\\server\\sql\\02tbls\\[nombre]\\00tbl', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('11', '11', '[usuario]\\server\\sql\\02tbls\\[nombre]\\00tbl', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('12', '12', '[usuario]\\server\\sql\\02tbls\\[nombre]\\06data', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('13', '13', '[usuario]\\server\\sql\\02tbls\\[nombre]\\06data', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('14', '14', '[usuario]\\server\\sql\\02tbls\\[nombre]\\06data', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('15', '15', '', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('16', '16', 'Despliegues\\[hu]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('17', '17', '[usuario]\\server\\sql\\02tbls\\[nombre]\\06data', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('18', '18', '[usuario]\\server\\sql\\02tbls\\[nombre]\\01pkey', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('19', '19', '[usuario]\\server\\sql\\02tbls\\[nombre]\\03fkey', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('20', '20', '[usuario]\\server\\sql\\02tbls\\[nombre]\\04chk', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('21', '21', '[usuario]\\server\\sql\\07vwmat\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('22', '22', '[usuario]\\server\\sql\\09job\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('23', '23', '[usuario]\\server\\sql\\10grt\\[nombre]', '', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('24', '24', 'client\\framework\\EA\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('25', '25', 'client\\framework\\GI\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('26', '26', 'client\\framework\\GR\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('27', '27', 'client\\framework\\MD\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('28', '28', 'client\\framework\\OB\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('29', '29', 'client\\framework\\OP\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('30', '30', 'client\\framework\\PB\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('31', '31', 'client\\framework\\PI\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('32', '32', 'client\\framework\\RU\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('33', '33', 'client\\framework\\TC\\[nombre]', 'FLEX', '99')",
+                        "INSERT INTO object_type (codigo, object, slash, count_slash, priority, grant) VALUES ('34', 'Aplica', '', '0', '200', 'No')",
+                        "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('34', '34', 'Despliegues\\[hu]', '', '99')"
+                        /*"CREATE TABLE story_user ( 	codigo	INTEGER, 	descripcion	TEXT, 	usuario	TEXT, 	empresa	INTEGER, 	FOREIGN KEY(empresa) REFERENCES company(codigo), 	PRIMARY KEY(codigo) )",
                         "CREATE TABLE task_user ( 	codigo	INTEGER PRIMARY KEY AUTOINCREMENT, 	descripcion	TEXT, 	estado	TEXT, 	fecha_actualiza	TEXT, 	usuario	TEXT, 	completado	NUMERIC, 	fecha_display	TEXT, 	fecha_registro	TEXT, 	hist_usuario	INTEGER, 	fecha_inicio	TEXT, 	empresa	INTEGER, 	FOREIGN KEY(empresa) REFERENCES company(codigo), 	FOREIGN KEY(hist_usuario) REFERENCES story_user(codigo) )",
                         "CREATE TABLE week ( 	codigo	INTEGER PRIMARY KEY AUTOINCREMENT, 	fecha_ini	TEXT, 	fecha_fin	TEXT, 	descripcion	TEXT )",
                         "CREATE TABLE timexweek ( 	codigo	INTEGER PRIMARY KEY AUTOINCREMENT, 	id_hoja	INTEGER, 	fecha_registro	TEXT, 	usuario	BLOB, 	lunes	NUMERIC, 	martes	NUMERIC, 	miercoles	NUMERIC, 	jueves	NUMERIC, 	viernes	NUMERIC, 	sabado	NUMERIC, 	domingo	NUMERIC, 	fecha_actualiza	TEXT, 	observacion	TEXT, 	requerimiento	INTEGER, 	FOREIGN KEY(id_hoja) REFERENCES week(codigo), 	FOREIGN KEY(requerimiento) REFERENCES task_user(codigo) )",
@@ -324,7 +370,7 @@ namespace Cygnus2_0
                         "INSERT INTO azure (codigo,usuario, correo, dias, url, empresa, defecto, token, proyecto) VALUES (1,'', '', '10', 'https://grupoepm.visualstudio.com', '99', 'S', '"+res.TokenAzureConn+"', 'OPEN')",
                         "alter table company add defecto text",
                         "update company set defecto = 'Y' where codigo = 99"
-                        /*"DROP table object_type",
+                        "DROP table object_type",
                         "CREATE TABLE object_type (    codigo  INTEGER PRIMARY KEY AUTOINCREMENT,    object  TEXT,    slash   TEXT,    count_slash INTEGER,    priority    TEXT,    grant   BLOB)",
                         "CREATE TABLE object_path (    codigo  INTEGER PRIMARY KEY AUTOINCREMENT,    object_type INTEGER,    path    TEXT,    user_default    TEXT,    company INTEGER,    FOREIGN KEY(object_type) REFERENCES object_type(codigo))",
                         "insert into object_type (codigo,object,slash,count_slash,priority,grant) values (1,'Funcion','S',1,300,'E')",
