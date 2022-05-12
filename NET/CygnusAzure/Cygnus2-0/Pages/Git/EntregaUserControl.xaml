@@ -38,7 +38,15 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <general:AutoComplete x:Name="AucomboBoxLB" Grid.Row="0"  Grid.Column="0" Margin="0,0,10,0"
+                <general:AutoComplete x:Name="AucomboBoxRepo" Grid.Row="0"  Grid.Column="0" Margin="0,0,10,0"
+                                 ItemsSource="{Binding Path=ListaGit}" 
+                                          SelectedItem="{Binding Path=GitSeleccionado}" DisplayMemberPath="Descripcion" 
+                                      PatternChanged="AuListaRepoGit_PatternChanged"
+                           Style="{StaticResource AutoCompleteComboBox}" SelectionChanged="AucomboBoxRepo_SelectionChanged" 
+                          Delay="500" Tag="Seleccione el Repositorio GIT" 
+                                          KeyboardNavigation.TabIndex="0"/>
+
+                <general:AutoComplete x:Name="AucomboBoxLB" Grid.Row="0"  Grid.Column="1" Margin="0,0,10,0"
                                  ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
                                           SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}" DisplayMemberPath="Text" 
                                       PatternChanged="AuListaRamasLB_PatternChanged"
@@ -46,17 +54,23 @@
                           Delay="500" Tag="Seleccione Línea Base" SelectionChanged="ComboBox_SelectionChanged" 
                                           KeyboardNavigation.TabIndex="0"/>
 
-                <CheckBox Name="chSonar" Content="Ejecutar SONAR?" Grid.Row="0" Grid.Column="2" IsChecked="{Binding Path=GitModel.EjecutaSonar}" HorizontalAlignment="Center"  />
-                
                 <TextBox x:Name="Comment" 
                          Text="{Binding Path=GitModel.Comentario}" 
                          TextWrapping="Wrap" 
                          VerticalContentAlignment="Center" 
                          CharacterCasing="Upper"
-                         Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                         Grid.Row="1" Grid.Column="0" 
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Comentario commit" TabIndex="3" AcceptsTab="false"/>
+                         Style="{StaticResource placeHolder}" Tag="Comentario commit" TabIndex="3" AcceptsTab="false" Margin="0,0,10,0"/>
 
+                <TextBox x:Name="HU" 
+                         Text="{Binding Path=GitModel.HU}" 
+                         TextWrapping="Wrap" 
+                         VerticalContentAlignment="Center" 
+                         CharacterCasing="Upper"
+                         Grid.Row="1" Grid.Column="1" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Código HU" TabIndex="3" AcceptsTab="false" HorizontalAlignment="Stretch"/>
             </Grid>
         </GroupBox>
 
@@ -86,7 +100,8 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-
+                
+                <CheckBox Name="chSonar" Content="Ejecutar SONAR?" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" IsChecked="{Binding Path=GitModel.EjecutaSonar}" HorizontalAlignment="Right" />
                 <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="BtnExaminar_Click" />
 
                 <DataGrid x:Name="dataGridArch" 
@@ -105,7 +120,6 @@
                       >
 
                     <DataGrid.Columns>
-
                         <DataGridTemplateColumn x:Name="idArchivo" Header="Archivo" MaxWidth="300" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -180,13 +194,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <general:AutoComplete x:Name="AucomboBoxHU" Grid.Row="0" Grid.Column="0"
-                                 ItemsSource="{Binding Path=GitModel.ListaHU}" 
-                                          SelectedItem="{Binding Path=GitModel.SelectHU}" DisplayMemberPath="Text" 
-                                      PatternChanged="AucomboBoxHU_PatternChanged"
-                           Style="{StaticResource AutoCompleteComboBox}"
-                          Delay="500" Tag="Historia de Usuario" KeyboardNavigation.TabIndex="1" />
-                
+
                 <DataGrid x:Name="dataGridRamas" 
                 IsReadOnly="false" 
                 AllowDrop="false" 
@@ -197,7 +205,8 @@
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
                 ItemsSource="{Binding Path=GitModel.ListaRamasCreadas}" 
-                          Grid.Row="1" Grid.RowSpan="4"
+                          SelectedItem="{Binding Path=RamaSeleccionada}"
+                          Grid.Row="0" Grid.RowSpan="5"
                   >
                     <DataGrid.ContextMenu>
                         <ContextMenu>
@@ -209,7 +218,7 @@
                         <DataGridTextColumn                  
                               IsReadOnly="false"
                               Header="Rama"
-                              Binding="{Binding Path=FileName}" />
+                              Binding="{Binding Path=Estandar}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

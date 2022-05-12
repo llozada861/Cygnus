@@ -2226,4 +2226,10 @@ END;
   <data name="KEY_VALORW" xml:space="preserve">
     <value>VALOR_WINDOWS</value>
   </data>
+  <data name="TagHU" xml:space="preserve">
+    <value>[HU]</value>
+  </data>
+  <data name="TagUsuario" xml:space="preserve">
+    <value>[USUARIO]</value>
+  </data>
 </root>

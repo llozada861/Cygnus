@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using FirstFloor.ModernUI.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,146 +22,59 @@ namespace Cygnus2_0.Pages.Settings.Git
     /// <summary>
     /// Lógica de interacción para UserControlSonar.xaml
     /// </summary>
-    public partial class UserControlGit : UserControl
+    public partial class UserControlGit : UserControl, IContent
     {
         private Handler handler;
         public UserControlGit()
         {
             InitializeComponent();
             handler = ((MainWindow)Application.Current.MainWindow).Handler;
+            DataContext = handler.RepositorioVM;
         }
 
-        private void RdbExiste_Checked(object sender, RoutedEventArgs e)
+        public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-            grbDatosInstall.Visibility = Visibility.Hidden;
-            grbDatosRequeridos.Visibility = Visibility.Visible;
-            btnGuardar.Content = "Guardar";
         }
 
-        private void RdbNuevo_Checked(object sender, RoutedEventArgs e)
+        public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            grbDatosInstall.Visibility = Visibility.Visible;
-            grbDatosRequeridos.Visibility = Visibility.Hidden;
-            btnGuardar.Content = "Clonar";
+        }
+
+        public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
         }
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (rdbExiste.IsChecked == true)
-                {
-                    if (string.IsNullOrEmpty(txtRutaGitBash1.Text))
-                    {
-                        handler.MensajeError("Ingrese la ruta del git-bash.exe");
-                        return;
-                    }
-
-                    if (string.IsNullOrEmpty(txtRutaInstall1.Text))
-                    {
-                        handler.MensajeError("Ingrese la ruta del repositorio de DATOS.");
-                        return;
-                    }
-
-                    if (string.IsNullOrEmpty(txtRutaInstallObj.Text))
-                    {
-                        handler.MensajeError("Ingrese la ruta del repositorio de OBJETOS.");
-                        return;
-                    }
-
-                    handler.CursorWait();
-
-                    handler.RutaGitBash = txtRutaGitBash1.Text;
-                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitBash, handler.RutaGitBash);
-
-                    handler.RutaGitDatos = txtRutaInstall1.Text;
-                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);
-
-                    handler.RutaGitObjetos = txtRutaInstallObj.Text;
-                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitObjetos, handler.RutaGitObjetos);
-
-                    handler.CursorNormal();
-                    handler.MensajeOk("Proceso terminó con éxito!");
-                }
-
-                if (rdbNuevo.IsChecked == true)
-                {
-                    if (string.IsNullOrEmpty(txtRutaGitBash2.Text))
-                    {
-                        handler.MensajeError("Ingrese la ruta del git-bash.exe");
-                        return;
-                    }
-
-                    if (string.IsNullOrEmpty(txtRutaInstall2.Text) && string.IsNullOrEmpty(txtRutaInstallObj2.Text))
-                    {
-                        handler.MensajeError("Ingresa la ruta del repositorio que desea clonar.");
-                        return;
-                    }
-
-                    handler.CursorWait();
-
-                    handler.RutaGitBash = txtRutaGitBash2.Text;
-                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitBash, handler.RutaGitBash);
-                    txtRutaGitBash1.Text = handler.RutaGitBash;
-
-                    if (!string.IsNullOrEmpty(txtRutaInstall2.Text))
-                    {
-                        handler.RutaGitDatos = txtRutaInstall2.Text;
-                        RepoGit.pCreaDirectorios(handler.RutaGitDatos);
-
-                        RepoGit.pClonarRepo(handler.RutaGitDatos, res.RepoDATOS, handler.RutaGitBash);
-
-                        handler.RutaGitDatos = Path.Combine(handler.RutaGitDatos, res.CarpetaDatosGIT);
-                        SqliteDAO.pCreaConfiguracion(res.KeyRutaGitDatos, handler.RutaGitDatos);
-                        txtRutaInstall1.Text = handler.RutaGitDatos;
-                    }
-
-                    if (!string.IsNullOrEmpty(txtRutaInstallObj2.Text))
-                    {
-                        handler.RutaGitObjetos = txtRutaInstallObj2.Text;
-                        RepoGit.pCreaDirectorios(handler.RutaGitObjetos);
-
-                        RepoGit.pClonarRepo(handler.RutaGitObjetos, res.RepoOBJETOS, handler.RutaGitBash);
-
-                        handler.RutaGitObjetos = Path.Combine(handler.RutaGitDatos, res.CarpetaObjetosGIT);
-                        SqliteDAO.pCreaConfiguracion(res.KeyRutaGitObjetos, handler.RutaGitObjetos);
-                        txtRutaInstallObj.Text = handler.RutaGitObjetos;
-                    }
-
-                    handler.CursorNormal();
-
-                    handler.MensajeOk("Proceso terminó con éxito!");
-                   
-                }
-            }
-            catch (Exception ex)
-            {
-                handler.CursorNormal();
-                handler.MensajeError(ex.Message);
-            }
         }
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+
+        private void TabControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            grbDatosInstall.Visibility = Visibility.Hidden;
-            grbDatosRequeridos.Visibility = Visibility.Visible;
+            handler.RepositorioVM.TabRepo = true;
+            handler.RepositorioVM.TabRama = false;
+        }
 
-            rdbExiste.IsChecked = true;
+        private void TabControl_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            handler.RepositorioVM.TabRepo = false;
+            handler.RepositorioVM.TabRama = true;
+        }
 
-            if (!string.IsNullOrEmpty(handler.RutaGitDatos))
-            {
-                txtRutaInstall1.Text = handler.RutaGitDatos;
-            }
+        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            handler.RepositorioVM.ListaRamaGit = SqliteDAO.pListaRamaRepositorios(handler.RepositorioVM.RepoSeleccionado);
+            handler.RepositorioVM.TabRepo = true;
+            handler.RepositorioVM.TabRama = false;
+        }
 
-            if (!string.IsNullOrEmpty(handler.RutaGitBash))
-            {
-                txtRutaGitBash1.Text = handler.RutaGitBash;
-                txtRutaGitBash2.Text = handler.RutaGitBash;
-            }
-
-            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
-            {
-                txtRutaInstallObj.Text = handler.RutaGitObjetos;
-            }
+        private void dgDataRama_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            handler.RepositorioVM.TabRepo = false;
+            handler.RepositorioVM.TabRama = true;
         }
     }
 }

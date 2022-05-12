@@ -99,5 +99,16 @@ namespace Cygnus2_0.Pages.Git
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
         }
+        protected void AuListaRepoGit_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = objectViewModel.ListaGit.Where((hu, match) => hu.Descripcion.ToLower().Contains(args.Pattern.ToLower()));
+        }
+        private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (objectViewModel.GitSeleccionado != null)
+            {
+                objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
+            }
+        }
     }
 }

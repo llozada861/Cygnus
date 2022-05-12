@@ -63,8 +63,5 @@
                 <DataGridTextColumn Binding="{Binding Defecto}" Header="Defecto?"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock x:Name="txtStatus" HorizontalAlignment="Left" Margin="8,0,0,0" Grid.Row="1" 
-                   TextWrapping="Wrap" d:LayoutOverrides="Height" VerticalAlignment="Center"/>
-
     </Grid>
 </UserControl>

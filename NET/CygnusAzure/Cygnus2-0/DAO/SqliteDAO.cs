@@ -4,6 +4,8 @@ using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.General.Times;
 using Cygnus2_0.Model.Azure;
 using Cygnus2_0.Model.Empresa;
+using Cygnus2_0.Model.Repository;
+using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Model.Time;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {               
                 if (ifExist("configuration","key='"+key+"'",conn))
                 {
@@ -41,7 +43,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "insert into words (description) VALUES('" + value + "')";
                 ExecuteNonQuery(query, conn);                
@@ -51,7 +53,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "insert into user_grants (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+ ")";
                 ExecuteNonQuery(query, conn);
@@ -61,7 +63,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "insert into userbd (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                 ExecuteNonQuery(query, conn);
@@ -72,7 +74,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "insert into object_type (object,slash,count_slash,priority,grant) VALUES('" + objeto +"','"+ slash + "'," + cantidad + "," + proridad+ ",'" + permiso+"')";
                 ExecuteNonQuery(query, conn);
@@ -82,7 +84,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "insert into object_head (head,type,priority,end,company) VALUES('" + sbEncabezado + "','" + tipo + "'," + proridad + ",'" + fin + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                 ExecuteNonQuery(query, conn);
@@ -92,7 +94,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "insert into documentation (tag_ini,tag_fin,attributes,type,end,company) VALUES('" + inicio + "','" + fin + "','" + atributos + "','" + tipo+ "','"+finEnca+ "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                 ExecuteNonQuery(query, conn);
@@ -102,7 +104,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "update object_path set path ='" + path + "' where object_type =" + tipo_objeto + " and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
@@ -112,7 +114,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "update version set apply ='Y' where version_name ='" + version + "'";
                 ExecuteNonQuery(query, conn);
@@ -123,7 +125,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "update html set documentation ='" + value + "' where name ='" + key + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
@@ -147,7 +149,7 @@ namespace Cygnus2_0.DAO
 
             string defecto = handler.ConnView.Model.Conexion.BlValor ? "S" : "N";
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
 
                 try
@@ -171,7 +173,7 @@ namespace Cygnus2_0.DAO
 
         internal static void pEliminarConexion(SelectListItem conexion)
         {
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 string query = "delete from conection where name_ = '" + conexion.Etiqueta+"'";
                 ExecuteNonQuery(query, conn);
@@ -188,7 +190,7 @@ namespace Cygnus2_0.DAO
 
             try
             {
-                using (SQLiteConnection conn = DbContext.GetInstance())
+                using (SQLiteConnection conn = DataBaseContext.GetInstance())
                 {
                     using (var command = new SQLiteCommand(query, conn))
                     {
@@ -244,7 +246,7 @@ namespace Cygnus2_0.DAO
             string valor;
             string llave;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -272,7 +274,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select * from object_head order by priority";
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -301,7 +303,7 @@ namespace Cygnus2_0.DAO
 
             if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo))
             {
-                using (SQLiteConnection conn = DbContext.GetInstance())
+                using (SQLiteConnection conn = DataBaseContext.GetInstance())
                 {
                     using (var command = new SQLiteCommand(query, conn))
                     {
@@ -338,18 +340,6 @@ namespace Cygnus2_0.DAO
 
                             handler.ListaTiposObjetos.Add(item);
                         }
-
-                        handler.ListaTiposObjetos.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = res.TipoAplica,
-                                Value = "-1",
-                                CantidadSlash = 0,
-                                Prioridad = 200,
-                                Grant = res.No
-                            }
-                        );
                     }
                 }
             }
@@ -359,7 +349,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select * from user_grants where company ="+handler.ConfGeneralView.Model.Empresa.Codigo;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -382,7 +372,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select * from words";
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -405,7 +395,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select * from userbd where company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -431,7 +421,7 @@ namespace Cygnus2_0.DAO
 
             if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo))
             {
-                using (SQLiteConnection conn = DbContext.GetInstance())
+                using (SQLiteConnection conn = DataBaseContext.GetInstance())
                 {
                     using (var command = new SQLiteCommand(query, conn))
                     {
@@ -472,7 +462,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select * from html where company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -499,7 +489,7 @@ namespace Cygnus2_0.DAO
             handler.ConnView.Model.ListaConexiones.Clear();
             handler.ConnView.Model.Conexion = new SelectListItem();
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -570,7 +560,7 @@ namespace Cygnus2_0.DAO
         {
             string query = "select * from documentation where company ="+ handler.ConfGeneralView.Model.Empresa.Codigo;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -600,7 +590,7 @@ namespace Cygnus2_0.DAO
         }
         public static void pExecuteNonQuery(string query)
         {
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 ExecuteNonQuery(query, conn);
             }
@@ -611,7 +601,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "delete from words where description = '" + value + "'";
                 ExecuteNonQuery(query, conn);
@@ -621,7 +611,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "delete from user_grants where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
@@ -631,7 +621,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "delete from userbd where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
@@ -642,7 +632,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "delete from object_type where object = '" + value + "'";
                 ExecuteNonQuery(query, conn);
@@ -653,7 +643,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "delete from object_head where head = '" + value + "'";
                 ExecuteNonQuery(query, conn);
@@ -663,7 +653,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "delete from documentation where tag_ini = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
                 ExecuteNonQuery(query, conn);
@@ -705,7 +695,7 @@ namespace Cygnus2_0.DAO
             string completado = tareaAzure.Completed.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 fecha = string.IsNullOrEmpty(tareaAzure.IniFecha) ? tareaAzure.FechaCreacion : tareaAzure.IniFecha;
                 fechaParseada = DateTime.Parse(fecha);
@@ -767,7 +757,7 @@ namespace Cygnus2_0.DAO
             string fecha_actualiza = DateTime.Now.ToString("yyyy-MM-dd");
             string idHorasHojas = tareaAzure.Id != null ? tareaAzure.Id.ToString() : "0";
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 diadelasemana = (int)fechaParseada.DayOfWeek;
 
@@ -856,7 +846,7 @@ namespace Cygnus2_0.DAO
             string fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
             string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "WITH qHojaActual AS "+
                         "( " +
@@ -943,7 +933,7 @@ namespace Cygnus2_0.DAO
             string fechaSiguiente = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
             string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "SELECT * FROM ( " +
                         "SELECT codigo, " +
@@ -1007,7 +997,7 @@ namespace Cygnus2_0.DAO
             string query;
             int nuSecuencia = 0;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "insert into sequence (codigo) values (null)";
 
@@ -1033,7 +1023,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "DELETE FROM timexweek WHERE codigo =  "+ tareaAzure.Id;
 
@@ -1045,7 +1035,7 @@ namespace Cygnus2_0.DAO
             string query;
             string usuario = handler.Azure.Usuario.ToUpper();
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "SELECT (sum(lunes) + sum(martes) + sum(miercoles) + sum(jueves) + sum(viernes) + sum(sabado) + sum(domingo)) horas "+
                         "FROM timexweek hh "+
@@ -1167,7 +1157,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "select * from task_pred";
 
@@ -1195,7 +1185,7 @@ namespace Cygnus2_0.DAO
             string query;
             string defecto;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "select * from azure where empresa = "+handler.ConfGeneralView.Model.Empresa.Codigo;
 
@@ -1247,7 +1237,7 @@ namespace Cygnus2_0.DAO
             string query;
             string defecto;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 defecto = model.Defecto ? "S" : "N";
 
@@ -1274,7 +1264,7 @@ namespace Cygnus2_0.DAO
             string query;
             int nuSecuencia = 0;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query = "select count(1) from week";
 
@@ -1299,7 +1289,7 @@ namespace Cygnus2_0.DAO
             string query;
             string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 query =     "    SELECT * FROM " +
                             "    (" +
@@ -1335,7 +1325,7 @@ namespace Cygnus2_0.DAO
             string query;
             int valor = 0;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 string codigo = value == null ? "0" : value;
                 query = " SELECT codigo FROM company where codigo = " + codigo;
@@ -1359,7 +1349,7 @@ namespace Cygnus2_0.DAO
             string query;
             string defecto;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 defecto = empresa.Azure;
 
@@ -1373,7 +1363,7 @@ namespace Cygnus2_0.DAO
             string query;
             string defecto;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 defecto = empresa.Azure;
 
@@ -1386,7 +1376,7 @@ namespace Cygnus2_0.DAO
         {
             string query;
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
 
                 query = "update company set "+ 
@@ -1405,7 +1395,7 @@ namespace Cygnus2_0.DAO
             string query = "select codigo, descripcion, azure,git,sonar,defecto from company";
             handler.ConfGeneralView.Model.ListaEmpresas.Clear();
 
-            using (SQLiteConnection conn = DbContext.GetInstance())
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
                 using (var command = new SQLiteCommand(query, conn))
                 {
@@ -1444,5 +1434,96 @@ namespace Cygnus2_0.DAO
             }
         }
         #endregion Empresa
+
+        #region repositorios
+        public static void pEditaRepositorio(Repositorio repo)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(repo).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+        public static void pCreaRepositorio(Repositorio repo)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Repositorios.Add(repo);
+                context.SaveChanges();
+            }
+        }
+        public static void pEditaRamRepositorio(RamaRepositorio rama)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(rama).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+        public static void pCreaRamaRepositorio(RamaRepositorio rama)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.RamaRepositorios.Add(rama);
+                context.SaveChanges();
+            }
+        }
+        public static ObservableCollection<Repositorio> pListaRepositorios()
+        {
+            ObservableCollection<Repositorio> repositorios;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                repositorios = new ObservableCollection<Repositorio>(context.Repositorios.ToList());
+            }
+
+            return repositorios;
+        }
+        public static ObservableCollection<RamaRepositorio> pListaRamaRepositorios(Repositorio repo)
+        {
+            ObservableCollection<RamaRepositorio> repositoriosRama = new ObservableCollection<RamaRepositorio>();
+
+            if(repo != null)
+            {
+                using (DataBaseContext context = new DataBaseContext())
+                {
+                    repositoriosRama = new ObservableCollection<RamaRepositorio>(context.RamaRepositorios.Where(x => x.RepositorioId == repo.Codigo).ToList());
+                }
+            }
+
+            return repositoriosRama;
+        }
+
+        public static void pEliminaRepo(Repositorio repo)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(repo).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        public static void pEliminaRamaRepo(RamaRepositorio rama)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(rama).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        #endregion repositorios
+
+        #region Configuraciones
+        public static string pObtValorConfiguracion(string llave)
+        {
+            Configuracion valor;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                valor = context.Configuraciones.Where(x => x.Key == llave).First();
+            }            
+
+            return valor.Valor;
+        }
+        #endregion Configuraciones
     }
 }

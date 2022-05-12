@@ -3,81 +3,111 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+             d:DesignHeight="300" d:DesignWidth="300" 
+             >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="10*" />
+            <RowDefinition  />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition  />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition  />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <RadioButton x:Name="rdbExiste" Content="Configurar" 
-                     Grid.Column="0" 
-                     Grid.ColumnSpan="2" 
-                     Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RdbExiste_Checked" />
-        
-        <RadioButton x:Name="rdbNuevo" Content="Clonar Repo Datos" Visibility="Hidden"
-                     Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RdbNuevo_Checked" />
-
-        <GroupBox x:Name="grbDatosRequeridos" Header="Ruta Git" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="4">
-            <Grid Margin="10,0" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <TextBox x:Name="txtRutaGitBash1" 
+        <TextBox x:Name="txtRutaGitBash1" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" Grid.Column="0" Grid.Row="0"
-                         Grid.ColumnSpan="3" 
+                         Grid.ColumnSpan="6" 
                          VerticalAlignment="Center"
+                 Text="{Binding Path=RutaGitBash}"
                          Style="{StaticResource placeHolder}" Tag="Ruta de git-bash.exe"
                          />
-                <TextBox x:Name="txtRutaInstall1" 
-                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" Grid.Column="0" Grid.Row="1"
-                         Grid.ColumnSpan="3" 
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Ruta del repositorio de datos"
-                         />
 
-                <TextBox x:Name="txtRutaInstallObj" 
-                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" Grid.Column="0" Grid.Row="2"
-                         Grid.ColumnSpan="3" 
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Ruta del repositorio de Objetos"
-                         />
-            </Grid>
-        </GroupBox>
+        <Button Name="btnAdd" Content="Agregar" VerticalAlignment="Center" 
+                         Grid.Column="0" Grid.Row="1" 
+                        HorizontalAlignment="Center" Command="{Binding Path=Add}"/>
 
-        <GroupBox x:Name="grbDatosInstall" Header="Datos Para Clonar" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="4">
+        <Button Name="btnGuar" Content="Guardar" VerticalAlignment="Center"
+                         Grid.Column="1" Grid.Row="1" 
+                        HorizontalAlignment="Center" Command="{Binding Path=Process}"/>
+
+
+        <TabControl Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabControl_MouseLeftButtonDown" >
+            <TabItem Header="Repositorio">
+                <Grid Margin="10,0" >
+                    <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=ListaGit,Mode=TwoWay}"
+                  SelectedItem="{Binding Path=RepoSeleccionado}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                    SelectionChanged="dgData_SelectionChanged"
+                              >
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Command="{Binding Path=Delete}"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Descripción" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding Ruta}" Header="Ruta" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding Documento}" Header="Documento" MinWidth="150" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <TabControl Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabControl_MouseLeftButtonDown_1" Margin="0,10,0,0">
+            <TabItem Header="Ramas" >
+                <Grid Margin="10,0" >
+
+                    <DataGrid x:Name="dgDataRama" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=ListaRamaGit, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=RamaSeleccionada}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" SelectionChanged="dgDataRama_SelectionChanged">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Command="{Binding Path=DeleteRama}"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Rama}" Header="Rama" MinWidth="200" />
+                            <DataGridTextColumn Binding="{Binding Estandar}" Header="Rama Clon" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding LBase}" Header="Línea Base [S/N]" MinWidth="200"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!--<GroupBox x:Name="grbDatosInstall" Header="Datos Para Clonar" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="4">
             <Grid Margin="10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -98,6 +128,9 @@
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Ruta de git-bash.exe"
                          />
+                
+                
+                
                 <TextBox x:Name="txtRutaInstall2" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" Grid.Column="0" Grid.Row="1"
@@ -114,8 +147,7 @@
                          Style="{StaticResource placeHolder}" Tag="Ruta para clonar OBJETOS"
                          />
             </Grid>
-        </GroupBox>
+        </GroupBox>-->
 
-        <Button Name="btnGuardar"  Content="Guardar" VerticalAlignment="Center" Grid.Column="6" Grid.Row="6" Grid.ColumnSpan="3" Margin="5,0" HorizontalAlignment="Center" Click="BtnGuardar_Click"/>
     </Grid>
 </UserControl>

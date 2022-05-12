@@ -55,25 +55,33 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
+                <general:AutoComplete x:Name="AucomboBoxRepo" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="5"
+                                 ItemsSource="{Binding Path=ListaGit}" 
+                                          SelectedItem="{Binding Path=GitSeleccionado}" DisplayMemberPath="Descripcion" 
+                                      PatternChanged="AuListaRepoGit_PatternChanged"
+                           Style="{StaticResource AutoCompleteComboBox}" SelectionChanged="AucomboBoxRepo_SelectionChanged" 
+                          Delay="500" Tag="Seleccione el Repositorio GIT" 
+                                          KeyboardNavigation.TabIndex="0"/>
+                
                 <general:AutoComplete x:Name="AucomboBox" 
                                       ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
                       SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
-                      DisplayMemberPath="Text" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                      DisplayMemberPath="Text" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="5"
                         PatternChanged="AucomboBox_PatternChanged"
                                       SelectionChanged="ComboBox_SelectionChanged"
                         Style="{StaticResource AutoCompleteComboBox}"
-                        Delay="500" Tag="Seleccione Línea Base" />
+                        Delay="500" Tag="Seleccione Línea Base" Margin="5,0,0,0" />
 
                 <TextBox x:Name="txtBuscar" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
                          CharacterCasing="Upper" 
-                         Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="5"
+                         Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5"
                          VerticalAlignment="Center"
                          Text="{Binding Path=GitModel.ObjetoBuscar}" 
                          Style="{StaticResource placeHolder}" Tag="Ingrese Nombre Objeto"
-                             Margin="10,0,0,0" KeyDown="TxtBuscar_KeyDown"
+                             KeyDown="TxtBuscar_KeyDown"
                          />
-                <Button Content="Buscar" Command="{Binding Path=Buscar}" Grid.Column="8" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Content="Buscar" Command="{Binding Path=Buscar}" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                
             </Grid>
         </GroupBox>
@@ -136,7 +144,7 @@
             </DataGrid>
         </GroupBox>
 
-        <Button x:Name="btnProcesar" Command="{Binding Path=Procesar}" Content="Procesar"  VerticalAlignment="Center" Grid.Column="6" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" HorizontalAlignment="Center" />
-        <Button x:Name="btnLimpiar" Command="{Binding Path=Limpiar}" Content="Limpiar"  VerticalAlignment="Center" Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
+        <Button x:Name="btnProcesar" Command="{Binding Path=Procesar}" Content="Procesar"  VerticalAlignment="Center" Grid.Column="6" Grid.Row="8" Grid.ColumnSpan="2" Margin="0,0,5,0" HorizontalAlignment="Center" />
+        <Button x:Name="btnLimpiar" Command="{Binding Path=Limpiar}" Content="Limpiar"  VerticalAlignment="Center" Grid.Column="8" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" />
     </Grid>
 </UserControl>

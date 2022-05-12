@@ -1,4 +1,6 @@
-﻿using Cygnus2_0.Model.Git;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.Model.Git;
+using Cygnus2_0.Model.Repository;
 using LibGit2Sharp;
 using System;
 using System.Collections.Generic;
@@ -76,36 +78,68 @@ namespace Cygnus2_0.General
             return rama;
         }
 
-        public static void pVersionarObjetos(ObjectGitModel gitModel, Handler handler)
+        public static void pVersionarObjetos(ObjectGitModel gitModel, Handler handler, Repositorio repositorioGit)
         {
-            bool blRama = false;
-
             string ramaWO = gitModel.RamaLBSeleccionada.Text.ToUpper();
-            string rutaObjetos = Path.Combine(handler.RutaGitObjetos, res.Despliegues);
-            rutaObjetos = Path.Combine(rutaObjetos, ramaWO);
-            string MensajeCommit = ramaWO + " - " +gitModel.Comentario;
+            string MensajeCommit;
+            Boolean boUnaRama = false;
+            
+            var ramasGit = SqliteDAO.pListaRamaRepositorios(repositorioGit);
 
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            //Repos con una sola rama
+            if(ramasGit.Count == 1)
+            {
+                ramaWO = ramasGit.ElementAt(0).Estandar;
+                ramaWO = ramaWO.Replace(res.TagHU, gitModel.HU);
+                ramaWO = ramaWO.Replace(res.TagUsuario, Environment.UserName.ToUpper());
+                pCreaRamaRepo(handler, repositorioGit.Ruta, ramasGit.ElementAt(0).Rama, ramaWO);
+                boUnaRama = true;
+            }
+
+            MensajeCommit = gitModel.HU + " - " + gitModel.Comentario;
+
+            using (var repo = new Repository(repositorioGit.Ruta))
             {
                 Commands.Checkout(repo, ramaWO);
-                pCreaDirectorios(rutaObjetos);
+                //pCreaDirectorios(repositorioGit.Ruta);
 
                 //Se copian los archivos en cada ruta del repo
-                pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), handler.RutaGitObjetos);
+                pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit);
 
                 Commands.Stage(repo, "*");
                 Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.ConnView.Model.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.ConnView.Model.Correo, DateTimeOffset.Now));
+            
+                if(boUnaRama)
+                {
+                    Remote remote = repo.Network.Remotes["origin"];
+                    Branch ramaFeat = null;
+
+                    var branches = repo.Branches;
+                    foreach (Branch ramaFeature in branches)
+                    {
+                        if (ramaFeature.FriendlyName.Equals(ramaWO))
+                        {
+                            ramaFeat = ramaFeature;
+                            break;
+                        }
+                    }
+
+                    repo.Branches.Update(ramaFeat,
+                            b => b.Remote = remote.Name,
+                            b => b.UpstreamBranch = ramaFeat.CanonicalName);
+
+                    repo.Network.Push(ramaFeat);
+                }
             }
         }
 
-        public static void pCreaRamaRepo(Handler handler,string ramaPrincipal, string ramaCrear)
+        public static void pCreaRamaRepo(Handler handler,string rutaRepo,string ramaPrincipal, string ramaCrear)
         {
             bool blRama = false;
 
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            using (var repo = new Repository(@rutaRepo))
             {
                 Commands.Checkout(repo, ramaPrincipal);
-                //Commands.Pull(repo, new Signature(Environment.UserName, handler.View.Correo, DateTimeOffset.Now), new PullOptions());
 
                 var branches = repo.Branches;
                 foreach (Branch b in branches)
@@ -121,7 +155,7 @@ namespace Cygnus2_0.General
 
                 if (!blRama)
                 {
-                    pActualizarRepo(handler, ramaPrincipal);
+                    pActualizarRepo(handler, rutaRepo, ramaPrincipal);
                     repo.CreateBranch(ramaCrear);
                 }
 
@@ -129,21 +163,22 @@ namespace Cygnus2_0.General
             }
         }
 
-        public static void pActualizarRepo(Handler handler,string rama)
+        public static void pActualizarRepo(Handler handler, string rutaRepo,string rama)
         {
             string command = "git pull origin " + rama;
-            string RutagitBash = handler.RutaGitBash + "\\" + res.GitBashExe;
-            ExecuteGitBashCommand(RutagitBash, command, handler.RutaGitObjetos,true);
+            string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
+            ExecuteGitBashCommand(RutagitBash, command, rutaRepo, true);
         }
 
-        public static void pCreaLineaBase(ObjectGitModel model, Handler handler)
+        public static void pCreaLineaBase(ObjectGitModel model, Handler handler, Repositorio repositorioGit)
         {
             bool blRama = false;
 
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            RamaRepositorio ramaPrincipal = SqliteDAO.pListaRamaRepositorios(repositorioGit).Where(x=>x.LBase.Equals(res.Si)).First();
+
+            using (var repo = new Repository(@repositorioGit.Ruta))
             {
-                Commands.Checkout(repo, res.RamaProduccion);
-                //Commands.Pull(repo, new Signature(Environment.UserName, handler.View.Correo, DateTimeOffset.Now), new PullOptions());
+                Commands.Checkout(repo, ramaPrincipal.Rama);
 
                 var branches = repo.Branches;
 
@@ -158,7 +193,7 @@ namespace Cygnus2_0.General
 
                 if (!blRama)
                 {
-                    pActualizarRepo(handler, res.RamaProduccion);
+                    pActualizarRepo(handler, repositorioGit.Ruta, ramaPrincipal.Rama);
                     repo.CreateBranch(model.Codigo.ToUpper());
                 }
             }
@@ -180,13 +215,13 @@ namespace Cygnus2_0.General
                 }
             }
         }
-        public static ObservableCollection<SelectListItem> pObtieneRamasListLB(Handler handler)
+        public static ObservableCollection<SelectListItem> pObtieneRamasListLB(Handler handler,Repositorio repositorio)
         {
             ObservableCollection<SelectListItem> listaRamas = new ObservableCollection<SelectListItem>();
 
-            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
+            if (repositorio != null && !string.IsNullOrEmpty(repositorio.Ruta))
             {
-                using (var repo = new Repository(@handler.RutaGitObjetos))
+                using (var repo = new Repository(repositorio.Ruta))
                 {
                     BranchCollection branches = repo.Branches;
 
@@ -209,13 +244,22 @@ namespace Cygnus2_0.General
             }
         }
 
-        internal static void pRemoverCambiosSonar(ObjectGitModel gitModel, Handler handler)
+        internal static void pRemoverCambiosSonar(Handler handler, Repositorio repositorio)
         {
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            using (var repo = new Repository(@repositorio.Ruta))
             {
                 string command = "git stash -u";
-                string RutagitBash = handler.RutaGitBash + "\\" + res.GitBashExe;
-                ExecuteGitBashCommand(RutagitBash, command, handler.RutaGitObjetos,false);
+                string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
+                ExecuteGitBashCommand(RutagitBash, command, repositorio.Ruta, false);
+            }
+        }
+        internal static void pLimpiarRepo(Handler handler, Repositorio repositorio)
+        {
+            using (var repo = new Repository(@repositorio.Ruta))
+            {
+                string command = "git clean -fx";
+                string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
+                ExecuteGitBashCommand(RutagitBash, command, repositorio.Ruta, false);
             }
         }
 
@@ -289,7 +333,7 @@ namespace Cygnus2_0.General
             //process.Close();
         }
 
-        public static void pCopiarObjetosRepo(List<Folder> ListaCarpetas, string path)
+        public static void pCopiarObjetosRepo(List<Folder> ListaCarpetas, string path, Repositorio GitSeleccionado)
         {
             string destino = "";
             string pathIn = "";
@@ -301,13 +345,16 @@ namespace Cygnus2_0.General
 
                 if (string.IsNullOrEmpty(extension))
                 {
-                    if (!archivo.FolderLabel.Equals(res.Carpetas))
+                    if (!archivo.FolderLabel.Equals(GitSeleccionado.Descripcion))
                         pathIn = Path.Combine(path, archivo.FolderLabel);
                     else
                         pathIn = path;
 
-                    pCreaDirectorios(pathIn);
-                    pCopiarObjetosRepo(archivo.Folders, pathIn);
+                    if (archivo.Folders.Count > 0)
+                    {
+                        pCreaDirectorios(pathIn);
+                        pCopiarObjetosRepo(archivo.Folders, pathIn, GitSeleccionado);
+                    }
                 }
                 else
                 {

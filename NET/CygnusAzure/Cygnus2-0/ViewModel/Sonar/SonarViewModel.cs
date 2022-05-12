@@ -1,7 +1,9 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Git;
+using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Pages.General;
+using Cygnus2_0.ViewModel.Git;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,18 +33,17 @@ namespace Cygnus2_0.ViewModel.Sonar
             _process = new DelegateCommand(pProcesar);
             _buscar = new DelegateCommand(pBuscar);
             _limpiar = new DelegateCommand(pLimpiar);
-
-            this.GitModel = new ObjectGitModel();
-
-            if(string.IsNullOrEmpty(handler.RutaGitObjetos))
-            {
-                handler.MensajeAdvertencia("Configure la ruta del repositorio de Git BaseDeDatos en Ajustes/Herramientas Gestión/Git");
-            }
-            else
-                this.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler);
+            GitModel = new ObjectGitModel(new ObjectGitViewModel(handler));
         }
 
         public ObjectGitModel GitModel { get; set; }
+        public ObservableCollection<Repositorio> ListaGit
+        {
+            get { return handler.RepositorioVM.ListaGit; }
+            set { handler.RepositorioVM.ListaGit = value; }
+        }
+
+        public Repositorio GitSeleccionado { get; set; }
 
         public void pProcesar(object commandParameter)
         {
@@ -56,7 +57,7 @@ namespace Cygnus2_0.ViewModel.Sonar
 
                 handler.CursorWait();
 
-                List<string> salida = pSonar(GitModel.RamaLBSeleccionada.Text, handler, GitModel.ListaArchivos);
+                List<string> salida = pSonar(GitModel.RamaLBSeleccionada.Text, handler, GitModel.ListaArchivos,GitSeleccionado);
                 System.Console.WriteLine(salida);
 
                 string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
@@ -79,7 +80,7 @@ namespace Cygnus2_0.ViewModel.Sonar
 
                 UserControl log = new UserControlLog(salidaBuild);
                 WinImage request = new WinImage(log, "Traza");
-                RepoGit.pRemoverCambiosSonar(GitModel, handler);
+                RepoGit.pRemoverCambiosSonar(handler,GitSeleccionado);
                 request.ShowDialog();
             }
             catch (Exception ex)
@@ -137,17 +138,20 @@ namespace Cygnus2_0.ViewModel.Sonar
 
         public void pLimpiar(object commandParameter)
         {
+            if (GitModel == null)
+                return;
+
             GitModel.Codigo = "";
             GitModel.ObjetoBuscar = "";
             GitModel.ListaArchivosEncontrados.Clear();
             GitModel.ListaRamasLB = null;
-            if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
-                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);
+            /*if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
+                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);*/
             GitModel.Comentario = "";
             GitModel.ListaArchivos.Clear();
         }
 
-        public static List<string> pSonar(string codigo,Handler handler, ObservableCollection<Archivo> ListaArchivos)
+        public static List<string> pSonar(string codigo,Handler handler, ObservableCollection<Archivo> ListaArchivos, Repositorio repositorioGit)
         {
             string rutaRel = "";
             List<string> salida = null;
@@ -157,8 +161,8 @@ namespace Cygnus2_0.ViewModel.Sonar
             {
                 foreach (Archivo archivo in ListaArchivos)
                 {
-                    int nuIndex = archivo.Ruta.IndexOf(res.CarpetaObjetosGIT);
-                    int nuIndex2 = (nuIndex + res.CarpetaObjetosGIT.Length);
+                    int nuIndex = archivo.Ruta.IndexOf(repositorioGit.Descripcion);
+                    int nuIndex2 = (nuIndex + repositorioGit.Descripcion.Length);
                     rutaRel = archivo.Ruta.Substring(nuIndex2, archivo.Ruta.Length- nuIndex2);
                     rutaRel = rutaRel.Replace("\\","/");
                     rutaRel = "." + rutaRel+"/"+ archivo.FileName;
@@ -166,7 +170,7 @@ namespace Cygnus2_0.ViewModel.Sonar
                     archivosEvaluar.Add(new SelectListItem { Text = rutaRel, Value = archivo.FileName });
                 }
 
-                salida = SonarQube.pEjecutarSonar(codigo, handler.RutaSonar, archivosEvaluar,handler.RutaGitObjetos);
+                salida = SonarQube.pEjecutarSonar(codigo, handler.RutaSonar, archivosEvaluar, repositorioGit.Ruta);
             }
 
             return salida;
