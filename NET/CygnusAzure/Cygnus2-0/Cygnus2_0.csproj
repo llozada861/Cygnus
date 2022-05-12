@@ -494,6 +494,7 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <EmbeddedResource Include="Libs\EntityFramework.SqlServer.dll" />
     <EmbeddedResource Include="Libs\EntityFramework.dll" />
     <EmbeddedResource Include="Libs\x64\SQLite.Interop.dll" />
     <EmbeddedResource Include="Libs\x86\SQLite.Interop.dll" />
