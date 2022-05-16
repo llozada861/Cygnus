@@ -307,7 +307,7 @@ namespace Cygnus2_0
 
                 string[] query = 
                  {
-                        "drop table repositories",
+                        /*"drop table repositories",
                         "CREATE TABLE repositories (codigo	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,	descripcion	TEXT,	documento	TEXT,	ruta_local	TEXT,empresa	INTEGER,	FOREIGN KEY(empresa) REFERENCES company(codigo))",
                         "drop table repository_branch",
                         "CREATE TABLE repository_branch (codigo	INTEGER PRIMARY KEY AUTOINCREMENT,repositorio_id	INTEGER,rama	TEXT,estandar TEXT, lbase TEXT)",
@@ -353,7 +353,7 @@ namespace Cygnus2_0
                         "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('33', '33', 'client\\framework\\TC\\[nombre]', 'FLEX', '99')",
                         "INSERT INTO object_type (codigo, object, slash, count_slash, priority, grant) VALUES ('34', 'Aplica', '', '0', '200', 'No')",
                         "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('34', '34', 'Despliegues\\[hu]', '', '99')"
-                        /*"CREATE TABLE story_user ( 	codigo	INTEGER, 	descripcion	TEXT, 	usuario	TEXT, 	empresa	INTEGER, 	FOREIGN KEY(empresa) REFERENCES company(codigo), 	PRIMARY KEY(codigo) )",
+                        "CREATE TABLE story_user ( 	codigo	INTEGER, 	descripcion	TEXT, 	usuario	TEXT, 	empresa	INTEGER, 	FOREIGN KEY(empresa) REFERENCES company(codigo), 	PRIMARY KEY(codigo) )",
                         "CREATE TABLE task_user ( 	codigo	INTEGER PRIMARY KEY AUTOINCREMENT, 	descripcion	TEXT, 	estado	TEXT, 	fecha_actualiza	TEXT, 	usuario	TEXT, 	completado	NUMERIC, 	fecha_display	TEXT, 	fecha_registro	TEXT, 	hist_usuario	INTEGER, 	fecha_inicio	TEXT, 	empresa	INTEGER, 	FOREIGN KEY(empresa) REFERENCES company(codigo), 	FOREIGN KEY(hist_usuario) REFERENCES story_user(codigo) )",
                         "CREATE TABLE week ( 	codigo	INTEGER PRIMARY KEY AUTOINCREMENT, 	fecha_ini	TEXT, 	fecha_fin	TEXT, 	descripcion	TEXT )",
                         "CREATE TABLE timexweek ( 	codigo	INTEGER PRIMARY KEY AUTOINCREMENT, 	id_hoja	INTEGER, 	fecha_registro	TEXT, 	usuario	BLOB, 	lunes	NUMERIC, 	martes	NUMERIC, 	miercoles	NUMERIC, 	jueves	NUMERIC, 	viernes	NUMERIC, 	sabado	NUMERIC, 	domingo	NUMERIC, 	fecha_actualiza	TEXT, 	observacion	TEXT, 	requerimiento	INTEGER, 	FOREIGN KEY(id_hoja) REFERENCES week(codigo), 	FOREIGN KEY(requerimiento) REFERENCES task_user(codigo) )",
