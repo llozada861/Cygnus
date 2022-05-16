@@ -140,6 +140,8 @@ namespace Cygnus2_0.ViewModel.Repository
 
                     RamaRepositorio rama = new RamaRepositorio();
                     rama.RepositorioId = RepoSeleccionado.Codigo;
+                    rama.Estandar = "feature/[HU]_[USUARIO]";
+                    rama.LBase = "N";
                     ListaRamaGit.Add(rama);
                 }
             }
