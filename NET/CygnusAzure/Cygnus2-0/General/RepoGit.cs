@@ -236,9 +236,9 @@ namespace Cygnus2_0.General
             return listaRamas;
         }
 
-        public static void pSetearLineaBase(string rama, Handler handler)
+        public static void pSetearLineaBase(string rama, Repositorio repositorio)
         {
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            using (var repo = new Repository(@repositorio.Ruta))
             {
                 Commands.Checkout(repo, rama);
             }

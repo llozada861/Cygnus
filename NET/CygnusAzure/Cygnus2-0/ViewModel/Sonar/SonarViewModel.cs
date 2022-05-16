@@ -110,7 +110,7 @@ namespace Cygnus2_0.ViewModel.Sonar
                 handler.CursorWait();
 
                 GitModel.ListaArchivosEncontrados.Clear();
-                RepoGit.pSetearLineaBase(GitModel.RamaLBSeleccionada.Text, handler);
+                RepoGit.pSetearLineaBase(GitModel.RamaLBSeleccionada.Text, GitSeleccionado);
                 List<Archivo> archivos = new List<Archivo>();
                 handler.pListaArchivosCarpeta(handler.RutaGitObjetos, archivos);
 
