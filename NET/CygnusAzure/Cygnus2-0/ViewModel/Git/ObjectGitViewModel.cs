@@ -111,7 +111,7 @@ namespace Cygnus2_0.ViewModel.Git
                 GitModel.ListaArchivosEncontrados.Clear();
                 RepoGit.pSetearLineaBase(GitModel.RamaLBSeleccionada.Text, GitSeleccionado);
                 List<Archivo> archivos = new List<Archivo>();
-                handler.pListaArchivosCarpeta(handler.RutaGitObjetos, archivos);
+                handler.pListaArchivosCarpeta(GitSeleccionado.Ruta, archivos);
                 archivos = archivos.FindAll(x => x.FileName.ToUpper().IndexOf(GitModel.ObjetoBuscar.ToUpper()) > -1);
 
                 foreach(Archivo archivo in archivos)
