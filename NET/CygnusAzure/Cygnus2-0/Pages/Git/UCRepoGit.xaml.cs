@@ -117,12 +117,6 @@ namespace Cygnus2_0.Pages.Compila
                     return;
                 }
 
-                if (!compilaViewModel.Model.ListaArchivosCargados.ToList().Exists(x => x.FileName.ToUpper().StartsWith("OPENDATOSEPM")))
-                {
-                    handler.MensajeError("Es importante entregar el documento de arquitectura. Por favor adicionar.");
-                    return;
-                }
-
                 handler.CursorWait();
 
                 List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
@@ -132,7 +126,7 @@ namespace Cygnus2_0.Pages.Compila
                     archivosEvaluar.Add(new SelectListItem { Text = archivo.Ruta, Value = archivo.FileName });
                 }
 
-                string rama = RepoGit.pVersionarDatos(compilaViewModel.Model.SelectHU.Value, compilaViewModel.Model.Codigo,compilaViewModel.Model.Comentario,handler.ConnView.Model.Correo, archivosEvaluar, handler);
+                string rama = RepoGit.pVersionarDatos(compilaViewModel.Model.SelectHU.Value, compilaViewModel.Model.Codigo,compilaViewModel.Model.Comentario, handler.Azure.Correo, archivosEvaluar, handler);
 
                 handler.CursorNormal();
                 handler.MensajeOk("Rama creada ["+ rama+"]");

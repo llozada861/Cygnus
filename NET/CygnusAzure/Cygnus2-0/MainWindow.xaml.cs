@@ -124,13 +124,6 @@ namespace Cygnus2_0
                     request.ShowDialog();
                 }
 
-                /*if (handler.ConfGeneralView.Model.Empresa.Git == res.No && string.IsNullOrEmpty(handler.RutaGitObjetos) || string.IsNullOrEmpty(handler.RutaGitDatos) || string.IsNullOrEmpty(handler.RutaGitBash))
-                {
-                    userControls = new UserControlGit();
-                    RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el repositorio Git...",null);
-                    request.ShowDialog();
-                }*/
-
                 if (handler.ConfGeneralView.Model.Empresa.Sonar == res.No && string.IsNullOrEmpty(handler.RutaSonar))
                 {
                     userControls = new UserControlSonar();

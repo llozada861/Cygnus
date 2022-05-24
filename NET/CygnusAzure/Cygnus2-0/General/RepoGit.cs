@@ -107,7 +107,7 @@ namespace Cygnus2_0.General
                 pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit);
 
                 Commands.Stage(repo, "*");
-                Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.ConnView.Model.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.ConnView.Model.Correo, DateTimeOffset.Now));
+                Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now));
             
                 if(boUnaRama)
                 {
@@ -199,9 +199,9 @@ namespace Cygnus2_0.General
             }
         }
 
-        public static void pRenombrar(Handler handler,string nombreantes, string nuevonombre)
+        public static void pRenombrar(Handler handler,string nombreantes, string nuevonombre, Repositorio repositorioGit)
         {
-            using (var repo = new Repository(@handler.RutaGitObjetos))
+            using (var repo = new Repository(@repositorioGit.Ruta))
             {
                 var branches = repo.Branches;
 

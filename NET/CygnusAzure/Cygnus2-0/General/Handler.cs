@@ -708,9 +708,6 @@ namespace Cygnus2_0.General
                 string pass = view.Model.Usuario.Trim() + "-0";
                 this.DAO.pGuardaRol(view.Model.Usuario.Trim().ToUpper(), EncriptaPass.Encriptar(pass), "");
             }
-
-            //Se obtiene el usuario azure
-            SqliteDAO.pCreaConfiguracion(res.KeyEmail, ConnView.Model.Correo);
         }
 
         public void pCreaArchivoBD(string path, string nombre, byte[] myFile)

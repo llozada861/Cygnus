@@ -404,26 +404,6 @@ namespace Cygnus2_0.ViewModel.Index
                 handler.RutaSonar = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaSonar)).Value;
             }
 
-            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaGitDatos)))
-            {
-                handler.RutaGitDatos = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaGitDatos)).Value;
-            }
-
-            /*if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaGitBash)))
-            {
-                handler.RutaGitBash = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaGitBash)).Value;
-            }*/
-
-            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyEmail)))
-            {
-                handler.ConnView.Model.Correo = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyEmail)).Value;
-            }
-
-            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyRutaGitObjetos)))
-            {
-                handler.RutaGitObjetos = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaGitObjetos)).Value;
-            }
-
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.SQLPLUS)))
             {
                 handler.ConfGeneralView.Model.RutaSqlplus = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.SQLPLUS)).Value;
