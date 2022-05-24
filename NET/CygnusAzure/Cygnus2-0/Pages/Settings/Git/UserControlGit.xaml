@@ -50,7 +50,7 @@
                         HorizontalAlignment="Center" Command="{Binding Path=Process}"/>
 
 
-        <TabControl Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabControl_MouseLeftButtonDown" >
+        <TabControl x:Name="TabRepo" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabControl_MouseLeftButtonDown" MouseUp="TabRepo_MouseUp" >
             <TabItem Header="Repositorio">
                 <Grid Margin="10,0" >
                     <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
@@ -70,8 +70,8 @@
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Descripción" MinWidth="200"/>
-                            <DataGridTextColumn Binding="{Binding Ruta}" Header="Ruta" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Carpeta Principal Repo" MinWidth="300"/>
+                            <DataGridTextColumn Binding="{Binding Ruta}" Header="Ruta" MinWidth="300"/>
                             <DataGridTextColumn Binding="{Binding Documento}" Header="Documento" MinWidth="150" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -79,7 +79,7 @@
             </TabItem>
         </TabControl>
 
-        <TabControl Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabControl_MouseLeftButtonDown_1" Margin="0,10,0,0">
+        <TabControl x:Name="TabRama" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabControl_MouseLeftButtonDown_1" Margin="0,10,0,0" MouseUp="TabRama_MouseUp">
             <TabItem Header="Ramas" >
                 <Grid Margin="10,0" >
 

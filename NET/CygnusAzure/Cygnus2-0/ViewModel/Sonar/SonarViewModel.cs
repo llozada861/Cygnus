@@ -55,6 +55,12 @@ namespace Cygnus2_0.ViewModel.Sonar
                     return;
                 }
 
+                if (handler.RutaSonar == null)
+                {
+                    handler.MensajeError("Configure Sonar [Ajustes/Herramientas Gestión/Sonar]");
+                    return;
+                }
+
                 handler.CursorWait();
 
                 List<string> salida = pSonar(GitModel.RamaLBSeleccionada.Text, handler, GitModel.ListaArchivos,GitSeleccionado);
@@ -112,7 +118,7 @@ namespace Cygnus2_0.ViewModel.Sonar
                 GitModel.ListaArchivosEncontrados.Clear();
                 RepoGit.pSetearLineaBase(GitModel.RamaLBSeleccionada.Text, GitSeleccionado);
                 List<Archivo> archivos = new List<Archivo>();
-                handler.pListaArchivosCarpeta(handler.RutaGitObjetos, archivos);
+                handler.pListaArchivosCarpeta(GitSeleccionado.Ruta, archivos);
 
                 string[] objetosBuscar = GitModel.ObjetoBuscar.Trim().Split(',');
 
@@ -145,8 +151,6 @@ namespace Cygnus2_0.ViewModel.Sonar
             GitModel.ObjetoBuscar = "";
             GitModel.ListaArchivosEncontrados.Clear();
             GitModel.ListaRamasLB = null;
-            /*if (!string.IsNullOrEmpty(handler.RutaGitObjetos))
-                GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler);*/
             GitModel.Comentario = "";
             GitModel.ListaArchivos.Clear();
         }

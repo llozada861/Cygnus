@@ -111,7 +111,7 @@ namespace Cygnus2_0.ViewModel.Git
                 GitModel.ListaArchivosEncontrados.Clear();
                 RepoGit.pSetearLineaBase(GitModel.RamaLBSeleccionada.Text, GitSeleccionado);
                 List<Archivo> archivos = new List<Archivo>();
-                handler.pListaArchivosCarpeta(handler.RutaGitObjetos, archivos);
+                handler.pListaArchivosCarpeta(GitSeleccionado.Ruta, archivos);
                 archivos = archivos.FindAll(x => x.FileName.ToUpper().IndexOf(GitModel.ObjetoBuscar.ToUpper()) > -1);
 
                 foreach(Archivo archivo in archivos)
@@ -237,6 +237,12 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
+                if(string.IsNullOrEmpty(handler.Azure.Correo))
+                {
+                    handler.MensajeError("Configure el correo empresarial [Ajustes/Herramientas Gestión/Azure]");
+                    return;
+                }
+
                 handler.CursorWait();
                 RepoGit.pVersionarObjetos(GitModel,handler,GitSeleccionado);
                 
@@ -259,7 +265,19 @@ namespace Cygnus2_0.ViewModel.Git
         {
             ObservableCollection<Archivo> archivosSonar = new ObservableCollection<Archivo>();
 
-            foreach(Archivo item in GitModel.ListaArchivos)
+            if(GitSeleccionado == null)
+            {
+                handler.MensajeError("Debe seleccionar un repositorio");
+                return;
+            }
+
+            if (GitModel.RamaLBSeleccionada == null)
+            {
+                handler.MensajeError("Debe seleccionar una rama del repositorio");
+                return;
+            }
+
+            foreach (Archivo item in GitModel.ListaArchivos)
             {
                 if( item.SelectItemTipo != null && res.Extensiones.IndexOf(item.Extension.ToLower()) > -1 && !String.IsNullOrEmpty(item.SelectItemTipo.Path) && !string.IsNullOrEmpty(item.NombreObjeto))
                 {
@@ -273,6 +291,12 @@ namespace Cygnus2_0.ViewModel.Git
 
             if (archivosSonar.Count == 0)
                 return;
+
+            if(handler.RutaSonar == null)
+            {
+                handler.MensajeError("Configure Sonar [Ajustes/Herramientas Gestión/Sonar]");
+                return;
+            }
 
             List<string> salida = SonarViewModel.pSonar(GitModel.RamaLBSeleccionada.Text, handler, archivosSonar,GitSeleccionado);
 
@@ -330,7 +354,7 @@ namespace Cygnus2_0.ViewModel.Git
                 }
 
                 handler.CursorWait();
-                RepoGit.pRenombrar(handler, GitModel.RamaLBSeleccionada.Text, GitModel.NuevaRama);
+                RepoGit.pRenombrar(handler, GitModel.RamaLBSeleccionada.Text, GitModel.NuevaRama,GitSeleccionado);
                 handler.CursorNormal();
                 handler.MensajeOk("Rama Renombrada con éxito");
                 pLimpiar(null);
@@ -346,6 +370,12 @@ namespace Cygnus2_0.ViewModel.Git
         {
             try
             {
+                if(string.IsNullOrEmpty(handler.RepositorioVM.RutaGitBash))
+                {
+                    handler.MensajeError("Debe configurar la ruta del GitBash.exe [Ajustes/Herramientas Gestión/GIT]");
+                    return;
+                }
+
                 handler.CursorWait();
 
                 RepoGit.pCreaRamaRepo(handler,GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar);
@@ -362,7 +392,7 @@ namespace Cygnus2_0.ViewModel.Git
 
         public void pEjecutaGitBash(object commandParameter)
         {
-            RepoGit.ExecuteGitBash(handler.RepositorioVM.RutaGitBash+"\\"+res.GitBashExe,handler.RutaGitObjetos);
+            RepoGit.ExecuteGitBash(handler.RepositorioVM.RutaGitBash+"\\"+res.GitBashExe,GitSeleccionado.Ruta);
         }
 
         public void pArmarArbol(SelectListItem tipo, Archivo itemModif)

@@ -39,7 +39,6 @@ namespace Cygnus2_0.ViewModel.Settings
             _nuevo = new DelegateCommand(OnNuevo);
             handler = hand;
             this.Model = new ConexionModel(handler);
-            this.Model.UrlAzure = "https://grupoepm.visualstudio.com";
             this.Model.ListaConexiones = new ObservableCollection<SelectListItem>();
             this.Model.Conexion = new SelectListItem();
         }

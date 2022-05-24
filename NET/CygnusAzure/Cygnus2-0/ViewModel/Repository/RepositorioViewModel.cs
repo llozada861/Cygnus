@@ -65,8 +65,17 @@ namespace Cygnus2_0.ViewModel.Repository
         {
             try
             {
-                if(string.IsNullOrEmpty(RutaGitBash))
-                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitBash, handler.RepositorioVM.RutaGitBash);
+                if(RutaGitBash == null || string.IsNullOrEmpty(RutaGitBash))
+                {
+                    handler.MensajeError("Agregue la ruta del GitBash.exe");
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(RutaGitBash))
+                {
+                    SqliteDAO.pCreaConfiguracion(res.KeyRutaGitBash, RutaGitBash);
+                    handler.RepositorioVM.RutaGitBash = RutaGitBash;
+                }
 
                 if (handler.RepositorioVM.TabRepo)
                 {
@@ -138,6 +147,12 @@ namespace Cygnus2_0.ViewModel.Repository
                         return;
                     }
 
+                    if (RepoSeleccionado.Codigo == null)
+                    {
+                        handler.MensajeError("Guarde el repositorio");
+                        return;
+                    }
+
                     RamaRepositorio rama = new RamaRepositorio();
                     rama.RepositorioId = RepoSeleccionado.Codigo;
                     rama.Estandar = "feature/[HU]_[USUARIO]";
@@ -154,7 +169,11 @@ namespace Cygnus2_0.ViewModel.Repository
         {
             try
             {
-                if (RepoSeleccionado != null && handler.MensajeConfirmacion("Seguro que desea eliminar el repositorio [" + RepoSeleccionado.Descripcion + " - " + RepoSeleccionado.Ruta + "] ?") == "Y")
+                if(RepoSeleccionado != null && RepoSeleccionado.Codigo == null)
+                {
+                    ListaGit.Remove(RepoSeleccionado);
+                }
+                else if (RepoSeleccionado != null && handler.MensajeConfirmacion("Seguro que desea eliminar el repositorio [" + RepoSeleccionado.Descripcion + " - " + RepoSeleccionado.Ruta + "] ?") == "Y")
                 {
                     SqliteDAO.pEliminaRepo(RepoSeleccionado);
                     ListaGit = SqliteDAO.pListaRepositorios();
@@ -169,7 +188,11 @@ namespace Cygnus2_0.ViewModel.Repository
         {
             try
             {
-                if (RamaSeleccionada != null && handler.MensajeConfirmacion("Seguro que desea eliminar la rama [" + RamaSeleccionada.Rama + " - " + RamaSeleccionada.Estandar + "] ?") == "Y")
+                if (RamaSeleccionada != null && RamaSeleccionada.Codigo == null)
+                {
+                    ListaRamaGit.Remove(RamaSeleccionada);
+                }
+                else if (RamaSeleccionada != null && handler.MensajeConfirmacion("Seguro que desea eliminar la rama [" + RamaSeleccionada.Rama + " - " + RamaSeleccionada.Estandar + "] ?") == "Y")
                 {
                     SqliteDAO.pEliminaRamaRepo(RamaSeleccionada);
                     ListaRamaGit = SqliteDAO.pListaRamaRepositorios(RepoSeleccionado);
