@@ -295,8 +295,8 @@ namespace Cygnus2_0
 
             if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
-                string RepoObj = "insert into repositories (codigo,descripcion,documento,ruta_local,empresa) values(1,'BaseDeDatos','OpenEPM10_Analisis_Diseno','" + SqliteDAO.pObtValorConfiguracion(res.KeyRutaGitObjetos)+ "',99)";
-                string RepoDat = "insert into repositories (codigo,descripcion,documento,ruta_local,empresa) values(2,'ActualizacionDatos','OpenDatosEPM01_Analisis','" + SqliteDAO.pObtValorConfiguracion(res.KeyRutaGitDatos) + "',99)";
+                //string RepoObj = "insert into repositories (codigo,descripcion,documento,ruta_local,empresa) values(1,'BaseDeDatos','OpenEPM10_Analisis_Diseno','" + SqliteDAO.pObtValorConfiguracion(res.KeyRutaGitObjetos)+ "',99)";
+                //string RepoDat = "insert into repositories (codigo,descripcion,documento,ruta_local,empresa) values(2,'ActualizacionDatos','OpenDatosEPM01_Analisis','" + SqliteDAO.pObtValorConfiguracion(res.KeyRutaGitDatos) + "',99)";
 
                 string[] query = 
                  {
