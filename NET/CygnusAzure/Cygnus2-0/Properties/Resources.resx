@@ -190,7 +190,7 @@
     <value>procedure</value>
   </data>
   <data name="Script" xml:space="preserve">
-    <value>Script</value>
+    <value>15</value>
   </data>
   <data name="Secuencia" xml:space="preserve">
     <value>sq</value>
@@ -247,7 +247,7 @@
     <value>GrantFlex</value>
   </data>
   <data name="TipoOtros" xml:space="preserve">
-    <value>Otros</value>
+    <value>16</value>
   </data>
   <data name="Flex" xml:space="preserve">
     <value>FLEX</value>
@@ -466,13 +466,13 @@
     <value>Funcion</value>
   </data>
   <data name="TipoObjetoPaquete" xml:space="preserve">
-    <value>Paquete</value>
+    <value>3</value>
   </data>
   <data name="TipoObjetoProcedimiento" xml:space="preserve">
     <value>Procedimiento</value>
   </data>
   <data name="TipoObjetoTrigger" xml:space="preserve">
-    <value>Trigger</value>
+    <value>4</value>
   </data>
   <data name="TipoSubMetodo" xml:space="preserve">
     <value>SubMetodo</value>
@@ -1219,16 +1219,16 @@ END;
     <value>&lt;solucion&gt;</value>
   </data>
   <data name="END" xml:space="preserve">
-    <value>end</value>
+    <value>END</value>
   </data>
   <data name="PuntoYComa" xml:space="preserve">
-    <value>pc</value>
+    <value>PC</value>
   </data>
   <data name="Key" xml:space="preserve">
     <value>MVM_EPM_CYGNUS_2018_INGENIERIA_SOFTWARE_AUTOR_LLOZ</value>
   </data>
   <data name="TipoAplica" xml:space="preserve">
-    <value>Aplica</value>
+    <value>34</value>
   </data>
   <data name="TipoGrantSIUD" xml:space="preserve">
     <value>S|I|U|D</value>
@@ -1854,7 +1854,7 @@ sonar.password=[pass]</value>
   <data name="SonarProperties" xml:space="preserve">
     <value>#sonar-project.properties
 # must be unique in a given SonarQube instance
-sonar.projectKey=Open.BaseDeDatos
+sonar.projectKey=[PROYECTO]
 
 # --- optional properties ---
 

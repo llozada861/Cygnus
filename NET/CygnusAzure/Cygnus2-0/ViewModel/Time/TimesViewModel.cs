@@ -274,10 +274,10 @@ namespace Cygnus2_0.ViewModel.Time
                     tarea.HU = (int)historiaUsuario.Id;
                     tarea.DescripcionHU = historiaUsuario.Fields.Last().Value.ToString();
 
-                    /*if (tarea.IdAzure == 272078)
+                    if (tarea.IdAzure == 535936 || tarea.IdAzure == 537734)
                     {
                         int pru = 1;
-                    }*/
+                    }
 
                     try
                     {

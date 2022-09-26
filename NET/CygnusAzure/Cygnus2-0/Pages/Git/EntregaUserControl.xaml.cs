@@ -162,7 +162,7 @@ namespace Cygnus2_0.Pages.Git
                         row.Background = Colobk;
                     }
 
-                    if (item.Tipo != null && (item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) || item.Tipo.ToLower().Equals(res.TipoAplica.ToLower())))
+                    if (item.Tipo != null && item.Tipo == Int32.Parse(res.TipoOtros) || item.Tipo == Int32.Parse(res.TipoAplica))
                     {
                         row.Background = Colobk;
                     }

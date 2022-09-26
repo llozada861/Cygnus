@@ -33,7 +33,7 @@ namespace Cygnus2_0.ViewModel.Pkg
 
             this.Model = new pkgModel();
 
-            this.Model.ListaUsuarios = handler.ListaUsuarios;
+            this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
             this.Model.Usuario = new SelectListItem();
         }
 
@@ -44,7 +44,7 @@ namespace Cygnus2_0.ViewModel.Pkg
             this.Model.Caso = "";
             this.Model.Tabla = "";
             this.Model.Usuario = new SelectListItem();
-            this.Model.ListaUsuarios = handler.ListaUsuarios;
+            this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
         }
 
         public void OnConection(object commandParameter)

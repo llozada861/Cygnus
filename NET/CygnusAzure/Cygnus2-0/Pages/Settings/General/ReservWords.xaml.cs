@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using Cygnus2_0.Model.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,19 +32,9 @@ namespace Cygnus2_0.Pages.Settings.General
             DataContext = handler;
         }
 
-        private void dataGridDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (dataGridDatos.SelectedItem == null)
-                return;
-
-            txtEliminar.Text = ((SelectListItem)dataGridDatos.SelectedItem).Text;
-        }
-
         private void tbnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            string palabra = txtWord.Text.Trim().ToLower();
-
-            if (String.IsNullOrEmpty(palabra))
+            if (handler.PalabraSeleccionada == null)
             {
                 handler.MensajeError("Debe ingresar una palabra reservada.");
                 return;
@@ -51,30 +42,27 @@ namespace Cygnus2_0.Pages.Settings.General
 
             try
             {
-                SqliteDAO.pGuardarPalabra(palabra);
-                pCargarLista();
+                SqliteDAO.pGuardarPalabra(handler.PalabraSeleccionada.Palabra.Trim().ToLower());
+                //pCargarLista();
+                btnGuar.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
                 handler.MensajeError(ex.Message);
             }
+
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            string sbPalabra = txtEliminar.Text.Trim();
-
             try
             {
-                if (!String.IsNullOrEmpty(sbPalabra))
+                if (handler.PalabraSeleccionada != null && handler.MensajeConfirmacion("Está seguro que desea borrar la palabra [" + handler.PalabraSeleccionada.Palabra + "]") == "Y" && SqliteDAO.pExistePalabra(handler.PalabraSeleccionada))
                 {
-                    if (handler.MensajeConfirmacion("Está seguro que desea borrar la palabra [" + sbPalabra + "]") == "Y")
-                    {
-                        SqliteDAO.pEliminaPalabra(sbPalabra);
-                        pCargarLista();
-                        txtEliminar.Text = "";
-                    }
+                    SqliteDAO.pEliminaPalabra(handler.PalabraSeleccionada.Palabra.Trim());
                 }
+
+                handler.ListaPalabrasReservadas.Remove(handler.PalabraSeleccionada);
             }
             catch (Exception ex)
             {
@@ -85,6 +73,13 @@ namespace Cygnus2_0.Pages.Settings.General
         {
             handler.ListaPalabrasReservadas.Clear();
             SqliteDAO.pListaPalabrasReservadas(handler);
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            PalabrasClaves nuevo = new PalabrasClaves();
+            handler.ListaPalabrasReservadas.Add(nuevo);
+            btnGuar.Visibility = Visibility.Visible;
         }
     }
 }

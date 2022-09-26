@@ -18,121 +18,197 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition  />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition  />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition  />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <GroupBox x:Name="groupBox1" Header="Tipos de objetos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="10">
-            <DataGrid x:Name="dataGridDatos"
-                      ItemsSource="{Binding Path=ListaTiposObjetos}"
-                      AutoGenerateColumns="False"
-                    SelectionMode="Single"
-                    CanUserDeleteRows="True"
-                    CanUserAddRows="False"
-                    CanUserReorderColumns="False"
-                    CanUserSortColumns="False"
-                      SelectionChanged="dataGridDatos_SelectionChanged" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Tipo objeto"
-                  Binding="{Binding Path=Text}" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Prioridad"
-                  Binding="{Binding Path=Prioridad}" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Grant"
-                  Binding="{Binding Path=Grant}" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Ruta"
-                  Binding="{Binding Path=Path}" />
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Cantida Slash"
-                  Binding="{Binding Path=CantidadSlash}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
 
-        <GroupBox Header="Adicionar" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="7">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                
-                <TextBox x:Name="txtObject" 
-                         Text="{Binding Path=Model.Codigo}" 
-                         TextWrapping="Wrap" 
-                         VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" 
-                         Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Tipo Objeto"/>
+        <Button Name="btnAdd" Content="Agregar" VerticalAlignment="Center" 
+                         Grid.Column="0" Grid.Row="0" 
+                        HorizontalAlignment="Center" Command="{Binding Path=Add}"/>
 
-                <TextBox x:Name="txtPriodad" 
-                         Text="{Binding Path=Model.Codigo}" 
-                         TextWrapping="Wrap" 
-                         VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" 
-                         Style="{StaticResource placeHolder}" Tag="Prioridad"/>
+        <Button Name="btnGuar" Content="Guardar" VerticalAlignment="Center"
+                         Grid.Column="1" Grid.Row="0" 
+                        HorizontalAlignment="Center" Command="{Binding Path=Process}"/>
 
-                <general:AutoComplete x:Name="AucomboBox" 
-                                     ItemsSource="{Binding Path=ListaComboGrantTO}" 
-                  SelectedItem="{Binding Path=Generico2}"
-                  DisplayMemberPath="Text" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
-                        PatternChanged="AucomboBox_PatternChanged"
-                        Style="{StaticResource AutoCompleteComboBox}"
-                        Delay="500" Tag="Permiso" Margin="0,5,10,0" />
 
-                <TextBox x:Name="txtCantidad" 
-                         Text="{Binding Path=Model.Codigo}" 
-                         Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Cantidad Slash"/>
+        <TabControl x:Name="TabPrincipal" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabPrincipal_MouseLeftButtonDown" MouseUp="TabPrincipal_MouseUp" >
+            <TabItem Header="Tipos de objetos">
+                <Grid Margin="10,0" >
+                    <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=Handler.ListaTiposObjetos,Mode=TwoWay}"
+                  SelectedItem="{Binding Path=PrincipalSeleccionado}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                    SelectionChanged="dgData_SelectionChanged"
+                              >
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Command="{Binding Path=EliminarPadre}"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Tipo Objeto" MinWidth="200">
+                                <DataGridTextColumn.EditingElementStyle>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="CharacterCasing" Value="Upper"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.EditingElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Prioridad}" Header="Prioridad" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding CantidadSlash}" Header="Cantidad Slash" MinWidth="200"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
-                <TextBox x:Name="txtEmpresa" 
-                         Text="{Binding Path=ConfGeneralViewModel.Model.Empresa.Text}" 
-                         TextWrapping="Wrap" 
-                         VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" IsReadOnly="true"/>
+        <TabControl x:Name="TabHijo" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="10" Grid.RowSpan="4" Background="{StaticResource WindowBackgroundBrush}" MouseLeftButtonDown="TabHijo_MouseLeftButtonDown" Margin="0,10,0,0" >
+            <TabItem Header="Encabezados" MouseUp="TabHijo2_MouseUp" MouseLeftButtonDown="TabHijo2_MouseLeftButtonDown" >
+                <Grid Margin="10,0" >
+                    <DataGrid x:Name="dgDataHijo2" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=ListaEncabezadoObjetos, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=Hijo2Seleccionado}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" SelectionChanged="dgDataHijo2_SelectionChanged">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Command="{Binding Path=ElminarHijo2}"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Tipo Objeto" MinWidth="200">
+                                <DataGridTextColumn.EditingElementStyle>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="CharacterCasing" Value="Upper"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.EditingElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Prioridad}" Header="Prioridad" MinWidth="200"/>
+                            <DataGridComboBoxColumn Width="200"
+                                            DisplayMemberPath="Text"
+                                            SelectedValuePath="Value"
+                                            Header="Termina en"
+                                            SelectedValueBinding="{Binding Fin, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipoFin}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipoFin}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Permisos" MouseUp="TabItemHijo3_MouseUp_" MouseLeftButtonDown="TabHijo3_MouseLeftButtonDown_" >
+                <Grid Margin="10,0" >
 
-                <Button Name="btnGuardar"  Content="Guardar" VerticalAlignment="Top" Click="btnGuardar_Click" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" Grid.ColumnSpan="3"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="Eliminar" Grid.Column="6" Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+                    <DataGrid x:Name="dgDatahijo3" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=ListaPermisosObjeto, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=Hijo3Seleccionado}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" SelectionChanged="dgDatahijo3_SelectionChanged_">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Command="{Binding Path=ElminarHijo3}"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridComboBoxColumn Width="200"
+                         DisplayMemberPath="Text"
+                                            SelectedValuePath="Value"
+                                            Header="Usuario"
+                                            SelectedValueBinding="{Binding Usuario, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaUsuarios}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaUsuarios}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+                            <DataGridComboBoxColumn Width="200"
+                         DisplayMemberPath="Descripcion"
+                                            SelectedValuePath="Codigo"
+                                            Header="Permiso"
+                                            SelectedValueBinding="{Binding Permiso, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaPermisos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaPermisos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Rutas" MouseUp="TabItemHijo_MouseUp" MouseLeftButtonDown="TabHijo_MouseLeftButtonDown"  >
+                <Grid Margin="10,0" >
 
-                <TextBox Name="txtEliminar" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" IsEnabled="False"/>
-                <Button Name="btnEliminar" Content="Eliminar" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Click="btnEliminar_Click"/>
-            </Grid>
-        </GroupBox>
+                    <DataGrid x:Name="dgDatahijo" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=ListaRutas, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=HijoSeleccionado}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" SelectionChanged="dgDatahijo_SelectionChanged">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Command="{Binding Path=ElminarHijo}"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Ruta}" Header="Ruta" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding Usuario}" Header="Usuario por Defecto" MinWidth="200">
+                                <DataGridTextColumn.EditingElementStyle>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="CharacterCasing" Value="Upper"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.EditingElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

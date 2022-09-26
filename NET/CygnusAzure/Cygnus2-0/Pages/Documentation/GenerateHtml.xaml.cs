@@ -27,7 +27,7 @@ namespace Cygnus2_0.Pages.Documentation
     {
         private Handler handler;        
         private GeneratHtmlViewModel view;
-        private DocumentacionModel docModel;
+        private DocumentacionHTMLModel docModel;
 
         public GenerateHtml()
         {
@@ -39,7 +39,7 @@ namespace Cygnus2_0.Pages.Documentation
             InitializeComponent();
 
             view.Model.Usuario = Cygnus2_0.Properties.Cygnus.Default.UserName; 
-            docModel = new DocumentacionModel();
+            docModel = new DocumentacionHTMLModel();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -189,7 +189,7 @@ namespace Cygnus2_0.Pages.Documentation
             String parametros = "";
             String head = "";
             String foot = "";
-            docModel = new DocumentacionModel();
+            docModel = new DocumentacionHTMLModel();
 
             string[] parametrosList;
             string[] encabezado;

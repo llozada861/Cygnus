@@ -3,10 +3,16 @@ using Cygnus2_0.General;
 using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.General.Times;
 using Cygnus2_0.Model.Azure;
+using Cygnus2_0.Model.Conexion;
 using Cygnus2_0.Model.Empresa;
+using Cygnus2_0.Model.Html;
+using Cygnus2_0.Model.Objects;
+using Cygnus2_0.Model.Permisos;
 using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Model.Time;
+using Cygnus2_0.Model.User;
+using Cygnus2_0.Model.Version;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,117 +27,398 @@ namespace Cygnus2_0.DAO
 {
     public class SqliteDAO
     {
-        public static void pCreaConfiguracion(string key, string value)
+        #region Palabras Reservadas
+        public static void pGuardarPalabra(string value)
         {
-            string query;
+            PalabrasClaves palabra;
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {               
-                if (ifExist("configuration","key='"+key+"'",conn))
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                palabra = new PalabrasClaves() { Palabra = value };
+
+                if(pExistePalabra(palabra))
                 {
-                    query = "update configuration set value ='" + value + "' where key = '" + key+"'";
-                    ExecuteNonQuery(query, conn);
+                    palabra = context.PalabrasReservadas.Where(x => x.Palabra.Equals(value)).First();
+                    palabra.Palabra = value;
+                    context.Entry(palabra).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
                 }
                 else
                 {
-                    query = "insert into configuration (key,value) VALUES('"+key+"','"+value+"')";
-                    ExecuteNonQuery(query, conn);
+                    palabra = new PalabrasClaves();
+                    palabra.Palabra = value;
+                    context.PalabrasReservadas.Add(palabra);
+                    context.SaveChanges();
                 }
             }
         }
-        public static void pGuardarPalabra(string value)
+        public static void pEliminaPalabra(string value)
         {
-            string query;
+            PalabrasClaves objeto = new PalabrasClaves();
+            objeto.Palabra = value;
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "insert into words (description) VALUES('" + value + "')";
-                ExecuteNonQuery(query, conn);                
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
             }
         }
-        public static void pGuardarUsuario(string value,Handler handler)
+        public static void pListaPalabrasReservadas(Handler handler)
         {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "insert into user_grants (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+ ")";
-                ExecuteNonQuery(query, conn);
+                handler.ListaPalabrasReservadas = new ObservableCollection<PalabrasClaves>(context.PalabrasReservadas.ToList());
             }
         }
-        public static void pGuardarUsuarioBD(string value, Handler handler)
+        public static bool pExistePalabra(PalabrasClaves palabra)
         {
-            string query;
+            bool existe = false;
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "insert into userbd (user,company) VALUES('" + value + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
-                ExecuteNonQuery(query, conn);
+                var objeto = context.PalabrasReservadas.FirstOrDefault(x => x.Palabra.Equals(palabra.Palabra));
+
+                if(objeto != null)
+                    existe = true;
+            }
+
+            return existe;
+        }
+        #endregion Palabras Reservadas 
+
+        #region Grants
+        public static void pGuardarUsuarioGrant(GrantsModel objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.UsuariosGrant.Add(objeto);
+                context.SaveChanges();
+            }
+        }
+        public static bool pExisteUsGrant(GrantsModel item)
+        {
+            bool existe = false;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                var objeto = context.UsuariosGrant.FirstOrDefault(x => x.Codigo == item.Codigo);
+
+                if (objeto != null)
+                    existe = true;
+            }
+
+            return existe;
+        }
+        public static void pGuardarUsuarioBD(UsuarioModel objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Usuarios.Add(objeto);
+                context.SaveChanges();                
+            }
+        }
+        public static void pEliminaUsuario(string value, Handler handler)
+        {
+            GrantsModel objeto = new GrantsModel();
+            objeto.Usuario = value;
+            objeto.Empresa = handler.ConfGeneralView.Model.Empresa.Codigo;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        public static void pListaUsGrants(Handler handler)
+        {
+            if(handler.ListaUsGrants != null)
+                handler.ListaUsGrants.Clear();
+
+            if(handler.ListaPermisos != null)
+                handler.ListaPermisos.Clear();
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                List<GrantsModel> lista = context.UsuariosGrant.Where(x => x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList();
+
+                foreach (GrantsModel objeto in lista)
+                {
+                    SelectListItem item = new SelectListItem() { Text = objeto.Usuario, Value = objeto.Codigo.ToString(), Empresa = objeto.Empresa};
+                    handler.ListaUsGrants.Add(item);
+                }
+
+                handler.ListaPermisos = new ObservableCollection<PermisosModel>(context.ListaPermisos.ToList());
+            }
+        }
+        public static void pGuardarPermiso(PermisosModel objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.ListaPermisos.Add(objeto);
+                context.SaveChanges();
+            }
+        }
+        #endregion Grants
+
+        #region Permisos Usuarios
+
+        #endregion Permisos Usuarios
+        public static void pAdicionaPermiso(PermisosObjeto objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.ListaPermisosObjeto.Add(objeto);
+                context.SaveChanges();
+            }
+        }
+        public static void pGuardarPermisoObjeto(PermisosObjeto objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.ListaPermisosObjeto.Add(objeto);
+                context.SaveChanges();
+            }
+        }
+        public static void pListaPermisosObjetos(Handler handler)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                handler.ListaPermisosObjeto = new ObservableCollection<PermisosObjeto>(context.ListaPermisosObjeto.ToList());
+            }
+        }
+        
+        #region Tipo Objetos
+        public static void pGuardarTipoObjeto(TipoObjetos objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.TipoObjetos.Add(objeto);
+                context.SaveChanges();
+            }
+        }
+        public static void pListaTiposObjetos(Handler handler)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                handler.ListaTiposObjetos = new ObservableCollection<TipoObjetos>(context.TipoObjetos.ToList());
             }
         }
 
-        public static void pGuardarTipoObjeto(string objeto, string slash, string cantidad, string proridad, string permiso)
+        public static void pEliminaTipoObjeto(TipoObjetos objeto)
         {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "insert into object_type (object,slash,count_slash,priority,grant) VALUES('" + objeto +"','"+ slash + "'," + cantidad + "," + proridad+ ",'" + permiso+"')";
-                ExecuteNonQuery(query, conn);
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
             }
         }
-        public static void pGuardarEncabezado(string sbEncabezado, string tipo, string proridad, string fin, Handler handler)
+        public static void pActualizaTipoObjeto(TipoObjetos objeto)
         {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "insert into object_head (head,type,priority,end,company) VALUES('" + sbEncabezado + "','" + tipo + "'," + proridad + ",'" + fin + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
-                ExecuteNonQuery(query, conn);
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
             }
         }
-        public static void pGuardarConfHtml(string inicio, string fin, string atributos, string finEnca, string tipo, Handler handler)
-        {
-            string query;
+        #endregion Tipo Objetos
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+        #region Ruta Objetos
+        public static void pAdicionaRuta(RutaObjetos objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "insert into documentation (tag_ini,tag_fin,attributes,type,end,company) VALUES('" + inicio + "','" + fin + "','" + atributos + "','" + tipo+ "','"+finEnca+ "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
-                ExecuteNonQuery(query, conn);
+                context.RutaObjetos.Add(objeto);
+                context.SaveChanges();
             }
         }
-        public static void pActualizaRuta(string key, string path,int tipo_objeto, Handler handler)
+        public static void pActualizaRuta(RutaObjetos objeto)
         {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "update object_path set path ='" + path + "' where object_type =" + tipo_objeto + " and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
-                ExecuteNonQuery(query, conn);
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
             }
         }
-        public static void pActualizaVersion(string version)
+        public static void pListaRutas(Handler handler)
         {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            if (handler.ConfGeneralView.Model.Empresa.Codigo != null)
             {
-                query = "update version set apply ='Y' where version_name ='" + version + "'";
-                ExecuteNonQuery(query, conn);
+                using (DataBaseContext context = new DataBaseContext())
+                {
+                    handler.ListaRutas = new ObservableCollection<RutaObjetos>(context.RutaObjetos.Where(x => x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
+                }
             }
         }
+        public static void pEliminaRuta(RutaObjetos objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        #endregion Ruta Objetos
 
+        #region Encabezados
+        public static void pGuardarEncabezado(HeadModel objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.EncabezadosObjetos.Add(objeto);
+                context.SaveChanges();
+            }
+        }
+        public static void pActualizaEncabezado(HeadModel objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+        public static void pEliminaEncabezado(HeadModel objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        public static void pListaEncabezadoObjetos(Handler handler)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                handler.ListaEncabezadoObjetos = new ObservableCollection<HeadModel>(context.EncabezadosObjetos.ToList());
+            }
+        }
+        #endregion Encabezados
+
+        #region Documentacion
+        public static void pGuardarConfHtml(DocumentacionHTML objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {                
+                context.Documentacion.Add(objeto);
+                context.SaveChanges();
+            }
+        }
+        public static void pEliminaConfHtml(string value, Handler handler)
+        {
+            DocumentacionHTML objeto = new DocumentacionHTML() { TagIni = value,Empresa= handler.ConfGeneralView.Model.Empresa.Codigo };
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        public static void pDocumentacionHtml(Handler handler)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                handler.ListaDocHtml = new ObservableCollection<DocumentacionHTML>(context.Documentacion.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
+            }
+        }
+        #endregion Documentacion
+
+        #region HTML
         public static void pActualizaHtml(string key, string value, Handler handler)
         {
-            string query;
+            PlantillasHTMLModel objeto = new PlantillasHTMLModel() { Nombre = key, Documentacion = value };
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "update html set documentation ='" + value + "' where name ='" + key + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
-                ExecuteNonQuery(query, conn);
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+        public static void pListaHTML(Handler handler)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                List<PlantillasHTMLModel> lista = context.PlantillasHTML.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList();
+
+                foreach (PlantillasHTMLModel objeto in lista)
+                {
+                    SelectListItem item = new SelectListItem() { Text = objeto.Nombre, Value = objeto.Documentacion };
+                    handler.ListaHTML.Add(item);
+                }
+            }
+        }
+        #endregion HTML
+
+        #region Version
+        public static void pActualizaVersion(string version)
+        {
+            VersionBD version_;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                version_ = context.Versiones.FirstOrDefault(x => x.Version.Equals(version));
+
+                if (version_ == null)
+                {
+                    version_ = new VersionBD();
+                    version_.Version = version;
+                    version_.Aplicada = "Y";
+                    context.Versiones.Add(version_);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    version_.Aplicada = "Y";
+                    context.Entry(version_).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
             }
         }
 
+        public static Boolean pblValidaVersion(string version)
+        {
+            bool existe = false;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                var objeto = context.Versiones.FirstOrDefault(x => x.Version.Equals(version) && x.Aplicada.Equals("Y"));
+
+                if (objeto != null)
+                    existe = true;
+            }
+
+            return existe;
+        }
+
+        public static Boolean pEsNueva()
+        {
+            bool existe = false;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                int cantidad = context.Versiones.Count();
+
+                if (cantidad == 0)
+                    existe = true;
+            }
+
+            return existe;
+        }
+        #endregion Version
+
+        #region Conexion
+        public static bool pExisteConexion(string etiqueta)
+        {
+            bool existe = false;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                var objeto = context.Conexiones.FirstOrDefault(x => x.Nombre.Equals(etiqueta));
+
+                if (objeto != null)
+                    existe = true;
+            }
+
+            return existe;
+        }
         public static void pCreaConexion(Handler handler,string pass)
         {
             string query;
@@ -149,374 +436,87 @@ namespace Cygnus2_0.DAO
 
             string defecto = handler.ConnView.Model.Conexion.BlValor ? "S" : "N";
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
+            ConnModel objeto;
 
-                try
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                objeto = new ConnModel() { Nombre = etiqueta };
+
+                if (pExisteConexion(etiqueta))
                 {
-                    query = "insert into conection (user,pass,bd,server,port,company,active,name_) VALUES('" + user + "','" + pass + "','" + bd + "','" + serv + "','" + port + "'," + handler.ConfGeneralView.Model.Empresa.Codigo + ",'"+ defecto+"','"+etiqueta.ToUpper()+"')";
-                    ExecuteNonQuery(query, conn);
+                    objeto = context.Conexiones.Where(x => x.Nombre.Equals(etiqueta)).First();
+                    objeto.Usuario = user;
+                    objeto.BaseDatos = bd;
+                    objeto.Servidor = serv;
+                    objeto.Puerto = port;
+                    objeto.Pass = pass;
+                    context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
                 }
-                catch
+                else
                 {
-                    query = "update conection set pass ='" + pass + "'," +
-                                                 "port = '" + port + "'," +
-                                                 "active = '" + defecto + "'," +
-                                                 "user = '" + user + "'," +
-                                                 "bd = '" + bd + "'," +
-                                                 "server = '" + serv + "'" +
-                                                " where name_ = '" + etiqueta + "'";
-                    ExecuteNonQuery(query, conn);
+                    objeto = new ConnModel() {Usuario=user,BaseDatos=bd,Servidor=serv,Pass=pass,Nombre=etiqueta,Puerto=port,Activo=defecto,Empresa= handler.ConfGeneralView.Model.Empresa.Codigo };
+                    context.Conexiones.Add(objeto);
+                    context.SaveChanges();
                 }
             }
         }
 
         internal static void pEliminarConexion(SelectListItem conexion)
         {
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            ConnModel objeto = new ConnModel() {Nombre= conexion.Etiqueta };
+
+            using (DataBaseContext context = new DataBaseContext())
             {
-                string query = "delete from conection where name_ = '" + conexion.Etiqueta+"'";
-                ExecuteNonQuery(query, conn);
-            }
-        }
-
-        public static Boolean pblValidaVersion(string version)
-        {
-            string query = "select * from version where version_name = '"+ version + "'";
-            Boolean blExists = false;
-            string apply = "N";
-            bool blResultado;
-            bool blNuevo = false;
-
-            try
-            {
-                using (SQLiteConnection conn = DataBaseContext.GetInstance())
-                {
-                    using (var command = new SQLiteCommand(query, conn))
-                    {
-                        SQLiteDataReader reader = command.ExecuteReader();
-                        
-                        while (reader.Read())
-                        {
-                            if (!String.IsNullOrEmpty(reader.GetString(1)))
-                            {
-                                apply = reader.GetString(2);
-                                blExists = true;
-                            }
-                        }
-
-                        if (!ifExist("version", "version_name like '1.%'", conn))
-                            blNuevo = true;
-                    }
-                }
-            }
-            catch
-            {
-                query = "CREATE TABLE version (id INTEGER PRIMARY KEY AUTOINCREMENT,version_name TEXT, apply   TEXT)";
-                pExecuteNonQuery(query);
-            }
-
-            if (!blExists)
-            {
-                query = "insert into version (version_name,apply) values('" + version + "','N')";
-                pExecuteNonQuery(query);
-            }
-
-            if (apply.Equals("Y"))
-                blResultado = true;
-            else
-            {                
-                if (blNuevo)
-                {
-                    //Se actualiza la versión
-                    SqliteDAO.pActualizaVersion(version);
-                    blResultado = true;
-                }
-                else
-                    blResultado = false;
-                
-            }
-
-            return blResultado;
-        }
-
-        public static void pCargaConfiguracion(Handler handler)
-        {
-            string query = "select * from configuration";
-            string valor;
-            string llave;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        llave = reader.GetString(0);
-                        valor = reader.GetString(1);
-
-                        handler.ListaConfiguracion.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = llave,
-                                Value = valor
-                            }
-                        );
-                    }
-                }
-            }
-        }
-
-        public static void pListaEncabezadoObjetos(Handler handler)
-        {
-            string query = "select * from object_head order by priority";
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        handler.ListaEncabezadoObjetos.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = reader.GetString(0),
-                                Value = reader.GetString(1),
-                                Prioridad = reader.GetInt32(2),
-                                Fin = reader.GetString(3)
-                            }
-                        );
-                    }
-                }
-            }
-        }
-
-        public static void pListaTiposObjetos(Handler handler)
-        {
-            string query = "select codigo,object,slash,count_slash,priority,grant from object_type order by priority";
-
-            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo))
-            {
-                using (SQLiteConnection conn = DataBaseContext.GetInstance())
-                {
-                    using (var command = new SQLiteCommand(query, conn))
-                    {
-                        SQLiteDataReader reader = command.ExecuteReader();
-
-                        while (reader.Read())
-                        {
-                            SelectListItem item = new SelectListItem();
-                            item.Value = reader.GetInt32(0).ToString();
-                            item.Text = reader.GetString(1);
-
-                            if (!reader.IsDBNull(3))
-                                item.CantidadSlash = reader.GetInt32(3);
-                            else
-                                item.CantidadSlash = 0;
-
-                            item.Prioridad = Convert.ToInt32(reader.GetString(4));
-                            item.Grant = reader.GetString(5);
-
-                            /*if (!reader.IsDBNull(3))
-                                item.Value = reader.GetString(2);
-                            else
-                                item.Value = res.No;*/
-
-                            /*if (!reader.IsDBNull(5))
-                                item.Path = reader.GetString(5);
-                            else
-                                item.Path = "";
-
-                            if (!reader.IsDBNull(6))
-                                item.Usuario = reader.GetString(6);
-                            else
-                                item.Usuario = "";*/
-
-                            handler.ListaTiposObjetos.Add(item);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void pListaUsGrants(Handler handler)
-        {
-            string query = "select * from user_grants where company ="+handler.ConfGeneralView.Model.Empresa.Codigo;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        handler.ListaUsGrants.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = reader.GetString(0)
-                            }
-                        );
-                    }
-                }
-            }
-        }
-        public static void pListaPalabrasReservadas(Handler handler)
-        {
-            string query = "select * from words";
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        handler.ListaPalabrasReservadas.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = reader.GetString(0)
-                            }
-                        );
-                    }
-                }
-            }
-        }
-        public static void pListaUsuarios(Handler handler)
-        {
-            string query = "select * from userbd where company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        handler.ListaUsuarios.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = reader.GetString(0)
-                            }
-                        );
-                    }
-                }
-            }
-        }
-
-        public static void pListaRutas(Handler handler)
-        {
-            string query = "select object_type,path,user_default,company from object_path where company = "+handler.ConfGeneralView.Model.Empresa.Codigo;
-
-            if (!string.IsNullOrEmpty(handler.ConfGeneralView.Model.Empresa.Codigo))
-            {
-                using (SQLiteConnection conn = DataBaseContext.GetInstance())
-                {
-                    using (var command = new SQLiteCommand(query, conn))
-                    {
-                        SQLiteDataReader reader = command.ExecuteReader();
-
-                        while (reader.Read())
-                        {
-                            SelectListItem item = new SelectListItem();
-
-                            item.Value = reader.GetInt32(0).ToString();
-
-                            if (!reader.IsDBNull(1))
-                                item.Path = reader.GetString(1);
-                            else
-                                item.Path = "";
-
-                            if (!reader.IsDBNull(2))
-                                item.Usuario = reader.GetString(2);
-                            else
-                                item.Usuario = "";
-
-                            handler.ListaRutas.Add(item);
-                        }
-                    }
-                }
-
-                if (handler.ListaRutas.Count() > 0)
-                {
-                    foreach (SelectListItem item in handler.ListaRutas)
-                    {
-                        handler.ListaTiposObjetos.ToList().Find(x => x.Value == item.Value).Usuario = item.Usuario;
-                        handler.ListaTiposObjetos.ToList().Find(x => x.Value == item.Value).Path = item.Path;
-                    }
-                }
-            }
-        }
-        public static void pListaHTML(Handler handler)
-        {
-            string query = "select * from html where company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        handler.ListaHTML.Add
-                        (
-                            new SelectListItem
-                            {
-                                Text = reader.GetString(0),
-                                Value = reader.GetString(1)
-                            }
-                        );
-                    }
-                }
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
             }
         }
         public static void pDatosBd(Handler handler, SelectListItem conexionActual)
-        { 
-            string query = "select * from conection where company = "+handler.ConfGeneralView.Model.Empresa.Codigo;
-
+        {
             handler.ConnView.Model.ListaConexiones.Clear();
             handler.ConnView.Model.Conexion = new SelectListItem();
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                using (var command = new SQLiteCommand(query, conn))
+                List<ConnModel> lista = context.Conexiones.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList();
+
+                foreach (ConnModel objeto in lista)
                 {
-                    SQLiteDataReader reader = command.ExecuteReader();
+                    SelectListItem item = new SelectListItem();
+                    item.Usuario = objeto.Usuario;
 
-                    while (reader.Read())
+                    if (!item.Usuario.ToLower().Equals("sql_usuario"))
                     {
-                        SelectListItem item = new SelectListItem();
-                        item.Usuario = reader.GetString(0);
+                        item.Pass = objeto.Pass;
+                        item.Bd = objeto.BaseDatos;
+                        item.Servidor = objeto.Servidor;
+                        item.Puerto = objeto.Puerto;
+                        item.Activo = objeto.Activo;
+                        item.Etiqueta = objeto.Nombre;
+                        item.BlValor = false;
 
-                        if (!item.Usuario.ToLower().Equals("sql_usuario"))
+                        if (item.Activo == res.Si)
+                            item.BlValor = true;
+
+                        if (item.BlValor && conexionActual == null)
                         {
-                            item.Pass = reader.GetString(1);
-                            item.Bd = reader.GetString(2);
-                            item.Servidor = reader.GetString(3);
-                            item.Puerto = reader.GetString(4);
-                            item.Activo = reader.GetString(5);
-
-                            if (!reader.IsDBNull(7))
-                                item.Etiqueta = reader.GetString(7);
-
-                            item.BlValor = false;
-
-                            if (item.Activo == res.Si)
-                                item.BlValor = true;
-
-                            if (item.BlValor && conexionActual == null)
+                            handler.ConnView.Model.Usuario = item.Usuario;
+                            handler.ConnView.Model.Pass = item.Pass;
+                            handler.ConnView.Model.BaseDatos = item.Bd;
+                            handler.ConnView.Model.Servidor = item.Servidor;
+                            handler.ConnView.Model.Puerto = item.Puerto;
+                            handler.ConnView.Model.Conexion.Usuario = handler.ConnView.Model.Usuario;
+                            handler.ConnView.Model.Conexion.Pass = handler.ConnView.Model.Pass;
+                            handler.ConnView.Model.Conexion.Bd = handler.ConnView.Model.BaseDatos;
+                            handler.ConnView.Model.Conexion.Puerto = handler.ConnView.Model.Puerto;
+                            handler.ConnView.Model.Conexion.Servidor = handler.ConnView.Model.Servidor;
+                            handler.ConnView.Model.Conexion.BlValor = item.BlValor;
+                            handler.ConnView.Model.Conexion.Etiqueta = item.Etiqueta;
+                        }
+                        else
+                        {
+                            if (conexionActual != null && conexionActual.Usuario.Equals(item.Usuario) && conexionActual.Bd.Equals(item.Bd) && conexionActual.Servidor.Equals(item.Servidor))
                             {
                                 handler.ConnView.Model.Usuario = item.Usuario;
                                 handler.ConnView.Model.Pass = item.Pass;
@@ -531,151 +531,51 @@ namespace Cygnus2_0.DAO
                                 handler.ConnView.Model.Conexion.BlValor = item.BlValor;
                                 handler.ConnView.Model.Conexion.Etiqueta = item.Etiqueta;
                             }
-                            else
-                            {
-                                if (conexionActual != null && conexionActual.Usuario.Equals(item.Usuario) && conexionActual.Bd.Equals(item.Bd) && conexionActual.Servidor.Equals(item.Servidor))
-                                {
-                                    handler.ConnView.Model.Usuario = item.Usuario;
-                                    handler.ConnView.Model.Pass = item.Pass;
-                                    handler.ConnView.Model.BaseDatos = item.Bd;
-                                    handler.ConnView.Model.Servidor = item.Servidor;
-                                    handler.ConnView.Model.Puerto = item.Puerto;
-                                    handler.ConnView.Model.Conexion.Usuario = handler.ConnView.Model.Usuario;
-                                    handler.ConnView.Model.Conexion.Pass = handler.ConnView.Model.Pass;
-                                    handler.ConnView.Model.Conexion.Bd = handler.ConnView.Model.BaseDatos;
-                                    handler.ConnView.Model.Conexion.Puerto = handler.ConnView.Model.Puerto;
-                                    handler.ConnView.Model.Conexion.Servidor = handler.ConnView.Model.Servidor;
-                                    handler.ConnView.Model.Conexion.BlValor = item.BlValor;
-                                    handler.ConnView.Model.Conexion.Etiqueta = item.Etiqueta;
-                                }
-                            }
-
-                            handler.ConnView.Model.ListaConexiones.Add(item);
                         }
+
+                        handler.ConnView.Model.ListaConexiones.Add(item);
                     }
                 }
             }
         }
-        public static void pDocumentacionHtml(Handler handler)
+        #endregion Conexion
+
+        #region Usuarios BD
+        public static bool pExisteUsuario(UsuarioModel item)
         {
-            string query = "select * from documentation where company ="+ handler.ConfGeneralView.Model.Empresa.Codigo;
+            bool existe = false;
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
+                var objeto = context.Usuarios.FirstOrDefault(x => x.Usuariobd.Equals(item.Usuariobd));
 
-                    while (reader.Read())
-                    {
-                        DocumentacionHTML doc = new DocumentacionHTML();
+                if (objeto != null)
+                    existe = true;
+            }
 
-                        doc.TagInicio = reader.GetString(0);
-                        doc.TagFin = reader.GetString(1);
-                        doc.Atributos = reader.GetString(2);
-                        doc.Tipo = reader.GetString(3);
-                        doc.TagEncabezadoFin = reader.GetString(4);
+            return existe;
+        }
+        public static void pListaUsuarios(Handler handler)
+        {
+            handler.ListaUsuarios.Clear();
 
-                        handler.ListaDocHtml.Add(doc);
-                    }
-                }
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                handler.ListaUsuarios = new ObservableCollection<UsuarioModel>(context.Usuarios.Where(x => x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
             }
         }
-        public static void ExecuteNonQuery(string query, SQLiteConnection conn)
-        {
-            using (var command = new SQLiteCommand(query, conn))
-            {
-                command.ExecuteNonQuery();
-            }
-        }
-        public static void pExecuteNonQuery(string query)
-        {
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                ExecuteNonQuery(query, conn);
-            }
-        }
-
-        //Elimina
-        public static void pEliminaPalabra(string value)
-        {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                query = "delete from words where description = '" + value + "'";
-                ExecuteNonQuery(query, conn);
-            }
-        }
-        public static void pEliminaUsuario(string value, Handler handler)
-        {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                query = "delete from user_grants where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
-                ExecuteNonQuery(query, conn);
-            }
-        }
+        
         public static void pEliminaUsuarioBD(string value, Handler handler)
         {
-            string query;
+            UsuarioModel objeto = new UsuarioModel() { Usuariobd=value };
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                query = "delete from userbd where user = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
-                ExecuteNonQuery(query, conn);
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
             }
         }
-
-        public static void pEliminaTipoObjeto(string value)
-        {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                query = "delete from object_type where object = '" + value + "'";
-                ExecuteNonQuery(query, conn);
-            }
-        }
-
-        public static void pEliminaEncabezado(string value)
-        {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                query = "delete from object_head where head = '" + value + "'";
-                ExecuteNonQuery(query, conn);
-            }
-        }
-        public static void pEliminaConfHtml(string value, Handler handler)
-        {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
-            {
-                query = "delete from documentation where tag_ini = '" + value + "' and company = "+ handler.ConfGeneralView.Model.Empresa.Codigo;
-                ExecuteNonQuery(query, conn);
-            }
-        }
-
-        public static Boolean ifExist(string table, string where, SQLiteConnection conn)
-        {
-            string query = "select count(1) from "+ table +" where " + where;
-            int nuCantidad = 0;
-
-            using (var command = new SQLiteCommand(query, conn))
-            {
-                SQLiteDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    nuCantidad = reader.GetInt16(0);
-                }
-            }
-            return nuCantidad >0 ? true : false; 
-        }
+        #endregion Usuarios BD
 
         #region Azure
         public static void pInsertaTareaAzure(TareaHoja tareaAzure, Handler handler, string accion,string desde)
@@ -1232,7 +1132,7 @@ namespace Cygnus2_0.DAO
             }
         }
 
-        public static void pCreaRegistroAzure(AzureModel model,string empresa)
+        public static void pCreaRegistroAzure(AzureModel model,int? empresa)
         {
             string query;
             string defecto;
@@ -1320,117 +1220,53 @@ namespace Cygnus2_0.DAO
         #endregion Azure
 
         #region Empresa
-        public static bool pExisteEmpresa(string value)
+        public static bool pExisteEmpresa(EmpresaModel empresa)
         {
-            string query;
-            int valor = 0;
+            bool existe = false;
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                string codigo = value == null ? "0" : value;
-                query = " SELECT codigo FROM company where codigo = " + codigo;
+                var objeto = context.Empresas.FirstOrDefault(x => x.Codigo == empresa.Codigo);
 
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read()) 
-                    {
-                        valor = Convert.ToInt32(reader["codigo"]);
-                    }
-                }
+                if (objeto != null)
+                    existe = true;
             }
 
-            return valor > 0 ? true:false;
+            return existe;
         }
 
         public static void pInsertaEmpresa(EmpresaModel empresa)
         {
-            string query;
-            string defecto;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                defecto = empresa.Azure;
-
-                query = "insert into company (codigo,descripcion,azure,git,sonar,defecto) values (" + empresa.Codigo + ",'" + empresa.Descripcion + "','" + empresa.Azure + "','"+ empresa.Git + "','"  + empresa.Sonar + "','" + empresa.Defecto + "')";
-
-                ExecuteNonQuery(query, conn);
+                context.Empresas.Add(empresa);
+                context.SaveChanges();
             }
         }
         public static void pEliminaEmpresa(EmpresaModel empresa)
         {
-            string query;
-            string defecto;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                defecto = empresa.Azure;
-
-                query = "delete from company where codigo = " + empresa.Codigo;
-
-                ExecuteNonQuery(query, conn);
+                context.Entry(empresa).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
             }
         }
         public static void pActualizaEmpresa(EmpresaModel empresa)
         {
-            string query;
-
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-
-                query = "update company set "+ 
-                        "descripcion = '" + empresa.Descripcion + "'"+
-                        ",azure = '" + empresa.Azure + "'" +
-                        ",git = '" +empresa.Git+ "'" +
-                        ",sonar = '" + empresa.Sonar + "'" +
-                        ",defecto = '" + empresa.Defecto + "'" +
-                        " where codigo = " + empresa.Codigo;
-
-                ExecuteNonQuery(query, conn);
+                context.Entry(empresa).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
             }
         }
+
         public static void pListaEmpresas(Handler handler)
         {
-            string query = "select codigo, descripcion, azure,git,sonar,defecto from company";
             handler.ConfGeneralView.Model.ListaEmpresas.Clear();
 
-            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            using (DataBaseContext context = new DataBaseContext())
             {
-                using (var command = new SQLiteCommand(query, conn))
-                {
-                    SQLiteDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        EmpresaModel item = new EmpresaModel();
-                        item.Codigo = reader.GetInt32(0).ToString();
-                        item.Descripcion = reader.GetString(1);
-                        item.Azure = res.No;
-                        item.Git = res.No;
-                        item.Sonar = res.No;
-                        item.Defecto = "";
-
-                        if (!reader.IsDBNull(2))
-                            item.Azure = reader.GetString(2);
-
-                        if (!reader.IsDBNull(3))
-                            item.Git = reader.GetString(3);                            
-
-                        if (!reader.IsDBNull(4))
-                            item.Sonar = reader.GetString(4);
-
-                        if (!reader.IsDBNull(5))
-                            item.Defecto = reader.GetString(5);
-
-                        if(item.Defecto.Equals(res.YES))
-                        {
-                            handler.ConfGeneralView.Model.Empresa = item;
-                        }
-
-                        handler.ConfGeneralView.Model.ListaEmpresas.Add(item);
-                    }
-                }
+                handler.ConfGeneralView.Model.ListaEmpresas = new ObservableCollection<EmpresaModel>(context.Empresas.ToList());
             }
         }
         #endregion Empresa
@@ -1524,6 +1360,95 @@ namespace Cygnus2_0.DAO
 
             return valor.Valor;
         }
+
+        public static void pCreaConfiguracion(string key, string value)
+        {
+            Configuracion conf;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                try
+                {
+                    conf = context.Configuraciones.Where(x => x.Key.Equals(key)).First();
+                    conf.Valor = value;
+                    context.Entry(conf).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    conf = new Configuracion();
+                    conf.Key = key;
+                    conf.Valor = value;
+                    context.Configuraciones.Add(conf);
+                    context.SaveChanges();
+                }
+            }
+        }
+        public static void pCargaConfiguracion(Handler handler)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                List<Configuracion> lista = context.Configuraciones.ToList();
+
+                foreach (Configuracion objeto in lista)
+                {
+                    SelectListItem item = new SelectListItem() { Value = objeto.Valor, Text = objeto.Key };
+                    handler.ListaConfiguracion.Add(item);
+                }
+            }
+        }
         #endregion Configuraciones
+
+        #region Genericos
+        public static void pEliminaObjeto(object objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+        public static void pActualizaObjeto(object objeto)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+        #endregion Genericos
+
+        #region Ejecuta SQL
+        public static void ExecuteNonQuery(string query, SQLiteConnection conn)
+        {
+            using (var command = new SQLiteCommand(query, conn))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+        public static void pExecuteNonQuery(string query)
+        {
+            using (SQLiteConnection conn = DataBaseContext.GetInstance())
+            {
+                ExecuteNonQuery(query, conn);
+            }
+        }
+        public static Boolean ifExist(string table, string where, SQLiteConnection conn)
+        {
+            string query = "select count(1) from " + table + " where " + where;
+            int nuCantidad = 0;
+
+            using (var command = new SQLiteCommand(query, conn))
+            {
+                SQLiteDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nuCantidad = reader.GetInt16(0);
+                }
+            }
+            return nuCantidad > 0 ? true : false;
+        }
+        #endregion Ejecuta SQL
     }
 }

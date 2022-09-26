@@ -100,54 +100,27 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Rama}" Header="Rama" MinWidth="200" />
                             <DataGridTextColumn Binding="{Binding Estandar}" Header="Rama Clon" MinWidth="200"/>
-                            <DataGridTextColumn Binding="{Binding LBase}" Header="Línea Base [S/N]" MinWidth="200"/>
+                            <DataGridComboBoxColumn Width="200"
+                                            DisplayMemberPath="Text"
+                                            SelectedValuePath="Value"
+                                            Header="Línea Base [S/N]"
+                                            SelectedValueBinding="{Binding LBase, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaSINO}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaSINO}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
-
-        <!--<GroupBox x:Name="grbDatosInstall" Header="Datos Para Clonar" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="4">
-            <Grid Margin="10,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <TextBox x:Name="txtRutaGitBash2" 
-                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" Grid.Column="0" Grid.Row="0"
-                         Grid.ColumnSpan="3" 
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Ruta de git-bash.exe"
-                         />
-                
-                
-                
-                <TextBox x:Name="txtRutaInstall2" 
-                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" Grid.Column="0" Grid.Row="1"
-                         Grid.ColumnSpan="3" 
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Ruta para clonar DATOS"
-                         />
-
-                <TextBox x:Name="txtRutaInstallObj2" 
-                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" Grid.Column="0" Grid.Row="2"
-                         Grid.ColumnSpan="3" 
-                         VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Ruta para clonar OBJETOS"
-                         />
-            </Grid>
-        </GroupBox>-->
-
     </Grid>
 </UserControl>

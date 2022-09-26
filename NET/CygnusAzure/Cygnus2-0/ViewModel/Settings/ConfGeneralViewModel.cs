@@ -50,7 +50,7 @@ namespace Cygnus2_0.ViewModel.Settings
             SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "" + Model.Empresa.Codigo);
             //SqliteDAO.pCreaConfiguracion(res.KEY_LLAVEW, "" + Model.LlaveW);
             SqliteDAO.pCreaConfiguracion(res.KEY_VALORW, "" + Model.ValorW);
-            handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x => x.Codigo.Equals(Model.Empresa.Codigo));
+            handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x => x.Codigo== Model.Empresa.Codigo);
         }
     }
 }

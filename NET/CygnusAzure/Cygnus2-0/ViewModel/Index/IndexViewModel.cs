@@ -14,6 +14,9 @@ using System.Drawing;
 using Cygnus2_0.DAO;
 using Cygnus2_0.Model.Azure;
 using Cygnus2_0.Model.Empresa;
+using Cygnus2_0.Model.User;
+using Cygnus2_0.Model.Settings;
+using Cygnus2_0.Model.Objects;
 
 namespace Cygnus2_0.ViewModel.Index
 {
@@ -162,7 +165,7 @@ namespace Cygnus2_0.ViewModel.Index
             archivoBD = Path.Combine(res.CarpetaBD, res.NombreArchivoEncabezadoObj);
             file = Path.Combine(path, archivoBD);
 
-            handler.ListaEncabezadoObjetos = new ObservableCollection<SelectListItem>();
+            handler.ListaEncabezadoObjetos = new ObservableCollection<HeadModel>();
 
             SqliteDAO.pListaEncabezadoObjetos(handler);
         }
@@ -174,12 +177,15 @@ namespace Cygnus2_0.ViewModel.Index
                 archivoBD = Path.Combine(res.CarpetaBD, res.NombreArchivoTiposObj);
                 file = Path.Combine(path, archivoBD);
 
-                handler.ListaTiposObjetos = new ObservableCollection<SelectListItem>();
+                handler.ListaTiposObjetos = new ObservableCollection<TipoObjetos>();
                 SqliteDAO.pListaTiposObjetos(handler);
+
+                handler.ListaPermisosObjeto = new ObservableCollection<PermisosObjeto>();
+                SqliteDAO.pListaPermisosObjetos(handler);
             }
             catch (Exception ex)
             {
-                //handler.MensajeError(ex.Message);
+                handler.MensajeError(ex.Message);
             }
         }
 
@@ -196,7 +202,7 @@ namespace Cygnus2_0.ViewModel.Index
             }
             catch(Exception ex)
             {
-                //handler.MensajeError(ex.Message);
+                handler.MensajeError(ex.Message);
             }
         }
 
@@ -208,12 +214,12 @@ namespace Cygnus2_0.ViewModel.Index
 
             try
             {
-                handler.ListaUsuarios = new ObservableCollection<SelectListItem>();
+                handler.ListaUsuarios = new ObservableCollection<UsuarioModel>();
                 SqliteDAO.pListaUsuarios(handler);
             }
             catch (Exception ex)
             {
-                //handler.MensajeError(ex.Message);
+                handler.MensajeError(ex.Message);
             }
         }
 
@@ -263,7 +269,7 @@ namespace Cygnus2_0.ViewModel.Index
             archivoBD = Path.Combine(res.CarpetaBD, res.NombreArchivoPalReser);
             file = Path.Combine(path, archivoBD);
 
-            handler.ListaPalabrasReservadas = new ObservableCollection<SelectListItem>();
+            handler.ListaPalabrasReservadas = new ObservableCollection<PalabrasClaves>();
             SqliteDAO.pListaPalabrasReservadas(handler);
         }
         public void ListaChequeo()
@@ -300,7 +306,7 @@ namespace Cygnus2_0.ViewModel.Index
         {
             try
             {
-                handler.ListaRutas = new ObservableCollection<SelectListItem>();
+                handler.ListaRutas = new ObservableCollection<RutaObjetos>();
                 SqliteDAO.pListaRutas(handler);
             }
             catch(Exception ex)
@@ -412,7 +418,7 @@ namespace Cygnus2_0.ViewModel.Index
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_EMPRESA)))
             {
                 string codEmpresa = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_EMPRESA)).Value;
-                handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x=>x.Codigo.Equals(codEmpresa));
+                handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x=>x.Codigo == int.Parse(codEmpresa));
             }
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_LLAVEW)))

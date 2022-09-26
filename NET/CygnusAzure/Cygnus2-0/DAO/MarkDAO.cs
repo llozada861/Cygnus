@@ -41,87 +41,82 @@ namespace Cygnus2_0.DAO
         #region GestionDatos
         public void pCreaParametro(ParameterModel parametro)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pCreaParametro"))
+            string query = "INSERT INTO FLEX.epm_parametr (PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, DATA_TYPE, ALLOW_UPDATE)" +
+                             "VALUES" +
+                             "(" +
+                                 ":isbParamId," +
+                                 ":isbDescrip," +
+                                 ":isbValor," +
+                                 ":isbFuncion," +
+                                 "-99," +
+                                 ":isbTipo," +
+                                 "'Y'" +
+                             ")";
+
+            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbParamId", OracleDbType.Varchar2, parametro.ParameterId);
-                handler.ConexionOracle.AddInParameter(cmd, "isbDescrip", OracleDbType.Varchar2, parametro.Descripcion);
-                handler.ConexionOracle.AddInParameter(cmd, "isbValor", OracleDbType.Varchar2, parametro.Valor);
-                handler.ConexionOracle.AddInParameter(cmd, "isbTipo", OracleDbType.Varchar2, parametro.Tipo.Text);
-                handler.ConexionOracle.AddInParameter(cmd, "isbFuncion", OracleDbType.Varchar2, parametro.Funcion);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
+                cmd.Parameters.Add(":isbParamId", parametro.ParameterId);
+                cmd.Parameters.Add(":isbDescrip", parametro.Descripcion);
+                cmd.Parameters.Add(":isbValor", parametro.Valor);
+                cmd.Parameters.Add(":isbFuncion", parametro.Funcion);
+                cmd.Parameters.Add(":isbTipo", parametro.Tipo.Text);
+                cmd.ExecuteNonQuery();
             }
         }
 
         public void pCreaMensaje(MessageModel mensajesModel)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pCreaMensaje"))
+            string query = "INSERT INTO flex.mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo ) " +
+                            " VALUES" +
+                            "(" +
+                                ":isbCodigo," +
+                                ":isbDescrip," +
+                                "'EPM'," +
+                                "'CUZ'," +
+                                ":isbCausa," +
+                                ":isbSolucion" +
+                            ")";
+
+            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbCodigo", OracleDbType.Varchar2, mensajesModel.Codigo);
-                handler.ConexionOracle.AddInParameter(cmd, "isbDescrip", OracleDbType.Varchar2, mensajesModel.Descripcion);
-                handler.ConexionOracle.AddInParameter(cmd, "isbCausa", OracleDbType.Varchar2, mensajesModel.Causa);
-                handler.ConexionOracle.AddInParameter(cmd, "isbSolucion", OracleDbType.Varchar2, mensajesModel.Solucion);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
+                cmd.Parameters.Add(":isbCodigo", mensajesModel.Codigo);
+                cmd.Parameters.Add(":isbDescrip", mensajesModel.Descripcion);
+                cmd.Parameters.Add(":isbCausa", mensajesModel.Causa);
+                cmd.Parameters.Add(":isbSolucion", mensajesModel.Solucion);
+                cmd.ExecuteNonQuery();
             }
         }
 
         public string pObtCodigoMensaje()
         {
-            string sbCodigoMensaje = "";
+            string sql = "SELECT max(menscodi) nuCodigo" +
+                        " FROM flex.mensaje " +
+                        " WHERE mensdivi = 'EPM'" +
+                        " AND mensmodu = 'CUZ'" +
+                        " AND menscodi < 900196";
 
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtCodigoMensaje"))
+            int Codigo = 0;
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
-                handler.ConexionOracle.AddOutParameter(cmd, "osbCodigoMens", OracleDbType.Varchar2);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+                cmd.CommandText = sql;
+                cmd.Connection = con;
 
-                try
+                using (OracleDataReader rdr = cmd.ExecuteReader()) 
                 {
-                    cmd.ExecuteNonQuery();
+                    while (rdr.Read())
+                    {
+                        Codigo = Convert.ToInt32(rdr["nuCodigo"]);
+                    }
+                    rdr.Close();
                 }
-                catch (InvalidCastException)
-                {
-                }
-
-                sbCodigoMensaje = handler.ConexionOracle.GetParameterValue(cmd, "osbCodigoMens");
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
             }
 
-            return sbCodigoMensaje;
+            Codigo = Codigo + 1;
+
+            return Codigo+"";
         }
         #endregion GetionDatos
 
@@ -296,38 +291,37 @@ namespace Cygnus2_0.DAO
         #region Updater
         internal string pObtCodigoVersion()
         {
-            string sbCodigoVersion= "";
+            string sbCodigoVersion = "";
 
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtCodigoVersion"))
+            string sql = "SELECT version" +
+                        " FROM flex.ll_version" +
+                        " ORDER BY fecha_ini desc";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
-                handler.ConexionOracle.AddOutParameter(cmd, "osbVersion", OracleDbType.Varchar2);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+                cmd.CommandText = sql;
+                cmd.Connection = con;
 
-                try
+                using (OracleDataReader rdr = cmd.ExecuteReader())
                 {
-                    cmd.ExecuteNonQuery();
+                    while (rdr.Read())
+                    {
+                        sbCodigoVersion = rdr["version"].ToString();
+                        break;
+                    }
+                    rdr.Close();
                 }
-                catch (InvalidCastException)
-                {
-                }
-
-                sbCodigoVersion = handler.ConexionOracle.GetParameterValue(cmd, "osbVersion");
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
             }
 
             return sbCodigoVersion;
         }
+
         internal void pCargaVersion(byte[] bytes, string archivo, string version)
         {
             string query = "insert into ll_version values (:version,sysdate,sysdate,:data)";
 
-            //using (OracleCommand cmd = new OracleCommand(query))
             using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
             {
                 cmd.Parameters.Add(":version", version);
@@ -684,32 +678,23 @@ namespace Cygnus2_0.DAO
         #region CompilacionObjetos
         public void pObtErrores(Archivo archivo, CompilaModel model)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtErrores"))
+            string sql = "SELECT " +
+                               "NAME ," +
+                               "TYPE ," +
+                               "LINE ," +
+                               "TEXT " +
+                        " FROM   all_errors " +
+                        " WHERE  name = isbObjeto" +
+                        " AND    owner IN (SELECT usuario FROM FLEX.ll_credmark)";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
-                cmd.Connection = handler.ConexionOracle.ConexionOracleCompila;
-                handler.ConexionOracle.AddInParameter(cmd, "isbObjeto", OracleDbType.Varchar2, archivo.NombreObjeto.ToUpper());
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+                cmd.CommandText = sql;
+                cmd.Connection = con;
 
-                OracleDataReader reader = null;
-
-                try
-                {
-                    reader = cmd.ExecuteReader();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                try
+                using (OracleDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -721,42 +706,8 @@ namespace Cygnus2_0.DAO
                         dato.Prioridad = Convert.ToInt32(reader["LINE"].ToString());
                         model.ListaObservaciones.Add(dato);
                     }
+                    reader.Close();
                 }
-                finally
-                {
-                    if (reader != null && !reader.IsClosed)
-                        reader.Close();
-                }
-            }
-        }
-
-        public void pGuardaLogCompilacion(Archivo archivo, string maquina, string usuario, string cantidadobjs, string accion, string owner)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pInsLog"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbObjeto", OracleDbType.Varchar2, archivo.NombreObjeto);
-                handler.ConexionOracle.AddInParameter(cmd, "isbMaquina", OracleDbType.Varchar2, maquina);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, usuario);
-                handler.ConexionOracle.AddInParameter(cmd, "isbTipo", OracleDbType.Varchar2, archivo.Tipo);
-                handler.ConexionOracle.AddInParameter(cmd, "isbAccion", OracleDbType.Varchar2, accion);
-                handler.ConexionOracle.AddInParameter(cmd, "inuCantObjsI", OracleDbType.Int16, cantidadobjs);
-                handler.ConexionOracle.AddInParameter(cmd, "isbOwner", OracleDbType.Varchar2, owner);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
             }
         }
 
@@ -975,7 +926,7 @@ namespace Cygnus2_0.DAO
 
                 foreach (Archivo archivo in archivos)
                 {
-                    if (!archivo.Tipo.Equals(res.TipoAplica))
+                    if (archivo.Tipo != Int32.Parse(res.TipoAplica))
                     {
                         sbAplicaBody.Append("@" + "'" + archivo.RutaConArchivo + "'");
                         sbAplicaBody.Append(Environment.NewLine);

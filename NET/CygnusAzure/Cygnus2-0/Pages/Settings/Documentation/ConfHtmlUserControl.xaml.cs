@@ -31,70 +31,75 @@ namespace Cygnus2_0.Pages.Settings.Documentation
             DataContext = handler;
         }
 
-        private void dataGridDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGridDatos.SelectedItem == null)
-                return;
-
-            txtEliminar.Text = ((DocumentacionHTML)dataGridDatos.SelectedItem).TagInicio;
+            handler.ListaDocHtml.Add(new DocumentacionHTML() { Empresa = handler.ConfGeneralView.Model.Empresa.Codigo,ListaTipoHTml = new System.Collections.ObjectModel.ObservableCollection<SelectListItem>(handler.ListaTipoHTml) });
         }
 
-        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        private void btnGuar_Click(object sender, RoutedEventArgs e)
         {
-            string inicio = txtTagIni.Text.Trim().ToLower();
-            string fin = txtTagFin.Text.Trim().ToLower();
-            string atributos = txtAtributos.Text.Trim();
-            string finEnca = txtFinEnca.Text.Trim();
-            string tipo = handler.Generico.Value;
-
-            if (String.IsNullOrEmpty(inicio))
-            {
-                handler.MensajeError("Debe ingresar un tag de inicio.");
-                return;
-            }
-            if (String.IsNullOrEmpty(fin))
-            {
-                handler.MensajeError("Debe ingresar un tag de fin.");
-                return;
-            }
-
-            if (String.IsNullOrEmpty(tipo))
-            {
-                handler.MensajeError("Debe seleccionar un tipo.");
-                return;
-            }
-
             try
             {
-                SqliteDAO.pGuardarConfHtml(inicio, fin, atributos, finEnca, tipo,handler);
+                foreach (DocumentacionHTML item in handler.ListaDocHtml)
+                {
+                    if (String.IsNullOrEmpty(item.TagIni))
+                    {
+                        handler.MensajeError("Debe ingresar un tag de Inicio.");
+                        return;
+                    }
+
+                    if (String.IsNullOrEmpty(item.TagFin))
+                    {
+                        handler.MensajeError("Debe ingresar un tag de Fin.");
+                        return;
+                    }
+
+                    if (String.IsNullOrEmpty(item.Tipo))
+                    {
+                        handler.MensajeError("Debe ingresar un tipo.");
+                        return;
+                    }
+
+                    if (item.Codigo > 0)
+                    {
+                        SqliteDAO.pActualizaObjeto(item);
+                    }
+                    else
+                    {
+                        SqliteDAO.pGuardarConfHtml(item);
+                    }
+                }
+
                 pCargarLista();
             }
             catch (Exception ex)
             {
                 handler.MensajeError(ex.Message);
             }
+
+            btnGuar.Visibility = Visibility.Hidden;
         }
 
-        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        private void btnElim_Click(object sender, RoutedEventArgs e)
         {
-            string sbPalabra = txtEliminar.Text.Trim();
-
             try
             {
-                if (!String.IsNullOrEmpty(sbPalabra))
+                if (handler.DocHTMLSeleccionado != null && handler.MensajeConfirmacion("Seguro que desea eliminar la documentación [" + handler.DocHTMLSeleccionado.TagIni + "] ?") == "Y")
                 {
-                    if (handler.MensajeConfirmacion("Está seguro que desea borrar la documentación [" + sbPalabra + "]") == "Y")
-                    {
-                        SqliteDAO.pEliminaConfHtml(sbPalabra,handler);
-                        pCargarLista();
-                        txtEliminar.Text = "";
-                    }
+                    SqliteDAO.pEliminaObjeto(handler.DocHTMLSeleccionado);
+                    handler.ListaDocHtml.Remove(handler.DocHTMLSeleccionado);
                 }
             }
             catch (Exception ex)
             {
                 handler.MensajeError(ex.Message);
             }
+
+            btnGuar.Visibility = Visibility.Hidden;
+        }
+        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnGuar.Visibility = Visibility.Visible;
         }
         public void pCargarLista()
         {

@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 
 namespace Cygnus2_0.Model.Settings
 {
-    [Table(name: "configuration")]
-    public class Configuracion
+    [Table(name: "words")]
+    public class PalabrasClaves
     {
-        [Column(name: "key")]
+        [Column(name: "description")]
         [Key]
-        public string Key { get; set; }
-
-        [Column(name: "value")]
-        public string Valor { get; set; }
+        public string Palabra { get; set; }
     }
 }

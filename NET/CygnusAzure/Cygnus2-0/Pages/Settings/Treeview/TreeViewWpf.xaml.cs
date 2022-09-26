@@ -78,10 +78,6 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                     userControls = new ObjectTypeUserControl();
                     GridMain.Children.Add(userControls);
                     break;
-                case 5:
-                    userControls = new EncabezadosUserControl();
-                    GridMain.Children.Add(userControls);
-                    break;
                 case 6:
                     userControls = new PathsUserControl();
                     GridMain.Children.Add(userControls);
@@ -143,6 +139,10 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                     GridMain.Children.Add(userControls);
                     break;
                 case 103:
+                    userControls = new EmpresaUC();
+                    GridMain.Children.Add(userControls);
+                    break;
+                case 104:
                     userControls = new EmpresaUC();
                     GridMain.Children.Add(userControls);
                     break;

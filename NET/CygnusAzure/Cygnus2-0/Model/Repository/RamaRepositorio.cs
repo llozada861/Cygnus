@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Cygnus2_0.General;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -26,5 +28,8 @@ namespace Cygnus2_0.Model.Repository
 
         [Column(name: "lbase")]
         public string LBase { get; set; }
+
+        [NotMapped]
+        public ObservableCollection<SelectListItem> ListaSINO { get; set; }
     }
 }

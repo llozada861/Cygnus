@@ -1,5 +1,13 @@
-﻿using Cygnus2_0.Model.Repository;
+﻿using Cygnus2_0.General.Documentacion;
+using Cygnus2_0.Model.Conexion;
+using Cygnus2_0.Model.Empresa;
+using Cygnus2_0.Model.Html;
+using Cygnus2_0.Model.Objects;
+using Cygnus2_0.Model.Permisos;
+using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Model.Settings;
+using Cygnus2_0.Model.User;
+using Cygnus2_0.Model.Version;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -54,5 +62,18 @@ namespace Cygnus2_0.BaseDatos.sqlite
         public DbSet<Repositorio> Repositorios { get; set; }
         public DbSet<RamaRepositorio> RamaRepositorios { get; set; }
         public DbSet<Configuracion> Configuraciones { get; set; }
+        public DbSet<UsuarioModel> Usuarios { get; set; }
+        public DbSet<EmpresaModel> Empresas { get; set; }
+        public DbSet<VersionBD> Versiones { get; set; }
+        public DbSet<PalabrasClaves> PalabrasReservadas { get; set; }
+        public DbSet<GrantsModel> UsuariosGrant { get; set; }
+        public DbSet<TipoObjetos> TipoObjetos { get; set; }
+        public DbSet<RutaObjetos> RutaObjetos { get; set; }
+        public DbSet<HeadModel> EncabezadosObjetos { get; set; }
+        public DbSet<DocumentacionHTML> Documentacion { get; set; }
+        public DbSet<PlantillasHTMLModel> PlantillasHTML { get; set; }
+        public DbSet<ConnModel> Conexiones { get; set; }
+        public DbSet<PermisosObjeto> ListaPermisosObjeto { get; set; }
+        public DbSet<PermisosModel> ListaPermisos { get; set; }
     }
 }

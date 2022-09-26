@@ -128,7 +128,7 @@ namespace Cygnus2_0.ViewModel.Security
                 str.Write(sbAplicaBody.ToString());
             }
 
-            List<Archivo> archivos = new List<Archivo>{ new Archivo { FileName = sbNombreAplica, Ruta = handler.PathTempAplica, Tipo = res.TipoAplica }};
+            List<Archivo> archivos = new List<Archivo>{ new Archivo { FileName = sbNombreAplica, Ruta = handler.PathTempAplica, Tipo = Int32.Parse(res.TipoAplica) }};
             handler.DAO.pExecuteSqlplus(credenciales, archivos, handler.PathTempAplica, handler.ConnView.Model.UsuarioCompila);            
         }
 

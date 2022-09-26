@@ -98,7 +98,7 @@ namespace Cygnus2_0.Pages.Compila
 
                 foreach (Archivo archivo in compilaViewModel.Model.ListaArchivosCargados)
                 {
-                    if (string.IsNullOrEmpty(archivo.Tipo))
+                    if (archivo.Tipo == null)
                     {
                         Noselec = true;
                     }

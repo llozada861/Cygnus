@@ -49,10 +49,10 @@ namespace Cygnus2_0.Pages.Settings.Empresa
         {
             foreach(EmpresaModel empresa in handler.ConfGeneralView.Model.ListaEmpresas)
             {
-                if(SqliteDAO.pExisteEmpresa(empresa.Codigo))
+                if(SqliteDAO.pExisteEmpresa(empresa))
                     SqliteDAO.pActualizaEmpresa(empresa);
                 else 
-                    if(!string.IsNullOrEmpty(empresa.Codigo))
+                    if(empresa.Codigo != null)
                         SqliteDAO.pInsertaEmpresa(empresa);
             }
 
