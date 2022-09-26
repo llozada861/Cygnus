@@ -286,7 +286,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             //Se genera el aplica de los objetos entregados
             pGeneraAplica();
-            //handler.pGeneraArchivoHtml(this.Model.ListaArchivosCargados, null);
+            handler.pGeneraArchivoHtml(this.Model.ListaArchivosCargados, null);
         }
 
         private void pEstablecerOrdenAplica()
@@ -640,12 +640,14 @@ namespace Cygnus2_0.ViewModel.Aplica
             string rutaGeneracion;
             string nombreGrant = this.Model.Codigo + res.NombreArchivoGrant + this.Model.Usuario.Text + res.ExtensionSQL;
             rutaGeneracion = Path.Combine(handler.SavePath, nombreGrant);
-            string usuarioGrant = "";
+            Boolean sinonimo = false;
 
             if (handler.ListaUsGrants.Count > 0)
             {
                 foreach (Archivo archivo in this.Model.ListaArchivosCargados)
                 {
+                    sinonimo = false;
+
                     foreach (TipoObjetos tipo in handler.ListaTiposObjetos)
                     {
                         //Si el tipo aplica para grant
@@ -665,85 +667,18 @@ namespace Cygnus2_0.ViewModel.Aplica
                                         grant.Replace(res.TagGrantPermiso, permiso.Descripcion);
                                         grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
                                         grant.AppendLine();
+                                        sinonimo = true;
                                     }
                                 }
                             }
 
-                            /*foreach (SelectListItem item in handler.ListaUsGrants)
+                            if (sinonimo)
                             {
-                                usuarioGrant = item.Text;
-
-                                if (usuarioGrant.ToUpper().Equals(this.Model.Usuario.Text.ToUpper()))
-                                {
-                                    continue;
-                                }
-
-                                if (tipo.Grant.Equals(res.TipoGrantSelect))
-                                {
-                                    grant.AppendLine(res.PlantillaGrant);
-                                    grant.Replace(res.TagGrantUsuario, usuarioGrant);
-                                    grant.Replace(res.TagGrantPermiso, res.GrantSELECT);
-                                    grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                    grant.AppendLine();
-                                }
-
-                                //Permisos execute
-                                if (tipo.Grant.Equals(res.TipoGrantExecute))
-                                {
-                                    if (!usuarioGrant.ToUpper().Trim().Equals("CONSULTA_TODAS_LAS_TABLAS"))
-                                    {
-                                        grant.AppendLine(res.PlantillaGrant);
-                                        grant.Replace(res.TagGrantUsuario, usuarioGrant);
-                                        grant.Replace(res.TagGrantPermiso, res.GrantEXECUTE);
-                                        grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                        grant.AppendLine();
-                                    }
-                                }
-
-                                if (tipo.Grant.Equals(res.TipoGrantSIUD))
-                                {
-                                    if (usuarioGrant.ToUpper().Trim().Equals("CONSULTA_TODAS_LAS_TABLAS"))
-                                    {
-                                        grant.AppendLine(res.PlantillaGrant);
-                                        grant.Replace(res.TagGrantUsuario, usuarioGrant);
-                                        grant.Replace(res.TagGrantPermiso, res.GrantSELECT);
-                                        grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                        grant.AppendLine();
-                                    }
-                                    else
-                                    {
-                                        grant.AppendLine(res.PlantillaGrant);
-                                        grant.Replace(res.TagGrantUsuario, usuarioGrant);
-                                        grant.Replace(res.TagGrantPermiso, res.GrantSIUD);
-                                        grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                        grant.AppendLine();
-                                    }
-                                }
-                            }
-
-                            //Permisos execute
-                            if (tipo.Grant.Equals(res.TipoGrantExecute))
-                            {
-                                grant.AppendLine(res.PlantillaGrant);
-                                grant.Replace(res.TagGrantUsuario, "EJECUTA_TODOS_LOS_PROC");
-                                grant.Replace(res.TagGrantPermiso, res.GrantEXECUTE);
+                                grant.AppendLine(res.PlantillaSinonimo);
+                                grant.Replace(res.TagGrantUsuario, this.Model.Usuario.Text);
                                 grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
                                 grant.AppendLine();
                             }
-
-                            if (tipo.Grant.Equals(res.TipoGrantSIUD))
-                            {
-                                grant.AppendLine(res.PlantillaGrant);
-                                grant.Replace(res.TagGrantUsuario, "MODIFICA_TODAS_LAS_TABLAS");
-                                grant.Replace(res.TagGrantPermiso, res.GrantSIUD);
-                                grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                grant.AppendLine();
-                            }*/
-
-                            grant.AppendLine(res.PlantillaSinonimo);
-                            grant.Replace(res.TagGrantUsuario, this.Model.Usuario.Text);
-                            grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                            grant.AppendLine();
                         }
                     }
                 }
