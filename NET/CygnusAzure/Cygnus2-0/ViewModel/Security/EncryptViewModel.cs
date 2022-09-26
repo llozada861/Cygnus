@@ -18,7 +18,7 @@ namespace Cygnus2_0.ViewModel.Security
         private SelectListItem usuario;
         private string pass;
         private string bd;
-        private ObservableCollection<UsuarioModel> listaUsuarios;
+        private ObservableCollection<SelectListItem> listaUsuarios;
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
         private EncryptModel model;
@@ -32,7 +32,7 @@ namespace Cygnus2_0.ViewModel.Security
 
             model = new EncryptModel(handler, this);
 
-            ListaUsuarios = handler.ListaUsuarios;
+            ListaUsuarios = handler.pObtlistaUsuarios();
         }
         public SelectListItem Usuario
         {
@@ -49,7 +49,7 @@ namespace Cygnus2_0.ViewModel.Security
             get { return bd; }
             set { SetProperty(ref bd, value); }
         }
-        public ObservableCollection<UsuarioModel> ListaUsuarios
+        public ObservableCollection<SelectListItem> ListaUsuarios
         {
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }
@@ -57,7 +57,7 @@ namespace Cygnus2_0.ViewModel.Security
         public void OnClean(object commandParameter)
         {
             ListaUsuarios = null;
-            ListaUsuarios = handler.ListaUsuarios;
+            ListaUsuarios = handler.pObtlistaUsuarios();
             Pass = "";
             BD = "";
         }
