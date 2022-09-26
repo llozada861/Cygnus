@@ -73,9 +73,10 @@ namespace Cygnus2_0.General
             pCrearDirectorio(path, res.CarpetaObjetos);
 
             //Se instala Sonar
-            myFile = res.SonarZip;
-            pCreaArchivoBD(path, res.ZipZonar, myFile);
-            unZip(Path.Combine(path, res.ZipZonar), path);
+            //myFile = res.SonarZip;
+            //pCreaArchivoBD(path, res.ZipZonar, myFile);
+
+            unZip(Path.Combine(path, Path.Combine(Environment.CurrentDirectory, "Sonar\\sonar-scanner-cli-4.4.0.2170-windows.zip")), path);
             File.Delete(Path.Combine(path, res.ZipZonar));
 
             //archivo de configuración
