@@ -2142,16 +2142,6 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Byte[].
-        /// </summary>
-        public static byte[] Oracle_ManagedDataAccess {
-            get {
-                object obj = ResourceManager.GetObject("Oracle_ManagedDataAccess", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a OUT.
         /// </summary>
         public static string OUT {
@@ -2879,16 +2869,6 @@ namespace Cygnus2_0.Properties {
         public static string SonarProperties {
             get {
                 return ResourceManager.GetString("SonarProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Byte[].
-        /// </summary>
-        public static byte[] SonarZip {
-            get {
-                object obj = ResourceManager.GetObject("SonarZip", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         

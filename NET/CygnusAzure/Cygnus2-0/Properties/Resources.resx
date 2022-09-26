@@ -1178,9 +1178,6 @@ END;
   <data name="NombreLibOracle" xml:space="preserve">
     <value>Oracle_ManagedDataAccess.dll</value>
   </data>
-  <data name="Oracle_ManagedDataAccess" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Plantillas\Oracle.ManagedDataAccess.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="PlantillaInsMensaje" xml:space="preserve">
     <value>REM Archivo Generado Automáticamente
 REM Nombre      : insmensaje_EPM-CUZ-&lt;codigo&gt;.sql
@@ -1872,9 +1869,6 @@ sonar.branch.name=[rama]
 #sonar.sourceEncoding=UTF-8
 sonar.branch.target=desarrollo
 sonar.plsql.file.suffixes=sql,pkg</value>
-  </data>
-  <data name="SonarZip" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sonar-scanner-cli-4.4.0.2170-windows.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ZipZonar" xml:space="preserve">
     <value>sonarq.zip</value>

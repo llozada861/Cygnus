@@ -500,16 +500,7 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
-    <None Include="Libs\EntityFramework.SqlServer.dll" />
-    <None Include="Libs\EntityFramework.dll" />
-    <None Include="Libs\x64\SQLite.Interop.dll" />
-    <None Include="Libs\x86\SQLite.Interop.dll" />
-    <None Include="Libs\System.Data.SQLite.EF6.dll" />
-    <None Include="Libs\System.Data.SQLite.Linq.dll" />
     <Resource Include="img\LookupGlass.png" />
-    <None Include="Libs\git2-106a5f2.dll" />
-    <None Include="Libs\LibGit2Sharp.dll" />
-    <None Include="Libs\Updater.exe" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\01_crll_credmark.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\02_crll_logapli.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\03_crll_objetosbl.sql" />
@@ -532,13 +523,7 @@
     <None Include="BaseDatos\scriptCreaUsuario.sql" />
     <Content Include="BaseDatos\oracleInstall\p_DC_GeneraAudit.sql" />
     <Content Include="img\Fullname.png" />
-    <None Include="Libs\Newtonsoft.Json.dll" />
-    <None Include="Libs\FirstFloor.ModernUI.dll" />
-    <None Include="Libs\Cygnus.exe.config" />
-    <None Include="Libs\LibGit2Sharp.dll.config" />
-    <None Include="Libs\Cygnus.db" />
     <None Include="Resources\Image1.bmp" />
-    <None Include="Resources\sonar-scanner-cli-4.4.0.2170-windows.zip" />
     <Page Include="Assets\AutoComplete.Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -558,31 +543,6 @@
     <None Include="img\ayudaAzure.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Libs\Microsoft.IdentityModel.JsonWebTokens.dll" />
-    <None Include="Libs\Microsoft.IdentityModel.Logging.dll" />
-    <None Include="Libs\Microsoft.IdentityModel.Tokens.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Build2.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Common.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Core.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Dashboards.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.DistributedTask.Common.Contracts.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Policy.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.SourceControl.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Test.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.TestManagement.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Wiki.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.Work.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.WorkItemTracking.Process.WebApi.dll" />
-    <None Include="Libs\Microsoft.TeamFoundation.WorkItemTracking.WebApi.dll" />
-    <None Include="Libs\Microsoft.VisualStudio.Services.Common.dll" />
-    <None Include="Libs\Microsoft.VisualStudio.Services.TestManagement.TestPlanning.WebApi.dll" />
-    <None Include="Libs\Microsoft.VisualStudio.Services.TestResults.WebApi.dll" />
-    <None Include="Libs\Microsoft.VisualStudio.Services.WebApi.dll" />
-    <None Include="Libs\Notifications.Wpf.dll" />
-    <None Include="Libs\Oracle.ManagedDataAccess.dll" />
-    <None Include="Libs\System.Data.SQLite.dll" />
-    <None Include="Libs\System.IdentityModel.Tokens.Jwt.dll" />
-    <None Include="Libs\System.Net.Http.Formatting.dll" />
     <Content Include="i18N\es-CO.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -935,9 +895,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Plantillas\insepm_parametr.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Plantillas\Oracle.ManagedDataAccess.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
