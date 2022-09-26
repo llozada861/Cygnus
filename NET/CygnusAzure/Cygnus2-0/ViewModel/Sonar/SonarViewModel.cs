@@ -55,7 +55,13 @@ namespace Cygnus2_0.ViewModel.Sonar
                     return;
                 }
 
-                if (handler.RutaSonar == null)
+                if (string.IsNullOrEmpty(handler.RutaSonar))
+                {
+                    handler.MensajeError("Configure Sonar [Ajustes/Herramientas Gestión/Sonar]");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(handler.ProyectoSonar))
                 {
                     handler.MensajeError("Configure Sonar [Ajustes/Herramientas Gestión/Sonar]");
                     return;
@@ -161,7 +167,7 @@ namespace Cygnus2_0.ViewModel.Sonar
             List<string> salida = null;
             List<SelectListItem> archivosEvaluar = new List<SelectListItem>();
 
-            if (!string.IsNullOrEmpty(handler.RutaSonar))
+            if (!string.IsNullOrEmpty(handler.RutaSonar) && !string.IsNullOrEmpty(handler.ProyectoSonar))
             {
                 foreach (Archivo archivo in ListaArchivos)
                 {
@@ -174,7 +180,7 @@ namespace Cygnus2_0.ViewModel.Sonar
                     archivosEvaluar.Add(new SelectListItem { Text = rutaRel, Value = archivo.FileName });
                 }
 
-                salida = SonarQube.pEjecutarSonar(codigo, handler.RutaSonar, archivosEvaluar, repositorioGit.Ruta);
+                salida = SonarQube.pEjecutarSonar(codigo, handler.RutaSonar, handler.ProyectoSonar, archivosEvaluar, repositorioGit.Ruta);
             }
 
             return salida;

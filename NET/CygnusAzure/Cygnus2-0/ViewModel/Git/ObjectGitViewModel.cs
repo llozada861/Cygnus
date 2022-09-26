@@ -2,6 +2,7 @@
 using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Git;
+using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.Pages.Git;
@@ -294,7 +295,13 @@ namespace Cygnus2_0.ViewModel.Git
             if (archivosSonar.Count == 0)
                 return;
 
-            if(handler.RutaSonar == null)
+            if(string.IsNullOrEmpty(handler.RutaSonar))
+            {
+                handler.MensajeError("Configure Sonar [Ajustes/Herramientas Gestión/Sonar]");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(handler.ProyectoSonar))
             {
                 handler.MensajeError("Configure Sonar [Ajustes/Herramientas Gestión/Sonar]");
                 return;
@@ -397,9 +404,10 @@ namespace Cygnus2_0.ViewModel.Git
             RepoGit.ExecuteGitBash(handler.RepositorioVM.RutaGitBash+"\\"+res.GitBashExe,GitSeleccionado.Ruta);
         }
 
-        public void pArmarArbol(SelectListItem tipo, Archivo itemModif)
+        public void pArmarArbol(TipoObjetos tipo, Archivo itemModif)
         {
             Folder raiz;
+            string usuarioTipo;
 
             GitModel.ListaCarpetas.Clear();
 
@@ -408,25 +416,29 @@ namespace Cygnus2_0.ViewModel.Git
                 return;
             }
 
-            raiz  = new Folder { FolderLabel = GitSeleccionado.Descripcion, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
-
-            foreach (Archivo archivo in GitModel.ListaArchivos)
+            if (GitSeleccionado != null)
             {
-                if (tipo != null && itemModif != null && archivo.FileName.Equals(itemModif.FileName))
+                raiz = new Folder { FolderLabel = GitSeleccionado.Descripcion, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+
+                foreach (Archivo archivo in GitModel.ListaArchivos)
                 {
-                    archivo.Usuario = !string.IsNullOrEmpty(tipo.Usuario) ? tipo.Usuario : archivo.Usuario;
-                    archivo.NombreObjeto = !string.IsNullOrEmpty(tipo.Usuario) ? archivo.NombreSinExt.ToLower() : "";
+                    if (tipo != null && itemModif != null && archivo.FileName.Equals(itemModif.FileName))
+                    {
+                        usuarioTipo = handler.pObtUsuarioTipo(archivo.Tipo);
+                        archivo.Usuario = !string.IsNullOrEmpty(usuarioTipo) ? usuarioTipo : archivo.Usuario;
+                        archivo.NombreObjeto = !string.IsNullOrEmpty(usuarioTipo) ? archivo.NombreSinExt.ToLower() : "";
+                    }
+
+                    if (itemModif != null && archivo.FileName.Equals(itemModif.FileName))
+                    {
+                        archivo.NombreObjeto = itemModif.NombreObjeto;
+                    }
+
+                    pGeneraHijos(archivo, raiz);
                 }
 
-                if (itemModif != null && archivo.FileName.Equals(itemModif.FileName))
-                {
-                    archivo.NombreObjeto = itemModif.NombreObjeto;
-                }
-
-                pGeneraHijos(archivo, raiz);
+                GitModel.ListaCarpetas.Add(raiz);
             }
-
-            GitModel.ListaCarpetas.Add(raiz);
         }
         public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)
         {

@@ -33,7 +33,7 @@
         <RadioButton x:Name="rdbExiste" Content="Ya lo tengo" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RdbExiste_Checked" />
         <RadioButton x:Name="rdbNuevo" Content="Quiero Instalarlo" Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RdbNuevo_Checked" />
 
-        <GroupBox x:Name="grbDatosRequeridos" Header="Ruta Sonar" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="4">
+        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Sonar" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="8" Grid.RowSpan="4">
             <Grid Margin="10,0" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -49,10 +49,17 @@
 
                 <TextBox x:Name="txtRuta" 
                          TextWrapping="Wrap" VerticalContentAlignment="Center" 
-                         CharacterCasing="Upper" Grid.Column="0" Grid.Row="0"
+                         Grid.Column="0" Grid.Row="0"
                          Grid.ColumnSpan="3" 
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Ingrese la ruta"
+                         />
+                <TextBox x:Name="txtProyecto" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         Grid.Column="0" Grid.Row="1"
+                         Grid.ColumnSpan="3" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Ingrese el proyecto"
                          />
             </Grid>
         </GroupBox>
@@ -91,6 +98,13 @@
                          Grid.ColumnSpan="3" 
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Password Sonar" 
+                         />
+                <TextBox x:Name="txtProyecto2" 
+                         TextWrapping="Wrap" VerticalContentAlignment="Center" 
+                         Grid.Column="0" Grid.Row="4"
+                         Grid.ColumnSpan="3" 
+                         VerticalAlignment="Center"
+                         Style="{StaticResource placeHolder}" Tag="Ingrese el proyecto"
                          />
             </Grid>
         </GroupBox>

@@ -377,7 +377,7 @@ namespace Cygnus2_0
                     "INSERT INTO user_grants (codigo, user, company) VALUES ('5', 'OPENSIRIUS', '99')",
                     "INSERT INTO user_grants (codigo, user, company) VALUES ('6', 'EJECUTA_TODOS_LOS_PROC', '99')",
                     "INSERT INTO user_grants (codigo, user, company) VALUES ('7', 'MODIFICA_TODAS_LAS_TABLAS', '99')",
-                    "CREATE TABLE grants (	codigo	INTEGER PRIMARY KEY AUTOINCREMENT,	descripcion	TEXT)",                    
+                    "CREATE TABLE grants (	codigo	INTEGER PRIMARY KEY AUTOINCREMENT,	descripcion	TEXT)",
                     "INSERT INTO grants (codigo, descripcion) VALUES ('1', 'EXECUTE')",
                     "INSERT INTO grants (codigo, descripcion) VALUES ('2', 'SELECT')",
                     "INSERT INTO grants (codigo, descripcion) VALUES ('3', 'UPDATE')",
@@ -472,8 +472,15 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion("1.1.3.6");
             }
 
+            if (!SqliteDAO.pblValidaVersion("1.1.3.8") && !SqliteDAO.pEsNueva())
+            {
+                SqliteDAO.pCreaConfiguracion(res.KeyProyectoSonar, "Open.BaseDeDatos.Actualizacion");
+
+                SqliteDAO.pActualizaVersion("1.1.3.8");
+            }
+
             //ultima versión
-            if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
+                if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
                 //SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "99");
                 //handler.pRegeneraIndexListas();

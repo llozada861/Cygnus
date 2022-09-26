@@ -56,9 +56,17 @@ namespace Cygnus2_0.Pages.Settings.Sonar
                         return;
                     }
 
+                    if (string.IsNullOrEmpty(txtProyecto.Text))
+                    {
+                        handler.MensajeError("Ingrese el proyecto de sonar");
+                        return;
+                    }
+
                     handler.RutaSonar = txtRuta.Text;
+                    handler.ProyectoSonar = txtProyecto.Text;
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaSonar, handler.RutaSonar);
-                    handler.MensajeOk("Ya puedes analizar el código al momento de compilar de los objetos.");
+                    SqliteDAO.pCreaConfiguracion(res.KeyProyectoSonar, handler.ProyectoSonar);
+                    handler.MensajeOk("Ya se puede analizar el código al momento de compilar de los objetos.");
                 }
 
                 if (rdbNuevo.IsChecked == true)
@@ -82,14 +90,17 @@ namespace Cygnus2_0.Pages.Settings.Sonar
                     }
 
                     handler.RutaSonar = txtRutaInstall.Text;
+                    handler.ProyectoSonar = txtProyecto2.Text;
 
                     RepoGit.pCreaDirectorios(handler.RutaSonar);
 
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaSonar, handler.RutaSonar);
+                    SqliteDAO.pCreaConfiguracion(res.KeyProyectoSonar, handler.ProyectoSonar);
                     SonarQube.pInstalaSonar(handler.RutaSonar, txtUser.Text, txtPass.Text);
-                    handler.MensajeOk("Se instala con éxito. Ya puedes analizar el código al momento de compilar de los objetos.");
+                    handler.MensajeOk("Se instala con éxito. Ya se puede analizar el código al momento de compilar de los objetos.");
                     txtUser.Text = "";
                     txtPass.Text = "";
+                    txtProyecto2.Text = "";
                 }
             }
             catch (Exception ex)
@@ -107,6 +118,11 @@ namespace Cygnus2_0.Pages.Settings.Sonar
             if (!string.IsNullOrEmpty(handler.RutaSonar))
             {
                 txtRuta.Text = handler.RutaSonar;
+            }
+
+            if (!string.IsNullOrEmpty(handler.ProyectoSonar))
+            {
+                txtProyecto.Text = handler.ProyectoSonar;
             }
         }
     }

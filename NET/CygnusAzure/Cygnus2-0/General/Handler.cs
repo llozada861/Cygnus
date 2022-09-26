@@ -266,6 +266,7 @@ namespace Cygnus2_0.General
         public string PathArchivos { set; get; }
         public string CarpetaPadre { set; get; }
         public string RutaSonar { set; get; }
+        public string ProyectoSonar { set; get; }
         public string RutaGitDatos { set; get; }
         public string RutaGitObjetos { set; get; }
         public string EsLlamadoDesdeUpdater { set; get; }
@@ -437,6 +438,19 @@ namespace Cygnus2_0.General
                     }
                 }
             }
+        }
+
+        internal string pObtUsuarioTipo(int? tipo)
+        {
+            string usuario = null;
+            RutaObjetos ruta = ListaRutas.FirstOrDefault(x => x.TipoObjeto == tipo);
+
+            if(ruta != null)
+            {
+                usuario = ruta.Usuario;
+            }
+
+            return usuario;
         }
 
         internal void pGeneraArchivoHtml(ObservableCollection<Archivo> listaArchivosCargados, ObservableCollection<SelectListItem> listaObs)

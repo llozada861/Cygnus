@@ -52,7 +52,7 @@
                                       PatternChanged="AuListaRamasLB_PatternChanged"
                            Style="{StaticResource AutoCompleteComboBox}"
                           Delay="500" Tag="Seleccione Línea Base" SelectionChanged="ComboBox_SelectionChanged" 
-                                          KeyboardNavigation.TabIndex="0"/>
+                                          KeyboardNavigation.TabIndex="1"/>
 
                 <TextBox x:Name="Comment" 
                          Text="{Binding Path=GitModel.Comentario}" 
@@ -133,8 +133,8 @@
                         </DataGridTemplateColumn>
 
                         <DataGridComboBoxColumn Width="100"
-                             DisplayMemberPath="Text"
-                                                SelectedValuePath="Text"
+                             DisplayMemberPath="Descripcion"
+                                                SelectedValuePath="Codigo"
                                                 Header="Tipo"
                                                 SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 SelectedItemBinding="{Binding SelectItemTipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -153,8 +153,8 @@
                         </DataGridComboBoxColumn>
 
                         <DataGridComboBoxColumn Width="120"
-                             DisplayMemberPath="Text"
-                                                SelectedValuePath="Text"
+                             DisplayMemberPath="Usuariobd"
+                                                SelectedValuePath="Usuariobd"
                                                 Header="Usuario"
                                                 SelectedValueBinding="{Binding Usuario, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 >
