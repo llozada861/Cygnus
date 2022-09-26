@@ -410,6 +410,11 @@ namespace Cygnus2_0.ViewModel.Index
                 handler.RutaSonar = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyRutaSonar)).Value;
             }
 
+            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyProyectoSonar)))
+            {
+                handler.ProyectoSonar = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyProyectoSonar)).Value;
+            }
+
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.SQLPLUS)))
             {
                 handler.ConfGeneralView.Model.RutaSqlplus = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.SQLPLUS)).Value;

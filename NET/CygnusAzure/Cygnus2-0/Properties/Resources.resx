@@ -2232,4 +2232,7 @@ END;
   <data name="TagUsuario" xml:space="preserve">
     <value>[USUARIO]</value>
   </data>
+  <data name="KeyProyectoSonar" xml:space="preserve">
+    <value>PROYECTO_SONAR</value>
+  </data>
 </root>

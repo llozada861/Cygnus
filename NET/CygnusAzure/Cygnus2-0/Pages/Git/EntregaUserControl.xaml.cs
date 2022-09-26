@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.ViewModel.Git;
 using FirstFloor.ModernUI.Windows;
@@ -61,7 +62,7 @@ namespace Cygnus2_0.Pages.Git
         }
         private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(objectViewModel.GitSeleccionado != null)
+            if (objectViewModel.GitSeleccionado != null)
             {
                 objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
             }
@@ -70,11 +71,11 @@ namespace Cygnus2_0.Pages.Git
         {
             string[] DropPath;
 
-            if (objectViewModel.GitModel.RamaLBSeleccionada == null)
+            /*if (objectViewModel.GitModel.RamaLBSeleccionada == null)
             {
                 handler.MensajeError("Seleccione una rama de línea base.");
                 return;
-            }
+            }*/
 
             try
             {
@@ -98,7 +99,7 @@ namespace Cygnus2_0.Pages.Git
         private void TipoSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            SelectListItem tipo = (SelectListItem)comboBox.SelectedItem;
+            TipoObjetos tipo = (TipoObjetos)comboBox.SelectedItem;
 
             if (tipo != null)
             {

@@ -1382,6 +1382,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PROYECTO_SONAR.
+        /// </summary>
+        public static string KeyProyectoSonar {
+            get {
+                return ResourceManager.GetString("KeyProyectoSonar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a RUTAGITBASH.
         /// </summary>
         public static string KeyRutaGitBash {
