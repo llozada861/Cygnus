@@ -20,7 +20,7 @@ namespace Cygnus2_0
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            pCargarDlls();
+            //pCargarDlls();
 
             //Create a custom principal with an anonymous identity at startup
             CustomPrincipal customPrincipal = new CustomPrincipal();
