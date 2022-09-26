@@ -49,12 +49,12 @@
                     <TreeViewItem Header="Configuración" Uid="2"/>
                     <TreeViewItem Header="Palabras reservadas" Uid="3"/>
                     <TreeViewItem Header="Tipos de objetos" Uid="4"/>
-                    <TreeViewItem Header="Encabezado objetos" Uid="5"/>
                     <TreeViewItem Header="Rutas" Uid="6"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Base de Datos" IsExpanded="True" Uid="30">
-                    <TreeViewItem Header="Grants" Uid="32"/>
-                    <TreeViewItem Header="Usuarios" Uid="33"/>
+                    <!--<TreeViewItem Header="Permisos" Uid="104"/>-->
+                    <TreeViewItem Header="Roles o Usuarios" Uid="32"/>
+                    <TreeViewItem Header="Esquemas" Uid="33"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Herramientas Gestión" IsExpanded="True" Uid="104">
                     <TreeViewItem Header="Azure" Uid="100"/>

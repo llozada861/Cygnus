@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.User;
 using Cygnus2_0.ViewModel.Aplica;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,6 @@ namespace Cygnus2_0.Model.Aplica
         private ObservableCollection<Archivo> listaArchivosGenerados;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
-        private ObservableCollection<Archivo> listaArchivosNoOrden;
 
         public GenerateAplicaModel(Handler handler)
         {

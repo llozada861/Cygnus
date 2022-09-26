@@ -46,7 +46,15 @@ namespace Cygnus2_0.ViewModel.Repository
         public ObservableCollection<RamaRepositorio> ListaRamaGit
         {
             get { return listaRamaGit; }
-            set { SetProperty(ref listaRamaGit, value); }
+            set 
+            { 
+                SetProperty(ref listaRamaGit, value);
+
+                foreach (RamaRepositorio objeto in listaRamaGit)
+                {
+                    objeto.ListaSINO = new ObservableCollection<SelectListItem>(handler.ListaSiNO);
+                }
+            }
         }
         public Repositorio RepoSeleccionado { get; set; }
         public RamaRepositorio RamaSeleccionada { get; set; }
@@ -112,7 +120,7 @@ namespace Cygnus2_0.ViewModel.Repository
 
                         if (string.IsNullOrEmpty(rama.LBase))
                         {
-                            handler.MensajeError("Identifique la rama sobre la cual se va a generar la línea base");
+                            handler.MensajeError("Identifique si la rama es Línea Base");
                             continue;
                         }
 
@@ -156,7 +164,7 @@ namespace Cygnus2_0.ViewModel.Repository
                     RamaRepositorio rama = new RamaRepositorio();
                     rama.RepositorioId = RepoSeleccionado.Codigo;
                     rama.Estandar = "feature/[HU]_[USUARIO]";
-                    rama.LBase = "N";
+                    rama.ListaSINO = new ObservableCollection<SelectListItem>(handler.ListaSiNO);
                     ListaRamaGit.Add(rama);
                 }
             }

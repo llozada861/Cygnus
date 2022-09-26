@@ -193,15 +193,15 @@ namespace Cygnus2_0.ViewModel.Git
                 {
                     archivoRojo = archivo.FileName;
 
-                    if (archivo.Tipo == null && string.IsNullOrEmpty(archivo.Tipo))
+                    if (archivo.Tipo == null && archivo.Tipo == null)
                     {
                         archivosNoRepo = true;
                         break;
                     }
 
-                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) && !archivo.Tipo.ToLower().Equals(res.TipoAplica.ToLower()))
+                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && archivo.Tipo != Int32.Parse(res.TipoOtros) && archivo.Tipo != Int32.Parse(res.TipoAplica))
                     {
-                        if (string.IsNullOrEmpty(archivo.Usuario) && !archivo.Tipo.ToLower().Equals(res.TipoOtros.ToLower()))
+                        if (string.IsNullOrEmpty(archivo.Usuario) && archivo.Tipo != Int32.Parse(res.TipoOtros))
                         {
                             archivosNoRepo = true;
                             break;
@@ -279,9 +279,11 @@ namespace Cygnus2_0.ViewModel.Git
 
             foreach (Archivo item in GitModel.ListaArchivos)
             {
-                if( item.SelectItemTipo != null && res.Extensiones.IndexOf(item.Extension.ToLower()) > -1 && !String.IsNullOrEmpty(item.SelectItemTipo.Path) && !string.IsNullOrEmpty(item.NombreObjeto))
+                string path = handler.ListaRutas.FirstOrDefault(x => x.TipoObjeto == item.Tipo && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).Ruta;
+
+                if ( item.SelectItemTipo != null && res.Extensiones.IndexOf(item.Extension.ToLower()) > -1 && !String.IsNullOrEmpty(path) && !string.IsNullOrEmpty(item.NombreObjeto))
                 {
-                    item.Ruta = GitSeleccionado.Ruta + "\\" + item.SelectItemTipo.Path;
+                    item.Ruta = GitSeleccionado.Ruta + "\\" + path;
 
                     item.Ruta = item.Ruta.Replace("[usuario]", item.Usuario != null ? item.Usuario : "");
                     item.Ruta = item.Ruta.Replace(res.TagHTML_nombre,item.NombreObjeto);
@@ -434,10 +436,12 @@ namespace Cygnus2_0.ViewModel.Git
             Folder carpetaHija = new Folder();
             string path;
 
-            if (string.IsNullOrEmpty(archivo.SelectItemTipo.Path))
+            path = handler.ListaRutas.FirstOrDefault(x => x.TipoObjeto == archivo.Tipo && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).Ruta;
+
+            if (string.IsNullOrEmpty(path))
                 return;
 
-            path = archivo.SelectItemTipo.Path.Replace("[nombre]", archivo.NombreObjeto);
+            path = path.Replace("[nombre]", archivo.NombreObjeto);
             path = path.Replace("[usuario]", archivo.Usuario != null ? archivo.Usuario : "");
             path = path.Replace("[hu]", GitModel.HU);
 
@@ -502,10 +506,10 @@ namespace Cygnus2_0.ViewModel.Git
                     {
                         if (this.GitModel.ListaArchivos.ToList().Exists(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)))
                         {
-                            string tipoNuevo = this.GitModel.ListaArchivos.ToList().Find(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)).Tipo;
+                            int? tipoNuevo = this.GitModel.ListaArchivos.ToList().Find(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)).Tipo;
 
                             if(this.GitModel.ListaArchivos.ToList().Exists(x => x.FileName.Equals(archivo.FileName)))
-                                this.GitModel.ListaArchivos.ToList().Find(x => x.FileName.Equals(archivo.FileName)).Tipo = string.IsNullOrEmpty(tipoNuevo)?archivo.Tipo:tipoNuevo;
+                                this.GitModel.ListaArchivos.ToList().Find(x => x.FileName.Equals(archivo.FileName)).Tipo = tipoNuevo == null?archivo.Tipo:tipoNuevo;
                         }
                     }
                 }

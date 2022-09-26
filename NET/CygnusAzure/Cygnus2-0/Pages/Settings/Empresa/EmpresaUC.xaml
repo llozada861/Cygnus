@@ -36,32 +36,39 @@
                          Grid.Column="0" Grid.Row="0" 
                         HorizontalAlignment="Center" Click="btnAdd_Click" />
 
-        <Button Name="btnElim" Content="Eliminar" VerticalAlignment="Center" 
-                         Grid.Column="1" Grid.Row="0" 
-                        HorizontalAlignment="Center" Click="btnElim_Click" />
-
         <Button Name="btnGuar" Content="Guardar" VerticalAlignment="Center"
                          Grid.Column="2" Grid.Row="0" 
                         HorizontalAlignment="Center" Click="btnGuar_Click" Visibility="Hidden"/>
 
-        <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
+        <TabControl x:Name="TabGeneral" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" Background="{StaticResource WindowBackgroundBrush}">
+            <TabItem Header="Empresas">
+                <Grid Margin="10,0" >
+                    <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
                   ItemsSource="{Binding Path=ListaEmpresas}"
                   SelectedItem="{Binding Path=EmpresaSeleccionada}"
-                         CanUserAddRows="False" CanUserDeleteRows="False" SelectionChanged="dgData_SelectionChanged"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
                   GridLinesVisibility="All"
                         ScrollViewer.HorizontalScrollBarVisibility="Auto"
                             ScrollViewer.VerticalScrollBarVisibility="Auto"                          
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
-                   Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Codigo}" Header="ID"/>
-                <DataGridTextColumn Binding="{Binding Descripcion}" Header="Descripción"/>
-                <DataGridTextColumn Binding="{Binding Azure}" Header="Azure" />
-                <DataGridTextColumn Binding="{Binding Git}" Header="Git" />
-                <DataGridTextColumn Binding="{Binding Sonar}" Header="Sonar"/>
-                <DataGridTextColumn Binding="{Binding Defecto}" Header="Defecto?"/>
-            </DataGrid.Columns>
-        </DataGrid>
+                    SelectionChanged="dgData_SelectionChanged">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Click="btnElim_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Codigo}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Descripción"/>
+                            <DataGridTextColumn Binding="{Binding Azure}" Header="Azure" />
+                            <DataGridTextColumn Binding="{Binding Git}" Header="Git" />
+                            <DataGridTextColumn Binding="{Binding Sonar}" Header="Sonar"/>
+                            <DataGridTextColumn Binding="{Binding Defecto}" Header="Defecto?"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

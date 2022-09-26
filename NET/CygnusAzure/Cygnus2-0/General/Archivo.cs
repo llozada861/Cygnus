@@ -1,5 +1,7 @@
 ﻿using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Objects;
+using Cygnus2_0.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +16,7 @@ namespace Cygnus2_0.General
     {
         public int Index { get; set; }
         public string NombreSinExt { set; get; }
-        public string Tipo { get; set; }
+        public int? Tipo { get; set; }
         public string RutaConArchivo { get; set; }
         public string Extension { get; set; }
         public string Ruta { get; set; }
@@ -29,10 +31,10 @@ namespace Cygnus2_0.General
         public string OrdenCambio { set; get; }
         public List<StringBuilder> DocumentacionSinDepurar { set; get; }
         public List<ModificacionModel> Modificaciones { set; get; }
-        public List<DocumentacionModel> ListDocumentacionDepurada { set; get; }
-        public ObservableCollection<SelectListItem> ListaTipos { set; get; }
-        public ObservableCollection<SelectListItem> ListaUsuarios { set; get; }
-        public SelectListItem SelectItemTipo { set; get; }
+        public List<DocumentacionHTMLModel> ListDocumentacionDepurada { set; get; }
+        public ObservableCollection<TipoObjetos> ListaTipos { set; get; }
+        public ObservableCollection<UsuarioModel> ListaUsuarios { set; get; }
+        public TipoObjetos SelectItemTipo { set; get; }
         public bool ObjetoSql { get; set; }
         public int CantidadSlahs { get; set; }
         public string Observacion { get; set; }

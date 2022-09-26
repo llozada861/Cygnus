@@ -10,7 +10,7 @@ namespace Cygnus2_0.General
     {
         public string Text { set; get; }
         public string Value { set; get; }
-        public int CantidadSlash { set; get; }
+        public int? CantidadSlash { set; get; }
         public int Prioridad { set; get; }
         public string Grant { set; get; }
         public string Observacion { set; get; }
@@ -28,5 +28,6 @@ namespace Cygnus2_0.General
         public string Bd { set; get; }
         public string Pass { set; get; }
         public string Etiqueta { set; get; }
+        public int? Empresa { set; get; }
     }
 }

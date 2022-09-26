@@ -102,7 +102,7 @@ namespace Cygnus2_0.Pages.General
         private bool IsKeyEvent = false;
         private bool _clearOnEmpty = true;
         private int _delay = DEFAULT_DELAY;
-        private const int DEFAULT_DELAY = 800; // 1 seconds delay
+        private const int DEFAULT_DELAY = 700; // 1 seconds delay
         #endregion
 
         #region Properties

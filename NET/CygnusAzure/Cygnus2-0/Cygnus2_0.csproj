@@ -223,7 +223,7 @@
     <Compile Include="General\Archivo.cs" />
     <Compile Include="General\ConexionOracle.cs" />
     <Compile Include="General\Documentacion\DocumentacionHTML.cs" />
-    <Compile Include="General\Documentacion\DocumentacionModel.cs" />
+    <Compile Include="General\Documentacion\DocumentacionHTMLModel.cs" />
     <Compile Include="General\Documentacion\ModificacionModel.cs" />
     <Compile Include="General\Documentacion\ParametrosModel.cs" />
     <Compile Include="General\Documentacion\RetornoModel.cs" />
@@ -252,16 +252,23 @@
     <Compile Include="Model\Audit\TbAuditoriaModel.cs" />
     <Compile Include="Model\Azure\AzureModel.cs" />
     <Compile Include="Model\Compila\CompilaModel.cs" />
+    <Compile Include="Model\Conexion\ConnModel.cs" />
     <Compile Include="Model\Data\MessageModel.cs" />
     <Compile Include="Model\Data\ParameterModel.cs" />
     <Compile Include="Model\Documentation\HtmlModel.cs" />
     <Compile Include="Model\Empresa\EmpresaModel.cs" />
     <Compile Include="Model\Estandar\EstandarModel.cs" />
     <Compile Include="Model\Git\ObjectGitModel.cs" />
+    <Compile Include="Model\Objects\HeadModel.cs" />
+    <Compile Include="Model\Html\PlantillasHTMLModel.cs" />
     <Compile Include="Model\Index\IndexModel.cs" />
     <Compile Include="Model\Objects\BlockModel.cs" />
     <Compile Include="Model\Objects\DesblockModel.cs" />
+    <Compile Include="Model\Objects\PermisosObjeto.cs" />
+    <Compile Include="Model\Objects\RutaObjetos.cs" />
+    <Compile Include="Model\Objects\TipoObjetos.cs" />
     <Compile Include="Model\Package\pkgModel.cs" />
+    <Compile Include="Model\Permisos\PermisosModel.cs" />
     <Compile Include="Model\Refresh\RefreshModel.cs" />
     <Compile Include="Model\Repository\RamaRepositorio.cs" />
     <Compile Include="Model\Repository\Repositorio.cs" />
@@ -270,9 +277,13 @@
     <Compile Include="Model\Settings\ConexionModel.cs" />
     <Compile Include="Model\Settings\ConfGeneralModel.cs" />
     <Compile Include="Model\Settings\Configuracion.cs" />
+    <Compile Include="Model\Settings\PalabrasClaves.cs" />
     <Compile Include="Model\Settings\UpdateModel.cs" />
     <Compile Include="Model\Threats\ThreatsModel.cs" />
     <Compile Include="Model\Time\TimeModel.cs" />
+    <Compile Include="Model\User\GrantsModel.cs" />
+    <Compile Include="Model\User\UsuarioModel.cs" />
+    <Compile Include="Model\Version\VersionBD.cs" />
     <Compile Include="Pages\Aplica\UCGenerateAplica.xaml.cs">
       <DependentUpon>UCGenerateAplica.xaml</DependentUpon>
     </Compile>
@@ -379,14 +390,8 @@
     <Compile Include="Pages\Settings\Empresa\EmpresaUC.xaml.cs">
       <DependentUpon>EmpresaUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Settings\Empresa\EmpresaUserControl.xaml.cs">
-      <DependentUpon>EmpresaUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Settings\Estandar\CRUDEstandarUserControl.xaml.cs">
       <DependentUpon>CRUDEstandarUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Settings\General\HeadUserControl.xaml.cs">
-      <DependentUpon>HeadUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\General\ObjectTypeUserControl.xaml.cs">
       <DependentUpon>ObjectTypeUserControl.xaml</DependentUpon>
@@ -480,6 +485,7 @@
     <Compile Include="ViewModel\Index\IndexViewModel.cs" />
     <Compile Include="ViewModel\Objects\BlockViewModel.cs" />
     <Compile Include="ViewModel\Objects\DesblockViewModel.cs" />
+    <Compile Include="ViewModel\Objects\TipoObjetosVM.cs" />
     <Compile Include="ViewModel\Pkg\FirstLevelViewModel.cs" />
     <Compile Include="ViewModel\Refresh\RefreshViewModel.cs" />
     <Compile Include="ViewModel\Repository\RepositorioViewModel.cs" />
@@ -729,15 +735,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Settings\Empresa\EmpresaUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Settings\Estandar\CRUDEstandarUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Settings\General\HeadUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,44 +11,8 @@
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
-        <!--Tab genérico-->
-        <mui:ModernTab Name="UserTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsUser, Converter={StaticResource booleanToVisibilityConverter}}">
-            <mui:ModernTab.Links >
-                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
-                <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
-                <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
-                <mui:Link DisplayName="Git" Source="/Pages/Git/AdminGit.xaml" />
-                <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
-                <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
-                <mui:Link DisplayName="Data" Source="/Pages/Data/AdminData.xaml" />
-                <mui:Link DisplayName="Docu HTML" Source="/Pages/Documentation/AdminDoc.xaml" />
-                <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
-                <mui:Link DisplayName="Auditoria" Source="/Pages/Audit/TbAuditoria.xaml" />
-                <mui:Link DisplayName="Lineamientos PLSQL" Source="/Pages/Estandar/EstandarUserControl.xaml" />
-                <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
-        <!--Tab Especialista-->
-        <mui:ModernTab Name="EspecialistTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}">
-            <mui:ModernTab.Links >
-                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
-                <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
-                <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
-                <mui:Link DisplayName="Git" Source="/Pages/Git/AdminGit.xaml" />
-                <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
-                <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
-                <mui:Link DisplayName="Data" Source="/Pages/Data/AdminData.xaml" />
-                <mui:Link DisplayName="Docu HTML" Source="/Pages/Documentation/AdminDoc.xaml" />
-                <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
-                <mui:Link DisplayName="Auditoria" Source="/Pages/Audit/TbAuditoria.xaml" />
-                <mui:Link DisplayName="Lineamientos PLSQL" Source="/Pages/Estandar/EstandarUserControl.xaml" />
-                <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
-                <mui:Link DisplayName="Seguridad" Source="/Pages/Security/AdminUser.xaml" />
-                <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
         <!--Tab Admin-->
-        <mui:ModernTab Name="AdminTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsAdmin, Converter={StaticResource booleanToVisibilityConverter}}">
+        <mui:ModernTab Name="AdminTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" >
             <mui:ModernTab.Links >
                 <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
                 <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
@@ -70,3 +34,39 @@
         <controls:NotificationArea x:Name="WindowAreaUp" Position="TopLeft" MaxItems="1" />
     </Grid>
 </UserControl>
+<!--Tab genérico
+        <mui:ModernTab Name="UserTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsUser, Converter={StaticResource booleanToVisibilityConverter}}">
+            <mui:ModernTab.Links >
+                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
+                <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
+                <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
+                <mui:Link DisplayName="Git" Source="/Pages/Git/AdminGit.xaml" />
+                <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
+                <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
+                <mui:Link DisplayName="Data" Source="/Pages/Data/AdminData.xaml" />
+                <mui:Link DisplayName="Docu HTML" Source="/Pages/Documentation/AdminDoc.xaml" />
+                <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
+                <mui:Link DisplayName="Auditoria" Source="/Pages/Audit/TbAuditoria.xaml" />
+                <mui:Link DisplayName="Lineamientos PLSQL" Source="/Pages/Estandar/EstandarUserControl.xaml" />
+                <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
+        Tab Especialista
+        <mui:ModernTab Name="EspecialistTab" Layout="List" SelectedSource="/Pages/Time/AdminTime.xaml" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}">
+            <mui:ModernTab.Links >
+                <mui:Link DisplayName="Tiempos" Source="/Pages/Time/AdminTime.xaml" />
+                <mui:Link DisplayName="Aplica" Source="/Pages/Aplica/UCGenerateAplica.xaml" />
+                <mui:Link DisplayName="Compilación" Source="/Pages/Compila/UCCompila.xaml" />
+                <mui:Link DisplayName="Git" Source="/Pages/Git/AdminGit.xaml" />
+                <mui:Link DisplayName="Sonar" Source="/Pages/Sonar/UCSonar.xaml" />
+                <mui:Link DisplayName="Paquetes" Source="/Pages/Pkg/UCPackageFirstLevel.xaml" />
+                <mui:Link DisplayName="Data" Source="/Pages/Data/AdminData.xaml" />
+                <mui:Link DisplayName="Docu HTML" Source="/Pages/Documentation/AdminDoc.xaml" />
+                <mui:Link DisplayName="Hilos" Source="/Pages/Threats/ThreatsProcess.xaml" />
+                <mui:Link DisplayName="Auditoria" Source="/Pages/Audit/TbAuditoria.xaml" />
+                <mui:Link DisplayName="Lineamientos PLSQL" Source="/Pages/Estandar/EstandarUserControl.xaml" />
+                <mui:Link DisplayName="Objetos" Source="/Pages/Objects/AdminObjects.xaml" />
+                <mui:Link DisplayName="Seguridad" Source="/Pages/Security/AdminUser.xaml" />
+                <mui:Link DisplayName="Refrescamiento" Source="/Pages/Refresh/RefreshView.xaml" />
+            </mui:ModernTab.Links>
+        </mui:ModernTab>-->

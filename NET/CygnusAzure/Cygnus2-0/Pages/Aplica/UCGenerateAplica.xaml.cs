@@ -55,6 +55,9 @@ namespace Cygnus2_0.Pages.Aplica
 
             try
             {
+                generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
+                generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
+
                 if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
@@ -183,7 +186,7 @@ namespace Cygnus2_0.Pages.Aplica
                         row.Background = Colobk;
                     }
 
-                    if (item.Tipo != null && (item.Tipo.ToLower().Equals(res.TipoOtros.ToLower()) || item.Tipo.ToLower().Equals(res.TipoAplica.ToLower())))
+                    if (item.Tipo != null && item.Tipo == Int32.Parse(res.TipoOtros) || item.Tipo == Int32.Parse(res.TipoAplica))
                     {
                         row.Background = Colobk;
                     }
@@ -194,6 +197,8 @@ namespace Cygnus2_0.Pages.Aplica
         {
             try
             {
+                generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
+                generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
                 generateAplicaViewModel.pExaminar(null);
                 dataGridArchivosCargados.Items.Refresh();
             }

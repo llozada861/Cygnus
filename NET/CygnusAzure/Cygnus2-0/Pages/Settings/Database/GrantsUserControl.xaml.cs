@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using Cygnus2_0.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,60 +31,74 @@ namespace Cygnus2_0.Pages.Settings.Database
             DataContext = handler;
         }
 
-        private void dataGridDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void pCargarLista()
         {
-            if (dataGridDatos.SelectedItem == null)
-                return;
-
-            txtEliminar.Text = ((SelectListItem)dataGridDatos.SelectedItem).Text;
+            handler.ListaUsGrants.Clear();
+            SqliteDAO.pListaUsGrants(handler);
         }
 
-        private void tbnGuardar_Click(object sender, RoutedEventArgs e)
+        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string palabra = txtUser.Text.Trim().ToUpper();
-
-            if (String.IsNullOrEmpty(palabra))
-            {
-                handler.MensajeError("Debe ingresar un usuario.");
-                return;
-            }
-
-            try
-            {
-                SqliteDAO.pGuardarUsuario(palabra,handler);
-                pCargarLista();
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeOk(ex.Message);
-            }
+            btnGuar.Visibility = Visibility.Visible;
         }
 
-        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            string sbPalabra = txtEliminar.Text.Trim();
+            handler.ListaUsGrants.Add(new SelectListItem() { Empresa = handler.ConfGeneralView.Model.Empresa.Codigo });
+        }
 
+        private void btnGuar_Click(object sender, RoutedEventArgs e)
+        {
             try
             {
-                if (!String.IsNullOrEmpty(sbPalabra))
+                foreach (SelectListItem item in handler.ListaUsGrants)
                 {
-                    if (handler.MensajeConfirmacion("Está seguro que desea borrar el usuario [" + sbPalabra + "]") == "Y")
+                    if (String.IsNullOrEmpty(item.Text))
                     {
-                        SqliteDAO.pEliminaUsuario(sbPalabra,handler);
-                        pCargarLista();
-                        txtEliminar.Text = "";
+                        handler.MensajeError("Debe ingresar un usuario o rol.");
+                        return;
+                    }
+
+                    var objeto = new GrantsModel();
+
+                    if (!string.IsNullOrEmpty(item.Value))
+                    {
+                        objeto = new GrantsModel() { Codigo = Int32.Parse(item.Value), Usuario = item.Text, Empresa = item.Empresa };
+                        SqliteDAO.pActualizaObjeto(objeto);
+                    }
+                    else
+                    {
+                        objeto = new GrantsModel() { Usuario = item.Text, Empresa = item.Empresa };
+                        SqliteDAO.pGuardarUsuarioGrant(objeto);
                     }
                 }
             }
             catch (Exception ex)
             {
-                handler.MensajeOk(ex.Message);
+                handler.MensajeError(ex.Message);
             }
-        }
-        public void pCargarLista()
-        {
-            handler.ListaUsGrants.Clear();
+
             SqliteDAO.pListaUsGrants(handler);
+            btnGuar.Visibility = Visibility.Hidden;
+        }
+
+        private void btnElim_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (handler.Generico != null && handler.MensajeConfirmacion("Seguro que desea eliminar el usuario o rol [" + handler.Generico.Text + "] ?") == "Y")
+                {
+                    var objeto = new GrantsModel() { Codigo = Int32.Parse(handler.Generico.Value), Usuario = handler.Generico.Text };
+                    SqliteDAO.pEliminaObjeto(objeto);
+                    handler.ListaUsGrants.Remove(handler.Generico);
+                }
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
+
+            btnGuar.Visibility = Visibility.Hidden;
         }
     }
 }

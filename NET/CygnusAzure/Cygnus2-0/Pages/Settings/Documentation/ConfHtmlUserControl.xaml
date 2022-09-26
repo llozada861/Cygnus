@@ -31,7 +31,63 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <GroupBox x:Name="groupBox1" Header="Configuración" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="10">
+
+        <Button Name="btnAdd" Content="Agregar" VerticalAlignment="Center" 
+                         Grid.Column="0" Grid.Row="0" 
+                        HorizontalAlignment="Center" Click="btnAdd_Click" />
+
+        <Button Name="btnGuar" Content="Guardar" VerticalAlignment="Center"
+                         Grid.Column="2" Grid.Row="0" 
+                        HorizontalAlignment="Center" Click="btnGuar_Click" Visibility="Hidden"/>
+
+        <TabControl x:Name="TabPrincipal" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" Background="{StaticResource WindowBackgroundBrush}" >
+            <TabItem Header="Usuarios base de datos">
+                <Grid Margin="10,0" >
+                    <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=ListaDocHtml,Mode=TwoWay}"
+                  SelectedItem="{Binding Path=DocHTMLSeleccionado}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                    SelectionChanged="dgData_SelectionChanged"
+                              >
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Click="btnElim_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding TagIni}" Header="Tag Inicio" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding TagFin}" Header="Tag Fin" MinWidth="200"/>
+                            <DataGridTextColumn Binding="{Binding Atributos}" Header="Atributos" MinWidth="200"/>
+                            <DataGridComboBoxColumn Width="200"
+                                            DisplayMemberPath="Text"
+                                            SelectedValuePath="Value"
+                                            Header="Tipo"
+                                            SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipoHTml}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipoHTml}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+                            <DataGridTextColumn Binding="{Binding Fin}" Header="Tag Fin Encabezado" MinWidth="200"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!--<GroupBox x:Name="groupBox1" Header="Configuración" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="10">
             <DataGrid x:Name="dataGridDatos"
                       ItemsSource="{Binding Path=ListaDocHtml}"
                       AutoGenerateColumns="False"
@@ -115,6 +171,6 @@
                 <TextBox Name="txtEliminar" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" IsEnabled="False"/>
                 <Button Name="btnEliminar" Content="Eliminar" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Click="btnEliminar_Click"/>
             </Grid>
-        </GroupBox>
+        </GroupBox>-->
     </Grid>
 </UserControl>

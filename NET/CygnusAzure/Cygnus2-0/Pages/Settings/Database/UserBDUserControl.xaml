@@ -31,54 +31,45 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <GroupBox x:Name="groupBox1" Header="Usuarios de base de datos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="10">
-            <DataGrid x:Name="dataGridDatos"
-                      ItemsSource="{Binding Path=ListaUsuarios}"
-                      AutoGenerateColumns="False"
-                    SelectionMode="Single"
-                    CanUserDeleteRows="True"
-                    CanUserAddRows="False"
-                    CanUserReorderColumns="False"
-                    CanUserSortColumns="False"
-                      SelectionChanged="dataGridDatos_SelectionChanged" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Usuario"
-                  Binding="{Binding Path=Text}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+        <Button Name="btnAdd" Content="Agregar" VerticalAlignment="Center" 
+                         Grid.Column="0" Grid.Row="0" 
+                        HorizontalAlignment="Center" Click="btnAdd_Click" />
 
-        <GroupBox Header="Adicionar" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Label Content="Usuario" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                <TextBox Name="txtUser" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" />
-                <Button Name="tbnGuardar" Content="Guardar" VerticalAlignment="Top" Click="tbnGuardar_Click" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Grid.ColumnSpan="3"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Header="Eliminar" Grid.Column="6" Grid.Row="5" Grid.ColumnSpan="4" Grid.RowSpan="5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+        <Button Name="btnGuar" Content="Guardar" VerticalAlignment="Center"
+                         Grid.Column="2" Grid.Row="0" 
+                        HorizontalAlignment="Center" Click="btnGuar_Click" Visibility="Hidden"/>
 
-                <TextBox Name="txtEliminar" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" IsEnabled="False"/>
-                <Button Name="btnEliminar" Content="Eliminar" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Click="btnEliminar_Click"/>
-            </Grid>
-        </GroupBox>
+        <TabControl x:Name="TabPrincipal" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" Background="{StaticResource WindowBackgroundBrush}" >
+            <TabItem Header="Usuarios base de datos">
+                <Grid Margin="10,0" >
+                    <DataGrid x:Name="dgData" Margin="0" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=ListaUsuarios,Mode=TwoWay}"
+                  SelectedItem="{Binding Path=UsuarioSeleccionado}"
+                         CanUserAddRows="False" CanUserDeleteRows="False" 
+                  GridLinesVisibility="All"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"                          
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                    SelectionChanged="dgData_SelectionChanged"
+                              >
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Eliminar" Click="btnElim_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Usuariobd}" Header="Usuario o Rol" MinWidth="200">
+                                <DataGridTextColumn.EditingElementStyle>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="CharacterCasing" Value="Upper"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.EditingElementStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

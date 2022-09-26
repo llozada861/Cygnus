@@ -35,6 +35,9 @@ using System.Windows.Input;
 using Cygnus2_0.Model.Azure;
 using Cygnus2_0.ViewModel.Azure;
 using Cygnus2_0.ViewModel.Repository;
+using Cygnus2_0.Model.User;
+using Cygnus2_0.Model.Objects;
+using Cygnus2_0.Model.Permisos;
 
 namespace Cygnus2_0.General
 {
@@ -53,6 +56,10 @@ namespace Cygnus2_0.General
         private bool roleEspecialist;
         private bool roleUser;
         private string email;
+
+        ObservableCollection<TipoObjetos> listaTiposObjetos;
+        ObservableCollection<UsuarioModel> listaUsuarios;
+        ObservableCollection<DocumentacionHTML> listaDocHtml;
 
         //Conexion
         private ConexionOracle conectionOracle;
@@ -73,33 +80,6 @@ namespace Cygnus2_0.General
             this.HtmlMetodoParam = new StringBuilder();
             this.HtmlMetodoReturn = new StringBuilder();
             this.HtmlScript = new StringBuilder();
-
-            #region ViewModels
-            //Se instancian los view models generales           
-            view = new ConexionViewModel(this);
-            confGeneralViewModel = new ConfGeneralViewModel(this);
-            repositorioVM = new RepositorioViewModel(this);
-            pRegeneraIndexListas();
-            #endregion ViewModels
-
-            #region Appareance
-            settings = new AppearanceViewModel();
-            System.Uri uri = new Uri(this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyThemeSource)).Value, UriKind.Relative);
-            System.Windows.Media.Color color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyThemeColor)).Value);
-            Tema = this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyDisplayName)).Value;
-            settings.SetThemeAndColor
-            (
-                Tema,
-                uri,
-                color,
-                this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyFontSize)).Value
-            );
-            #endregion Appareance
-
-            #region Conexion
-            conectionOracle = new ConexionOracle(view);
-            dao = new MarkDAO(this);
-            #endregion Conexion
 
             #region Listas
             this.ListaTipoArchivos = new List<SelectListItem>()
@@ -169,6 +149,33 @@ namespace Cygnus2_0.General
                     }
             };
             #endregion Listas
+
+            #region ViewModels
+            //Se instancian los view models generales           
+            view = new ConexionViewModel(this);
+            confGeneralViewModel = new ConfGeneralViewModel(this);
+            repositorioVM = new RepositorioViewModel(this);
+            pRegeneraIndexListas();
+            #endregion ViewModels
+
+            #region Appareance
+            settings = new AppearanceViewModel();
+            System.Uri uri = new Uri(this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyThemeSource)).Value, UriKind.Relative);
+            System.Windows.Media.Color color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyThemeColor)).Value);
+            Tema = this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyDisplayName)).Value;
+            settings.SetThemeAndColor
+            (
+                Tema,
+                uri,
+                color,
+                this.ListaConfiguracion.Find(x => x.Text.Equals(res.keyFontSize)).Value
+            );
+            #endregion Appareance
+
+            #region Conexion
+            conectionOracle = new ConexionOracle(view);
+            dao = new MarkDAO(this);
+            #endregion Conexion
         }
 
         internal void ModificaLlaveRegistro()
@@ -264,20 +271,48 @@ namespace Cygnus2_0.General
         public string EsLlamadoDesdeUpdater { set; get; }
         public List<SelectListItem> ListaChequeo { set; get; }
         public List<SelectListItem> ListaTipoArchivos { get; set; }
-        public ObservableCollection<SelectListItem> ListaEncabezadoObjetos { get; set; }
-        public ObservableCollection<SelectListItem> ListaTiposObjetos { get; set; }
+        public ObservableCollection<HeadModel> ListaEncabezadoObjetos { get; set; }
+        public ObservableCollection<TipoObjetos> ListaTiposObjetos
+        {
+            get { return listaTiposObjetos; }
+            set { SetProperty(ref listaTiposObjetos, value); }
+        }
         public ObservableCollection<SelectListItem> ListaUsGrants { get; set; }
+        public ObservableCollection<PermisosModel> ListaPermisos { get; set; }
         public List<SelectListItem> ListaTiposRepo { get; set; }
         public List<SelectListItem> ListaTiposRQ { get; set; }
-        public ObservableCollection<SelectListItem> ListaPalabrasReservadas { get; set; }
-        public ObservableCollection<SelectListItem> ListaRutas { get; set; }
-        public ObservableCollection<SelectListItem> ListaUsuarios { get; set; }
+        public ObservableCollection<PalabrasClaves> ListaPalabrasReservadas { get; set; }
+        public PalabrasClaves PalabraSeleccionada { get; set; }
+        public ObservableCollection<RutaObjetos> ListaRutas { get; set; }
+        public ObservableCollection<PermisosObjeto> ListaPermisosObjeto { get; set; }
+        public ObservableCollection<UsuarioModel> ListaUsuarios
+        {
+            get { return listaUsuarios; }
+            set { SetProperty(ref listaUsuarios, value); }
+        }
+        public UsuarioModel UsuarioSeleccionado { get; set; }
         public List<SelectListItem> ListaConfiguracion { get; set; }
         public List<SelectListItem> ListaSiNO { get; set; }
         public List<SelectListItem> ListaTipoFin { get; set; }
         public List<SelectListItem> ListaComboGrantTO { get; set; }
         public List<SelectListItem> ListaTipoHTml { get; set; }
-        public ObservableCollection<DocumentacionHTML> ListaDocHtml { get; set; }
+        public ObservableCollection<DocumentacionHTML> ListaDocHtml
+        {
+            get
+            {
+                return listaDocHtml;
+            }
+            set
+            {
+                SetProperty(ref listaDocHtml, value);
+
+                foreach (DocumentacionHTML objeto in listaDocHtml)
+                {
+                    objeto.ListaTipoHTml = new ObservableCollection<SelectListItem>(this.ListaTipoHTml);
+                }
+            }
+        }
+        public DocumentacionHTML DocHTMLSeleccionado { get; set; }
         public ObservableCollection<SelectListItem> ListaHTML { get; set; }
         public SelectListItem Generico { get; set; }
         public SelectListItem Generico2 { get; set; }
@@ -349,44 +384,44 @@ namespace Cygnus2_0.General
                             continue;
                         }
 
-                        if (!string.IsNullOrEmpty(archivo.Tipo) && archivo.Tipo.Equals(res.TipoObjetoTrigger.ToLower()) && !existeOn)
+                        if (archivo.Tipo != null && archivo.Tipo == Int32.Parse(res.TipoObjetoTrigger) && !existeOn)
                         {
                             archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace, out existeOn);
                             break;                            
                         }
                         else
-                            foreach (SelectListItem prefijo in this.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
+                            foreach (HeadModel prefijo in this.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
                             {
                                 if (archivo.FileName.ToLower().IndexOf(res.NombreAplica) > nuMenosUno || archivo.FileName.ToLower().IndexOf(res.NombreArchivoGrant) > nuMenosUno)
                                 {
                                     archivo.NombreObjeto = "";
-                                    archivo.Tipo = res.TipoAplica;
+                                    archivo.Tipo = Int32.Parse(res.TipoAplica);
                                     break;
                                 }
-                                else if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
+                                else if (sbLineSpace.ToLower().IndexOf(prefijo.Descripcion.ToLower()) > nuMenosUno)
                                 {
-                                    archivo.Tipo = prefijo.Value;
-                                    archivo.SelectItemTipo = ListaTiposObjetos.ToList().Find(x => x.Text.Equals(archivo.Tipo));
+                                    archivo.Tipo = prefijo.Tipo;
+                                    archivo.SelectItemTipo = ListaTiposObjetos.ToList().Find(x => x.Codigo == archivo.Tipo);
                                     archivo.NombreObjeto = pObtenerNombreObjeto(sbLineSpace, out existeOn);
                                     archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
-                                    archivo.InicioArchivo = prefijo.Text.ToLower();
+                                    archivo.InicioArchivo = prefijo.Descripcion.ToLower();
 
-                                    if(llamado.Equals(res.No_aplica) && archivo.SelectItemTipo.Grant.Equals(res.No))
+                                    if(llamado.Equals(res.No_aplica))
                                     {
                                         archivo.NombreObjeto = res.No_aplica;
                                     }
 
-                                    if (archivo.Tipo.ToLower().Equals(res.Script.ToLower()) && llamado.Equals(res.GIT))
+                                    if (archivo.Tipo == Int32.Parse(res.Script) && llamado.Equals(res.GIT))
                                     {
                                         archivo.NombreObjeto = "";
-                                        archivo.Tipo = "";
+                                        archivo.Tipo = null;
                                     }
 
                                     break;
                                 }
                             }
 
-                        if (string.IsNullOrEmpty(archivo.Tipo))
+                        if (archivo.Tipo == null)
                         {
                             sbLine = streamReader.ReadLine();
                         }
@@ -411,8 +446,8 @@ namespace Cygnus2_0.General
                 //Se instancian las listas del archivo
                 archivo.DocumentacionSinDepurar = new List<StringBuilder>();
                 archivo.Modificaciones = new List<ModificacionModel>();
-                archivo.ListDocumentacionDepurada = new List<DocumentacionModel>();
-                this.ObtenerTipoArchivo(archivo, res.No_aplica);
+                archivo.ListDocumentacionDepurada = new List<DocumentacionHTMLModel>();
+                //this.ObtenerTipoArchivo(archivo, res.No_aplica);
 
                 if (this.pDepuraDocumentacion(archivo) && listaObs != null)
                 {
@@ -437,9 +472,9 @@ namespace Cygnus2_0.General
                 blPalabraReservada = false;
                 sbPalabra = split[i].Trim().ToLower();
 
-                foreach (SelectListItem item in this.ListaPalabrasReservadas)
+                foreach (PalabrasClaves item in this.ListaPalabrasReservadas)
                 {
-                    if (sbPalabra.Equals(item.Text))
+                    if (sbPalabra.Equals(item.Palabra))
                     {
                         blPalabraReservada = true;
                     }
@@ -473,9 +508,9 @@ namespace Cygnus2_0.General
 
             if (splitCualificado.Length > 1)
             {
-                foreach (SelectListItem usuario in this.ListaUsuarios)
+                foreach (UsuarioModel usuario in this.ListaUsuarios)
                 {
-                    if (splitCualificado[0].ToLower().IndexOf(usuario.Text.ToLower()) > -1)
+                    if (splitCualificado[0].ToLower().IndexOf(usuario.Usuariobd.ToLower()) > -1)
                     {
                         throw new Exception("No se pueden trabajar, ni entregar objetos cualificados. Por favor ajustar. [" + sbPalabra + "]");
                     }
@@ -554,11 +589,6 @@ namespace Cygnus2_0.General
             }
         }
 
-        public void pGuardaLogCompilacion(Archivo archivo, string objetosInvalidos, string tiempo)
-        {
-            DAO.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, objetosInvalidos, tiempo, this.ConnView.Model.UsuarioCompila);
-        }
-
         public void pGeneraArchivosPermisosArchivo(Archivo archivo, string usuario)
         {
             StringBuilder grant = new StringBuilder();
@@ -567,49 +597,29 @@ namespace Cygnus2_0.General
 
             if (this.ListaUsGrants.Count > 0)
             {
-                foreach (SelectListItem tipo in this.ListaTiposObjetos)
+                foreach (TipoObjetos tipo in this.ListaTiposObjetos)
                 {
                     //Si el tipo aplica para grant
-                    if (archivo.Tipo.ToLower().Equals(tipo.Text.ToLower()) && !tipo.Grant.ToLower().Equals(res.No.ToLower()))
+                    if (archivo.Tipo == tipo.Codigo)
                     {
-                        foreach (SelectListItem item in this.ListaUsGrants)
+                        foreach(PermisosObjeto permisoObj in this.ListaPermisosObjeto)
                         {
-                            usuarioGrant = item.Text;
-                            grant = new StringBuilder();
-
-                            if (usuarioGrant.ToUpper().Equals(usuario.ToUpper()))
+                            if(tipo.Codigo == permisoObj.TipoObjeto)
                             {
-                                continue;
-                            }
+                                PermisosModel permiso = this.ListaPermisos.Where(x => x.Codigo == permisoObj.Permiso).First();
+                                SelectListItem usGrant = this.ListaUsGrants.Where(x => x.Value.Equals(permisoObj.Usuario)).First();
 
-                            if (tipo.Grant.ToLower().Equals(res.TipoGrantSelect.ToLower()))
-                            {
-                                grant.AppendLine(res.PlantillaGrantNP);
-                                grant.Replace(res.TagGrantUsuario, usuarioGrant);
-                                grant.Replace(res.TagGrantPermiso, res.GrantSELECT);
-                                grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                sql.Add(grant.ToString());
-                            }
-
-                            //Permisos execute
-                            if (tipo.Grant.ToLower().Equals(res.TipoGrantExecute.ToLower()))
-                            {
-                                grant.AppendLine(res.PlantillaGrantNP);
-                                grant.Replace(res.TagGrantUsuario, usuarioGrant);
-                                grant.Replace(res.TagGrantPermiso, res.GrantEXECUTE);
-                                grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                sql.Add(grant.ToString());
-                            }
-
-                            if (tipo.Grant.ToLower().Equals(res.TipoGrantSIUD.ToLower()))
-                            {
-                                grant.AppendLine(res.PlantillaGrantNP);
-                                grant.Replace(res.TagGrantUsuario, usuarioGrant);
-                                grant.Replace(res.TagGrantPermiso, res.GrantSIUD);
-                                grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                sql.Add(grant.ToString());
+                                if (!usuario.Equals(usGrant.Text))
+                                {
+                                    grant.AppendLine(res.PlantillaGrantNP);
+                                    grant.Replace(res.TagGrantUsuario, usGrant.Text);
+                                    grant.Replace(res.TagGrantPermiso, permiso.Descripcion);
+                                    grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                                    sql.Add(grant.ToString());
+                                }
                             }
                         }
+
                         grant = new StringBuilder();
                         grant.AppendLine(res.PlantillaSinonimoNP);
                         grant.Replace(res.TagGrantUsuario, usuario);
@@ -842,7 +852,7 @@ namespace Cygnus2_0.General
                             //filtrar por principales
                             foreach (DocumentacionHTML html in this.ListaDocHtml.Where(x => x.Tipo.Equals(res.Principal)))
                             {
-                                if (sbLineSpace.ToLower().IndexOf(html.TagInicio.ToLower()) > nuMenosUno)
+                                if (sbLineSpace.ToLower().IndexOf(html.TagIni.ToLower()) > nuMenosUno)
                                 {
                                     sbTagFin = html.TagFin;
                                     documentacion = new StringBuilder();
@@ -894,7 +904,7 @@ namespace Cygnus2_0.General
             XmlNodeList parametros;
 
             XmlDocument xmlDoc = new XmlDocument();
-            DocumentacionModel doc = new DocumentacionModel();
+            DocumentacionHTMLModel doc = new DocumentacionHTMLModel();
             doc.Modificaciones = new List<ModificacionModel>();
             doc.Parametros = new List<ParametrosModel>();
             doc.Retorno = new RetornoModel();
@@ -906,7 +916,7 @@ namespace Cygnus2_0.General
                     xmlDoc.Load(reader);
                     metodo = xmlDoc.DocumentElement.SelectSingleNode(String.Format(NodoPrincipal, "unidad")).InnerText;
 
-                    if (metodo.ToLower().Trim().Equals(archivo.NombreObjeto.Trim().ToLower()) && archivo.Tipo.ToLower().Equals(res.TipoObjetoPaquete.ToLower()))
+                    if (metodo.ToLower().Trim().Equals(archivo.NombreObjeto.Trim().ToLower()) && archivo.Tipo == Int32.Parse(res.TipoObjetoPaquete))
                     {
                         node = xmlDoc.SelectSingleNode(String.Format(NodoPrincipal, "package"));
                         doc.Fuente = node.SelectSingleNode(String.Format(AtributoNodo, "fuente")).InnerText;
@@ -1009,7 +1019,7 @@ namespace Cygnus2_0.General
 
             body.Append(res.HTMLEncabezado);
 
-            foreach (DocumentacionModel docu in archivo.ListDocumentacionDepurada)
+            foreach (DocumentacionHTMLModel docu in archivo.ListDocumentacionDepurada)
             {
                 if (docu.Unidad.Trim().ToLower().Equals(sbNombreMetodo.Trim().ToLower()))
                 {
@@ -1075,7 +1085,7 @@ namespace Cygnus2_0.General
             return false;
         }
 
-        public void pGeneraMetodoHTML(StringBuilder cadena, DocumentacionModel modificacion, string tipo)
+        public void pGeneraMetodoHTML(StringBuilder cadena, DocumentacionHTMLModel modificacion, string tipo)
         {
             if (tipo.ToLower().Equals(res.Text_Paquete.ToLower()))
             {
@@ -1098,7 +1108,7 @@ namespace Cygnus2_0.General
                 cadena.Replace(res.TagHtml_descMetodo, modificacion.Descripcion);
             }
         }
-        public void pGeneraHistorialHTML(StringBuilder cadena, DocumentacionModel docu)
+        public void pGeneraHistorialHTML(StringBuilder cadena, DocumentacionHTMLModel docu)
         {
             foreach (ModificacionModel modificacion in docu.Modificaciones)
             {
@@ -1109,7 +1119,7 @@ namespace Cygnus2_0.General
                 cadena.Replace(res.TagHtml_descripcionModi, modificacion.Descripcion);
             }
         }
-        public void pGeneraParametrosHTML(StringBuilder cadena, DocumentacionModel docu)
+        public void pGeneraParametrosHTML(StringBuilder cadena, DocumentacionHTMLModel docu)
         {
             StringBuilder Parametros = new StringBuilder();
             Boolean blParametros = false;
@@ -1136,7 +1146,7 @@ namespace Cygnus2_0.General
                 }
             }
         }
-        public void pGeneraRetornosHTML(StringBuilder cadena, DocumentacionModel docu)
+        public void pGeneraRetornosHTML(StringBuilder cadena, DocumentacionHTMLModel docu)
         {
             StringBuilder Retornos = new StringBuilder();
             Boolean blRetornos = false;
@@ -1269,7 +1279,7 @@ namespace Cygnus2_0.General
                     archivo.Ruta = System.IO.Path.GetDirectoryName(dropfilepath);
                     archivo.Extension = System.IO.Path.GetExtension(dropfilepath);
 
-                    if(llamado.Equals(res.TipoAplica))
+                    if(llamado == res.TipoAplica)
                         if (archivo.Extension.ToLower().Equals(res.ExtensionHtml) || archivo.Extension.ToLower().Equals(res.ExtensionLog))
                             continue;
 
@@ -1282,34 +1292,36 @@ namespace Cygnus2_0.General
                         archivo.NombreObjeto = archivo.NombreSinExt;
 
                     archivo.CarpetaPadre = pObtCarpetaPadre(archivo.RutaConArchivo);
+
                     this.ObtenerTipoArchivo(archivo, llamado);
+
                     archivo.BloquesCodigo = new List<string>();
 
-                    if (llamado.Equals(res.TipoAplica))
+                    if (llamado == res.TipoAplica)
                     {
-                        if (archivo.Tipo != null && archivo.Tipo.Equals(res.TipoAplica))
+                        if (archivo.Tipo != null && archivo.Tipo == Int32.Parse(res.TipoAplica))
                             continue;
 
                         if(archivo.Tipo == null)
                             archivo.NombreObjeto = "";
                     }
 
-                    if (archivo.ListaUsuarios.ToList().Exists(x => x.Text.ToUpper().Equals(archivo.CarpetaPadre.Trim().ToUpper())))
+                    if (archivo.ListaUsuarios.ToList().Exists(x => x.Usuariobd.ToUpper().Equals(archivo.CarpetaPadre.Trim().ToUpper())))
                     {
                         archivo.Usuario = archivo.CarpetaPadre.Trim().ToUpper();
                     }
 
-                    if (string.IsNullOrEmpty(archivo.Tipo))
+                    if (archivo.Tipo == null)
                     {
                         if (archivo.Extension.Equals(res.ExtensionHtml))
                         {
-                            archivo.Tipo = res.TipoObjetoPaquete.ToLower();
+                            archivo.Tipo = Int32.Parse(res.TipoObjetoPaquete);
                             archivo.NombreObjeto = archivo.NombreSinExt;
                         }
 
                         if (archivo.Extension.Equals(res.ExtensionExcel) || archivo.Extension.Equals(res.ExtensionExcelX) || archivo.Extension.Equals(res.ExtensionWord) || archivo.Extension.Equals(res.ExtensionWordX) || archivo.Extension.Equals(res.ExtensionXLSM))
                         {
-                            archivo.Tipo = res.TipoOtros.ToLower();
+                            archivo.Tipo = Int32.Parse(res.TipoOtros);
                             archivo.NombreObjeto = "-";
                         }
                     }
@@ -1341,6 +1353,18 @@ namespace Cygnus2_0.General
         public void pRegeneraIndexListas()
         {
             indexViewModel = new IndexViewModel(this);
+        }
+
+        public ObservableCollection<SelectListItem> pObtlistaUsuarios()
+        {
+            ObservableCollection<SelectListItem> lista = new ObservableCollection<SelectListItem>();
+
+            foreach (UsuarioModel objeto in this.ListaUsuarios)
+            {
+                lista.Add(new SelectListItem() { Text = objeto.Usuariobd, Value = objeto.Usuariobd });
+            }
+
+            return lista;
         }
     }
 }

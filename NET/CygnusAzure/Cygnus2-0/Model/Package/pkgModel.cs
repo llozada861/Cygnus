@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

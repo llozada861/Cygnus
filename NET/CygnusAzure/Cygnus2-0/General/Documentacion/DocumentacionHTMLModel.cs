@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cygnus2_0.General.Documentacion
 {
-    public class DocumentacionModel
+    public class DocumentacionHTMLModel
     {
         public string Fuente { get; set; }
         public string Unidad { get; set; }

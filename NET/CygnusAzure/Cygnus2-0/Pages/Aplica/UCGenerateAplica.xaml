@@ -156,8 +156,8 @@
                       Binding="{Binding Path=FileName}" />
 
                         <DataGridComboBoxColumn Width="100" 
-                             DisplayMemberPath="Text" 
-                                                SelectedValuePath="Text"
+                             DisplayMemberPath="Descripcion" 
+                                                SelectedValuePath="Codigo"
                                                 Header="Tipo"
                                                 SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 >

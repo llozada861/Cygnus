@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
 using Cygnus2_0.Pages.General;
+using Cygnus2_0.ViewModel.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,127 +26,120 @@ namespace Cygnus2_0.Pages.Settings.General
     public partial class ObjectTypeUserControl : UserControl
     {
         private Handler handler;
+        private TipoObjetosVM viewModel;
         public ObjectTypeUserControl()
         {
             InitializeComponent();
             handler = ((MainWindow)Application.Current.MainWindow).Handler;
-            DataContext = handler;
-            txtCantidad.Text = "0";
+            viewModel = new TipoObjetosVM(handler);
+            DataContext = viewModel;
         }
 
-        private void dataGridDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TabPrincipal_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (dataGridDatos.SelectedItem == null)
-                return;
-
-            txtEliminar.Text = ((SelectListItem)dataGridDatos.SelectedItem).Text;
+            viewModel.TabPrincipal = true;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = false;
         }
 
-        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string objeto = txtObject.Text.Trim().ToLower(); ;
-            string slash = handler.Generico.Value;
-            string cantidad = txtCantidad.Text;
-            string prioridad = txtPriodad.Text;
-            string permiso = handler.Generico2.Value;
-
-            if (String.IsNullOrEmpty(objeto))
-            {
-                handler.MensajeError("Debe ingresar un tipo de objeto.");
-                return;
+            if (viewModel.PrincipalSeleccionado != null) 
+            { 
+                viewModel.ListaRutas = new System.Collections.ObjectModel.ObservableCollection<Model.Objects.RutaObjetos>(handler.ListaRutas.Where(x => x.TipoObjeto == viewModel.PrincipalSeleccionado.Codigo));
+                viewModel.ListaEncabezadoObjetos = new System.Collections.ObjectModel.ObservableCollection<Model.Objects.HeadModel>(handler.ListaEncabezadoObjetos.Where(x => x.Tipo == viewModel.PrincipalSeleccionado.Codigo));
+                viewModel.ListaPermisosObjeto = new System.Collections.ObjectModel.ObservableCollection<Model.Objects.PermisosObjeto>(handler.ListaPermisosObjeto.Where(x=>x.TipoObjeto == viewModel.PrincipalSeleccionado.Codigo && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo));
             }
-
-            if (String.IsNullOrEmpty(slash))
-            {
-                handler.MensajeError("Debe definir si el objeto lleva slash al final.");
-                return;
-            }
-
-            if (String.IsNullOrEmpty(cantidad) && slash.Equals(res.Si))
-            {
-                handler.MensajeError("Debe ingresar una cantidad.");
-                return;
-            }
-            else if(slash.Equals(res.Si))
-            {
-                try
-                {
-                    if (Convert.ToInt32(cantidad) == 0)
-                    {
-                        handler.MensajeError("La cantidad debe ser mayor que cero.");
-                        return;
-                    }
-                }
-                catch
-                {
-                    handler.MensajeError("La cantidad debe ser numérica.");
-                    return;
-                }
-            }
-
-            if (String.IsNullOrEmpty(prioridad))
-            {
-                handler.MensajeError("Debe ingresar una prioridad.");
-                return;
-            }
-
-            try
-            {
-                int prioridad_ = Convert.ToInt32(prioridad);
-            }
-            catch
-            {
-                handler.MensajeError("La prioridad debe ser numérica.");
-                return;
-            }
-
-            if (String.IsNullOrEmpty(permiso))
-            {
-                handler.MensajeError("Debe ingresar un permiso para el objeto.");
-                return;
-            }
-
-            try
-            {
-                SqliteDAO.pGuardarTipoObjeto(objeto, slash, cantidad, prioridad, permiso);
-                pCargarLista();
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeOk(ex.Message);
-            }
+            viewModel.TabPrincipal = true;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = false;
         }
 
-        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        private void dgDatahijo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string sbPalabra = txtEliminar.Text.Trim();
-
-            try
-            {
-                if (!String.IsNullOrEmpty(sbPalabra))
-                {
-                    if (handler.MensajeConfirmacion("Está seguro que desea borrar el tipo de objeto [" + sbPalabra + "]") == "Y")
-                    {
-                        SqliteDAO.pEliminaTipoObjeto(sbPalabra);
-                        pCargarLista();
-                        txtEliminar.Text = "";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeOk(ex.Message);
-            }
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = true;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = false;
+        }
+        private void dgDataHijo2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = true;
+            viewModel.TabHijo3 = false;
+        }
+        private void TabPrincipal_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            viewModel.TabPrincipal = true;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = false;
         }
 
-        public void pCargarLista()
+        private void Tabhijo_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            handler.ListaTiposObjetos.Clear();
-            SqliteDAO.pListaTiposObjetos(handler);
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = true;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = false;
         }
-        protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+
+        private void TabItemHijo_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            args.DataSource = handler.ListaComboGrantTO.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = true;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = false;
+        }
+
+        private void TabHijo2_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = true;
+            viewModel.TabHijo3 = false;
+        }
+        private void TabHijo_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = true;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = false;
+        }
+
+        private void TabHijo2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = true;
+            viewModel.TabHijo3 = false;
+        }
+
+        private void TabItemHijo3_MouseUp_(object sender, MouseButtonEventArgs e)
+        {
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = true;
+        }
+
+        private void TabHijo3_MouseLeftButtonDown_(object sender, MouseButtonEventArgs e)
+        {
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = true;
+        }
+
+        private void dgDatahijo3_SelectionChanged_(object sender, SelectionChangedEventArgs e)
+        {
+            viewModel.TabPrincipal = false;
+            viewModel.TabHijo = false;
+            viewModel.TabHijo2 = false;
+            viewModel.TabHijo3 = true;
         }
     }
 }

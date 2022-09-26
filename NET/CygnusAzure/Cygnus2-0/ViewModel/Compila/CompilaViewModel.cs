@@ -3,6 +3,7 @@ using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Compila;
 using Cygnus2_0.Model.Git;
+using Cygnus2_0.Model.Objects;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -41,7 +42,7 @@ namespace Cygnus2_0.ViewModel.Compila
 
             this.Model.ListaObservaciones = new ObservableCollection<SelectListItem>();
             this.Model.ListaArchivosCargados = new ObservableCollection<Archivo>();
-            this.Model.ListaUsuarios = handler.ListaUsuarios;
+            this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
 
             try
             {
@@ -74,7 +75,7 @@ namespace Cygnus2_0.ViewModel.Compila
                 this.Model.ArchivosCompilados = pObtCantObjsInvalidos();
                 this.Model.ArchivosDescompilados = "0";
                 this.Model.ListaUsuarios = null;
-                this.Model.ListaUsuarios = handler.ListaUsuarios;
+                this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
                 this.Model.EstadoConn = "1";
                 this.Model.ListaHU = null;
                 this.Model.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
@@ -192,28 +193,28 @@ namespace Cygnus2_0.ViewModel.Compila
 
                         if (sbLineSpace.StartsWith(res.Arroa))
                         {
-                            archivo.Tipo = res.TipoAplica;
+                            archivo.Tipo = Int32.Parse(res.TipoAplica);
                             archivo.Observacion = res.No_aplica;
                             break;
                         }
 
                         archivo.TipoAplicacion = res.SQLPLUS;
 
-                        foreach (SelectListItem prefijo in handler.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
+                        foreach (HeadModel prefijo in handler.ListaEncabezadoObjetos.OrderBy(x => x.Prioridad))
                         {
-                            if (sbLineSpace.ToLower().IndexOf(prefijo.Text.ToLower()) > nuMenosUno)
+                            if (sbLineSpace.ToLower().IndexOf(prefijo.Descripcion.ToLower()) > nuMenosUno)
                             {
-                                archivo.Tipo = prefijo.Value;
-                                archivo.SelectItemTipo = prefijo;
+                                archivo.Tipo = prefijo.Tipo;
+                                archivo.SelectItemTipo = handler.ListaTiposObjetos.FirstOrDefault(x=>x.Codigo == prefijo.Tipo);
                                 archivo.NombreObjeto = handler.pObtenerNombreObjeto(sbLineSpace, out existeOn);
                                 archivo.FinArchivo = prefijo.Fin.Equals(res.PuntoYComa) ? ";" : prefijo.Fin;
                                 archivo.TipoAplicacion = archivo.FinArchivo.Equals(res.END) ? res.SQL : res.SQLPLUS;
-                                archivo.InicioArchivo = prefijo.Text.ToLower();
+                                archivo.InicioArchivo = prefijo.Descripcion.ToLower();
                                 break;
                             }
                         }
 
-                        if (string.IsNullOrEmpty(archivo.Tipo))
+                        if (archivo.Tipo == null)
                         {
                             sbLine = streamReader.ReadLine();
                         }
@@ -226,7 +227,7 @@ namespace Cygnus2_0.ViewModel.Compila
             }
 
             //Sino se encuentra el tipo dentro del archivo
-            if (string.IsNullOrEmpty(archivo.Tipo))
+            if (archivo.Tipo == null)
             {
                 if (string.IsNullOrEmpty(archivo.NombreObjeto))
                 {
@@ -281,10 +282,6 @@ namespace Cygnus2_0.ViewModel.Compila
 
             this.Model.ArchivosCompilados = handler.DAO.pObtCantObjsInvalidos();
 
-            //Se guarda el estado de los objetos compilados antes de la ejecución
-            //dao.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, stObjetosInvalidosAntes, res.Antes, handler.DatosConexion.UsuarioCompila);
-            handler.pGuardaLogCompilacion(archivo, this.Model.ArchivosCompilados, res.Antes);
-
             for (int i = archivo.BloquesCodigo.Count - 1; i >= 0; i--)
             {
                 //Console.WriteLine(archivo.BloquesCodigo.ElementAt(i));
@@ -293,8 +290,6 @@ namespace Cygnus2_0.ViewModel.Compila
 
             this.Model.ArchivosDescompilados = handler.DAO.pObtCantObjsInvalidos();
 
-            //dao.pGuardaLogCompilacion(archivo, Environment.MachineName, Environment.UserName, stObjetosInvalidosDespues, res.Despues, handler.DatosConexion.UsuarioCompila);
-            handler.pGuardaLogCompilacion(archivo, this.Model.ArchivosDescompilados, res.Despues);
             pObtieneErroresAplicacion(archivo);
         }
 
@@ -327,8 +322,6 @@ namespace Cygnus2_0.ViewModel.Compila
                         //Valida que solo se aplique en un esquema
                         handler.DAO.pValidaObjEsquema(archivo, this.Model.Usuario.Text);
                     }
-
-                    handler.pGuardaLogCompilacion(archivo, this.Model.ArchivosCompilados, res.Antes);
                 }
 
                 handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)).ToList(),rutaLog, handler.ConnView.Model.UsuarioCompila);
@@ -342,7 +335,6 @@ namespace Cygnus2_0.ViewModel.Compila
                 {
                     handler.pGeneraArchivosPermisosArchivo(archivo, this.Model.Usuario.Text);
                     pObtieneErroresAplicacion(archivo);
-                    handler.pGuardaLogCompilacion(archivo, this.Model.ArchivosDescompilados, res.Despues);
                 }
                 catch(Exception ex)
                 {

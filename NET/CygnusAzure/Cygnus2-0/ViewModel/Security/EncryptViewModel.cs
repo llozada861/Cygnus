@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Security;
+using Cygnus2_0.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace Cygnus2_0.ViewModel.Security
         private SelectListItem usuario;
         private string pass;
         private string bd;
-        private ObservableCollection<SelectListItem> listaUsuarios;
+        private ObservableCollection<UsuarioModel> listaUsuarios;
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
         private EncryptModel model;
@@ -48,7 +49,7 @@ namespace Cygnus2_0.ViewModel.Security
             get { return bd; }
             set { SetProperty(ref bd, value); }
         }
-        public ObservableCollection<SelectListItem> ListaUsuarios
+        public ObservableCollection<UsuarioModel> ListaUsuarios
         {
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }

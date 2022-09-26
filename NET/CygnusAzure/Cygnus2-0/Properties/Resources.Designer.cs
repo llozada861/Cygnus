@@ -695,7 +695,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a end.
+        ///   Busca una cadena traducida similar a END.
         /// </summary>
         public static string END {
             get {
@@ -2512,7 +2512,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a pc.
+        ///   Busca una cadena traducida similar a PC.
         /// </summary>
         public static string PuntoYComa {
             get {
@@ -2740,7 +2740,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Script.
+        ///   Busca una cadena traducida similar a 15.
         /// </summary>
         public static string Script {
             get {
@@ -2850,7 +2850,7 @@ namespace Cygnus2_0.Properties {
         /// <summary>
         ///   Busca una cadena traducida similar a #sonar-project.properties
         ///# must be unique in a given SonarQube instance
-        ///sonar.projectKey=Open.BaseDeDatos
+        ///sonar.projectKey=[PROYECTO]
         ///
         ///# --- optional properties ---
         ///
@@ -2865,7 +2865,7 @@ namespace Cygnus2_0.Properties {
         ///#sonar.branch=desarrollo
         ///sonar.branch.name=[rama]
         ///# Encoding of the source code. Default is default system encoding
-        ///#sonar.sou [resto de la cadena truncado]&quot;;.
+        ///#sonar.sourceEnc [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string SonarProperties {
             get {
@@ -3595,7 +3595,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Aplica.
+        ///   Busca una cadena traducida similar a 34.
         /// </summary>
         public static string TipoAplica {
             get {
@@ -3766,7 +3766,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Paquete.
+        ///   Busca una cadena traducida similar a 3.
         /// </summary>
         public static string TipoObjetoPaquete {
             get {
@@ -3820,7 +3820,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Trigger.
+        ///   Busca una cadena traducida similar a 4.
         /// </summary>
         public static string TipoObjetoTrigger {
             get {
@@ -3847,7 +3847,7 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Otros.
+        ///   Busca una cadena traducida similar a 16.
         /// </summary>
         public static string TipoOtros {
             get {
