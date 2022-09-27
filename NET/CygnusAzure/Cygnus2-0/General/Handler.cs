@@ -603,7 +603,7 @@ namespace Cygnus2_0.General
             }
         }
 
-        public void pGeneraArchivosPermisosArchivo(Archivo archivo, string usuario)
+        public void pEjecutaPermisosArchivo(Archivo archivo, string usuario)
         {
             StringBuilder grant = new StringBuilder();
             string usuarioGrant = "";
@@ -620,11 +620,12 @@ namespace Cygnus2_0.General
                         {
                             if(tipo.Codigo == permisoObj.TipoObjeto)
                             {
-                                PermisosModel permiso = this.ListaPermisos.Where(x => x.Codigo == permisoObj.Permiso).First();
-                                SelectListItem usGrant = this.ListaUsGrants.Where(x => x.Value.Equals(permisoObj.Usuario)).First();
+                                PermisosModel permiso = this.ListaPermisos.FirstOrDefault(x => x.Codigo == permisoObj.Permiso);
+                                SelectListItem usGrant = this.ListaUsGrants.FirstOrDefault(x => Int32.Parse(x.Value) == permisoObj.Usuario);
 
                                 if (!usuario.Equals(usGrant.Text))
                                 {
+                                    grant = new StringBuilder();
                                     grant.AppendLine(res.PlantillaGrantNP);
                                     grant.Replace(res.TagGrantUsuario, usGrant.Text);
                                     grant.Replace(res.TagGrantPermiso, permiso.Descripcion);

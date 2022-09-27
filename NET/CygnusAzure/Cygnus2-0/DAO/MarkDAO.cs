@@ -684,7 +684,7 @@ namespace Cygnus2_0.DAO
                                "LINE ," +
                                "TEXT " +
                         " FROM   all_errors " +
-                        " WHERE  name = isbObjeto" +
+                        " WHERE  name = '" + archivo.NombreObjeto +"'"+
                         " AND    owner IN (SELECT usuario FROM FLEX.ll_credmark)";
 
             OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;

@@ -249,7 +249,7 @@ namespace Cygnus2_0.ViewModel.Compila
             {
                 if (archivo.TipoAplicacion != res.SQLPLUS)
                 {
-                    handler.pGeneraArchivosPermisosArchivo(archivo, this.Model.Usuario.Text);
+                    handler.pEjecutaPermisosArchivo(archivo, this.Model.Usuario.Text);
                     handler.pObtieneBloquesCodigo(archivo);
                     pCompilaObjetosBD(archivo);
                 }
@@ -333,7 +333,7 @@ namespace Cygnus2_0.ViewModel.Compila
             {
                 try
                 {
-                    handler.pGeneraArchivosPermisosArchivo(archivo, this.Model.Usuario.Text);
+                    handler.pEjecutaPermisosArchivo(archivo, this.Model.Usuario.Text);
                     pObtieneErroresAplicacion(archivo);
                 }
                 catch(Exception ex)
