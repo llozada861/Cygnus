@@ -2229,4 +2229,16 @@ END;
   <data name="KeyProyectoSonar" xml:space="preserve">
     <value>PROYECTO_SONAR</value>
   </data>
+  <data name="ImgArchivo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\icons8-archivo-de-codigo-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImgFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\icons8-folder-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>ImgArchivo</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>ImgFolder</value>
+  </data>
 </root>

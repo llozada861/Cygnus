@@ -17,6 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Git
@@ -418,7 +420,13 @@ namespace Cygnus2_0.ViewModel.Git
 
             if (GitSeleccionado != null)
             {
-                raiz = new Folder { FolderLabel = GitSeleccionado.Descripcion, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+                var Imgcarpeta = new BitmapImage(new Uri(String.Format("img/{0}", "icons8-folder-48.png"), UriKind.Relative));
+                Imgcarpeta.Freeze();
+
+                var ImgArchivo = new BitmapImage(new Uri(String.Format("img/{0}", "icons8-archivo-de-codigo-32.png"), UriKind.Relative));
+                ImgArchivo.Freeze();
+
+                raiz = new Folder { FolderLabel = GitSeleccionado.Descripcion,Icon = Imgcarpeta, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
 
                 foreach (Archivo archivo in GitModel.ListaArchivos)
                 {
@@ -434,13 +442,13 @@ namespace Cygnus2_0.ViewModel.Git
                         archivo.NombreObjeto = itemModif.NombreObjeto;
                     }
 
-                    pGeneraHijos(archivo, raiz);
+                    pGeneraHijos(archivo, raiz, Imgcarpeta, ImgArchivo);
                 }
 
                 GitModel.ListaCarpetas.Add(raiz);
             }
         }
-        public void pGeneraHijos(Archivo archivo, Folder carpetaPadre)
+        public void pGeneraHijos(Archivo archivo, Folder carpetaPadre, ImageSource Imgcarpeta, ImageSource ImgArchivo)
         {
             if (archivo.SelectItemTipo == null)
                 return;
@@ -481,6 +489,7 @@ namespace Cygnus2_0.ViewModel.Git
                     {
                         carpetaHija = new Folder();
                         carpetaHija.FolderLabel = path;
+                        carpetaHija.Icon = Imgcarpeta;
                         carpetaPadre.Folders.Add(carpetaHija);
                     }
 
@@ -488,7 +497,7 @@ namespace Cygnus2_0.ViewModel.Git
                 }
             }
 
-            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
+            carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName,Icon = ImgArchivo, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
         }
 
         public void ListarArchivos(string[] DropPath)

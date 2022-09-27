@@ -333,12 +333,6 @@
     <Compile Include="Pages\Git\LBUserControl.xaml.cs">
       <DependentUpon>LBUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Git\UCObjectGit.xaml.cs">
-      <DependentUpon>UCObjectGit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Git\UCRepoGit.xaml.cs">
-      <DependentUpon>UCRepoGit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Objects\AdminObjects.xaml.cs">
       <DependentUpon>AdminObjects.xaml</DependentUpon>
     </Compile>
@@ -500,6 +494,8 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <Content Include="img\icons8-archivo-de-codigo-32.png" />
+    <Content Include="img\icons8-folder-48.png" />
     <Resource Include="img\LookupGlass.png" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\01_crll_credmark.sql" />
     <EmbeddedResource Include="BaseDatos\oracleInstall\02_crll_logapli.sql" />
@@ -622,14 +618,6 @@
     <Page Include="Pages\Git\LBUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Git\UCObjectGit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Git\UCRepoGit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Objects\AdminObjects.xaml">
       <SubType>Designer</SubType>
