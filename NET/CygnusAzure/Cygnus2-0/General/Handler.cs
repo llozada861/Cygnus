@@ -484,7 +484,7 @@ namespace Cygnus2_0.General
             for (int i = 0; i < split.Length; i++)
             {
                 blPalabraReservada = false;
-                sbPalabra = split[i].Trim().ToLower();
+                sbPalabra = split[i].Trim().ToLower().Replace(";","");
 
                 foreach (PalabrasClaves item in this.ListaPalabrasReservadas)
                 {
