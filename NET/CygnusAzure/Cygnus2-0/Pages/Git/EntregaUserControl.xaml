@@ -249,7 +249,10 @@
                     </TreeView.ItemContainerStyle>
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Folders}">
-                            <TreeViewItem Header="{Binding FolderLabel}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Icon}" Width="28" Height="28" />
+                                <TextBlock Text="{Binding FolderLabel}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource ModernButtonText}"/>
+                            </StackPanel>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>

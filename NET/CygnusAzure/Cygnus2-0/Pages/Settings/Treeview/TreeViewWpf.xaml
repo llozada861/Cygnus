@@ -63,7 +63,7 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Documentación" IsExpanded="True" Uid="60">
                     <TreeViewItem Header="Configuración" Uid="62"/>
-                    <TreeViewItem Header="HTML" Uid="63"/>
+                    <TreeViewItem Header="Plantillas" Uid="63"/>
                     <TreeViewItem Header="Lineamientos PLSQL" Uid="64" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}"/>
                 </TreeViewItem>
                 <TreeViewItem Header="Ayuda" IsExpanded="True" Uid="90">

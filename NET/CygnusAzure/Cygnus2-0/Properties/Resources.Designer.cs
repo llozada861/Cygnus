@@ -1201,6 +1201,26 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ImgArchivo {
+            get {
+                object obj = ResourceManager.GetObject("ImgArchivo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ImgFolder {
+            get {
+                object obj = ResourceManager.GetObject("ImgFolder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a IN.
         /// </summary>
         public static string IN {
@@ -2887,6 +2907,24 @@ namespace Cygnus2_0.Properties {
         public static string SQLPLUS {
             get {
                 return ResourceManager.GetString("SQLPLUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ImgArchivo.
+        /// </summary>
+        public static string String {
+            get {
+                return ResourceManager.GetString("String", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ImgFolder.
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

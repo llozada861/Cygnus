@@ -97,6 +97,14 @@ namespace Cygnus2_0.ViewModel.Index
             nombre = "Fullname.png";
             myFile = ImageToByte(res.Fullname);
             handler.pCreaArchivoBD(pathImg, nombre, myFile);
+
+            nombre = "icons8-archivo-de-codigo-32.png";
+            myFile = ImageToByte(res.ImgArchivo);
+            handler.pCreaArchivoBD(pathImg, nombre, myFile);
+
+            nombre = "icons8-folder-48.png";
+            myFile = ImageToByte(res.ImgFolder);
+            handler.pCreaArchivoBD(pathImg, nombre, myFile);
         }
 
         public void pCargarListasArchivo()
