@@ -176,13 +176,19 @@ namespace Cygnus2_0.ViewModel.Git
 
                 if (GitModel.RamaLBSeleccionada == null)
                 {
-                    handler.MensajeError("Seleccione una rama de línea base");
+                    handler.MensajeError("Seleccione la línea base del repositorio");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(GitModel.Comentario))
                 {
                     handler.MensajeError("Ingrese un comentario para el commit");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(GitModel.HU))
+                {
+                    handler.MensajeError("Ingrese la carpeta despliegue");
                     return;
                 }
 
