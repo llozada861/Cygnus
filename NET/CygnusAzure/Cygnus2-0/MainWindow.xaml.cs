@@ -479,8 +479,27 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion("1.1.3.8");
             }
 
+            if (!SqliteDAO.pblValidaVersion("1.1.4.2") && !SqliteDAO.pEsNueva())
+            {
+                string[] query =
+                 {
+                    "INSERT INTO words (description) VALUES ('drop')",
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.4.2");
+            }
+
             //ultima versión
-                if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
+            if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
                 //SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "99");
                 //handler.pRegeneraIndexListas();
