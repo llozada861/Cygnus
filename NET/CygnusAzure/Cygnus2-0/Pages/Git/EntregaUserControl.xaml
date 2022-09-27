@@ -70,7 +70,7 @@
                          CharacterCasing="Upper"
                          Grid.Row="1" Grid.Column="1" 
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="Código HU" TabIndex="3" AcceptsTab="false" HorizontalAlignment="Stretch"/>
+                         Style="{StaticResource placeHolder}" Tag="Carpeta Despliegue" TabIndex="3" AcceptsTab="false" HorizontalAlignment="Stretch"/>
             </Grid>
         </GroupBox>
 
