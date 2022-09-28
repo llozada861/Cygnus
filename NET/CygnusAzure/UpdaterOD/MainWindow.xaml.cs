@@ -79,6 +79,7 @@ namespace Updater
         {           
             preDownload();
             (sender as BackgroundWorker).ReportProgress(10);
+            Thread.Sleep(10000);
 
             if (called)
             {                
@@ -180,7 +181,7 @@ namespace Updater
         {
             string cmdLn = "";
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "Cygnus";
+            startInfo.FileName = "Cygnus.exe";
             cmdLn += "|Up|Y";
             startInfo.Arguments = cmdLn;
             Process.Start(startInfo);
