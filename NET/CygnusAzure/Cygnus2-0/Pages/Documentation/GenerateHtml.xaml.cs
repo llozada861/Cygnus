@@ -48,7 +48,6 @@ namespace Cygnus2_0.Pages.Documentation
             StringBuilder parametrosBuilder = new StringBuilder();
             StringBuilder metodoBuilder = new StringBuilder();
             StringBuilder returnBuilder = new StringBuilder();
-            int index;
 
             try
             {
@@ -116,9 +115,9 @@ namespace Cygnus2_0.Pages.Documentation
                     metodoBuilder.Replace(res.TagHtml_numeroOC, view.Model.Wo);
                     metodoBuilder.AppendLine();
 
-                    if (docModel.Parametros != null && docModel.Parametros.Count > 0)
+                    if (view.Model.ListaParametros != null && view.Model.ListaParametros.Count > 0)
                     {
-                        foreach (ParametrosModel parameter in docModel.Parametros)
+                        foreach (ParametrosModel parameter in view.Model.ListaParametros)
                         {
                             if (!parameter.Tipo.Equals(res.NameReturn) && !parameter.Tipo.Equals(res.DescReturn))
                             {
@@ -127,13 +126,6 @@ namespace Cygnus2_0.Pages.Documentation
                                 parametrosBuilder.Replace(res.TagHtmlParamType, parameter.Tipo);
                                 parametrosBuilder.Replace(res.TagHtmlParamDir, parameter.Direccion);
                                 parametrosBuilder.Replace(res.TagHtmlParaDesc, parameter.Descripcion);
-
-                                index = docModel.Parametros.IndexOf(parameter);
-
-                                /*if (index < docModel.Parametros.Count - 1)
-                                {
-                                    parametrosBuilder.AppendLine();
-                                }*/
                             }
                             else
                             {
@@ -327,8 +319,9 @@ namespace Cygnus2_0.Pages.Documentation
                     }                                      
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                handler.MensajeError(ex.Message);
             }                     
         }
 
