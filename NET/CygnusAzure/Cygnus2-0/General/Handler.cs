@@ -461,7 +461,9 @@ namespace Cygnus2_0.General
                 archivo.DocumentacionSinDepurar = new List<StringBuilder>();
                 archivo.Modificaciones = new List<ModificacionModel>();
                 archivo.ListDocumentacionDepurada = new List<DocumentacionHTMLModel>();
-                //this.ObtenerTipoArchivo(archivo, res.No_aplica);
+
+                if(archivo.Tipo == null)
+                    this.ObtenerTipoArchivo(archivo, "-");
 
                 if (this.pDepuraDocumentacion(archivo) && listaObs != null)
                 {
