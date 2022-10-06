@@ -462,6 +462,9 @@ namespace Cygnus2_0.ViewModel.Git
             Folder carpetaHija = new Folder();
             string path;
 
+            if (archivo.Tipo == null)
+                return;
+
             path = handler.ListaRutas.FirstOrDefault(x => x.TipoObjeto == archivo.Tipo && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).Ruta;
 
             if (string.IsNullOrEmpty(path))
