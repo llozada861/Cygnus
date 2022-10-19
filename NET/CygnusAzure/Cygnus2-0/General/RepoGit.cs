@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using res = Cygnus2_0.Properties.Resources;
 
@@ -29,6 +30,7 @@ namespace Cygnus2_0.General
             using (var repo = new Repository(@handler.RutaGitDatos))
             {
                 Commands.Checkout(repo, res.RamaMasterDatos);
+
                 Commands.Pull(repo, new Signature(Environment.UserName, email, DateTimeOffset.Now), new PullOptions());
 
                 var branches = repo.Branches;
@@ -100,11 +102,19 @@ namespace Cygnus2_0.General
 
             using (var repo = new Repository(repositorioGit.Ruta))
             {
-                Commands.Checkout(repo, ramaWO);
-                //pCreaDirectorios(repositorioGit.Ruta);
+                try
+                {
+                    Commands.Checkout(repo, ramaWO);
+                }
+                catch (Exception ex)
+                {
+                    pCambiarRama(handler, repositorioGit.Ruta, ramaWO);
+                }
 
-                //Se copian los archivos en cada ruta del repo
-                pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit);
+            //pCreaDirectorios(repositorioGit.Ruta);
+
+            //Se copian los archivos en cada ruta del repo
+            pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit);
 
                 Commands.Stage(repo, "*");
                 Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now));
@@ -139,7 +149,14 @@ namespace Cygnus2_0.General
 
             using (var repo = new Repository(@rutaRepo))
             {
-                Commands.Checkout(repo, ramaPrincipal);
+                try 
+                { 
+                    Commands.Checkout(repo, ramaPrincipal);
+                }
+                catch (Exception ex)
+                {
+                    pCambiarRama(handler, @rutaRepo, ramaPrincipal);
+                }
 
                 var branches = repo.Branches;
                 foreach (Branch b in branches)
@@ -163,6 +180,13 @@ namespace Cygnus2_0.General
             }
         }
 
+        public static void pCambiarRama(Handler handler, string rutaRepo, string rama)
+        {
+            string command = "git checkout " + rama;
+            string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
+            ExecuteGitBashCommand(RutagitBash, command, rutaRepo, true);
+        }
+
         public static void pActualizarRepo(Handler handler, string rutaRepo,string rama)
         {
             string command = "git pull origin " + rama;
@@ -178,7 +202,14 @@ namespace Cygnus2_0.General
 
             using (var repo = new Repository(@repositorioGit.Ruta))
             {
-                Commands.Checkout(repo, ramaPrincipal.Rama);
+                try 
+                { 
+                    Commands.Checkout(repo, ramaPrincipal.Rama);
+                }
+                catch (Exception ex)
+                {
+                    pCambiarRama(handler, repositorioGit.Ruta, ramaPrincipal.Rama);
+                }
 
                 var branches = repo.Branches;
 
