@@ -898,6 +898,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="General\Word\" />
+    <Folder Include="Pages\ObjetosBD\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Notifications.Wpf\Notifications.Wpf.csproj">

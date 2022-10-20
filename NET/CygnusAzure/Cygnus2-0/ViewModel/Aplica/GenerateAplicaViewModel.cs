@@ -243,21 +243,28 @@ namespace Cygnus2_0.ViewModel.Aplica
         }
         public void ListarArchivos(string[] DropPath)
         {
-            this.Model.ListaArchivosCargados.Clear();
-
-            List<Archivo> archivos = new List<Archivo>();
-            handler.pListaArchivos(DropPath, archivos, res.TipoAplica);
-
-            foreach (Archivo archivo in archivos)
+            try
             {
-                this.Model.ListaArchivosNoOrden.Add(archivo);
+                this.Model.ListaArchivosCargados.Clear();
+
+                List<Archivo> archivos = new List<Archivo>();
+                handler.pListaArchivos(DropPath, archivos, res.TipoAplica);
+
+                foreach (Archivo archivo in archivos)
+                {
+                    this.Model.ListaArchivosNoOrden.Add(archivo);
+                }
+
+                pEstablecerOrdenAplica();
+
+                foreach (Archivo archivo in this.Model.ListaArchivosNoOrden.OrderBy(x => x.Index))
+                {
+                    this.Model.ListaArchivosCargados.Add(archivo);
+                }
             }
-
-            pEstablecerOrdenAplica();
-
-            foreach(Archivo archivo in this.Model.ListaArchivosNoOrden.OrderBy(x=>x.Index))
+            catch (Exception ex)
             {
-                this.Model.ListaArchivosCargados.Add(archivo);
+                handler.MensajeError(ex.Message);   
             }
         }
         private void pListaArchivosCarpeta(string path)
