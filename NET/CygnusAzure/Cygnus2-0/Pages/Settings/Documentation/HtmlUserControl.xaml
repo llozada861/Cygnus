@@ -31,7 +31,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
                   IsReadOnly="True"
-                  Header="Key"
+                  Header="Tag"
                   Binding="{Binding Path=Text}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
@@ -58,9 +58,10 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Content="Key" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                <TextBox Name="txtName" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" IsEnabled="False" />
-                <Label Content="HTML" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                <Label Content="Tag" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                <TextBox Name="txtName" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" CharacterCasing="Upper">
+                </TextBox>
+                <Label Content="Plantilla" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
                 <RichTextBox x:Name="richTextBoxProce"  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
@@ -73,7 +74,8 @@
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox>
-                <Button Name="btnModif" Content="Modificar" VerticalAlignment="Center" Click="btnModif_Click" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" Grid.ColumnSpan="4"/>
+                <Button Name="btnEliminar" Content="Eliminar" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Click="btnEliminar_Click" HorizontalAlignment="Center"/>
+                <Button Name="btnModif" Content="Adicionar" VerticalAlignment="Center" Click="btnModif_Click" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
             </Grid>
         </GroupBox>
     </Grid>

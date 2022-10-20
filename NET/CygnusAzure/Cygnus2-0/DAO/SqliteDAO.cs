@@ -321,14 +321,12 @@ namespace Cygnus2_0.DAO
         }
         #endregion Documentacion
 
-        #region HTML
-        public static void pActualizaHtml(string key, string value, Handler handler)
+        #region Plantillas
+        public static void pInsertaPlantilla(PlantillasHTMLModel objeto)
         {
-            PlantillasHTMLModel objeto = new PlantillasHTMLModel() { Nombre = key, Documentacion = value };
-
             using (DataBaseContext context = new DataBaseContext())
             {
-                context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                context.PlantillasHTML.Add(objeto);
                 context.SaveChanges();
             }
         }
@@ -340,12 +338,12 @@ namespace Cygnus2_0.DAO
 
                 foreach (PlantillasHTMLModel objeto in lista)
                 {
-                    SelectListItem item = new SelectListItem() { Text = objeto.Nombre, Value = objeto.Documentacion };
+                    SelectListItem item = new SelectListItem() { Text = objeto.Nombre, Value = objeto.Documentacion,Empresa = objeto.Empresa };
                     handler.ListaHTML.Add(item);
                 }
             }
         }
-        #endregion HTML
+        #endregion Plantillas
 
         #region Version
         public static void pActualizaVersion(string version)

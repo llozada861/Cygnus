@@ -197,6 +197,9 @@ namespace Cygnus2_0.Pages.Aplica
         {
             try
             {
+                generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
+                generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
+
                 generateAplicaViewModel.pExaminar(null);
                 dataGridArchivosCargados.Items.Refresh();
             }
