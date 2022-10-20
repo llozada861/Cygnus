@@ -28,7 +28,7 @@
         <GroupBox Header="Repositorio" Grid.Row="0"  Grid.ColumnSpan="2">
             <Grid>
                 <general:AutoComplete x:Name="AucomboBoxRepo" 
-                                 ItemsSource="{Binding Path=ListaGit}" Width="500"
+                                 ItemsSource="{Binding Path=GitModel.ListaGit}" Width="500"
                                           SelectedItem="{Binding Path=GitSeleccionado}" DisplayMemberPath="Descripcion" 
                                       PatternChanged="AuListaRepoGit_PatternChanged"
                            Style="{StaticResource AutoCompleteComboBox}" SelectionChanged="AucomboBoxRepo_SelectionChanged" 

@@ -23,6 +23,7 @@ namespace Cygnus2_0.Model.Git
         private ObservableCollection<Archivo> listaArchivosRamas;
         private ObservableCollection<Folder> listacarpetas;
         private ObservableCollection<SelectListItem> listaHU;
+        private ObservableCollection<Repositorio> listaGit;
         private string codigo;
         private string objetoBuscar;
         private string hu;
@@ -135,6 +136,14 @@ namespace Cygnus2_0.Model.Git
         public bool EjecutaSonar {
             get { return ejecutarSonar; }
             set { SetProperty(ref ejecutarSonar, value); }
+        }
+        public ObservableCollection<Repositorio> ListaGit
+        {
+            get { return listaGit; }
+            set 
+            {
+                SetProperty(ref listaGit, value); 
+            }
         }
     }
 }
