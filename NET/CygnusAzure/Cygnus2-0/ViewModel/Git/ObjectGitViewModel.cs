@@ -511,41 +511,43 @@ namespace Cygnus2_0.ViewModel.Git
 
         public void ListarArchivos(string[] DropPath)
         {
-            List<Archivo> archivos = new List<Archivo>();
-            handler.pListaArchivos(DropPath, archivos,res.GIT);
-
-            foreach (Archivo archivo in archivos)
+            try
             {
-                /*if (archivo.Extension.Equals(res.ExtensionHtml) && archivos.Exists(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)))
+                List<Archivo> archivos = new List<Archivo>();
+                handler.pListaArchivos(DropPath, archivos, res.GIT);
+
+                foreach (Archivo archivo in archivos)
                 {
-                    string tipoNuevo = archivos.Find(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)).Tipo;
-                    archivo.Tipo = string.IsNullOrEmpty(tipoNuevo)?archivo.Tipo:tipoNuevo;
-                }*/
 
-                if (!this.GitModel.ListaArchivos.ToList().Exists(x => x.FileName.Equals(archivo.FileName)))
-                    this.GitModel.ListaArchivos.Add(archivo);
-            }
+                    if (!this.GitModel.ListaArchivos.ToList().Exists(x => x.FileName.Equals(archivo.FileName)))
+                        this.GitModel.ListaArchivos.Add(archivo);
+                }
 
-            if(this.GitModel.ListaArchivos.Count > 0)
-            {
-                List<Archivo> archivosHtml = this.GitModel.ListaArchivos.ToList().FindAll(x=>x.Extension.Equals(res.ExtensionHtml));
-
-                if(archivosHtml.Count > 0)
+                if (this.GitModel.ListaArchivos.Count > 0)
                 {
-                    foreach (Archivo archivo in archivosHtml)
+                    List<Archivo> archivosHtml = this.GitModel.ListaArchivos.ToList().FindAll(x => x.Extension.Equals(res.ExtensionHtml));
+
+                    if (archivosHtml.Count > 0)
                     {
-                        if (this.GitModel.ListaArchivos.ToList().Exists(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)))
+                        foreach (Archivo archivo in archivosHtml)
                         {
-                            int? tipoNuevo = this.GitModel.ListaArchivos.ToList().Find(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)).Tipo;
+                            if (this.GitModel.ListaArchivos.ToList().Exists(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)))
+                            {
+                                int? tipoNuevo = this.GitModel.ListaArchivos.ToList().Find(x => x.NombreObjeto.Equals(archivo.NombreObjeto) && !x.Extension.Equals(res.ExtensionHtml)).Tipo;
 
-                            if(this.GitModel.ListaArchivos.ToList().Exists(x => x.FileName.Equals(archivo.FileName)))
-                                this.GitModel.ListaArchivos.ToList().Find(x => x.FileName.Equals(archivo.FileName)).Tipo = tipoNuevo == null?archivo.Tipo:tipoNuevo;
+                                if (this.GitModel.ListaArchivos.ToList().Exists(x => x.FileName.Equals(archivo.FileName)))
+                                    this.GitModel.ListaArchivos.ToList().Find(x => x.FileName.Equals(archivo.FileName)).Tipo = tipoNuevo == null ? archivo.Tipo : tipoNuevo;
+                            }
                         }
                     }
                 }
-            }
 
-            pArmarArbol(null, null);
+                pArmarArbol(null, null);
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
         }
 
         public void pPonerUsuarioArchivos(Archivo archivo, SelectListItem usuario)
