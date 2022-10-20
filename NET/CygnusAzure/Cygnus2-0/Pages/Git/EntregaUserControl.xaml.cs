@@ -187,7 +187,7 @@ namespace Cygnus2_0.Pages.Git
         }
         protected void AuListaRepoGit_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
         {
-            args.DataSource = objectViewModel.ListaGit.Where((hu, match) => hu.Descripcion.ToLower().Contains(args.Pattern.ToLower()));
+            args.DataSource = objectViewModel.GitModel.ListaGit.Where((hu, match) => hu.Descripcion.ToLower().Contains(args.Pattern.ToLower()));
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

@@ -53,17 +53,14 @@ namespace Cygnus2_0.ViewModel.Git
             _examinar = new DelegateCommand(pExaminar);
             _renombrar = new DelegateCommand(pRenombrar);
             _gitBash = new DelegateCommand(pEjecutaGitBash);
+
+            GitModel.ListaGit = SqliteDAO.pListaRepositorios();
         }
         public ObjectGitModel GitModel { get; set; }
         public List<SelectListItem> ListaSino
         {
             get { return handler.ListaSiNO; }
             set { handler.ListaSiNO = value; }
-        }
-        public ObservableCollection<Repositorio> ListaGit
-        {
-            get { return handler.RepositorioVM.ListaGit; }
-            set { handler.RepositorioVM.ListaGit = value; }
         }
 
         public Repositorio GitSeleccionado { get; set; }
@@ -136,12 +133,9 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.Codigo = "";
             GitModel.ObjetoBuscar = "";
             GitModel.ListaArchivosEncontrados.Clear();
-            GitModel.ListaRamasLB = null;
-            ListaGit.Clear();
-            ListaGit = SqliteDAO.pListaRepositorios();
-
-            //if (GitSeleccionado != null)
-            //    GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(handler,GitSeleccionado);
+            GitModel.ListaGit.Clear();
+            GitModel.ListaGit = SqliteDAO.pListaRepositorios();
+            GitModel.ListaRamasLB.Clear();
 
             GitModel.Comentario = "";
             GitModel.HU = "";
