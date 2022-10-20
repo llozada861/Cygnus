@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
+using Cygnus2_0.Model.Html;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,10 +40,13 @@ namespace Cygnus2_0.Pages.Settings.Documentation
 
             richTextBoxProce.Document.Blocks.Clear();
             richTextBoxProce.Document.Blocks.Add(new Paragraph(new Run(((SelectListItem)dataGridDatos.SelectedItem).Value)));
+            btnModif.Content = "Modificar";
+            txtName.IsEnabled = false;
         }
 
         private void btnModif_Click(object sender, RoutedEventArgs e)
         {
+            int? nuEmpresa;
             string key = txtName.Text;
             string value = new TextRange(richTextBoxProce.Document.ContentStart, richTextBoxProce.Document.ContentEnd).Text;
 
@@ -52,24 +56,55 @@ namespace Cygnus2_0.Pages.Settings.Documentation
                 return;
             }
 
-            try
-            {
-                SqliteDAO.pActualizaHtml(key, value,handler);
-                pCargarLista();
+            SelectListItem seleccionado = ((SelectListItem)dataGridDatos.SelectedItem);
 
-                richTextBoxProce.Document.Blocks.Clear();
-                txtName.Text = "";
+            if(seleccionado != null)
+            {
+                nuEmpresa = seleccionado.Empresa;
+            }
+            else
+            {
+                nuEmpresa = handler.ConfGeneralView.Model.Empresa.Codigo;
+            }
+
+            PlantillasHTMLModel objeto = new PlantillasHTMLModel() { Nombre = key, Documentacion = value, Empresa = nuEmpresa };
+
+            try
+            {                
+                SqliteDAO.pActualizaObjeto(objeto);                
             }
             catch (Exception ex)
             {
-                handler.MensajeError(ex.Message);
+                SqliteDAO.pInsertaPlantilla(objeto);
             }
+
+            pCargarLista();
+            richTextBoxProce.Document.Blocks.Clear();
+            txtName.Text = "";
+            btnModif.Content = "Adicionar";
+            txtName.IsEnabled = false;
         }
     
         public void pCargarLista()
         {
             handler.ListaHTML.Clear();
             SqliteDAO.pListaHTML(handler);
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            SelectListItem seleccionado = ((SelectListItem)dataGridDatos.SelectedItem);
+
+            if(seleccionado != null && handler.MensajeConfirmacion("Desea eliminar la plantilla ["+seleccionado.Text+"]") == "Y")
+            {
+                PlantillasHTMLModel objeto = new PlantillasHTMLModel() { Nombre = seleccionado.Text, Documentacion = seleccionado.Value, Empresa = seleccionado.Empresa };
+                SqliteDAO.pEliminaObjeto(objeto);
+                pCargarLista();
+                richTextBoxProce.Document.Blocks.Clear();
+                txtName.Text = "";
+                btnModif.Content = "Adicionar";
+                txtName.IsEnabled = false;
+            }
         }
     }
 }
