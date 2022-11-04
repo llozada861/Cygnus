@@ -518,17 +518,39 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion("1.1.4.3");
             }
 
+            if (!SqliteDAO.pblValidaVersion("1.1.5.3") && !SqliteDAO.pEsNueva())
+            {
+                string[] query =
+                 {
+                    "INSERT INTO object_grants (objeto, usuario_grant, permiso, company) VALUES ( '5', '1', '5', '99')",
+                    "INSERT INTO object_grants (objeto, usuario_grant, permiso, company) VALUES ( '5', '1', '2', '99')",
+                    "INSERT INTO object_grants (objeto, usuario_grant, permiso, company) VALUES ( '5', '1', '3', '99')",
+                    "INSERT INTO object_grants (objeto, usuario_grant, permiso, company) VALUES ( '5', '1', '4', '99')"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.5.3");
+            }
+
             //ultima versión
-            if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
+            /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
                 //SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "99");
                 //handler.pRegeneraIndexListas();
 
-                SqliteDAO.pCreaConfiguracion(res.KEY_LLAVEW, @"HKEY_CURRENT_USER\Software\Classes\osfweb\shell\open\command");
+                //SqliteDAO.pCreaConfiguracion(res.KEY_LLAVEW, @"HKEY_CURRENT_USER\Software\Classes\osfweb\shell\open\command");
 
                 //Se actualiza la versión
                 SqliteDAO.pActualizaVersion(fieVersionInfo.FileVersion);                
-            }
+            }*/
         }
     }
 }
