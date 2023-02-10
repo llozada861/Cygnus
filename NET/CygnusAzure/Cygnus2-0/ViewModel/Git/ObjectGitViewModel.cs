@@ -467,6 +467,7 @@ namespace Cygnus2_0.ViewModel.Git
             path = path.Replace("[nombre]", archivo.NombreObjeto);
             path = path.Replace("[usuario]", archivo.Usuario != null ? archivo.Usuario : "");
             path = path.Replace("[hu]", GitModel.HU);
+            path = path.Replace("[archivo]", archivo.NombreSinExt);
 
             archivo.RutaRepo = Path.Combine(path, archivo.FileName);
             string carpetaPadreRepo = handler.pObtCarpetaPadre(archivo.RutaRepo);
