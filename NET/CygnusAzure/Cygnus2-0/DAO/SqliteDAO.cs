@@ -927,6 +927,18 @@ namespace Cygnus2_0.DAO
 
                 ExecuteNonQuery(query, conn);
             }
+
+            try
+            {
+
+                using (SQLiteConnection conn = DataBaseContext.GetInstance())
+                {
+                    query = "DELETE FROM task_user WHERE codigo =  " + tareaAzure.IdAzure;
+
+                    ExecuteNonQuery(query, conn);
+                }
+            }
+            catch (Exception ex) { }
         }
         public static void pObtDetalleRq(TimeModel view, TareaHoja tarea, Handler handler)
         {
