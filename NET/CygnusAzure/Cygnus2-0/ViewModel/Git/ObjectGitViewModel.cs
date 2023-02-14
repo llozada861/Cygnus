@@ -196,15 +196,15 @@ namespace Cygnus2_0.ViewModel.Git
                 {
                     archivoRojo = archivo.FileName;
 
-                    if (archivo.Tipo == null && archivo.Tipo == null)
+                    if (archivo.Tipo == null && archivo.NombreObjeto == null && archivo.Usuario == null)
                     {
                         archivosNoRepo = true;
                         break;
                     }
 
-                    if (string.IsNullOrEmpty(archivo.NombreObjeto) && archivo.Tipo != Int32.Parse(res.TipoOtros) && archivo.Tipo != Int32.Parse(res.TipoAplica))
+                    if (archivo.Tipo != Int32.Parse(res.TipoOtros) && archivo.Tipo != Int32.Parse(res.TipoAplica))
                     {
-                        if (string.IsNullOrEmpty(archivo.Usuario) && archivo.Tipo != Int32.Parse(res.TipoOtros))
+                        if (string.IsNullOrEmpty(archivo.Usuario))
                         {
                             archivosNoRepo = true;
                             break;
