@@ -25,7 +25,6 @@ namespace Cygnus2_0.ViewModel.Settings
             _process = new DelegateCommand(OnProcess);
             handler = hand;
             this.Model = new ConfGeneralModel();
-            this.Model.GeneraHtml = true;
             this.Model.ListaEmpresas = new ObservableCollection<EmpresaModel>();
             this.Model.Empresa = new EmpresaModel();
         }
@@ -48,7 +47,7 @@ namespace Cygnus2_0.ViewModel.Settings
             SqliteDAO.pCreaConfiguracion(res.KeyGeneraGrants, "" + Model.Grant);
             SqliteDAO.pCreaConfiguracion(res.KeyProxy, "" + Model.Proxy);
             SqliteDAO.pCreaConfiguracion(res.KEY_EMPRESA, "" + Model.Empresa.Codigo);
-            //SqliteDAO.pCreaConfiguracion(res.KEY_LLAVEW, "" + Model.LlaveW);
+            SqliteDAO.pCreaConfiguracion(res.KeyGeneraHTML, "" + Model.GeneraHtml);
             SqliteDAO.pCreaConfiguracion(res.KEY_VALORW, "" + Model.ValorW);
             handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x => x.Codigo== Model.Empresa.Codigo);
         }

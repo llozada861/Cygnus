@@ -899,6 +899,7 @@ namespace Cygnus2_0.DAO
             StringBuilder sbAplicaBody = new StringBuilder();
             Process process = new Process();
             string output = null;
+            List<Archivo> archivosOrdenados;
 
             if (archivos.Count > 0)
             {
@@ -924,34 +925,42 @@ namespace Cygnus2_0.DAO
                 sbAplicaBody.Append(Environment.NewLine);
                 sbAplicaBody.Append(Environment.NewLine);
 
-                foreach (Archivo archivo in archivos)
+                archivosOrdenados = archivos.OrderBy(x => x.Tipo).ToList();
+
+                foreach (Archivo archivo in archivosOrdenados)
                 {
-                    if (archivo.Tipo != Int32.Parse(res.TipoAplica))
+                    if (archivo.Tipo != Int32.Parse(res.TipoAplica) && archivo.Tipo != Int32.Parse(res.TipoAplicaGrant))
                     {
                         sbAplicaBody.Append("@" + "'" + archivo.RutaConArchivo + "'");
                         sbAplicaBody.Append(Environment.NewLine);
                         sbAplicaBody.Append(Environment.NewLine);
 
-                        using (StreamWriter str = new StreamWriter(sbAplica))
+                        /*using (StreamWriter str = new StreamWriter(sbAplica))
                         {
                             str.Write(sbAplicaBody.ToString());
-                        }
+                        }*/
 
                         archivo.AplicaTemporal = nombreLog;
                     }
                     else
                     {
-                        sbAplica = archivo.FileName;
+                        sbAplicaBody.Append("@" + "'" + archivo.Ruta+archivo.FileName + "'");
+                        sbAplicaBody.Append(Environment.NewLine);
                     }
                 }
 
                 sbAplicaBody.Append(res.FinAplSqlplus);
 
+                using (StreamWriter str = new StreamWriter(sbAplica))
+                {
+                    str.Write(sbAplicaBody.ToString());
+                }
+
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.WorkingDirectory = scriptDir;
                 process.StartInfo.RedirectStandardOutput = false;
                 process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralView.Model.RutaSqlplus, "sqlplus.exe"); //"sqlplus";
+                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralView.Model.RutaSqlplus, "sqlplus.exe"); 
                 process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
                 process.StartInfo.CreateNoWindow = false;
 
