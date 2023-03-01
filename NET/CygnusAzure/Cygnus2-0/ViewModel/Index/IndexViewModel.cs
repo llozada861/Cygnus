@@ -403,6 +403,7 @@ namespace Cygnus2_0.ViewModel.Index
         {
             handler.ConfGeneralView.Model.OrdenAutomatico = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyOrdenAutomatico)).Value);
             handler.ConfGeneralView.Model.Grant = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyGeneraGrants)).Value);
+            handler.ConfGeneralView.Model.GeneraHtml = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyGeneraHTML)).Value);
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyProxy)))
             {

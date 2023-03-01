@@ -177,7 +177,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                     }
                 }
 
-                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosGenerados.ToList().Where(x => x.Tipo == Int32.Parse(res.TipoAplica)).ToList(), rutaLog, handler.ConnView.Model.UsuarioCompila);
+                handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosGenerados.ToList().Where(x => x.Tipo == Int32.Parse(res.TipoAplica) || x.Tipo == Int32.Parse(res.TipoAplicaGrant)).ToList(), rutaLog, handler.ConnView.Model.UsuarioCompila);
             }
             catch(Exception ex)
             {
@@ -483,7 +483,6 @@ namespace Cygnus2_0.ViewModel.Aplica
             if (handler.ConfGeneralView.Model.Grant)
             {
                 pGeneraArchivosPermisos();
-                //pGeneraArchivosPermisosOA();
             }
 
             //Si es de datos, se genera el nuevo archivo
@@ -705,7 +704,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                     Archivo archivoGrant = new Archivo
                     {
                         FileName = nombreGrant,
-                        Tipo = Int32.Parse(res.TipoAplica),
+                        Tipo = Int32.Parse(res.TipoAplicaGrant),
                         Observacion = "Archivo Grant",
                         Ruta = handler.SavePath,
                         RutaDentroAplica = res.Slash

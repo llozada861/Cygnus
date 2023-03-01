@@ -1357,6 +1357,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a GENERA_HTML.
+        /// </summary>
+        public static string KeyGeneraHTML {
+            get {
+                return ResourceManager.GetString("KeyGeneraHTML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a METODO.
         /// </summary>
         public static string KeyMetodo {
@@ -3627,6 +3636,15 @@ namespace Cygnus2_0.Properties {
         public static string TipoAplica {
             get {
                 return ResourceManager.GetString("TipoAplica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 35.
+        /// </summary>
+        public static string TipoAplicaGrant {
+            get {
+                return ResourceManager.GetString("TipoAplicaGrant", resourceCulture);
             }
         }
         

@@ -2241,4 +2241,10 @@ END;
   <data name="String1" xml:space="preserve">
     <value>ImgFolder</value>
   </data>
+  <data name="KeyGeneraHTML" xml:space="preserve">
+    <value>GENERA_HTML</value>
+  </data>
+  <data name="TipoAplicaGrant" xml:space="preserve">
+    <value>35</value>
+  </data>
 </root>
