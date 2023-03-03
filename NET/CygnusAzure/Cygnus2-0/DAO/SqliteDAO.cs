@@ -359,6 +359,7 @@ namespace Cygnus2_0.DAO
                     version_ = new VersionBD();
                     version_.Version = version;
                     version_.Aplicada = "Y";
+                    version_.Empresa = 99;
                     context.Versiones.Add(version_);
                     context.SaveChanges();
                 }
