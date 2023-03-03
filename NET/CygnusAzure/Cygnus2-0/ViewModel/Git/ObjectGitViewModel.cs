@@ -19,6 +19,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Git
@@ -446,6 +447,7 @@ namespace Cygnus2_0.ViewModel.Git
                 }
 
                 GitModel.ListaCarpetas.Add(raiz);
+                pVisualizaArbol(raiz,Imgcarpeta, ImgArchivo);
             }
         }
         public void pGeneraHijos(Archivo archivo, Folder carpetaPadre, ImageSource Imgcarpeta, ImageSource ImgArchivo)
@@ -504,6 +506,66 @@ namespace Cygnus2_0.ViewModel.Git
             carpetaHija.Folders.Add(new Folder { FolderLabel = archivo.FileName,Icon = ImgArchivo, IsNodeExpanded = false, FullPath = archivo.RutaConArchivo });
         }
 
+        public void pVisualizaArbol(Folder raiz, BitmapImage Imgcarpeta, BitmapImage ImgArchivo)
+        {
+
+            Folder raizNuevo = new Folder { FolderLabel = GitModel.ListaCarpetas.First().FolderLabel, Icon = Imgcarpeta, FullPath = "", IsNodeExpanded = true, Folders = new List<Folder>() };
+
+            pValidaHijos(raiz,"", raizNuevo, Imgcarpeta, ImgArchivo);
+
+            GitModel.ListaCarpetasView.Clear();
+            GitModel.ListaCarpetasView.Add(raizNuevo);
+        }
+
+        public void pValidaHijos(Folder raiz,string nuevoPath, Folder carpetaPadre, BitmapImage Imgcarpeta, BitmapImage ImgArchivo)
+        {
+            string carpetaPath;
+
+            List<Folder> listaOrdenada = new List<Folder>(raiz.Folders.OrderBy(x=>x.FolderLabel));
+
+            foreach (Folder carpetaActual in listaOrdenada)
+            {
+                carpetaPath = nuevoPath;
+
+                if (!Path.HasExtension(carpetaActual.FolderLabel))
+                    carpetaPath = carpetaPath + "/" + carpetaActual.FolderLabel;
+                else
+                {
+                    if (carpetaPadre != null)
+                    {
+                        carpetaPadre.Folders.Add(new Folder { FolderLabel = carpetaActual.FolderLabel, Icon = ImgArchivo, IsNodeExpanded = false, FullPath = carpetaActual.FullPath });
+                        continue;
+                    }
+                }
+
+                List<Folder> listaSoloCarpetas = carpetaActual.Folders.Where(x => !Path.HasExtension(x.FolderLabel)).ToList();
+
+                if (listaSoloCarpetas.Count == 1)
+                {
+                    pValidaHijos(carpetaActual, carpetaPath, carpetaPadre, Imgcarpeta, ImgArchivo);
+                }
+                else
+                {
+
+                    Folder carpetaHija1 = new Folder();
+
+                    carpetaHija1 = carpetaPadre.Folders.ToList().Find(x => x.FolderLabel.Equals(carpetaPath));
+
+                    if (carpetaHija1 == null)
+                    {
+                        carpetaPath = carpetaPath.Substring(1);
+                        carpetaHija1 = new Folder();
+                        carpetaHija1.FolderLabel = carpetaPath;
+                        carpetaHija1.Icon = Imgcarpeta;
+                        carpetaHija1.IsNodeExpanded = true;
+                        carpetaPadre.Folders.Add(carpetaHija1);
+
+                        pValidaHijos(carpetaActual, "", carpetaHija1, Imgcarpeta, ImgArchivo);
+                    }
+                    
+                }
+            }
+        }
         public void ListarArchivos(string[] DropPath)
         {
             try

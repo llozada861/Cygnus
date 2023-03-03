@@ -64,18 +64,13 @@ namespace Cygnus2_0.Pages.Git
         {
             if (objectViewModel.GitSeleccionado != null)
             {
+                objectViewModel.GitModel.ListaRamasLB.Clear();
                 objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
             }
         }
         private void listBox1_Drop(object sender, DragEventArgs e)
         {
             string[] DropPath;
-
-            /*if (objectViewModel.GitModel.RamaLBSeleccionada == null)
-            {
-                handler.MensajeError("Seleccione una rama de línea base.");
-                return;
-            }*/
 
             try
             {

@@ -27,13 +27,14 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <GroupBox x:Name="grbDatosRequeridos" Header="Datos Requeridos" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
@@ -71,10 +72,14 @@
                          Grid.Row="1" Grid.Column="1" 
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Carpeta Despliegue" TabIndex="3" AcceptsTab="false" HorizontalAlignment="Stretch"/>
+
+                <CheckBox Name="chSonar" Content="Ejecutar SONAR?" Grid.Row="3" Grid.Column="0" IsChecked="{Binding Path=GitModel.EjecutaSonar}" HorizontalAlignment="Center" />
+                <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Click="BtnExaminar_Click" />
+
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="8" >
+        <GroupBox x:Name="groupBox" Header="Arrastre o cargue aquí los archivos que desea entregar" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="8" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -100,9 +105,6 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                
-                <CheckBox Name="chSonar" Content="Ejecutar SONAR?" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" IsChecked="{Binding Path=GitModel.EjecutaSonar}" HorizontalAlignment="Right" />
-                <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Command="{Binding Path=Examinar}" Grid.Column="8" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="BtnExaminar_Click" />
 
                 <DataGrid x:Name="dataGridArch" 
                     IsReadOnly="false" 
@@ -115,12 +117,12 @@
                     CanUserReorderColumns="False"
                     CanUserSortColumns="False"
                     ItemsSource="{Binding Path=GitModel.ListaArchivos, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
-                              Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9" CellEditEnding="DataGridArch_CellEditEnding" SelectionChanged="DataGridArch_SelectionChanged"  
+                              Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="9" CellEditEnding="DataGridArch_CellEditEnding" SelectionChanged="DataGridArch_SelectionChanged"  
                               
                       >
 
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn x:Name="idArchivo" Header="Archivo" MaxWidth="300" IsReadOnly="True">
+                        <DataGridTemplateColumn x:Name="idArchivo" Header="Archivo" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=FileName, Mode=OneWay}">
@@ -182,7 +184,7 @@
 
         <GridSplitter Grid.Column="2" Grid.RowSpan="10" Width="5" HorizontalAlignment="Stretch" />
 
-        <GroupBox x:Name="groupBoxRamas" Header="Ramas"  Grid.Row="0"  Grid.Column="3" Grid.RowSpan="3">
+        <GroupBox x:Name="groupBoxRamas" Header="Ramas"  Grid.Row="0"  Grid.Column="3" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -224,7 +226,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="groupBoxRamasObj" Header="Árbol estructura objetos" Grid.Row="3" Grid.Column="3" Grid.RowSpan="6">
+        <GroupBox x:Name="groupBoxRamasObj" Header="Carpetas" Grid.Row="2" Grid.Column="3" Grid.RowSpan="7">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -239,9 +241,9 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <CheckBox Name="chAprobar" Content="Aprobar Estructura!" Grid.Row="0" Margin="50,0,0,0" Checked="ChAprobar_Checked"  />
+                <CheckBox Name="chAprobar" Content="Aprobar Estructura!" Grid.Row="0" Margin="103,0,0,24" Checked="ChAprobar_Checked" HorizontalAlignment="Left" Grid.RowSpan="2" />
 
-                <TreeView x:Name="ArbolRutas" ItemsSource="{Binding GitModel.ListaCarpetas}" Grid.Row="1" Grid.RowSpan="9">
+                <TreeView x:Name="ArbolRutas" ItemsSource="{Binding GitModel.ListaCarpetasView}" Grid.Row="1" Grid.RowSpan="9" >
                     <TreeView.ItemContainerStyle>
                         <Style TargetType="{x:Type TreeViewItem}">
                             <Setter Property="IsExpanded" Value="{Binding IsNodeExpanded}" />
