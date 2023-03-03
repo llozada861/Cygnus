@@ -22,6 +22,7 @@ namespace Cygnus2_0.Model.Git
         private ObservableCollection<RamaRepositorio> listaRamasCreadas;
         private ObservableCollection<Archivo> listaArchivosRamas;
         private ObservableCollection<Folder> listacarpetas;
+        private ObservableCollection<Folder> listacarpetasview;
         private ObservableCollection<SelectListItem> listaHU;
         private ObservableCollection<Repositorio> listaGit;
         private string codigo;
@@ -42,6 +43,7 @@ namespace Cygnus2_0.Model.Git
             this.ListaRamasCreadas = new ObservableCollection<RamaRepositorio>();
             this.ListaArchivosRamas = new ObservableCollection<Archivo>();
             this.ListaCarpetas = new ObservableCollection<Folder>();
+            this.ListaCarpetasView = new ObservableCollection<Folder>();
             this.ListaHU = new ObservableCollection<SelectListItem>();
             this.view_ = view;
         }
@@ -126,6 +128,11 @@ namespace Cygnus2_0.Model.Git
         {
             get { return listacarpetas; }
             set { SetProperty(ref listacarpetas, value); }
+        }
+        public ObservableCollection<Folder> ListaCarpetasView
+        {
+            get { return listacarpetasview; }
+            set { SetProperty(ref listacarpetasview, value); }
         }
 
         public bool ActivaAprobRamas
