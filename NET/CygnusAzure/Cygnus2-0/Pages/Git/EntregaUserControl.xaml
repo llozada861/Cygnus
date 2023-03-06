@@ -40,7 +40,7 @@
                 </Grid.RowDefinitions>
 
                 <general:AutoComplete x:Name="AucomboBoxRepo" Grid.Row="0"  Grid.Column="0" Margin="0,0,10,0"
-                                 ItemsSource="{Binding Path=GitModel.ListaGit, Mode=TwoWay}" 
+                                 ItemsSource="{Binding Path=GitModel.ListaGit}" 
                                           SelectedItem="{Binding Path=GitSeleccionado}" DisplayMemberPath="Descripcion" 
                                       PatternChanged="AuListaRepoGit_PatternChanged"
                            Style="{StaticResource AutoCompleteComboBox}" SelectionChanged="AucomboBoxRepo_SelectionChanged" 

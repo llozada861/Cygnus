@@ -37,6 +37,7 @@ namespace Cygnus2_0.Model.Git
         private ObjectGitViewModel view_;
         public ObjectGitModel(ObjectGitViewModel view)
         {
+            this.ListaGit = new ObservableCollection<Repositorio>();
             this.ListaRamasLB = new ObservableCollection<SelectListItem>();
             this.ListaArchivosEncontrados = new ObservableCollection<Archivo>();
             this.ListaArchivos = new ObservableCollection<Archivo>();

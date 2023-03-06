@@ -142,6 +142,7 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.HU = "";
             GitModel.ListaArchivos.Clear();
             GitModel.ListaCarpetas.Clear();
+            GitModel.ListaCarpetasView.Clear();
             GitModel.ActivaAprobRamas = false;
             GitModel.NuevaRama = "";
             GitModel.ListaRamasCreadas.Clear();
