@@ -60,7 +60,7 @@
                             Grid.Column="2" 
                             Focusable="false"
                             IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
-                            ClickMode="Press">
+                            ClickMode="Press" Visibility="Hidden">
                         </ToggleButton>
                         <ContentPresenter
                             Name="ContentSite"

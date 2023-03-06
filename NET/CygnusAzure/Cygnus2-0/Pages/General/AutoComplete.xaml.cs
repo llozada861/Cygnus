@@ -242,7 +242,7 @@ namespace Cygnus2_0.Pages.General
         private void ComboBox_LostFocus(object sender, RoutedEventArgs e)
         {
             this.IsKeyEvent = false;
-            this.IsDropDownOpen = false;
+            this.IsDropDownOpen = true;
             // to prevent misunderstanding that user has entered some information
             if (this.SelectedIndex == -1)
                 this.Text = string.Empty;
