@@ -23,6 +23,7 @@ using Cygnus2_0.ViewModel.Home;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using Cygnus2_0.Model.Settings;
+using System.Diagnostics;
 
 namespace Cygnus2_0.Pages
 {
@@ -49,15 +50,23 @@ namespace Cygnus2_0.Pages
             InitializeComponent();
 
             //notificación de desbloqueo de objetos
-            var timer = new Timer { Interval = 10000 };
-            timer.Elapsed += (sender, args) => generaNotificacion();
+            var timer = new Stopwatch();
             timer.Start();
+            generaNotificacion();
+            timer.Stop();
+
+            //Notificación para nueva versión de Cygnus
+            var timerUp = new Stopwatch();
+            timer.Start();
+            pConsultaArchivoVersion();
+            timer.Stop();
+
 
             //Timer para desactivar proxy
-            var timerProxy = new Timer { Interval = 15000 };
+            /*var timerProxy = new Timer { Interval = 15000 };
             timerProxy.Elapsed += (sender, args) => desactivaProxy();
-            timerProxy.Start();
-            
+            timerProxy.Start();*/
+
         }        
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
@@ -79,37 +88,33 @@ namespace Cygnus2_0.Pages
         #region Eventos-Timer
         public void generaNotificacion()
         {
-            if (handler.DesblockViewModel != null)
+            if (handler.DesblockViewModel != null && handler.ConexionOracle.ConexionOracleSQL != null && handler.ConexionOracle.ConexionOracleSQL.State == System.Data.ConnectionState.Open && handler.DesblockViewModel.ListaArchivosBloqueo.Count > 0)
             {
-                if (handler.ConexionOracle.ConexionOracleSQL != null)
+                foreach (Archivo archivo in handler.DesblockViewModel.ListaArchivosBloqueo)
                 {
-                    if (handler.ConexionOracle.ConexionOracleSQL.State == System.Data.ConnectionState.Open)
+                    if (DateTime.Today > Convert.ToDateTime(archivo.FechaEstLib))
                     {
-                        if (handler.DesblockViewModel.ListaArchivosBloqueo.Count > 0)
+                        try
                         {
-                            foreach (Archivo archivo in handler.DesblockViewModel.ListaArchivosBloqueo)
+                            var content = new NotificationContent
                             {
-                                if (DateTime.Today > Convert.ToDateTime(archivo.FechaEstLib))
-                                {
-                                    try
-                                    {
-                                        var content = new NotificationContent
-                                        {
-                                            Title = "Desbloquear Objeto!",
-                                            Message = "El objeto [" + archivo.FileName + "] está pendiente por liberar, fecha estimada de liberación [" + archivo.FechaEstLib + "]",
-                                            Type = NotificationType.Warning
-                                        };
-                                        _notificationManager.Show(content, "WindowArea");
-                                    }
-                                    catch
-                                    {
-                                    }
-                                }
-                            }
+                                Title = "Desbloquear Objeto!",
+                                Message = "El objeto [" + archivo.FileName + "] está pendiente por liberar, fecha estimada de liberación [" + archivo.FechaEstLib + "]",
+                                Type = NotificationType.Warning
+                            };
+                            _notificationManager.Show(content, "WindowArea");
+                        }
+                        catch
+                        {
                         }
                     }
-                }
+                }                        
             }
+        }
+
+        public void pConsultaArchivoVersion()
+        {
+
         }
 
         public void desactivaProxy()

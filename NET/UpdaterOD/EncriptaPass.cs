@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using res = Updater.Properties.Resources;
+using res = UpdaterOD.Properties.Resources;
 
 namespace Updater
 {

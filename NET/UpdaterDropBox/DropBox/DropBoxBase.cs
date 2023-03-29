@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Updater.DropBox
+namespace UpdaterDB.DropBox
 {
     class DropBoxBase
     {
@@ -108,7 +109,7 @@ namespace Updater.DropBox
                     login.ShowDialog();*/
                     //if (login.Result)
                     {
-                        _strAccessToken = "DnsRo2mE6AAAAAAAAAACGqBMW2XQLZRcyvYbrtj4W7gOf-Xpez0iSlcE4Lcscv1I"; //login.AccessToken;
+                        _strAccessToken = "sl.BbVgjzsvvYF8K1lpJM6q9chwW2RLx7FzBd3InGFqmK34alzMGUF5LRKf4yAsL-EM_6aIa2eO9wqwRvZBcnop92yC5PYYwgmPVr52dLbbFnN2j-EnyQK_Y_nJhrT38NQzH9gmwqKFJlx7.."; //login.AccessToken;
                         AccessTocken = _strAccessToken; //login.AccessToken;
                         Uid = "731395691"; //login.Uid;
                                                 
@@ -256,22 +257,17 @@ namespace Updater.DropBox
         /// <returns></returns>  
         public async void Download(string DropboxFolderPath, string DropboxFileName, string DownloadFolderPath, string DownloadFileName)
         {
-            try
-            {
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-                using (var response = await DBClient.Files.DownloadAsync(DropboxFolderPath + "/" + DropboxFileName))
+            DropboxClient client = new DropboxClient("DnsRo2mE6AAAAAAAAAACRjVW5MKoyEcLbDU6N_3E7ug");
+
+            using (var response = await client.Files.DownloadAsync(DropboxFolderPath + "/" + DropboxFileName))
+            {
+                using (var fileStream = File.Create(Path.Combine(DownloadFolderPath, DownloadFileName)))
                 {
-                    using (var fileStream = File.Create(Path.Combine(DownloadFolderPath, DownloadFileName)))
-                    {
-                        (await response.GetContentAsStreamAsync()).CopyTo(fileStream);
-                    }
+                    (await response.GetContentAsStreamAsync()).CopyTo(fileStream);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
         }
         #endregion
         #region Validation Methods  

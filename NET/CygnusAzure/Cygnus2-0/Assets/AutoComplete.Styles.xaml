@@ -29,7 +29,7 @@
               VerticalAlignment="Center"/>
             <Image x:Name="ImageLook" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15" Focusable="False" >
                 <Image.Source>
-                    <ImageSource>../img/LookupGlass.png</ImageSource>
+                    <ImageSource>../img/flecha-hacia-abajo.png</ImageSource>
                 </Image.Source>
             </Image>
         </Grid>
@@ -60,7 +60,8 @@
                             Grid.Column="2" 
                             Focusable="false"
                             IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
-                            ClickMode="Press" Visibility="Hidden">
+                            ClickMode="Press" 
+                            >
                         </ToggleButton>
                         <ContentPresenter
                             Name="ContentSite"

@@ -494,6 +494,7 @@
     <Compile Include="ViewModel\Threats\ThreatsViewModel.cs" />
     <Compile Include="ViewModel\Time\ReportViewModel.cs" />
     <Compile Include="ViewModel\Time\TimesViewModel.cs" />
+    <Resource Include="img\flecha-hacia-abajo.png" />
     <Content Include="img\icons8-archivo-de-codigo-32.png" />
     <Content Include="img\icons8-folder-48.png" />
     <Resource Include="img\LookupGlass.png" />

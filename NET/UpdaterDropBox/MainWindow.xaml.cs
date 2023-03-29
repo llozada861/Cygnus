@@ -17,8 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Updater.DropBox;
-using res = Updater.Properties.Resources;
+using UpdaterDB.DropBox;
+using res = UpdaterDB.Properties.Resources;
 
 namespace Updater
 {
@@ -47,13 +47,7 @@ namespace Updater
         {
             InitializeComponent();
             path = System.IO.Path.Combine(Environment.CurrentDirectory, res.CarpetaBD);
-            DBB = new DropBoxBase(strAppKey, "CygnusApp");
-
-            nombre = res.NombreArchivoRutaActualiza;
-            myFile = res.RutaActualiza;
-            pCreaArchivoBD(path, nombre, myFile);
-
-            DatosRutaActualizacion();            
+            DBB = new DropBoxBase(strAppKey, "CygnusNet");       
         }
 
         public string RutaInstalador { set; get; }
@@ -117,20 +111,16 @@ namespace Updater
                 pActualiza();
 
                 //(sender as BackgroundWorker).ReportProgress(40);
-                Thread.Sleep(6000);
+                Thread.Sleep(8000);
 
                 unZip(tempDownloadFolder + downloadFile, tempDownloadFolder);
 
                 (sender as BackgroundWorker).ReportProgress(60);
-                Thread.Sleep(2000);
+                Thread.Sleep(100);
 
                 moveFiles();
                 (sender as BackgroundWorker).ReportProgress(80);
-                Thread.Sleep(2000);
-
-                /*SetLabel( "Wrapping up...");
-                Thread.Sleep(1000);
-                wrapUp();*/
+                Thread.Sleep(100);
 
                 (sender as BackgroundWorker).ReportProgress(100);
                 Thread.Sleep(100);
@@ -264,11 +254,11 @@ namespace Updater
 
         public void pActualiza()
         {
-            string archivoOrigen;
             string archivoDestino;
 
-            archivoOrigen = System.IO.Path.Combine(RutaInstalador , ArchivoVersion);
-            archivoDestino = System.IO.Path.Combine(Environment.CurrentDirectory , ArchivoVersion);
+            ArchivoVersion = res.ArchivoVersion;
+
+            archivoDestino = System.IO.Path.Combine(Environment.CurrentDirectory , res.ArchivoVersion);
 
             if (File.Exists(archivoDestino))
             {
@@ -277,17 +267,15 @@ namespace Updater
 
             try
             {
-                //Red Local
-                File.Copy(archivoOrigen, archivoDestino, true);
-                pVerificaVersion("R");
-                pDescargarArchivosRed();                
+                //DropBox
+                pDescargaDropBox(ArchivoVersion, Environment.CurrentDirectory);
+                pVerificaVersion("D");
+                pDescargaDropBox(downloadFile, tempDownloadFolder);
             }
             catch (Exception ex)
             {
                 //DropBox
-                pDescargaDropBox(ArchivoVersion, Environment.CurrentDirectory);
-                pVerificaVersion("D");
-                pDescargaDropBox(downloadFile,tempDownloadFolder);
+                MessageBox.Show(ex.Message);
             }           
         }
 
@@ -302,7 +290,7 @@ namespace Updater
 
             if (tipo.Equals("D"))
             {
-                System.Threading.Thread.Sleep(30000);
+                System.Threading.Thread.Sleep(5000);
             }
 
             using (StreamReader streamReader = new StreamReader(file, Encoding.Default))
@@ -318,14 +306,7 @@ namespace Updater
         {
             try
             {                
-                string strAuthenticationURL = DBB.GeneratedAuthenticationURL(); // This method must be executed before generating Access Token.    
-                string strAccessToken = DBB.GenerateAccessToken();
-
-                if (strAccessToken != null && strAuthenticationURL != null)
-                {
-                    DBB.Download("/Instalador", archivo, ruta, archivo);
-                }
-
+                DBB.Download("/Instalador", archivo, ruta, archivo);
             }
             catch (Exception)
             {

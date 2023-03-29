@@ -72,7 +72,7 @@
                 CanUserReorderColumns="False"
                 CanUserSortColumns="False"
                               Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"
-                ItemsSource="{Binding Path=Model.ListaArchivosCargados}" MouseDoubleClick="DataGridArchCompila_MouseDoubleClick"
+                ItemsSource="{Binding Path=Model.ListaArchivosCargados}" 
                   >
                 <DataGrid.Columns>
                     <DataGridTextColumn                  
