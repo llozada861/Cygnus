@@ -200,7 +200,7 @@ namespace Cygnus2_0.DAO
         {
             using (DataBaseContext context = new DataBaseContext())
             {
-                handler.ListaTiposObjetos = new ObservableCollection<TipoObjetos>(context.TipoObjetos.ToList());
+                handler.ListaTiposObjetos = new ObservableCollection<TipoObjetos>(context.TipoObjetos.OrderBy(x => x.Descripcion).ToList());
             }
         }
 
@@ -449,6 +449,7 @@ namespace Cygnus2_0.DAO
                     objeto.Servidor = serv;
                     objeto.Puerto = port;
                     objeto.Pass = pass;
+                    objeto.Activo = defecto;
                     context.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }

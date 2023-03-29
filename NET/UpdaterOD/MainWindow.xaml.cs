@@ -9,7 +9,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Windows;
-using res = Updater.Properties.Resources;
+using res = UpdaterOD.Properties.Resources;
 
 namespace Updater
 {
@@ -308,6 +308,7 @@ namespace Updater
 
                 if (!string.IsNullOrEmpty(sbLine))
                 {
+                    //"https://mvmingenieriadesoftware-my.sharepoint.com/personal/luis_lozada_mvm_com_co|luis.lozada@mvm.com.co|dici2018*|/personal/luis_lozada_mvm_com_co/Documents/InstaladorCygnus/Actualizacion/Version.txt|/personal/luis_lozada_mvm_com_co/Documents/InstaladorCygnus/Actualizacion/Cygnus.zip"
                     //Se desencripta la linea con las credenciales
                     sbLineUnWrap = EncriptaPass.Desencriptar(sbLine);
 

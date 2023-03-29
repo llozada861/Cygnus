@@ -934,17 +934,11 @@ namespace Cygnus2_0.DAO
                         sbAplicaBody.Append("@" + "'" + archivo.RutaConArchivo + "'");
                         sbAplicaBody.Append(Environment.NewLine);
                         sbAplicaBody.Append(Environment.NewLine);
-
-                        /*using (StreamWriter str = new StreamWriter(sbAplica))
-                        {
-                            str.Write(sbAplicaBody.ToString());
-                        }*/
-
                         archivo.AplicaTemporal = nombreLog;
                     }
                     else
                     {
-                        sbAplicaBody.Append("@" + "'" + archivo.Ruta+archivo.FileName + "'");
+                        sbAplicaBody.Append("@" + "'" + archivo.RutaConArchivo + "'");
                         sbAplicaBody.Append(Environment.NewLine);
                     }
                 }
