@@ -900,6 +900,7 @@ namespace Cygnus2_0.DAO
             Process process = new Process();
             string output = null;
             List<Archivo> archivosOrdenados;
+            string rutaArchivo;
 
             if (archivos.Count > 0)
             {
@@ -938,7 +939,12 @@ namespace Cygnus2_0.DAO
                     }
                     else
                     {
-                        sbAplicaBody.Append("@" + "'" + archivo.RutaConArchivo + "'");
+                        if(string.IsNullOrEmpty(archivo.RutaConArchivo))
+                            rutaArchivo = archivo.Ruta+""+archivo.FileName;
+                        else
+                            rutaArchivo = archivo.RutaConArchivo;
+
+                        sbAplicaBody.Append("@" + "'" + rutaArchivo + "'");
                         sbAplicaBody.Append(Environment.NewLine);
                     }
                 }
