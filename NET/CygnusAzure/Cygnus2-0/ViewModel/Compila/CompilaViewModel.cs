@@ -329,14 +329,14 @@ namespace Cygnus2_0.ViewModel.Compila
 
             Thread.Sleep(4000);
 
-            foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)))
+            foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS) && x.Tipo != Int32.Parse(res.TipoAplica) && x.Tipo != Int32.Parse(res.TipoAplicaGrant)))
             {
                 try
                 {
                     handler.pEjecutaPermisosArchivo(archivo, this.Model.Usuario.Text);
                     pObtieneErroresAplicacion(archivo);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     handler.MensajeError(ex.Message);
                 }
