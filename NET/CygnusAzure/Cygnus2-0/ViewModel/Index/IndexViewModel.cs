@@ -17,6 +17,7 @@ using Cygnus2_0.Model.Empresa;
 using Cygnus2_0.Model.User;
 using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Model.Objects;
+using Cygnus2_0.Model.Html;
 
 namespace Cygnus2_0.ViewModel.Index
 {
@@ -341,14 +342,14 @@ namespace Cygnus2_0.ViewModel.Index
         {
             try
             {
-                handler.ListaHTML = new ObservableCollection<SelectListItem>();
+                handler.ListaHTML = new ObservableCollection<PlantillasHTMLModel>();
                 SqliteDAO.pListaHTML(handler);
 
-                handler.HtmlEspecificacion.Append(handler.ListaHTML.ToList().Find(x => x.Text.Equals(res.KeyEspecificacion)).Value);
-                handler.HtmlMetodo.Append(handler.ListaHTML.ToList().Find(x => x.Text.Equals(res.KeyMetodo)).Value);
-                handler.HtmlMetodoParam.Append(handler.ListaHTML.ToList().Find(x => x.Text.Equals(res.KeyMetoParam)).Value);
-                handler.HtmlMetodoReturn.Append(handler.ListaHTML.ToList().Find(x => x.Text.Equals(res.KeyMetoReturn)).Value);
-                handler.HtmlScript.Append(handler.ListaHTML.ToList().Find(x => x.Text.Equals(res.KeyScript)).Value);
+                handler.HtmlEspecificacion.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyEspecificacion)));
+                handler.HtmlMetodo.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetodo)));
+                handler.HtmlMetodoParam.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoParam)));
+                handler.HtmlMetodoReturn.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoReturn)));
+                handler.HtmlScript.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyScript)));
             }
             catch (Exception ex)
             {
@@ -443,6 +444,11 @@ namespace Cygnus2_0.ViewModel.Index
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KEY_VALORW)))
             {
                 handler.ConfGeneralView.Model.ValorW = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_VALORW)).Value;
+            }
+
+            if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyCorreoGeneral)))
+            {
+                handler.CorreoGeneral = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_VALORW)).Value;
             }
         }
         #endregion Configuracion

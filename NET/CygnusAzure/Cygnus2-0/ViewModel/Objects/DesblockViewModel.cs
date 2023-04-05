@@ -41,16 +41,6 @@ namespace Cygnus2_0.ViewModel.Objects
             ListaArchivosDesbloq = new ObservableCollection<Archivo>();
             this.CantidadObjetos = "0";
             this.Fecha = DateTime.Now.AddDays(-1);
-
-            try
-            {
-                if(!handler.ConnView.Model.Usuario.ToUpper().Equals(res.UsuarioSQLDefault) && handler.ConexionOracle.ConexionOracleSQL != null)
-                    handler.DAO.pObtObjetosBloqueados(this);
-            }
-            catch(Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
         }
         public string CantidadObjetos
         {
@@ -131,22 +121,6 @@ namespace Cygnus2_0.ViewModel.Objects
 
         public void OnUpdate(Archivo objeto)
         {
-            try
-            {
-                if(this.Fecha <= DateTime.Now)
-                {
-                    handler.MensajeError("La fecha debe ser mayor a la fecha actual");
-                    return;
-                }
-
-                handler.DAO.pActualizaFecha(objeto,this.Fecha);
-                handler.MensajeOk("La fecha estimada de liberación del objeto ["+objeto.FileName+"] se ha cambiado con éxito.");
-                this.OnClean("");
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
         }
     }
 }

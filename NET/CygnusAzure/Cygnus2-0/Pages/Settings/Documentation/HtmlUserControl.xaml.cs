@@ -36,10 +36,10 @@ namespace Cygnus2_0.Pages.Settings.Documentation
             if (dataGridDatos.SelectedItem == null)
                 return;
 
-            txtName.Text = ((SelectListItem)dataGridDatos.SelectedItem).Text;
+            txtName.Text = ((PlantillasHTMLModel)dataGridDatos.SelectedItem).Nombre;
 
             richTextBoxProce.Document.Blocks.Clear();
-            richTextBoxProce.Document.Blocks.Add(new Paragraph(new Run(((SelectListItem)dataGridDatos.SelectedItem).Value)));
+            richTextBoxProce.Document.Blocks.Add(new Paragraph(new Run(((PlantillasHTMLModel)dataGridDatos.SelectedItem).Documentacion)));
             btnModif.Content = "Modificar";
             txtName.IsEnabled = false;
         }
@@ -56,7 +56,7 @@ namespace Cygnus2_0.Pages.Settings.Documentation
                 return;
             }
 
-            SelectListItem seleccionado = ((SelectListItem)dataGridDatos.SelectedItem);
+            PlantillasHTMLModel seleccionado = ((PlantillasHTMLModel)dataGridDatos.SelectedItem);
 
             if(seleccionado != null)
             {
@@ -67,15 +67,14 @@ namespace Cygnus2_0.Pages.Settings.Documentation
                 nuEmpresa = handler.ConfGeneralView.Model.Empresa.Codigo;
             }
 
-            PlantillasHTMLModel objeto = new PlantillasHTMLModel() { Nombre = key, Documentacion = value, Empresa = nuEmpresa };
-
             try
-            {                
-                SqliteDAO.pActualizaObjeto(objeto);                
+            {
+                seleccionado.Documentacion = value;
+                SqliteDAO.pActualizaObjeto(seleccionado);                
             }
             catch (Exception ex)
             {
-                SqliteDAO.pInsertaPlantilla(objeto);
+                SqliteDAO.pInsertaPlantilla(seleccionado);
             }
 
             pCargarLista();

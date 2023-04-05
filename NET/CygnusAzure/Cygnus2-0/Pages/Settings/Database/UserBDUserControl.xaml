@@ -59,12 +59,16 @@
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Usuariobd}" Header="Usuario o Rol" MinWidth="200">
+                            <DataGridTextColumn Binding="{Binding Usuariobd}" Header="Usuario" MinWidth="200">
                                 <DataGridTextColumn.EditingElementStyle>
                                     <Style TargetType="TextBox">
                                         <Setter Property="CharacterCasing" Value="Upper"></Setter>
                                     </Style>
                                 </DataGridTextColumn.EditingElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Passwordbd}" Header="Contraseña" MinWidth="200">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding BaseDatos}" Header="Base De Datos" MinWidth="200">
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>

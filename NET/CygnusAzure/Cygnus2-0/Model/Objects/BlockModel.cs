@@ -59,8 +59,6 @@ namespace Cygnus2_0.Model.Objects
 
             foreach (Archivo archivo in view.ListaArchivosBloqueo)
             {
-                handler.DAO.pBloqueaObjeto(archivo, view);
-
                 if (view.ListaArchivosBloqueo.IndexOf(archivo) == view.ListaArchivosBloqueo.Count - 1)
                 {
                     objetosBloqueados = objetosBloqueados + archivo.FileName;
@@ -75,9 +73,9 @@ namespace Cygnus2_0.Model.Objects
             {
                 if (handler.MensajeConfirmacion("Desea enviar la notificación por correo?") == "Y")
                 {
-                    asunto = "Bloqueo de Objetos [" + objetosBloqueados + "]";
-                    body = "Buen día, <br><br> Se informa que se ha(n) bloqueado el(los) objeto(s) [" + objetosBloqueados + "] " +
-                           " con la WO [" + view.Codigo + "], desde la aplicación Cygnus. <br><br> Correo enviado a través de Cygnus.";
+                    asunto = "Notificación para modificar los objetos [" + objetosBloqueados + "]";
+                    body = "Buen día, <br><br> Se informa que se va a trabajar sobre los objetos [" + objetosBloqueados + "] " +
+                           " con la WO [" + view.Codigo + "]. <br><br> Correo enviado a través de Cygnus.";
 
                     handler.sendEMailThroughOUTLOOK(asunto, body);
                 }

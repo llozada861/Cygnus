@@ -32,11 +32,11 @@
                     <DataGridTextColumn                  
                   IsReadOnly="True"
                   Header="Tag"
-                  Binding="{Binding Path=Text}" />
+                  Binding="{Binding Path=Nombre}" />
                     <DataGridTextColumn                  
                   IsReadOnly="True"
                   Header="Plantilla"
-                  Binding="{Binding Path=Value}" />
+                  Binding="{Binding Path=Documentacion}" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

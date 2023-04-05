@@ -128,34 +128,10 @@ namespace Cygnus2_0.ViewModel.Time
         }
         private void InsertDataCygnus()
         {
-            int ind = 2;
-            List<TareaHoja> ListaTareas = handler.DAO.pObtListaTareas(this);
-
-            foreach (TareaHoja field in ListaTareas)
-            {
-                this.SheetCygnus.Cells[ind, 1] = field.FechaCreacion;
-                this.SheetCygnus.Cells[ind, 2] = field.HU;
-                this.SheetCygnus.Cells[ind, 3] = field.IdAzure;
-                this.SheetCygnus.Cells[ind, 4] = field.Descripcion;
-                this.SheetCygnus.Cells[ind, 5] = field.Total;
-                ind++;
-            }
         }
 
         public void pInsertaTareaAzure()
         {
-            int ind = 2;
-            List<TareaHoja> lista = handler.DAO.pObtListaTaskAzure(this);
-
-            foreach (TareaHoja field in lista)
-            {
-                this.SheetAzure.Cells[ind, 1] = field.FechaCreacion;
-                this.SheetAzure.Cells[ind, 2] = field.IdAzure;
-                this.SheetAzure.Cells[ind, 3] = field.Descripcion;
-                this.SheetAzure.Cells[ind, 4] = field.Estado;
-                this.SheetAzure.Cells[ind, 5] = field.Total;
-                ind++;
-            }
         }
 
         private void Close()

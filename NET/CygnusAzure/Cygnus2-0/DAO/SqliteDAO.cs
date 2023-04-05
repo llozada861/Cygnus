@@ -334,13 +334,7 @@ namespace Cygnus2_0.DAO
         {
             using (DataBaseContext context = new DataBaseContext())
             {
-                List<PlantillasHTMLModel> lista = context.PlantillasHTML.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList();
-
-                foreach (PlantillasHTMLModel objeto in lista)
-                {
-                    SelectListItem item = new SelectListItem() { Text = objeto.Nombre, Value = objeto.Documentacion,Empresa = objeto.Empresa };
-                    handler.ListaHTML.Add(item);
-                }
+                handler.ListaHTML = new ObservableCollection<PlantillasHTMLModel>(context.PlantillasHTML.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
             }
         }
         #endregion Plantillas

@@ -14,7 +14,11 @@ namespace Cygnus2_0.Model.User
         [Column(name: "user")]
         [Key]
         public string Usuariobd { get; set; }
+        [Column(name: "password")]
+        public string Passwordbd { get; set; }
 
+        [Column(name: "basedatos")]
+        public string BaseDatos { get; set; }
         [Column(name: "company")]
         public int? Empresa { get; set; }
     }

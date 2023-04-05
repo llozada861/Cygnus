@@ -61,7 +61,6 @@ namespace Cygnus2_0.Model.Refresh
         public void pObtBackup(RefreshViewModel view)
         {
             StringBuilder reiniciaSeq = new StringBuilder();
-            handler.DAO.pObtBackup(view);
 
             nombre = "17_reiniciaSecuencia.sql";
 
