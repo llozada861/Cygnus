@@ -448,7 +448,7 @@ namespace Cygnus2_0.ViewModel.Index
 
             if (handler.ListaConfiguracion.Exists(x => x.Text.Equals(res.KeyCorreoGeneral)))
             {
-                handler.CorreoGeneral = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KEY_VALORW)).Value;
+                handler.CorreoGeneral = handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyCorreoGeneral)).Value;
             }
         }
         #endregion Configuracion
