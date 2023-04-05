@@ -70,6 +70,23 @@
                             </DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding BaseDatos}" Header="Base De Datos" MinWidth="200">
                             </DataGridTextColumn>
+                            <DataGridComboBoxColumn Width="200"
+                                            DisplayMemberPath="Text"
+                                            SelectedValuePath="Value"
+                                            Header="Principal?"
+                                            SelectedValueBinding="{Binding Principal, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaSINO}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaSINO}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

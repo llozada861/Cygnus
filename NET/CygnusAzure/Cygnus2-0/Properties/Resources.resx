@@ -2256,4 +2256,7 @@ END;
   <data name="KEY_AUDIT_TABLA" xml:space="preserve">
     <value>AUDITORIA_TABLA</value>
   </data>
+  <data name="KEY_CREA_USUARIOS" xml:space="preserve">
+    <value>CREA_USUARIOS</value>
+  </data>
 </root>

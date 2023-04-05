@@ -40,6 +40,7 @@ using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Permisos;
 using System.Runtime.InteropServices;
 using Cygnus2_0.Model.Html;
+using Cygnus2_0.Model.Repository;
 
 namespace Cygnus2_0.General
 {
@@ -292,7 +293,13 @@ namespace Cygnus2_0.General
         public ObservableCollection<UsuarioModel> ListaUsuarios
         {
             get { return listaUsuarios; }
-            set { SetProperty(ref listaUsuarios, value); }
+            set { SetProperty(ref listaUsuarios, value);
+
+                foreach (UsuarioModel objeto in listaUsuarios)
+                {
+                    objeto.ListaSINO = new ObservableCollection<SelectListItem>(this.ListaSiNO);
+                }
+            }
         }
         public UsuarioModel UsuarioSeleccionado { get; set; }
         public List<SelectListItem> ListaConfiguracion { get; set; }

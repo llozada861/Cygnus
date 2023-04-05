@@ -72,12 +72,6 @@ namespace Cygnus2_0.ViewModel.Security
                     return;
                 }
 
-                if (string.IsNullOrEmpty(this.Model.Rol.Text))
-                {
-                    handler.MensajeError("Debe ingresar el rol.");
-                    return;
-                }
-
                 handler.CursorWait();
                 pCreaUsuario();
 
@@ -88,7 +82,6 @@ namespace Cygnus2_0.ViewModel.Security
                     handler.ConexionOracle.ConexionOracleCompila.Close();
                 }
 
-                string pass = this.Model.Usuario.Trim() + "-" + this.Model.Rol.Value;
                 handler.CursorNormal();
 
                 handler.MensajeOk("Proceso terminó.");
@@ -107,7 +100,7 @@ namespace Cygnus2_0.ViewModel.Security
             string sbAplica;
             StringBuilder sbAplicaBody = new StringBuilder();
 
-            handler.pObtenerUsuarioCompilacion("FLEX");
+            handler.pObtenerUsuarioCompilacion(handler.ListaUsuarios.Where(x => x.Principal.Equals(res.Si)).FirstOrDefault().Usuariobd);
             credenciales = handler.ConnView.Model.UsuarioCompila + "/" + handler.ConnView.Model.PassCompila + "@" + handler.ConnView.Model.BaseDatos;
 
             sbNombreAplica = this.Model.Usuario.Trim() + ".sql";
@@ -118,7 +111,7 @@ namespace Cygnus2_0.ViewModel.Security
                 File.Delete(sbAplica);
             }
 
-            sbAplicaBody.Append(res.ScriptCreaUsuario);
+            sbAplicaBody.Append(handler.ListaHTML.Where(x=>x.Nombre.Equals(res.KEY_CREA_USUARIOS)).FirstOrDefault().Documentacion);
             sbAplicaBody.Replace("[PAR_USUARIO_SQL]", this.Model.Usuario.Trim());
             sbAplicaBody.Replace("[PAR_PASS_SQL]", this.Model.Password);
 
@@ -127,7 +120,7 @@ namespace Cygnus2_0.ViewModel.Security
                 str.Write(sbAplicaBody.ToString());
             }
 
-            List<Archivo> archivos = new List<Archivo>{ new Archivo { FileName = sbNombreAplica, Ruta = handler.PathTempAplica, Tipo = Int32.Parse(res.TipoAplica) }};
+            List<Archivo> archivos = new List<Archivo>{ new Archivo { FileName = sbNombreAplica, Ruta = handler.PathTempAplica, Tipo = Int32.Parse(res.TipoAplica), RutaConArchivo = Path.Combine(handler.PathTempAplica, sbNombreAplica) }};
             handler.DAO.pExecuteSqlplus(credenciales, archivos, handler.PathTempAplica, handler.ConnView.Model.UsuarioCompila);            
         }
 

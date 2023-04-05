@@ -3,6 +3,7 @@ using Cygnus2_0.General;
 using Cygnus2_0.Model.User;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Cygnus2_0.Pages.Settings.Database
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            handler.ListaUsuarios.Add(new UsuarioModel() { Empresa = handler.ConfGeneralView.Model.Empresa.Codigo });
+            handler.ListaUsuarios.Add(new UsuarioModel() { Empresa = handler.ConfGeneralView.Model.Empresa.Codigo,ListaSINO = new ObservableCollection<SelectListItem>(handler.ListaSiNO) });
         }
 
         private void btnGuar_Click(object sender, RoutedEventArgs e)
