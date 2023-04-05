@@ -1294,6 +1294,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a CREA_USUARIOS.
+        /// </summary>
+        public static string KEY_CREA_USUARIOS {
+            get {
+                return ResourceManager.GetString("KEY_CREA_USUARIOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a EMPRESA.
         /// </summary>
         public static string KEY_EMPRESA {
