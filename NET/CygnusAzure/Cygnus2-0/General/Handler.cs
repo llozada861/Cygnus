@@ -38,6 +38,8 @@ using Cygnus2_0.ViewModel.Repository;
 using Cygnus2_0.Model.User;
 using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Permisos;
+using System.Runtime.InteropServices;
+using Cygnus2_0.Model.Html;
 
 namespace Cygnus2_0.General
 {
@@ -255,6 +257,7 @@ namespace Cygnus2_0.General
         public DesblockViewModel DesblockViewModel { set; get; }
         public string RutaBaseDatos { set; get; }
         public string Tema { set; get; }
+        public string CorreoGeneral { set; get; }
         public string RutaBk { set; get; }
         public string PathTempAplica { set; get; }
         public Double Version { set; get; }
@@ -314,7 +317,7 @@ namespace Cygnus2_0.General
             }
         }
         public DocumentacionHTML DocHTMLSeleccionado { get; set; }
-        public ObservableCollection<SelectListItem> ListaHTML { get; set; }
+        public ObservableCollection<PlantillasHTMLModel> ListaHTML { get; set; }
         public SelectListItem Generico { get; set; }
         public SelectListItem Generico2 { get; set; }
         public StringBuilder HtmlEspecificacion { set; get; }
@@ -715,26 +718,6 @@ namespace Cygnus2_0.General
         public void pRealizaConexion()
         {
             this.ConexionOracle.RealizarConexion();
-
-            //Establece el rol
-            CustomPrincipal customPrincipal = Thread.CurrentPrincipal as CustomPrincipal;
-            if (customPrincipal == null)
-                throw new ArgumentException("The application's default thread principal must be set to a CustomPrincipal object on startup.");
-
-            //string cred = EncriptaPass.Encriptar("SQL_LLOZADA-2");
-
-            int rol = this.DAO.pObtRol(view.Model.Usuario);
-
-            if (rol > 0)
-            {
-                //Authenticate the user
-                customPrincipal.Identity = new CustomIdentity(view.Model.Usuario, "", rol);
-            }
-            else
-            {
-                string pass = view.Model.Usuario.Trim() + "-0";
-                this.DAO.pGuardaRol(view.Model.Usuario.Trim().ToUpper(), EncriptaPass.Encriptar(pass), "");
-            }
         }
 
         public void pCreaArchivoBD(string path, string nombre, byte[] myFile)
@@ -792,7 +775,7 @@ namespace Cygnus2_0.General
                 // Add a recipient.
                 Outlook.Recipients oRecips = (Outlook.Recipients)oMsg.Recipients;
                 // Change the recipient in the next line if necessary.
-                Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(DAO.pObtGrupoCorreo());
+                Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(this.CorreoGeneral);
                 oRecip.Resolve();
                 // Send.
                 oMsg.Send();
@@ -1208,15 +1191,16 @@ namespace Cygnus2_0.General
 
         public void pObtenerUsuarioCompilacion(string usuario)
         {
-            string passEncrypt = DAO.pObtenerUsuarioCompilacion(usuario);
-            string credenciales = EncriptaPass.Desencriptar(passEncrypt);
-            string[] split = credenciales.Split('-');
+            UsuarioModel userCompila = this.ListaUsuarios.Where(x=>x.Usuariobd.Equals(usuario)).FirstOrDefault();
 
-            ConnView.Model.UsuarioCompila = split[0];
-            ConnView.Model.PassCompila = split[1];
-            ConnView.Model.BdCompila = split[2];
+            if (userCompila != null)
+            {
+                ConnView.Model.UsuarioCompila = userCompila.Usuariobd;
+                ConnView.Model.PassCompila = userCompila.Passwordbd;
+                ConnView.Model.BdCompila = userCompila.BaseDatos;
 
-            ConexionOracle.RealizarConexionCompilacion();
+                ConexionOracle.RealizarConexionCompilacion();
+            }
         }
 
         public void CopyResource(string resourceName, string file)

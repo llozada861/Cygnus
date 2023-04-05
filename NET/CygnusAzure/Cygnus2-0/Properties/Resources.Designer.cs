@@ -1285,6 +1285,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a AUDITORIA_TABLA.
+        /// </summary>
+        public static string KEY_AUDIT_TABLA {
+            get {
+                return ResourceManager.GetString("KEY_AUDIT_TABLA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a EMPRESA.
         /// </summary>
         public static string KEY_EMPRESA {
@@ -1303,11 +1312,29 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PKTBL.
+        /// </summary>
+        public static string KEY_PKTBL {
+            get {
+                return ResourceManager.GetString("KEY_PKTBL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a VALOR_WINDOWS.
         /// </summary>
         public static string KEY_VALORW {
             get {
                 return ResourceManager.GetString("KEY_VALORW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CORREO_GENERAL.
+        /// </summary>
+        public static string KeyCorreoGeneral {
+            get {
+                return ResourceManager.GetString("KeyCorreoGeneral", resourceCulture);
             }
         }
         

@@ -68,7 +68,7 @@ namespace Cygnus2_0.ViewModel.Pkg
         {
             handler.CursorWait();
 
-            OracleClob pktbl = handler.DAO.pGeneraPktbl(this.Model.Tabla, this.Model.Usuario, this.Model.Caso);
+            OracleClob pktbl = handler.DAO.pGeneraPktbl(this.Model.Tabla, this.Model.Usuario, this.Model.Caso,handler);
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = "pktbl" + this.Model.Tabla.ToLower().Trim() + ".sql";

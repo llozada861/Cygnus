@@ -12,7 +12,7 @@
             <mui:ModernTab.Links>
                 <!-- TODO: set @Source -->
                 <mui:Link DisplayName="Bloqueo" Source="/Pages/Objects/UCBlockObject.xaml" />
-                <mui:Link DisplayName="Desbloqueo" Source="/Pages/Objects/UCDesBlockObjects.xaml" />
+                <!--<mui:Link DisplayName="Desbloqueo" Source="/Pages/Objects/UCDesBlockObjects.xaml" />-->
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

@@ -89,7 +89,6 @@ namespace Cygnus2_0.ViewModel.Security
                 }
 
                 string pass = this.Model.Usuario.Trim() + "-" + this.Model.Rol.Value;
-                handler.DAO.pGuardaRol(this.Model.Usuario.Trim(), EncriptaPass.Encriptar(pass), this.Model.Email);
                 handler.CursorNormal();
 
                 handler.MensajeOk("Proceso terminó.");
@@ -160,7 +159,6 @@ namespace Cygnus2_0.ViewModel.Security
         public void pGuardaRol()
         {
             string pass = this.Model.Usuario.Trim() + "-" + this.Model.Rol.Value;
-            handler.DAO.pGuardaRol(this.Model.Usuario.Trim(), EncriptaPass.Encriptar(pass), this.Model.Email);
 
             if (!string.IsNullOrEmpty(this.Model.Email))
             {

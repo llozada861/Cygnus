@@ -49,24 +49,11 @@ namespace Cygnus2_0.Pages
             DataContext = handler;
             InitializeComponent();
 
-            //notificación de desbloqueo de objetos
-            var timer = new Stopwatch();
-            timer.Start();
-            generaNotificacion();
-            timer.Stop();
-
             //Notificación para nueva versión de Cygnus
-            var timerUp = new Stopwatch();
+            /*var timerUp = new Stopwatch();
             timer.Start();
             pConsultaArchivoVersion();
-            timer.Stop();
-
-
-            //Timer para desactivar proxy
-            /*var timerProxy = new Timer { Interval = 15000 };
-            timerProxy.Elapsed += (sender, args) => desactivaProxy();
-            timerProxy.Start();*/
-
+            timer.Stop();*/
         }        
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {

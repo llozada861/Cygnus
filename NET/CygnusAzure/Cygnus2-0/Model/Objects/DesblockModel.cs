@@ -27,8 +27,6 @@ namespace Cygnus2_0.Model.Objects
 
             foreach (Archivo archivo in view.ListaArchivosDesbloq)
             {
-                pDesbloqueaObjeto(archivo);
-
                 if (view.ListaArchivosDesbloq.IndexOf(archivo) == view.ListaArchivosDesbloq.Count - 1)
                 {
                     objetosDesBloqueados = objetosDesBloqueados + archivo.FileName;
@@ -39,7 +37,6 @@ namespace Cygnus2_0.Model.Objects
                 }
             }
             pLimpiar();
-            handler.DAO.pObtObjetosBloqueados(view);
 
             if (!string.IsNullOrEmpty(objetosDesBloqueados))
             {
@@ -56,14 +53,12 @@ namespace Cygnus2_0.Model.Objects
 
         public void pDesbloqueaObjeto(Archivo archivo)
         {
-            handler.DAO.pDesbloqueaObjeto(archivo);
         }
 
         public void pLimpiar()
         {
             view.ListaArchivosDesbloq.Clear();
             view.ListaArchivosBloqueo.Clear();
-            handler.DAO.pObtObjetosBloqueados(view);
             view.EstadoConn = "1";
             pRefrescaConteo();
         }

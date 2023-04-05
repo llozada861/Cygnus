@@ -93,25 +93,13 @@ namespace Cygnus2_0.ViewModel.Objects
             {
                 if (string.IsNullOrEmpty(this.Codigo))
                 {
-                    handler.MensajeError("Ingrese el número de la WO para bloquear los objetos.");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(Fecha.ToString()))
-                {
-                    handler.MensajeError("Ingrese la fecha de liberación de los objetos.");
-                    return;
-                }
-
-                if (Fecha < DateTime.Now)
-                {
-                    handler.MensajeError("La fecha de liberación debe ser mayor a la fecha actual.");
+                    handler.MensajeError("Ingrese el número de la WO para trabajar sobre los objetos.");
                     return;
                 }
 
                 if (this.ListaArchivosBloqueo.Count == 0)
                 {
-                    handler.MensajeError("No hay objetos para bloquear.");
+                    handler.MensajeError("No hay objetos para informar.");
                     return;
                 }
 

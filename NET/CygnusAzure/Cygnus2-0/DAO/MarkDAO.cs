@@ -22,6 +22,13 @@ using Cygnus2_0.Model.Compila;
 using Cygnus2_0.Model.Data;
 using Cygnus2_0.Model.Security;
 using Cygnus2_0.Model.Time;
+using Microsoft.Office.Interop.Excel;
+using System.Windows.Controls.Primitives;
+using System.Windows.Forms;
+using Cygnus2_0.Model.User;
+using System.Xml.Linq;
+using Microsoft.Office.Interop.Outlook;
+using System.Drawing;
 
 namespace Cygnus2_0.DAO
 {
@@ -121,171 +128,6 @@ namespace Cygnus2_0.DAO
         #endregion GetionDatos
 
         #region Refrescamiento
-        internal void pObtBackup(RefreshViewModel view)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtBackup"))
-            {
-                handler.ConexionOracle.AddOutParameter(cmd, "onuSeqObjBl", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuSeqLogap", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuSeqRq", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuSeqHH", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuSeqNeg", OracleDbType.Int64);
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                OracleDataReader reader = null;
-
-                try
-                {
-                    view.ListaInsertCM.Clear();
-                    view.ListaUsuarios.Clear();
-                    view.ListaObjetosBl.Clear();
-                    view.ListaSaUser.Clear();
-                    view.ListaPerson.Clear();
-                    view.ListaHoja.Clear();
-                    view.ListaRQ.Clear();
-                    view.ListaHH.Clear();
-
-                    reader = cmd.ExecuteReader();
-
-                    //CredMark
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaInsertCM.Add(dato);
-                    }
-
-                    reader.NextResult();
-
-                    //ll_usuarios
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaUsuarios.Add(dato);
-                    }
-
-                    reader.NextResult();
-
-                    //Ll_objetosbl
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaObjetosBl.Add(dato);
-                    }
-
-                    reader.NextResult();
-
-                    //sa_user
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaSaUser.Add(dato);
-                    }
-
-                    reader.NextResult();
-
-                    //ge_person
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaPerson.Add(dato);
-                    }
-
-                    reader.NextResult();
-
-                    //ll_hojas
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaHoja.Add(dato);
-                    }
-
-                    reader.NextResult();
-
-                    //ll_requerimiento
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaRQ.Add(dato);
-                    }
-
-                    reader.NextResult();
-
-                    //ll_horashoja
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-
-                        dato.Text = Convert.ToString(reader["VALOR"]);
-                        view.ListaHH.Add(dato);
-                    }
-                }
-                catch (InvalidCastException)
-                {}
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                view.ObjetosBl = handler.ConexionOracle.GetParameterValue(cmd, "onuSeqObjBl");
-                view.ObjetosLog = handler.ConexionOracle.GetParameterValue(cmd, "onuSeqLogap");
-                view.onuSeqRq = handler.ConexionOracle.GetParameterValue(cmd, "onuSeqRq");
-                view.onuSeqHH = handler.ConexionOracle.GetParameterValue(cmd, "onuSeqHH");
-                view.onuSeqNeg = handler.ConexionOracle.GetParameterValue(cmd, "onuSeqNeg");
-            }
-        }
-        internal void pObtBackupNuevo(RefreshViewModel view)
-        {
-            ObservableCollection<SelectListItem> listaEstandar = new ObservableCollection<SelectListItem>();
-
-            string sql = "SELECT token,descripcion,valor FROM flex.ll_estandar";
-
-            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
-
-            using (OracleCommand cmd = new OracleCommand())
-            {
-                cmd.CommandText = sql;
-                cmd.Connection = con;
-
-                using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it
-                {
-                    while (rdr.Read()) // loop through each row from oracle
-                    {
-                        listaEstandar.Add(new SelectListItem
-                        {
-                            Value = rdr["token"].ToString(),
-                            Text = rdr["descripcion"].ToString(),
-                            Observacion = rdr["valor"].ToString()
-                        });
-                    }
-                    rdr.Close(); // close the oracle reader
-                }
-            }
-        }
         #endregion Refrescamiento
 
         #region Updater
@@ -330,362 +172,40 @@ namespace Cygnus2_0.DAO
             }
         }
 
-
-        internal void pObtCodigoSql()
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtCodigoSql"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbVersion", OracleDbType.Varchar2, handler.fsbVersion);
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                OracleDataReader reader = null;
-
-                reader = cmd.ExecuteReader();
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                try
-                {
-                    while (reader.Read())
-                    {
-                        OracleBlob blob = reader.GetOracleBlob(0);
-                        MemoryStream ms = new MemoryStream(blob.Value);
-                        StreamReader sr = new StreamReader(ms);
-                        string text = sr.ReadToEnd();
-                        SqliteDAO.pExecuteNonQuery(text);
-                    }
-                }
-                finally
-                {
-                    if (reader != null && !reader.IsClosed)
-                        reader.Close();
-                }
-            }
-        }
         #endregion Updater
 
         #region GestionObjetos
-        internal void pActualizaFecha(Archivo archivo, DateTime fecha)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pActualizaFecha"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbNombreObj", OracleDbType.Varchar2, archivo.FileName);
-                handler.ConexionOracle.AddInParameter(cmd, "isbOwnerObj", OracleDbType.Varchar2, archivo.Owner);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
-                handler.ConexionOracle.AddInParameter(cmd, "isbFechaLib", OracleDbType.Varchar2, fecha.Day + "-" + fecha.Month + "-" + fecha.Year);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-            }
-        }
-        internal string pObtGrupoCorreo()
-        {
-            string sbGrupo = "";
-
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtGrupoCorreo"))
-            {
-                handler.ConexionOracle.AddOutParameter(cmd, "osbGrupoCorreo", OracleDbType.Varchar2);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                sbGrupo = handler.ConexionOracle.GetParameterValue(cmd, "osbGrupoCorreo").ToString();
-            }
-
-            return sbGrupo;
-        }
-        public void pBloqueaObjeto(Archivo archivo, BlockViewModel view)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pBloqueaObjeto"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbNombreObj", OracleDbType.Varchar2, archivo.FileName);
-                handler.ConexionOracle.AddInParameter(cmd, "isbOwnerObj", OracleDbType.Varchar2, archivo.Owner);
-                handler.ConexionOracle.AddInParameter(cmd, "isbNumCaso", OracleDbType.Varchar2, view.Codigo);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
-                handler.ConexionOracle.AddInParameter(cmd, "isbFechaLib", OracleDbType.Varchar2, view.Fecha.Day + "-" + view.Fecha.Month + "-" + view.Fecha.Year);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-            }
-        }
-
-        public void pObtObjetosBloqueados(DesblockViewModel view)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtObjetosBloqueados"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                OracleDataReader reader = null;
-
-                try
-                {
-                    reader = cmd.ExecuteReader();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                try
-                {
-                    while (reader.Read())
-                    {
-                        Archivo dato = new Archivo();
-
-                        dato.FileName = Convert.ToString(reader["objeto"]);
-                        dato.Owner = Convert.ToString(reader["owner"]);
-                        dato.OrdenCambio = Convert.ToString(reader["orden"]);
-                        dato.FechaBloqueo = Convert.ToString(reader["fecha_bloqueo"]);
-                        dato.FechaEstLib = Convert.ToString(reader["fecha_liberacion"]);
-
-                        view.ListaArchivosBloqueo.Add(dato);
-                    }
-                }
-                finally
-                {
-                    if (reader != null && !reader.IsClosed)
-                        reader.Close();
-                }
-            }
-        }
-
-        public void pDesbloqueaObjeto(Archivo archivo)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pDesbloqueaObjeto"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbNombreObj", OracleDbType.Varchar2, archivo.FileName);
-                handler.ConexionOracle.AddInParameter(cmd, "isbOwnerObj", OracleDbType.Varchar2, archivo.Owner);
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, handler.ConnView.Model.Usuario.ToUpper());
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-            }
-        }
-        public void pObtObjetosBloqTodos(string objeto)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtObjetosBloqTodos"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbObjeto", OracleDbType.Varchar2, objeto.ToUpper().Trim());
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                OracleDataReader reader = null;
-
-                try
-                {
-                    reader = cmd.ExecuteReader();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                try
-                {
-                    while (reader.Read())
-                    {
-                        Archivo dato = new Archivo();
-
-                        dato.FileName = Convert.ToString(reader["objeto"]);
-                        dato.Owner = Convert.ToString(reader["owner"]);
-                        dato.OrdenCambio = Convert.ToString(reader["orden"]);
-                        dato.FechaBloqueo = Convert.ToString(reader["fecha_bloqueo"]);
-                        dato.FechaEstLib = Convert.ToString(reader["fecha_est_liberacion"]);
-                        dato.Usuario = Convert.ToString(reader["usuario"]);
-
-                        //handler.ListaArchivosBloqueo.Add(dato);
-                    }
-                }
-                finally
-                {
-                    if (reader != null && !reader.IsClosed)
-                        reader.Close();
-                }
-            }
-        }
         #endregion GestionObjetos
 
         #region GestionUsuarios
-        public void pGuardaPass(string usuario, string pass)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pGuardaCodigo"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, usuario);
-                handler.ConexionOracle.AddInParameter(cmd, "isbCodigo", OracleDbType.Varchar2, pass);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-            }
-        }
-
-        public void pGuardaRol(string usuario, string pass, string email)
-        {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pGuardaRol"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, usuario);
-                handler.ConexionOracle.AddInParameter(cmd, "isbCodigo", OracleDbType.Varchar2, pass);
-                handler.ConexionOracle.AddInParameter(cmd, "isbEmail", OracleDbType.Varchar2, email);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-            }
-        }
-        public int pObtRol(string username)
-        {
-            string sbRol = "";
-            int nuRol = 0;
-            string[] rolList;
-            string rolEncrypt;
-
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtRol"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, username.ToUpper().Trim());
-                handler.ConexionOracle.AddOutParameter(cmd, "osbRol", OracleDbType.Varchar2);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                rolEncrypt = handler.ConexionOracle.GetParameterValue(cmd, "osbRol");
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                sbRol = EncriptaPass.Desencriptar(rolEncrypt);
-
-                rolList = sbRol.Split('-');
-
-                if (rolList.Count() > 0)
-                {
-                    if (rolList[0].Equals(username.ToUpper().Trim()))
-                    {
-                        nuRol = Convert.ToInt32(rolList[1]);
-                    }
-                }
-            }
-
-            return nuRol;
-        }
         #endregion GetionUsuarios
 
         #region CompilacionObjetos
+        private string pDevuelveUsuariosIn()
+        {
+            string usuariosIn = "";
+
+            foreach (UsuarioModel usuario in handler.ListaUsuarios)
+            {
+                usuariosIn = usuariosIn + "'" + usuario.Usuariobd + "',";
+            }
+
+            usuariosIn = usuariosIn.Remove(usuariosIn.Length - 1);
+
+            return usuariosIn;
+        }
         public void pObtErrores(Archivo archivo, CompilaModel model)
         {
-            string sql = "SELECT " +
+            string sql;
+
+            sql = "SELECT " +
                                "NAME ," +
                                "TYPE ," +
                                "LINE ," +
                                "TEXT " +
                         " FROM   all_errors " +
-                        " WHERE  name = '" + archivo.NombreObjeto +"'"+
-                        " AND    owner IN (SELECT usuario FROM FLEX.ll_credmark)";
+                        " WHERE  name = upper('" + archivo.NombreObjeto +"')"+
+                        " AND    OWNER IN(" + pDevuelveUsuariosIn() + ") ";
 
             OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
 
@@ -725,113 +245,105 @@ namespace Cygnus2_0.DAO
             }
         }
 
-        public string pObtenerUsuarioCompilacion(string usuario)
-        {
-            string credenciales = "";
-
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtieneCodigo"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, usuario);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbCodigo", OracleDbType.Varchar2);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                credenciales = handler.ConexionOracle.GetParameterValue(cmd, "osbCodigo");
-            }
-
-            return credenciales;
-        }
-
         public void pValidaUsuarioCompila(Archivo archivo, Handler handler)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pValidaUsuarioApl"))
+            string sql;
+            Int32 nuCantidad = 0;
+
+            sql = "SELECT COUNT(1) cantidad" +
+                         "   FROM " +
+                         "   ( " +
+                         "       SELECT DISTINCT OWNER " +
+                         "       FROM   all_objects " +
+                         "       WHERE  object_name = upper('" + archivo.NombreObjeto +"') " +
+                         "       AND    OWNER IN("+ pDevuelveUsuariosIn() + ") " +
+                         "   )"; 
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbObjeto", OracleDbType.Varchar2, archivo.NombreObjeto.ToUpper());
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+                cmd.CommandText = sql;
+                cmd.Connection = con;
 
-                try
+                using (OracleDataReader rdr = cmd.ExecuteReader())
                 {
-                    cmd.ExecuteNonQuery();
+                    while (rdr.Read())
+                    {
+                        nuCantidad = Int32.Parse(rdr["cantidad"].ToString());
+                        break;
+                    }
+                    rdr.Close();
                 }
-                catch (InvalidCastException)
-                {
-                }
+            }
 
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
+            if(nuCantidad > 1)
+            {
+                throw new System.Exception("El objeto ["+ archivo.NombreObjeto+"] solo puede existir en un esquema!");
             }
         }
 
         public void pValidaObjEsquema(Archivo archivo, string usuario)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pValidaObjEsquema"))
+            string sql;
+            string ownerBd = null;
+
+            sql =   "       SELECT DISTINCT OWNER " +
+                    "       FROM   all_objects " +
+                    "       WHERE  object_name = upper('" + archivo.NombreObjeto + "') " +
+                    "       AND    OWNER IN(" + pDevuelveUsuariosIn() + ") ";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbObjeto", OracleDbType.Varchar2, archivo.NombreObjeto.ToUpper());
-                handler.ConexionOracle.AddInParameter(cmd, "isbUsuario", OracleDbType.Varchar2, usuario.ToUpper());
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+                cmd.CommandText = sql;
+                cmd.Connection = con;
 
-                try
+                using (OracleDataReader rdr = cmd.ExecuteReader())
                 {
-                    cmd.ExecuteNonQuery();
+                    while (rdr.Read())
+                    {
+                        ownerBd = rdr["OWNER"].ToString();
+                        break;
+                    }
+                    rdr.Close();
                 }
-                catch (InvalidCastException)
-                {
-                }
+            }
 
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
+            if (!string.IsNullOrEmpty(ownerBd) && !ownerBd.Equals(usuario))
+            {
+                throw new System.Exception("El objeto [" + archivo.NombreObjeto + "] ya existe en el esquema ["+ ownerBd+"]");
             }
         }
         public string pObtCantObjsInvalidos()
         {
             string stCantidadObjetosInvalidos = null;
+            string sql;
+
+            sql = "select count(distinct name)  cantidad "+
+                    "from all_errors "+
+                    "where owner in ("+ pDevuelveUsuariosIn()+") "+
+                    "and attribute = 'ERROR'";
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
 
             if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
             {
-
-                using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtCantObjsInvalidos"))
+                using (OracleCommand cmd = new OracleCommand())
                 {
-                    handler.ConexionOracle.AddOutParameter(cmd, "onuCantObjetos", OracleDbType.Int64);
-                    handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                    handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+                    cmd.CommandText = sql;
+                    cmd.Connection = con;
 
-                    try
+                    using (OracleDataReader rdr = cmd.ExecuteReader())
                     {
-                        cmd.ExecuteNonQuery();
+                        while (rdr.Read())
+                        {
+                            stCantidadObjetosInvalidos = rdr["cantidad"].ToString();
+                            break;
+                        }
+                        rdr.Close();
                     }
-                    catch (InvalidCastException)
-                    {
-                    }
-
-                    handler.EvaluateErrorCode
-                    (
-                        handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                        handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                    );
-
-                    stCantidadObjetosInvalidos = handler.ConexionOracle.GetParameterValue(cmd, "onuCantObjetos").ToString();
                 }
             }
 
@@ -840,52 +352,41 @@ namespace Cygnus2_0.DAO
 
         public void pObtConsultaObjetos(string nombreObjeto, BlockViewModel view)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pObtConsultaObjetos"))
+            string sql;
+
+            sql = "SELECT DISTINCT a.owner, " +
+                    "a.object_name, " +
+                    "a.OBJECT_TYPE, " +
+                    "a.STATUS " +
+                    "FROM all_objects a " +
+                    "WHERE a.object_name LIKE "+ nombreObjeto+" "+
+                    "AND a.OWNER IN ( " + pDevuelveUsuariosIn()+") ";
+
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
-                handler.ConexionOracle.AddInParameter(cmd, "isbNombreObj", OracleDbType.Varchar2, nombreObjeto.ToUpper().Trim());
-                handler.ConexionOracle.AddParameterRefCursor(cmd, "");
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+                cmd.CommandText = sql;
+                cmd.Connection = con;
 
-                OracleDataReader reader = null;
-
-                try
-                {
-                    reader = cmd.ExecuteReader();
-                }
-                catch (InvalidCastException)
-                {
-                }
-
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
-
-                try
+                using (OracleDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         Archivo dato = new Archivo();
 
                         dato.FileName = Convert.ToString(reader["object_name"]);
-                        dato.Usuario = Convert.ToString(reader["usuario"]);
-                        dato.Observacion = Convert.ToString(reader["bloqueado"]);
-                        dato.FechaBloqueo = Convert.ToString(reader["fecha_bloqueo"]);
-                        dato.FechaEstLib = Convert.ToString(reader["fecha_est_lib"]);
-                        dato.OrdenCambio = Convert.ToString(reader["orden"]);
+                        dato.Usuario = Convert.ToString(reader["owner"]);
+                        dato.Observacion = Convert.ToString(reader["OBJECT_TYPE"]);
+                        dato.OrdenCambio = Convert.ToString(reader["STATUS"]);
                         dato.Owner = Convert.ToString(reader["owner"]);
 
                         //Si no existe que adicione el registro
                         if (!view.ListaArchivosEncontrados.ToList().Exists(x => (x.FileName.Equals(dato.FileName) && x.Owner.Equals(dato.Owner))))
                             view.ListaArchivosEncontrados.Add(dato);
                     }
-                }
-                finally
-                {
-                    if (reader != null && !reader.IsClosed)
-                        reader.Close();
+                    reader.Close();
                 }
             }
         }
@@ -975,250 +476,88 @@ namespace Cygnus2_0.DAO
         #endregion CompilacionObjetos
                         
         #region GenereacionPaquetes
-        internal OracleClob pGeneraPktbl(string tabla, SelectListItem usuarioBD, string caso)
+        internal OracleClob pGeneraPktbl(string tabla, SelectListItem usuarioBD, string caso,Handler handler)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("pkg_utilmark.pGenerapktbl"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbTabla", OracleDbType.Varchar2, tabla.ToUpper().Trim());
-                handler.ConexionOracle.AddInParameter(cmd, "isbOwner", OracleDbType.Varchar2, usuarioBD.Text);
-                handler.ConexionOracle.AddInParameter(cmd, "isOrder", OracleDbType.Varchar2, caso.ToUpper().Trim());
-                handler.ConexionOracle.AddOutParameter(cmd, "oclFile", OracleDbType.Clob);
-                handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
-                
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
+            OracleConnection conn = handler.ConexionOracle.ConexionOracleSQL;
 
-                handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );
+            OracleCommand sqlPktbl = new OracleCommand(handler.ListaHTML.Where(x=>x.Nombre.Equals(res.KEY_PKTBL)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
-                return (OracleClob)cmd.Parameters["oclFile"].Value;
-            }
+            sqlPktbl.BindByName = true;
+
+            OracleParameter sbTabla = new OracleParameter("isbTabla", OracleDbType.Varchar2);
+            sbTabla.Value = tabla.ToUpper().Trim();
+            sqlPktbl.Parameters.Add(sbTabla);
+
+            OracleParameter sbOwner = new OracleParameter("isbOwner", OracleDbType.Varchar2);
+            sbOwner.Value = usuarioBD.Text;
+            sqlPktbl.Parameters.Add(sbOwner);
+
+            OracleParameter sbOrder = new OracleParameter("isOrder", OracleDbType.Varchar2);
+            sbOrder.Value = caso.ToUpper().Trim();
+            sqlPktbl.Parameters.Add(sbOrder);
+
+            OracleParameter clFile = new OracleParameter("oclFile", OracleDbType.Clob);
+            clFile.Direction = ParameterDirection.Output;
+            sqlPktbl.Parameters.Add(clFile);
+
+            OracleParameter nuErrorCode = new OracleParameter("onuErrorCode", OracleDbType.Int64);
+            nuErrorCode.Direction = ParameterDirection.Output;
+            sqlPktbl.Parameters.Add(nuErrorCode);
+
+            OracleParameter nuErrorMessage = new OracleParameter("osbErrorMessage", OracleDbType.Int64);
+            nuErrorMessage.Direction = ParameterDirection.Output;
+            sqlPktbl.Parameters.Add(nuErrorMessage);
+
+            sqlPktbl.ExecuteReader();
+
+            return (OracleClob)sqlPktbl.Parameters["oclFile"].Value;
         }
         #endregion GenereacionPaquetes
 
         #region Reporte
-        public List<TareaHoja> pObtListaTareas(ReportViewModel view)
-        {
-            List<TareaHoja> listaTareas = new List<TareaHoja>();
-
-            string sql = "SELECT * FROM (" +
-                        "            SELECT fecha_ini fecha, " +
-                        "                   nvl(rq.hist_usuario,0) hist_usuario," +
-                        "                   rq.id_azure," +
-                        "                   rq.descripcion," +
-                        "                   lunes horaCygnus," +
-                        "                   nvl(rq.completado,0) horaAzure" +
-                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
-                        "            WHERE hh.usuario = :usuario" +
-                        "            AND   ho.fecha_ini >= :fecha_i" +
-                        "            AND   ho.fecha_ini <= :fecha_f" +
-                        "            AND hh.id_hoja = ho.codigo" +
-                        "            AND hh.requerimiento = rq.codigo" +
-                        "            AND lunes > 0                        " +
-                        "            UNION" +
-                        "            SELECT fecha_ini+1 fecha," +
-                        "                   nvl(rq.hist_usuario,0) hist_usuario," +
-                        "                   rq.id_azure," +
-                        "                   rq.descripcion," +
-                        "                   martes horaCygnus," +
-                        "                   nvl(rq.completado,0) horaAzure" +
-                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
-                        "            WHERE hh.usuario = :usuario" +
-                        "            AND   ho.fecha_ini >= :fecha_i" +
-                        "            AND   ho.fecha_ini <= :fecha_f" +
-                        "            AND   hh.id_hoja = ho.codigo" +
-                        "            AND hh.requerimiento = rq.codigo" +
-                        "            AND martes > 0" +
-                        "            UNION" +
-                        "            SELECT fecha_ini+2 fecha," +
-                        "                   nvl(rq.hist_usuario,0) hist_usuario," +
-                        "                   rq.id_azure," +
-                        "                   rq.descripcion," +
-                        "                   miercoles horaCygnus," +
-                        "                   nvl(rq.completado,0) horaAzure" +
-                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
-                        "            WHERE hh.usuario = :usuario" +
-                        "            AND   ho.fecha_ini >= :fecha_i" +
-                        "            AND   ho.fecha_ini <= :fecha_f" +
-                        "            AND hh.id_hoja = ho.codigo" +
-                        "            AND hh.requerimiento = rq.codigo" +
-                        "            AND miercoles > 0" +
-                        "            UNION" +
-                        "            SELECT fecha_ini+3 fecha," +
-                        "                   nvl(rq.hist_usuario,0) hist_usuario," +
-                        "                   rq.id_azure," +
-                        "                   rq.descripcion," +
-                        "                   jueves horaCygnus," +
-                        "                   nvl(rq.completado,0) horaAzure" +
-                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
-                        "            WHERE hh.usuario = :usuario" +
-                        "            AND   ho.fecha_ini >= :fecha_i" +
-                        "            AND   ho.fecha_ini <= :fecha_f" +
-                        "            AND hh.id_hoja = ho.codigo" +
-                        "            AND hh.requerimiento = rq.codigo" +
-                        "            AND jueves > 0" +
-                        "            UNION" +
-                        "            SELECT fecha_ini+4 fecha," +
-                        "                   nvl(rq.hist_usuario,0) hist_usuario," +
-                        "                   rq.id_azure," +
-                        "                   rq.descripcion," +
-                        "                   viernes horaCygnus," +
-                        "                   nvl(rq.completado,0) horaAzure" +
-                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
-                        "            WHERE hh.usuario = :usuario" +
-                        "            AND   ho.fecha_ini >= :fecha_i" +
-                        "            AND   ho.fecha_ini <= :fecha_f" +
-                        "            AND hh.id_hoja = ho.codigo" +
-                        "            AND hh.requerimiento = rq.codigo" +
-                        "            AND viernes > 0" +
-                        "            UNION" +
-                        "            SELECT fecha_ini+5 fecha," +
-                        "                   nvl(rq.hist_usuario,0) hist_usuario," +
-                        "                   rq.id_azure," +
-                        "                   rq.descripcion," +
-                        "                   sabado horaCygnus," +
-                        "                   nvl(rq.completado,0) horaAzure" +
-                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
-                        "            WHERE hh.usuario = :usuario" +
-                        "            AND   ho.fecha_ini >= :fecha_i" +
-                        "            AND   ho.fecha_ini <= :fecha_f" +
-                        "            AND hh.id_hoja = ho.codigo" +
-                        "            AND hh.requerimiento = rq.codigo" +
-                        "            AND sabado > 0" +
-                        "            UNION" +
-                        "            SELECT fecha_ini+6 fecha," +
-                        "                   nvl(rq.hist_usuario,0) hist_usuario," +
-                        "                   rq.id_azure," +
-                        "                   rq.descripcion," +
-                        "                   domingo horaCygnus," +
-                        "                   nvl(rq.completado,0) horaAzure" +
-                        "            FROM ll_horashoja hh,ll_hoja ho, ll_requerimiento rq" +
-                        "            WHERE hh.usuario = :usuario" +
-                        "            AND   ho.fecha_ini >= :fecha_i" +
-                        "            AND   ho.fecha_ini <= :fecha_f" +
-                        "            AND hh.id_hoja = ho.codigo" +
-                        "            AND hh.requerimiento = rq.codigo" +
-                        "            AND domingo > 0 " +
-                        "            )" +
-                        "            ORDER BY fecha";
-
-            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
-
-            using (OracleCommand cmd = new OracleCommand())
-            {
-                cmd.CommandText = sql;
-                cmd.Parameters.Add(":usuario", handler.ConnView.Model.Usuario.ToUpper());
-                cmd.Parameters.Add(":fecha_i", view.FechaDesde.ToShortDateString());
-                cmd.Parameters.Add(":fecha_f", view.FechaHasta.ToShortDateString());
-                cmd.Connection = con;
-
-                using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it
-                {
-                    while (rdr.Read()) // loop through each row from oracle
-                    {
-                        listaTareas.Add(new TareaHoja { FechaCreacion = rdr["fecha"].ToString(),
-                                                        HU = Convert.ToInt32(rdr["hist_usuario"]),
-                                                        IdAzure = Convert.ToInt32(rdr["id_azure"].ToString()),
-                                                        Descripcion = rdr["descripcion"].ToString(),
-                                                        Total = Convert.ToDouble(rdr["horaCygnus"].ToString())
-                        });
-                    }
-                    rdr.Close(); // close the oracle reader
-                }
-            }
-
-            return listaTareas;
-        }
-        public List<TareaHoja> pObtListaTaskAzure(ReportViewModel view)
-        {
-            List<TareaHoja> listaTareas = new List<TareaHoja>();
-
-            string sql = "SELECT * FROM (" +
-                        "SELECT fecha_inicio fecha," +
-                        "       nvl(hist_usuario,0) hist_usuario," +
-                        "       id_azure," +
-                        "       descripcion," +
-                        "       estado," +
-                        "       nvl(completado,0) completado " +
-                        "FROM ll_requerimiento " +
-                        "WHERE usuario = :usuario " +
-                        "AND fecha_inicio >= :fecha_i " +
-                        "AND fecha_inicio <= :fecha_f "+
-                        ") ORDER BY fecha";
-
-            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
-
-            using (OracleCommand cmd = new OracleCommand())
-            {
-                cmd.CommandText = sql;
-                cmd.Parameters.Add(":usuario", handler.ConnView.Model.Usuario.ToUpper());
-                cmd.Parameters.Add(":fecha_i", view.FechaDesde.ToShortDateString());
-                cmd.Parameters.Add(":fecha_f", view.FechaHasta.ToShortDateString());
-                cmd.Connection = con;
-
-                using (OracleDataReader rdr = cmd.ExecuteReader()) // execute the oracle sql and start reading it
-                {
-                    while (rdr.Read()) // loop through each row from oracle
-                    {
-                        listaTareas.Add(new TareaHoja
-                        {
-                            FechaCreacion = rdr["fecha"].ToString(),
-                            HU = Convert.ToInt32(rdr["hist_usuario"]),
-                            IdAzure = Convert.ToInt32(rdr["id_azure"].ToString()),
-                            Descripcion = rdr["descripcion"].ToString(),
-                            Estado = rdr["estado"].ToString(),
-                            Total = Convert.ToDouble(rdr["completado"].ToString())
-                        });
-                    }
-                    rdr.Close(); // close the oracle reader
-                }
-            }
-
-            return listaTareas;
-        }
         #endregion Reporte
 
         #region Auditoria
         internal void pGeneraAuditoria(TbAuditoriaModel model, out OracleClob tabla, out OracleClob trigger)
         {
-            using (OracleCommand cmd = handler.ConexionOracle.GetStoredProcCommand("flex.p_DC_GeneraAudit"))
-            {
-                handler.ConexionOracle.AddInParameter(cmd, "isbTableName", OracleDbType.Varchar2, model.Tabla.ToUpper().Trim());
-                handler.ConexionOracle.AddInParameter(cmd, "isbAutor", OracleDbType.Varchar2, model.Autor.Trim());
-                handler.ConexionOracle.AddInParameter(cmd, "isbLogin", OracleDbType.Varchar2, model.Login.Trim());
-                handler.ConexionOracle.AddInParameter(cmd, "isbTicket", OracleDbType.Varchar2, model.Ticket.ToUpper().Trim());
-                handler.ConexionOracle.AddInParameter(cmd, "isbPK", OracleDbType.Varchar2, model.Primaria.ToUpper().Trim());
-                handler.ConexionOracle.AddOutParameter(cmd, "osbScript", OracleDbType.Clob);
-                handler.ConexionOracle.AddOutParameter(cmd, "osbTrgScript", OracleDbType.Clob);
-                //handler.ConexionOracle.AddOutParameter(cmd, "onuErrorCode", OracleDbType.Int64);
-                //handler.ConexionOracle.AddOutParameter(cmd, "osbErrorMessage", OracleDbType.Varchar2);
+            OracleConnection conn = handler.ConexionOracle.ConexionOracleSQL;
 
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (InvalidCastException)
-                {
-                }
+            OracleCommand sqlPktbl = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_AUDIT_TABLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
-                /*handler.EvaluateErrorCode
-                (
-                    handler.ConexionOracle.GetParameterValue(cmd, "onuErrorCode"),
-                    handler.ConexionOracle.GetParameterValue(cmd, "osbErrorMessage")
-                );*/
+            sqlPktbl.BindByName = true;
 
-                tabla = (OracleClob)cmd.Parameters["osbScript"].Value;
-                trigger = (OracleClob)cmd.Parameters["osbTrgScript"].Value;
-            }
+            OracleParameter sbTabla = new OracleParameter("isbTableName", OracleDbType.Varchar2);
+            sbTabla.Value = model.Tabla.ToUpper().Trim();
+            sqlPktbl.Parameters.Add(sbTabla);
+
+            OracleParameter sbOwner = new OracleParameter("isbAutor", OracleDbType.Varchar2);
+            sbOwner.Value = model.Autor.Trim();
+            sqlPktbl.Parameters.Add(sbOwner);
+
+            OracleParameter sbLogin = new OracleParameter("isbLogin", OracleDbType.Varchar2);
+            sbLogin.Value = model.Login.Trim();
+            sqlPktbl.Parameters.Add(sbLogin);
+
+            OracleParameter sbTicket = new OracleParameter("isbTicket", OracleDbType.Varchar2);
+            sbTicket.Value = model.Ticket.ToUpper().Trim();
+            sqlPktbl.Parameters.Add(sbTicket);
+
+            OracleParameter sbPk = new OracleParameter("isbPK", OracleDbType.Varchar2);
+            sbPk.Value = model.Primaria.ToUpper().Trim();
+            sqlPktbl.Parameters.Add(sbPk);
+
+            OracleParameter oclScript = new OracleParameter("osbScript", OracleDbType.Clob);
+            oclScript.Direction = ParameterDirection.Output;
+            sqlPktbl.Parameters.Add(oclScript);
+
+            OracleParameter oclTrg = new OracleParameter("osbTrgScript", OracleDbType.Clob);
+            oclTrg.Direction = ParameterDirection.Output;
+            sqlPktbl.Parameters.Add(oclTrg);
+
+            sqlPktbl.ExecuteReader();
+
+            tabla = (OracleClob)sqlPktbl.Parameters["osbScript"].Value;
+            trigger = (OracleClob)sqlPktbl.Parameters["osbTrgScript"].Value;
         }
         #endregion Auditoria
 
@@ -1328,7 +667,7 @@ namespace Cygnus2_0.DAO
                 cmd.ExecuteNonQuery();*/
 
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
 
             }

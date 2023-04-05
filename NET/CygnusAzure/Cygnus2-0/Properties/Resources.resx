@@ -2247,4 +2247,13 @@ END;
   <data name="TipoAplicaGrant" xml:space="preserve">
     <value>35</value>
   </data>
+  <data name="KeyCorreoGeneral" xml:space="preserve">
+    <value>CORREO_GENERAL</value>
+  </data>
+  <data name="KEY_PKTBL" xml:space="preserve">
+    <value>PKTBL</value>
+  </data>
+  <data name="KEY_AUDIT_TABLA" xml:space="preserve">
+    <value>AUDITORIA_TABLA</value>
+  </data>
 </root>

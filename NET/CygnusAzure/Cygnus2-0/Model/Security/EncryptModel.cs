@@ -21,7 +21,6 @@ namespace Cygnus2_0.Model.Security
         public void pGuardaPass()
         {
             string pass = view.Usuario.Text + "-" + view.Pass + "-" + view.BD;
-            handler.DAO.pGuardaPass(view.Usuario.Text, EncriptaPass.Encriptar(pass));
         }
     }
 }
