@@ -2259,4 +2259,10 @@ END;
   <data name="KEY_CREA_USUARIOS" xml:space="preserve">
     <value>CREA_USUARIOS</value>
   </data>
+  <data name="KEY_SQL_PARAMETRO" xml:space="preserve">
+    <value>SQL_PARAMETRO</value>
+  </data>
+  <data name="KEY_PLANT_PARAMETRO" xml:space="preserve">
+    <value>PLANTILLA_PARAMETRO</value>
+  </data>
 </root>

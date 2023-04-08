@@ -1,11 +1,14 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Data;
+using Cygnus2_0.Model.Html;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using res = Cygnus2_0.Properties.Resources;
 
@@ -69,6 +72,9 @@ namespace Cygnus2_0.ViewModel.Data
 
         public void OnProcess(object commandParameter)
         {
+            RichTextBox textBox = (RichTextBox) commandParameter;
+            this.Model.Valor = new TextRange(textBox.Document.ContentStart, textBox.Document.ContentEnd).Text;
+
             if (String.IsNullOrEmpty(this.Model.ParameterId))
             {
                 handler.MensajeError("Ingrese el identificador del parámetro");
@@ -92,21 +98,22 @@ namespace Cygnus2_0.ViewModel.Data
             }
             catch (Exception ex)
             {
-                handler.MensajeError("NO se pudo crear el parámetro en base de datos. Establezca nuevamente la conexión desde la ventana PROPIEDADES/CONFIGURACION. [" + ex.Message + "]");
+                handler.MensajeError("NO se pudo crear el parámetro en base de datos. Establezca nuevamente la conexión desde Ajustes. [" + ex.Message + "]");
             }
         }
         public void pGenerarArchivo()
         {
             StringBuilder insParam = new StringBuilder();
 
-            insParam.Append(res.PlantillaInsParametr);
-            insParam.Replace(res.Tag_parametro, this.Model.ParameterId);
-            insParam.Replace(res.Tag_paramvalo, this.Model.Valor);
-            insParam.Replace(res.Tag_paramtipo, this.Model.Tipo.Text);
-            insParam.Replace(res.Tag_paramdesc, this.Model.Descripcion);
-            insParam.Replace(res.Tag_parafunc, this.Model.Funcion);
+            PlantillasHTMLModel plantilla = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_PLANT_PARAMETRO)).FirstOrDefault();
+            insParam.Append(plantilla.Documentacion.Replace("\r\n", "\n"));
+            insParam.Replace(":PARAMETRO_ID", "'"+this.Model.ParameterId+"'");
+            insParam.Replace(":VALOR", "'" + this.Model.Valor + "'");
+            insParam.Replace(":TIPO", "'" + this.Model.Tipo.Text + "'");
+            insParam.Replace(":DESCRIPCION", "'" + this.Model.Descripcion + "'");
+            insParam.Replace(":FUNCION", "'" + this.Model.Funcion + "'");
 
-            handler.pGuardaArchivo(res.NombreArchivoInsepm_parametr + this.Model.ParameterId + res.ExtensionSQL, insParam.ToString());
+            handler.pGuardaArchivo(plantilla.NombreArchivo + this.Model.ParameterId + res.ExtensionSQL, insParam.ToString());
         }
     }
 }

@@ -17,8 +17,11 @@ namespace Cygnus2_0.Model.Html
 
         [Column(name: "documentation")]
         public string Documentacion { get; set; }
+        [Column(name: "filename")]
+        public string NombreArchivo { get; set; }
 
         [Column(name: "company")]
         public int? Empresa { get; set; }
+
     }
 }
