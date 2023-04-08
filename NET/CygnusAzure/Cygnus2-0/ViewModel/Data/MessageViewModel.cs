@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Data;
+using Cygnus2_0.Model.Html;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,13 +68,15 @@ namespace Cygnus2_0.ViewModel.Data
         {
             StringBuilder insParam = new StringBuilder();
 
-            insParam.Append(res.PlantillaInsMensaje);
-            insParam.Replace(res.Tag_codigo, this.Model.Codigo);
-            insParam.Replace(res.Tag_descripcion, this.Model.Descripcion);
-            insParam.Replace(res.Tag_causa, this.Model.Causa);
-            insParam.Replace(res.Tag_solucion, this.Model.Solucion);
+            PlantillasHTMLModel plantilla = handler.ListaHTML.Where(x => x.Nombre.Equals("PLANTILLA_MENSAJE")).FirstOrDefault();
 
-            handler.pGuardaArchivo(res.NombreArchivoInsMensaje + this.Model.Codigo + res.ExtensionSQL, insParam.ToString());
+            insParam.Append(plantilla.Documentacion.Replace("\r\n", "\n"));
+            insParam.Replace(":CODIGO", "'" + this.Model.Codigo + "'");
+            insParam.Replace(":DESCRIPCION", "'" + this.Model.Descripcion + "'");
+            insParam.Replace(":CAUSA", "'" + this.Model.Causa + "'");
+            insParam.Replace(":SOLUCION", "'" + this.Model.Solucion + "'");
+
+            handler.pGuardaArchivo(plantilla.NombreArchivo + this.Model.Codigo + res.ExtensionSQL, insParam.ToString());
         }
     }
 }

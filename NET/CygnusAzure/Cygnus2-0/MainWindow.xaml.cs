@@ -294,6 +294,29 @@ namespace Cygnus2_0
             System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
 
+            if (!SqliteDAO.pblValidaVersion("1.1.6.8"))
+            {
+                string[] query =
+                 {
+                    "alter table html add filename",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('SQL_PARAMETRO', 'INSERT INTO FLEX.epm_parametr (PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, DATA_TYPE, ALLOW_UPDATE) \r\n VALUES \r\n ( \r\n     :PARAMETRO_ID, \r\n     :DESCRIPCION, \r\n     :VALOR, \r\n     :FUNCION, \r\n     -99, \r\n     :TIPO, \r\n     ''Y'' \r\n )\r\n\r\n', '99', '')",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_PARAMETRO', 'MERGE INTO EPM_PARAMETR A USING\r\n (SELECT\r\n  :PARAMETRO_ID as PARAMETER_ID,\r\n  :DESCRIPCION as DESCRIPTION,\r\n  :VALOR as VALUE,\r\n  :FUNCION as VAL_FUNCTION,\r\n  -99 as MODULE_ID,\r\n  :TIPO as DATA_TYPE,\r\n  ''Y'' as ALLOW_UPDATE\r\n  FROM DUAL) B\r\nON (A.PARAMETER_ID = B.PARAMETER_ID)\r\nWHEN NOT MATCHED THEN \r\nINSERT (\r\n  PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, \r\n  DATA_TYPE, ALLOW_UPDATE)\r\nVALUES (\r\n  B.PARAMETER_ID, B.DESCRIPTION, B.VALUE, B.VAL_FUNCTION, B.MODULE_ID, \r\n  B.DATA_TYPE, B.ALLOW_UPDATE)\r\nWHEN MATCHED THEN\r\nUPDATE SET \r\n  A.DESCRIPTION = B.DESCRIPTION,\r\n  A.VALUE = B.VALUE,\r\n  A.VAL_FUNCTION = B.VAL_FUNCTION,\r\n  A.MODULE_ID = B.MODULE_ID,\r\n  A.DATA_TYPE = B.DATA_TYPE,\r\n  A.ALLOW_UPDATE = B.ALLOW_UPDATE;\r\n\r\nCOMMIT;\r\n', '99', 'mrgepm_parametr')",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('SQL_MENSAJE', 'INSERT INTO flex.mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo )  \r\n VALUES \r\n( \r\n    :CODIGO, \r\n    :DESCRIPCION, \r\n    ''EPM'', \r\n    ''CUZ'', \r\n    :CAUSA, \r\n    :SOLUCION \r\n)\r\n', '99', '')",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_MENSAJE', 'MERGE INTO MENSAJE A USING\r\n (SELECT\r\n  :CODIGO as MENSCODI,\r\n  :DESCRIPCION as MENSDESC,\r\n  ''EPM'' as MENSDIVI,\r\n  ''CUZ'' as MENSMODU,\r\n  :CAUSA as MENSCAUS,\r\n  :SOLUCION  as MENSPOSO\r\n  FROM DUAL) B\r\nON (A.MENSDIVI = B.MENSDIVI and A.MENSMODU = B.MENSMODU and A.MENSCODI = B.MENSCODI)\r\nWHEN NOT MATCHED THEN \r\nINSERT (\r\n  MENSCODI, MENSDESC, MENSDIVI, MENSMODU, MENSCAUS, \r\n  MENSPOSO)\r\nVALUES (\r\n  B.MENSCODI, B.MENSDESC, B.MENSDIVI, B.MENSMODU, B.MENSCAUS, \r\n  B.MENSPOSO)\r\nWHEN MATCHED THEN\r\nUPDATE SET \r\n  A.MENSDESC = B.MENSDESC,\r\n  A.MENSCAUS = B.MENSCAUS,\r\n  A.MENSPOSO = B.MENSPOSO;\r\n\r\nCOMMIT;\r\n', '99', 'mrgmensaje')"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.6.8");
+            }
+
             if (!SqliteDAO.pblValidaVersion("1.1.6.7"))
             {                
                 string[] query =

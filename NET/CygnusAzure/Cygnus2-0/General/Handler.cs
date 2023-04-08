@@ -63,6 +63,7 @@ namespace Cygnus2_0.General
         ObservableCollection<TipoObjetos> listaTiposObjetos;
         ObservableCollection<UsuarioModel> listaUsuarios;
         ObservableCollection<DocumentacionHTML> listaDocHtml;
+        ObservableCollection<PlantillasHTMLModel> listaHtml;
 
         //Conexion
         private ConexionOracle conectionOracle;
@@ -324,7 +325,17 @@ namespace Cygnus2_0.General
             }
         }
         public DocumentacionHTML DocHTMLSeleccionado { get; set; }
-        public ObservableCollection<PlantillasHTMLModel> ListaHTML { get; set; }
+        public ObservableCollection<PlantillasHTMLModel> ListaHTML 
+        {
+            get
+            {
+                return listaHtml;
+            }
+            set
+            {
+                SetProperty(ref listaHtml, value);
+            }
+        }
         public SelectListItem Generico { get; set; }
         public SelectListItem Generico2 { get; set; }
         public StringBuilder HtmlEspecificacion { set; get; }
@@ -357,6 +368,7 @@ namespace Cygnus2_0.General
             ModernDialog.ShowMessage(mensaje, "Mensaje Éxito", System.Windows.MessageBoxButton.OK);
         }
 
+        #region Metodos
         public string MensajeConfirmacion(string mensaje)
         {
             if (System.Windows.Forms.MessageBox.Show(mensaje, "Confirmación",
@@ -1374,5 +1386,7 @@ namespace Cygnus2_0.General
 
             return lista;
         }
+
+        #endregion Metodos
     }
 }

@@ -37,10 +37,10 @@ namespace Cygnus2_0.Pages.Settings.Documentation
                 return;
 
             txtName.Text = ((PlantillasHTMLModel)dataGridDatos.SelectedItem).Nombre;
+            txtFileName.Text = ((PlantillasHTMLModel)dataGridDatos.SelectedItem).NombreArchivo;
 
             richTextBoxProce.Document.Blocks.Clear();
             richTextBoxProce.Document.Blocks.Add(new Paragraph(new Run(((PlantillasHTMLModel)dataGridDatos.SelectedItem).Documentacion)));
-            btnModif.Content = "Modificar";
             txtName.IsEnabled = false;
         }
 
@@ -49,10 +49,11 @@ namespace Cygnus2_0.Pages.Settings.Documentation
             int? nuEmpresa;
             string key = txtName.Text;
             string value = new TextRange(richTextBoxProce.Document.ContentStart, richTextBoxProce.Document.ContentEnd).Text;
+            string fileName = txtFileName.Text;
 
-            if(String.IsNullOrEmpty(key))
+            if (String.IsNullOrEmpty(key))
             {
-                handler.MensajeError("Debe seleccionar un ítem de la grilla.");
+                handler.MensajeError("El tag no puede ser null");
                 return;
             }
 
@@ -70,17 +71,22 @@ namespace Cygnus2_0.Pages.Settings.Documentation
             try
             {
                 seleccionado.Documentacion = value;
+                seleccionado.NombreArchivo = fileName;
                 SqliteDAO.pActualizaObjeto(seleccionado);                
             }
             catch (Exception ex)
             {
-                SqliteDAO.pInsertaPlantilla(seleccionado);
+                PlantillasHTMLModel nuevo = new PlantillasHTMLModel();
+                nuevo.Nombre = key;
+                nuevo.Documentacion = value;
+                nuevo.NombreArchivo = fileName;
+                nuevo.Empresa = nuEmpresa;
+                SqliteDAO.pInsertaPlantilla(nuevo);
             }
 
             pCargarLista();
             richTextBoxProce.Document.Blocks.Clear();
             txtName.Text = "";
-            btnModif.Content = "Adicionar";
             txtName.IsEnabled = false;
         }
     
@@ -92,18 +98,25 @@ namespace Cygnus2_0.Pages.Settings.Documentation
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            SelectListItem seleccionado = ((SelectListItem)dataGridDatos.SelectedItem);
+            PlantillasHTMLModel seleccionado = ((PlantillasHTMLModel)dataGridDatos.SelectedItem);
 
-            if(seleccionado != null && handler.MensajeConfirmacion("Desea eliminar la plantilla ["+seleccionado.Text+"]") == "Y")
+            if(seleccionado != null && handler.MensajeConfirmacion("Desea eliminar la plantilla ["+seleccionado.Nombre+"]") == "Y")
             {
-                PlantillasHTMLModel objeto = new PlantillasHTMLModel() { Nombre = seleccionado.Text, Documentacion = seleccionado.Value, Empresa = seleccionado.Empresa };
-                SqliteDAO.pEliminaObjeto(objeto);
+                SqliteDAO.pEliminaObjeto(seleccionado);
                 pCargarLista();
                 richTextBoxProce.Document.Blocks.Clear();
                 txtName.Text = "";
-                btnModif.Content = "Adicionar";
-                txtName.IsEnabled = false;
+                txtName.IsEnabled = true;
             }
+        }
+
+        private void btnNuevo_Click(object sender, RoutedEventArgs e)
+        {
+            richTextBoxProce.Document.Blocks.Clear();
+            txtName.Text = "";
+            txtName.IsEnabled = true;
+            txtFileName.Text = "";
+            dataGridDatos.SelectedItem = null;
         }
     }
 }

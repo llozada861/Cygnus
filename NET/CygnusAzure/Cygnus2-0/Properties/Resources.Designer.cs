@@ -1330,6 +1330,24 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PLANTILLA_PARAMETRO.
+        /// </summary>
+        public static string KEY_PLANT_PARAMETRO {
+            get {
+                return ResourceManager.GetString("KEY_PLANT_PARAMETRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SQL_PARAMETRO.
+        /// </summary>
+        public static string KEY_SQL_PARAMETRO {
+            get {
+                return ResourceManager.GetString("KEY_SQL_PARAMETRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a VALOR_WINDOWS.
         /// </summary>
         public static string KEY_VALORW {

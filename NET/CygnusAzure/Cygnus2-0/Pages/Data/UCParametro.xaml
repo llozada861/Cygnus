@@ -65,11 +65,22 @@
                 <TextBox x:Name="textBox" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Model.ParameterId}"  CharacterCasing="Upper" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="7" VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Parameter ID"/>
 
-                <TextBox x:Name="textBox1" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Model.Descripcion}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="3" Margin="0,0,0,5" 
+                <TextBox x:Name="textBox1" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Model.Descripcion}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Margin="0,0,0,5" 
                          Style="{StaticResource placeHolder}" Tag="Descripción"/>
 
-                <TextBox x:Name="textBox2" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Model.Valor}" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="7" Grid.RowSpan="3" Margin="0,0,0,5"
-                         Style="{StaticResource placeHolder}" Tag="Valor"/>
+                <Label Content="Valor:" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+                <RichTextBox x:Name="richTextBoxValor" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="7" Grid.RowSpan="4" Margin="0,0,0,5" Tag="Valor">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </RichTextBox.Resources>
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="" />
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
 
                 <TextBox x:Name="textBox3" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Model.Funcion}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="7" VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Función"/>
@@ -82,8 +93,8 @@
                         PatternChanged="AucomboBox_PatternChanged"
                         Style="{StaticResource AutoCompleteComboBox}"
                         Delay="500" Tag="Tipo" />
-                
-                <Button x:Name="btnAceptar" Content="Guardar" Command="{Binding Path=Process}" Grid.Column="7" Grid.Row="9" Grid.ColumnSpan="3" VerticalAlignment="Center"/>
+
+                <Button x:Name="btnAceptar" Content="Guardar" Command="{Binding Path=Process}" CommandParameter="{Binding ElementName=richTextBoxValor}" Grid.Column="7" Grid.Row="9" Grid.ColumnSpan="3" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
     </Grid>
