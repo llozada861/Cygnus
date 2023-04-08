@@ -77,11 +77,7 @@ namespace Cygnus2_0.DAO
 
         public string pObtCodigoMensaje()
         {
-            string sql = "SELECT max(menscodi) nuCodigo" +
-                        " FROM flex.mensaje " +
-                        " WHERE mensdivi = 'EPM'" +
-                        " AND mensmodu = 'CUZ'" +
-                        " AND menscodi < 900196";
+            string sql = handler.ListaHTML.Where(x => x.Nombre.Equals("CODIGO_MENSAJE")).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
 
             int Codigo = 0;
 
@@ -107,9 +103,6 @@ namespace Cygnus2_0.DAO
             return Codigo+"";
         }
         #endregion GetionDatos
-
-        #region Refrescamiento
-        #endregion Refrescamiento
 
         #region Updater
         internal string pObtCodigoVersion()
@@ -154,12 +147,6 @@ namespace Cygnus2_0.DAO
         }
 
         #endregion Updater
-
-        #region GestionObjetos
-        #endregion GestionObjetos
-
-        #region GestionUsuarios
-        #endregion GetionUsuarios
 
         #region CompilacionObjetos
         private string pDevuelveUsuariosIn()

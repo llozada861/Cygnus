@@ -294,6 +294,25 @@ namespace Cygnus2_0
             System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
 
+            if (!SqliteDAO.pblValidaVersion("1.1.6.9"))
+            {
+                string[] query =
+                 {
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('CODIGO_MENSAJE', 'SELECT max(menscodi) nuCodigo \r\nFROM flex.mensaje  \r\nWHERE mensdivi = ''EPM'' \r\nAND mensmodu = ''CUZ'' \r\nAND menscodi < 900196\r\n', '99', '')"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.6.9");
+            }
+
             if (!SqliteDAO.pblValidaVersion("1.1.6.8"))
             {
                 string[] query =
