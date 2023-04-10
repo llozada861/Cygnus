@@ -51,8 +51,6 @@ namespace Cygnus2_0
 
         public MainWindow()
         {
-            //pObtParamEntrada();
-
             InitializeComponent();
 
             try

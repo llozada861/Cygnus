@@ -49,6 +49,11 @@ namespace Cygnus2_0.Pages
             DataContext = handler;
             InitializeComponent();
 
+            //notificación de desbloqueo de objetos
+            /*var timer = new Timer { Interval = 600000 };
+            timer.Elapsed += (sender, args) => generaNotificacionTiempos();
+            timer.Start();*/
+
             //Notificación para nueva versión de Cygnus
             /*var timerUp = new Stopwatch();
             timer.Start();
@@ -102,6 +107,10 @@ namespace Cygnus2_0.Pages
         public void pConsultaArchivoVersion()
         {
 
+        }
+
+        public void generaNotificacionTiempos()
+        {
         }
 
         public void desactivaProxy()
