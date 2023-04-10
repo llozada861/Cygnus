@@ -345,11 +345,11 @@ namespace Cygnus2_0.ViewModel.Index
                 handler.ListaHTML = new ObservableCollection<PlantillasHTMLModel>();
                 SqliteDAO.pListaHTML(handler);
 
-                handler.HtmlEspecificacion.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyEspecificacion)));
-                handler.HtmlMetodo.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetodo)));
-                handler.HtmlMetodoParam.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoParam)));
-                handler.HtmlMetodoReturn.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoReturn)));
-                handler.HtmlScript.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyScript)));
+                handler.HtmlEspecificacion.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyEspecificacion)).Documentacion);
+                handler.HtmlMetodo.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetodo)).Documentacion);
+                handler.HtmlMetodoParam.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoParam)).Documentacion);
+                handler.HtmlMetodoReturn.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoReturn)).Documentacion);
+                handler.HtmlScript.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyScript)).Documentacion);
             }
             catch (Exception ex)
             {

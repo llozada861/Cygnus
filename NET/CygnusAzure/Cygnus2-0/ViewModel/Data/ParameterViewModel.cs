@@ -73,7 +73,7 @@ namespace Cygnus2_0.ViewModel.Data
         public void OnProcess(object commandParameter)
         {
             RichTextBox textBox = (RichTextBox) commandParameter;
-            this.Model.Valor = new TextRange(textBox.Document.ContentStart, textBox.Document.ContentEnd).Text;
+            this.Model.Valor = new TextRange(textBox.Document.ContentStart, textBox.Document.ContentEnd).Text.TrimEnd('\r', '\n');
 
             if (String.IsNullOrEmpty(this.Model.ParameterId))
             {
