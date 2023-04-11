@@ -292,6 +292,27 @@ namespace Cygnus2_0
             System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
 
+            if (!SqliteDAO.pblValidaVersion("1.1.7.2"))
+            {
+                string[] query =
+                 {
+                    "update userbd set password = 'Fl3xv8Dll0_0987' where user = 'FLEX'",
+                    "update userbd set password = 'CusT0v8Dll0_0987' where user = 'FLEX_CUSTOMIZACION'",
+                    "update userbd set password = 'Op3n$is1usdllo' where user = 'OPENSIRIUS'"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.7.2");
+            }
+
             if (!SqliteDAO.pblValidaVersion("1.1.6.9"))
             {
                 string[] query =
