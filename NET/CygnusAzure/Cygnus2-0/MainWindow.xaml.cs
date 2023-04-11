@@ -292,13 +292,15 @@ namespace Cygnus2_0
             System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
 
-            if (!SqliteDAO.pblValidaVersion("1.1.7.2"))
+            /*** ULTIMA VERSION AL FINAL!!!!! ***/
+
+            if (!SqliteDAO.pblValidaVersion("1.1.5.7"))
             {
+                SqliteDAO.pCreaConfiguracion(res.KeyGeneraHTML, "True");
+
                 string[] query =
                  {
-                    "update userbd set password = 'Fl3xv8Dll0_0987' where user = 'FLEX'",
-                    "update userbd set password = 'CusT0v8Dll0_0987' where user = 'FLEX_CUSTOMIZACION'",
-                    "update userbd set password = 'Op3n$is1usdllo' where user = 'OPENSIRIUS'"
+                    "INSERT INTO object_type (codigo, object, slash, count_slash, priority) VALUES (35, 'APLICA GRANT', '', '0', 200)"
                 };
 
                 foreach (string sql in query)
@@ -310,73 +312,7 @@ namespace Cygnus2_0
                     catch (Exception ex) { }
                 }
 
-                SqliteDAO.pActualizaVersion("1.1.7.2");
-            }
-
-            if (!SqliteDAO.pblValidaVersion("1.1.6.9"))
-            {
-                string[] query =
-                 {
-                    "INSERT INTO html (name, documentation, company, filename) VALUES ('CODIGO_MENSAJE', 'SELECT max(menscodi) nuCodigo \r\nFROM flex.mensaje  \r\nWHERE mensdivi = ''EPM'' \r\nAND mensmodu = ''CUZ'' \r\nAND menscodi < 900196\r\n', '99', '')"
-                };
-
-                foreach (string sql in query)
-                {
-                    try
-                    {
-                        SqliteDAO.pExecuteNonQuery(sql);
-                    }
-                    catch (Exception ex) { }
-                }
-
-                SqliteDAO.pActualizaVersion("1.1.6.9");
-            }
-
-            if (!SqliteDAO.pblValidaVersion("1.1.6.8"))
-            {
-                string[] query =
-                 {
-                    "alter table html add filename",
-                    "INSERT INTO html (name, documentation, company, filename) VALUES ('SQL_PARAMETRO', 'INSERT INTO FLEX.epm_parametr (PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, DATA_TYPE, ALLOW_UPDATE) \r\n VALUES \r\n ( \r\n     :PARAMETRO_ID, \r\n     :DESCRIPCION, \r\n     :VALOR, \r\n     :FUNCION, \r\n     -99, \r\n     :TIPO, \r\n     ''Y'' \r\n )\r\n\r\n', '99', '')",
-                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_PARAMETRO', 'MERGE INTO EPM_PARAMETR A USING\r\n (SELECT\r\n  :PARAMETRO_ID as PARAMETER_ID,\r\n  :DESCRIPCION as DESCRIPTION,\r\n  :VALOR as VALUE,\r\n  :FUNCION as VAL_FUNCTION,\r\n  -99 as MODULE_ID,\r\n  :TIPO as DATA_TYPE,\r\n  ''Y'' as ALLOW_UPDATE\r\n  FROM DUAL) B\r\nON (A.PARAMETER_ID = B.PARAMETER_ID)\r\nWHEN NOT MATCHED THEN \r\nINSERT (\r\n  PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, \r\n  DATA_TYPE, ALLOW_UPDATE)\r\nVALUES (\r\n  B.PARAMETER_ID, B.DESCRIPTION, B.VALUE, B.VAL_FUNCTION, B.MODULE_ID, \r\n  B.DATA_TYPE, B.ALLOW_UPDATE)\r\nWHEN MATCHED THEN\r\nUPDATE SET \r\n  A.DESCRIPTION = B.DESCRIPTION,\r\n  A.VALUE = B.VALUE,\r\n  A.VAL_FUNCTION = B.VAL_FUNCTION,\r\n  A.MODULE_ID = B.MODULE_ID,\r\n  A.DATA_TYPE = B.DATA_TYPE,\r\n  A.ALLOW_UPDATE = B.ALLOW_UPDATE;\r\n\r\nCOMMIT;\r\n', '99', 'mrgepm_parametr')",
-                    "INSERT INTO html (name, documentation, company, filename) VALUES ('SQL_MENSAJE', 'INSERT INTO flex.mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo )  \r\n VALUES \r\n( \r\n    :CODIGO, \r\n    :DESCRIPCION, \r\n    ''EPM'', \r\n    ''CUZ'', \r\n    :CAUSA, \r\n    :SOLUCION \r\n)\r\n', '99', '')",
-                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_MENSAJE', 'MERGE INTO MENSAJE A USING\r\n (SELECT\r\n  :CODIGO as MENSCODI,\r\n  :DESCRIPCION as MENSDESC,\r\n  ''EPM'' as MENSDIVI,\r\n  ''CUZ'' as MENSMODU,\r\n  :CAUSA as MENSCAUS,\r\n  :SOLUCION  as MENSPOSO\r\n  FROM DUAL) B\r\nON (A.MENSDIVI = B.MENSDIVI and A.MENSMODU = B.MENSMODU and A.MENSCODI = B.MENSCODI)\r\nWHEN NOT MATCHED THEN \r\nINSERT (\r\n  MENSCODI, MENSDESC, MENSDIVI, MENSMODU, MENSCAUS, \r\n  MENSPOSO)\r\nVALUES (\r\n  B.MENSCODI, B.MENSDESC, B.MENSDIVI, B.MENSMODU, B.MENSCAUS, \r\n  B.MENSPOSO)\r\nWHEN MATCHED THEN\r\nUPDATE SET \r\n  A.MENSDESC = B.MENSDESC,\r\n  A.MENSCAUS = B.MENSCAUS,\r\n  A.MENSPOSO = B.MENSPOSO;\r\n\r\nCOMMIT;\r\n', '99', 'mrgmensaje')"
-                };
-
-                foreach (string sql in query)
-                {
-                    try
-                    {
-                        SqliteDAO.pExecuteNonQuery(sql);
-                    }
-                    catch (Exception ex) { }
-                }
-
-                SqliteDAO.pActualizaVersion("1.1.6.8");
-            }
-
-            if (!SqliteDAO.pblValidaVersion("1.1.6.7"))
-            {                
-                string[] query =
-                 {
-                    "alter table userbd add main text",
-                    "delete from userbd",
-                    "INSERT INTO userbd (user, company, password, basedatos,main) VALUES ('FLEX', '99', 'Opentest2020', 'SFDLLO','S')",
-                    "INSERT INTO userbd (user, company, password, basedatos,main) VALUES ('FLEX_CUSTOMIZACION', '99', 'Actver82021', 'SFDLLO','N')",
-                    "INSERT INTO userbd (user, company, password, basedatos,main) VALUES ('OPENSIRIUS', '99', 'opensv82021', 'SFDLLO','N')",
-                    "INSERT INTO html (name, documentation, company) VALUES ('CREA_USUARIOS', 'SET SERVEROUTPUT ON\r\n/*\r\n  \r\n   Autor:        Llozada\r\n   Fecha:        16-01-2019 \r\n   Descripcion:  Script para creacion de usuarios SQL_<LOGIN_RED>                 \r\n\r\n*/\r\nDECLARE\r\n    ---Archivos planos de salida\r\n    sbArchivoSalidaDatos              VARCHAR2 (200);\r\n    iflFileHandle_out                 pkg_EPM_GestionArchivos.TyRcArchivo;     -- Tipo archivo del sistema\r\n    \r\n    ---Archivos planos de salida\r\n    sbArchivoSalidaDatos_err          VARCHAR2 (200);\r\n    iflFileHandle_err                 pkg_EPM_GestionArchivos.TyRcArchivo;     -- Tipo archivo del sistema\r\n\r\n    -- Se definen las variables para calcular el tiempo que demora el procedimiento.\r\n    dtTiempoInicia     TIMESTAMP(9);\r\n    dtTiempoTermina    TIMESTAMP(9);\r\n    dtTiempoUtilizado  INTERVAL DAY TO SECOND(9);\r\n\r\n    sbNumeroOC         VARCHAR2(20) := ''RESULTADO'';\r\n    sbSepara           VARCHAR2(1)  := ''|'';\r\n    sbSepaFile         VARCHAR2(1)  := ''|'';\r\n    sbRuta             VARCHAR2(100) := ''/output/traza'';\r\n\tsbUsuarioSql\t   VARCHAR2(50);\r\n\r\n    nuTotal             PLS_INTEGER := 0;\r\n    nuOk                PLS_INTEGER := 0;\r\n    nuErr               PLS_INTEGER := 0;\r\n    nuCicloEsp          PLS_INTEGER := 0;\r\n    \r\n    sbCreaUser          VARCHAR2(2000) := ''CREATE USER %usuario IDENTIFIED BY %pass DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP PROFILE DEFAULT'';\r\n    sbTableSpace        VARCHAR2(200)  := ''GRANT UNLIMITED TABLESPACE TO %usuario'';\r\n    \r\n    TYPE tyUsuarios IS TABLE OF VARCHAR2(40) ;     \r\n        \r\n    TYPE typermisos IS TABLE OF VARCHAR2(400);                                 \r\n    tblPermisos typermisos  := typermisos(\r\n                                             --usuarios de creacion de objetos\r\n                                            --''GRANT ACCESO_OBJETOS TO %usuario'',\r\n                                            --''GRANT DESCRIBE_OBJETO TO %usuario'',\r\n                                            --''GRANT CONSULTA_TODAS_LAS_TABLAS TO %usuario'',\r\n                                            ''GRANT CREATE TYPE TO %usuario'',\r\n                                            ''GRANT CREATE VIEW TO %usuario'',\r\n                                            ''GRANT CREATE TABLE TO %usuario'',\r\n                                            ''GRANT ALTER SESSION TO %usuario'',\r\n                                            ''GRANT CREATE SESSION TO %usuario'',\r\n                                            ''GRANT CREATE SYNONYM TO %usuario'',\r\n                                            ''GRANT CREATE TRIGGER TO %usuario'',\r\n                                            ''GRANT CREATE SEQUENCE TO %usuario'',\r\n                                            ''GRANT CREATE PROCEDURE TO %usuario'',\r\n                                            ''grant SELECT ANY DICTIONARY to %usuario''\r\n                                     );\r\n  \r\n\t  CURSOR CuExistUsuario\r\n\t  (\r\n\t\tisbUsuario IN VARCHAR2\r\n\t  )\r\n\t  IS\r\n\t  SELECT COUNT(1) \r\n\t\tFROM dba_users\r\n\t   WHERE username = isbUsuario; \r\n\t  \r\n\t  CURSOR cuTables\r\n\t  (\r\n\t\tisbUsuaSQL IN VARCHAR2\r\n\t  )\r\n\t  IS\r\n\t  select ''GRANT SELECT, DELETE, INSERT, UPDATE ON '' || owner || ''.'' || table_name ||'' TO ''||isbUsuaSQL AS sentencia\r\n\t\tfrom dba_tables tb\r\n\t   where owner like ''FLEX%''\r\n\t\t AND IOT_NAME IS NULL \r\n\t\t AND NOT EXISTS (SELECT 1 FROM dba_external_tables WHERE OWNER LIKE ''FLEX'' AND TABLE_NAME = tb.table_name );\r\n\r\n\t  CURSOR cuTablesView\r\n\t  (\r\n\t\tisbUsuaSQL IN VARCHAR2\r\n\t  )\r\n\t  IS     \r\n\t  SELECT ''GRANT SELECT ON '' || owner || ''.'' || object_name ||'' TO ''||isbUsuaSQL AS sentencia\r\n\t\tFROM dba_objects\r\n\t   WHERE owner like ''FLEX%'' \r\n\t\t AND object_type in (''TABLE'',''VIEW'');\r\n\t\t \r\n\t  CURSOR cuPaPrFu\r\n\t  (\r\n\t\tisbUsuaSQL IN VARCHAR2\r\n\t  )\r\n\t  IS \r\n\t  select ''GRANT EXECUTE ON '' || owner || ''.'' || object_name ||'' TO ''||isbUsuaSQL AS sentencia\r\n\t\tfrom dba_objects\r\n\t   where owner like ''FLEX%'' \r\n\t\t and object_type in (''PROCEDURE'',''FUNCTION'',''PACKAGE'');\r\n\r\n\t  sbSentencia  VARCHAR2(4000);\r\n\t  nuExiste     NUMBER;\r\n\r\n    sbPass\t  varchar2(100);\r\nBEGIN\r\n\r\n    --almacena la hora de inicio del proceso\r\n    dtTiempoInicia := SYSTIMESTAMP;\r\n    \r\n    sbUsuarioSql := ''[PAR_USUARIO_SQL]'';\r\n    sbPass\t\t := ''[PAR_PASS_SQL]'';\r\n    \r\n    sbArchivoSalidaDatos      := sbUsuarioSql||''_CREA_USUA_''||TO_CHAR(SYSDATE,''yyyymmdd_hh24miss'')||''.txt'';\r\n    iflFileHandle_out         := pkg_EPM_GestionArchivos.fflAbrirArchivo(sbRuta, sbArchivoSalidaDatos, ''w'');\r\n    sbArchivoSalidaDatos_err  := sbUsuarioSql||''_CREA_USUA_ERR_''||TO_CHAR(SYSDATE,''yyyymmdd_hh24miss'')||''.txt'';\r\n    iflFileHandle_err         := pkg_EPM_GestionArchivos.fflAbrirArchivo(sbRuta, sbArchivoSalidaDatos_err, ''w'');\r\n\r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out, ''CREACION USUARIO SQL Y PERMISOS''); \r\n\t\t\r\n    OPEN CuExistUsuario(sbUsuarioSql);\r\n      FETCH CuExistUsuario INTO nuExiste;          \r\n    CLOSE CuExistUsuario;\r\n    \r\n    IF nuExiste = 0 THEN\r\n       sbSentencia := REPLACE(sbCreaUser,''%usuario'',sbUsuarioSql);\r\n       sbSentencia := REPLACE(sbSentencia,''%pass'',sbPass);\r\n       EXECUTE IMMEDIATE sbSentencia;\r\n       sbSentencia := REPLACE(sbTableSpace,''%usuario'',sbUsuarioSql);\r\n       EXECUTE IMMEDIATE sbSentencia;\r\n       pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,sbSentencia||'';'');\r\n    END IF;    \r\n\r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out, ''USUARIO:''||sbUsuarioSql); \r\n    DBMS_OUTPUT.PUT_LINE (''USUARIO:'' || sbUsuarioSql );\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS CREACION OBJETOS''); \r\n    FOR idx IN 1 .. tblPermisos.COUNT LOOP\r\n    BEGIN     \r\n        sbSentencia := REPLACE(tblPermisos(idx),''%usuario'',sbUsuarioSql);\r\n        pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,sbSentencia||'';''); \r\n        EXECUTE IMMEDIATE sbSentencia;\r\n    EXCEPTION\r\n        WHEN OTHERS THEN\r\n             pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''ERROR|''||SQLERRM||''|''||sbSentencia||'';'');\r\n    END;                \r\n    END LOOP; \r\n\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS TABLAS''); \r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,''ASIGNACION PERMISOS TABLAS''); \r\n    FOR rctables IN cuTables(sbUsuarioSql) LOOP\r\n    BEGIN    \r\n        EXECUTE IMMEDIATE rctables.sentencia;\r\n    \r\n    EXCEPTION\r\n        WHEN OTHERS THEN\r\n             pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''ERROR|''||SQLERRM||''|''||rctables.sentencia);\r\n    END;  \r\n    END LOOP; \r\n\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS CONSULTA TABLAS Y VISTAS''); \r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,''ASIGNACION PERMISOS CONSULTA TABLAS Y VISTAS''); \r\n    FOR rctables IN cuTablesView(sbUsuarioSql) LOOP\r\n    BEGIN    \r\n        EXECUTE IMMEDIATE rctables.sentencia;\r\n    \r\n    EXCEPTION\r\n        WHEN OTHERS THEN\r\n             pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''ERROR|''||SQLERRM||''|''||rctables.sentencia);\r\n    END;  \r\n    END LOOP;\r\n\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS PACKAGE,PROCEDURES,FUNCTIONS''); \r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,''ASIGNACION PERMISOS PACKAGE,PROCEDURES,FUNCTIONS''); \r\n    FOR rctables IN cuPaPrFu(sbUsuarioSql) LOOP\r\n        BEGIN    \r\n            EXECUTE IMMEDIATE rctables.sentencia;\r\n        \r\n        EXCEPTION\r\n            WHEN OTHERS THEN\r\n                 pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''*ERROR|''||SQLERRM||''|''||rctables.sentencia);\r\n        END;  \r\n    END LOOP;          \r\n\r\n    dtTiempoTermina   := SYSTIMESTAMP ;\r\n    dtTiempoUtilizado := dtTiempoTermina - dtTiempoInicia ;\r\n\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out,''TERMINA PROCESO'');\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out, ''Hora de Finalización:''||TO_CHAR(dtTiempoTermina,''DD-MM-YYYY HH24:MI:SS''));\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out, ''Tiempo de Ejecucion[''||dtTiempoUtilizado||'']'');\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out,''Fin Archivo'');\r\n\r\n    pkg_EPM_GestionArchivos.fclose(iflFileHandle_out);\r\n    pkg_EPM_GestionArchivos.fclose(iflFileHandle_err);\r\n    DBMS_OUTPUT.PUT_LINE (''TERMINA PROCESO''); \r\n    \r\nEXCEPTION\r\n    WHEN OTHERS THEN\r\n        pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_err,''ERROR - General: ''||SQLERRM);\r\n        pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_err,''Ultima Linea procesada:''||nuTotal);\r\n        pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''Fin de Archivo'');\r\n        pkg_EPM_GestionArchivos.FCLOSE(iflFileHandle_out);\r\n        pkg_EPM_GestionArchivos.fclose(iflFileHandle_err);\r\nEND;\r\n/\r\n\r\n', '99')"
-                };
-
-                foreach (string sql in query)
-                {
-                    try
-                    {
-                        SqliteDAO.pExecuteNonQuery(sql);
-                    }
-                    catch (Exception ex) { }
-                }
-
-                SqliteDAO.pActualizaVersion("1.1.6.7");
+                SqliteDAO.pActualizaVersion("1.1.5.7");
             }
 
             if (!SqliteDAO.pblValidaVersion("1.1.6.5"))
@@ -407,13 +343,16 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion("1.1.6.5");
             }
 
-            if (!SqliteDAO.pblValidaVersion("1.1.5.7"))
+            if (!SqliteDAO.pblValidaVersion("1.1.6.7"))
             {
-                SqliteDAO.pCreaConfiguracion(res.KeyGeneraHTML, "True");
-
                 string[] query =
                  {
-                    "INSERT INTO object_type (codigo, object, slash, count_slash, priority) VALUES (35, 'APLICA GRANT', '', '0', 200)"
+                    "alter table userbd add main text",
+                    "delete from userbd",
+                    "INSERT INTO userbd (user, company, password, basedatos,main) VALUES ('FLEX', '99', 'Fl3xv8Dll0_0987', 'SFDLLO','S')",
+                    "INSERT INTO userbd (user, company, password, basedatos,main) VALUES ('FLEX_CUSTOMIZACION', '99', 'CusT0v8Dll0_0987', 'SFDLLO','N')",
+                    "INSERT INTO userbd (user, company, password, basedatos,main) VALUES ('OPENSIRIUS', '99', 'Op3n$is1usdllo', 'SFDLLO','N')",
+                    "INSERT INTO html (name, documentation, company) VALUES ('CREA_USUARIOS', 'SET SERVEROUTPUT ON\r\n/*\r\n  \r\n   Autor:        Llozada\r\n   Fecha:        16-01-2019 \r\n   Descripcion:  Script para creacion de usuarios SQL_<LOGIN_RED>                 \r\n\r\n*/\r\nDECLARE\r\n    ---Archivos planos de salida\r\n    sbArchivoSalidaDatos              VARCHAR2 (200);\r\n    iflFileHandle_out                 pkg_EPM_GestionArchivos.TyRcArchivo;     -- Tipo archivo del sistema\r\n    \r\n    ---Archivos planos de salida\r\n    sbArchivoSalidaDatos_err          VARCHAR2 (200);\r\n    iflFileHandle_err                 pkg_EPM_GestionArchivos.TyRcArchivo;     -- Tipo archivo del sistema\r\n\r\n    -- Se definen las variables para calcular el tiempo que demora el procedimiento.\r\n    dtTiempoInicia     TIMESTAMP(9);\r\n    dtTiempoTermina    TIMESTAMP(9);\r\n    dtTiempoUtilizado  INTERVAL DAY TO SECOND(9);\r\n\r\n    sbNumeroOC         VARCHAR2(20) := ''RESULTADO'';\r\n    sbSepara           VARCHAR2(1)  := ''|'';\r\n    sbSepaFile         VARCHAR2(1)  := ''|'';\r\n    sbRuta             VARCHAR2(100) := ''/output/traza'';\r\n\tsbUsuarioSql\t   VARCHAR2(50);\r\n\r\n    nuTotal             PLS_INTEGER := 0;\r\n    nuOk                PLS_INTEGER := 0;\r\n    nuErr               PLS_INTEGER := 0;\r\n    nuCicloEsp          PLS_INTEGER := 0;\r\n    \r\n    sbCreaUser          VARCHAR2(2000) := ''CREATE USER %usuario IDENTIFIED BY %pass DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP PROFILE DEFAULT'';\r\n    sbTableSpace        VARCHAR2(200)  := ''GRANT UNLIMITED TABLESPACE TO %usuario'';\r\n    \r\n    TYPE tyUsuarios IS TABLE OF VARCHAR2(40) ;     \r\n        \r\n    TYPE typermisos IS TABLE OF VARCHAR2(400);                                 \r\n    tblPermisos typermisos  := typermisos(\r\n                                             --usuarios de creacion de objetos\r\n                                            --''GRANT ACCESO_OBJETOS TO %usuario'',\r\n                                            --''GRANT DESCRIBE_OBJETO TO %usuario'',\r\n                                            --''GRANT CONSULTA_TODAS_LAS_TABLAS TO %usuario'',\r\n                                            ''GRANT CREATE TYPE TO %usuario'',\r\n                                            ''GRANT CREATE VIEW TO %usuario'',\r\n                                            ''GRANT CREATE TABLE TO %usuario'',\r\n                                            ''GRANT ALTER SESSION TO %usuario'',\r\n                                            ''GRANT CREATE SESSION TO %usuario'',\r\n                                            ''GRANT CREATE SYNONYM TO %usuario'',\r\n                                            ''GRANT CREATE TRIGGER TO %usuario'',\r\n                                            ''GRANT CREATE SEQUENCE TO %usuario'',\r\n                                            ''GRANT CREATE PROCEDURE TO %usuario'',\r\n                                            ''grant SELECT ANY DICTIONARY to %usuario''\r\n                                     );\r\n  \r\n\t  CURSOR CuExistUsuario\r\n\t  (\r\n\t\tisbUsuario IN VARCHAR2\r\n\t  )\r\n\t  IS\r\n\t  SELECT COUNT(1) \r\n\t\tFROM dba_users\r\n\t   WHERE username = isbUsuario; \r\n\t  \r\n\t  CURSOR cuTables\r\n\t  (\r\n\t\tisbUsuaSQL IN VARCHAR2\r\n\t  )\r\n\t  IS\r\n\t  select ''GRANT SELECT, DELETE, INSERT, UPDATE ON '' || owner || ''.'' || table_name ||'' TO ''||isbUsuaSQL AS sentencia\r\n\t\tfrom dba_tables tb\r\n\t   where owner like ''FLEX%''\r\n\t\t AND IOT_NAME IS NULL \r\n\t\t AND NOT EXISTS (SELECT 1 FROM dba_external_tables WHERE OWNER LIKE ''FLEX'' AND TABLE_NAME = tb.table_name );\r\n\r\n\t  CURSOR cuTablesView\r\n\t  (\r\n\t\tisbUsuaSQL IN VARCHAR2\r\n\t  )\r\n\t  IS     \r\n\t  SELECT ''GRANT SELECT ON '' || owner || ''.'' || object_name ||'' TO ''||isbUsuaSQL AS sentencia\r\n\t\tFROM dba_objects\r\n\t   WHERE owner like ''FLEX%'' \r\n\t\t AND object_type in (''TABLE'',''VIEW'');\r\n\t\t \r\n\t  CURSOR cuPaPrFu\r\n\t  (\r\n\t\tisbUsuaSQL IN VARCHAR2\r\n\t  )\r\n\t  IS \r\n\t  select ''GRANT EXECUTE ON '' || owner || ''.'' || object_name ||'' TO ''||isbUsuaSQL AS sentencia\r\n\t\tfrom dba_objects\r\n\t   where owner like ''FLEX%'' \r\n\t\t and object_type in (''PROCEDURE'',''FUNCTION'',''PACKAGE'');\r\n\r\n\t  sbSentencia  VARCHAR2(4000);\r\n\t  nuExiste     NUMBER;\r\n\r\n    sbPass\t  varchar2(100);\r\nBEGIN\r\n\r\n    --almacena la hora de inicio del proceso\r\n    dtTiempoInicia := SYSTIMESTAMP;\r\n    \r\n    sbUsuarioSql := ''[PAR_USUARIO_SQL]'';\r\n    sbPass\t\t := ''[PAR_PASS_SQL]'';\r\n    \r\n    sbArchivoSalidaDatos      := sbUsuarioSql||''_CREA_USUA_''||TO_CHAR(SYSDATE,''yyyymmdd_hh24miss'')||''.txt'';\r\n    iflFileHandle_out         := pkg_EPM_GestionArchivos.fflAbrirArchivo(sbRuta, sbArchivoSalidaDatos, ''w'');\r\n    sbArchivoSalidaDatos_err  := sbUsuarioSql||''_CREA_USUA_ERR_''||TO_CHAR(SYSDATE,''yyyymmdd_hh24miss'')||''.txt'';\r\n    iflFileHandle_err         := pkg_EPM_GestionArchivos.fflAbrirArchivo(sbRuta, sbArchivoSalidaDatos_err, ''w'');\r\n\r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out, ''CREACION USUARIO SQL Y PERMISOS''); \r\n\t\t\r\n    OPEN CuExistUsuario(sbUsuarioSql);\r\n      FETCH CuExistUsuario INTO nuExiste;          \r\n    CLOSE CuExistUsuario;\r\n    \r\n    IF nuExiste = 0 THEN\r\n       sbSentencia := REPLACE(sbCreaUser,''%usuario'',sbUsuarioSql);\r\n       sbSentencia := REPLACE(sbSentencia,''%pass'',sbPass);\r\n       EXECUTE IMMEDIATE sbSentencia;\r\n       sbSentencia := REPLACE(sbTableSpace,''%usuario'',sbUsuarioSql);\r\n       EXECUTE IMMEDIATE sbSentencia;\r\n       pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,sbSentencia||'';'');\r\n    END IF;    \r\n\r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out, ''USUARIO:''||sbUsuarioSql); \r\n    DBMS_OUTPUT.PUT_LINE (''USUARIO:'' || sbUsuarioSql );\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS CREACION OBJETOS''); \r\n    FOR idx IN 1 .. tblPermisos.COUNT LOOP\r\n    BEGIN     \r\n        sbSentencia := REPLACE(tblPermisos(idx),''%usuario'',sbUsuarioSql);\r\n        pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,sbSentencia||'';''); \r\n        EXECUTE IMMEDIATE sbSentencia;\r\n    EXCEPTION\r\n        WHEN OTHERS THEN\r\n             pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''ERROR|''||SQLERRM||''|''||sbSentencia||'';'');\r\n    END;                \r\n    END LOOP; \r\n\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS TABLAS''); \r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,''ASIGNACION PERMISOS TABLAS''); \r\n    FOR rctables IN cuTables(sbUsuarioSql) LOOP\r\n    BEGIN    \r\n        EXECUTE IMMEDIATE rctables.sentencia;\r\n    \r\n    EXCEPTION\r\n        WHEN OTHERS THEN\r\n             pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''ERROR|''||SQLERRM||''|''||rctables.sentencia);\r\n    END;  \r\n    END LOOP; \r\n\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS CONSULTA TABLAS Y VISTAS''); \r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,''ASIGNACION PERMISOS CONSULTA TABLAS Y VISTAS''); \r\n    FOR rctables IN cuTablesView(sbUsuarioSql) LOOP\r\n    BEGIN    \r\n        EXECUTE IMMEDIATE rctables.sentencia;\r\n    \r\n    EXCEPTION\r\n        WHEN OTHERS THEN\r\n             pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''ERROR|''||SQLERRM||''|''||rctables.sentencia);\r\n    END;  \r\n    END LOOP;\r\n\r\n    DBMS_OUTPUT.PUT_LINE (''ASIGNACION PERMISOS PACKAGE,PROCEDURES,FUNCTIONS''); \r\n    pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_out,''ASIGNACION PERMISOS PACKAGE,PROCEDURES,FUNCTIONS''); \r\n    FOR rctables IN cuPaPrFu(sbUsuarioSql) LOOP\r\n        BEGIN    \r\n            EXECUTE IMMEDIATE rctables.sentencia;\r\n        \r\n        EXCEPTION\r\n            WHEN OTHERS THEN\r\n                 pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''*ERROR|''||SQLERRM||''|''||rctables.sentencia);\r\n        END;  \r\n    END LOOP;          \r\n\r\n    dtTiempoTermina   := SYSTIMESTAMP ;\r\n    dtTiempoUtilizado := dtTiempoTermina - dtTiempoInicia ;\r\n\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out,''TERMINA PROCESO'');\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out, ''Hora de Finalización:''||TO_CHAR(dtTiempoTermina,''DD-MM-YYYY HH24:MI:SS''));\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out, ''Tiempo de Ejecucion[''||dtTiempoUtilizado||'']'');\r\n    pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_out,''Fin Archivo'');\r\n\r\n    pkg_EPM_GestionArchivos.fclose(iflFileHandle_out);\r\n    pkg_EPM_GestionArchivos.fclose(iflFileHandle_err);\r\n    DBMS_OUTPUT.PUT_LINE (''TERMINA PROCESO''); \r\n    \r\nEXCEPTION\r\n    WHEN OTHERS THEN\r\n        pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_err,''ERROR - General: ''||SQLERRM);\r\n        pkg_EPM_GestionArchivos.PUT_LINE(iflFileHandle_err,''Ultima Linea procesada:''||nuTotal);\r\n        pkg_EPM_GestionArchivos.PUT_LINE (iflFileHandle_err, ''Fin de Archivo'');\r\n        pkg_EPM_GestionArchivos.FCLOSE(iflFileHandle_out);\r\n        pkg_EPM_GestionArchivos.fclose(iflFileHandle_err);\r\nEND;\r\n/\r\n\r\n', '99')"
                 };
 
                 foreach (string sql in query)
@@ -425,8 +364,73 @@ namespace Cygnus2_0
                     catch (Exception ex) { }
                 }
 
-                SqliteDAO.pActualizaVersion("1.1.5.7");
+                SqliteDAO.pActualizaVersion("1.1.6.7");
             }
+
+            if (!SqliteDAO.pblValidaVersion("1.1.6.8"))
+            {
+                string[] query =
+                 {
+                    "alter table html add filename",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('SQL_PARAMETRO', 'INSERT INTO FLEX.epm_parametr (PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, DATA_TYPE, ALLOW_UPDATE) \r\n VALUES \r\n ( \r\n     :PARAMETRO_ID, \r\n     :DESCRIPCION, \r\n     :VALOR, \r\n     :FUNCION, \r\n     -99, \r\n     :TIPO, \r\n     ''Y'' \r\n )\r\n\r\n', '99', '')",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_PARAMETRO', 'MERGE INTO EPM_PARAMETR A USING\r\n (SELECT\r\n  :PARAMETRO_ID as PARAMETER_ID,\r\n  :DESCRIPCION as DESCRIPTION,\r\n  :VALOR as VALUE,\r\n  :FUNCION as VAL_FUNCTION,\r\n  -99 as MODULE_ID,\r\n  :TIPO as DATA_TYPE,\r\n  ''Y'' as ALLOW_UPDATE\r\n  FROM DUAL) B\r\nON (A.PARAMETER_ID = B.PARAMETER_ID)\r\nWHEN NOT MATCHED THEN \r\nINSERT (\r\n  PARAMETER_ID, DESCRIPTION, VALUE, VAL_FUNCTION, MODULE_ID, \r\n  DATA_TYPE, ALLOW_UPDATE)\r\nVALUES (\r\n  B.PARAMETER_ID, B.DESCRIPTION, B.VALUE, B.VAL_FUNCTION, B.MODULE_ID, \r\n  B.DATA_TYPE, B.ALLOW_UPDATE)\r\nWHEN MATCHED THEN\r\nUPDATE SET \r\n  A.DESCRIPTION = B.DESCRIPTION,\r\n  A.VALUE = B.VALUE,\r\n  A.VAL_FUNCTION = B.VAL_FUNCTION,\r\n  A.MODULE_ID = B.MODULE_ID,\r\n  A.DATA_TYPE = B.DATA_TYPE,\r\n  A.ALLOW_UPDATE = B.ALLOW_UPDATE;\r\n\r\nCOMMIT;\r\n', '99', 'mrgepm_parametr')",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('SQL_MENSAJE', 'INSERT INTO flex.mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo )  \r\n VALUES \r\n( \r\n    :CODIGO, \r\n    :DESCRIPCION, \r\n    ''EPM'', \r\n    ''CUZ'', \r\n    :CAUSA, \r\n    :SOLUCION \r\n)\r\n', '99', '')",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_MENSAJE', 'MERGE INTO MENSAJE A USING\r\n (SELECT\r\n  :CODIGO as MENSCODI,\r\n  :DESCRIPCION as MENSDESC,\r\n  ''EPM'' as MENSDIVI,\r\n  ''CUZ'' as MENSMODU,\r\n  :CAUSA as MENSCAUS,\r\n  :SOLUCION  as MENSPOSO\r\n  FROM DUAL) B\r\nON (A.MENSDIVI = B.MENSDIVI and A.MENSMODU = B.MENSMODU and A.MENSCODI = B.MENSCODI)\r\nWHEN NOT MATCHED THEN \r\nINSERT (\r\n  MENSCODI, MENSDESC, MENSDIVI, MENSMODU, MENSCAUS, \r\n  MENSPOSO)\r\nVALUES (\r\n  B.MENSCODI, B.MENSDESC, B.MENSDIVI, B.MENSMODU, B.MENSCAUS, \r\n  B.MENSPOSO)\r\nWHEN MATCHED THEN\r\nUPDATE SET \r\n  A.MENSDESC = B.MENSDESC,\r\n  A.MENSCAUS = B.MENSCAUS,\r\n  A.MENSPOSO = B.MENSPOSO;\r\n\r\nCOMMIT;\r\n', '99', 'mrgmensaje')"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.6.8");
+            }
+
+            if (!SqliteDAO.pblValidaVersion("1.1.6.9"))
+            {
+                string[] query =
+                 {
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('CODIGO_MENSAJE', 'SELECT max(menscodi) nuCodigo \r\nFROM flex.mensaje  \r\nWHERE mensdivi = ''EPM'' \r\nAND mensmodu = ''CUZ'' \r\nAND menscodi < 900196\r\n', '99', '')"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.6.9");
+            }
+
+            if (!SqliteDAO.pblValidaVersion("1.1.7.5"))
+            {
+                string[] query =
+                 {
+                    "update userbd set password = 'Fl3xv8Dll0_0987' where user = 'FLEX'",
+                    "update userbd set password = 'CusT0v8Dll0_0987' where user = 'FLEX_CUSTOMIZACION'",
+                    "update userbd set password = 'Op3n$is1usdllo' where user = 'OPENSIRIUS'"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.7.5");
+            }
+
+            
 
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))

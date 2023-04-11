@@ -4,9 +4,9 @@
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         Title="Cygnus" IsTitleVisible="True"        
         WindowStartupLocation="CenterScreen"
-        Width="1400" 
-        Height="760" Loaded="ModernWindow_Loaded" MinHeight="760" MinWidth="1400"
-        xmlns:p="clr-namespace:Cygnus2_0.Properties" WindowState="Maximized" Closing="ModernWindow_Closing"
+        Width="1280" 
+        Height="720" Loaded="ModernWindow_Loaded"
+        xmlns:p="clr-namespace:Cygnus2_0.Properties"  Closing="ModernWindow_Closing"
  >
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Bienvenido" >
