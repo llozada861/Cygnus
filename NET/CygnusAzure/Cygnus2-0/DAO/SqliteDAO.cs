@@ -1422,7 +1422,20 @@ namespace Cygnus2_0.DAO
                 context.SaveChanges();
             }
         }
+
+        public static List<UsuariosPDN> pObtListaBD()
+        {
+            List<UsuariosPDN> lista = new List<UsuariosPDN>();
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                lista = context.ListaUsuariosPDN.ToList();
+            }
+
+            return lista;
+        }
         #endregion Genericos
+
 
         #region Ejecuta SQL
         public static void ExecuteNonQuery(string query, SQLiteConnection conn)

@@ -10,6 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FirstFloor.ModernUI.Windows.Navigation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using Cygnus2_0.DAO;
+using Cygnus2_0.Model.User;
+using Cygnus2_0.Model.Settings;
+using Cygnus2_0.Model.Repository;
+using Oracle.ManagedDataAccess.Types;
+using System.Windows.Forms;
+using System.IO;
 
 namespace Cygnus2_0.ViewModel.Objects
 {
@@ -18,92 +26,51 @@ namespace Cygnus2_0.ViewModel.Objects
         private Handler handler;
         private readonly DelegateCommand _process;
         private readonly DelegateCommand _clean;
-        private readonly DelegateCommand _conection;
+        private readonly DelegateCommand _descargar;
         private readonly DelegateCommand _search;
-        private ObservableCollection<Archivo> listaArchivosBloqueo;
-        private ObservableCollection<Archivo> listaArchivosEncontrados;
-        private string cantidadObjetos;
-        private string estadoConn;
-        private string codigo;
-        private string objeto;
-        private DateTime fecha;
-        private BlockModel model;
+        private string objetosBloqueados;
+        private string asunto;
+        private string body;
         public ICommand Process => _process;
         public ICommand Clean => _clean;
-        public ICommand Conectar => _conection;
+        public ICommand Descargar => _descargar;
         public ICommand Search => _search;
         public BlockViewModel(Handler hand)
         {
             _process = new DelegateCommand(OnProcess);
             _clean = new DelegateCommand(OnClean);
-            _conection = new DelegateCommand(OnConection);
+            _descargar = new DelegateCommand(onDownload);
             _search = new DelegateCommand(OnSearch);
 
             handler = hand;
-            model = new BlockModel(handler, this);
+            Model = new BlockModel(handler, this);
 
-            ListaArchivosBloqueo = new ObservableCollection<Archivo>();
-            listaArchivosEncontrados = new ObservableCollection<Archivo>();
-            this.CantidadObjetos = "0";
-            this.Fecha = DateTime.Now;
+            Model.ListaArchivosBloqueo = new ObservableCollection<Archivo>();
+            Model.ListaArchivosEncontrados = new ObservableCollection<Archivo>();
+            Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD());
         }
 
-        public string EstadoConn
-        {
-            get { return handler.EstadoConn; }
-            set { SetProperty(ref estadoConn, handler.EstadoConn); }
-        }
-        public string Codigo
-        {
-            get { return codigo; }
-            set { SetProperty(ref codigo, value); }
-        }
-        public string Objeto
-        {
-            get { return objeto; }
-            set { SetProperty(ref objeto, value); }
-        }
-        public DateTime Fecha
-        {
-            get { return fecha; }
-            set { SetProperty(ref fecha, value); }
-        }
-        public string CantidadObjetos
-        {
-            get { return cantidadObjetos; }
-            set { SetProperty(ref cantidadObjetos, value); }
-        }
-        public ObservableCollection<Archivo> ListaArchivosBloqueo
-        {
-            get { return listaArchivosBloqueo; }
-            set { SetProperty(ref listaArchivosBloqueo, value); }
-        }
-        public ObservableCollection<Archivo> ListaArchivosEncontrados
-        {
-            get { return listaArchivosEncontrados; }
-            set { SetProperty(ref listaArchivosEncontrados, value); }
-        }
-        internal void pAdicionaObjeto(Archivo objeto)
-        {
-            model.pAdicionaObjeto(objeto);
-        }
+        public BlockModel Model { get; set; }
+        public UsuariosPDN BdSeleccionada { get; set; }
+        public Archivo ObjetoSeleccionado { get; set; }
+
         public void OnProcess(object commandParameter)
         {
             try
             {
-                if (string.IsNullOrEmpty(this.Codigo))
+                if (string.IsNullOrEmpty(Model.Codigo))
                 {
                     handler.MensajeError("Ingrese el número de la WO para trabajar sobre los objetos.");
                     return;
                 }
 
-                if (this.ListaArchivosBloqueo.Count == 0)
+                if (Model.ListaArchivosBloqueo.Count == 0)
                 {
                     handler.MensajeError("No hay objetos para informar.");
                     return;
                 }
 
-                model.pBloquearObjetos();
+                pBloquearObjetos();
 
                 handler.MensajeOk("Proceso terminado.");
             }
@@ -112,23 +79,38 @@ namespace Cygnus2_0.ViewModel.Objects
                 handler.MensajeError(ex.Message);
             }
         }
-        public void OnConection(object commandParameter)
+        public void onDownload(object commandParameter)
         {
             try
             {
-                //se intenta realizar la conexión con la base de datos
-                handler.pRealizaConexion();
+                handler.CursorWait();
+
+                OracleClob pktbl = handler.DAO.pGeneraFuente(this.ObjetoSeleccionado.FileName, this.ObjetoSeleccionado.Owner,this.BdSeleccionada);
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.FileName = this.BdSeleccionada.BaseDatos+"_"+this.ObjetoSeleccionado.FileName.ToLower() + ".sql";
+
+                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    File.WriteAllText(saveFileDialog.FileName, pktbl.Value, Encoding.Default);
+
+                handler.CursorNormal();
+
+                handler.ConexionOracle.ConexionOracleProd.Close();
             }
             catch (Exception ex)
             {
                 handler.MensajeError(ex.Message);
+                handler.ConexionOracle.ConexionOracleProd.Close();
             }
         }
         public void OnClean(object commandParameter)
         {
             try
-            { 
-                model.OnClean();
+            {
+                Model.ListaArchivosEncontrados.Clear();
+                Model.Objeto = "";
+                Model.ListaBD.Clear();
+                Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD());
             }
             catch (Exception ex)
             {
@@ -140,7 +122,8 @@ namespace Cygnus2_0.ViewModel.Objects
         {
             try
             {
-                model.OnSearch();
+                handler.DAO.pObtConsultaObjetos(Model.Objeto.Trim(), this, BdSeleccionada);
+                pRefrescaConteo();
             }
             catch (Exception ex)
             {
@@ -150,7 +133,51 @@ namespace Cygnus2_0.ViewModel.Objects
 
         internal void pRefrescaConteo()
         {
-            model.pRefrescaConteo();
+            Model.CantidadObjetos = Model.ListaArchivosBloqueo.Count().ToString();
+        }
+
+        internal void pAdicionaObjeto(Archivo objeto)
+        {
+            if (!Model.ListaArchivosBloqueo.ToList().Exists(x => (x.Owner.Equals(objeto.Owner) && x.FileName.Equals(objeto.FileName))))
+            {
+                Model.ListaArchivosBloqueo.Add(objeto);
+            }
+
+            pRefrescaConteo();
+        }
+
+        internal void pBloquearObjetos()
+        {
+            objetosBloqueados = "";
+
+            foreach (Archivo archivo in Model.ListaArchivosBloqueo)
+            {
+                if (Model.ListaArchivosBloqueo.IndexOf(archivo) == Model.ListaArchivosBloqueo.Count - 1)
+                {
+                    objetosBloqueados = objetosBloqueados + archivo.FileName;
+                }
+                else
+                {
+                    objetosBloqueados = objetosBloqueados + archivo.FileName + ", ";
+                }
+            }
+
+            if (!string.IsNullOrEmpty(objetosBloqueados))
+            {
+                if (handler.MensajeConfirmacion("Desea enviar la notificación por correo?") == "Y")
+                {
+                    asunto = "Notificación para modificar los objetos [" + objetosBloqueados + "]";
+                    body = "Buen día, <br><br> Se informa que se va a trabajar sobre los objetos [" + objetosBloqueados + "] " +
+                           " con la WO [" + Model.Codigo + "]. <br><br> Correo enviado a través de Cygnus.";
+
+                    handler.sendEMailThroughOUTLOOK(asunto, body);
+                }
+            }
+        }
+
+        public void OnConection(object commandParameter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

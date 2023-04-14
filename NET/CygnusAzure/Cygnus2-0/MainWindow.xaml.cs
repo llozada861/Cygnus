@@ -430,7 +430,30 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion("1.1.7.5");
             }
 
-            
+            if (!SqliteDAO.pblValidaVersion("1.1.7.8"))
+            {
+                string[] query =
+                 {
+                    "create table cy_userbd( codigo integer primary key,  user_        varchar2(50),    password_    varchar2(1000),    basedatos   varchar2(100),    servidor    varchar2(100),    puerto      varchar2(100))",
+                    "Insert into CY_USERBD   (codigo,USER_, PASSWORD_, BASEDATOS, SERVIDOR, PUERTO) Values   (1,'sql_mvm', 'N0M30LVid3s+-', 'SFDLLO', 'EPM-DO13', '1521')",
+                    "Insert into CY_USERBD   (codigo,USER_, PASSWORD_, BASEDATOS, SERVIDOR, PUERTO) Values   (2,'sql_mvm', 'U6UdkBwxk5Ezw8', 'SFUAT', 'EPM-TO34', '1521')",
+                    "Insert into CY_USERBD   (codigo,USER_, PASSWORD_, BASEDATOS, SERVIDOR, PUERTO) Values   (3,'sql_mvm', 'N0M30LVid3s+-', 'SFPDN', 'epmpo34-01', '1521')",
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_FUENTES', 'DECLARE\r\n    PROCEDURE pObtFuentes\r\n    (\r\n        isbNombre   IN VARCHAR2,\r\n        isbOwner    IN VARCHAR2,\r\n        oclObjeto   OUT CLOB\r\n    )\r\n    IS\r\n        sbText      VARCHAR2(4000);\r\n        \r\n        CURSOR cuDatos\r\n        IS\r\n            SELECT text\r\n            FROM dba_source \r\n            WHERE NAME = isbNombre\r\n            AND owner = isbOwner\r\n            ORDER BY type,line;\r\n    BEGIN\r\n        dbms_lob.createtemporary(lob_loc => oclObjeto, cache => true, dur => dbms_lob.session);\r\n        \r\n        OPEN cuDatos;\r\n        LOOP\r\n            FETCH cuDatos INTO sbText;\r\n            EXIT WHEN cuDatos%NOTFOUND;\r\n            \r\n            DBMS_LOB.APPEND(oclObjeto, sbText);\r\n            \r\n        END LOOP;\r\n        CLOSE cuDatos;\r\n    END;\r\nBEGIN\r\n    pObtFuentes(:isbNombre,:isbOwner,:oclObjeto);\r\nEND;\r\n', '99', '')"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.7.8");
+            }
+
+
 
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))

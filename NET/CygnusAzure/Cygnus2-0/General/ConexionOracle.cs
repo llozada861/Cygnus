@@ -1,4 +1,6 @@
 ﻿using Cygnus2_0.General;
+using Cygnus2_0.Model.Settings;
+using Cygnus2_0.Model.User;
 using Cygnus2_0.Security;
 using Cygnus2_0.ViewModel.Settings;
 using Oracle.ManagedDataAccess.Client;
@@ -18,6 +20,7 @@ namespace Cygnus2_0.Conn
         private ConexionViewModel conexion;
         private OracleConnection conexionOracleSql;
         private OracleConnection conexionOracleCompila;
+        private OracleConnection conexionOracleProd;
         #endregion Variables
 
         public ConexionOracle(ConexionViewModel model)
@@ -54,6 +57,20 @@ namespace Cygnus2_0.Conn
             conexionOracleCompila = new OracleConnection(connectionstring);
             conexionOracleCompila.Open();
         }
+        public void RealizarConexionProd(UsuariosPDN user)
+        {
+            string connectionstring = OracleConnString
+                                        (
+                                            user.Servidor,
+                                            user.Puerto,
+                                            user.BaseDatos,
+                                            user.Usuariobd,
+                                            user.Passwordbd
+                                        );
+
+            ConexionOracleProd = new OracleConnection(connectionstring);
+            ConexionOracleProd.Open();
+        }
 
         public OracleConnection ConexionOracleSQL
         {
@@ -65,6 +82,11 @@ namespace Cygnus2_0.Conn
         {
             get { return conexionOracleCompila; }
             set { conexionOracleCompila = value; }
+        }
+        public OracleConnection ConexionOracleProd
+        {
+            get { return conexionOracleProd; }
+            set { conexionOracleProd = value; }
         }
 
         public string OracleConnString(string host, string port, string servicename, string user, string pass)
