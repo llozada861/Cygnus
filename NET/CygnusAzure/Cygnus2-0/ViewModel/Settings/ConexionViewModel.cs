@@ -38,7 +38,7 @@ namespace Cygnus2_0.ViewModel.Settings
             _eliminar = new DelegateCommand(OnEliminar);
             _nuevo = new DelegateCommand(OnNuevo);
             handler = hand;
-            this.Model = new ConexionModel(handler);
+            this.Model = new ConexionModel();
             this.Model.ListaConexiones = new ObservableCollection<SelectListItem>();
             this.Model.Conexion = new SelectListItem();
         }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:general="clr-namespace:Cygnus2_0.Pages.General"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -32,70 +33,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <GroupBox x:Name="grbBuscar" Header="Objetos encontrados" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="5">
-            <Grid>
-                <DataGrid
-            x:Name="dataGridObjetos" 
-            IsReadOnly="false" 
-            AllowDrop="True" 
-            AutoGenerateColumns="False"
-            SelectionMode="Extended"
-            CanUserDeleteRows="True"
-            CanUserAddRows="False"
-            CanUserReorderColumns="False"
-            CanUserSortColumns="False"
-            ItemsSource="{Binding Path=ListaArchivosEncontrados}"
-                    MouseDoubleClick="dataGridObjetos_MouseDoubleClick">
-                    <DataGrid.Columns>
-                    <DataGridTextColumn
-                  Header="Objeto"
-                  IsReadOnly="True"
-                  Binding="{Binding Path=FileName}" />
-                        <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Tipo"
-                  Binding="{Binding Path=Tipo}" />
-                        <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Estado"
-                  Binding="{Binding Path=Estado}" />
-                        <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Dueño"
-                  Binding="{Binding Path=Owner}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </GroupBox>
-        <GroupBox x:Name="grbResultado" Header="Objetos a trabajar" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" >
-            <Grid>
-                <DataGrid 
-            x:Name="dataGridObjsBloqResult" 
-            IsReadOnly="True" 
-            AutoGenerateColumns="False"
-            AllowDrop="False" 
-            SelectionMode="Single"
-            CanUserDeleteRows="true"
-            CanUserAddRows="False"
-            CanUserReorderColumns="False"
-            CanUserSortColumns="False"
-            ItemsSource="{Binding Path=ListaArchivosBloqueo}"
-                    SelectionChanged="dataGridObjsDesbloq_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn                  
-                  IsReadOnly="True"
-                  Header="Objeto"
-                  Binding="{Binding Path=FileName}" />
-                        <DataGridTextColumn
-                  Header="Dueño"
-                  IsReadOnly="True"
-                  Binding="{Binding Path=Owner}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </GroupBox>
-
-        <GroupBox x:Name="grbSearch" Header="Búsqueda" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="3">
+        <GroupBox x:Name="grbSearch" Header="Búsqueda" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="2">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -105,32 +43,69 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBox x:Name="txtObjeto" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Objeto}" CharacterCasing="Upper" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
-                <Button x:Name="btnBuscar" Content="Buscar" Command="{Binding Path=Search}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
+                <general:AutoComplete x:Name="AucomboBoxRepo" Grid.Row="0"  Grid.Column="0" Margin="0,0,10,0"
+                                 ItemsSource="{Binding Path=Model.ListaBD}" 
+                                          SelectedItem="{Binding Path=BdSeleccionada}" DisplayMemberPath="Displayname" 
+                                      PatternChanged="AuListaRepoGit_PatternChanged" SelectionChanged="AucomboBoxRepo_SelectionChanged"
+                           Style="{StaticResource AutoCompleteComboBox}"
+                          Delay="500" Tag="Seleccione el Repositorio GIT" 
+                                          KeyboardNavigation.TabIndex="0"/>
+                
+                <TextBox x:Name="txtObjeto" VerticalContentAlignment="Center" TextWrapping="Wrap" 
+                         Text="{Binding Path=Model.Objeto}" CharacterCasing="Upper" 
+                         Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" 
+                         Margin="0,0,5,0"
+                         Style="{StaticResource placeHolder}" Tag="Objeto a buscar (se hace un like)"/>
+                <Button x:Name="btnBuscar" Content="Buscar" Command="{Binding Path=Search}" 
+                        Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="grbDatosReq" Header="Datos requeridos" Grid.Row="3" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="3" >
+
+        <GroupBox x:Name="grbBuscar" Header="Objetos encontrados" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Label x:Name="lblOc" Content="OC" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" />
-                <TextBox x:Name="txtOc" TextWrapping="Wrap" CharacterCasing="Upper" Text="{Binding Path=Codigo}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
-                <Label x:Name="lblFecha" Content="Fecha Lib." Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dtFechaLib" SelectedDate="{Binding Path=Fecha}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Visibility="Hidden"/>
+                <DataGrid
+            x:Name="dataGridObjetos" 
+            IsReadOnly="false" 
+            AllowDrop="True" 
+            AutoGenerateColumns="False"
+            SelectionMode="Extended"
+            CanUserDeleteRows="false"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="False"
+            ItemsSource="{Binding Path=Model.ListaArchivosEncontrados}"
+                 SelectedItem="{Binding Path=ObjetoSeleccionado}">
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Descargar Fuente" Command="{Binding Path=Descargar}" />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Dueño"
+                  Binding="{Binding Path=Owner}" />
+                        <DataGridTextColumn
+                  Header="Objeto"
+                  IsReadOnly="True"
+                  Binding="{Binding Path=FileName}" />
+                        <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Tipo"
+                  Binding="{Binding Path=Observacion}" />
+                        <DataGridTextColumn                  
+                  IsReadOnly="True"
+                  Header="Estado"
+                  Binding="{Binding Path=OrdenCambio}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="grbGen" Header="Total" Grid.Row="6" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="3" >
-            <Grid>
-                <Label x:Name="labelBlock" Foreground="Red" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="{Binding Path=CantidadObjetos}" FontWeight="Bold" FontSize="80" VerticalAlignment="Center" />
-            </Grid>
-        </GroupBox>
-        <Button x:Name="btnBloquear" Content="Informar"  VerticalAlignment="Center" Command="{Binding Path=Process}" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="9" Margin="0,0,5,0"/>
-        <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center"  Command="{Binding Path=Clean}" Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="9" />
+        <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center"  
+                        Command="{Binding Path=Clean}" Grid.Column="8" Grid.Row="10" Grid.ColumnSpan="2" HorizontalAlignment="Left" />
+        <!--<Button x:Name="btnBloquear" Content="Informar"  VerticalAlignment="Center" Command="{Binding Path=Process}" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="9" Margin="0,0,5,0"/>-->
     </Grid>
 </UserControl>

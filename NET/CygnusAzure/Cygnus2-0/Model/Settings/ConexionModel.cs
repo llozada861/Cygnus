@@ -5,6 +5,7 @@ using Cygnus2_0.ViewModel.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,11 +29,8 @@ namespace Cygnus2_0.Model.Settings
         ObservableCollection<SelectListItem> listaAreaAzure;
         ObservableCollection<SelectListItem> listaConexiones;
         private SelectListItem conexion;
-
-        Handler handler;
-        public ConexionModel(Handler hand)
+        public ConexionModel()
         {
-            handler = hand;
         }
 
         public string Usuario
@@ -103,6 +101,10 @@ namespace Cygnus2_0.Model.Settings
         {
             get { return conexion; }
             set { SetProperty(ref conexion, value); }
+        }
+        public string Displayname
+        {
+            get { return Usuario + "@" + BaseDatos; }
         }
     }
 }

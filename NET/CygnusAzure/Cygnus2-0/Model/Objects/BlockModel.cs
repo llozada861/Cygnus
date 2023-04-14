@@ -1,20 +1,30 @@
 ﻿using Cygnus2_0.General;
+using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Repository;
+using Cygnus2_0.Model.Settings;
+using Cygnus2_0.Model.User;
 using Cygnus2_0.ViewModel.Objects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Cygnus2_0.Model.Objects
 {
-    public class BlockModel
+    public class BlockModel: ViewModelBase
     {
         private Handler handler;
         private BlockViewModel view;
-        private string objetosBloqueados;
-        private string asunto;
-        private string body;
+        private string cantidadObjetos;
+        private string estadoConn;
+        private string codigo;
+        private string objeto;
+        private DateTime fecha;
+        private ObservableCollection<Archivo> listaArchivosBloqueo;
+        private ObservableCollection<Archivo> listaArchivosEncontrados;
+        ObservableCollection<UsuariosPDN> listaBD;
 
         public BlockModel(Handler hand, BlockViewModel view)
         {
@@ -22,63 +32,42 @@ namespace Cygnus2_0.Model.Objects
             this.view = view;
         }
 
-        internal void OnClean()
+        public string Codigo
         {
-            view.ListaArchivosBloqueo.Clear();
-            view.ListaArchivosEncontrados.Clear();
-            view.EstadoConn = "1";
-            view.Fecha = DateTime.Now;
-            view.Objeto = "";
-            view.Codigo = "";
+            get { return codigo; }
+            set { SetProperty(ref codigo, value); }
         }
-
-        internal void OnSearch()
+        public string Objeto
         {
-            view.ListaArchivosEncontrados.Clear();
-            handler.DAO.pObtConsultaObjetos(view.Objeto.Trim(), view);
-            pRefrescaConteo();
+            get { return objeto; }
+            set { SetProperty(ref objeto, value); }
         }
-        internal void pRefrescaConteo()
+        public DateTime Fecha
         {
-            view.CantidadObjetos = view.ListaArchivosBloqueo.Count().ToString();
+            get { return fecha; }
+            set { SetProperty(ref fecha, value); }
         }
-
-        internal void pAdicionaObjeto(Archivo objeto)
+        public string CantidadObjetos
         {
-            if (!view.ListaArchivosBloqueo.ToList().Exists(x => (x.Owner.Equals(objeto.Owner) && x.FileName.Equals(objeto.FileName))))
+            get { return cantidadObjetos; }
+            set { SetProperty(ref cantidadObjetos, value); }
+        }
+        public ObservableCollection<Archivo> ListaArchivosBloqueo
+        {
+            get { return listaArchivosBloqueo; }
+            set { SetProperty(ref listaArchivosBloqueo, value); }
+        }
+        public ObservableCollection<Archivo> ListaArchivosEncontrados
+        {
+            get { return listaArchivosEncontrados; }
+            set { SetProperty(ref listaArchivosEncontrados, value); }
+        }
+        public ObservableCollection<UsuariosPDN> ListaBD
+        {
+            get { return listaBD; }
+            set
             {
-                view.ListaArchivosBloqueo.Add(objeto);
-            }
-
-            pRefrescaConteo();
-        }
-
-        internal void pBloquearObjetos()
-        {
-            objetosBloqueados = "";
-
-            foreach (Archivo archivo in view.ListaArchivosBloqueo)
-            {
-                if (view.ListaArchivosBloqueo.IndexOf(archivo) == view.ListaArchivosBloqueo.Count - 1)
-                {
-                    objetosBloqueados = objetosBloqueados + archivo.FileName;
-                }
-                else
-                {
-                    objetosBloqueados = objetosBloqueados + archivo.FileName + ", ";
-                }
-            }
-
-            if (!string.IsNullOrEmpty(objetosBloqueados))
-            {
-                if (handler.MensajeConfirmacion("Desea enviar la notificación por correo?") == "Y")
-                {
-                    asunto = "Notificación para modificar los objetos [" + objetosBloqueados + "]";
-                    body = "Buen día, <br><br> Se informa que se va a trabajar sobre los objetos [" + objetosBloqueados + "] " +
-                           " con la WO [" + view.Codigo + "]. <br><br> Correo enviado a través de Cygnus.";
-
-                    handler.sendEMailThroughOUTLOOK(asunto, body);
-                }
+                SetProperty(ref listaBD, value);
             }
         }
     }

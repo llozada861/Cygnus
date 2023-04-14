@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
+using Cygnus2_0.Pages.General;
 
 namespace Cygnus2_0.Pages.Objects
 {
@@ -72,6 +73,15 @@ namespace Cygnus2_0.Pages.Objects
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+        }
+        protected void AuListaRepoGit_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = blockViewModel.Model.ListaBD.Where((hu, match) => hu.Displayname.ToLower().Contains(args.Pattern.ToLower()));
+        }
+
+        private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            blockViewModel.Model.ListaArchivosEncontrados.Clear();
         }
     }
 }

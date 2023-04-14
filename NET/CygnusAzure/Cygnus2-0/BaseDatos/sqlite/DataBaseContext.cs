@@ -75,5 +75,6 @@ namespace Cygnus2_0.BaseDatos.sqlite
         public DbSet<ConnModel> Conexiones { get; set; }
         public DbSet<PermisosObjeto> ListaPermisosObjeto { get; set; }
         public DbSet<PermisosModel> ListaPermisos { get; set; }
+        public DbSet<UsuariosPDN> ListaUsuariosPDN { get; set; }
     }
 }

@@ -281,6 +281,7 @@
     <Compile Include="Model\Settings\UpdateModel.cs" />
     <Compile Include="Model\Threats\ThreatsModel.cs" />
     <Compile Include="Model\Time\TimeModel.cs" />
+    <Compile Include="Model\User\cy_userbd.cs" />
     <Compile Include="Model\User\GrantsModel.cs" />
     <Compile Include="Model\User\UsuarioModel.cs" />
     <Compile Include="Model\Version\VersionBD.cs" />
