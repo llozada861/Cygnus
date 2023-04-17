@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 using Cygnus2_0.Pages.General;
+using System.Collections.Specialized;
 
 namespace Cygnus2_0.Pages.Objects
 {
@@ -83,5 +84,34 @@ namespace Cygnus2_0.Pages.Objects
         {
             blockViewModel.Model.ListaArchivosEncontrados.Clear();
         }
+        private void TxtBuscar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                blockViewModel.Model.Objeto = txtObjeto.Text;
+                blockViewModel.OnSearch(null);
+            }
+        }
+
+        /*private void CopyCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            StringCollection paths = new StringCollection();
+            List<String> archivos = new List<string>();
+
+            IList<DataGridCellInfo> filas = dataGridObjetos.SelectedCells;
+
+            foreach (DataGridCellInfo fila in filas)
+            {
+                Archivo archivo = (Archivo)fila.Item;
+
+                if (!archivos.Exists(x => x.Equals(archivo.RutaConArchivo)))
+                {
+                    paths.Add(archivo.RutaConArchivo);
+                    archivos.Add(archivo.RutaConArchivo);
+                }
+            }
+
+            Clipboard.SetFileDropList(paths);
+        }*/
     }
 }
