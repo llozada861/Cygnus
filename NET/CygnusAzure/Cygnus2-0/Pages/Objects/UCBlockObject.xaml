@@ -55,7 +55,7 @@
                          Text="{Binding Path=Model.Objeto}" CharacterCasing="Upper" 
                          Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" 
                          Margin="0,0,5,0"
-                         Style="{StaticResource placeHolder}" Tag="Objeto a buscar (se hace un like)"/>
+                         Style="{StaticResource placeHolder}" Tag="Objeto a buscar (se hace un like)" KeyDown="TxtBuscar_KeyDown"/>
                 <Button x:Name="btnBuscar" Content="Buscar" Command="{Binding Path=Search}" 
                         Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 

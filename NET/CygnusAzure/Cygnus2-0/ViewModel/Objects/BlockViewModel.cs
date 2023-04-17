@@ -83,6 +83,9 @@ namespace Cygnus2_0.ViewModel.Objects
         {
             try
             {
+                if (this.ObjetoSeleccionado == null)
+                    return;
+
                 handler.CursorWait();
 
                 OracleClob pktbl = handler.DAO.pGeneraFuente(this.ObjetoSeleccionado.FileName, this.ObjetoSeleccionado.Owner,this.BdSeleccionada);
@@ -122,11 +125,14 @@ namespace Cygnus2_0.ViewModel.Objects
         {
             try
             {
+                handler.CursorWait();
                 handler.DAO.pObtConsultaObjetos(Model.Objeto.Trim(), this, BdSeleccionada);
                 pRefrescaConteo();
+                handler.CursorNormal();
             }
             catch (Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }
