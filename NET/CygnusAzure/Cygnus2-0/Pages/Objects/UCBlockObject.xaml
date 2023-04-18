@@ -48,7 +48,7 @@
                                           SelectedItem="{Binding Path=BdSeleccionada}" DisplayMemberPath="Displayname" 
                                       PatternChanged="AuListaRepoGit_PatternChanged" SelectionChanged="AucomboBoxRepo_SelectionChanged"
                            Style="{StaticResource AutoCompleteComboBox}"
-                          Delay="500" Tag="Seleccione el Repositorio GIT" 
+                          Delay="500" Tag="Seleccione la Base de Datos" 
                                           KeyboardNavigation.TabIndex="0"/>
                 
                 <TextBox x:Name="txtObjeto" VerticalContentAlignment="Center" TextWrapping="Wrap" 
@@ -82,6 +82,16 @@
                             <MenuItem Header="Descargar Fuente" Command="{Binding Path=Descargar}" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
+
+                    <!-- This is required to handle CTRL + C when something is selected in the DataGrid -->
+                    <DataGrid.CommandBindings>
+                        <CommandBinding Command="Copy" Executed="CopyCommand" />
+                    </DataGrid.CommandBindings>
+
+                    <!-- This is required to handle CTRL + C when something is selected in the DataGrid -->
+                    <DataGrid.InputBindings>
+                        <KeyBinding Key="C" Modifiers="Control" Command="Copy" />
+                    </DataGrid.InputBindings>
 
                     <DataGrid.Columns>
                         <DataGridTextColumn                  

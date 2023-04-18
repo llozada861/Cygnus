@@ -14,10 +14,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Navigation;
 using Cygnus2_0.Pages.General;
 using System.Collections.Specialized;
+using System.IO;
 
 namespace Cygnus2_0.Pages.Objects
 {
@@ -93,25 +93,28 @@ namespace Cygnus2_0.Pages.Objects
             }
         }
 
-        /*private void CopyCommand(object sender, ExecutedRoutedEventArgs e)
+        private void CopyCommand(object sender, ExecutedRoutedEventArgs e)
         {
             StringCollection paths = new StringCollection();
             List<String> archivos = new List<string>();
 
-            IList<DataGridCellInfo> filas = dataGridObjetos.SelectedCells;
+            IList<DataGridCellInfo> ObjetosSelec = dataGridObjetos.SelectedCells;
 
-            foreach (DataGridCellInfo fila in filas)
+            foreach (DataGridCellInfo fila in ObjetosSelec)
             {
                 Archivo archivo = (Archivo)fila.Item;
 
-                if (!archivos.Exists(x => x.Equals(archivo.RutaConArchivo)))
+                if (!archivos.Exists(x => x.Equals(archivo.FileName)))
                 {
+                    archivo.NombreObjeto = blockViewModel.BdSeleccionada.BaseDatos + "_" + archivo.FileName.ToLower() + ".sql";
+                    archivo.RutaConArchivo = Path.Combine(handler.PathTempAplica, archivo.NombreObjeto);
+                    blockViewModel.onDownload(archivo);
                     paths.Add(archivo.RutaConArchivo);
-                    archivos.Add(archivo.RutaConArchivo);
+                    archivos.Add(archivo.FileName);
                 }
             }
 
             Clipboard.SetFileDropList(paths);
-        }*/
+        }
     }
 }

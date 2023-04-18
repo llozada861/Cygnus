@@ -18,6 +18,7 @@ using Cygnus2_0.Model.Repository;
 using Oracle.ManagedDataAccess.Types;
 using System.Windows.Forms;
 using System.IO;
+using static System.Net.WebRequestMethods;
 
 namespace Cygnus2_0.ViewModel.Objects
 {
@@ -83,20 +84,41 @@ namespace Cygnus2_0.ViewModel.Objects
         {
             try
             {
-                if (this.ObjetoSeleccionado == null)
-                    return;
+                if (commandParameter == null)
+                {
+                    if (this.ObjetoSeleccionado == null)
+                        return;
 
-                handler.CursorWait();
+                    handler.CursorWait();
 
-                OracleClob pktbl = handler.DAO.pGeneraFuente(this.ObjetoSeleccionado.FileName, this.ObjetoSeleccionado.Owner,this.BdSeleccionada);
+                    OracleClob pktbl = handler.DAO.pGeneraFuente(this.ObjetoSeleccionado.FileName, this.ObjetoSeleccionado.Owner, this.BdSeleccionada);
 
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.FileName = this.BdSeleccionada.BaseDatos+"_"+this.ObjetoSeleccionado.FileName.ToLower() + ".sql";
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.FileName = this.BdSeleccionada.BaseDatos + "_" + this.ObjetoSeleccionado.FileName.ToLower() + ".sql";
 
-                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    File.WriteAllText(saveFileDialog.FileName, pktbl.Value, Encoding.Default);
+                    if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        System.IO.File.WriteAllText(saveFileDialog.FileName, pktbl.Value, Encoding.Default);
 
-                handler.CursorNormal();
+                    handler.CursorNormal();
+                }
+                else
+                {
+                    Archivo archivo = (Archivo)commandParameter;
+
+                    handler.CursorWait();
+
+                    OracleClob pktbl = handler.DAO.pGeneraFuente(archivo.FileName, archivo.Owner, this.BdSeleccionada);
+
+                    if (!System.IO.File.Exists(archivo.RutaConArchivo))
+                    {
+                        using (StreamWriter descarga = new StreamWriter(archivo.RutaConArchivo, false, Encoding.Default))
+                        {
+                            descarga.Write(pktbl.Value);
+                        }
+                    }
+
+                    handler.CursorNormal();
+                }
 
                 handler.ConexionOracle.ConexionOracleProd.Close();
             }
