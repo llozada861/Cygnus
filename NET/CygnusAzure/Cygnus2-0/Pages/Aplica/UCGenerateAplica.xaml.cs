@@ -55,6 +55,24 @@ namespace Cygnus2_0.Pages.Aplica
 
             try
             {
+                if (String.IsNullOrEmpty(generateAplicaViewModel.Model.Codigo))
+                {
+                    handler.MensajeError("Ingrese número de caso");
+                    return;
+                }
+
+                if (generateAplicaViewModel.Model.Usuario == null)
+                {
+                    handler.MensajeError("Debe ingresar el usuario para la entrega.");
+                    return;
+                }
+
+                if (!generateAplicaViewModel.Model.Datos && !generateAplicaViewModel.Model.Objetos)
+                {
+                    handler.MensajeError("Selecciona el tipo de entrega Datos u Objetos.");
+                    return;
+                }
+
                 generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
                 generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
 
@@ -197,6 +215,24 @@ namespace Cygnus2_0.Pages.Aplica
         {
             try
             {
+                if (String.IsNullOrEmpty(generateAplicaViewModel.Model.Codigo))
+                {
+                    handler.MensajeError("Ingrese número de caso");
+                    return;
+                }
+
+                if (generateAplicaViewModel.Model.Usuario == null)
+                {
+                    handler.MensajeError("Debe ingresar el usuario para la entrega.");
+                    return;
+                }
+
+                if (!generateAplicaViewModel.Model.Datos && !generateAplicaViewModel.Model.Objetos)
+                {
+                    handler.MensajeError("Selecciona el tipo de entrega Datos u Objetos.");
+                    return;
+                }
+
                 generateAplicaViewModel.pExaminar(null);
                 dataGridArchivosCargados.Items.Refresh();
             }

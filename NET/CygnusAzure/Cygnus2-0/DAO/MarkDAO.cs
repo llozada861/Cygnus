@@ -480,9 +480,10 @@ namespace Cygnus2_0.DAO
                 process.StartInfo.CreateNoWindow = false;
 
                 process.Start();
+                process.Close();
+
                 //string output = null; //process.StandardOutput.ReadToEnd();
                 //process.StandardInput.WriteLine("exit;");
-                process.Close();
             }
 
             return output;

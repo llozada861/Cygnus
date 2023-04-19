@@ -115,6 +115,9 @@ namespace Cygnus2_0.ViewModel.Aplica
                     this.OnSqlplus(null);
                 }
 
+                this.Model.Objetos = false;
+                this.Model.Datos = false;
+
             }
             catch (Exception ex)
             {
@@ -135,6 +138,7 @@ namespace Cygnus2_0.ViewModel.Aplica
 
                 this.Model.ArchivosCargados = "0";
                 this.Model.ArchivosGenerados = "0";
+                this.Model.Codigo = "";
                 this.Model.ListaUsuarios = null;
                 this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
                 this.Model.Objetos = false;
@@ -167,9 +171,10 @@ namespace Cygnus2_0.ViewModel.Aplica
 
                 foreach (Archivo archivo in this.Model.ListaArchivosCargados)
                 {
+                    rutaLog = archivo.Ruta;
+
                     if (!string.IsNullOrEmpty(archivo.NombreObjeto))
                     {
-                        rutaLog = archivo.Ruta;
                         //Valida que el objeto no se encuentra aplicado en más de un esquema
                         handler.DAO.pValidaUsuarioCompila(archivo, handler);
                         //Valida que solo se aplique en un esquema
@@ -485,12 +490,6 @@ namespace Cygnus2_0.ViewModel.Aplica
                 pGeneraArchivosPermisos();
             }
 
-            //Si es de datos, se genera el nuevo archivo
-            if (this.Model.Datos)
-            {
-                pGeneraAplicaDatos(nombreAplica);
-            }
-
             rutaGeneracion = Path.Combine(handler.SavePathAplica, nombreAplica);
 
             using (StreamWriter aplica = new StreamWriter(rutaGeneracion,false,Encoding.Default))
@@ -500,13 +499,22 @@ namespace Cygnus2_0.ViewModel.Aplica
                 aplica.Write(finAplica.ToString());
             }
 
-            this.pAdicionarArchivo
-            (
-                nombreAplica,
-                Int32.Parse(res.TipoAplica),
-                "Aplica de la entrega",
-                handler.SavePathAplica
-            );
+            //Si es de datos, se genera el nuevo archivo
+            if (this.Model.Datos)
+            {
+                pGeneraAplicaDatos(nombreAplica);
+            }
+            else
+            {
+
+                this.pAdicionarArchivo
+                (
+                    nombreAplica,
+                    Int32.Parse(res.TipoAplica),
+                    "Aplica de la entrega",
+                    handler.SavePathAplica
+                );
+            }
         }
 
         public void pInsertaCuerpo(Archivo archivo, StringBuilder objetosAplica)
