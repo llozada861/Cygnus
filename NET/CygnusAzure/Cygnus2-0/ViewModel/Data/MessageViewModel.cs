@@ -71,7 +71,7 @@ namespace Cygnus2_0.ViewModel.Data
             PlantillasHTMLModel plantilla = handler.ListaHTML.Where(x => x.Nombre.Equals("PLANTILLA_MENSAJE")).FirstOrDefault();
 
             insParam.Append(plantilla.Documentacion.Replace("\r\n", "\n"));
-            insParam.Replace(":CODIGO", "'" + this.Model.Codigo + "'");
+            insParam.Replace(":CODIGO", this.Model.Codigo );
             insParam.Replace(":DESCRIPCION", "'" + this.Model.Descripcion + "'");
             insParam.Replace(":CAUSA", "'" + this.Model.Causa + "'");
             insParam.Replace(":SOLUCION", "'" + this.Model.Solucion + "'");
