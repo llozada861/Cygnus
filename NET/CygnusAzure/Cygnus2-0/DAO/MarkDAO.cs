@@ -493,7 +493,10 @@ namespace Cygnus2_0.DAO
         #region GenereacionPaquetes
         internal OracleClob pGeneraPktbl(string tabla, SelectListItem usuarioBD, string caso,Handler handler)
         {
-            OracleConnection conn = handler.ConexionOracle.ConexionOracleSQL;
+            UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Usuariobd.Equals(usuarioBD.Text.ToUpper())).FirstOrDefault();
+            handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
+
+            OracleConnection conn = handler.ConexionOracle.ConexionOracleCompila;
 
             OracleCommand sqlPktbl = new OracleCommand(handler.ListaHTML.Where(x=>x.Nombre.Equals(res.KEY_PKTBL)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
@@ -519,9 +522,9 @@ namespace Cygnus2_0.DAO
             nuErrorCode.Direction = ParameterDirection.Output;
             sqlPktbl.Parameters.Add(nuErrorCode);
 
-            OracleParameter nuErrorMessage = new OracleParameter("osbErrorMessage", OracleDbType.Int64);
-            nuErrorMessage.Direction = ParameterDirection.Output;
-            sqlPktbl.Parameters.Add(nuErrorMessage);
+            OracleParameter sbErrorMessage = new OracleParameter("osbErrorMessage", OracleDbType.Varchar2);
+            sbErrorMessage.Direction = ParameterDirection.Output;
+            sqlPktbl.Parameters.Add(sbErrorMessage);
 
             sqlPktbl.ExecuteReader();
 
