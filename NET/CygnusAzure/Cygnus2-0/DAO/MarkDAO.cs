@@ -563,7 +563,10 @@ namespace Cygnus2_0.DAO
         #region Auditoria
         internal void pGeneraAuditoria(TbAuditoriaModel model, out OracleClob tabla, out OracleClob trigger)
         {
-            OracleConnection conn = handler.ConexionOracle.ConexionOracleSQL;
+            UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Principal.Equals(res.Si)).FirstOrDefault();
+            handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
+
+            OracleConnection conn = handler.ConexionOracle.ConexionOracleCompila;
 
             OracleCommand sqlPktbl = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_AUDIT_TABLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
