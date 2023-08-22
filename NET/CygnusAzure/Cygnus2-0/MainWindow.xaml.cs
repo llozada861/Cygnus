@@ -510,6 +510,26 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion("1.1.8.8");
             }
 
+            if (!SqliteDAO.pblValidaVersion("1.1.8.9"))
+            {
+                string[] query =
+                 {
+                    "alter table repositories add tipo_dato INTEGER",
+                    "update repositories set tipo_dato = 16 where descripcion = 'ActualizacionDatos'"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.8.9");
+            }
+
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {

@@ -158,8 +158,8 @@ namespace Cygnus2_0.General
             //Se instancian los view models generales           
             view = new ConexionViewModel(this);
             confGeneralViewModel = new ConfGeneralViewModel(this);
-            repositorioVM = new RepositorioViewModel(this);
             pRegeneraIndexListas();
+            repositorioVM = new RepositorioViewModel(this);
             #endregion ViewModels
 
             #region Appareance

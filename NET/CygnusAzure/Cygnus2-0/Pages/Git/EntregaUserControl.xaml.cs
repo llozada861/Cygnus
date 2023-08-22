@@ -62,15 +62,31 @@ namespace Cygnus2_0.Pages.Git
         }
         private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            objectViewModel.GitModel.ListaRamasLB.Clear();
+
             if (objectViewModel.GitSeleccionado != null)
-            {
-                objectViewModel.GitModel.ListaRamasLB.Clear();
+            { 
                 objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
             }
+
+            objectViewModel.GitModel.Comentario = "";
+            objectViewModel.GitModel.HU = "";
+            objectViewModel.GitModel.ListaArchivos.Clear();
+            objectViewModel.GitModel.ListaCarpetas.Clear();
+            objectViewModel.GitModel.ListaCarpetasView.Clear();
+            objectViewModel.GitModel.ActivaAprobRamas = false;
+            objectViewModel.GitModel.NuevaRama = "";
+            objectViewModel.GitModel.ListaRamasCreadas.Clear();
         }
         private void listBox1_Drop(object sender, DragEventArgs e)
         {
             string[] DropPath;
+
+            if (objectViewModel.GitSeleccionado == null)
+            {
+                handler.MensajeError("Debe seleccionar un repositorio.");
+                return;
+            }
 
             try
             {
@@ -78,7 +94,7 @@ namespace Cygnus2_0.Pages.Git
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
 
-                    objectViewModel.ListarArchivos(DropPath);
+                    objectViewModel.ListarArchivos(DropPath, objectViewModel.GitSeleccionado.TipoDato);
 
                     if (objectViewModel.GitModel.ListaCarpetas.Count() > 0)
                     {

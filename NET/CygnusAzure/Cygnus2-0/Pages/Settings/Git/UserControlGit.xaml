@@ -73,6 +73,23 @@
                             <DataGridTextColumn Binding="{Binding Descripcion}" Header="Carpeta Principal Repo" MinWidth="300"/>
                             <DataGridTextColumn Binding="{Binding Ruta}" Header="Ruta" MinWidth="300"/>
                             <DataGridTextColumn Binding="{Binding Documento}" Header="Documento" MinWidth="150" />
+                            <DataGridComboBoxColumn Width="300" 
+                             DisplayMemberPath="Descripcion" 
+                                                SelectedValuePath="Codigo"
+                                                Header="Tipo Dato Defecto"
+                                                SelectedValueBinding="{Binding TipoDato, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
