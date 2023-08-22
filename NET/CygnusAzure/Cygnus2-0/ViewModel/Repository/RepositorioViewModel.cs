@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Repository;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,15 @@ namespace Cygnus2_0.ViewModel.Repository
         public ObservableCollection<Repositorio> ListaGit
         {
             get { return listaGit; }
-            set { SetProperty(ref listaGit, value); }
+            set 
+            {
+                SetProperty(ref listaGit, value);
+
+                foreach (Repositorio objeto in ListaGit)
+                {
+                    objeto.ListaTipos = new ObservableCollection<TipoObjetos>(handler.ListaTiposObjetos);
+                }
+            }
         }
         public ObservableCollection<RamaRepositorio> ListaRamaGit
         {
@@ -144,6 +153,7 @@ namespace Cygnus2_0.ViewModel.Repository
                 {
                     Repositorio repo = new Repositorio();
                     repo.Empresa = Convert.ToInt32(handler.ConfGeneralView.Model.Empresa.Codigo);
+                    repo.ListaTipos = new ObservableCollection<TipoObjetos>(handler.ListaTiposObjetos);
                     ListaGit.Add(repo);
                 }
 

@@ -146,7 +146,7 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.ActivaAprobRamas = false;
             GitModel.NuevaRama = "";
             GitModel.ListaRamasCreadas.Clear();
-            try
+            /*try
             {
                 this.GitModel.ListaHU = null;
                 this.GitModel.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
@@ -154,7 +154,7 @@ namespace Cygnus2_0.ViewModel.Git
             catch (Exception ex)
             {
                 handler.MensajeError(ex.Message);
-            }
+            }*/
         }
         public void pEntrega(object commandParameter)
         {
@@ -346,7 +346,7 @@ namespace Cygnus2_0.ViewModel.Git
             }
 
             string[] archivos = handler.pCargarArchivos();
-            ListarArchivos(archivos);
+            ListarArchivos(archivos, GitSeleccionado.TipoDato);
             pArmarArbol(null,null);
         }
 
@@ -567,7 +567,7 @@ namespace Cygnus2_0.ViewModel.Git
                 }
             }
         }
-        public void ListarArchivos(string[] DropPath)
+        public void ListarArchivos(string[] DropPath, int? tipo_defecto = null)
         {
             try
             {
@@ -576,6 +576,8 @@ namespace Cygnus2_0.ViewModel.Git
 
                 foreach (Archivo archivo in archivos)
                 {
+                    if (tipo_defecto != null)
+                        archivo.Tipo = tipo_defecto;
 
                     if (!this.GitModel.ListaArchivos.ToList().Exists(x => x.FileName.Equals(archivo.FileName)))
                         this.GitModel.ListaArchivos.Add(archivo);
