@@ -313,7 +313,7 @@ namespace Cygnus2_0.ViewModel.Git
 
             List<string> salida = SonarViewModel.pSonar(GitModel.RamaLBSeleccionada.Text, handler, archivosSonar,GitSeleccionado);
 
-            string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can browse") > -1);
+            string exito = salida.Find(x => x.IndexOf("ANALYSIS SUCCESSFUL, you can find the results at") > -1);
 
             StringBuilder salidaBuild = new StringBuilder();
 
