@@ -258,7 +258,7 @@ namespace Cygnus2_0.General
 
                     foreach (Branch b in branches)
                     {
-                        if (b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
+                        if (b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
                             listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
                     }
                 }
