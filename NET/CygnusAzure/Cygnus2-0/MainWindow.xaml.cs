@@ -476,6 +476,7 @@ namespace Cygnus2_0
             {
                 string[] query =
                  {
+                    //SFPDN
                     "update cy_userbd set password_ = 'N0M3Vay4aBloqu34r-+' where codigo = 3"
                 };
 
@@ -528,6 +529,30 @@ namespace Cygnus2_0
                 }
 
                 SqliteDAO.pActualizaVersion("1.1.8.9");
+            }
+
+            if (!SqliteDAO.pblValidaVersion("1.1.9.2"))
+            {
+                string[] query =
+                 {
+                    //SFDLLO
+                    "update cy_userbd set password_ = 'N0M30LVid3s+-' where codigo = 1",
+                    //SFUAT
+                    "update cy_userbd set password_ = 'N0M3Vay4aBloqu34r-+' where codigo = 2",
+                    //SFPDN
+                    "update cy_userbd set password_ = 'N0M3Vay4aBloqu34r-+' where codigo = 3"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.9.2");
             }
 
             //ultima versión
