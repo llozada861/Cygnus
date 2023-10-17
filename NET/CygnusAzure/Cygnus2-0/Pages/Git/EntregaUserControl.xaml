@@ -226,7 +226,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="groupBoxRamasObj" Header="Carpetas" Grid.Row="2" Grid.Column="3" Grid.RowSpan="7">
+        <GroupBox x:Name="groupBoxRamasObj" Header="Archivos" Grid.Row="2" Grid.Column="3" Grid.RowSpan="7">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -241,8 +241,10 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <CheckBox Name="chAprobar" Content="Aprobar Estructura!" Grid.Row="0" Margin="103,0,0,24" Checked="ChAprobar_Checked" HorizontalAlignment="Left" Grid.RowSpan="2" />
+                <CheckBox Name="chAprobar" Content="Aprobar" Grid.Row="0"  Checked="ChAprobar_Checked" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.RowSpan="2" Margin="20,20,5,10" FontWeight="Bold" />
 
+                <Label Content="{Binding Path=GitModel.TotalArchivos}"  Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.RowSpan="2" FontWeight="Bold" Margin="5,20,20,10" ></Label>
+                
                 <TreeView x:Name="ArbolRutas" ItemsSource="{Binding GitModel.ListaCarpetasView}" Grid.Row="1" Grid.RowSpan="9" >
                     <TreeView.ItemContainerStyle>
                         <Style TargetType="{x:Type TreeViewItem}">

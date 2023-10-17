@@ -599,20 +599,20 @@ namespace Cygnus2_0.DAO
                 //Historia de usuario
                 if (ifExist("story_user", "codigo =" + tareaAzure.HU, conn))
                 {
-                    query = "update story_user set descripcion ='" + tareaAzure.DescripcionHU + "' where codigo = " + tareaAzure.HU;
+                    query = "update story_user set descripcion ='" + tareaAzure.DescripcionHU.Replace("'", "''") + "' where codigo = " + tareaAzure.HU;
                     ExecuteNonQuery(query, conn);
                 }
                 else
                 {
                     query = "insert into story_user (codigo,descripcion,usuario,empresa) "+
-                            "VALUES(" + tareaAzure.HU + ",'" + tareaAzure.DescripcionHU + "','"+ usuario + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
+                            "VALUES(" + tareaAzure.HU + ",'" + tareaAzure.DescripcionHU.Replace("'", "''") + "','"+ usuario + "',"+ handler.ConfGeneralView.Model.Empresa.Codigo+")";
                     ExecuteNonQuery(query, conn);
                 }
 
                 //Tarea
                 if (ifExist("task_user", " codigo =" + tareaAzure.IdAzure, conn))
                 {
-                    query = "update task_user set descripcion ='" + tareaAzure.Descripcion +"' " + 
+                    query = "update task_user set descripcion ='" + tareaAzure.Descripcion.Replace("'", "''") +"' " + 
                             ", estado = '"+tareaAzure.Estado+"' "+
                             ", completado = "+ completado +
                             ", hist_usuario = "+ tareaAzure.HU+
@@ -624,7 +624,7 @@ namespace Cygnus2_0.DAO
                 else
                 {
                     query = "insert into task_user (codigo,descripcion,estado,usuario,completado,fecha_registro,hist_usuario,fecha_inicio,empresa) " +
-                            "VALUES(" + tareaAzure.IdAzure + ",'" + tareaAzure.Descripcion + "','"+tareaAzure.Estado+"','" + usuario + "',"+ completado + ",'" + fecha_actualiza + "',"+ tareaAzure.HU+",'"+ fecha_inicio +"',"+ handler.ConfGeneralView.Model.Empresa.Codigo + ")";
+                            "VALUES(" + tareaAzure.IdAzure + ",'" + tareaAzure.Descripcion.Replace("'", "''") + "','"+tareaAzure.Estado+"','" + usuario + "',"+ completado + ",'" + fecha_actualiza + "',"+ tareaAzure.HU+",'"+ fecha_inicio +"',"+ handler.ConfGeneralView.Model.Empresa.Codigo + ")";
                     ExecuteNonQuery(query, conn);
 
                     //Se crea el registro inicial para la hoja
