@@ -35,6 +35,7 @@ namespace Cygnus2_0.Model.Git
         private bool ejecutarSonar;
         private string nuevaRama;
         private ObjectGitViewModel view_;
+        private string sbCantidad;
         public ObjectGitModel(ObjectGitViewModel view)
         {
             this.ListaGit = new ObservableCollection<Repositorio>();
@@ -152,6 +153,11 @@ namespace Cygnus2_0.Model.Git
             {
                 SetProperty(ref listaGit, value); 
             }
+        }
+        public string TotalArchivos
+        {
+            get { return sbCantidad; }
+            set { SetProperty(ref sbCantidad, value); }
         }
     }
 }

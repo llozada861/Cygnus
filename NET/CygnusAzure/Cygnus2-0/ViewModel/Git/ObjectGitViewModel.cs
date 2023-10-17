@@ -603,6 +603,7 @@ namespace Cygnus2_0.ViewModel.Git
                 }
 
                 pArmarArbol(null, null);
+                GitModel.TotalArchivos = "Total: " + GitModel.ListaArchivos.Count();
             }
             catch (Exception ex)
             {
