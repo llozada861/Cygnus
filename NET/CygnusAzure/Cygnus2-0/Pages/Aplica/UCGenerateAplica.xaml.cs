@@ -82,6 +82,15 @@ namespace Cygnus2_0.Pages.Aplica
                     generateAplicaViewModel.pListaArchivos(DropPath);
                     dataGridArchivosCargados.Items.Refresh();
                 }
+
+                chAprobar.IsChecked = false;
+
+                if (generateAplicaViewModel.Model.Objetos)                
+                    chAprobar.Visibility = Visibility.Visible;                
+                else                
+                    chAprobar.Visibility = Visibility.Hidden;
+                
+
             }
             catch (Exception ex)
             {
@@ -151,7 +160,6 @@ namespace Cygnus2_0.Pages.Aplica
                 return; // return if there's no row selected
 
             Archivo archivo = (Archivo)dataGridArchivosCargados.SelectedItem;
-            //handler.pAbrirArchivo(archivo.RutaConArchivo);
         }
 
         private void DataGridArchivosGen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -166,11 +174,6 @@ namespace Cygnus2_0.Pages.Aplica
         private void ChAprobar_Checked(object sender, RoutedEventArgs e)
         {
             generateAplicaViewModel.Model.AprobarOrden = (bool)chAprobar.IsChecked;
-        }
-
-        private void RdbObjetos_Click(object sender, RoutedEventArgs e)
-        {
-            chAprobar.Visibility = Visibility.Visible;                
         }
 
         private void RdbDatos_Click(object sender, RoutedEventArgs e)
@@ -235,6 +238,13 @@ namespace Cygnus2_0.Pages.Aplica
 
                 generateAplicaViewModel.pExaminar(null);
                 dataGridArchivosCargados.Items.Refresh();
+
+                chAprobar.IsChecked = false;
+
+                if (generateAplicaViewModel.Model.Objetos)
+                    chAprobar.Visibility = Visibility.Visible;
+                else
+                    chAprobar.Visibility = Visibility.Hidden;
             }
             catch { }
         }
