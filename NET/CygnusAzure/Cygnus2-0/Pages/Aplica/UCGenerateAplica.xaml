@@ -90,44 +90,64 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos" Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Grid.ColumnSpan="10" >
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="2" Grid.RowSpan="7" Grid.ColumnSpan="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-                <Label x:Name="labelTotalText" Content="Total:"  HorizontalContentAlignment="Center" 
+            <GroupBox x:Name="grbArrastre" Header="Arrastre la carpeta que contiene los archivos"  Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="10" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="labelTotalText" Content="Total:"  HorizontalContentAlignment="Center" 
                        VerticalContentAlignment="Center" 
                        FontWeight="Bold"
                        Grid.Column="7" Grid.Row="0" Grid.ColumnSpan="2"
                        HorizontalAlignment="Right" />
-                <Label x:Name="labelTotal"  HorizontalContentAlignment="Center" 
+                    <Label x:Name="labelTotal"  HorizontalContentAlignment="Center" 
                        VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosCargados}" 
                        FontWeight="Bold"
                        Grid.Column="10" Grid.Row="0" />
-                
-                <DataGrid
+
+                    <DataGrid
                 x:Name="dataGridArchivosCargados" 
                 IsReadOnly="False" 
                 AllowDrop="True" 
@@ -142,84 +162,86 @@
                     SelectionChanged="dataGridArchivosCargados_SelectionChanged" 
                     MouseDoubleClick="DataGridArchivosCargados_MouseDoubleClick"
                     Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="9"    
-                    >                                            
-                    <DataGrid.Columns>
-                        
-                        <DataGridTextColumn          
+                    >
+                        <DataGrid.Columns>
+
+                            <DataGridTextColumn          
                       IsReadOnly="False"
                       Header="Orden"
                       Binding="{Binding Path=Index}" SortDirection="Ascending"/>
-                        
-                        <DataGridTextColumn                  
+
+                            <DataGridTextColumn                  
                       IsReadOnly="True"
                       Header="Archivo"
                       Binding="{Binding Path=FileName}" />
 
-                        <DataGridComboBoxColumn Width="100" 
+                            <DataGridComboBoxColumn Width="100" 
                              DisplayMemberPath="Descripcion" 
                                                 SelectedValuePath="Codigo"
                                                 Header="Tipo"
                                                 SelectedValueBinding="{Binding Tipo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 >
-                            <DataGridComboBoxColumn.ElementStyle>
-                                <Style TargetType="{x:Type ComboBox}">
-                                    <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
-                                </Style>
-                            </DataGridComboBoxColumn.ElementStyle>
-                            <DataGridComboBoxColumn.EditingElementStyle>
-                                <Style TargetType="{x:Type ComboBox}">
-                                    <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
-                                </Style>
-                            </DataGridComboBoxColumn.EditingElementStyle>
-                        </DataGridComboBoxColumn>
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaTipos}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
 
-                        <DataGridTextColumn                  
+                            <DataGridTextColumn                  
                       IsReadOnly="True"
                       Header="Obj. Grant"
                       Binding="{Binding Path=NombreObjeto}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </GroupBox>
-        
-        <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Column="0" Grid.Row="6" Grid.RowSpan="3" Grid.ColumnSpan="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
 
-                <Label x:Name="labelGenText" Content="Total:"  HorizontalContentAlignment="Center" 
+            <GridSplitter Grid.Column="2" Grid.RowSpan="10" Width="5" HorizontalAlignment="Stretch" />
+
+            <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Row="0" Grid.Column="3" Grid.RowSpan="10" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="labelGenText" Content="Total:"  HorizontalContentAlignment="Center" 
                        VerticalContentAlignment="Center" 
                        FontWeight="Bold"
                        Grid.Column="7" Grid.Row="0" 
                        Grid.ColumnSpan="2"
                        HorizontalAlignment="Right" />
-                <Label x:Name="labelGen"  HorizontalContentAlignment="Center" 
+                    <Label x:Name="labelGen"  HorizontalContentAlignment="Center" 
                        VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosGenerados}"
                        FontWeight="Bold"
                        Grid.Column="10" Grid.Row="0" />
-                <DataGrid 
+                    <DataGrid 
                 x:Name="dataGridArchivosGen" 
                 IsReadOnly="True" 
                 AutoGenerateColumns="False"
@@ -235,21 +257,23 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="10"
                     Grid.RowSpan="9">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn                  
+                        <DataGrid.Columns>
+                            <DataGridTextColumn                  
                       IsReadOnly="True"
                       Header="Archivo"
                       Foreground="Red"
                       Binding="{Binding Path=FileName}" />
-                        <DataGridTextColumn
+                            <DataGridTextColumn
                       Header="Observación"
                       IsReadOnly="True"
                       Binding="{Binding Path=Observacion}"
                             Width="200" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </GroupBox>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </GroupBox>
+
+        </Grid>
 
         <Label x:Name="label3" Visibility="Hidden" Content="Ruta Apl." HorizontalAlignment="Left" Margin="6,65,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBoxPlant" IsChecked="{Binding Handl.Formulario.EntregaPlantilla, Mode = TwoWay}" Content="Plantillas?" HorizontalAlignment="Left" Margin="22,71,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Visibility="Hidden"/>
