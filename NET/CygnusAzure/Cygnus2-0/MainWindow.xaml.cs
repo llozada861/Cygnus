@@ -555,6 +555,30 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion("1.1.9.2");
             }
 
+            if (!SqliteDAO.pblValidaVersion("1.1.9.8"))
+            {
+                string[] query =
+                 {
+                    //SFDLLO
+                    "update cy_userbd set password_ = 'N0M30LVid3s+-' where codigo = 1",
+                    //SFUAT
+                    "update cy_userbd set password_ = 'N0M3Vay4aBloqu34r-+' where codigo = 2",
+                    //SFPDN
+                    "update cy_userbd set password_ = 'Tr1qu1Tr1qu1+Hall*w33n' where codigo = 3"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion("1.1.9.8");
+            }
+
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
