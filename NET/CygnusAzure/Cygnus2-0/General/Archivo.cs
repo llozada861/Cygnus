@@ -48,5 +48,6 @@ namespace Cygnus2_0.General
         public string TipoAplicacion { get; set; }
         public string AplicaTemporal { get; set; }
         public string RutaRepo { get; set; }
+        public int? Codigo { get; set; }
     }
 }

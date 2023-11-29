@@ -20,6 +20,8 @@ using System.Security.Permissions;
 using System.Windows.Controls.Primitives;
 using res = Cygnus2_0.Properties.Resources;
 using Cygnus2_0.Pages.General;
+using Cygnus2_0.DAO;
+using Cygnus2_0.Model.History;
 
 namespace Cygnus2_0.Pages.Aplica
 {
@@ -40,6 +42,7 @@ namespace Cygnus2_0.Pages.Aplica
             generateAplicaViewModel = new GenerateAplicaViewModel(handler);
 
             DataContext = generateAplicaViewModel;
+            generateAplicaViewModel.Model.VisibleObjetos = Visibility.Hidden;
             InitializeComponent();
 
             generateAplicaViewModel.Model.ArchivosCargados = "0";
@@ -52,6 +55,7 @@ namespace Cygnus2_0.Pages.Aplica
         private void listBox1_Drop(object sender, DragEventArgs e)
         {
             string[] DropPath;
+            generateAplicaViewModel.Model.AprobarOrden = false;
 
             try
             {
@@ -82,14 +86,6 @@ namespace Cygnus2_0.Pages.Aplica
                     generateAplicaViewModel.pListaArchivos(DropPath);
                     dataGridArchivosCargados.Items.Refresh();
                 }
-
-                chAprobar.IsChecked = false;
-
-                if (generateAplicaViewModel.Model.Objetos)                
-                    chAprobar.Visibility = Visibility.Visible;                
-                else                
-                    chAprobar.Visibility = Visibility.Hidden;
-                
 
             }
             catch (Exception ex)
@@ -143,8 +139,8 @@ namespace Cygnus2_0.Pages.Aplica
             btnSqlPlus.Visibility = Visibility.Hidden;
             generateAplicaViewModel.Model.Objetos = false;
             generateAplicaViewModel.Model.Datos = false;
-            chAprobar.Visibility = Visibility.Hidden;
-            chAprobar.IsChecked = false;
+            generateAplicaViewModel.Model.VisibleObjetos = Visibility.Hidden;
+            generateAplicaViewModel.Model.AprobarOrden = false;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -173,12 +169,12 @@ namespace Cygnus2_0.Pages.Aplica
 
         private void ChAprobar_Checked(object sender, RoutedEventArgs e)
         {
-            generateAplicaViewModel.Model.AprobarOrden = (bool)chAprobar.IsChecked;
+            //generateAplicaViewModel.Model.AprobarOrden = (bool)chAprobar.IsChecked;
         }
 
         private void RdbDatos_Click(object sender, RoutedEventArgs e)
         {
-            chAprobar.Visibility = Visibility.Hidden;
+            generateAplicaViewModel.Model.VisibleObjetos = Visibility.Hidden;
         }
         private void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
         {
@@ -216,6 +212,8 @@ namespace Cygnus2_0.Pages.Aplica
         }
         private void BtnExaminar_Click(object sender, RoutedEventArgs e)
         {
+            generateAplicaViewModel.Model.AprobarOrden = false;
+
             try
             {
                 if (String.IsNullOrEmpty(generateAplicaViewModel.Model.Codigo))
@@ -238,13 +236,6 @@ namespace Cygnus2_0.Pages.Aplica
 
                 generateAplicaViewModel.pExaminar(null);
                 dataGridArchivosCargados.Items.Refresh();
-
-                chAprobar.IsChecked = false;
-
-                if (generateAplicaViewModel.Model.Objetos)
-                    chAprobar.Visibility = Visibility.Visible;
-                else
-                    chAprobar.Visibility = Visibility.Hidden;
             }
             catch { }
         }
@@ -252,6 +243,34 @@ namespace Cygnus2_0.Pages.Aplica
         protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
         {
             args.DataSource = generateAplicaViewModel.Model.ListaUsuarios.Where((hu, match) => hu.Text.ToLower().Contains(args.Pattern.ToLower()));
+        }
+        protected void CasoText_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
+        {
+            args.DataSource = generateAplicaViewModel.Model.ListaHistoria.Where(x => x.Historia.ToLower().Contains(args.Pattern.ToLower()));
+            generateAplicaViewModel.Model.ListaAplicaHistoria.Clear();
+            generateAplicaViewModel.Model.ListaAplicaHistoria = SqliteDAO.pListaAplicaHistoria(args.Pattern.ToUpper());
+        }
+
+        private void CasoText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            generateAplicaViewModel.Model.ListaAplicaHistoria.Clear();
+            generateAplicaViewModel.Model.ListaAplicaHistoria = SqliteDAO.pListaAplicaHistoria(CasoText.Text.ToUpper());
+        }
+
+        private void dataGridArchivosGen_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                Archivo select = (Archivo)dataGridArchivosGen.SelectedItem;
+                SqliteDAO.pEliminaObjeto(new AplicaHistoriaModel { Archivo = select.FileName,Caso = select.OrdenCambio, Codigo = select.Codigo, Ruta = select.Ruta,Tipo = select.Tipo,Usuario = select.Owner});
+                generateAplicaViewModel.Model.ListaAplicaHistoria = SqliteDAO.pListaAplicaHistoria(generateAplicaViewModel.Model.Codigo.Trim().ToUpper());
+            }
+        }
+
+        private void CasoText_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            generateAplicaViewModel.Model.ListaAplicaHistoria.Clear();
+            generateAplicaViewModel.Model.ListaAplicaHistoria = SqliteDAO.pListaAplicaHistoria(generateAplicaViewModel.Model.Historia.Historia.ToUpper());
         }
     }
 }

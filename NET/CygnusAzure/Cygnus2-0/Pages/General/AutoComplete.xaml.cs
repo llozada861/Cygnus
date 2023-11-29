@@ -242,13 +242,17 @@ namespace Cygnus2_0.Pages.General
         private void ComboBox_LostFocus(object sender, RoutedEventArgs e)
         {
             this.IsKeyEvent = false;
-            this.IsDropDownOpen = true;
+            this.IsDropDownOpen = true  ;
+
+            AutoComplete item = (AutoComplete)sender;
+            
             // to prevent misunderstanding that user has entered some information
-            if (this.SelectedIndex == -1)
+            if (this.SelectedIndex == -1 && item.Delay != 800)
                 this.Text = string.Empty;
             // syncronize text
             else
                 this.Text = this.SelectedText;
+
             // release timer resources
             this._interval.Close();
 

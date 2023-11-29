@@ -259,6 +259,8 @@
     <Compile Include="Model\Empresa\EmpresaModel.cs" />
     <Compile Include="Model\Estandar\EstandarModel.cs" />
     <Compile Include="Model\Git\ObjectGitModel.cs" />
+    <Compile Include="Model\History\AplicaHistoriaModel.cs" />
+    <Compile Include="Model\History\HistoriaModel.cs" />
     <Compile Include="Model\Objects\HeadModel.cs" />
     <Compile Include="Model\Html\PlantillasHTMLModel.cs" />
     <Compile Include="Model\Index\IndexModel.cs" />

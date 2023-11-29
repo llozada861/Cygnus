@@ -41,6 +41,7 @@ using Cygnus2_0.Model.Permisos;
 using System.Runtime.InteropServices;
 using Cygnus2_0.Model.Html;
 using Cygnus2_0.Model.Repository;
+using Cygnus2_0.Model.History;
 
 namespace Cygnus2_0.General
 {
@@ -64,6 +65,7 @@ namespace Cygnus2_0.General
         ObservableCollection<UsuarioModel> listaUsuarios;
         ObservableCollection<DocumentacionHTML> listaDocHtml;
         ObservableCollection<PlantillasHTMLModel> listaHtml;
+        ObservableCollection<HistoriaModel> listaHistoria;
 
         //Conexion
         private ConexionOracle conectionOracle;
@@ -300,6 +302,14 @@ namespace Cygnus2_0.General
                 {
                     objeto.ListaSINO = new ObservableCollection<SelectListItem>(this.ListaSiNO);
                 }
+            }
+        }
+        public ObservableCollection<HistoriaModel> ListaHistoria
+        {
+            get { return listaHistoria; }
+            set
+            {
+                SetProperty(ref listaHistoria, value);
             }
         }
         public UsuarioModel UsuarioSeleccionado { get; set; }

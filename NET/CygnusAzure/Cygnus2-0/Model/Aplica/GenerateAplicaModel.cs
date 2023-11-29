@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.History;
 using Cygnus2_0.Model.User;
 using Cygnus2_0.ViewModel.Aplica;
 using System;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using res = Cygnus2_0.Properties.Resources;
 
@@ -30,6 +32,9 @@ namespace Cygnus2_0.Model.Aplica
         private ObservableCollection<Archivo> listaArchivosGenerados;
         private ObservableCollection<Archivo> listaArchivosCargados;
         private ObservableCollection<SelectListItem> listaUsuarios;
+        private ObservableCollection<Archivo> listaAplicaHistoria;
+        private ObservableCollection<HistoriaModel> listaHistoria;
+        private Visibility visibleObjetos;
 
         public GenerateAplicaModel(Handler handler)
         {
@@ -71,6 +76,11 @@ namespace Cygnus2_0.Model.Aplica
             get { return listaUsuarios; }
             set { SetProperty(ref listaUsuarios, value); }
         }
+        public ObservableCollection<HistoriaModel> ListaHistoria
+        {
+            get { return listaHistoria; }
+            set { SetProperty(ref listaHistoria, value); }
+        }
         public Boolean Datos
         {
             get { return datos; }
@@ -79,7 +89,18 @@ namespace Cygnus2_0.Model.Aplica
         public Boolean Objetos
         {
             get { return objetos; }
-            set { SetProperty(ref objetos, value); }
+            set 
+            {
+                SetProperty(ref objetos, value);
+
+                if (objetos)
+                    VisibleObjetos = Visibility.Visible;
+                else
+                {
+                    VisibleObjetos = Visibility.Hidden;
+                    AprobarOrden = false;
+                }
+            }
         }
         public Boolean AprobarOrden
         {
@@ -88,5 +109,17 @@ namespace Cygnus2_0.Model.Aplica
         }
 
         public ObservableCollection<Archivo> ListaArchivosNoOrden { get; set; }
+        public ObservableCollection<Archivo> ListaAplicaHistoria
+        {
+            get { return new ObservableCollection<Archivo>(listaAplicaHistoria.OrderBy(x=>x.Tipo)); }
+            set { SetProperty(ref listaAplicaHistoria, value); }
+        }
+        public HistoriaModel Historia { get; set; }
+
+        public Visibility VisibleObjetos
+        {
+            get { return visibleObjetos; }
+            set { SetProperty(ref visibleObjetos, value); }
+        }
     }
 }

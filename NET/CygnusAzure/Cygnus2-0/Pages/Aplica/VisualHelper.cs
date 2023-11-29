@@ -96,7 +96,9 @@ namespace Cygnus2_0.Pages.Aplica
 
             var draggeditem = VisualHelper.GetDraggedItem(sender as DependencyObject);
             if (draggeditem == null) return;
-            if (targetItem != null && !ReferenceEquals(draggeditem, targetItem))
+            if (targetItem != null && !ReferenceEquals(draggeditem, targetItem) &&
+                ((Archivo)targetItem).FileName != ((Archivo)draggeditem).FileName
+                )
             {
                 var list = (sender as DataGrid).ItemsSource as IList;
                 if (list == null)

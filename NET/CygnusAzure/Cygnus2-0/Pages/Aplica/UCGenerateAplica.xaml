@@ -63,7 +63,7 @@
                          Grid.ColumnSpan="3"
                          Margin="0,5,10,0"
                          VerticalAlignment="Center"
-                         Style="{StaticResource placeHolder}" Tag="# de caso"/>
+                         Style="{StaticResource placeHolder}" Tag="# de caso" TextChanged="CasoText_TextChanged"/>
 
                 <general:AutoComplete x:Name="AucomboBox" 
                                       Grid.Row="0"
@@ -86,7 +86,7 @@
                      Grid.Column="8" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}" Margin="0,5,0,0"/>
 
                 <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2" Click="BtnExaminar_Click" Margin="0,5,0,0" />
-                <CheckBox Name="chAprobar" Content="Aprobar Orden Aplica!" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  Checked="ChAprobar_Checked" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,5,0,0" />
+                <CheckBox Name="chAprobar" Content="Aprobar Orden Aplica!" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  IsChecked="{Binding Path=Model.AprobarOrden}" Visibility="{Binding Path=Model.VisibleObjetos}" HorizontalAlignment="Center" Margin="0,5,0,0" />
             </Grid>
         </GroupBox>
 
@@ -95,7 +95,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="6"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" MinWidth="200"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -202,9 +202,10 @@
                 </Grid>
             </GroupBox>
 
-            <GridSplitter Grid.Column="2" Grid.RowSpan="10" Width="5" HorizontalAlignment="Stretch" />
+            <GridSplitter Grid.Column="2" Grid.RowSpan="10" Width="5" HorizontalAlignment="Left" ResizeBehavior="PreviousAndNext" 
+                  ResizeDirection="Columns" />
 
-            <GroupBox x:Name="groupBox" Header="Archivos Generados" Grid.Row="0" Grid.Column="3" Grid.RowSpan="10" >
+            <GroupBox x:Name="groupBox" Header="Aplicas Generados" Grid.Row="0" Grid.Column="3" Grid.RowSpan="10" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -241,35 +242,45 @@
                        VerticalContentAlignment="Center" Content="{Binding Path=Model.ArchivosGenerados}"
                        FontWeight="Bold"
                        Grid.Column="10" Grid.Row="0" />
+
                     <DataGrid 
                 x:Name="dataGridArchivosGen" 
-                IsReadOnly="True" 
+                IsReadOnly="False" 
                 AutoGenerateColumns="False"
                 AllowDrop="False" 
                 SelectionMode="Single"
-                CanUserDeleteRows="False"
+                CanUserDeleteRows="True"
                 CanUserAddRows="False"
-                CanUserReorderColumns="False"
-                CanUserSortColumns="False"
-                ItemsSource="{Binding Path=Model.ListaArchivosGenerados}" 
-                        MouseDoubleClick="DataGridArchivosGen_MouseDoubleClick"
+                        local:VisualHelper.EnableRowsMove="True"  
+                ItemsSource="{Binding Path=Model.ListaAplicaHistoria}" 
+                        PreviewKeyDown="dataGridArchivosGen_PreviewKeyDown"
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="10"
-                    Grid.RowSpan="9">
+                    Grid.RowSpan="8">
                         <DataGrid.Columns>
+
+                            <DataGridTextColumn          
+                      IsReadOnly="True"
+                      Header="Orden"
+                      Binding="{Binding Path=Index}" SortDirection="Ascending"/>
                             <DataGridTextColumn                  
                       IsReadOnly="True"
                       Header="Archivo"
                       Foreground="Red"
                       Binding="{Binding Path=FileName}" />
-                            <DataGridTextColumn
-                      Header="Observación"
+                            <DataGridTextColumn                  
                       IsReadOnly="True"
-                      Binding="{Binding Path=Observacion}"
-                            Width="200" />
+                      Header="Usuario"
+                      Binding="{Binding Path=Owner}" />
+                            <DataGridTextColumn                  
+                      IsReadOnly="True"
+                      Header="Caso"
+                      Binding="{Binding Path=OrdenCambio}" />
                         </DataGrid.Columns>
                     </DataGrid>
+
+                    <Button x:Name="BotonGenerarGen" Command="{Binding Path=GeneralApl}" Content="Aplica General" VerticalAlignment="Center" Grid.Row="9" Grid.ColumnSpan="10" Margin="0,0,5,0"/>
                 </Grid>
             </GroupBox>
 
@@ -278,8 +289,24 @@
         <Label x:Name="label3" Visibility="Hidden" Content="Ruta Apl." HorizontalAlignment="Left" Margin="6,65,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBoxPlant" IsChecked="{Binding Handl.Formulario.EntregaPlantilla, Mode = TwoWay}" Content="Plantillas?" HorizontalAlignment="Left" Margin="22,71,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Visibility="Hidden"/>
 
-        <Button x:Name="btnSqlPlus" Content="Sqlplus" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Sqlplus}" Grid.Column="6" Grid.Row="9" Margin="0,0,5,0"/>
-        <Button x:Name="BotonGenerar" Content="Procesar" VerticalAlignment="Center" Grid.Column="7" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" Click="BotonGenerar_Click"/>
-        <Button x:Name="BotonLimpiar" Content="Limpiar" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Clean}" Grid.Column="9" Grid.Row="9" Click="BotonLimpiar_Click"/>
+        <Button x:Name="btnSqlPlus" Content="Sqlplus" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Sqlplus}" Grid.Column="3" Grid.Row="9" Margin="0,0,5,0"/>
+        <Button x:Name="BotonGenerar" Content="Procesar" VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" Click="BotonGenerar_Click"/>
+        <Button x:Name="BotonLimpiar" Content="Limpiar" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Clean}" Grid.Column="0" Grid.Row="9" Click="BotonLimpiar_Click"/>
     </Grid>
 </UserControl>
+<!--
+                    <general:AutoComplete x:Name="CasoText" 
+                                      Grid.Row="0" 
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"
+                         VerticalContentAlignment="Center"
+                        ItemsSource="{Binding Path=Model.ListaHistoria}" 
+                        SelectedItem="{Binding Path=Model.Historia}"
+                        DisplayMemberPath="Historia" 
+                        PatternChanged="CasoText_PatternChanged"
+                        Style="{StaticResource AutoCompleteWithoutImg}"
+                        Delay="800" Tag="# de caso" Margin="0,5,10,0" SelectionChanged="CasoText_SelectionChanged"/>
+
+
+
+    -->

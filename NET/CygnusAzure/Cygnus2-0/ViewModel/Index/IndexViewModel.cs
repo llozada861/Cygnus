@@ -127,6 +127,7 @@ namespace Cygnus2_0.ViewModel.Index
             DocumentacionHtml();
             ListaRutas();
             ListaHTML();
+            ListaHistoria();
         }
 
         public void pBorrarListas()
@@ -139,6 +140,7 @@ namespace Cygnus2_0.ViewModel.Index
                 handler.ListaPalabrasReservadas.Clear();
                 handler.ListaConfiguracion.Clear();
                 handler.ListaUsuarios.Clear();
+                handler.ListaHistoria.Clear();
                 handler.ListaDocHtml.Clear();
                 handler.ListaRutas.Clear();
                 handler.ListaHTML.Clear();
@@ -225,6 +227,18 @@ namespace Cygnus2_0.ViewModel.Index
             {
                 handler.ListaUsuarios = new ObservableCollection<UsuarioModel>();
                 SqliteDAO.pListaUsuarios(handler);
+            }
+            catch (Exception ex)
+            {
+                handler.MensajeError(ex.Message);
+            }
+        }
+
+        public void ListaHistoria()
+        {
+            try
+            {
+                handler.ListaHistoria = SqliteDAO.pListaHistoria();
             }
             catch (Exception ex)
             {

@@ -1,7 +1,9 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Aplica;
+using Cygnus2_0.Model.History;
 using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Permisos;
 using Cygnus2_0.Model.User;
@@ -14,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 using res = Cygnus2_0.Properties.Resources;
 
@@ -26,6 +29,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         private readonly DelegateCommand _clean;
         private readonly DelegateCommand _sqlplus;
         private readonly DelegateCommand _examinar;
+        private readonly DelegateCommand _generalapl;
         private StringBuilder encabezadoAplica;
         private StringBuilder objetosAplica;
         private StringBuilder finAplica;
@@ -35,6 +39,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         public ICommand Clean => _clean;
         public ICommand Sqlplus => _sqlplus;
         public ICommand Examinar => _examinar;
+        public ICommand GeneralApl => _generalapl;
 
         public GenerateAplicaViewModel(Handler hand)
         {
@@ -42,6 +47,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             _clean = new DelegateCommand(OnClean);
             _sqlplus = new DelegateCommand(OnSqlplus);
             _examinar = new DelegateCommand(pExaminar);
+            _generalapl = new DelegateCommand(pGeneralApl);
 
             handler = hand;
             this.Model = new GenerateAplicaModel(handler);
@@ -50,6 +56,8 @@ namespace Cygnus2_0.ViewModel.Aplica
             this.Model.ListaArchivosCargados = new ObservableCollection<Archivo>();
             this.Model.ListaArchivosNoOrden = new ObservableCollection<Archivo>();
             this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
+            this.Model.ListaHistoria = handler.ListaHistoria;
+            this.Model.ListaAplicaHistoria = new ObservableCollection<Archivo>();
         }
 
         public GenerateAplicaModel Model { get; set; }
@@ -60,12 +68,6 @@ namespace Cygnus2_0.ViewModel.Aplica
 
             try
             {
-                if (!this.Model.Datos && !this.Model.Objetos)
-                {
-                    handler.MensajeError("Selecciona el tipo de entrega Datos u Objetos.");
-                    return;
-                }
-
                 if (String.IsNullOrEmpty(this.Model.Codigo))
                 {
                     handler.MensajeError("Ingrese número de caso");
@@ -121,6 +123,8 @@ namespace Cygnus2_0.ViewModel.Aplica
             }
             catch (Exception ex)
             {
+                this.Model.Objetos = false;
+                this.Model.Datos = false;
                 handler.MensajeError(ex.Message);
             }
         }
@@ -130,19 +134,19 @@ namespace Cygnus2_0.ViewModel.Aplica
             {
                 this.Model.ListaArchivosCargados.Clear();
                 this.Model.ListaArchivosNoOrden.Clear();
+                this.Model.ArchivosCargados = "0";
+                this.Model.ArchivosGenerados = "0";
+                this.Model.Codigo = "";
+                this.Model.ListaUsuarios = null;
+                this.Model.Objetos = false;
+                this.Model.Datos = false;
+                this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
 
                 if (this.Model.ListaArchivosGenerados.Count() > 0)
                 {
                     this.Model.ListaArchivosGenerados.Clear();
                 }
 
-                this.Model.ArchivosCargados = "0";
-                this.Model.ArchivosGenerados = "0";
-                this.Model.Codigo = "";
-                this.Model.ListaUsuarios = null;
-                this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
-                this.Model.Objetos = false;
-                this.Model.Datos = false;
             }
             catch (Exception ex)
             {
@@ -385,15 +389,24 @@ namespace Cygnus2_0.ViewModel.Aplica
             DirectoryInfo di;
             string sourceFile;
             string destFile;
+            string nombreAplica;
+            int CantidadAplicas = 1;
 
-            string nombreAplica = this.Model.Codigo + res.NombreAplica + this.Model.Usuario.Text.Trim() + res.ExtensionSQL;
+            if (Model.ListaAplicaHistoria.ToList().Exists(x => x.Owner.Equals(this.Model.Usuario.Text.ToUpper().Trim())))
+            {
+                if (handler.MensajeConfirmacion("El caso ["+ this.Model.Codigo+"] ya contiene un aplica para el usuario ["+ this.Model.Usuario.Text.ToUpper()+"], desea agregarlo nuevamente?") == "N")
+                    return;
+                
+                CantidadAplicas = Model.ListaAplicaHistoria.Where(x => x.Owner.Equals(this.Model.Usuario.Text.ToUpper().Trim())).Count();
+            }
+            
+            nombreAplica = this.Model.Codigo + res.NombreAplica + this.Model.Usuario.Text.Trim()+"_"+ CantidadAplicas + res.ExtensionSQL;
 
             foreach (Archivo archivo in this.Model.ListaArchivosCargados.OrderBy(x => x.Index))
             {
                 if (!archivo.Tipo.Equals(res.TipoPlantilla))
                     pInsertaCuerpo(archivo, objetosAplica);
-            }
-            
+            }            
 
             if (handler.ConfGeneralView.Model.EntregaPlantilla)
             {
@@ -482,6 +495,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             encabezadoAplica.Replace(res.TagNombreAplica, nombreAplica);
             encabezadoAplica.Replace(res.Tag_numero_oc, this.Model.Codigo);
             encabezadoAplica.Replace(res.TagGrantUsuario, this.Model.Usuario.Text);
+            encabezadoAplica.Replace(res.TagNumeroApl, CantidadAplicas.ToString());
             encabezadoAplica.AppendLine();
 
             //Genera el archivo con los permisos
@@ -506,7 +520,6 @@ namespace Cygnus2_0.ViewModel.Aplica
             }
             else
             {
-
                 this.pAdicionarArchivo
                 (
                     nombreAplica,
@@ -514,6 +527,11 @@ namespace Cygnus2_0.ViewModel.Aplica
                     "Aplica de la entrega",
                     handler.SavePathAplica
                 );
+            }
+
+            if(!SqliteDAO.pExisteHistoria(this.Model.Codigo))
+            {
+                SqliteDAO.pCreaHistoria(new HistoriaModel { Historia= this.Model.Codigo});
             }
         }
 
@@ -645,6 +663,20 @@ namespace Cygnus2_0.ViewModel.Aplica
         internal void pAdicionarArchivo(string archivoSalida, int? tipo, string observacion, string ruta)
         {
             this.Model.ListaArchivosGenerados.Add(new Archivo { FileName = archivoSalida, Tipo = tipo, Observacion = observacion, Ruta = ruta });
+
+            AplicaHistoriaModel item = new AplicaHistoriaModel();
+            item.Archivo = archivoSalida;
+            item.Ruta = ruta;
+            item.Caso = this.Model.Codigo.Trim().ToUpper();
+            item.Usuario = this.Model.Usuario.Text.Trim();
+            item.Tipo = tipo;
+
+            if (!SqliteDAO.pExisteAplHist(item))
+            {
+                SqliteDAO.pCreaAplicaHistoria(item);
+            }
+
+            this.Model.ListaAplicaHistoria = SqliteDAO.pListaAplicaHistoria(item.Caso);
         }
 
         #region Grants
@@ -672,16 +704,20 @@ namespace Cygnus2_0.ViewModel.Aplica
                                 if (tipo.Codigo == permisoObj.TipoObjeto)
                                 {
                                     PermisosModel permiso = handler.ListaPermisos.Where(x => x.Codigo == permisoObj.Permiso).First();
-                                    SelectListItem usGrant = handler.ListaUsGrants.Where(x => Int32.Parse(x.Value) == permisoObj.Usuario).First();
 
-                                    if (!this.Model.Usuario.Text.ToUpper().Equals(usGrant.Text))
+                                    if (handler.ListaUsGrants.ToList().Exists(x => Int32.Parse(x.Value) == permisoObj.Usuario))
                                     {
-                                        grant.AppendLine(res.PlantillaGrant);
-                                        grant.Replace(res.TagGrantUsuario, usGrant.Text);
-                                        grant.Replace(res.TagGrantPermiso, permiso.Descripcion);
-                                        grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
-                                        grant.AppendLine();
-                                        sinonimo = true;
+                                        SelectListItem usGrant = handler.ListaUsGrants.Where(x => Int32.Parse(x.Value) == permisoObj.Usuario).First();
+
+                                        if (!this.Model.Usuario.Text.ToUpper().Equals(usGrant.Text))
+                                        {
+                                            grant.AppendLine(res.PlantillaGrant);
+                                            grant.Replace(res.TagGrantUsuario, usGrant.Text);
+                                            grant.Replace(res.TagGrantPermiso, permiso.Descripcion);
+                                            grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                                            grant.AppendLine();
+                                            sinonimo = true;
+                                        }
                                     }
                                 }
                             }
@@ -704,22 +740,19 @@ namespace Cygnus2_0.ViewModel.Aplica
                         StringBuilder encabezado = new StringBuilder();
                         encabezado.Append(res.EncabezadoAplicaGrant);
                         encabezado.Replace(res.Tag_numero_oc, this.Model.Codigo);
+                        encabezado.Replace(res.TagGrantUsuario, this.Model.Usuario.Text);
                         versionIns.WriteLine(encabezado);
                         versionIns.Write(grant);
                         versionIns.WriteLine(res.FinAplicaGrant);
                     }
 
-                    Archivo archivoGrant = new Archivo
-                    {
-                        FileName = nombreGrant,
-                        Tipo = Int32.Parse(res.TipoAplicaGrant),
-                        Observacion = "Archivo Grant",
-                        Ruta = handler.SavePath,
-                        RutaDentroAplica = res.Slash
-                    };
-
-                    //pInsertaCuerpo(archivoGrant);
-                    this.Model.ListaArchivosGenerados.Add(archivoGrant);
+                    pAdicionarArchivo
+                    (
+                        nombreGrant,
+                        Int32.Parse(res.TipoAplicaGrant),
+                        "Archivo Grant",
+                        handler.SavePath
+                    );
                 }
             }
         }
@@ -751,6 +784,47 @@ namespace Cygnus2_0.ViewModel.Aplica
                 FileName = nombre,
                 Tipo = Int32.Parse(res.TipoAplica),
                 Observacion = "Aplica Datos",
+                Ruta = handler.SavePath,
+                RutaDentroAplica = res.Slash
+            };
+
+            this.Model.ListaArchivosGenerados.Add(archivoGrant);
+        }
+
+        public void pGeneralApl(object commandParameter)
+        {
+            StringBuilder grant = new StringBuilder();
+            string nombre = res.NombreAplicaDatos + res.ExtensionSQL;
+            StringBuilder objetosApl = new StringBuilder();
+            StringBuilder body = new StringBuilder();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = nombre;
+
+            foreach (Archivo item in this.Model.ListaAplicaHistoria.OrderBy(x=>x.Index))
+            {
+                objetosApl.AppendLine(res.CuerpoAplica);
+                objetosApl.Replace(res.TagObjetoAplica, "/" + item.FileName);
+                objetosApl.AppendLine();
+            }
+
+            StringBuilder encabezado = new StringBuilder();
+            encabezado.Append(res.EncabezadoAplicaGenDatos);
+            encabezado.AppendLine();
+            encabezado.Replace(res.Tag_numero_oc, this.Model.Codigo);
+            encabezado.AppendLine();
+            body.Append(encabezado);
+            body.Append(objetosApl);
+            body.Append(res.FinAplicaGenDatos);
+
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                File.WriteAllText(saveFileDialog.FileName, body.ToString(), Encoding.Default);
+
+            Archivo archivoGrant = new Archivo
+            {
+                FileName = nombre,
+                Tipo = Int32.Parse(res.TipoAplica),
+                Observacion = "Aplica Objetos",
                 Ruta = handler.SavePath,
                 RutaDentroAplica = res.Slash
             };

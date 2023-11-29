@@ -5,6 +5,7 @@ using Cygnus2_0.General.Times;
 using Cygnus2_0.Model.Azure;
 using Cygnus2_0.Model.Conexion;
 using Cygnus2_0.Model.Empresa;
+using Cygnus2_0.Model.History;
 using Cygnus2_0.Model.Html;
 using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Permisos;
@@ -161,8 +162,6 @@ namespace Cygnus2_0.DAO
         #endregion Grants
 
         #region Permisos Usuarios
-
-        #endregion Permisos Usuarios
         public static void pAdicionaPermiso(PermisosObjeto objeto)
         {
             using (DataBaseContext context = new DataBaseContext())
@@ -186,7 +185,8 @@ namespace Cygnus2_0.DAO
                 handler.ListaPermisosObjeto = new ObservableCollection<PermisosObjeto>(context.ListaPermisosObjeto.ToList());
             }
         }
-        
+        #endregion Permisos Usuarios
+
         #region Tipo Objetos
         public static void pGuardarTipoObjeto(TipoObjetos objeto)
         {
@@ -1405,6 +1405,88 @@ namespace Cygnus2_0.DAO
         }
         #endregion Configuraciones
 
+        #region Historia
+        public static void pCreaAplicaHistoria(AplicaHistoriaModel item)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.AplicaHistoria.Add(item);
+                context.SaveChanges();
+            }
+        }
+
+        public static ObservableCollection<Archivo> pListaAplicaHistoria(string caso)
+        {
+            ObservableCollection<AplicaHistoriaModel> aplicaHistorias;
+            ObservableCollection<Archivo> aplicaArchivos = new ObservableCollection<Archivo>();
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                aplicaHistorias = new ObservableCollection<AplicaHistoriaModel>(context.AplicaHistoria.Where(x=> x.Caso.Equals(caso)).ToList());
+            }
+
+            int index = 1;
+
+            foreach (AplicaHistoriaModel archivo in aplicaHistorias.OrderBy(x=>x.Tipo))
+            {
+                aplicaArchivos.Add(new Archivo { FileName = archivo.Archivo, Owner = archivo.Usuario, Tipo = archivo.Tipo, OrdenCambio = archivo.Caso, Ruta = archivo.Ruta, Index =  index, Codigo = archivo.Codigo});
+                index++;
+            }
+
+            return aplicaArchivos;
+        }
+
+        public static void pCreaHistoria(HistoriaModel repo)
+        {
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                context.Historia.Add(repo);
+                context.SaveChanges();
+            }
+        }
+
+        public static ObservableCollection<HistoriaModel> pListaHistoria()
+        {
+            ObservableCollection<HistoriaModel> historias;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                historias = new ObservableCollection<HistoriaModel>(context.Historia.ToList());
+            }
+
+            return historias;
+        }
+
+        public static bool pExisteAplHist(AplicaHistoriaModel item)
+        {
+            bool existe = false;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                var objeto = context.AplicaHistoria.FirstOrDefault(x => x.Caso.ToUpper().Equals(item.Caso.ToUpper()) && x.Archivo.ToUpper().Equals(item.Archivo.ToUpper()));
+
+                if (objeto != null)
+                    existe = true;
+            }
+
+            return existe;
+        }
+        public static bool pExisteHistoria(string caso)
+        {
+            bool existe = false;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                var objeto = context.Historia.FirstOrDefault(x => x.Historia.ToUpper().Equals(caso.ToUpper()));
+
+                if (objeto != null)
+                    existe = true;
+            }
+
+            return existe;
+        }
+        #endregion Historia
+
         #region Genericos
         public static void pEliminaObjeto(object objeto)
         {
@@ -1435,7 +1517,6 @@ namespace Cygnus2_0.DAO
             return lista;
         }
         #endregion Genericos
-
 
         #region Ejecuta SQL
         public static void ExecuteNonQuery(string query, SQLiteConnection conn)

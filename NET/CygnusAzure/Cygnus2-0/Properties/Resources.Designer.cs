@@ -461,7 +461,8 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a SET appinfo ON
+        ///   Busca una cadena traducida similar a ALTER SESSION SET CURRENT_SCHEMA = &lt;usuario&gt;;
+        ///SET appinfo ON
         ///SET echo OFF
         ///SET serveroutput ON
         ///SET timing OFF
@@ -478,8 +479,7 @@ namespace Cygnus2_0.Properties {
         ///COLUMN usuario_os new_val usuario_os;
         ///DEFINE OC=&lt;numero_oc&gt;
         ///
-        ///SELECT SUBSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),INSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),&apos;@&apos;)+2) file_script,
-        /// [resto de la cadena truncado]&quot;;.
+        ///SELECT SUBSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),INSTR(SYS_CON [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string EncabezadoAplica {
             get {
@@ -547,7 +547,8 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a SET feedback ON
+        ///   Busca una cadena traducida similar a ALTER SESSION SET CURRENT_SCHEMA = &lt;usuario&gt;;
+        ///SET feedback ON
         ///SET define ON
         ///
         ///COLUMN file_script new_val file_script;
@@ -559,8 +560,7 @@ namespace Cygnus2_0.Properties {
         ///DEFINE OC=&lt;numero_oc&gt;
         ///
         ///SELECT SUBSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),INSTR(SYS_CONTEXT(&apos;USERENV&apos;,&apos;MODULE&apos;),&apos;@&apos;)+2) file_script,
-        ///       SYS_CONTEXT(&apos;USERENV&apos;, &apos;DB_NAME&apos;) instance_name,
-        ///       TO_CHAR(SYSDATE, &apos;DD-MM-YYYY HH24:MI: [resto de la cadena truncado]&quot;;.
+        ///       SYS_CONTEXT(&apos;USERENV&apos;, &apos;DB_NAME&apos;) instance_name [resto de la cadena truncado]&quot;;.
         /// </summary>
         public static string EncabezadoAplicaGrant {
             get {
@@ -3609,6 +3609,15 @@ namespace Cygnus2_0.Properties {
         public static string TagNombreHilos {
             get {
                 return ResourceManager.GetString("TagNombreHilos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;numeroApl&gt;.
+        /// </summary>
+        public static string TagNumeroApl {
+            get {
+                return ResourceManager.GetString("TagNumeroApl", resourceCulture);
             }
         }
         

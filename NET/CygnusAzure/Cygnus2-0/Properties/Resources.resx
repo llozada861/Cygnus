@@ -792,7 +792,8 @@
 show errors;</value>
   </data>
   <data name="EncabezadoAplica" xml:space="preserve">
-    <value>SET appinfo ON
+    <value>ALTER SESSION SET CURRENT_SCHEMA = &lt;usuario&gt;;
+SET appinfo ON
 SET echo OFF
 SET serveroutput ON
 SET timing OFF
@@ -811,10 +812,10 @@ DEFINE OC=&lt;numero_oc&gt;
 
 SELECT SUBSTR(SYS_CONTEXT('USERENV','MODULE'),INSTR(SYS_CONTEXT('USERENV','MODULE'),'@')+2) file_script,
        SYS_CONTEXT('USERENV', 'DB_NAME') instance_name,
-       TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS') fecha_exec,
+       TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS') fecha_exec,                               
        USER usuario_exec,
        SYS_CONTEXT('USERENV', 'OS_USER') usuario_os,
-       '&amp;OC'||'_'||'apl_'||USER||'_'||SUBSTR(SYS_CONTEXT('USERENV', 'DB_NAME'),1,4)||
+       '&amp;OC'||'_'||'apl_'||SYS_CONTEXT('USERENV','CURRENT_SCHEMA')||'_'||&lt;numeroApl&gt;||'_'||SUBSTR(SYS_CONTEXT('USERENV', 'DB_NAME'),1,4)||
        '_'||TO_CHAR(SYSDATE, 'YYYYMMDD_HH24MISS')  spool_file  FROM DUAL;
 
 SPOOL &amp;spool_file..log
@@ -1083,7 +1084,8 @@ set define on
 spool off</value>
   </data>
   <data name="EncabezadoAplicaGrant" xml:space="preserve">
-    <value>SET feedback ON
+    <value>ALTER SESSION SET CURRENT_SCHEMA = &lt;usuario&gt;;
+SET feedback ON
 SET define ON
 
 COLUMN file_script new_val file_script;
@@ -1099,7 +1101,7 @@ SELECT SUBSTR(SYS_CONTEXT('USERENV','MODULE'),INSTR(SYS_CONTEXT('USERENV','MODUL
        TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS') fecha_exec,
        USER usuario_exec,
        SYS_CONTEXT('USERENV', 'OS_USER') usuario_os,
-       '&amp;OC'||'_'||'apl_grant_'||USER||'_'||SUBSTR(SYS_CONTEXT('USERENV', 'DB_NAME'),1,4)||
+       '&amp;OC'||'_'||'apl_grant_'||SYS_CONTEXT('USERENV','CURRENT_SCHEMA')||'_'||SUBSTR(SYS_CONTEXT('USERENV', 'DB_NAME'),1,4)||
        '_'||TO_CHAR(SYSDATE, 'YYYYMMDD_HH24MISS')  spool_file  FROM DUAL;
 
 SPOOL &amp;spool_file..log
@@ -2264,5 +2266,8 @@ END;
   </data>
   <data name="KEY_PLANT_PARAMETRO" xml:space="preserve">
     <value>PLANTILLA_PARAMETRO</value>
+  </data>
+  <data name="TagNumeroApl" xml:space="preserve">
+    <value>&lt;numeroApl&gt;</value>
   </data>
 </root>

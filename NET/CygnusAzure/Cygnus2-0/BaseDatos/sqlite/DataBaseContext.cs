@@ -1,6 +1,7 @@
 ﻿using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.Model.Conexion;
 using Cygnus2_0.Model.Empresa;
+using Cygnus2_0.Model.History;
 using Cygnus2_0.Model.Html;
 using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Permisos;
@@ -76,5 +77,7 @@ namespace Cygnus2_0.BaseDatos.sqlite
         public DbSet<PermisosObjeto> ListaPermisosObjeto { get; set; }
         public DbSet<PermisosModel> ListaPermisos { get; set; }
         public DbSet<UsuariosPDN> ListaUsuariosPDN { get; set; }
+        public DbSet<AplicaHistoriaModel> AplicaHistoria { get; set; }
+        public DbSet<HistoriaModel> Historia { get; set; }
     }
 }
