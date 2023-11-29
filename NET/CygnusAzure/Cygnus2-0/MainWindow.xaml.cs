@@ -291,6 +291,7 @@ namespace Cygnus2_0
         {
             System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+            string sbVersion;
 
             /*** ULTIMA VERSION AL FINAL!!!!! ***/
 
@@ -577,6 +578,29 @@ namespace Cygnus2_0
                 }
 
                 SqliteDAO.pActualizaVersion("1.1.9.8");
+            }
+
+            sbVersion = "1.1.9.9";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                 {
+                    "CREATE TABLE apl_hist (codigo\tINTEGER PRIMARY KEY AUTOINCREMENT,caso\tTEXT NOT NULL,\tuser\tTEXT NOT NULL,\tfile\tTEXT NOT NULL,    path\tTEXT NOT NULL, tipo integer)",
+                    "CREATE TABLE history (\tcodigo\tINTEGER PRIMARY KEY AUTOINCREMENT,\tstory\tTEXT NOT NULL)",
+                    "delete from user_grants where user = 'FLEX'"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
             }
 
             //ultima versión
