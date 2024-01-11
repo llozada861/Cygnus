@@ -95,7 +95,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="6"/>
-                <ColumnDefinition Width="*" MinWidth="200"/>
+                <ColumnDefinition Width="*" MinWidth="350"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -257,7 +257,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="10"
-                    Grid.RowSpan="8">
+                    Grid.RowSpan="7">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn          
@@ -279,8 +279,8 @@
                       Binding="{Binding Path=OrdenCambio}" />
                         </DataGrid.Columns>
                     </DataGrid>
-
-                    <Button x:Name="BotonGenerarGen" Command="{Binding Path=GeneralApl}" Content="Aplica General" VerticalAlignment="Center" Grid.Row="9" Grid.ColumnSpan="10" Margin="0,0,5,0"/>
+                    <Button x:Name="BotonGenerar" Content="Apl. Esquema" VerticalAlignment="Center"  Grid.Row="8" Grid.ColumnSpan="10" Margin="0,0,5,0" Click="BotonGenerar_Click"/>
+                    <Button x:Name="BotonGenerarGen" Command="{Binding Path=GeneralApl}" Content="Apl. General" VerticalAlignment="Center" Grid.Row="9" Grid.ColumnSpan="10" Margin="0,0,5,0"/>
                 </Grid>
             </GroupBox>
 
@@ -290,7 +290,6 @@
         <CheckBox x:Name="checkBoxPlant" IsChecked="{Binding Handl.Formulario.EntregaPlantilla, Mode = TwoWay}" Content="Plantillas?" HorizontalAlignment="Left" Margin="22,71,0,0" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" Visibility="Hidden"/>
 
         <Button x:Name="btnSqlPlus" Content="Sqlplus" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Sqlplus}" Grid.Column="3" Grid.Row="9" Margin="0,0,5,0"/>
-        <Button x:Name="BotonGenerar" Content="Procesar" VerticalAlignment="Center" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,5,0" Click="BotonGenerar_Click"/>
         <Button x:Name="BotonLimpiar" Content="Limpiar" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding Path=Clean}" Grid.Column="0" Grid.Row="9" Click="BotonLimpiar_Click"/>
     </Grid>
 </UserControl>
