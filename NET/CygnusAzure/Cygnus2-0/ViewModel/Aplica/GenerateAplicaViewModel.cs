@@ -397,7 +397,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                 if (handler.MensajeConfirmacion("El caso ["+ this.Model.Codigo+"] ya contiene un aplica para el usuario ["+ this.Model.Usuario.Text.ToUpper()+"], desea agregarlo nuevamente?") == "N")
                     return;
                 
-                CantidadAplicas = Model.ListaAplicaHistoria.Where(x => x.Owner.Equals(this.Model.Usuario.Text.ToUpper().Trim())).Count();
+                CantidadAplicas = Model.ListaAplicaHistoria.Where(x => x.Owner.Equals(this.Model.Usuario.Text.ToUpper().Trim())).Count() + 1;
             }
             
             nombreAplica = this.Model.Codigo + res.NombreAplica + this.Model.Usuario.Text.Trim()+"_"+ CantidadAplicas + res.ExtensionSQL;
