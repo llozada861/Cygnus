@@ -90,6 +90,24 @@
                                     </Style>
                                 </DataGridComboBoxColumn.EditingElementStyle>
                             </DataGridComboBoxColumn>
+                            <DataGridTextColumn Binding="{Binding RamaDefecto}" Header="Rama Defecto" MinWidth="150" />
+                            <DataGridComboBoxColumn Width="200"
+                                            DisplayMemberPath="Text"
+                                            SelectedValuePath="Value"
+                                            Header="Sonar?"
+                                            SelectedValueBinding="{Binding Sonar, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaSINO}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaSINO}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

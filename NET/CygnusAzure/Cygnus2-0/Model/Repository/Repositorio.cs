@@ -1,4 +1,5 @@
-﻿using Cygnus2_0.Interface;
+﻿using Cygnus2_0.General;
+using Cygnus2_0.Interface;
 using Cygnus2_0.Model.Objects;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,13 @@ namespace Cygnus2_0.Model.Repository
 
         [Column(name: "empresa")]
         public int Empresa { get; set; }
+        [Column(name: "rama")]
+        public string RamaDefecto { get; set; }
+        [Column(name: "sonar")]
+        public string Sonar { get; set; }
         [NotMapped]
         public ObservableCollection<TipoObjetos> ListaTipos { set; get; }
+        [NotMapped]
+        public ObservableCollection<SelectListItem> ListaSINO { get; set; }
     }
 }
