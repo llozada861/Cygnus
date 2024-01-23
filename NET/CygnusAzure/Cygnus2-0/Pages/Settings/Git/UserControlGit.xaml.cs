@@ -66,7 +66,6 @@ namespace Cygnus2_0.Pages.Settings.Git
 
         private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //handler.RepositorioVM.ListaRamaGit.Clear();
             handler.RepositorioVM.ListaRamaGit = SqliteDAO.pListaRamaRepositorios(handler.RepositorioVM.RepoSeleccionado);
             handler.RepositorioVM.TabRepo = true;
             handler.RepositorioVM.TabRama = false;
@@ -74,8 +73,8 @@ namespace Cygnus2_0.Pages.Settings.Git
 
         private void dgDataRama_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            handler.RepositorioVM.TabRepo = false;
-            handler.RepositorioVM.TabRama = true;
+            //handler.RepositorioVM.TabRepo = false;
+            //handler.RepositorioVM.TabRama = true;
         }
 
         private void TabRepo_MouseUp(object sender, MouseButtonEventArgs e)

@@ -49,6 +49,7 @@ namespace Cygnus2_0.ViewModel.Repository
                 foreach (Repositorio objeto in ListaGit)
                 {
                     objeto.ListaTipos = new ObservableCollection<TipoObjetos>(handler.ListaTiposObjetos);
+                    objeto.ListaSINO = new ObservableCollection<SelectListItem>(handler.ListaSiNO);
                 }
             }
         }

@@ -45,7 +45,6 @@ namespace Cygnus2_0.Pages.Git
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            this.objectViewModel.GitModel.EjecutaSonar = true;
             try
             {
                 this.objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
@@ -62,11 +61,16 @@ namespace Cygnus2_0.Pages.Git
         }
         private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            objectViewModel.GitModel.ListaRamasLB.Clear();
-
             if (objectViewModel.GitSeleccionado != null)
-            { 
+            {
+                objectViewModel.GitModel.ListaRamasLB.Clear();
                 objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
+                this.objectViewModel.GitModel.EjecutaSonar = this.objectViewModel.GitSeleccionado.Sonar == "S" ? true : false;
+
+                if(!string.IsNullOrEmpty(this.objectViewModel.GitSeleccionado.RamaDefecto))
+                {
+                    AucomboBoxLB.SelectedItem = objectViewModel.GitModel.ListaRamasLB.Where(x => x.Text.Trim().Equals(this.objectViewModel.GitSeleccionado.RamaDefecto.Trim())).FirstOrDefault();
+                }
             }
 
             objectViewModel.GitModel.Comentario = "";

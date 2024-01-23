@@ -603,6 +603,31 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
+            sbVersion = "1.2.0.3";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                 {
+                    "alter TABLE repositories add rama text",
+                    "alter TABLE repositories add sonar text",
+                    "update repositories set sonar = 'N'",
+                    "update repositories set sonar = 'S' where descripcion = 'BaseDeDatos'",
+                    "update repositories set rama = 'master-datos' where descripcion = 'ActualizacionDatos'"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
