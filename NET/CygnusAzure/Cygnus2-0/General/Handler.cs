@@ -657,7 +657,7 @@ namespace Cygnus2_0.General
                                 PermisosModel permiso = this.ListaPermisos.FirstOrDefault(x => x.Codigo == permisoObj.Permiso);
                                 SelectListItem usGrant = this.ListaUsGrants.FirstOrDefault(x => Int32.Parse(x.Value) == permisoObj.Usuario);
 
-                                if (!usuario.Equals(usGrant.Text))
+                                if (usGrant != null && !usuario.Equals(usGrant.Text))
                                 {
                                     grant = new StringBuilder();
                                     grant.AppendLine(res.PlantillaGrantNP);
