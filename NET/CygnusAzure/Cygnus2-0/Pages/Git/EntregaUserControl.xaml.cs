@@ -58,6 +58,9 @@ namespace Cygnus2_0.Pages.Git
         {
             objectViewModel.GitModel.ListaArchivosEncontrados.Clear();
             objectViewModel.pArmarArbol(null, null);
+
+            if (objectViewModel.GitModel.RamaLBSeleccionada != null)
+                objectViewModel.GitModel.HU = objectViewModel.GitModel.RamaLBSeleccionada.Text;
         }
         private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

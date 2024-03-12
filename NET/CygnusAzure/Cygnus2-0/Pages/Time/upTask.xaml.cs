@@ -116,15 +116,6 @@ namespace Cygnus2_0.Pages.Time
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Modifica = true;
-            
-            if (AppearanceManager.Current.ThemeSource == AppearanceManager.DarkThemeSource)
-            {
-                pWindow.Background = Brushes.DimGray;
-            }
-            else
-            {
-                pWindow.Background = Brushes.WhiteSmoke;
-            }
 
             lblAzureText.Visibility = Visibility.Hidden;
             txAzureText.Visibility = Visibility.Hidden;

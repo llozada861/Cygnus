@@ -37,18 +37,6 @@ namespace Cygnus2_0.Pages.Time
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (AppearanceManager.Current.ThemeSource == AppearanceManager.DarkThemeSource)
-            {
-                GridDetails.Background = Brushes.DimGray;
-            }
-            else
-            {
-                GridDetails.Background = Brushes.WhiteSmoke;
-            }
-        }
-
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

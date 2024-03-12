@@ -70,8 +70,8 @@
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Carpeta Principal Repo" MinWidth="300"/>
                             <DataGridTextColumn Binding="{Binding Ruta}" Header="Ruta" MinWidth="300"/>
+                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Carpeta Principal Repo" MinWidth="300" IsReadOnly="True"/>
                             <DataGridTextColumn Binding="{Binding Documento}" Header="Documento" MinWidth="150" />
                             <DataGridComboBoxColumn Width="300" 
                              DisplayMemberPath="Descripcion" 
@@ -91,6 +91,7 @@
                                 </DataGridComboBoxColumn.EditingElementStyle>
                             </DataGridComboBoxColumn>
                             <DataGridTextColumn Binding="{Binding RamaDefecto}" Header="Rama Defecto" MinWidth="150" />
+                            
                             <DataGridComboBoxColumn Width="200"
                                             DisplayMemberPath="Text"
                                             SelectedValuePath="Value"

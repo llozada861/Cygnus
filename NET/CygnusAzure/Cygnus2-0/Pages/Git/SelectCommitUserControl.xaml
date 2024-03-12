@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Git.SelectCommitUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cygnus2_0.Pages.Git"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="pWindow" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="*" MinWidth="150"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox x:Name="Main" Header="Commits Rama" Grid.Column="0" Foreground="{DynamicResource ButtonText}"  >
+            <DataGrid x:Name="dataGridCherry" 
+                        IsReadOnly="True" 
+                        AutoGenerateColumns="False"
+                        SelectionMode="Single"
+                        CanUserDeleteRows="False"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserSortColumns="False"
+                        ItemsSource="{Binding Path=GitModel.ListaCommitsLB, Mode=TwoWay}" >
+
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="Select" Header=" " Width="25">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=BlValor,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="idDesc" Header="Descripción" IsReadOnly="True" Width="250">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Text}" TextAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Text="{Binding Path=Text, Mode=OneWay}"/>
+                                    </TextBlock.ToolTip>
+                                            </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTextColumn                  
+                                  IsReadOnly="True"
+                                  Header="Fecha"
+                                  Binding="{Binding Path=Fecha}" SortDirection="Descending"/>
+                    <DataGridTextColumn                  
+                                  IsReadOnly="True"
+                                  Header="Usuario"
+                                  Binding="{Binding Path=Usuario}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <GridSplitter Grid.Column="1" Grid.RowSpan="10"  HorizontalAlignment="Stretch" />
+
+        <GroupBox x:Name="Feature" Header="Commits Rama" Grid.Column="2" Foreground="{DynamicResource ButtonText}">
+            <DataGrid x:Name="dataGridCommitsFeaure" 
+                        IsReadOnly="True" 
+                        AutoGenerateColumns="False"
+                        SelectionMode="Single"
+                        CanUserDeleteRows="False"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserSortColumns="False"
+                        ItemsSource="{Binding Path=GitModel.ListaCommitsFeature, Mode=TwoWay}" Grid.Column="2" >
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn                  
+                                  IsReadOnly="True"
+                                  Header="Fecha"
+                                  Binding="{Binding Path=Fecha}" SortDirection="Descending"/>
+
+                    <DataGridTemplateColumn Header="Descripción" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Text}" TextAlignment="Left" TextWrapping="WrapWithOverflow" VerticalAlignment="Center">
+                                    <TextBlock.ToolTip>
+                                        <TextBlock Text="{Binding Path=Text, Mode=OneWay}"/>
+                                    </TextBlock.ToolTip>
+                                            </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn                  
+                                  IsReadOnly="True"
+                                  Header="Usuario"
+                                  Binding="{Binding Path=Usuario}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</UserControl>

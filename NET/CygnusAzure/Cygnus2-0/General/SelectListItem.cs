@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibGit2Sharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Cygnus2_0.General
         public string Grant { set; get; }
         public string Observacion { set; get; }
         public string Fin { set; get; }
-        public Boolean BlValor { set; get; }
+        public bool BlValor { set; get; }
         public string Path { set; get; }
         public string Usuario { set; get; }
         public Boolean Azure { set; get; }
@@ -29,5 +30,7 @@ namespace Cygnus2_0.General
         public string Pass { set; get; }
         public string Etiqueta { set; get; }
         public int? Empresa { set; get; }
+        public DateTime Fecha { set; get; }
+        public Commit Commit_ { set; get; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Cygnus2_0.DAO;
 using Cygnus2_0.Model.Git;
 using Cygnus2_0.Model.Repository;
+using Cygnus2_0.Pages.General;
+using Cygnus2_0.Pages.Git;
 using LibGit2Sharp;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.General
@@ -111,15 +115,15 @@ namespace Cygnus2_0.General
                     pCambiarRama(handler, repositorioGit.Ruta, ramaWO);
                 }
 
-            //pCreaDirectorios(repositorioGit.Ruta);
+                //pCreaDirectorios(repositorioGit.Ruta);
 
-            //Se copian los archivos en cada ruta del repo
-            pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit);
+                //Se copian los archivos en cada ruta del repo
+                pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit);
 
                 Commands.Stage(repo, "*");
                 Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now));
-            
-                if(boUnaRama)
+
+                if (boUnaRama)
                 {
                     Remote remote = repo.Network.Remotes["origin"];
                     Branch ramaFeat = null;
@@ -143,13 +147,47 @@ namespace Cygnus2_0.General
             }
         }
 
-        public static void pCreaRamaRepo(Handler handler,string rutaRepo,string ramaPrincipal, string ramaCrear)
+        public static bool pCreaRamaRepo(Handler handler,string rutaRepo,string ramaPrincipal, string ramaCrear,string lineaBase = null,string tipoCrea = null)
         {
             bool blRama = false;
+            bool boResultado = true;
+            List<SelectListItem> ListaCommitsLB = new List<SelectListItem>();
+            List<SelectListItem> ListaCommitsFeaure = new List<SelectListItem>();
+            RepositoryStatus status;
 
             using (var repo = new Repository(@rutaRepo))
             {
-                try 
+                #region Se pasa a la linea base para obtener los commits que se han realizado
+                if (!String.IsNullOrEmpty(tipoCrea))
+                {
+                    status = repo.RetrieveStatus();
+
+                    if (status.IsDirty)
+                    {
+                        handler.MensajeError("El repositorio tiene un problema, por favor corregir antes de contniuar");
+                        return boResultado = false;
+                    }
+
+                    try
+                    {
+                        Commands.Checkout(repo, lineaBase);
+                    }
+                    catch (Exception ex)
+                    {
+                        pCambiarRama(handler, rutaRepo, lineaBase);
+                    }
+
+                    var ListaCommits = repo.Commits.Where(x => x.Message.StartsWith(lineaBase)).OrderByDescending(x => x.Committer.When.DateTime);
+
+                    for (int i = 0; i < ListaCommits.Count(); i++)
+                    {
+                        Commit actual = ListaCommits.ElementAt(i);
+                        ListaCommitsLB.Add(new SelectListItem { BlValor = false, Text = actual.MessageShort, Fecha = actual.Committer.When.LocalDateTime, Commit_ = actual, Usuario = actual.Committer.Name });                        
+                    }
+                }
+                #endregion
+
+                try
                 { 
                     Commands.Checkout(repo, ramaPrincipal);
                 }
@@ -177,7 +215,93 @@ namespace Cygnus2_0.General
                 }
 
                 Commands.Checkout(repo, ramaCrear);
+
+                if (ListaCommitsLB.Count() > 0)
+                {
+                    var ListaCommits = repo.Commits.OrderByDescending(x => x.Committer.When.LocalDateTime);
+
+                    for (int i = 0; i < ListaCommits.Count(); i++)
+                    {
+                        if (i >= 25) break;
+
+                        Commit actual = ListaCommits.ElementAt(i);
+                        ListaCommitsFeaure.Add(new SelectListItem { BlValor = false, Text = actual.MessageShort, Fecha = actual.Committer.When.LocalDateTime, Commit_ = actual, Usuario= actual.Committer.Name});
+
+                        if(ListaCommitsLB.Exists(x=> x.Commit_.MessageShort.Equals(actual.MessageShort) && x.Commit_.Author.When.LocalDateTime == actual.Author.When.LocalDateTime && x.Commit_.Author.Name.Equals(actual.Author.Name)))
+                        {
+                            ListaCommitsLB.Remove(ListaCommitsLB.Where(x => x.Commit_.MessageShort.Equals(actual.MessageShort) && x.Commit_.Author.When.LocalDateTime == actual.Author.When.LocalDateTime && x.Commit_.Author.Name.Equals(actual.Author.Name)).FirstOrDefault());
+                        }
+                    }
+
+                    if (ListaCommitsLB.Count() == 0)
+                    {
+                        handler.MensajeError("No hay commits en la línea base ["+ lineaBase + "] para pasar a la rama ["+ ramaCrear+"]");
+                        return boResultado = false;
+                    }
+
+                    SelectCommitUserControl winCommit = new SelectCommitUserControl(ListaCommitsLB, ListaCommitsFeaure, lineaBase, ramaCrear);
+                    WinImage request = new WinImage(winCommit, "Commits Linea Base");
+                    request.ShowDialog();
+
+                    if(request.Accion.Equals(res.No))
+                    {
+                        return boResultado = false;
+                    }
+
+                    ObservableCollection<SelectListItem> listaCommSelect = winCommit.View.GitModel.ListaCommitsLB;
+
+                    foreach (SelectListItem item in listaCommSelect.OrderBy(x=>x.Fecha))
+                    {
+                        if(item.BlValor)
+                        {
+                            //repo.CherryPick(item.Commit_, new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now));
+                            string command = "git cherry-pick " + item.Commit_.Sha;
+                            string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
+                            ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
+                            //Thread.Sleep(5000);
+
+                            status = repo.RetrieveStatus();
+
+                            if (status.IsDirty)
+                            {
+                                command = "TortoiseGitProc.exe /command:diff";
+                                ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
+
+                                if(ListaCommitsLB.Count()>1)
+                                    boResultado = false;
+
+                                break;
+                            }
+                        }
+                    }
+
+                    status = repo.RetrieveStatus();
+
+                    if (!status.IsDirty && boResultado)
+                    {
+                        Remote remote = repo.Network.Remotes["origin"];
+                        Branch ramaFeat = null;
+
+                        branches = repo.Branches;
+                        foreach (Branch ramaFeature in branches)
+                        {
+                            if (ramaFeature.FriendlyName.Equals(ramaCrear))
+                            {
+                                ramaFeat = ramaFeature;
+                                break;
+                            }
+                        }
+
+                        repo.Branches.Update(ramaFeat,
+                                b => b.Remote = remote.Name,
+                                b => b.UpstreamBranch = ramaFeat.CanonicalName);
+
+                        repo.Network.Push(ramaFeat);
+                    }
+                }
             }
+
+            return boResultado;
         }
 
         public static void pCambiarRama(Handler handler, string rutaRepo, string rama)
@@ -334,8 +458,8 @@ namespace Cygnus2_0.General
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
-                UseShellExecute = false,
-                CreateNoWindow = blMostrar
+                UseShellExecute = false ,
+                CreateNoWindow = blMostrar                
             };
 
             var process = Process.Start(processStartInfo);

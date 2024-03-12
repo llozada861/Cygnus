@@ -32,17 +32,5 @@ namespace Cygnus2_0.Pages.Time
 
             lbldescripcion.Content = descripcion;
         }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (AppearanceManager.Current.ThemeSource == AppearanceManager.DarkThemeSource)
-            {
-                pWindow.Background = Brushes.DimGray;
-            }
-            else
-            {
-                pWindow.Background = Brushes.WhiteSmoke;
-            }
-        }
     }
 }
