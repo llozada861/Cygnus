@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,20 @@ namespace Cygnus2_0.Model.Repository
         public string Descripcion { get; set; }
 
         [Column(name: "documento")]
-        public string Documento { get; set; }
+        public string Documento { get; set; }       
 
+        private string ruta;
         [Column(name: "ruta_local")]
-        public string Ruta { get; set; }
+        public string Ruta
+        {
+            get { return ruta; }
+            set 
+            { 
+                ruta = value; 
+                this.Descripcion = Path.GetFileName(ruta);
+            }
+        }
+
         [Column(name: "tipo_dato")]
         public int? TipoDato { get; set; }
 

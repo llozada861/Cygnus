@@ -25,6 +25,9 @@ namespace Cygnus2_0.Model.Git
         private ObservableCollection<Folder> listacarpetasview;
         private ObservableCollection<SelectListItem> listaHU;
         private ObservableCollection<Repositorio> listaGit;
+        private ObservableCollection<SelectListItem> listaCommitsLB;
+        private ObservableCollection<SelectListItem> listaCommitsFeature;
+
         private string codigo;
         private string objetoBuscar;
         private string hu;
@@ -36,6 +39,7 @@ namespace Cygnus2_0.Model.Git
         private string nuevaRama;
         private ObjectGitViewModel view_;
         private string sbCantidad;
+       
         public ObjectGitModel(ObjectGitViewModel view)
         {
             this.ListaGit = new ObservableCollection<Repositorio>();
@@ -104,6 +108,16 @@ namespace Cygnus2_0.Model.Git
         {
             get { return listaHU; }
             set { SetProperty(ref listaHU, value); }
+        }
+        public ObservableCollection<SelectListItem> ListaCommitsLB
+        {
+            get { return listaCommitsLB; }
+            set { SetProperty(ref listaCommitsLB, value); }
+        }
+        public ObservableCollection<SelectListItem> ListaCommitsFeature
+        {
+            get { return listaCommitsFeature; }
+            set { SetProperty(ref listaCommitsFeature, value); }
         }
         public ObservableCollection<Archivo> ListaArchivosEncontrados 
         {

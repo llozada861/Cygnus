@@ -5,8 +5,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cygnus2_0.Pages.General"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" WindowStartupLocation="CenterScreen">
-    <Grid x:Name="gridPrincipal">
-
+             d:MinHeight="300" d:MinWidth="300" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" SizeToContent="WidthAndHeight"
+        WindowStyle="ThreeDBorderWindow" >
+    <Window.Background>
+        <StaticResource ResourceKey="WindowBackgroundBrush" />
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="gridPrincipal" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="10" Grid.RowSpan="9" >
+            
+        </Grid>
+        <Button x:Name="btnProcesar" Content="Procesar"  VerticalAlignment="Bottom"  Margin="5,5,5,5" HorizontalAlignment="Right" Grid.Row="9" Grid.Column="8" Click="btnProcesar_Click" />
+        <Button x:Name="btnCancelar" Content="Caneclar"  VerticalAlignment="Bottom"  Margin="5,5,5,5" HorizontalAlignment="Right" Grid.Row="9" Grid.Column="9" Click="btnCancelar_Click" />
     </Grid>
 </Window>

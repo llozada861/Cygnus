@@ -155,6 +155,7 @@ namespace Cygnus2_0.ViewModel.Repository
                     Repositorio repo = new Repositorio();
                     repo.Empresa = Convert.ToInt32(handler.ConfGeneralView.Model.Empresa.Codigo);
                     repo.ListaTipos = new ObservableCollection<TipoObjetos>(handler.ListaTiposObjetos);
+                    repo.ListaSINO = new ObservableCollection<SelectListItem>(handler.ListaSiNO);
                     ListaGit.Add(repo);
                 }
 

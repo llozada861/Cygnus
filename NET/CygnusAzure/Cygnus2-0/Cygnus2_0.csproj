@@ -336,6 +336,9 @@
     <Compile Include="Pages\Git\LBUserControl.xaml.cs">
       <DependentUpon>LBUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Git\SelectCommitUserControl.xaml.cs">
+      <DependentUpon>SelectCommitUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Objects\AdminObjects.xaml.cs">
       <DependentUpon>AdminObjects.xaml</DependentUpon>
     </Compile>
@@ -620,6 +623,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Git\LBUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Git\SelectCommitUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

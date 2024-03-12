@@ -34,6 +34,7 @@ namespace Cygnus2_0.ViewModel.Git
         private readonly DelegateCommand _examinar;
         private readonly DelegateCommand _renombrar;
         private readonly DelegateCommand _gitBash;
+        private readonly DelegateCommand _procCommits;
 
         public ICommand Procesar => _process;
         public ICommand Buscar => _buscar;
@@ -42,6 +43,7 @@ namespace Cygnus2_0.ViewModel.Git
         public ICommand Examinar => _examinar;
         public ICommand Renombrar => _renombrar;
         public ICommand GitBash => _gitBash;
+        public ICommand ProcCommits => _procCommits;
 
         public ObjectGitViewModel(Handler handler)
         {
@@ -56,6 +58,14 @@ namespace Cygnus2_0.ViewModel.Git
             _gitBash = new DelegateCommand(pEjecutaGitBash);
 
             GitModel.ListaGit = SqliteDAO.pListaRepositorios();
+        }
+        public ObjectGitViewModel(Handler handler, List<SelectListItem> ListaCommitsLB, List<SelectListItem> ListaCommitsFeature)
+        {
+            this.handler = handler;
+            this.GitModel = new ObjectGitModel(this);
+            _procCommits = new DelegateCommand(pCommits);
+            this.GitModel.ListaCommitsLB = new ObservableCollection<SelectListItem>(ListaCommitsLB);
+            this.GitModel.ListaCommitsFeature = new ObservableCollection<SelectListItem>(ListaCommitsFeature);
         }
         public ObjectGitModel GitModel { get; set; }
         public List<SelectListItem> ListaSino
@@ -389,12 +399,12 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                handler.CursorWait();
+                //handler.CursorWait();
 
-                RepoGit.pCreaRamaRepo(handler,GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar);
+                RepoGit.pCreaRamaRepo(handler,GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar, GitModel.RamaLBSeleccionada.Text, "C");
 
                 handler.CursorNormal();
-                handler.MensajeOk("Rama Creada!");
+                //handler.MensajeOk("Rama Creada!");
             }
             catch(Exception ex)
             {
@@ -633,6 +643,11 @@ namespace Cygnus2_0.ViewModel.Git
                     rama.Estandar = rama.Estandar.Replace(res.TagUsuario, Environment.UserName.ToUpper());
                 }
             }
+        }
+
+        public void pCommits(object commandParameter)
+        {
+
         }
     }
 }

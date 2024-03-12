@@ -8,7 +8,7 @@
              Width="600" Height="450" 
              WindowStyle="SingleBorderWindow" 
              WindowStartupLocation="CenterScreen" 
-             ResizeMode="CanResize" Loaded="Window_Loaded" Title="Detalle de la tarea">
+             ResizeMode="CanResize" Title="Detalle de la tarea">
     <Grid x:Name="GridDetails">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
