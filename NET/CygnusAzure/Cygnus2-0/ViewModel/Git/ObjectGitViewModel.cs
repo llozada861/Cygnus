@@ -401,10 +401,12 @@ namespace Cygnus2_0.ViewModel.Git
 
                 //handler.CursorWait();
 
-                RepoGit.pCreaRamaRepo(handler,GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar, GitModel.RamaLBSeleccionada.Text, "C");
+                bool resultado = RepoGit.pCreaRamaRepo(handler,GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar, GitModel.RamaLBSeleccionada.Text, "C");
 
-                handler.CursorNormal();
-                //handler.MensajeOk("Rama Creada!");
+                //handler.CursorNormal();
+
+                if (resultado)                
+                    handler.MensajeOk("Cherry-Pick ejecutado con éxito. Push ejecutado con éxito");  
             }
             catch(Exception ex)
             {

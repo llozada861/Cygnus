@@ -147,13 +147,13 @@ namespace Cygnus2_0.General
             }
         }
 
-        public static void pCreaRamaRepo(Handler handler,string rutaRepo,string ramaPrincipal, string ramaCrear,string lineaBase = null,string tipoCrea = null)
+        public static bool pCreaRamaRepo(Handler handler,string rutaRepo,string ramaPrincipal, string ramaCrear,string lineaBase = null,string tipoCrea = null)
         {
             bool blRama = false;
+            bool boResultado = true;
             List<SelectListItem> ListaCommitsLB = new List<SelectListItem>();
             List<SelectListItem> ListaCommitsFeaure = new List<SelectListItem>();
             RepositoryStatus status;
-            bool boLevantaDiff = false;
 
             using (var repo = new Repository(@rutaRepo))
             {
@@ -165,7 +165,7 @@ namespace Cygnus2_0.General
                     if (status.IsDirty)
                     {
                         handler.MensajeError("El repositorio tiene un problema, por favor corregir antes de contniuar");
-                        return;
+                        return boResultado = false;
                     }
 
                     try
@@ -236,7 +236,7 @@ namespace Cygnus2_0.General
                     if (ListaCommitsLB.Count() == 0)
                     {
                         handler.MensajeError("No hay commits en la línea base ["+ lineaBase + "] para pasar a la rama ["+ ramaCrear+"]");
-                        return;
+                        return boResultado = false;
                     }
 
                     SelectCommitUserControl winCommit = new SelectCommitUserControl(ListaCommitsLB, ListaCommitsFeaure, lineaBase, ramaCrear);
@@ -245,7 +245,7 @@ namespace Cygnus2_0.General
 
                     if(request.Accion.Equals(res.No))
                     {
-                        return;
+                        return boResultado = false;
                     }
 
                     ObservableCollection<SelectListItem> listaCommSelect = winCommit.View.GitModel.ListaCommitsLB;
@@ -258,6 +258,7 @@ namespace Cygnus2_0.General
                             string command = "git cherry-pick " + item.Commit_.Sha;
                             string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
                             ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
+                            //Thread.Sleep(5000);
 
                             status = repo.RetrieveStatus();
 
@@ -265,13 +266,18 @@ namespace Cygnus2_0.General
                             {
                                 command = "TortoiseGitProc.exe /command:diff";
                                 ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
-                                boLevantaDiff = true;
+
+                                if(ListaCommitsLB.Count()>1)
+                                    boResultado = false;
+
                                 break;
                             }
                         }
                     }
 
-                    if (!boLevantaDiff)
+                    status = repo.RetrieveStatus();
+
+                    if (!status.IsDirty && boResultado)
                     {
                         Remote remote = repo.Network.Remotes["origin"];
                         Branch ramaFeat = null;
@@ -294,6 +300,8 @@ namespace Cygnus2_0.General
                     }
                 }
             }
+
+            return boResultado;
         }
 
         public static void pCambiarRama(Handler handler, string rutaRepo, string rama)
@@ -447,21 +455,21 @@ namespace Cygnus2_0.General
             ProcessStartInfo processStartInfo = new ProcessStartInfo(fileName, "-c \" " + command + " \"")
             {
                 WorkingDirectory = workingDir,
-                RedirectStandardOutput = false, //true,
-                RedirectStandardError = false, //true,
-                RedirectStandardInput = false, //true,
-                UseShellExecute = false //,
-                //CreateNoWindow = false //blMostrar                
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                RedirectStandardInput = true,
+                UseShellExecute = false ,
+                CreateNoWindow = blMostrar                
             };
 
             var process = Process.Start(processStartInfo);
-            //process.WaitForExit();
+            process.WaitForExit();
 
-            /*string output = process.StandardOutput.ReadToEnd();
+            string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
-            var exitCode = process.ExitCode;*/
+            var exitCode = process.ExitCode;
 
-            //process.Close();
+            process.Close();
         }
 
         public static void ExecuteGitBash(string fileName, string workingDir)

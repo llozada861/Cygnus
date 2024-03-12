@@ -212,7 +212,7 @@
                   >
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="MenuItemCr" Header="Crear Rama" Click="MenuItemCr_Click"  />
+                            <MenuItem x:Name="MenuItemCr" Header="Cherry-Pick" Click="MenuItemCr_Click"  />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
 
