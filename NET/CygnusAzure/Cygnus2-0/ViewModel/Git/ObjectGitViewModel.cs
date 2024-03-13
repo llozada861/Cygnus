@@ -391,6 +391,8 @@ namespace Cygnus2_0.ViewModel.Git
 
         internal void pCreaRama()
         {
+            bool resultado = false;
+
             try
             {
                 if(string.IsNullOrEmpty(handler.RepositorioVM.RutaGitBash))
@@ -399,11 +401,17 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                //handler.CursorWait();
+                handler.CursorWait();
+                List<SelectListItem> ListaCommitsLB = RepoGit.pObtenerCommitsRama(handler, GitModel.RamaLBSeleccionada.Text, GitSeleccionado.Ruta);
 
-                bool resultado = RepoGit.pCreaRamaRepo(handler,GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar, GitModel.RamaLBSeleccionada.Text, "C");
-
-                //handler.CursorNormal();
+                if (ListaCommitsLB.Count > 0)
+                {
+                    RepoGit.pCreaRamaRepo(handler, GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar);
+                    List<SelectListItem> ListaCommitsFeature = RepoGit.pObtenerCommitsRama(handler, RamaSeleccionada.Estandar, GitSeleccionado.Ruta, "S");
+                    RepoGitIns repoInstancia = new RepoGitIns();
+                    resultado = repoInstancia.pCherryPick(handler, GitModel.RamaLBSeleccionada.Text, RamaSeleccionada.Estandar, GitSeleccionado.Ruta, ListaCommitsLB, ListaCommitsFeature);
+                }
+                 handler.CursorNormal();
 
                 if (resultado)                
                     handler.MensajeOk("Cherry-Pick ejecutado con éxito. Push ejecutado con éxito");  
