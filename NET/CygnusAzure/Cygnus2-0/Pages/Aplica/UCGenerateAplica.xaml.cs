@@ -50,6 +50,7 @@ namespace Cygnus2_0.Pages.Aplica
             btnSqlPlus.Visibility = Visibility.Hidden;
 
             dataGridArchivosCargados.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
+            BotonGenerarGen.Visibility = Visibility.Hidden;
         }
 
         private void listBox1_Drop(object sender, DragEventArgs e)
@@ -125,6 +126,10 @@ namespace Cygnus2_0.Pages.Aplica
             try
             { 
                 generateAplicaViewModel.OnProcess(null);
+
+                if (generateAplicaViewModel.Model.ListaAplicaHistoria.Count() > 0)
+                    BotonGenerarGen.Visibility = Visibility.Visible;
+
                 btnSqlPlus.Visibility = Visibility.Visible;
             }
             catch (Exception ex)
@@ -255,6 +260,11 @@ namespace Cygnus2_0.Pages.Aplica
         {
             generateAplicaViewModel.Model.ListaAplicaHistoria.Clear();
             generateAplicaViewModel.Model.ListaAplicaHistoria = SqliteDAO.pListaAplicaHistoria(CasoText.Text.ToUpper());
+
+            BotonGenerarGen.Visibility = Visibility.Hidden;
+
+            if (generateAplicaViewModel.Model.ListaAplicaHistoria.Count() > 0)
+                BotonGenerarGen.Visibility = Visibility.Visible;
         }
 
         private void dataGridArchivosGen_PreviewKeyDown(object sender, KeyEventArgs e)

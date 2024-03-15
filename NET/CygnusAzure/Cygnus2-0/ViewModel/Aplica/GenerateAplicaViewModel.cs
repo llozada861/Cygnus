@@ -794,7 +794,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         public void pGeneralApl(object commandParameter)
         {
             StringBuilder grant = new StringBuilder();
-            string nombre = res.NombreAplicaDatos + res.ExtensionSQL;
+            string nombre = "FLEX_"+res.NombreAplicaDatos + res.ExtensionSQL;
             StringBuilder objetosApl = new StringBuilder();
             StringBuilder body = new StringBuilder();
 
