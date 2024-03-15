@@ -292,11 +292,11 @@ namespace Cygnus2_0.General
             {
                 using (var repo = new Repository(repositorio.Ruta))
                 {
-                    BranchCollection branches = repo.Branches;
+                    var branches = repo.Branches.Where(x=> x.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && x.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0);
 
-                    foreach (Branch b in branches)
+                    foreach (Branch b in branches.OrderByDescending(x=>x.Tip.Committer.When.LocalDateTime))
                     {
-                        if (b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0  && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
+                        //if (b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0  && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
                             listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
                     }
                 }
