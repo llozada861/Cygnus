@@ -65,16 +65,25 @@
                          VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="# de caso" TextChanged="CasoText_TextChanged"/>
 
-                <general:AutoComplete x:Name="AucomboBox" 
-                                      Grid.Row="0"
+                <ComboBox x:Name="comboBox" 
+                  ItemsSource="{Binding Path=Model.ListaUsuarios}" 
+                  SelectedItem="{Binding Path=Model.Usuario}"
+                  DisplayMemberPath="Text" VerticalAlignment="Center"
+                          Grid.Row="0"
                                       Grid.Column="3"
                                       Grid.ColumnSpan="3"
-                        ItemsSource="{Binding Path=Model.ListaUsuarios}" 
-                        SelectedItem="{Binding Path=Model.Usuario}"
-                        DisplayMemberPath="Text" 
-                        PatternChanged="AucomboBox_PatternChanged"
-                        Style="{StaticResource AutoCompleteComboBox}"
-                        Delay="500" Tag="Usuario" Margin="0,5,10,0" />
+                          Margin="0,5,10,0"
+                  >
+                </ComboBox>
+                <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+                   VerticalAlignment="Center"
+                   Text="Usuario" 
+                   Style="{StaticResource ComboBoxSelectOverlay}"
+                           Grid.Row="0"
+                                      Grid.Column="3"
+                                      Grid.ColumnSpan="3"
+                           Margin="5,5,10,0"
+                           />
 
                 <RadioButton x:Name="rdbDatos" Content="Datos" 
                      Grid.Column="6" 

@@ -64,6 +64,9 @@ namespace Cygnus2_0.Pages.Git
         }
         private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //AucomboBoxLB.ClearOnEmpty = true;
+            //AucomboBoxLB.Text = string.Empty;
+
             if (objectViewModel.GitSeleccionado != null)
             {
                 objectViewModel.GitModel.ListaRamasLB.Clear();
@@ -205,8 +208,6 @@ namespace Cygnus2_0.Pages.Git
         }
         protected void AuListaRepoGit_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
         {
-            AucomboBoxRepo.ClearOnEmpty = true;
-            AucomboBoxLB.ClearOnEmpty = true;
             args.DataSource = objectViewModel.GitModel.ListaGit.Where((hu, match) => hu.Descripcion.ToLower().Contains(args.Pattern.ToLower()));
         }
 
