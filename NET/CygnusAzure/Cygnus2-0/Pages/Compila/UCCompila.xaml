@@ -138,13 +138,16 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <general:AutoComplete x:Name="AucomboBox" 
-                        ItemsSource="{Binding Path=Model.ListaUsuarios}" 
-                        SelectedItem="{Binding Path=Model.Usuario}"
-                        DisplayMemberPath="Text"  Grid.Row="0"
-                        PatternChanged="AucomboBox_PatternChanged"
-                        Style="{StaticResource AutoCompleteComboBox}"
-                        Delay="500" Tag="Usuario" />
+                <ComboBox x:Name="comboBox" 
+                  ItemsSource="{Binding Path=Model.ListaUsuarios}" 
+                  SelectedItem="{Binding Path=Model.Usuario}"
+                  DisplayMemberPath="Text"  Grid.Row="0" VerticalAlignment="Center"/>
+
+                <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+                   Grid.Row="0" VerticalAlignment="Center"
+                   Text="Usuario" 
+                   Style="{StaticResource ComboBoxSelectOverlay}" Margin="5,5,0,5"/>
+
             </Grid>
         </GroupBox>
         <GroupBox x:Name="grbObjDescomAntes" Header="Objetos Descompilados Antes" Grid.Column="6" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="4">
