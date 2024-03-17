@@ -471,16 +471,22 @@ namespace Cygnus2_0.DAO
                     str.Write(sbAplicaBody.ToString());
                 }
 
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.WorkingDirectory = scriptDir;
-                process.StartInfo.RedirectStandardOutput = false;
-                process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.FileName = Path.Combine(handler.ConfGeneralView.Model.RutaSqlplus, "sqlplus.exe"); 
-                process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
-                process.StartInfo.CreateNoWindow = false;
+                try
+                {
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.WorkingDirectory = scriptDir;
+                    process.StartInfo.RedirectStandardOutput = false;
+                    process.StartInfo.RedirectStandardInput = false;
+                    process.StartInfo.FileName = Path.Combine(handler.ConfGeneralView.Model.RutaSqlplus, "sqlplus.exe");
+                    process.StartInfo.Arguments = string.Format("{0} @\"{1}\" ", credentials, sbAplica);
+                    process.StartInfo.CreateNoWindow = false;
 
-                process.Start();
-                process.Close();
+                    process.Start();
+                    process.Close();
+                }
+                catch {
+                    throw new System.Exception("Verifique que la ruta del SqlPlus.exe [" + handler.ConfGeneralView.Model.RutaSqlplus + "] se la correcta en [Ajustes/General/Rutas]");
+                }
 
                 //string output = null; //process.StandardOutput.ReadToEnd();
                 //process.StandardInput.WriteLine("exit;");

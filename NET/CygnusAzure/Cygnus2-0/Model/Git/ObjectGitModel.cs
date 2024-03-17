@@ -39,7 +39,8 @@ namespace Cygnus2_0.Model.Git
         private string nuevaRama;
         private ObjectGitViewModel view_;
         private string sbCantidad;
-       
+        private string tituloRamas;
+
         public ObjectGitModel(ObjectGitViewModel view)
         {
             this.ListaGit = new ObservableCollection<Repositorio>();
@@ -87,6 +88,11 @@ namespace Cygnus2_0.Model.Git
         {
             get { return comentario; }
             set { SetProperty(ref comentario, value.Trim()); }
+        }
+        public string TituloRamas
+        {
+            get { return tituloRamas; }
+            set { SetProperty(ref tituloRamas, value); }
         }
         public string NuevaRama
         {

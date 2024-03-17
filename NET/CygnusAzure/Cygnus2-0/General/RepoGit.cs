@@ -236,7 +236,10 @@ namespace Cygnus2_0.General
         {
             bool blRama = false;
 
-            RamaRepositorio ramaPrincipal = SqliteDAO.pListaRamaRepositorios(repositorioGit).Where(x=>x.LBase.Equals(res.Si)).First();
+            RamaRepositorio ramaPrincipal = SqliteDAO.pListaRamaRepositorios(repositorioGit).Where(x => x.LBase.Equals(res.Si)).FirstOrDefault();
+
+            if (ramaPrincipal == null)
+                throw new Exception("El repositorio ["+repositorioGit.Descripcion+"] NO cuenta con una rama línea base registrada [Ajustes/Herramientas Gestión/Git]");
 
             using (var repo = new Repository(@repositorioGit.Ruta))
             {
@@ -313,7 +316,7 @@ namespace Cygnus2_0.General
             {
                 using (var repo = new Repository(repositorio.Ruta))
                 {
-                    var branches = repo.Branches.Where(x => x.IsRemote);
+                    var branches = repo.Branches.Where(x => x.IsRemote && Path.GetFileName(x.FriendlyName.ToUpper()).IndexOf("HU") < 0 && Path.GetFileName(x.FriendlyName.ToUpper()).IndexOf("WO") < 0);
 
                     foreach (Branch b in branches.OrderByDescending(x => x.Tip.Committer.When.LocalDateTime))
                     {
@@ -396,14 +399,21 @@ namespace Cygnus2_0.General
                 CreateNoWindow = blMostrar                
             };
 
-            var process = Process.Start(processStartInfo);
-            process.WaitForExit();
+            try
+            {
+                var process = Process.Start(processStartInfo);
+                process.WaitForExit();
 
-            string output = process.StandardOutput.ReadToEnd();
-            string error = process.StandardError.ReadToEnd();
-            var exitCode = process.ExitCode;
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+                var exitCode = process.ExitCode;
 
-            process.Close();
+                process.Close();
+            }
+            catch 
+            {
+                throw new Exception("Verifique que la ruta del Git-Bash.exe ["+ fileName+"] se la correcta [Ajustes/Herramientas Gestión/Git]");
+            }
         }
 
         public static void ExecuteGitBash(string fileName, string workingDir)
