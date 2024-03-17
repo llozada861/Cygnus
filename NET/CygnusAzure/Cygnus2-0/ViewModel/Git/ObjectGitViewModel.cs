@@ -647,6 +647,11 @@ namespace Cygnus2_0.ViewModel.Git
             {
                 GitModel.ListaRamasCreadas = SqliteDAO.pListaRamaRepositorios(GitSeleccionado);
 
+                if (GitModel.ListaRamasCreadas.Count == 0)
+                    GitModel.TituloRamas = "Registrar ramas [Ajustes/Herramientas Gestión/Git]";
+                else
+                    GitModel.TituloRamas = "Ramas Registradas";
+
                 foreach (RamaRepositorio rama in GitModel.ListaRamasCreadas)
                 {
                     rama.Estandar = rama.Estandar.Replace(res.TagHU, GitModel.HU);

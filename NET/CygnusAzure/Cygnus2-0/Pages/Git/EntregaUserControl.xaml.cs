@@ -64,9 +64,6 @@ namespace Cygnus2_0.Pages.Git
         }
         private void AucomboBoxRepo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //AucomboBoxLB.ClearOnEmpty = true;
-            //AucomboBoxLB.Text = string.Empty;
-
             if (objectViewModel.GitSeleccionado != null)
             {
                 objectViewModel.GitModel.ListaRamasLB.Clear();
