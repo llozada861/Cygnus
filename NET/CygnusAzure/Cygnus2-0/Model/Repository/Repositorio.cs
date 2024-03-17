@@ -10,23 +10,30 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace Cygnus2_0.Model.Repository
 {
     [Table(name:"repositories")]
-    public class Repositorio
+    public class Repositorio: ViewModelBase
     {
+        private string descripcion;
+        private string ruta;
+
         [Column(name:"codigo")]
         [Key]
         public int? Codigo { get; set; }
 
         [Column(name:"descripcion")]
-        public string Descripcion { get; set; }
+        public string Descripcion 
+        {
+            get { return descripcion; }
+            set { SetProperty(ref descripcion, value); }
+        }
 
         [Column(name: "documento")]
         public string Documento { get; set; }       
 
-        private string ruta;
         [Column(name: "ruta_local")]
         public string Ruta
         {

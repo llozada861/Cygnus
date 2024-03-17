@@ -71,12 +71,12 @@
                         </DataGrid.ContextMenu>
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Ruta}" Header="Ruta" MinWidth="300"/>
-                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Carpeta Principal Repo" MinWidth="300" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Documento}" Header="Documento" MinWidth="150" />
-                            <DataGridComboBoxColumn Width="300" 
+                            <DataGridTextColumn Binding="{Binding Descripcion,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Header="Nombre" MinWidth="300" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Documento}" Header="Documento" />
+                            <DataGridComboBoxColumn
                              DisplayMemberPath="Descripcion" 
                                                 SelectedValuePath="Codigo"
-                                                Header="Tipo Dato Defecto"
+                                                Header="Tipo Dato"
                                                 SelectedValueBinding="{Binding TipoDato, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 >
                                 <DataGridComboBoxColumn.ElementStyle>
@@ -90,9 +90,9 @@
                                     </Style>
                                 </DataGridComboBoxColumn.EditingElementStyle>
                             </DataGridComboBoxColumn>
-                            <DataGridTextColumn Binding="{Binding RamaDefecto}" Header="Rama Defecto" MinWidth="150" />
+                            <DataGridTextColumn Binding="{Binding RamaDefecto}" Header="Rama Defecto" />
                             
-                            <DataGridComboBoxColumn Width="200"
+                            <DataGridComboBoxColumn
                                             DisplayMemberPath="Text"
                                             SelectedValuePath="Value"
                                             Header="Sonar?"
@@ -134,8 +134,27 @@
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Rama}" Header="Rama" MinWidth="200" />
-                            <DataGridTextColumn Binding="{Binding Estandar}" Header="Rama Clon" MinWidth="200"/>
+
+                            <DataGridComboBoxColumn 
+                                            DisplayMemberPath="Text"
+                                            SelectedValuePath="Text"
+                                            Header="Rama Origen"
+                                            SelectedValueBinding="{Binding Rama, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            >
+                                <DataGridComboBoxColumn.ElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaRamaOrigen}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.ElementStyle>
+                                <DataGridComboBoxColumn.EditingElementStyle>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="ItemsSource" Value="{Binding ListaRamaOrigen}"/>
+                                    </Style>
+                                </DataGridComboBoxColumn.EditingElementStyle>
+                            </DataGridComboBoxColumn>
+
+                            <DataGridTextColumn Binding="{Binding Estandar,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Header="Rama Clon" MinWidth="200"/>
+                            
                             <DataGridComboBoxColumn Width="200"
                                             DisplayMemberPath="Text"
                                             SelectedValuePath="Value"

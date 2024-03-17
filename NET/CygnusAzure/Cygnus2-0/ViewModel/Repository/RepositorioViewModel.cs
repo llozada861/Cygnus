@@ -63,6 +63,7 @@ namespace Cygnus2_0.ViewModel.Repository
                 foreach (RamaRepositorio objeto in listaRamaGit)
                 {
                     objeto.ListaSINO = new ObservableCollection<SelectListItem>(handler.ListaSiNO);
+                    objeto.ListaRamaOrigen = RepoGit.pObtRamasOrigen(ListaGit.Where(x=>x.Codigo == objeto.RepositorioId).FirstOrDefault());
                 }
             }
         }
@@ -175,8 +176,9 @@ namespace Cygnus2_0.ViewModel.Repository
 
                     RamaRepositorio rama = new RamaRepositorio();
                     rama.RepositorioId = RepoSeleccionado.Codigo;
-                    rama.Estandar = "feature/[HU]_[USUARIO]";
+                    rama.Estandar = "feature/[HU]_[USUARIO]_";
                     rama.ListaSINO = new ObservableCollection<SelectListItem>(handler.ListaSiNO);
+                    rama.ListaRamaOrigen = RepoGit.pObtRamasOrigen(RepoSeleccionado);
                     ListaRamaGit.Add(rama);
                 }
             }
