@@ -195,7 +195,7 @@
 
         <GridSplitter Grid.Column="2" Grid.RowSpan="10" Width="5" HorizontalAlignment="Stretch" />
 
-        <GroupBox x:Name="groupBoxRamas" Header="{Binding Path=GitModel.TituloRamas}"  Grid.Row="0"  Grid.Column="3" Grid.RowSpan="2" Margin="0,10,0,0" FontWeight="Bold">
+        <GroupBox x:Name="groupBoxRamas" Header="{Binding Path=GitModel.TituloRamas}"  Grid.Row="0"  Grid.Column="3" Grid.RowSpan="2" FontWeight="Bold">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
