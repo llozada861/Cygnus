@@ -305,6 +305,26 @@ namespace Cygnus2_0.General
             return listaRamas;
         }
 
+        internal static ObservableCollection<SelectListItem> pObtRamasOrigen(Repositorio repositorio)
+        {
+            ObservableCollection<SelectListItem> listaRamas = new ObservableCollection<SelectListItem>();
+
+            if (repositorio != null && !string.IsNullOrEmpty(repositorio.Ruta))
+            {
+                using (var repo = new Repository(repositorio.Ruta))
+                {
+                    var branches = repo.Branches.Where(x => x.IsRemote);
+
+                    foreach (Branch b in branches.OrderByDescending(x => x.Tip.Committer.When.LocalDateTime))
+                    {
+                        listaRamas.Add(new SelectListItem { Text = Path.GetFileName(b.FriendlyName) });
+                    }
+                }
+            }
+
+            return listaRamas;
+        }
+
         public static void pSetearLineaBase(string rama, Repositorio repositorio)
         {
             using (var repo = new Repository(@repositorio.Ruta))
