@@ -22,11 +22,15 @@ namespace Cygnus2_0.Pages.General
     public partial class WinImage : Window
     {
         private string accion = res.No;
-        public WinImage(UserControl userControls, string titulo)
+        public WinImage(UserControl userControls, string titulo, Int64 width = 300, Int64 height = 200, string textProc = "Procesar", string textCanc = "Cancelar")
         {
             InitializeComponent();
             this.Title = titulo;
             gridPrincipal.Children.Add(userControls);
+            this.Width = width;
+            this.Height = height;
+            this.btnProcesar.Content = textProc;
+            this.btnCancelar.Content = textCanc;
         }
 
         private void btnProcesar_Click(object sender, RoutedEventArgs e)
