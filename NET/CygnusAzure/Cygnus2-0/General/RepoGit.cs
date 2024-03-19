@@ -5,6 +5,7 @@ using Cygnus2_0.Pages.General;
 using Cygnus2_0.Pages.Git;
 using LibGit2Sharp;
 using Microsoft.Office.Interop.Excel;
+using Microsoft.VisualStudio.Services.CircuitBreaker;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -472,6 +473,8 @@ namespace Cygnus2_0.General
         {
             RepositoryStatus status;
             bool boResultado = true;
+            string command;
+            string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe; ;
 
             using (var repo = new Repository(@rutaRepo))
             {
@@ -493,7 +496,7 @@ namespace Cygnus2_0.General
 
                     handler.CursorNormal();
                     SelectCommitUserControl winCommit = new SelectCommitUserControl(ListaCommitsLB, ListaCommitsFeaure, lineaBase, ramaCrear);
-                    WinImage request = new WinImage(winCommit, "Commits Linea Base");
+                    WinImage request = new WinImage(winCommit, "Commits Linea Base",800,500);
                     request.ShowDialog();
 
                     if (request.Accion.Equals(res.No))
@@ -508,8 +511,7 @@ namespace Cygnus2_0.General
                     {
                         if (item.BlValor)
                         {
-                            string command = "git cherry-pick " + item.Commit_.Sha;
-                            string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
+                            command = "git cherry-pick " + item.Commit_.Sha;
                             RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
 
                             status = repo.RetrieveStatus();
@@ -542,11 +544,14 @@ namespace Cygnus2_0.General
                             }
                         }
 
-                        repo.Branches.Update(ramaFeat,
+                        command = "git push origin " + ramaFeat;
+                        RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
+
+                        /*repo.Branches.Update(ramaFeat,
                                 b => b.Remote = remote.Name,
                                 b => b.UpstreamBranch = ramaFeat.CanonicalName);
 
-                        repo.Network.Push(ramaFeat);
+                        repo.Network.Push(ramaFeat);*/
                     }
                 }
             }

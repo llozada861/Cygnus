@@ -190,6 +190,12 @@ namespace Cygnus2_0.Pages.Git
         }
         private void MenuItemCr_Click(object sender, RoutedEventArgs e)
         {
+            if (objectViewModel.GitModel.RamaLBSeleccionada == null)
+            {
+                handler.MensajeError("Debe seleccionar una línea base");
+                return;
+            }
+
             if (objectViewModel.RamaSeleccionada != null)
             {
                 objectViewModel.pCreaRama();
