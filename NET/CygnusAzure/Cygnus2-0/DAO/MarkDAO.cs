@@ -173,7 +173,7 @@ namespace Cygnus2_0.DAO
                                "TYPE ," +
                                "LINE ," +
                                "TEXT " +
-                        " FROM   all_errors " +
+                        " FROM   dba_errors " +
                         " WHERE  name = upper('" + archivo.NombreObjeto +"')"+
                         " AND    OWNER IN(" + pDevuelveUsuariosIn() + ") ";
 
@@ -224,7 +224,7 @@ namespace Cygnus2_0.DAO
                          "   FROM " +
                          "   ( " +
                          "       SELECT DISTINCT OWNER " +
-                         "       FROM   all_objects " +
+                         "       FROM   dba_objects " +
                          "       WHERE  object_name = upper('" + archivo.NombreObjeto +"') " +
                          "       AND    OWNER IN("+ pDevuelveUsuariosIn() + ") " +
                          "   )"; 
@@ -259,7 +259,7 @@ namespace Cygnus2_0.DAO
             string ownerBd = null;
 
             sql =   "       SELECT DISTINCT OWNER " +
-                    "       FROM   all_objects " +
+                    "       FROM   dba_objects " +
                     "       WHERE  object_name = upper('" + archivo.NombreObjeto + "') " +
                     "       AND    OWNER IN(" + pDevuelveUsuariosIn() + ") ";
 
@@ -292,7 +292,7 @@ namespace Cygnus2_0.DAO
             string sql;
 
             sql = "select count(distinct name)  cantidad "+
-                    "from all_errors "+
+                    "from dba_errors "+
                     "where owner in ("+ pDevuelveUsuariosIn()+") "+
                     "and attribute = 'ERROR'";
 
@@ -482,9 +482,11 @@ namespace Cygnus2_0.DAO
                     process.StartInfo.CreateNoWindow = false;
 
                     process.Start();
+                    process.WaitForExit();
                     process.Close();
                 }
-                catch {
+                catch 
+                {
                     throw new System.Exception("Verifique que la ruta del SqlPlus.exe [" + handler.ConfGeneralView.Model.RutaSqlplus + "] se la correcta en [Ajustes/General/Rutas]");
                 }
 

@@ -260,6 +260,8 @@ namespace Cygnus2_0.ViewModel.Compila
                 handler.ConexionOracle.ConexionOracleCompila.Close();
             }
 
+            this.Model.ArchivosDescompilados = pObtCantObjsInvalidos();
+
             pExeSqlplus();
 
             this.Model.ArchivosDescompilados = pObtCantObjsInvalidos();
@@ -327,7 +329,7 @@ namespace Cygnus2_0.ViewModel.Compila
                 handler.DAO.pExecuteSqlplus(credenciales, this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS)).ToList(),rutaLog, handler.ConnView.Model.UsuarioCompila);
             }
 
-            Thread.Sleep(4000);
+            //Thread.Sleep(4000);
 
             foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQLPLUS) && x.Tipo != Int32.Parse(res.TipoAplica) && x.Tipo != Int32.Parse(res.TipoAplicaGrant)))
             {
