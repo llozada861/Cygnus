@@ -411,7 +411,8 @@ namespace Cygnus2_0.ViewModel.Git
                     RepoGitIns repoInstancia = new RepoGitIns();
                     resultado = repoInstancia.pCherryPick(handler, GitModel.RamaLBSeleccionada.Text, RamaSeleccionada.Estandar, GitSeleccionado.Ruta, ListaCommitsLB, ListaCommitsFeature);
                 }
-                 handler.CursorNormal();
+                 
+                handler.CursorNormal();
 
                 if (resultado)                
                     handler.MensajeOk("Cherry-Pick ejecutado con éxito. Push ejecutado con éxito");  
