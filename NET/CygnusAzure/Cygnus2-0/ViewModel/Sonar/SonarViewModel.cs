@@ -92,7 +92,7 @@ namespace Cygnus2_0.ViewModel.Sonar
 
                 UserControl log = new UserControlLog(salidaBuild);
                 WinImage request = new WinImage(log, "Traza",700,500);
-                RepoGit.pRemoverCambiosSonar(handler,GitSeleccionado);
+                RepoGit.pRemoverCambiosGit(handler,GitSeleccionado.Ruta);
                 request.ShowDialog();
             }
             catch (Exception ex)
