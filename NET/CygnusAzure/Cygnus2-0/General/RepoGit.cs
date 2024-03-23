@@ -189,6 +189,29 @@ namespace Cygnus2_0.General
             return ListaCommits;
         }
 
+        public static List<SelectListItem> pObtenerCommitsRamaSinVal(Handler handler, string rama, string rutaRepo)
+        {
+            List<SelectListItem> ListaCommits = new List<SelectListItem>();
+            List<Commit> ListaCommitsRepo = new List<Commit>();
+
+            using (var repo = new Repository(@rutaRepo))
+            {
+                ListaCommitsRepo = repo.Commits.Where(x => x.Author.When.LocalDateTime >= DateTime.Now.AddMonths(-1)).OrderByDescending(x => x.Committer.When.LocalDateTime).ToList();
+
+                for (int i = 0; i < ListaCommitsRepo.Count(); i++)
+                {
+                    if (i >= 3)
+                        break;
+
+                    Commit actual = ListaCommitsRepo.ElementAt(i);
+                    ListaCommits.Add(new SelectListItem { BlValor = false, Text = actual.MessageShort, Fecha = actual.Committer.When.LocalDateTime, Commit_ = actual, Usuario = actual.Committer.Name });
+                }
+                
+            }
+
+            return ListaCommits;
+        }
+
         public static void pCreaRamaRepo(Handler handler,string rutaRepo,string ramaPrincipal, string ramaCrear)
         {
             bool blRama = false;
@@ -337,36 +360,24 @@ namespace Cygnus2_0.General
             }
         }
 
-        internal static void pRemoverCambiosSonar(Handler handler, Repositorio repositorio)
+        internal static void pRemoverCambiosGit(Handler handler, string ruta)
         {
-            using (var repo = new Repository(@repositorio.Ruta))
+            using (var repo = new Repository(@ruta))
             {
                 string command = "git stash -u";
                 string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
-                ExecuteGitBashCommand(RutagitBash, command, repositorio.Ruta, false);
+                ExecuteGitBashCommand(RutagitBash, command, ruta, false);
             }
         }
-        internal static void pLimpiarRepo(Handler handler, Repositorio repositorio)
+        internal static void pLimpiarRepo(Handler handler, string ruta)
         {
-            using (var repo = new Repository(@repositorio.Ruta))
+            using (var repo = new Repository(@ruta))
             {
                 string command = "git clean -fx";
                 string RutagitBash = handler.RepositorioVM.RutaGitBash + "\\" + res.GitBashExe;
-                ExecuteGitBashCommand(RutagitBash, command, repositorio.Ruta, false);
+                ExecuteGitBashCommand(RutagitBash, command, ruta, false);
             }
         }
-
-        /*
-         *                 //Se cambia a master datos para crear el feature
-                Commands.Checkout(repo, res.RamaMasterDatos);
-                Commands.Pull(repo, new Signature(Environment.UserName, email, DateTimeOffset.Now), new PullOptions());
-                         /*if (!blRama)
-                {
-                    repo.CreateBranch(rama);
-                }
-                
-                Commands.Checkout(repo, rama);
-                repo.CherryPick(comm, new Signature(Environment.UserName, email, DateTimeOffset.Now));*/
 
         public static string pClonarRepo(string ruta, string url, string rutaGitBash)
         {
@@ -503,6 +514,7 @@ namespace Cygnus2_0.General
                     {
                         return boResultado = false;
                     }
+
                     handler.CursorWait();
 
                     ObservableCollection<SelectListItem> listaCommSelect = winCommit.View.GitModel.ListaCommitsLB;
@@ -546,12 +558,14 @@ namespace Cygnus2_0.General
 
                         command = "git push origin " + ramaFeat;
                         RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
-
-                        /*repo.Branches.Update(ramaFeat,
-                                b => b.Remote = remote.Name,
-                                b => b.UpstreamBranch = ramaFeat.CanonicalName);
-
-                        repo.Network.Push(ramaFeat);*/
+                    }
+                    else
+                    {
+                        List<SelectListItem> ListaCommitsFeature2 = RepoGit.pObtenerCommitsRamaSinVal(handler, ramaCrear, rutaRepo);
+                        repo.Reset(ResetMode.Hard, ListaCommitsFeature2.First().Commit_);
+                        boResultado = false;
+                        handler.CursorNormal();
+                        handler.MensajeOk("El proceso no terminó con éxito. Debe resolver los conflictos que se presentaron.");
                     }
                 }
             }

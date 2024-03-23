@@ -247,7 +247,7 @@ namespace Cygnus2_0.ViewModel.Git
                     return;
                 }
 
-                if (handler.MensajeConfirmacion("Seguro que quiere procesar el repositorio [ " + GitSeleccionado.Descripcion.ToUpper() + " ]?") == res.No)
+                if (handler.MensajeConfirmacion("Seguro que quiere procesar el repositorio [ " + GitSeleccionado.Descripcion.ToUpper() + " ] y línea base ["+ GitModel.RamaLBSeleccionada.Text+ "]?") == res.No)
                 {
                     return;
                 }
@@ -343,7 +343,7 @@ namespace Cygnus2_0.ViewModel.Git
 
             UserControl log = new UserControlLog(salidaBuild);
             WinImage request = new WinImage(log, "Traza",700,500);
-            RepoGit.pRemoverCambiosSonar(handler,GitSeleccionado);
+            RepoGit.pRemoverCambiosGit(handler,GitSeleccionado.Ruta);
             request.ShowDialog();
         }
 
@@ -415,7 +415,7 @@ namespace Cygnus2_0.ViewModel.Git
                 handler.CursorNormal();
 
                 if (resultado)                
-                    handler.MensajeOk("Cherry-Pick ejecutado con éxito. Push ejecutado con éxito");  
+                    handler.MensajeOk("Cherry-Pick ejecutado con éxito. Push ejecutado con éxito");
             }
             catch(Exception ex)
             {
