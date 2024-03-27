@@ -173,7 +173,7 @@ namespace Cygnus2_0.General
                     if(todos == res.Si)
                         ListaCommitsRepo = repo.Commits.Where(x=>x.Author.When.LocalDateTime >= DateTime.Now.AddMonths(-4)).OrderByDescending(x => x.Committer.When.LocalDateTime).ToList();
                     else
-                        ListaCommitsRepo = repo.Commits.Where(x => x.Message.StartsWith(rama)).OrderByDescending(x => x.Committer.When.DateTime).ToList();
+                        ListaCommitsRepo = repo.Commits.Where(x => x.Message.ToUpper().StartsWith(rama.ToUpper())).OrderByDescending(x => x.Committer.When.DateTime).ToList();
 
                     for (int i = 0; i < ListaCommitsRepo.Count(); i++)
                     {
@@ -305,7 +305,7 @@ namespace Cygnus2_0.General
                 {
                     if (b.FriendlyName.ToUpper().Equals(nombreantes.ToUpper()))
                     {
-                        repo.Branches.Rename(b, nuevonombre.ToUpper());
+                        repo.Branches.Rename(b, nuevonombre);
                         break;
                     }
                 }
