@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using res = Cygnus2_0.Properties.Resources;
@@ -91,7 +92,7 @@ namespace Cygnus2_0.ViewModel.Sonar
                 handler.CursorNormal();
 
                 UserControl log = new UserControlLog(salidaBuild);
-                WinImage request = new WinImage(log, "Traza",700,500);
+                WinGenerica request = new WinGenerica(log, "Traza",700,500,"Ok","Cerrar", WindowStyle.None);
                 RepoGit.pRemoverCambiosGit(handler,GitSeleccionado.Ruta);
                 request.ShowDialog();
             }

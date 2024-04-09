@@ -1,4 +1,4 @@
-﻿<Window x:Class="Cygnus2_0.Pages.General.WinImage"
+﻿<Window x:Class="Cygnus2_0.Pages.General.WinGenerica"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Cygnus2_0.Pages.General"
              mc:Ignorable="d" 
              d:MinHeight="300" d:MinWidth="300" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" 
-        WindowStyle="None" >
+        >
     <Window.Background>
         <StaticResource ResourceKey="WindowBackgroundBrush" />
     </Window.Background>

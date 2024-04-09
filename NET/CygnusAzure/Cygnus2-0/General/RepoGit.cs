@@ -507,7 +507,7 @@ namespace Cygnus2_0.General
 
                     handler.CursorNormal();
                     SelectCommitUserControl winCommit = new SelectCommitUserControl(ListaCommitsLB, ListaCommitsFeaure, lineaBase, ramaCrear);
-                    WinImage request = new WinImage(winCommit, "Commits Linea Base",800,500);
+                    WinGenerica request = new WinGenerica(winCommit, "Commits Linea Base",800,500);
                     request.ShowDialog();
 
                     if (request.Accion.Equals(res.No))
@@ -523,8 +523,16 @@ namespace Cygnus2_0.General
                     {
                         if (item.BlValor)
                         {
-                            command = "git cherry-pick " + item.Commit_.Sha;
-                            RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
+                            //command = "git cherry-pick " + item.Commit_.Sha;
+                            //RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
+
+                            if (string.IsNullOrEmpty(handler.Azure.Correo))
+                            {
+                                handler.MensajeError("Configure el correo empresarial [Ajustes/Herramientas Gestión/Azure]");
+                                return boResultado = false;
+                            }
+
+                            repo.CherryPick(item.Commit_, new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now));
 
                             status = repo.RetrieveStatus();
 
@@ -532,9 +540,10 @@ namespace Cygnus2_0.General
                             {
                                 handler.CursorNormal();
 
-                                command = "TortoiseGitProc.exe /command:diff";                               
+                                command = "TortoiseGitProc.exe /command:diff";
                                 RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, true);
                             }
+                            
                         }
                     }
 
