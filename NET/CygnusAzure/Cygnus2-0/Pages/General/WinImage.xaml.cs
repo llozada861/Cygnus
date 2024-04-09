@@ -17,12 +17,12 @@ using res = Cygnus2_0.Properties.Resources;
 namespace Cygnus2_0.Pages.General
 {
     /// <summary>
-    /// Interaction logic for WinImage.xaml
+    /// Interaction logic for WinGenerica.xaml
     /// </summary>
-    public partial class WinImage : Window
+    public partial class WinGenerica : Window
     {
         private string accion = res.No;
-        public WinImage(UserControl userControls, string titulo, Int64 width = 300, Int64 height = 200, string textProc = "Procesar", string textCanc = "Cancelar")
+        public WinGenerica(UserControl userControls, string titulo, Int64 width = 300, Int64 height = 200, string textProc = "Procesar", string textCanc = "Cancelar", WindowStyle nuWindowStyle = WindowStyle.ThreeDBorderWindow)
         {
             InitializeComponent();
             this.Title = titulo;
@@ -31,6 +31,7 @@ namespace Cygnus2_0.Pages.General
             this.Height = height;
             this.btnProcesar.Content = textProc;
             this.btnCancelar.Content = textCanc;
+            this.WindowStyle = nuWindowStyle;
         }
 
         private void btnProcesar_Click(object sender, RoutedEventArgs e)

@@ -46,14 +46,14 @@ namespace Cygnus2_0.Pages.Settings.AzureData
         private void btnAyuda_Click(object sender, RoutedEventArgs e)
         {
             UserControl help = new HelpArea("\\img\\ayudaAzure.png", "De AzureDevops debe tomar la info de la columna Area Path (recuadro ROJO):");
-            WinImage request = new WinImage(help,"Ayuda",800,600);
+            WinGenerica request = new WinGenerica(help,"Ayuda",800,600);
             request.ShowDialog();
         }
 
         private void btnAyudaFullName_Click(object sender, RoutedEventArgs e)
         {
             UserControl help = new HelpArea("\\img\\Fullname.png", "Del profile de AzureDevops debe tomar el FULL NAME (recuadro ROJO):");
-            WinImage request = new WinImage(help, "FulName",800,600);
+            WinGenerica request = new WinGenerica(help, "FulName",800,600);
             request.ShowDialog();
         }
 
