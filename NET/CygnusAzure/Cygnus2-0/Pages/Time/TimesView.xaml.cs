@@ -24,6 +24,7 @@ using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
 using res = Cygnus2_0.Properties.Resources;
 using Cygnus2_0.DAO;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace Cygnus2_0.Pages.Time
 {
@@ -103,10 +104,23 @@ namespace Cygnus2_0.Pages.Time
         {
             view.Model.DescWindow = "";
             view.Model.IdAzureWindow = 0;
-            upTask ven = new upTask(view,handler,null);
-            ven.ShowDialog();
 
-            if(!string.IsNullOrEmpty(view.Model.DescWindow) || view.Model.TareaPred != null)
+            UCUpTask ven = new UCUpTask(view,handler,null);
+
+            var wnd = new ModernWindow
+            {
+                Style = (Style)App.Current.Resources["BlankWindow"],
+                Title = "Tarea Personalizada",
+                IsTitleVisible = true,
+                Content = ven,
+                Width = 450,
+                Height = 400,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
+            wnd.ShowDialog();
+
+            if (!string.IsNullOrEmpty(view.Model.DescWindow) || view.Model.TareaPred != null)
                 pActivarBtnGuardar();
         }
         
@@ -421,8 +435,21 @@ namespace Cygnus2_0.Pages.Time
             {
                 view.Model.DescWindow = tarea.Descripcion;
                 view.Model.IdAzureWindow = tarea.IdAzure;
-                upTask ven = new upTask(view, handler, tarea);
-                ven.ShowDialog();
+
+                UCUpTask ven = new UCUpTask(view, handler, tarea);
+
+                var wnd = new ModernWindow
+                {
+                    Style = (Style)App.Current.Resources["BlankWindow"],
+                    Title = "Tarea Personalizada",
+                    IsTitleVisible = true,
+                    Content = ven,
+                    Width = 450,
+                    Height = 400,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                };
+
+                wnd.ShowDialog();
 
                 if (ven.Modifica)
                 {
@@ -441,8 +468,20 @@ namespace Cygnus2_0.Pages.Time
             if (tarea != null)
             {
                 view.pObtDetalleRq(tarea);
-                DetailTask ven = new DetailTask(view, handler, tarea);
-                ven.Show();
+                UCDetailTask ven = new UCDetailTask(view, handler, tarea);
+
+                var wnd = new ModernWindow
+                {
+                    Style = (Style)App.Current.Resources["BlankWindow"],
+                    Title = "Detalle de la tarea",
+                    IsTitleVisible = true,
+                    Content = ven,
+                    Width = 600,
+                    Height = 450,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                };
+
+                wnd.ShowDialog();
             }
         }
 
