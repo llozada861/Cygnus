@@ -27,7 +27,7 @@ namespace Cygnus2_0.Pages.Settings
     public partial class UCConection : UserControl
     {
         Handler handler;
-        public UCConection(string tipo)
+        public UCConection(string tipo = "Nuevo")
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
             handler = myWin.Handler;

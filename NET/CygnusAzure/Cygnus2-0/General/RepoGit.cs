@@ -3,6 +3,7 @@ using Cygnus2_0.Model.Git;
 using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.Pages.Git;
+using FirstFloor.ModernUI.Windows.Controls;
 using LibGit2Sharp;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.VisualStudio.Services.CircuitBreaker;
@@ -17,6 +18,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
@@ -478,7 +480,10 @@ namespace Cygnus2_0.General
 
     public class RepoGitIns
     {
-        public RepoGitIns() { }
+        private System.Windows.Style estiloVentana;
+        public RepoGitIns(System.Windows.Style style) {
+            this.estiloVentana = style;
+        }
 
         public bool pCherryPick(Handler handler, string lineaBase, string ramaCrear, string rutaRepo, List<SelectListItem> ListaCommitsLB, List<SelectListItem> ListaCommitsFeaure)
         {
@@ -507,17 +512,27 @@ namespace Cygnus2_0.General
 
                     handler.CursorNormal();
                     SelectCommitUserControl winCommit = new SelectCommitUserControl(ListaCommitsLB, ListaCommitsFeaure, lineaBase, ramaCrear);
-                    WinGenerica request = new WinGenerica(winCommit, "Commits Linea Base",800,500);
-                    request.ShowDialog();
 
-                    if (request.Accion.Equals(res.No))
+                    var wnd = new ModernWindow
                     {
-                        return boResultado = false;
-                    }
+                        Style = estiloVentana,
+                        Title = "Commits Linea Base",
+                        IsTitleVisible = true,
+                        Content = winCommit,
+                        Width = 900,
+                        Height = 500,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen
+                    };
+                    wnd.ShowDialog();
 
                     handler.CursorWait();
 
-                    ObservableCollection<SelectListItem> listaCommSelect = winCommit.View.GitModel.ListaCommitsLB;
+                    ObservableCollection<SelectListItem> listaCommSelect = new ObservableCollection<SelectListItem> (winCommit.View.GitModel.ListaCommitsLB.Where(x=>x.BlValor));
+
+                    if (listaCommSelect.Count() == 0)
+                    {
+                        return boResultado = false;
+                    }
 
                     foreach (SelectListItem item in listaCommSelect.OrderBy(x => x.Fecha))
                     {

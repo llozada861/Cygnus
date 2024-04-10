@@ -5,6 +5,7 @@ using Cygnus2_0.Pages.SolInfo;
 using Cygnus2_0.Pages.Time;
 using Cygnus2_0.ViewModel.Azure;
 using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,15 +47,33 @@ namespace Cygnus2_0.Pages.Settings.AzureData
         private void btnAyuda_Click(object sender, RoutedEventArgs e)
         {
             UserControl help = new HelpArea("\\img\\ayudaAzure.png", "De AzureDevops debe tomar la info de la columna Area Path (recuadro ROJO):");
-            WinGenerica request = new WinGenerica(help,"Ayuda",800,600);
-            request.ShowDialog();
+
+            var wnd = new ModernWindow
+            {
+                Style = (Style)App.Current.Resources["BlankWindow"],
+                Title = "Ayuda",
+                IsTitleVisible = true,
+                Content = help,
+                Width = 800,
+                Height = 600
+            };
+            wnd.Show();
         }
 
         private void btnAyudaFullName_Click(object sender, RoutedEventArgs e)
         {
             UserControl help = new HelpArea("\\img\\Fullname.png", "Del profile de AzureDevops debe tomar el FULL NAME (recuadro ROJO):");
-            WinGenerica request = new WinGenerica(help, "FulName",800,600);
-            request.ShowDialog();
+
+            var wnd = new ModernWindow
+            {
+                Style = (Style)App.Current.Resources["BlankWindow"],
+                Title = "Ayuda",
+                IsTitleVisible = true,
+                Content = help,
+                Width = 800,
+                Height = 600
+            };
+            wnd.Show();
         }
 
         private void dataGridDatos_SelectionChanged(object sender, SelectionChangedEventArgs e)
