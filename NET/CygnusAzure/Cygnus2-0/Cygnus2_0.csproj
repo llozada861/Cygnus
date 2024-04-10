@@ -449,6 +449,12 @@
     <Compile Include="Pages\Time\TimesView.xaml.cs">
       <DependentUpon>TimesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Time\UCDetailTask.xaml.cs">
+      <DependentUpon>UCDetailTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Time\UCUpTask.xaml.cs">
+      <DependentUpon>UCUpTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Time\upTask.xaml.cs">
       <DependentUpon>upTask.xaml</DependentUpon>
     </Compile>
@@ -810,6 +816,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Time\TimesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\UCDetailTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Time\UCUpTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

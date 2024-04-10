@@ -44,7 +44,7 @@
                   SelectedItem="{Binding Path=GitSeleccionado}"
                   DisplayMemberPath="Descripcion"  VerticalAlignment="Center"
                           SelectionChanged="AucomboBoxRepo_SelectionChanged" 
-                          Grid.Row="0"  Grid.Column="0" Margin="0,0,10,0"
+                          Grid.Row="0"  Grid.Column="0" Margin="0,0,5,0"
                           KeyboardNavigation.TabIndex="0"/>
 
                 <TextBlock DataContext="{Binding ElementName=AucomboBoxRepo,Path=SelectedItem}" 
@@ -57,13 +57,13 @@
                   ItemsSource="{Binding Path=GitModel.ListaRamasLB}" 
                   SelectedItem="{Binding Path=GitModel.RamaLBSeleccionada}"
                   DisplayMemberPath="Text" VerticalAlignment="Center"
-                          Grid.Row="0"  Grid.Column="1" Margin="5,5,5,5"
+                          Grid.Row="0"  Grid.Column="1" Margin="5,5,0,5"
                           SelectionChanged="ComboBox_SelectionChanged" />
 
                 <TextBlock DataContext="{Binding ElementName=AucomboBoxLB,Path=SelectedItem}" Width="500"
                    VerticalAlignment="Center"
                    Text="Línea Base" 
-                   Style="{StaticResource ComboBoxSelectOverlay}" Margin="5,5,0,5"
+                   Style="{StaticResource ComboBoxSelectOverlay}" Margin="5,5,5,5"
                            Grid.Row="0"  Grid.Column="1" />
 
                 <TextBox x:Name="Comment" 
