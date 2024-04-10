@@ -4,6 +4,7 @@ using Cygnus2_0.Model.Git;
 using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.ViewModel.Git;
+using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -92,9 +93,18 @@ namespace Cygnus2_0.ViewModel.Sonar
                 handler.CursorNormal();
 
                 UserControl log = new UserControlLog(salidaBuild);
-                WinGenerica request = new WinGenerica(log, "Traza",700,500,"Ok","Cerrar", WindowStyle.None);
                 RepoGit.pRemoverCambiosGit(handler,GitSeleccionado.Ruta);
-                request.ShowDialog();
+
+                var wnd = new ModernWindow
+                {
+                    Style = (Style)App.Current.Resources["BlankWindow"],
+                    Title = "Traza Sonar",
+                    IsTitleVisible = true,
+                    Content = log,
+                    Width = 700,
+                    Height = 500
+                };
+                wnd.Show();
             }
             catch (Exception ex)
             {

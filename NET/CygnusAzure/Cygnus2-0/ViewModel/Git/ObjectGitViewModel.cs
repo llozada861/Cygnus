@@ -7,6 +7,7 @@ using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.Pages.Git;
 using Cygnus2_0.ViewModel.Sonar;
+using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -342,10 +344,19 @@ namespace Cygnus2_0.ViewModel.Git
 
             handler.CursorNormal();
 
-            UserControl log = new UserControlLog(salidaBuild);
-            WinGenerica request = new WinGenerica(log, "Traza",700,500, "Ok", "Cerrar", WindowStyle.None);
-            RepoGit.pRemoverCambiosGit(handler,GitSeleccionado.Ruta);
-            request.ShowDialog();
+            System.Windows.Controls.UserControl log = new UserControlLog(salidaBuild);
+
+            var wnd = new ModernWindow
+            {
+                Style = (Style)App.Current.Resources["BlankWindow"],
+                Title = "Traza Sonar",
+                IsTitleVisible = true,
+                Content = log,
+                Width = 700,
+                Height = 500
+            };
+            wnd.Show();
+            RepoGit.pRemoverCambiosGit(handler, GitSeleccionado.Ruta);
         }
 
         public void pExaminar(object commandParameter)
@@ -409,7 +420,7 @@ namespace Cygnus2_0.ViewModel.Git
                 {
                     RepoGit.pCreaRamaRepo(handler, GitSeleccionado.Ruta, RamaSeleccionada.Rama, RamaSeleccionada.Estandar);
                     List<SelectListItem> ListaCommitsFeature = RepoGit.pObtenerCommitsRama(handler, RamaSeleccionada.Estandar, GitSeleccionado.Ruta, "S");
-                    RepoGitIns repoInstancia = new RepoGitIns();
+                    RepoGitIns repoInstancia = new RepoGitIns((Style)App.Current.Resources["BlankWindow"]);
                     resultado = repoInstancia.pCherryPick(handler, GitModel.RamaLBSeleccionada.Text, RamaSeleccionada.Estandar, GitSeleccionado.Ruta, ListaCommitsLB, ListaCommitsFeature);
                 }
                  

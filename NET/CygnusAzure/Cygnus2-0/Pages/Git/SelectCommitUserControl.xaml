@@ -8,9 +8,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="pWindow" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" MinWidth="50"/>
             <ColumnDefinition Width="4"/>
-            <ColumnDefinition Width="*" MinWidth="150"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <GroupBox x:Name="Main" Header="Commits Rama" Grid.Column="0" Foreground="{DynamicResource ButtonText}"  >
@@ -59,7 +60,7 @@
 
         <GridSplitter Grid.Column="1" Grid.RowSpan="10"  HorizontalAlignment="Stretch" />
 
-        <GroupBox x:Name="Feature" Header="Commits Rama" Grid.Column="2" Foreground="{DynamicResource ButtonText}">
+        <GroupBox x:Name="Feature" Header="Commits Rama" Grid.Column="2" Grid.ColumnSpan="2" Foreground="{DynamicResource ButtonText}">
             <DataGrid x:Name="dataGridCommitsFeaure" 
                         IsReadOnly="True" 
                         AutoGenerateColumns="False"
