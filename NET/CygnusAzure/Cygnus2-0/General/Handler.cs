@@ -381,12 +381,17 @@ namespace Cygnus2_0.General
         #region Metodos
         public string MensajeConfirmacion(string mensaje)
         {
-            if (System.Windows.Forms.MessageBox.Show(mensaje, "Confirmación",
+            if (ModernDialog.ShowMessage(mensaje, "Mensaje De Confirmación", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                return "Y";
+            else
+                return "N";
+
+            /*if (System.Windows.Forms.MessageBox.Show(mensaje, "Confirmación",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
                 return "Y";
             else
-                return "N";
+                return "N";*/
         }
 
         public void ObtenerTipoArchivo(Archivo archivo,string llamado)

@@ -324,8 +324,8 @@
     <Compile Include="Pages\General\UserControlLog.xaml.cs">
       <DependentUpon>UserControlLog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\General\WinImage.xaml.cs">
-      <DependentUpon>WinImage.xaml</DependentUpon>
+    <Compile Include="Pages\General\WinGenerica.xaml.cs">
+      <DependentUpon>WinGenerica.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Git\AdminGit.xaml.cs">
       <DependentUpon>AdminGit.xaml</DependentUpon>
@@ -610,7 +610,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\General\WinImage.xaml">
+    <Page Include="Pages\General\WinGenerica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
