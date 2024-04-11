@@ -237,6 +237,7 @@
     <Compile Include="General\HtmlConverter\HtmlToXamlConverter.cs" />
     <Compile Include="General\HtmlRichTextBoxBehavior.cs" />
     <Compile Include="General\LocUtil.cs" />
+    <Compile Include="General\LoremIpsumLoader.cs" />
     <Compile Include="General\Mail.cs" />
     <Compile Include="General\RepoGit.cs" />
     <Compile Include="General\SelectListItem.cs" />

@@ -42,11 +42,11 @@ namespace Cygnus2_0.Pages.Settings.Treeview
 
             DataContext = handler;
             InitializeComponent();
-            TreeViewItem itemA = (TreeViewItem)TreeViewApp.Items[0];
-            itemA.IsSelected = true;
+            /*TreeViewItem itemA = (TreeViewItem)TreeViewApp.Items[0];
+            itemA.IsSelected = true;*/
         }
 
-        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        /*private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             UserControl userControls;
             TreeView tree = (TreeView)sender;
@@ -149,6 +149,6 @@ namespace Cygnus2_0.Pages.Settings.Treeview
                 default:
                     break;                      
             }
-        }
+        }*/
     }
 }

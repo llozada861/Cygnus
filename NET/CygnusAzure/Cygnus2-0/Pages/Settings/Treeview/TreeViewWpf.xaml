@@ -4,77 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Settings.Treeview"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
-    </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+    <Grid Style="{StaticResource ContentRoot}">
+        <mui:ModernTab SelectedSource="/Pages/Settings/General/Appearance.xaml" Layout="List">
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="General" Source="/Pages/Settings/General/UCGeneral.xaml"/>
+                <mui:Link DisplayName="Apariencia" Source="/Pages/Settings/General/Appearance.xaml" />
+                <mui:Link DisplayName="Empresas" Source="/Pages/Settings/Empresa/EmpresaUC.xaml"/>
+                <mui:Link DisplayName="Palabras Reservadas" Source="/Pages/Settings/General/ReservWords.xaml" />
+                <mui:Link DisplayName="Tipos de objetos" Source="/Pages/Settings/General/ObjectTypeUserControl.xaml" />
+                <mui:Link DisplayName="Rutas" Source="/Pages/Settings/General/PathsUserControl.xaml" />
+                
+                <mui:Link DisplayName="Base de Datos" Source="/Pages/Settings/Database/UCConection.xaml" />
+                <mui:Link DisplayName="Roles o Usuarios" Source="/Pages/Settings/Database/GrantsUserControl.xaml" />
+                <mui:Link DisplayName="Esquemas BD" Source="/Pages/Settings/Database/UserBDUserControl.xaml" />
 
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" Grid.RowSpan="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="18*" />
-                <ColumnDefinition Width="2" />
-                <ColumnDefinition Width="80*" />
-            </Grid.ColumnDefinitions>
+                <mui:Link DisplayName="Azure" Source="/Pages/Settings/AzureData/Azure.xaml"/>
+                <mui:Link DisplayName="Sonar" Source="/Pages/Settings/Sonar/UserControlSonar.xaml"/>
+                <mui:Link DisplayName="Git" Source="/Pages/Settings/Git/UserControlGit.xaml"/>
 
-            <TreeView Name="TreeViewApp" SelectedItemChanged="TreeView_SelectedItemChanged" Grid.Column="0" >
-                <TreeViewItem Header="General" IsExpanded="True" Uid="0">
-                    <TreeViewItem Header="Empresas" Uid="103"/>
-                    <TreeViewItem Header="Apariencia" Uid="1"/>
-                    <TreeViewItem Header="Configuración" Uid="2"/>
-                    <TreeViewItem Header="Palabras reservadas" Uid="3"/>
-                    <TreeViewItem Header="Tipos de objetos" Uid="4"/>
-                    <TreeViewItem Header="Rutas" Uid="6"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Base de Datos" IsExpanded="True" Uid="30">
-                    <!--<TreeViewItem Header="Permisos" Uid="104"/>-->
-                    <TreeViewItem Header="Roles o Usuarios" Uid="32"/>
-                    <TreeViewItem Header="Esquemas" Uid="33"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Herramientas Gestión" IsExpanded="True" Uid="104">
-                    <TreeViewItem Header="Azure" Uid="100"/>
-                    <TreeViewItem Header="Sonar" Uid="101"/>
-                    <TreeViewItem Header="Git" Uid="102"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Documentación" IsExpanded="True" Uid="60">
-                    <TreeViewItem Header="Configuración" Uid="62"/>
-                    <TreeViewItem Header="Plantillas" Uid="63"/>
-                    <TreeViewItem Header="Lineamientos PLSQL" Uid="64" Visibility="{Binding IsEspecialist, Converter={StaticResource booleanToVisibilityConverter}}"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Ayuda" IsExpanded="True" Uid="90">
-                    <TreeViewItem Header="Acerca De" Uid="91"/>
-                    <TreeViewItem Header="Actualizar" Uid="92"/>
-                </TreeViewItem>
-            </TreeView>
+                <mui:Link DisplayName="Tags Html" Source="/Pages/Settings/Documentation/ConfHtmlUserControl.xaml"/>
+                <mui:Link DisplayName="Plantillas" Source="/Pages/Settings/Documentation/HtmlUserControl.xaml"/>
 
-            <GridSplitter Grid.Column="1" Width="1" HorizontalAlignment="Stretch" />
-
-            <Grid x:Name="GridMain" Grid.Column="2" />
-        </Grid>
+                <mui:Link DisplayName="Actualizar" Source="/Pages/Settings/Help/UCUpdate.xaml"/>
+                <mui:Link DisplayName="Acerca De" Source="/Pages/Settings/Help/About.xaml"/>
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
     </Grid>
 </UserControl>

@@ -19,7 +19,7 @@ using Cygnus2_0.General;
 using Cygnus2_0.Pages.General;
 using res = Cygnus2_0.Properties.Resources;
 
-namespace Cygnus2_0.Pages.Settings
+namespace Cygnus2_0.Pages.Settings.Database
 {
     /// <summary>
     /// Interaction logic for UserControlConexion.xaml
@@ -27,7 +27,7 @@ namespace Cygnus2_0.Pages.Settings
     public partial class UCConection : UserControl
     {
         Handler handler;
-        public UCConection(string tipo = "Nuevo")
+        public UCConection()
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
             handler = myWin.Handler;
@@ -37,9 +37,10 @@ namespace Cygnus2_0.Pages.Settings
 
             passwordBox.Password = handler.ConnView.Model.Pass;
 
-            if(!tipo.Equals(res.Nuevo))
-                txtEtiqueta.IsEnabled = false;
+            //if(!tipo.Equals(res.Nuevo))
+            //    txtEtiqueta.IsEnabled = false;
         }
+
         protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)
         {
             args.DataSource = handler.ConnView.Model.ListaConexiones.Where((hu, match) => hu.Usuario.ToLower().Contains(args.Pattern.ToLower()));
