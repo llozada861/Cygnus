@@ -38,6 +38,7 @@ using Cygnus2_0.Pages.Settings.Git;
 using Cygnus2_0.Pages.Settings.Sonar;
 using Cygnus2_0.Pages.Settings.AdminGeneral;
 using Microsoft.VisualStudio.Services.CircuitBreaker;
+using Cygnus2_0.Pages.Settings.Database;
 
 namespace Cygnus2_0
 {
@@ -111,7 +112,7 @@ namespace Cygnus2_0
 
                 if (handler.ConnView.Model.Usuario == null)
                 {
-                    userControls = new UCConection(res.Nuevo);
+                    userControls = new UCConection(); //(res.Nuevo);
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura la conexión a la base de datos...",res.CONEXION_BD);
                     request.ShowDialog();
                 }

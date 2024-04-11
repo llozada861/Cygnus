@@ -9,6 +9,7 @@
         xmlns:p="clr-namespace:Cygnus2_0.Properties"  Closing="ModernWindow_Closing"
  >
     <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="Conexión BD" Source="/Pages/Settings/Database/UCConection.xaml" />
         <mui:Link DisplayName="Ajustes" Source="/Pages/Settings/Treeview/TreeViewWpf.xaml" />
     </mui:ModernWindow.TitleLinks>
     <mui:ModernWindow.MenuLinkGroups>
