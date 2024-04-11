@@ -319,15 +319,22 @@ namespace Cygnus2_0.General
 
             if (repositorio != null && !string.IsNullOrEmpty(repositorio.Ruta))
             {
-                using (var repo = new Repository(repositorio.Ruta))
+                try
                 {
-                    var branches = repo.Branches.Where(x=> x.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && x.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0);
-
-                    foreach (Branch b in branches.OrderByDescending(x=>x.Tip.Committer.When.LocalDateTime))
+                    using (var repo = new Repository(repositorio.Ruta))
                     {
-                        //if (b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0  && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
+                        var branches = repo.Branches.Where(x => x.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0 && x.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0);
+
+                        foreach (Branch b in branches.OrderByDescending(x => x.Tip.Committer.When.LocalDateTime))
+                        {
+                            //if (b.FriendlyName.ToUpper().IndexOf(res.Feature.ToUpper()) < 0  && b.FriendlyName.ToUpper().IndexOf("ORIGIN") < 0)
                             listaRamas.Add(new SelectListItem { Text = b.FriendlyName });
+                        }
                     }
+                }
+                catch (Exception ex) 
+                {
+                    handler.MensajeError(ex.Message);
                 }
             }
 
@@ -340,14 +347,21 @@ namespace Cygnus2_0.General
 
             if (repositorio != null && !string.IsNullOrEmpty(repositorio.Ruta))
             {
-                using (var repo = new Repository(repositorio.Ruta))
+                try
                 {
-                    var branches = repo.Branches.Where(x => x.IsRemote && Path.GetFileName(x.FriendlyName.ToUpper()).IndexOf("HU") < 0 && Path.GetFileName(x.FriendlyName.ToUpper()).IndexOf("WO") < 0);
-
-                    foreach (Branch b in branches.OrderByDescending(x => x.Tip.Committer.When.LocalDateTime))
+                    using (var repo = new Repository(repositorio.Ruta))
                     {
-                        listaRamas.Add(new SelectListItem { Text = Path.GetFileName(b.FriendlyName) });
+                        var branches = repo.Branches.Where(x => x.IsRemote && Path.GetFileName(x.FriendlyName.ToUpper()).IndexOf("HU") < 0 && Path.GetFileName(x.FriendlyName.ToUpper()).IndexOf("WO") < 0);
+
+                        foreach (Branch b in branches.OrderByDescending(x => x.Tip.Committer.When.LocalDateTime))
+                        {
+                            listaRamas.Add(new SelectListItem { Text = Path.GetFileName(b.FriendlyName) });
+                        }
                     }
+                }
+                catch(Exception ex)
+                {
+                    ModernDialog.ShowMessage(ex.Message, "Error", System.Windows.MessageBoxButton.OKCancel);
                 }
             }
 
