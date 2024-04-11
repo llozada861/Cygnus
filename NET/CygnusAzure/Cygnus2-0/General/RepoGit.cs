@@ -527,23 +527,24 @@ namespace Cygnus2_0.General
                     handler.CursorNormal();
                     SelectCommitUserControl winCommit = new SelectCommitUserControl(ListaCommitsLB, ListaCommitsFeaure, lineaBase, ramaCrear);
 
-                    var wnd = new ModernWindow
+                    var wnd = new ModernDialog
                     {
-                        Style = estiloVentana,
                         Title = "Commits Linea Base",
-                        IsTitleVisible = true,
                         Content = winCommit,
                         Width = 900,
-                        Height = 500,
-                        WindowStartupLocation = WindowStartupLocation.CenterScreen
+                        Height = 600,
+                        WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                        ResizeMode = ResizeMode.CanResize
                     };
+
+                    wnd.Buttons = new System.Windows.Controls.Button[] { wnd.OkButton, wnd.CancelButton };
                     wnd.ShowDialog();
 
                     handler.CursorWait();
 
                     ObservableCollection<SelectListItem> listaCommSelect = new ObservableCollection<SelectListItem> (winCommit.View.GitModel.ListaCommitsLB.Where(x=>x.BlValor));
 
-                    if (listaCommSelect.Count() == 0)
+                    if (listaCommSelect.Count() == 0 || wnd.DialogResult == false)
                     {
                         return boResultado = false;
                     }
@@ -552,9 +553,6 @@ namespace Cygnus2_0.General
                     {
                         if (item.BlValor)
                         {
-                            //command = "git cherry-pick " + item.Commit_.Sha;
-                            //RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, false);
-
                             if (string.IsNullOrEmpty(handler.Azure.Correo))
                             {
                                 handler.MensajeError("Configure el correo empresarial [Ajustes/Herramientas Gestión/Azure]");
