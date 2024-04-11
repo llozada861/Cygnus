@@ -26,6 +26,7 @@ namespace Cygnus2_0.Pages.Git
     {
         private Handler handler;
         private ObjectGitViewModel view;
+        private bool boProcesar;
         public SelectCommitUserControl(List<SelectListItem> ListaCommitsLB, List<SelectListItem> ListaCommitsFeaure, string lineaBase, string feature)
         {
             var myWin = (MainWindow)Application.Current.MainWindow;
@@ -36,9 +37,12 @@ namespace Cygnus2_0.Pages.Git
             InitializeComponent();
             Main.Header = "Commits " + lineaBase;
             Feature.Header = "Commits " + feature;
+            boProcesar = false;
         }
 
         public ObjectGitViewModel View { get { return view; } }
+
+        public bool BoProcesar { get {  return boProcesar; } set {  boProcesar = value; } }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
@@ -54,6 +58,11 @@ namespace Cygnus2_0.Pages.Git
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.boProcesar = true;
         }
     }
 }

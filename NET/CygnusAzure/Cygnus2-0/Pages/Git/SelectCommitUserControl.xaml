@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Git"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid x:Name="pWindow" >
+    <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="50"/>
             <ColumnDefinition Width="4"/>
@@ -58,7 +58,7 @@
             </DataGrid>
         </GroupBox>
 
-        <GridSplitter Grid.Column="1" Grid.RowSpan="10"  HorizontalAlignment="Stretch" />
+        <GridSplitter Grid.Column="1" Grid.RowSpan="10" HorizontalAlignment="Stretch" />
 
         <GroupBox x:Name="Feature" Header="Commits Rama" Grid.Column="2" Grid.ColumnSpan="2" Foreground="{DynamicResource ButtonText}">
             <DataGrid x:Name="dataGridCommitsFeaure" 
@@ -78,7 +78,7 @@
                                   Header="Fecha"
                                   Binding="{Binding Path=Fecha}" SortDirection="Descending"/>
 
-                    <DataGridTemplateColumn Header="Descripción" IsReadOnly="True">
+                    <DataGridTemplateColumn Header="Descripción" IsReadOnly="True" Width="350">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Text}" TextAlignment="Left" TextWrapping="WrapWithOverflow" VerticalAlignment="Center">
