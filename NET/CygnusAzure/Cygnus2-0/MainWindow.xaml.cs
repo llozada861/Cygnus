@@ -391,6 +391,27 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
+            sbVersion = "1.2.2.4";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                 {
+                    "update html \r\nset documentation = 'DECLARE\r\n    CURSOR cuValidaMsj\r\n    IS  \r\n        SELECT *\r\n         FROM mensaje \r\n        WHERE mensdivi = ''EPM''\r\n          AND mensmodu = ''CUZ''\r\n          AND mensdesc = :DESCRIPCION;\r\n          \r\n    rcmensaje  mensaje%ROWTYPE;\r\nBEGIN\r\n    \r\n    rcmensaje := null;\r\n    \r\n    OPEN cuValidaMsj;\r\n    FETCH  cuValidaMsj into rcmensaje;\r\n    CLOSE cuValidaMsj;\r\n    \r\n    IF(rcmensaje.menscodi IS NOT NULL)THEN\r\n        MERGE INTO MENSAJE A USING\r\n         (SELECT\r\n          :CODIGO as MENSCODI,\r\n          :DESCRIPCION as MENSDESC,\r\n          ''EPM'' as MENSDIVI,\r\n          ''CUZ'' as MENSMODU,\r\n          :CAUSA as MENSCAUS,\r\n          :SOLUCION  as MENSPOSO\r\n          FROM DUAL) B\r\n        ON (A.MENSDIVI = B.MENSDIVI and A.MENSMODU = B.MENSMODU and A.MENSCODI = B.MENSCODI)\r\n        WHEN NOT MATCHED THEN \r\n        INSERT (\r\n          MENSCODI, MENSDESC, MENSDIVI, MENSMODU, MENSCAUS, \r\n          MENSPOSO)\r\n        VALUES (\r\n          B.MENSCODI, B.MENSDESC, B.MENSDIVI, B.MENSMODU, B.MENSCAUS, \r\n          B.MENSPOSO)\r\n        WHEN MATCHED THEN\r\n        UPDATE SET \r\n          A.MENSDESC = B.MENSDESC,\r\n          A.MENSCAUS = B.MENSCAUS,\r\n          A.MENSPOSO = B.MENSPOSO;    \r\n    ELSE    \r\n        --realiza la insercción del mensaje EPM - CUZ - <codigo>\r\n        INSERT INTO mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo ) \r\n        VALUES\r\n        (\r\n            :CODIGO,\r\n            :DESCRIPCION,\r\n            ''EPM'',\r\n            ''CUZ'',\r\n            :CAUSA,\r\n            :SOLUCION\r\n        );\r\n    END IF;\r\n    COMMIT;    \r\nEND;\r\n/'\r\nwhere name = 'PLANTILLA_MENSAJE';"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
