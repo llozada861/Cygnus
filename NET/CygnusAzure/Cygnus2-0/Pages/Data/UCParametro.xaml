@@ -85,14 +85,16 @@
                 <TextBox x:Name="textBox3" VerticalContentAlignment="Center" TextWrapping="Wrap" Text="{Binding Path=Model.Funcion}" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="7" VerticalAlignment="Center"
                          Style="{StaticResource placeHolder}" Tag="Función"/>
 
-                <general:AutoComplete x:Name="AucomboBox" 
-                                      ItemsSource="{Binding Path=Model.ListaTipoDatos}" 
+                <ComboBox x:Name="AucomboBox" 
+                  ItemsSource="{Binding Path=Model.ListaTipoDatos}" 
                   SelectedItem="{Binding Path=Model.Tipo}"
-                  DisplayMemberPath="Text" 
-                  Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="5" 
-                        PatternChanged="AucomboBox_PatternChanged"
-                        Style="{StaticResource AutoCompleteComboBox}"
-                        Delay="500" Tag="Tipo" />
+                  DisplayMemberPath="Text"  Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="5"
+                          VerticalAlignment="Center"/>
+
+                <TextBlock DataContext="{Binding ElementName=AucomboBox,Path=SelectedItem}"
+                   Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="5" VerticalAlignment="Center"
+                   Text="Tipo Dato" 
+                   Style="{StaticResource ComboBoxSelectOverlay}" Margin="5,5,0,5"/>
 
                 <Button x:Name="btnAceptar" Content="Guardar" Command="{Binding Path=Process}" CommandParameter="{Binding ElementName=richTextBoxValor}" Grid.Column="7" Grid.Row="9" Grid.ColumnSpan="3" VerticalAlignment="Center"/>
             </Grid>

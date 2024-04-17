@@ -33,13 +33,16 @@
                     <RowDefinition Height="10*" />
                 </Grid.RowDefinitions>
 
-                <general:AutoComplete x:Name="AucomboBox" 
-                        ItemsSource="{Binding Path=Model.ListaConexiones}" 
-                        SelectedItem="{Binding Path=Model.Conexion}"
-                        DisplayMemberPath="Etiqueta"  Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5"
-                        PatternChanged="AucomboBox_PatternChanged"  
-                        Style="{StaticResource AutoCompleteComboBox}"
-                        Delay="500" Tag="Lista de Conexiones" SelectionChanged="AucomboBox_SelectionChanged" />
+                <ComboBox x:Name="AucomboBox" 
+                  ItemsSource="{Binding Path=Model.ListaConexiones}" 
+                  SelectedItem="{Binding Path=Model.Conexion}"
+                  DisplayMemberPath="Etiqueta" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5"
+                          VerticalAlignment="Center"/>
+
+                <TextBlock DataContext="{Binding ElementName=AucomboBox,Path=SelectedItem}"
+                   Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="5" VerticalAlignment="Center"
+                   Text="Lista de Conexiones" 
+                   Style="{StaticResource ComboBoxSelectOverlay}" Margin="5,5,0,5"/>
 
                 <Label x:Name="lblEtiqueta" Content="Etiqueta" HorizontalAlignment="Right"  VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="0,0,5,0" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="txtEtiqueta" Text="{Binding Path=Model.Conexion.Etiqueta, Mode=TwoWay}"  TextWrapping="Wrap" Grid.Column="3" Grid.Row="1" Margin="0,0,0,5" Grid.ColumnSpan="5" VerticalContentAlignment="Center"/>
