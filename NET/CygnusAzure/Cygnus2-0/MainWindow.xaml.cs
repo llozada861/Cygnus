@@ -391,7 +391,7 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
-            sbVersion = "1.2.2.4";
+            sbVersion = "1.2.2.5";
 
             if (!SqliteDAO.pblValidaVersion(sbVersion))
             {
@@ -424,6 +424,32 @@ namespace Cygnus2_0
                     //"update cy_userbd set password_ = 'N0M3Vay4aBloqu34r-+' where codigo = 2",
                     //SFPDN
                     "update cy_userbd set password_ = 'F3l1c1d4dp4r4t0d0s2024*' where codigo = 3"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
+            sbVersion = "1.2.2.8";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                 {
+                    "INSERT INTO object_type (codigo, object, slash, count_slash, priority) VALUES ('35', 'APLICA GRANT', '', '0', '200')",
+                    "INSERT INTO object_type (codigo, object, slash, count_slash, priority) VALUES ('36', 'FLEX_MANAGER', '', '0', '800')",
+                    "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('35', '36', '[hu]', '', '99')",
+                    "INSERT INTO object_type (codigo, object, slash, count_slash, priority) VALUES ('37', 'PLANTILLA', '', '0', '530')",
+                    "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('37', '37', '[usuario]\\server\\sql\\02tbls\\epm_script\\06data\\plantillas\\scripts\\UPD_[nombre]', 'FLEX', '99')"
+
                 };
 
                 foreach (string sql in query)
