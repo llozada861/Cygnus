@@ -569,6 +569,11 @@ namespace Cygnus2_0.General
 
                                 command = "TortoiseGitProc.exe /command:diff";
                                 RepoGit.ExecuteGitBashCommand(RutagitBash, command, rutaRepo, true);
+
+                                status = repo.RetrieveStatus();
+
+                                if (status.IsDirty)
+                                    break;
                             }
                             
                         }
