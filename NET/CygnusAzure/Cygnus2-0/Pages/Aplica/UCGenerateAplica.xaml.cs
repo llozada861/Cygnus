@@ -22,6 +22,8 @@ using res = Cygnus2_0.Properties.Resources;
 using Cygnus2_0.Pages.General;
 using Cygnus2_0.DAO;
 using Cygnus2_0.Model.History;
+using FirstFloor.ModernUI.Windows.Controls;
+using Cygnus2_0.Pages.Git;
 
 namespace Cygnus2_0.Pages.Aplica
 {
@@ -60,23 +62,8 @@ namespace Cygnus2_0.Pages.Aplica
 
             try
             {
-                if (String.IsNullOrEmpty(generateAplicaViewModel.Model.Codigo))
-                {
-                    handler.MensajeError("Ingrese número de caso");
+                if (!pValidaciones())
                     return;
-                }
-
-                if (generateAplicaViewModel.Model.Usuario == null)
-                {
-                    handler.MensajeError("Debe ingresar el usuario para la entrega.");
-                    return;
-                }
-
-                if (!generateAplicaViewModel.Model.Datos && !generateAplicaViewModel.Model.Objetos)
-                {
-                    handler.MensajeError("Selecciona el tipo de entrega Datos u Objetos.");
-                    return;
-                }
 
                 generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
                 generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
@@ -146,6 +133,8 @@ namespace Cygnus2_0.Pages.Aplica
             generateAplicaViewModel.Model.Datos = false;
             generateAplicaViewModel.Model.VisibleObjetos = Visibility.Hidden;
             generateAplicaViewModel.Model.AprobarOrden = false;
+            rdbDatos.Visibility = Visibility.Hidden;
+            rdbObjetos.Visibility = Visibility.Hidden;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -221,28 +210,62 @@ namespace Cygnus2_0.Pages.Aplica
 
             try
             {
-                if (String.IsNullOrEmpty(generateAplicaViewModel.Model.Codigo))
-                {
-                    handler.MensajeError("Ingrese número de caso");
+                if (!pValidaciones())
                     return;
-                }
-
-                if (generateAplicaViewModel.Model.Usuario == null)
-                {
-                    handler.MensajeError("Debe ingresar el usuario para la entrega.");
-                    return;
-                }
-
-                if (!generateAplicaViewModel.Model.Datos && !generateAplicaViewModel.Model.Objetos)
-                {
-                    handler.MensajeError("Selecciona el tipo de entrega Datos u Objetos.");
-                    return;
-                }
 
                 generateAplicaViewModel.pExaminar(null);
                 dataGridArchivosCargados.Items.Refresh();
             }
             catch { }
+        }
+
+        private bool pValidaciones()
+        {
+            bool boResultado = true;
+
+            if (String.IsNullOrEmpty(generateAplicaViewModel.Model.Codigo))
+            {
+                handler.MensajeError("Ingrese número de caso");
+                return boResultado = false;
+            }
+
+            if (generateAplicaViewModel.Model.Usuario == null)
+            {
+                handler.MensajeError("Debe ingresar el usuario para la entrega.");
+                return boResultado = false;
+            }
+
+            if (!generateAplicaViewModel.Model.Datos && !generateAplicaViewModel.Model.Objetos)
+            {
+                SelectTipoEntregaUC win = new SelectTipoEntregaUC(generateAplicaViewModel);
+
+                var wnd = new ModernDialog
+                {
+                    Title = "Tipo Entrega",
+                    Content = win,
+                    Width = 300,
+                    Height = 220,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                    ResizeMode = ResizeMode.NoResize
+                };
+
+                wnd.Buttons = new System.Windows.Controls.Button[] { wnd.OkButton };
+                wnd.ShowDialog();
+
+                if (!generateAplicaViewModel.Model.Datos && !generateAplicaViewModel.Model.Objetos)
+                {
+                    handler.MensajeError("Selecciona el tipo de entrega Datos u Objetos.");
+                    return boResultado = false;
+                }
+            }
+
+            if(boResultado)
+            {
+                rdbDatos.Visibility = Visibility.Visible;
+                rdbObjetos.Visibility = Visibility.Visible;
+            }
+
+            return boResultado;
         }
 
         protected void AucomboBox_PatternChanged(object sender, AutoComplete.AutoCompleteArgs args)

@@ -286,6 +286,9 @@
     <Compile Include="Model\User\GrantsModel.cs" />
     <Compile Include="Model\User\UsuarioModel.cs" />
     <Compile Include="Model\Version\VersionBD.cs" />
+    <Compile Include="Pages\Aplica\SelectTipoEntregaUC.xaml.cs">
+      <DependentUpon>SelectTipoEntregaUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Aplica\UCGenerateAplica.xaml.cs">
       <DependentUpon>UCGenerateAplica.xaml</DependentUpon>
     </Compile>
@@ -567,6 +570,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Aplica\SelectTipoEntregaUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Aplica\UCGenerateAplica.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
