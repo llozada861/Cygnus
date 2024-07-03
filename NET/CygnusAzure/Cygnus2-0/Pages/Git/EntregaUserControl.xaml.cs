@@ -45,14 +45,6 @@ namespace Cygnus2_0.Pages.Git
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                this.objectViewModel.GitModel.ListaRamasLB = RepoGit.pObtieneRamasListLB(this.handler, objectViewModel.GitSeleccionado);
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

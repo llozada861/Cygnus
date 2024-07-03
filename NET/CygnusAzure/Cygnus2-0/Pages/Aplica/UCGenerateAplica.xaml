@@ -89,10 +89,12 @@
                      Grid.Column="6" 
                      Grid.ColumnSpan="2" 
                      Grid.Row="0" HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" IsChecked="{Binding Path=Model.Datos}" Click="RdbDatos_Click" Margin="0,5,0,0"  />
+                             VerticalAlignment="Center" IsChecked="{Binding Path=Model.Datos}" Click="RdbDatos_Click" Margin="0,5,0,0" Visibility="Hidden" />
 
                 <RadioButton x:Name="rdbObjetos" Content="Objetos" 
-                     Grid.Column="8" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}" Margin="0,5,0,0"/>
+                     Grid.Column="8" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding Path=Model.Objetos}" 
+                             Margin="0,5,0,0"
+                             Visibility="Hidden"/>
 
                 <Button x:Name="btnExaminar" Content="Examinar..."  VerticalAlignment="Center" Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2" Click="BtnExaminar_Click" Margin="0,5,0,0" />
                 <CheckBox Name="chAprobar" Content="Aprobar Orden Aplica!" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3"  IsChecked="{Binding Path=Model.AprobarOrden}" Visibility="{Binding Path=Model.VisibleObjetos}" HorizontalAlignment="Center" Margin="0,5,0,0" />
