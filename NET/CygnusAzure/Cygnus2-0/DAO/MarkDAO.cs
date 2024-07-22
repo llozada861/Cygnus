@@ -177,7 +177,10 @@ namespace Cygnus2_0.DAO
                         " WHERE  name = upper('" + archivo.NombreObjeto +"')"+
                         " AND    OWNER IN(" + pDevuelveUsuariosIn() + ") ";
 
-            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+            UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Principal.Equals(res.Si)).FirstOrDefault();
+            handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleCompila;
 
             using (OracleCommand cmd = new OracleCommand())
             {
@@ -227,9 +230,12 @@ namespace Cygnus2_0.DAO
                          "       FROM   dba_objects " +
                          "       WHERE  object_name = upper('" + archivo.NombreObjeto +"') " +
                          "       AND    OWNER IN("+ pDevuelveUsuariosIn() + ") " +
-                         "   )"; 
+                         "   )";
 
-            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+            UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Principal.Equals(res.Si)).FirstOrDefault();
+            handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleCompila;
 
             using (OracleCommand cmd = new OracleCommand())
             {
@@ -263,7 +269,10 @@ namespace Cygnus2_0.DAO
                     "       WHERE  object_name = upper('" + archivo.NombreObjeto + "') " +
                     "       AND    OWNER IN(" + pDevuelveUsuariosIn() + ") ";
 
-            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+            UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Principal.Equals(res.Si)).FirstOrDefault();
+            handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleCompila;
 
             using (OracleCommand cmd = new OracleCommand())
             {
@@ -291,29 +300,29 @@ namespace Cygnus2_0.DAO
             string stCantidadObjetosInvalidos = null;
             string sql;
 
+            UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Principal.Equals(res.Si)).FirstOrDefault();
+            handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
+
+            OracleConnection con = handler.ConexionOracle.ConexionOracleCompila;
+
             sql = "select count(distinct name)  cantidad "+
                     "from dba_errors "+
                     "where owner in ("+ pDevuelveUsuariosIn()+") "+
                     "and attribute = 'ERROR'";
 
-            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
-
-            if (handler.ConexionOracle.ConexionOracleSQL.State != System.Data.ConnectionState.Closed)
+            using (OracleCommand cmd = new OracleCommand())
             {
-                using (OracleCommand cmd = new OracleCommand())
-                {
-                    cmd.CommandText = sql;
-                    cmd.Connection = con;
+                cmd.CommandText = sql;
+                cmd.Connection = con;
 
-                    using (OracleDataReader rdr = cmd.ExecuteReader())
+                using (OracleDataReader rdr = cmd.ExecuteReader())
+                {
+                    while (rdr.Read())
                     {
-                        while (rdr.Read())
-                        {
-                            stCantidadObjetosInvalidos = rdr["cantidad"].ToString();
-                            break;
-                        }
-                        rdr.Close();
+                        stCantidadObjetosInvalidos = rdr["cantidad"].ToString();
+                        break;
                     }
+                    rdr.Close();
                 }
             }
 
