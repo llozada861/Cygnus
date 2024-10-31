@@ -179,7 +179,7 @@ namespace Cygnus2_0.General
 
                     for (int i = 0; i < ListaCommitsRepo.Count(); i++)
                     {
-                        if (i >= 25) 
+                        if (i >= 130) 
                             break;
 
                         Commit actual = ListaCommitsRepo.ElementAt(i);
