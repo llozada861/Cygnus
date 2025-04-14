@@ -512,14 +512,14 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
-            sbVersion = "1.2.3.5";
+            sbVersion = "1.2.3.6";
 
             if (!SqliteDAO.pblValidaVersion(sbVersion))
             {
                 string[] query =
                  {
                     //SFPDN
-                    "update cy_userbd set password_ = 'D3sd3Septiembr3Se5iente+*' where codigo = 3"
+                    "update cy_userbd set password_ = 'trgs5W8JxUwejKz*+' where codigo = 3"
                 };
 
                 foreach (string sql in query)
