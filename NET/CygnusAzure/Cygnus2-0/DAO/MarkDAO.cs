@@ -204,8 +204,11 @@ namespace Cygnus2_0.DAO
             }
         }
 
-        public void pEjecutarScriptBD(string codigo)
+        public void pEjecutarScriptBD(string codigo,string usuario)
         {
+            if(!string.IsNullOrEmpty(usuario))
+                handler.pObtenerUsuarioCompilacion(usuario);
+
             using (OracleCommand cmd = handler.ConexionOracle.GetScriptCommand(codigo))
             {
                 try

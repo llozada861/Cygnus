@@ -687,7 +687,7 @@ namespace Cygnus2_0.General
             {
                 foreach (string sentence in sql)
                 {
-                    this.DAO.pEjecutarScriptBD(sentence);
+                    this.DAO.pEjecutarScriptBD(sentence, usuario);
                 }
             }
         }

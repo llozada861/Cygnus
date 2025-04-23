@@ -287,7 +287,7 @@ namespace Cygnus2_0.ViewModel.Compila
             for (int i = archivo.BloquesCodigo.Count - 1; i >= 0; i--)
             {
                 //Console.WriteLine(archivo.BloquesCodigo.ElementAt(i));
-                handler.DAO.pEjecutarScriptBD(archivo.BloquesCodigo.ElementAt(i));
+                handler.DAO.pEjecutarScriptBD(archivo.BloquesCodigo.ElementAt(i),null);
             }
 
             this.Model.ArchivosDescompilados = handler.DAO.pObtCantObjsInvalidos();
