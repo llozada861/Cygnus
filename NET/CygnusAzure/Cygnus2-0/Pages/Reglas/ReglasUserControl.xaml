@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="Cygnus2_0.Pages.Reglas.ReglasUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cygnus2_0.Pages.Reglas"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="comboBox" 
+          ItemsSource="{Binding Path=Model.ListaBD}" 
+          SelectedItem="{Binding Path=Model.BdSeleccionada}"
+          DisplayMemberPath="Displayname" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" SelectionChanged="comboBox_SelectionChanged"/>
+        <TextBlock DataContext="{Binding ElementName=comboBox,Path=SelectedItem}"
+           VerticalAlignment="Center"
+           Text="Selecciona la base de datos" 
+           Style="{StaticResource ComboBoxSelectOverlay}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="5,5,0,5"/>
+
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <GroupBox x:Name="groupBox" Header="Copie los códigos de regla aquí">
+                <RichTextBox x:Name="richTextBoxProce" TextChanged="richTextBox_TextChanged" >
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0" />
+                        </Style>
+                    </RichTextBox.Resources>
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="" />
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </GroupBox>
+
+            <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
+
+            <GroupBox x:Name="groupBoxGenerate" Header="Reglas a generar" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10">
+                <DataGrid x:Name="dataGridParameter"
+                        AutoGenerateColumns="False"
+                        SelectionMode="Single"
+                        CanUserDeleteRows="false"
+                        CanUserAddRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserSortColumns="False"
+                        ItemsSource="{Binding Path=Model.ListaReglas}"
+                          >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn x:Name="idRegla" Header="Código" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Value, Mode=OneWay}">
+                                        <TextBlock.ToolTip>
+                                            <TextBlock Text="{Binding Path=Observacion, Mode=OneWay}"/>
+                                        </TextBlock.ToolTip>
+                                        </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn x:Name="Desc" Header="Archivo" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Text, Mode=OneWay}">
+                                        <TextBlock.ToolTip>
+                                            <TextBlock Text="{Binding Path=Observacion, Mode=OneWay}"/>
+                                        </TextBlock.ToolTip>
+                                        </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTextColumn
+                            Header="Autor"
+                            Binding="{Binding Path=Usuario}" />
+                        <DataGridTextColumn
+                            Header="Fecha Generación"
+                            Binding="{Binding Path=Fecha}" />
+                        <DataGridTextColumn
+                            Header="Fecha Modificación"
+                            Binding="{Binding Path=Fecha2}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+
+        <Button x:Name="btnProcess" Grid.Row="10" Grid.ColumnSpan="2" Content="Generar" Grid.Column="7" Command="{Binding Path=Process}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Button x:Name="btnClear" Grid.Row="10"  Grid.ColumnSpan="2" Content="Limpiar" Grid.Column="9" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnClear_Click"/>
+    </Grid>
+</UserControl>

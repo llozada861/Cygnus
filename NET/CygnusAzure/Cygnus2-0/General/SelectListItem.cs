@@ -31,6 +31,7 @@ namespace Cygnus2_0.General
         public string Etiqueta { set; get; }
         public int? Empresa { set; get; }
         public DateTime Fecha { set; get; }
+        public DateTime Fecha2 { set; get; }
         public Commit Commit_ { set; get; }
     }
 }

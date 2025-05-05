@@ -31,6 +31,7 @@ using Microsoft.Office.Interop.Outlook;
 using System.Drawing;
 using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Conn;
+using Cygnus2_0.Pages.Data;
 
 namespace Cygnus2_0.DAO
 {
@@ -737,6 +738,74 @@ namespace Cygnus2_0.DAO
             {
 
             }
+        }
+
+        public SelectListItem pObtDatosRegla(string codigo, UsuariosPDN conexion)
+        {
+            string sql;
+            SelectListItem dato = new SelectListItem();
+            dato.Text = "Regla ["+ codigo+"] No existe en la base de datos ["+conexion.BaseDatos+"]";
+            dato.Value = "-99";
+
+            sql = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_REGLAS)).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
+
+            handler.ConexionOracle.RealizarConexionProd(conexion);
+            OracleConnection con = handler.ConexionOracle.ConexionOracleProd;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Connection = con;
+                cmd.Parameters.Add(":regla_id", codigo);
+
+                using (OracleDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        dato.Value = Convert.ToString(reader["regla_id"]);
+                        dato.Text = Convert.ToString(reader["descripcion"]);
+                        dato.Observacion = Convert.ToString(reader["code"]);
+                        dato.Usuario = Convert.ToString(reader["autor"]);
+                        dato.Fecha = Convert.ToDateTime(reader["fecha_generacion"]);
+                        dato.Fecha2 = Convert.ToDateTime(reader["fecha_modificacion"]);
+                    }
+                    reader.Close();
+                }
+            }
+
+            handler.ConexionOracle.ConexionOracleProd.Close();
+
+            return dato;
+        }
+
+        internal OracleClob pGeneraRegla(string idRegla, UsuariosPDN conexion)
+        {
+            handler.ConexionOracle.RealizarConexionProd(conexion);
+            OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
+
+            OracleCommand sqlValor = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_GENERA_REGLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
+
+            sqlValor.BindByName = true;
+
+            OracleParameter opRegla = new OracleParameter("id_regla", OracleDbType.Varchar2);
+            opRegla.Value = idRegla.Trim();
+            sqlValor.Parameters.Add(opRegla);
+
+            OracleParameter clFile = new OracleParameter("oclFile", OracleDbType.Clob);
+            clFile.Direction = ParameterDirection.Output;
+            sqlValor.Parameters.Add(clFile);
+
+            OracleParameter nuErrorCode = new OracleParameter("onuErrorCode", OracleDbType.Int64);
+            nuErrorCode.Direction = ParameterDirection.Output;
+            sqlValor.Parameters.Add(nuErrorCode);
+
+            OracleParameter sbErrorMessage = new OracleParameter("osbErrorMessage", OracleDbType.Varchar2);
+            sbErrorMessage.Direction = ParameterDirection.Output;
+            sqlValor.Parameters.Add(sbErrorMessage);
+
+            sqlValor.ExecuteReader();
+
+            return (OracleClob)sqlValor.Parameters["oclFile"].Value;
         }
     }
 

@@ -2270,4 +2270,10 @@ END;
   <data name="TagNumeroApl" xml:space="preserve">
     <value>&lt;numeroApl&gt;</value>
   </data>
+  <data name="KEY_REGLAS" xml:space="preserve">
+    <value>SQL_REGLAS</value>
+  </data>
+  <data name="KEY_GENERA_REGLA" xml:space="preserve">
+    <value>PLANTILLA_GENERA_REGLA</value>
+  </data>
 </root>
