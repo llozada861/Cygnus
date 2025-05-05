@@ -271,6 +271,7 @@
     <Compile Include="Model\Package\pkgModel.cs" />
     <Compile Include="Model\Permisos\PermisosModel.cs" />
     <Compile Include="Model\Refresh\RefreshModel.cs" />
+    <Compile Include="Model\Reglas\ReglasModel.cs" />
     <Compile Include="Model\Repository\RamaRepositorio.cs" />
     <Compile Include="Model\Repository\Repositorio.cs" />
     <Compile Include="Model\Security\EncryptModel.cs" />
@@ -355,6 +356,9 @@
     </Compile>
     <Compile Include="Pages\Refresh\RefreshView.xaml.cs">
       <DependentUpon>RefreshView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Reglas\ReglasUserControl.xaml.cs">
+      <DependentUpon>ReglasUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Security\AdminUser.xaml.cs">
       <DependentUpon>AdminUser.xaml</DependentUpon>
@@ -496,6 +500,7 @@
     <Compile Include="ViewModel\Objects\TipoObjetosVM.cs" />
     <Compile Include="ViewModel\Pkg\FirstLevelViewModel.cs" />
     <Compile Include="ViewModel\Refresh\RefreshViewModel.cs" />
+    <Compile Include="ViewModel\Reglas\ReglasViewModel.cs" />
     <Compile Include="ViewModel\Repository\RepositorioViewModel.cs" />
     <Compile Include="ViewModel\Security\AuthenticationViewModel.cs" />
     <Compile Include="ViewModel\Security\EncryptViewModel.cs" />
@@ -659,6 +664,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Refresh\RefreshView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Reglas\ReglasUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

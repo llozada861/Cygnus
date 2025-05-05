@@ -1312,6 +1312,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PLANTILLA_GENERA_REGLA.
+        /// </summary>
+        public static string KEY_GENERA_REGLA {
+            get {
+                return ResourceManager.GetString("KEY_GENERA_REGLA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a LLAVE_WINDOWS.
         /// </summary>
         public static string KEY_LLAVEW {
@@ -1335,6 +1344,15 @@ namespace Cygnus2_0.Properties {
         public static string KEY_PLANT_PARAMETRO {
             get {
                 return ResourceManager.GetString("KEY_PLANT_PARAMETRO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a SQL_REGLAS.
+        /// </summary>
+        public static string KEY_REGLAS {
+            get {
+                return ResourceManager.GetString("KEY_REGLAS", resourceCulture);
             }
         }
         
