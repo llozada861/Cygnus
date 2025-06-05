@@ -558,6 +558,48 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
+            sbVersion = "1.2.3.9";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                {
+                    "INSERT INTO user_grants (user,company) VALUES ('ROL_CONSULTA_DISECO',99)"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
+            sbVersion = "1.2.4.0";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                {
+                    "UPDATE user_grants set company = 99 where user = 'ROL_CONSULTA_DISECO'",
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {

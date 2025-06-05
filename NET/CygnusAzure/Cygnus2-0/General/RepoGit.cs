@@ -173,15 +173,12 @@ namespace Cygnus2_0.General
                     pCambiarRama(handler, rutaRepo, rama);
 
                     if(todos == res.Si)
-                        ListaCommitsRepo = repo.Commits.Where(x=>x.Author.When.LocalDateTime >= DateTime.Now.AddMonths(-4)).OrderByDescending(x => x.Committer.When.LocalDateTime).ToList();
+                        ListaCommitsRepo = repo.Commits.OrderByDescending(x => x.Committer.When.LocalDateTime).ToList();
                     else
                         ListaCommitsRepo = repo.Commits.Where(x => x.Message.ToUpper().StartsWith(rama.ToUpper())).OrderByDescending(x => x.Committer.When.DateTime).ToList();
 
                     for (int i = 0; i < ListaCommitsRepo.Count(); i++)
                     {
-                        if (i >= 130) 
-                            break;
-
                         Commit actual = ListaCommitsRepo.ElementAt(i);
                         ListaCommits.Add(new SelectListItem { BlValor = false, Text = actual.MessageShort, Fecha = actual.Committer.When.LocalDateTime, Commit_ = actual, Usuario = actual.Committer.Name });
                     }
