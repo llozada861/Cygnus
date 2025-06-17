@@ -2276,4 +2276,7 @@ END;
   <data name="KEY_GENERA_REGLA" xml:space="preserve">
     <value>PLANTILLA_GENERA_REGLA</value>
   </data>
+  <data name="KEY_REGENERA_REGLA" xml:space="preserve">
+    <value>PLANTILLA_REGENERA_REGLA</value>
+  </data>
 </root>
