@@ -13,8 +13,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using RadioButton = System.Windows.Controls.RadioButton;
 
 namespace Cygnus2_0.ViewModel.Reglas
 {
@@ -45,6 +47,10 @@ namespace Cygnus2_0.ViewModel.Reglas
         public void OnProcess(object commandParameter)
         {
             int contador = 1;
+            OracleClob clValor;
+            string nombreArchivo = "";
+
+            RadioButton generar = (RadioButton)commandParameter;
 
             foreach (SelectListItem item in Model.ListaReglas)
             {
@@ -54,11 +60,19 @@ namespace Cygnus2_0.ViewModel.Reglas
 
                     try
                     {
-
-                        OracleClob clValor = handler.DAO.pGeneraRegla(item.Value, this.Model.BdSeleccionada);
+                        if (generar.IsChecked == true)
+                        {
+                            clValor = handler.DAO.pGeneraRegla(item.Value, this.Model.BdSeleccionada);
+                            nombreArchivo = "ins_" + DateTime.Now.Day.ToString().PadLeft(2,'0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Year + "_gr_config_expression_" + contador.ToString().PadLeft(2,'0') + ".sql";
+                        }
+                        else
+                        {
+                            clValor = handler.DAO.pRegeneraRegla(item.Value, this.Model.BdSeleccionada);
+                            nombreArchivo = "up_" + DateTime.Now.Day.ToString().PadLeft(2, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Year + "_gr_config_expression_" + contador.ToString().PadLeft(2, '0') + ".sql";
+                        }
 
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.FileName = "ins_" + DateTime.Now.Day + DateTime.Now.Month + DateTime.Now.Year + "_gr_config_expression_" + contador + ".sql";
+                        saveFileDialog.FileName = nombreArchivo;
 
                         contador++;
 

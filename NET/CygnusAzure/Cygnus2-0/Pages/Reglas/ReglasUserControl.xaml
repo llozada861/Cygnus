@@ -41,6 +41,13 @@
            Text="Selecciona la base de datos" 
            Style="{StaticResource ComboBoxSelectOverlay}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="5,5,0,5"/>
 
+        <RadioButton x:Name="chgenerar" Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="4" IsChecked="True">
+            Generar
+        </RadioButton>
+        <RadioButton x:Name="chRegenerar" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="4">
+            Regenerar
+        </RadioButton>
+
         <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -114,7 +121,7 @@
             </GroupBox>
         </Grid>
 
-        <Button x:Name="btnProcess" Grid.Row="10" Grid.ColumnSpan="2" Content="Generar" Grid.Column="7" Command="{Binding Path=Process}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Button x:Name="btnProcess" Grid.Row="10" Grid.ColumnSpan="2" Content="Generar" Grid.Column="7" Command="{Binding Path=Process}" CommandParameter="{Binding ElementName=chgenerar}" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <Button x:Name="btnClear" Grid.Row="10"  Grid.ColumnSpan="2" Content="Limpiar" Grid.Column="9" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnClear_Click"/>
     </Grid>
 </UserControl>

@@ -344,32 +344,6 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
-            sbVersion = "1.2.0.4";
-
-            if (!SqliteDAO.pblValidaVersion(sbVersion))
-            {
-                string[] query =
-                 {
-                    //SFDLLO
-                    //"update cy_userbd set password_ = 'N0M30LVid3s+-' where codigo = 1",
-                    //SFUAT
-                    //"update cy_userbd set password_ = 'N0M3Vay4aBloqu34r-+' where codigo = 2",
-                    //SFPDN
-                    "update cy_userbd set password_ = 'AnoNu3v0+Alegr3L4V1d4Ser4' where codigo = 3"
-                };
-
-                foreach (string sql in query)
-                {
-                    try
-                    {
-                        SqliteDAO.pExecuteNonQuery(sql);
-                    }
-                    catch (Exception ex) { }
-                }
-
-                SqliteDAO.pActualizaVersion(sbVersion);
-            }
-
             sbVersion = "1.2.1.4";
 
             if (!SqliteDAO.pblValidaVersion(sbVersion))
@@ -398,32 +372,6 @@ namespace Cygnus2_0
                 string[] query =
                  {
                     "update html \r\nset documentation = 'DECLARE\r\n    CURSOR cuValidaMsj\r\n    IS  \r\n        SELECT *\r\n         FROM mensaje \r\n        WHERE mensdivi = ''EPM''\r\n          AND mensmodu = ''CUZ''\r\n          AND mensdesc = :DESCRIPCION;\r\n          \r\n    rcmensaje  mensaje%ROWTYPE;\r\nBEGIN\r\n    \r\n    rcmensaje := null;\r\n    \r\n    OPEN cuValidaMsj;\r\n    FETCH  cuValidaMsj into rcmensaje;\r\n    CLOSE cuValidaMsj;\r\n    \r\n    IF(rcmensaje.menscodi IS NOT NULL)THEN\r\n        MERGE INTO MENSAJE A USING\r\n         (SELECT\r\n          :CODIGO as MENSCODI,\r\n          :DESCRIPCION as MENSDESC,\r\n          ''EPM'' as MENSDIVI,\r\n          ''CUZ'' as MENSMODU,\r\n          :CAUSA as MENSCAUS,\r\n          :SOLUCION  as MENSPOSO\r\n          FROM DUAL) B\r\n        ON (A.MENSDIVI = B.MENSDIVI and A.MENSMODU = B.MENSMODU and A.MENSCODI = B.MENSCODI)\r\n        WHEN NOT MATCHED THEN \r\n        INSERT (\r\n          MENSCODI, MENSDESC, MENSDIVI, MENSMODU, MENSCAUS, \r\n          MENSPOSO)\r\n        VALUES (\r\n          B.MENSCODI, B.MENSDESC, B.MENSDIVI, B.MENSMODU, B.MENSCAUS, \r\n          B.MENSPOSO)\r\n        WHEN MATCHED THEN\r\n        UPDATE SET \r\n          A.MENSDESC = B.MENSDESC,\r\n          A.MENSCAUS = B.MENSCAUS,\r\n          A.MENSPOSO = B.MENSPOSO;    \r\n    ELSE    \r\n        --realiza la insercción del mensaje EPM - CUZ - <codigo>\r\n        INSERT INTO mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo ) \r\n        VALUES\r\n        (\r\n            :CODIGO,\r\n            :DESCRIPCION,\r\n            ''EPM'',\r\n            ''CUZ'',\r\n            :CAUSA,\r\n            :SOLUCION\r\n        );\r\n    END IF;\r\n    COMMIT;    \r\nEND;\r\n/'\r\nwhere name = 'PLANTILLA_MENSAJE';"
-                };
-
-                foreach (string sql in query)
-                {
-                    try
-                    {
-                        SqliteDAO.pExecuteNonQuery(sql);
-                    }
-                    catch (Exception ex) { }
-                }
-
-                SqliteDAO.pActualizaVersion(sbVersion);
-            }
-
-            sbVersion = "1.2.2.6";
-
-            if (!SqliteDAO.pblValidaVersion(sbVersion))
-            {
-                string[] query =
-                 {
-                    //SFDLLO
-                    //"update cy_userbd set password_ = 'N0M30LVid3s+-' where codigo = 1",
-                    //SFUAT
-                    //"update cy_userbd set password_ = 'N0M3Vay4aBloqu34r-+' where codigo = 2",
-                    //SFPDN
-                    "update cy_userbd set password_ = 'F3l1c1d4dp4r4t0d0s2024*' where codigo = 3"
                 };
 
                 foreach (string sql in query)
@@ -586,6 +534,27 @@ namespace Cygnus2_0
                 string[] query =
                 {
                     "UPDATE user_grants set company = 99 where user = 'ROL_CONSULTA_DISECO'",
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
+            sbVersion = "1.2.4.3";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                {
+                    "INSERT INTO html (name, documentation, company, filename) VALUES ('PLANTILLA_REGENERA_REGLA', 'DECLARE       \r\n    PROCEDURE pReplicaRegla\r\n    (\r\n        id_regla    in number,\r\n        oclSalida   out clob,\r\n        onuErrorCode    OUT NUMBER,\r\n        osbErrorMessage OUT VARCHAR2 \r\n    )\r\n    is\r\n        sql_ins VARCHAR2(32000):=NULL;\r\n        sbVariable varchar2(15);\r\n        nuConfExpreId gr_config_expression.config_expression_id%type;\r\n        sbObjectName varchar2(100);\r\n        \r\n        csbCARACTER_SEPA    VARCHAR2(1) := '';'';\r\n        \r\n        CURSOR cuGetConfExpre\r\n        (\r\n            inuConfExpreID IN gr_config_expression.config_expression_id%type\r\n        )\r\n        IS\r\n            SELECT rowid,a.* FROM gr_config_expression a\r\n            WHERE config_expression_id in (inuConfExpreID);\r\n\r\n        rcGetConfExpre  cuGetConfExpre%rowtype;\r\n        \r\n        sql_ins2 VARCHAR2(32000);\r\n        sql_ins3  VARCHAR2(32000):=NULL;\r\n        sbentrega_1 VARCHAR2(8000);\r\n        sbentrega_2 VARCHAR2(8000);\r\n        \r\n        TYPE tyTabla IS TABLE OF VARCHAR2(2000) INDEX BY BINARY_INTEGER;\r\n        tbstring tyTabla;\r\n        \r\n        PROCEDURE ParseString\r\n        (\r\n            ivaCadena               IN  VARCHAR2,\r\n            ivaToken                IN  VARCHAR2,\r\n            otbSalida               OUT tyTabla\r\n        )\r\n        IS\r\n            csbMETHODNAME           CONSTANT VARCHAR2(30) := ''ParseString'';\r\n\r\n            nuIniBusqueda           NUMBER := 1;\r\n            nuFinBusqueda           NUMBER := 1;\r\n            sbArgumento             VARCHAR2( 2000 );\r\n            nuIndArgumentos         NUMBER := 1;\r\n            nuLongitudArg           NUMBER;\r\n        BEGIN\r\n\r\n            -- Recorre la lista de argumentos y los guarda en un tabla pl-sql\r\n            WHILE( ivaCadena IS NOT NULL ) LOOP\r\n                -- Busca el separador en la cadena y almacena su posicion\r\n                nuFinBusqueda := INSTR( ivaCadena, ivaToken, nuIniBusqueda );\r\n\r\n                -- Si no exite el pipe, debe haber un argumento\r\n                IF ( nuFinBusqueda = 0 ) THEN\r\n                    -- Obtiene el argumento\r\n                    sbArgumento := SUBSTR( ivaCadena, nuIniBusqueda );\r\n                    otbSalida( nuIndArgumentos ) := sbArgumento;\r\n\r\n                    -- Termina el ciclo\r\n                    EXIT;\r\n                END IF;\r\n\r\n                -- Obtiene el argumento hasta el separador\r\n                nuLongitudArg := nuFinBusqueda - nuIniBusqueda;\r\n                sbArgumento := SUBSTR( ivaCadena, nuIniBusqueda, nuLongitudArg );\r\n                -- Lo adiciona a la tabla de argumentos, quitando espacios y ENTER a los lados\r\n                otbSalida( nuIndArgumentos ) := TRIM( REPLACE( sbArgumento, CHR( 13 ), '''' ));\r\n                -- Inicializa la posicion inicial con la posicion del caracterer\r\n                -- despues del pipe\r\n                nuIniBusqueda := nuFinBusqueda + 1;\r\n                -- Incrementa el indice de la tabla de argumentos\r\n                nuIndArgumentos := nuIndArgumentos + 1;\r\n            END LOOP;\r\n        EXCEPTION\r\n            WHEN OTHERS THEN\r\n                dbms_output.put_line(''ERROR OTHERS ''||SQLERRM);\r\n        END ParseString;\r\n    BEGIN\r\n    \r\n        onuErrorCode := 0;\r\n        osbErrorMessage := null;\r\n\r\n        nuConfExpreId := id_regla;\r\n\r\n        sbVariable := ''IdConfExpre'';\r\n        \r\n        dbms_lob.createtemporary(lob_loc => oclSalida, cache => true, dur => dbms_lob.session);\r\n        \r\n        OPEN cuGetConfExpre(nuConfExpreId);\r\n        FETCH cuGetConfExpre INTO rcGetConfExpre;\r\n        CLOSE cuGetConfExpre;\r\n        \r\n        sql_ins := ''EXPRESSION = '''''';\r\n\r\n        sql_ins2:=rcGetConfExpre.EXPRESSION||'''''',''||chr(10)||''           LAST_MODIFI_DATE = '';\r\n\r\n        sql_ins3:=''to_date (''''''||\r\n        rcGetConfExpre.LAST_MODIFI_DATE||'''''',''''DD/MM/YYYY HH24:MI:SS''''),''||chr(10)||''           MODIFICATION_TYPE =''''''||\r\n        rcGetConfExpre.MODIFICATION_TYPE||'''''', ''||chr(10)||''           EXECUTION_TYPE = ''''''||\r\n        rcGetConfExpre.EXECUTION_TYPE||'''''', ''||chr(10)||''           DESCRIPTION = ''''''||\r\n        rcGetConfExpre.DESCRIPTION||'''''',''||chr(10)||''           OBJECT_TYPE = ''''''||rcGetConfExpre.OBJECT_TYPE||'''''',''||chr(10)||\r\n        ''           expression_notes = null,''||chr(10)||''           code = null'';\r\n\r\n        ParseString(sql_ins2,csbCARACTER_SEPA,tbstring);\r\n\r\n        \r\n        sbentrega_1 := ''/******************************************************************\r\nPropiedad Intelectual de Empresas Publicas de Medellín\r\nArchivo     up_<DDMMYYYY>_gr_config_expression.sql\r\nAutor       <Nombre autor>\r\nFecha       <AAAAMMDD>\r\n\r\nDescripción\r\nObservaciones\r\n\r\nHistoria de Modificaciones\r\nFecha         Autor               Modificación\r\n<AAAAMMDD>  <Nombre Autor>              Creación\r\n******************************************************************/\r\ndeclare\r\n    tbConfigs   dagr_config_expression.tytbConfig_Expression_Id;\r\n    onuExprId gr_config_expression.config_expression_id%type := NULL;\r\n    nuCountErr number := 0;\r\n    nuProc number := 0;\r\n    nuErrorCode          NUMBER(15);\r\n    sbErrorMsg           VARCHAR2(2000);\r\n\r\n    IdConfExpre GR_CONFIG_EXPRESSION.config_expression_id%type;\r\nBEGIN\r\n\r\n    dbms_output.put_line(''''Inicia Proceso ''''||sysdate);\r\n    IdConfExpre := ''||nuConfExpreId||'';\r\n\r\n    dbms_output.put_line(''''Actualizando la Regla: ''''||IdConfExpre);\r\n\r\n    UPDATE GR_CONFIG_EXPRESSION\r\n       SET '';\r\n\r\n        sbentrega_2 := ''\r\n    where config_expression_id = IdConfExpre;\r\n\r\n    dbms_output.put_line(''''Regenerando Regla: ''''||IdConfExpre);\r\n\r\n    BEGIN\r\n        GR_BOINTERFACE_BODY.CreateStprByConfExpreId(IdConfExpre);\r\n        dbms_output.put_line(''''Expresion Generada = ''''||IdConfExpre);\r\n\r\n        EXCEPTION\r\n            when ex.CONTROLLED_ERROR then\r\n                 Errors.getError(nuErrorCode,sbErrorMsg);\r\n                 dbms_output.put_line(substr(''''ExprId = ''''||IdConfExpre||'''', Err : ''''||nuErrorCode||'''', ''''||sbErrorMsg,1,250));\r\n\r\n            when others then\r\n                 Errors.setError;\r\n                        Errors.getError(nuErrorCode,sbErrorMsg);\r\n                 dbms_output.put_line(substr(''''ExprId = ''''||IdConfExpre||'''', Err : ''''||nuErrorCode||'''', ''''||sbErrorMsg,1,250));\r\n\r\n    END;\r\n        \r\n    dbms_output.put_line(''''Termina regenerar Regla: ''''||IdConfExpre);\r\n\r\n    --<INSERT_TABLA> o <UPDATE_TABLA>\r\n\r\n    commit;\r\n\r\n    dbms_output.put_line(''''Fin Proceso ''''||sysdate);\r\nEXCEPTION\r\nwhen ex.CONTROLLED_ERROR  then\r\n    rollback;\r\n    Errors.getError(nuErrorCode, sbErrorMsg);\r\n    dbms_output.put_line(''''ERROR CONTROLLED '''');\r\n    dbms_output.put_line(''''error onuErrorCode: ''''||nuErrorCode);\r\n    dbms_output.put_line(''''error osbErrorMess: ''''||sbErrorMsg);\r\n\r\nwhen OTHERS then\r\n    rollback;\r\n    Errors.setError;\r\n    Errors.getError(nuErrorCode, sbErrorMsg);\r\n    dbms_output.put_line(''''ERROR OTHERS '''');\r\n    dbms_output.put_line(''''error onuErrorCode: ''''||nuErrorCode);\r\n    dbms_output.put_line(''''error osbErrorMess: ''''||sbErrorMsg);\r\nEND;'';\r\n        \r\n        DBMS_LOB.APPEND(oclSalida,sbentrega_1);\r\n        DBMS_LOB.APPEND(oclSalida,sql_ins);\r\n\r\n        FOR i IN 1..tbstring.count\r\n        LOOP\r\n              if i<> tbstring.count then\r\n                if (i= tbstring.first) then\r\n                  DBMS_LOB.APPEND(oclSalida,tbstring(i)||csbCARACTER_SEPA);\r\n                else\r\n                  if i<> (tbstring.count-1) then\r\n                    DBMS_LOB.APPEND(oclSalida,tbstring(i)||csbCARACTER_SEPA||''''''||''||chr(10)||''                        '''''');\r\n\r\n                  else\r\n                    DBMS_LOB.APPEND(oclSalida,tbstring(i)||csbCARACTER_SEPA);\r\n                  END if;\r\n                END if;\r\n              else\r\n                DBMS_LOB.APPEND(oclSalida,tbstring(i));\r\n              END if;\r\n        END LOOP;\r\n\r\n        DBMS_LOB.APPEND(oclSalida,sql_ins3);\r\n        DBMS_LOB.APPEND(oclSalida,sbentrega_2);\r\n        DBMS_LOB.APPEND(oclSalida,chr(10)||''/'');\r\n\r\n    EXCEPTION\r\n        when OTHERS then\r\n            dbms_output.put_line(''ERROR OTHERS '');\r\n            dbms_output.put_line(''error onuErrorCode: ''||onuErrorCode);\r\n            dbms_output.put_line(''error osbErrorMess: ''||osbErrorMessage);\r\n    END;\r\nbegin\r\n    pReplicaRegla\r\n    (\r\n        :id_regla,\r\n        :oclFile,\r\n        :onuErrorCode,\r\n        :osbErrorMessage\r\n     );\r\nend;\r\n', '99', '')",
                 };
 
                 foreach (string sql in query)

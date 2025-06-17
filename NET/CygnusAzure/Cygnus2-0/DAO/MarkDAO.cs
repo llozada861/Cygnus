@@ -807,6 +807,35 @@ namespace Cygnus2_0.DAO
 
             return (OracleClob)sqlValor.Parameters["oclFile"].Value;
         }
+        internal OracleClob pRegeneraRegla(string idRegla, UsuariosPDN conexion)
+        {
+            handler.ConexionOracle.RealizarConexionProd(conexion);
+            OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
+
+            OracleCommand sqlValor = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_REGENERA_REGLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
+
+            sqlValor.BindByName = true;
+
+            OracleParameter opRegla = new OracleParameter("id_regla", OracleDbType.Varchar2);
+            opRegla.Value = idRegla.Trim();
+            sqlValor.Parameters.Add(opRegla);
+
+            OracleParameter clFile = new OracleParameter("oclFile", OracleDbType.Clob);
+            clFile.Direction = ParameterDirection.Output;
+            sqlValor.Parameters.Add(clFile);
+
+            OracleParameter nuErrorCode = new OracleParameter("onuErrorCode", OracleDbType.Int64);
+            nuErrorCode.Direction = ParameterDirection.Output;
+            sqlValor.Parameters.Add(nuErrorCode);
+
+            OracleParameter sbErrorMessage = new OracleParameter("osbErrorMessage", OracleDbType.Varchar2);
+            sbErrorMessage.Direction = ParameterDirection.Output;
+            sqlValor.Parameters.Add(sbErrorMessage);
+
+            sqlValor.ExecuteReader();
+
+            return (OracleClob)sqlValor.Parameters["oclFile"].Value;
+        }
     }
 
 }

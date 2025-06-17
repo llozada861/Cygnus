@@ -1348,6 +1348,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PLANTILLA_REGENERA_REGLA.
+        /// </summary>
+        public static string KEY_REGENERA_REGLA {
+            get {
+                return ResourceManager.GetString("KEY_REGENERA_REGLA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a SQL_REGLAS.
         /// </summary>
         public static string KEY_REGLAS {
