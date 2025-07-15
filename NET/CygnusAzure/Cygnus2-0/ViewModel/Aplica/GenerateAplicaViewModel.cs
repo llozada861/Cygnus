@@ -127,6 +127,26 @@ namespace Cygnus2_0.ViewModel.Aplica
                 this.Model.Datos = false;
                 handler.MensajeError(ex.Message);
             }
+
+            try
+            {
+                this.Model.ListaArchivosCargados.Clear();
+                this.Model.ListaArchivosNoOrden.Clear();
+                this.Model.ArchivosCargados = "0";
+                this.Model.ListaUsuarios = null;
+                this.Model.Objetos = false;
+                this.Model.Datos = false;
+                this.Model.ListaUsuarios = handler.pObtlistaUsuarios();
+
+                if (this.Model.ListaArchivosGenerados.Count() > 0)
+                {
+                    this.Model.ListaArchivosGenerados.Clear();
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
         }
         public void OnClean(object commandParameter)
         {
@@ -501,7 +521,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             //Genera el archivo con los permisos
             if (handler.ConfGeneralView.Model.Grant)
             {
-                pGeneraArchivosPermisos();
+                pGeneraArchivosPermisos(CantidadAplicas);
             }
 
             rutaGeneracion = Path.Combine(handler.SavePathAplica, nombreAplica);
@@ -680,11 +700,12 @@ namespace Cygnus2_0.ViewModel.Aplica
         }
 
         #region Grants
-        public void pGeneraArchivosPermisos()
+        public void pGeneraArchivosPermisos(Int64 Cantidad)
         {
             StringBuilder grant = new StringBuilder();
             string rutaGeneracion;
-            string nombreGrant = this.Model.Codigo + res.NombreArchivoGrant + this.Model.Usuario.Text + res.ExtensionSQL;
+            string nombreGrant = this.Model.Codigo + res.NombreArchivoGrant + this.Model.Usuario.Text+ "_" + Cantidad + res.ExtensionSQL;
+
             rutaGeneracion = Path.Combine(handler.SavePath, nombreGrant);
             Boolean sinonimo = false;
 

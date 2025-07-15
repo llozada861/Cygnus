@@ -268,7 +268,7 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="10"
-                    Grid.RowSpan="7">
+                    Grid.RowSpan="7" MouseDoubleClick="dataGridArchivosGen_MouseDoubleClick_1">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn          
