@@ -305,5 +305,14 @@ namespace Cygnus2_0.Pages.Aplica
             generateAplicaViewModel.Model.ListaAplicaHistoria.Clear();
             generateAplicaViewModel.Model.ListaAplicaHistoria = SqliteDAO.pListaAplicaHistoria(generateAplicaViewModel.Model.Historia.Historia.ToUpper());
         }
+
+        private void dataGridArchivosGen_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            if (dataGridArchivosGen.SelectedItem == null)
+                return; // return if there's no row selected
+
+            Archivo archivo = (Archivo)dataGridArchivosGen.SelectedItem;
+            handler.pAbrirArchivo(archivo.Ruta + "\\" + archivo.FileName);
+        }
     }
 }
