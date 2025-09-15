@@ -206,7 +206,7 @@ namespace Cygnus2_0.ViewModel.Time
             pDescargarTareasAzure(uiContext);
         }
 
-        public IList<WorkItem> pObtItemsAzure()
+        public IList<WorkItem> pObtItemsAzure(string usuario, Int32 dias)
         {
             List<WorkItem> tareasAzure = new List<WorkItem>();
 
@@ -221,8 +221,8 @@ namespace Cygnus2_0.ViewModel.Time
                         "From WorkItems " +
                         "Where [System.WorkItemType] = 'Task' " +
                         "And [System.State] not in ('Removed') " +
-                        "And [System.AssignedTo] = '" + handler.Azure.Usuario + "'" +
-                        "And [System.CreatedDate] > @today-" + handler.Azure.Dias
+                        "And [System.AssignedTo] = '" + usuario + "'" +
+                        "And [System.CreatedDate] > @today-" + dias
             };
 
             //Proyecto = "OPEN"
@@ -245,7 +245,7 @@ namespace Cygnus2_0.ViewModel.Time
             CultureInfo culture = new CultureInfo("es-CO");
             //pGeneraLog(log);
 
-            var workItems = pObtItemsAzure();
+            var workItems = pObtItemsAzure(handler.Azure.Usuario, handler.Azure.Dias);
             listaTareaAzure = new List<TareaHoja>();
 
             /*log = log +"Query Results: " + workItems.Count+" - ";
