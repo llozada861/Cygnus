@@ -71,11 +71,11 @@ namespace Cygnus2_0.ViewModel.Time
                     return;
                 }
 
-                if ((FechaHasta.Date - FechaDesde.Date).Days > 90)
+                /*if ((FechaHasta.Date - FechaDesde.Date).Days > 90)
                 {
                     handler.MensajeError("No se recomienda buscar más de 90 días");
                     return;
-                }
+                }*/
 
                 Open(archivoTemporal);
                 CreateHeader();
