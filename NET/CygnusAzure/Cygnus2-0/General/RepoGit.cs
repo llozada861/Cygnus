@@ -62,7 +62,7 @@ namespace Cygnus2_0.General
                 }
 
                 Commands.Checkout(repo, rama);
-                pCreaDirectorios(rutaObjetos);
+                pCreaDirectorios(rutaObjetos, handler);
                 SonarQube.pCopiarArchivos(rutaObjetos, listaArchivosCargados);
 
                 Commands.Stage(repo, "*");
@@ -125,7 +125,7 @@ namespace Cygnus2_0.General
                 //pCreaDirectorios(repositorioGit.Ruta);
 
                 //Se copian los archivos en cada ruta del repo
-                pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit);
+                pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit, handler);
 
                 Commands.Stage(repo, "*");
                 Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now));
@@ -394,7 +394,7 @@ namespace Cygnus2_0.General
 
         public static string pClonarRepo(string ruta, string url, string rutaGitBash)
         {
-            pCreaDirectorios(ruta);
+            pCreaDirectorios(ruta,null);
 
             string command = "Git clone " + url;
             ExecuteGitBashCommand(rutaGitBash+"\\"+res.GitBashExe, command, ruta,true);
@@ -402,13 +402,19 @@ namespace Cygnus2_0.General
             return ruta + res.CarpetaDatosGIT;
         }
 
-        public static void pCreaDirectorios(string path)
+        public static void pCreaDirectorios(string path, Handler handler)
         {
             // Determine whether the directory exists.
             if (!Directory.Exists(path))
             {
-                // Try to create the directory.
-                DirectoryInfo di = Directory.CreateDirectory(path);
+                handler.CursorNormal();
+                if (handler.MensajeConfirmacion("Se va a crear la siguiente ruta en el repositorio [" + path + "] está seguro?") == "Y")
+                {
+                    // Try to create the directory.
+                    DirectoryInfo di = Directory.CreateDirectory(path);
+                }
+                else
+                    throw new Exception("Verifique las rutas del repositorio de los objetos que desea entregar");
             }
         }
 
@@ -457,7 +463,7 @@ namespace Cygnus2_0.General
             //process.Close();
         }
 
-        public static void pCopiarObjetosRepo(List<Folder> ListaCarpetas, string path, Repositorio GitSeleccionado)
+        public static void pCopiarObjetosRepo(List<Folder> ListaCarpetas, string path, Repositorio GitSeleccionado, Handler handler)
         {
             string destino = "";
             string pathIn = "";
@@ -476,8 +482,8 @@ namespace Cygnus2_0.General
 
                     if (archivo.Folders.Count > 0)
                     {
-                        pCreaDirectorios(pathIn);
-                        pCopiarObjetosRepo(archivo.Folders, pathIn, GitSeleccionado);
+                        pCreaDirectorios(pathIn, handler);
+                        pCopiarObjetosRepo(archivo.Folders, pathIn, GitSeleccionado, handler);
                     }
                 }
                 else

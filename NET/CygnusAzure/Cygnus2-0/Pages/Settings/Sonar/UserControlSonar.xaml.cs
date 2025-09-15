@@ -92,7 +92,7 @@ namespace Cygnus2_0.Pages.Settings.Sonar
                     handler.RutaSonar = txtRutaInstall.Text;
                     handler.ProyectoSonar = txtProyecto2.Text;
 
-                    RepoGit.pCreaDirectorios(handler.RutaSonar);
+                    RepoGit.pCreaDirectorios(handler.RutaSonar, handler);
 
                     SqliteDAO.pCreaConfiguracion(res.KeyRutaSonar, handler.RutaSonar);
                     SqliteDAO.pCreaConfiguracion(res.KeyProyectoSonar, handler.ProyectoSonar);
