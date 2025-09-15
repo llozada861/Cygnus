@@ -591,7 +591,7 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
-            sbVersion = "1.2.4.6";
+            sbVersion = "1.2.4.7";
 
             if (!SqliteDAO.pblValidaVersion(sbVersion))
             {

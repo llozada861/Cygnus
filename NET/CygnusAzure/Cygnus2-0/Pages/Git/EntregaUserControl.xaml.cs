@@ -5,6 +5,7 @@ using Cygnus2_0.Pages.General;
 using Cygnus2_0.ViewModel.Git;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
+using Microsoft.TeamFoundation.SourceControl.WebApi.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,7 +165,7 @@ namespace Cygnus2_0.Pages.Git
                     if (row.Background != Brushes.Red)
                         Colobk = row.Background;
 
-                    if (item.Tipo == null || string.IsNullOrEmpty(item.Usuario) || string.IsNullOrEmpty(item.NombreObjeto))
+                    if (item.Tipo == null || string.IsNullOrEmpty(item.Usuario) || string.IsNullOrEmpty(item.NombreObjeto) || (!string.IsNullOrEmpty(item.InicioArchivo) && item.InicioArchivo.IndexOf(item.NombreObjeto) >= 0))
                     {
                         row.Background = Brushes.Red;
                     }

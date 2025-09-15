@@ -211,7 +211,7 @@ namespace Cygnus2_0.ViewModel.Git
                 {
                     archivoRojo = archivo.FileName;
 
-                    if (archivo.Tipo == null && archivo.NombreObjeto == null && archivo.Usuario == null)
+                    if (archivo.Tipo == null && archivo.NombreObjeto == null && archivo.Usuario == null || (!string.IsNullOrEmpty(archivo.InicioArchivo) && archivo.InicioArchivo.IndexOf(archivo.NombreObjeto) >= 0))
                     {
                         archivosNoRepo = true;
                         break;
