@@ -205,7 +205,7 @@
                             </DataGridComboBoxColumn>
 
                             <DataGridTextColumn                  
-                      IsReadOnly="True"
+                      IsReadOnly="False"
                       Header="Obj. Grant"
                       Binding="{Binding Path=NombreObjeto}" />
                         </DataGrid.Columns>
