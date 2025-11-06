@@ -517,8 +517,8 @@ namespace Cygnus2_0.General
                     {
                         Commit actual = item.Commit_;
 
-                        if (ListaCommitsLB.Exists(x => x.Commit_.MessageShort.Equals(actual.MessageShort) && x.Commit_.Author.When.LocalDateTime == actual.Author.When.LocalDateTime && x.Commit_.Author.Name.Equals(actual.Author.Name)))
-                            ListaCommitsLB.Remove(ListaCommitsLB.Where(x => x.Commit_.MessageShort.Equals(actual.MessageShort) && x.Commit_.Author.When.LocalDateTime == actual.Author.When.LocalDateTime && x.Commit_.Author.Name.Equals(actual.Author.Name)).FirstOrDefault());                        
+                        if (ListaCommitsLB.Exists(x => actual.MessageShort.Contains(x.Commit_.MessageShort)))
+                            ListaCommitsLB.Remove(ListaCommitsLB.Where(x => actual.MessageShort.Contains(x.Commit_.MessageShort)).FirstOrDefault());                        
                     }
 
                     if (ListaCommitsLB.Count() == 0)
