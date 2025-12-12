@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "a+UKZyF3Fo4=",
+  "success": true,
+  "projectFilePath": "D:\\Dirtrab\\Repositorios\\CygnusMS\\CygnusMS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MVM\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.1\\system.diagnostics.eventlog.10.0.1.nupkg.sha512",
+    "C:\\Users\\MVM\\.nuget\\packages\\system.serviceprocess.servicecontroller\\10.0.1\\system.serviceprocess.servicecontroller.10.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
