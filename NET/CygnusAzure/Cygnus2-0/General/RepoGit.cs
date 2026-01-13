@@ -96,7 +96,8 @@ namespace Cygnus2_0.General
             string ramaWO = gitModel.RamaLBSeleccionada.Text.ToUpper();
             string MensajeCommit;
             Boolean boUnaRama = false;
-            
+            List<Commit> ListaCommitsRepo = new List<Commit>();
+
             var ramasGit = SqliteDAO.pListaRamaRepositorios(repositorioGit);
 
             //Repos con una sola rama
@@ -126,6 +127,13 @@ namespace Cygnus2_0.General
 
                 //Se copian los archivos en cada ruta del repo
                 pCopiarObjetosRepo(gitModel.ListaCarpetas.ToList(), repositorioGit.Ruta, repositorioGit, handler);
+
+                ListaCommitsRepo = repo.Commits.OrderByDescending(x => x.Committer.When.LocalDateTime).ToList();
+
+                if(ListaCommitsRepo.Exists(x => x.MessageShort.ToUpper().Trim().Equals(MensajeCommit.ToUpper().Trim())))
+                {
+                    MensajeCommit = MensajeCommit + " ["+(ListaCommitsRepo.Count(x => x.MessageShort.ToUpper().Trim().StartsWith(MensajeCommit.ToUpper().Trim())) + 1)+"]";
+                }
 
                 Commands.Stage(repo, "*");
                 Commit comm = repo.Commit(MensajeCommit, new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now), new Signature(Environment.UserName, handler.Azure.Correo, DateTimeOffset.Now));
