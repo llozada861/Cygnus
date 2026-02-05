@@ -19,6 +19,10 @@ using res = Cygnus2_0.Properties.Resources;
 using Cygnus2_0.ViewModel.Documentation;
 using Cygnus2_0.Model.Reglas;
 using Cygnus2_0.ViewModel.Reglas;
+using System.Reflection.Emit;
+using System.Text.RegularExpressions;
+using Cygnus2_0.Model.Html;
+using Microsoft.TeamFoundation.Common;
 
 namespace Cygnus2_0.Pages.Reglas
 {
@@ -58,6 +62,9 @@ namespace Cygnus2_0.Pages.Reglas
 
                 view.Model.ListaReglas.Clear();
 
+                txRegla.IsEnabled = false;
+                txTabla.IsEnabled = false;
+
                 try
                 {
                     if (!String.IsNullOrEmpty(richText.Trim()))
@@ -68,6 +75,12 @@ namespace Cygnus2_0.Pages.Reglas
                         {
                             view.pBuscarReglas(codigo);
                         }
+                    }
+
+                    if(view.Model.ListaReglas.Count > 0)
+                    {
+                        txRegla.IsEnabled = true;
+                        txTabla.IsEnabled = true;
                     }
                 }
                 catch (Exception ex)
@@ -88,5 +101,76 @@ namespace Cygnus2_0.Pages.Reglas
             richTextBoxProce.Document.Blocks.Clear();
             view.Model.ListaReglas.Clear();
         }
+
+        private void txTabla_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try 
+            { 
+                if (!string.IsNullOrEmpty(txTabla.Text) && !string.IsNullOrEmpty(view.Model.Regla))
+                {
+                    List<SelectListItem> listaPrimarias = handler.DAO.pObtPrimarias(view.Model.Tabla, view.Model.BdSeleccionada);
+
+                    foreach (SelectListItem item in view.Model.ListaReglas)
+                    {
+                        item.DocumentoAD = view.pObtUpdate(listaPrimarias, txTabla.Text, view.Model.Regla, item.Value);
+                    }
+                }            
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+
+        private void txColumna_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(view.Model.Tabla) && !string.IsNullOrEmpty(txRegla.Text))
+                {
+                    List<SelectListItem> listaPrimarias = handler.DAO.pObtPrimarias(view.Model.Tabla, view.Model.BdSeleccionada);
+
+                    foreach (SelectListItem item in view.Model.ListaReglas)
+                    {
+                        item.DocumentoAD = view.pObtUpdate(listaPrimarias, view.Model.Tabla, txRegla.Text, item.Value);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+
+        private void dataGridParameter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataGridReglas.SelectedItem == null)
+                return;
+
+            string richText = new TextRange(richTextBoxProce.Document.ContentStart, richTextBoxProce.Document.ContentEnd).Text;
+
+            richTextBoxSql.Document.Blocks.Clear();
+
+            SelectListItem seleccionado = ((SelectListItem)dataGridReglas.SelectedItem);
+
+            string idRegla = seleccionado.Value;
+
+            if (!string.IsNullOrEmpty(view.Model.Tabla) && !string.IsNullOrEmpty(view.Model.Regla) && string.IsNullOrEmpty(seleccionado.DocumentoAD))
+            {
+                try
+                {
+                    List<SelectListItem> listaPrimarias = handler.DAO.pObtPrimarias(view.Model.Tabla, view.Model.BdSeleccionada);
+
+                    string sbUpdate = view.pObtUpdate(listaPrimarias, view.Model.Tabla, view.Model.Regla, idRegla);
+
+                    seleccionado.DocumentoAD = sbUpdate;
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+
+            if(!string.IsNullOrEmpty(seleccionado.DocumentoAD))
+                richTextBoxSql.Document.Blocks.Add(new Paragraph(new Run((seleccionado.DocumentoAD))));
+        }
+
     }
 }

@@ -11,10 +11,13 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using res = Cygnus2_0.Properties.Resources;
+using System.Text.Json;
 
 namespace Cygnus2_0.ViewModel.Time
 {
@@ -47,13 +50,18 @@ namespace Cygnus2_0.ViewModel.Time
             set { SetProperty(ref fechaHasta, value); }
         }
 
-        public void pGeneraReporte()
+        public async Task pGeneraReporteAsync()
         {
+            string pat = handler.Azure.Token;
+            string auth = Convert.ToBase64String(
+                System.Text.Encoding.ASCII.GetBytes($":{pat}")
+            );
+
             try
             {
                 string archivoTemporal = Environment.CurrentDirectory + "\\ReporteHoras.xlsx";
 
-                if (string.IsNullOrEmpty(FechaDesde.ToString()))
+                /*if (string.IsNullOrEmpty(FechaDesde.ToString()))
                 {
                     handler.MensajeError("Ingrese fecha desde");
                     return;
@@ -69,7 +77,7 @@ namespace Cygnus2_0.ViewModel.Time
                 {
                     handler.MensajeError("La fecha hasta debe ser mayor que la fecha desde");
                     return;
-                }
+                }*/
 
                 /*if ((FechaHasta.Date - FechaDesde.Date).Days > 90)
                 {
@@ -77,18 +85,145 @@ namespace Cygnus2_0.ViewModel.Time
                     return;
                 }*/
 
-                Open(archivoTemporal);
-                CreateHeader();
-                InsertDataCygnus();
-                pInsertaTareaAzure();
-                Close();
+                //Open(archivoTemporal);
+                //CreateHeader();
+                //InsertDataCygnus();
+                //pInsertaTareaAzure();
+                //Close();
 
-                handler.pGuardaArchivoByte(archivoTemporal, "ReporteHoras[" + FechaDesde.Day + FechaDesde.Month + FechaDesde.Year + "-" + FechaHasta.Day + FechaHasta.Month + FechaHasta.Year + "].xlsx");
-                File.Delete(archivoTemporal);
+                //handler.pGuardaArchivoByte(archivoTemporal, "ReporteHoras[" + FechaDesde.Day + FechaDesde.Month + FechaDesde.Year + "-" + FechaHasta.Day + FechaHasta.Month + FechaHasta.Year + "].xlsx");
+                //File.Delete(archivoTemporal);
+
+                string org = "grupoepm";
+                string project = "OPEN";
+
+                string minDate = "2026-01-20T17:01:00Z";
+                string maxDate = "2026-01-22T17:00:00Z";
+
+                string url =
+                    $"https://vsrm.dev.azure.com/{org}/{project}/_apis/release/releases" +
+                    $"?minCreatedTime={minDate}" +
+                    $"&maxCreatedTime={maxDate}" +
+                    $"&status=active" +
+                    $"&api-version=7.1";
+
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Basic", auth);
+
+                var response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+                JsonDocument doc = JsonDocument.Parse(json);
+                JsonElement root = doc.RootElement;
+
+                foreach (JsonElement item in root.GetProperty("value").EnumerateArray())
+                {
+                    int id = item.GetProperty("id").GetInt32();
+                    string name = item.GetProperty("name").GetString();
+                    string status = item.GetProperty("status").GetString();
+
+                    Console.WriteLine($"{id} - {name} - {status}");
+
+                    if (status.Equals("active"))
+                    {
+                        JsonElement environments = item.GetProperty("releaseDefinition");
+
+                        string envName = environments.GetProperty("path").GetString();
+
+                        //Console.WriteLine($"{envName}");
+
+                        if (envName.ToUpper().IndexOf("PRODUCCION") > 0)
+                        {
+                            JsonElement creadoPor = item.GetProperty("createdFor");
+
+                            string analista = creadoPor.GetProperty("displayName").GetString();
+
+                            string stDesc = item.GetProperty("description").GetString();
+
+                            string liderTI = "";
+
+                            try
+                            {
+
+                                JsonDocument jsonDesc = JsonDocument.Parse(stDesc);
+
+                                JsonElement descripcion = jsonDesc.RootElement;
+
+                                string Grupo = descripcion.GetProperty("Grupo").GetString();
+                                string HU = descripcion.GetProperty("HU").GetString();
+                                string TipoAT = descripcion.GetProperty("TipoAT").GetString();
+                                string Descripcion = descripcion.GetProperty("Descripcion").GetString();
+                                string GenIndis = descripcion.GetProperty("GenIndis").GetString();
+                                string Precedencia = descripcion.GetProperty("Precedencia").GetString();
+
+                                url =
+                                $"https://vsrm.dev.azure.com/{org}/{project}/_apis/release/releases/" +
+                                $"{id}" +
+                                $"?api-version=7.1";
+
+                                client = new HttpClient();
+                                client.DefaultRequestHeaders.Authorization =
+                                    new AuthenticationHeaderValue("Basic", auth);
+
+                                response = await client.GetAsync(url);
+                                response.EnsureSuccessStatusCode();
+
+                                string jsonRel = await response.Content.ReadAsStringAsync();
+                                JsonDocument docRel = JsonDocument.Parse(jsonRel);
+                                JsonElement rootRel = docRel.RootElement;
+
+                                string nameCiclos = "";
+
+                                foreach (JsonElement itemEnv in rootRel.GetProperty("environments").EnumerateArray())
+                                {
+                                    string nameCiclo = itemEnv.GetProperty("name").GetString();
+                                    nameCiclo = nameCiclo.Substring(5).Trim();
+                                    //Console.WriteLine($"{nameCiclo}");
+
+                                    string statusRel = itemEnv.GetProperty("status").GetString();
+
+                                    if (statusRel.Equals("inProgress"))
+                                    {
+                                        nameCiclos = nameCiclo + " " + nameCiclos;
+
+                                        foreach (JsonElement itemAprobado in itemEnv.GetProperty("preDeployApprovals").EnumerateArray())
+                                        {
+                                            JsonElement aprobadoPor = itemAprobado.GetProperty("approvedBy");
+
+                                            string estadoApro = itemAprobado.GetProperty("status").GetString();
+                                            string fechaApro = itemAprobado.GetProperty("modifiedOn").GetString();
+
+                                            DateTimeOffset dto = DateTimeOffset.Parse(fechaApro);
+                                            DateTime utcFechaAprob = dto.UtcDateTime;
+
+                                            DateTimeOffset dtoLimite = DateTimeOffset.Parse(maxDate);
+                                            DateTime utcLimite = dtoLimite.UtcDateTime;
+
+
+                                            if (estadoApro.Equals("approved") && utcFechaAprob <= utcLimite)
+                                            {
+                                                liderTI = aprobadoPor.GetProperty("displayName").GetString();
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if(!string.IsNullOrEmpty(liderTI))
+                                    Console.WriteLine($"---------------|{Grupo}|{HU}|{analista}|{Descripcion}|{TipoAT}|{nameCiclos}|{liderTI}|-|{GenIndis}|{Precedencia}|https://grupoepm.visualstudio.com/OPEN/_releaseProgress?_a=release-pipeline-progress&releaseId={id}");
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine($"Error --- {stDesc}");
+                            }
+                        }
+                    }
+                }
             }
             catch(Exception ex)
             {
-                Close();
+                //Close();
                 handler.MensajeError(ex.Message);
             }
         }
@@ -225,7 +360,7 @@ namespace Cygnus2_0.ViewModel.Time
 
         public async Task<IList<WorkItem>> QueryOpenBugs(DateTime fechaDesde, DateTime fechaHasta)
         {
-            string personalAccessToken = res.TokenAzureConn; //"trrveg7rc4kp7fng4gxkp6r527ahwj2qncfvtx7gcoe3ljwpz7tq";
+            string personalAccessToken = res.TokenAzureConn; //;
 
             VssBasicCredential credentials = new VssBasicCredential("", personalAccessToken);
             VssConnection connection = null;

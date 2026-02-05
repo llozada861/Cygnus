@@ -33,5 +33,6 @@ namespace Cygnus2_0.General
         public DateTime Fecha { set; get; }
         public DateTime Fecha2 { set; get; }
         public Commit Commit_ { set; get; }
+        public List<SelectListItem> ListaHijos { set; get; }
     }
 }
