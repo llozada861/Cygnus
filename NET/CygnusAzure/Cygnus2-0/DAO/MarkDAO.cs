@@ -836,6 +836,95 @@ namespace Cygnus2_0.DAO
 
             return (OracleClob)sqlValor.Parameters["oclFile"].Value;
         }
+
+        internal List<SelectListItem> pObtPrimarias(string Tabla, UsuariosPDN conexion)
+        {
+            string sql;
+            List<SelectListItem> lista = new List<SelectListItem>();
+
+            sql = " select -- + ordered \n" +
+                  "  tcol.column_name as columna \n" +
+                  "  from    all_constraints cons, all_cons_columns ccol, all_tab_columns tcol \n" +
+                  "  where cons.table_name = upper('" + Tabla.ToUpper() + "') \n" +
+                  "  and cons.constraint_type = 'P' \n" +
+                  "  and cons.owner = upper('FLEX') \n" +
+                  "  and ccol.owner = cons.owner \n" +
+                  "  and ccol.constraint_name = cons.constraint_name \n" +
+                  "  and ccol.table_name = cons.table_name \n" +
+                  "  and tcol.owner = ccol.owner \n" +
+                  "  and tcol.table_name = ccol.table_name \n" +
+                  "  and tcol.column_name = ccol.column_name \n" +
+                  "  order by ccol.position";
+
+            handler.ConexionOracle.RealizarConexionProd(conexion);
+            OracleConnection con = handler.ConexionOracle.ConexionOracleProd;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Connection = con;
+
+                using (OracleDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SelectListItem dato = new SelectListItem();
+                        dato.Value = Convert.ToString(reader["columna"]);
+                        lista.Add(dato);
+                    }
+                    reader.Close();
+                }
+            }
+
+            handler.ConexionOracle.ConexionOracleProd.Close();
+
+            return lista;
+        }
+
+        internal List<SelectListItem> pObtDatosTablaRegla(string sql, UsuariosPDN conexion)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+
+            handler.ConexionOracle.RealizarConexionProd(conexion);
+            OracleConnection con = handler.ConexionOracle.ConexionOracleProd;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Connection = con;
+
+                using (OracleDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SelectListItem dato = new SelectListItem();
+                        dato.ListaHijos = new List<SelectListItem>();
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            string nombreCol = reader.GetName(i);   // nombre real de la columna
+                            object valor = reader.GetValue(i);      // valor genérico
+
+                            string texto = valor == DBNull.Value ? null : valor.ToString();
+
+                            SelectListItem datoCol = new SelectListItem();
+
+                            datoCol.Text = nombreCol;
+                            datoCol.Value = texto;
+                            dato.ListaHijos.Add(datoCol);
+                        }
+
+                        lista.Add(dato);
+
+                    }
+                    reader.Close();
+                }
+            }
+
+            handler.ConexionOracle.ConexionOracleProd.Close();
+
+            return lista;
+        }
     }
 
 }

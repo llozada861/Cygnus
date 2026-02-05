@@ -48,7 +48,28 @@
             Regenerar
         </RadioButton>
 
-        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="8">
+        <TextBox x:Name="txTabla" TextWrapping="Wrap" Text="{Binding Path=Model.Tabla}" Grid.ColumnSpan="3" Grid.Column="7"  Grid.Row="1" VerticalAlignment="Center"
+         Style="{StaticResource placeHolder}" Tag="Tabla" Margin="10,0,0,0" TextChanged="txTabla_TextChanged" IsEnabled="False"/>
+
+        <TextBox x:Name="txRegla" TextWrapping="Wrap" Text="{Binding Path=Model.Regla}" Grid.ColumnSpan="3" Grid.Column="7"  Grid.Row="2" VerticalAlignment="Center"
+        Style="{StaticResource placeHolder}" Tag="Columna que contiene la regla" Margin="10,0,0,0" TextChanged="txColumna_TextChanged" IsEnabled="False"/>
+
+        <GroupBox x:Name="groupBoxSql" Header="Update por regla" Grid.Column="7" Grid.ColumnSpan="3" Grid.Row="3" Grid.RowSpan="6" Margin="10,0,0,0">
+            <RichTextBox x:Name="richTextBoxSql" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="" />
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </GroupBox>
+
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="5" />
@@ -73,14 +94,14 @@
             <GridSplitter Grid.Row="1" Height="5" HorizontalAlignment="Stretch" />
 
             <GroupBox x:Name="groupBoxGenerate" Header="Reglas a generar" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10">
-                <DataGrid x:Name="dataGridParameter"
+                <DataGrid x:Name="dataGridReglas"
                         AutoGenerateColumns="False"
                         SelectionMode="Single"
                         CanUserDeleteRows="false"
                         CanUserAddRows="False"
                         CanUserReorderColumns="False"
                         CanUserSortColumns="False"
-                        ItemsSource="{Binding Path=Model.ListaReglas}"
+                        ItemsSource="{Binding Path=Model.ListaReglas}" SelectionChanged="dataGridParameter_SelectionChanged"
                           >
                     <DataGrid.Columns>
                         <DataGridTemplateColumn x:Name="idRegla" Header="Código" IsReadOnly="True">

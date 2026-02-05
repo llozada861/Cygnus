@@ -15,6 +15,8 @@ namespace Cygnus2_0.Model.Reglas
         ObservableCollection<UsuariosPDN> listaBD;
         ObservableCollection<SelectListItem> listaReglas;
         public UsuariosPDN BdSeleccionada { get; set; }
+        public string Tabla { get; set; }
+        public string Regla { get; set; }
 
         public ObservableCollection<UsuariosPDN> ListaBD
         {

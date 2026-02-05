@@ -49,6 +49,8 @@ namespace Cygnus2_0.ViewModel.Reglas
             int contador = 1;
             OracleClob clValor;
             string nombreArchivo = "";
+            string fecha = DateTime.Now.Day.ToString().PadLeft(2, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Year;
+            string plantilla = "";
 
             RadioButton generar = (RadioButton)commandParameter;
 
@@ -63,12 +65,22 @@ namespace Cygnus2_0.ViewModel.Reglas
                         if (generar.IsChecked == true)
                         {
                             clValor = handler.DAO.pGeneraRegla(item.Value, this.Model.BdSeleccionada);
-                            nombreArchivo = "ins_" + DateTime.Now.Day.ToString().PadLeft(2,'0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Year + "_gr_config_expression_" + contador.ToString().PadLeft(2,'0') + ".sql";
+                            plantilla = clValor.Value;
+
+                            if (!string.IsNullOrEmpty(item.DocumentoAD))
+                                plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
+
+                            nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + contador.ToString().PadLeft(2,'0') + ".sql";
                         }
                         else
                         {
                             clValor = handler.DAO.pRegeneraRegla(item.Value, this.Model.BdSeleccionada);
-                            nombreArchivo = "up_" + DateTime.Now.Day.ToString().PadLeft(2, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Year + "_gr_config_expression_" + contador.ToString().PadLeft(2, '0') + ".sql";
+                            plantilla = clValor.Value;
+
+                            if (!string.IsNullOrEmpty(item.DocumentoAD))
+                                plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
+
+                            nombreArchivo = "up_"+ fecha + "_gr_config_expression_" + item.Value + ".sql";
                         }
 
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -79,7 +91,7 @@ namespace Cygnus2_0.ViewModel.Reglas
                         handler.CursorNormal();
 
                         if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                            File.WriteAllText(saveFileDialog.FileName, clValor.Value, Encoding.Default);
+                            File.WriteAllText(saveFileDialog.FileName, plantilla, Encoding.Default);
 
                     }
                     catch (Exception ex)
@@ -109,6 +121,61 @@ namespace Cygnus2_0.ViewModel.Reglas
                 handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
+        }
+
+        internal string pObtUpdate(List<SelectListItem> listaPrimarias, string Tabla, string ColRegla, string idRegla)
+        {
+            StringBuilder update = new StringBuilder();
+
+            string sql;
+            string primariasSql = "";
+            string primariasUp = "";
+
+            try
+            {
+                handler.CursorWait();
+
+                foreach(SelectListItem item in listaPrimarias)
+                {
+                    primariasSql = primariasSql + item.Value + ",";
+                }
+
+                primariasSql = primariasSql.Substring(0, primariasSql.Length - 1);
+
+                sql = $"select {primariasSql} from {Tabla} where {ColRegla} = {idRegla}";
+
+                List<SelectListItem> valores = handler.DAO.pObtDatosTablaRegla(sql,Model.BdSeleccionada);
+
+                foreach(SelectListItem item in valores)
+                {
+                    primariasUp = "";
+
+                    foreach (SelectListItem itemCol in item.ListaHijos)
+                    {
+
+                        if (itemCol.Value.Any(char.IsLetter))
+                            primariasUp = primariasUp + itemCol.Text + " = '" + itemCol.Value + "' AND ";
+                        else
+                            primariasUp = primariasUp + itemCol.Text + " = " + itemCol.Value + " AND ";
+
+                    }
+
+                    primariasUp = primariasUp.Substring(0, primariasUp.Length - 5);
+
+                    sql = $"UPDATE {Tabla} {Environment.NewLine} SET {ColRegla} = IdConfExpre {Environment.NewLine} WHERE {primariasUp}; {Environment.NewLine}";
+
+                    update.AppendLine(sql);
+                }
+
+                handler.CursorNormal();
+            }
+            catch (Exception ex)
+            {
+                handler.CursorNormal();
+                handler.MensajeError(ex.Message);
+            }
+
+            return update.ToString();
         }
     }
 }

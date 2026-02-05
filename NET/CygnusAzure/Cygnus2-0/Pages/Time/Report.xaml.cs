@@ -37,7 +37,7 @@ namespace Cygnus2_0.Pages.Time
 
         private void BtnGenerar_Click(object sender, RoutedEventArgs e)
         {
-            view.pGeneraReporte();
+            view.pGeneraReporteAsync();
         }
     }
 }
