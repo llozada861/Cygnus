@@ -330,6 +330,8 @@ namespace Cygnus2_0.DAO
                 }
             }
 
+            con.Close();
+
             return stCantidadObjetosInvalidos;
         }
 
