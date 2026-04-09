@@ -54,7 +54,10 @@
         <TextBox x:Name="txRegla" TextWrapping="Wrap" Text="{Binding Path=Model.Regla}" Grid.ColumnSpan="3" Grid.Column="7"  Grid.Row="2" VerticalAlignment="Center"
         Style="{StaticResource placeHolder}" Tag="Columna que contiene la regla" Margin="10,0,0,0" TextChanged="txColumna_TextChanged" IsEnabled="False"/>
 
-        <GroupBox x:Name="groupBoxSql" Header="Update por regla" Grid.Column="7" Grid.ColumnSpan="3" Grid.Row="3" Grid.RowSpan="6" Margin="10,0,0,0">
+        <TextBox x:Name="txCodigo" TextWrapping="Wrap" Text="{Binding Path=Model.Contador}" Grid.ColumnSpan="3" Grid.Column="7"  Grid.Row="3" VerticalAlignment="Center"
+        Style="{StaticResource placeHolder}" Tag="Contador Reglas Nuevas" Margin="10,0,0,0" />
+        
+        <GroupBox x:Name="groupBoxSql" Header="Update por regla" Grid.Column="7" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="6" Margin="10,0,0,0">
             <RichTextBox x:Name="richTextBoxSql" >
                 <RichTextBox.Resources>
                     <Style TargetType="{x:Type Paragraph}">

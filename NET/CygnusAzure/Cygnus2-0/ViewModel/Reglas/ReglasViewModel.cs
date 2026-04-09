@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -32,6 +33,7 @@ namespace Cygnus2_0.ViewModel.Reglas
             this.handler = handler;
             Model.ListaReglas = new ObservableCollection<SelectListItem>();
             _process = new DelegateCommand(OnProcess);
+            Model.Contador = 1;
         }
 
         public ReglasModel Model { get; set; }
@@ -46,11 +48,13 @@ namespace Cygnus2_0.ViewModel.Reglas
 
         public void OnProcess(object commandParameter)
         {
-            int contador = 1;
+            int contador = this.Model.Contador;
             OracleClob clValor;
             string nombreArchivo = "";
             string fecha = DateTime.Now.Day.ToString().PadLeft(2, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Year;
             string plantilla = "";
+
+            var archivos = new List<(string nombreArchivo, string contenido)>();
 
             RadioButton generar = (RadioButton)commandParameter;
 
@@ -70,7 +74,7 @@ namespace Cygnus2_0.ViewModel.Reglas
                             if (!string.IsNullOrEmpty(item.DocumentoAD))
                                 plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
 
-                            nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + contador.ToString().PadLeft(2,'0') + ".sql";
+                            nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + contador.ToString().PadLeft(4, '0') + ".sql";
                         }
                         else
                         {
@@ -80,19 +84,11 @@ namespace Cygnus2_0.ViewModel.Reglas
                             if (!string.IsNullOrEmpty(item.DocumentoAD))
                                 plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
 
-                            nombreArchivo = "up_"+ fecha + "_gr_config_expression_" + item.Value + ".sql";
+                            nombreArchivo = "up_" + fecha + "_gr_config_expression_" + item.Value + ".sql";
                         }
 
-                        SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.FileName = nombreArchivo;
-
+                        archivos.Add((nombreArchivo, plantilla));
                         contador++;
-
-                        handler.CursorNormal();
-
-                        if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                            File.WriteAllText(saveFileDialog.FileName, plantilla, Encoding.Default);
-
                     }
                     catch (Exception ex)
                     {
@@ -101,6 +97,67 @@ namespace Cygnus2_0.ViewModel.Reglas
                         return;
                     }
 
+                }
+            }
+
+            handler.CursorNormal();
+
+            if (archivos.Count > 1)            
+                ExportarStringsEnZip(archivos, "Reglas_" + Model.Contador + "_" + (contador - 1) + ".zip");
+            else
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.FileName = archivos.First().nombreArchivo;
+
+                handler.CursorNormal();
+
+                if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    File.WriteAllText(saveFileDialog.FileName, archivos.First().contenido, Encoding.Default);
+            }
+        }
+
+        private void ExportarStringsEnZip(List<(string nombreArchivo, string contenido)> archivos, string nombreArchivo)
+        {
+            if (archivos == null || archivos.Count == 0)
+            {
+                MessageBox.Show("No hay datos para exportar.");
+                return;
+            }
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Archivo ZIP (*.zip)|*.zip";
+                sfd.Title = "Guardar ZIP";
+                sfd.FileName = nombreArchivo;
+
+                if (sfd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    using (FileStream fs = new FileStream(sfd.FileName, FileMode.Create))
+                    using (ZipArchive zip = new ZipArchive(fs, ZipArchiveMode.Create))
+                    {
+                        foreach (var archivo in archivos)
+                        {
+                            if (string.IsNullOrWhiteSpace(archivo.nombreArchivo))
+                                continue;
+
+                            var entry = zip.CreateEntry(archivo.nombreArchivo);
+
+                            using (var entryStream = entry.Open())
+                            using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                            {
+                                writer.Write(archivo.contenido ?? "");
+                            }
+                        }
+                    }
+
+                    handler.MensajeOk("ZIP generado correctamente.");
+                }
+                catch (Exception ex)
+                {
+                    handler.MensajeError("Error al generar ZIP: " + ex.Message);
                 }
             }
         }

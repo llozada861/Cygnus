@@ -18,6 +18,8 @@ namespace Cygnus2_0.Model.Reglas
         public string Tabla { get; set; }
         public string Regla { get; set; }
 
+        public Int32 Contador { get; set; }
+
         public ObservableCollection<UsuariosPDN> ListaBD
         {
             get { return listaBD; }
