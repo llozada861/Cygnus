@@ -27,6 +27,7 @@
                 <mui:Link DisplayName="Reglas" Source="/Pages/Reglas/ReglasUserControl.xaml" />
                 <mui:Link DisplayName="Objetos" Source="/Pages/Objects/UCBlockObject.xaml" />
                 <mui:Link DisplayName="Seguridad" Source="/Pages/Security/AdminUser.xaml" />
+                <!--<mui:Link DisplayName="Releases App" Source="/Pages/Releases/ReleasesUC.xaml" />-->
             </mui:ModernTab.Links>
         </mui:ModernTab>
         <controls:NotificationArea x:Name="WindowArea" Position="BottomLeft" MaxItems="3" />

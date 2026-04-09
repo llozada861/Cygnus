@@ -62,6 +62,8 @@ namespace Cygnus2_0.DAO
                 cmd.Parameters.Add(":TIPO", parametro.Tipo.Text);
                 cmd.ExecuteNonQuery();
             }
+
+            handler.ConexionOracle.ConexionOracleSQL.Close();
         }
 
         public void pCreaMensaje(MessageModel mensajesModel)
@@ -76,6 +78,8 @@ namespace Cygnus2_0.DAO
                 cmd.Parameters.Add(":SOLUCION", mensajesModel.Solucion);
                 cmd.ExecuteNonQuery();
             }
+
+            handler.ConexionOracle.ConexionOracleSQL.Close();
         }
 
         public string pObtCodigoMensaje()
@@ -102,6 +106,8 @@ namespace Cygnus2_0.DAO
             }
 
             Codigo = Codigo + 1;
+
+            con.Close();
 
             return Codigo+"";
         }
@@ -134,6 +140,8 @@ namespace Cygnus2_0.DAO
                 }
             }
 
+            con.Close();
+
             return sbCodigoVersion;
         }
 
@@ -147,6 +155,8 @@ namespace Cygnus2_0.DAO
                 cmd.Parameters.Add(":data", bytes);
                 cmd.ExecuteNonQuery();
             }
+
+            handler.ConexionOracle.ConexionOracleSQL.Close();
         }
 
         #endregion Updater
@@ -290,9 +300,10 @@ namespace Cygnus2_0.DAO
                         ownerBd = rdr["OWNER"].ToString();
                         break;
                     }
-                    rdr.Close();
                 }
             }
+
+            con.Close();
 
             if (!string.IsNullOrEmpty(ownerBd) && !ownerBd.Equals(usuario))
             {
@@ -375,7 +386,7 @@ namespace Cygnus2_0.DAO
                     reader.Close();
                 }
             }
-
+            con.Close();
             handler.ConexionOracle.ConexionOracleProd.Close();
         }
         public List<ConexionModel> pObtListaBD()
@@ -416,6 +427,8 @@ namespace Cygnus2_0.DAO
                     reader.Close();
                 }
             }
+
+            con.Close();
 
             return lista;
         }
@@ -579,6 +592,8 @@ namespace Cygnus2_0.DAO
 
             sqlPktbl.ExecuteReader();
 
+            conn.Close();
+
             return (OracleClob)sqlPktbl.Parameters["oclObjeto"].Value;
         }
         #endregion Fuentes PL
@@ -659,6 +674,8 @@ namespace Cygnus2_0.DAO
                 }
             }
 
+            con.Close();
+
             return listaEstandar;
         }
         internal void pAdicionarEstandar(string value1, string text, string value2)
@@ -673,6 +690,8 @@ namespace Cygnus2_0.DAO
                 cmd.Parameters.Add(":valor", value2);
                 cmd.ExecuteNonQuery();
             }
+
+            handler.ConexionOracle.ConexionOracleSQL.Close();
         }
         internal void pModificarEstandar(string value1, string text, string value2)
         {
@@ -686,6 +705,8 @@ namespace Cygnus2_0.DAO
                 cmd.Parameters.Add(":token", value1);
                 cmd.ExecuteNonQuery();
             }
+
+            handler.ConexionOracle.ConexionOracleSQL.Close();
         }
         internal void pEliminarEstandar(string value)
         {
@@ -697,6 +718,8 @@ namespace Cygnus2_0.DAO
                 cmd.Parameters.Add(":token", value);
                 cmd.ExecuteNonQuery();
             }
+
+            handler.ConexionOracle.ConexionOracleSQL.Close();
         }
         #endregion Estandar
         public string prueba()
@@ -775,6 +798,7 @@ namespace Cygnus2_0.DAO
                 }
             }
 
+            con.Close();
             handler.ConexionOracle.ConexionOracleProd.Close();
 
             return dato;
@@ -836,6 +860,8 @@ namespace Cygnus2_0.DAO
 
             sqlValor.ExecuteReader();
 
+            conn.Close();
+
             return (OracleClob)sqlValor.Parameters["oclFile"].Value;
         }
 
@@ -877,7 +903,7 @@ namespace Cygnus2_0.DAO
                     reader.Close();
                 }
             }
-
+            con.Close();
             handler.ConexionOracle.ConexionOracleProd.Close();
 
             return lista;
@@ -922,7 +948,7 @@ namespace Cygnus2_0.DAO
                     reader.Close();
                 }
             }
-
+            con.Close();
             handler.ConexionOracle.ConexionOracleProd.Close();
 
             return lista;
