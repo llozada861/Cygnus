@@ -146,7 +146,7 @@ namespace Cygnus2_0.ViewModel.Reglas
                             var entry = zip.CreateEntry(archivo.nombreArchivo);
 
                             using (var entryStream = entry.Open())
-                            using (var writer = new StreamWriter(entryStream, Encoding.UTF8))
+                            using (var writer = new StreamWriter(entryStream, Encoding.GetEncoding(1252)))
                             {
                                 writer.Write(archivo.contenido ?? "");
                             }

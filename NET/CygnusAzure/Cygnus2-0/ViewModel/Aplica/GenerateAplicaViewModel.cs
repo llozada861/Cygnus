@@ -232,6 +232,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                         /*if (handler.Formulario.AplicaCarpetaArriba)
                             handler.SavePathAplica = System.IO.Path.GetDirectoryName(dropfilepath) + "\\";
                         else*/
+
                         handler.SavePathAplica = handler.LoadPath;
 
                         handler.PathArchivos = handler.SavePathAplica;
