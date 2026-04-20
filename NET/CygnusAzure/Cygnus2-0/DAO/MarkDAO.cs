@@ -804,8 +804,10 @@ namespace Cygnus2_0.DAO
             return dato;
         }
 
-        internal OracleClob pGeneraRegla(string idRegla, UsuariosPDN conexion)
+        internal string pGeneraRegla(string idRegla, UsuariosPDN conexion)
         {
+            string resultado = "";
+
             handler.ConexionOracle.RealizarConexionProd(conexion);
             OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
 
@@ -831,10 +833,15 @@ namespace Cygnus2_0.DAO
 
             sqlValor.ExecuteReader();
 
-            return (OracleClob)sqlValor.Parameters["oclFile"].Value;
+            resultado = ((OracleClob)sqlValor.Parameters["oclFile"].Value).Value;
+            conn.Close();
+
+            return resultado;
         }
-        internal OracleClob pRegeneraRegla(string idRegla, UsuariosPDN conexion)
+        internal string pRegeneraRegla(string idRegla, UsuariosPDN conexion)
         {
+            string resultado = "";
+
             handler.ConexionOracle.RealizarConexionProd(conexion);
             OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
 
@@ -860,9 +867,11 @@ namespace Cygnus2_0.DAO
 
             sqlValor.ExecuteReader();
 
+            resultado = ((OracleClob)sqlValor.Parameters["oclFile"].Value).Value;
+
             conn.Close();
 
-            return (OracleClob)sqlValor.Parameters["oclFile"].Value;
+            return resultado;
         }
 
         internal List<SelectListItem> pObtPrimarias(string Tabla, UsuariosPDN conexion)

@@ -671,6 +671,16 @@ namespace Cygnus2_0.General
                                     grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
                                     sql.Add(grant.ToString());
                                 }
+
+                                if(!string.IsNullOrEmpty(this.view.Model.Usuario))
+                                {
+                                    grant = new StringBuilder();
+                                    grant.AppendLine(res.PlantillaGrantNP);
+                                    grant.Replace(res.TagGrantUsuario, this.view.Model.Usuario);
+                                    grant.Replace(res.TagGrantPermiso, permiso.Descripcion);
+                                    grant.Replace(res.TagGrantObjeto, archivo.NombreObjeto);
+                                    sql.Add(grant.ToString());
+                                }
                             }
                         }
 
