@@ -1,0 +1,7 @@
+{
+  "version": "1.2.5.9",
+  "url": "https://github.com/llozada861/Cygnus/releases/download/XXXX/Cygnus.zip",
+  "mandatory": false,
+  "checksum": "ABC123XYZ",
+  "signature": "firma_digital"
+}
