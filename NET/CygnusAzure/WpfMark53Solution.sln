@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQ", "SonarQ\SonarQ.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdaterBD", "UpdaterBD\UpdaterBD.csproj", "{42F485CA-F3FA-4FC0-87AC-8224E0BD20D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdaterGit", "UpdaterGit\UpdaterGit.csproj", "{6322A11A-72C6-4BD2-B437-08F73634AD03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,26 @@ Global
 		{42F485CA-F3FA-4FC0-87AC-8224E0BD20D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42F485CA-F3FA-4FC0-87AC-8224E0BD20D3}.Release|x86.ActiveCfg = Release|Any CPU
 		{42F485CA-F3FA-4FC0-87AC-8224E0BD20D3}.Release|x86.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Debug|x86.Build.0 = Debug|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.0|Any CPU.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.0|Any CPU.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.0|x86.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.0|x86.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.5|Any CPU.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.5|Any CPU.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.5|x86.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.5|x86.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.6.1|Any CPU.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.6.1|Any CPU.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.6.1|x86.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release 4.6.1|x86.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release|x86.ActiveCfg = Release|Any CPU
+		{6322A11A-72C6-4BD2-B437-08F73634AD03}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

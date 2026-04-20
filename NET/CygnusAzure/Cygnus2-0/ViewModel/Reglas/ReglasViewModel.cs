@@ -49,10 +49,10 @@ namespace Cygnus2_0.ViewModel.Reglas
         public void OnProcess(object commandParameter)
         {
             int contador = this.Model.Contador;
-            OracleClob clValor;
             string nombreArchivo = "";
             string fecha = DateTime.Now.Day.ToString().PadLeft(2, '0') + DateTime.Now.Month.ToString().PadLeft(2, '0') + DateTime.Now.Year;
             string plantilla = "";
+            string stPrefijo;
 
             var archivos = new List<(string nombreArchivo, string contenido)>();
 
@@ -68,8 +68,7 @@ namespace Cygnus2_0.ViewModel.Reglas
                     {
                         if (generar.IsChecked == true)
                         {
-                            clValor = handler.DAO.pGeneraRegla(item.Value, this.Model.BdSeleccionada);
-                            plantilla = clValor.Value;
+                            plantilla = handler.DAO.pGeneraRegla(item.Value, this.Model.BdSeleccionada);
 
                             if (!string.IsNullOrEmpty(item.DocumentoAD))
                                 plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
@@ -78,8 +77,7 @@ namespace Cygnus2_0.ViewModel.Reglas
                         }
                         else
                         {
-                            clValor = handler.DAO.pRegeneraRegla(item.Value, this.Model.BdSeleccionada);
-                            plantilla = clValor.Value;
+                            plantilla = handler.DAO.pRegeneraRegla(item.Value, this.Model.BdSeleccionada);
 
                             if (!string.IsNullOrEmpty(item.DocumentoAD))
                                 plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
@@ -102,8 +100,13 @@ namespace Cygnus2_0.ViewModel.Reglas
 
             handler.CursorNormal();
 
+            if (generar.IsChecked == true)
+                stPrefijo = "Generar_";
+            else
+                stPrefijo = "Regenerar_";
+
             if (archivos.Count > 1)            
-                ExportarStringsEnZip(archivos, "Reglas_" + Model.Contador + "_" + (contador - 1) + ".zip");
+                ExportarStringsEnZip(archivos, stPrefijo + "reglas_" + Model.Contador + "_" + (contador - 1) + ".zip");
             else
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();

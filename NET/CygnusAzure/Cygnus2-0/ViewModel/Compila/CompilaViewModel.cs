@@ -249,9 +249,9 @@ namespace Cygnus2_0.ViewModel.Compila
             {
                 if (archivo.TipoAplicacion != res.SQLPLUS)
                 {
-                    handler.pEjecutaPermisosArchivo(archivo, this.Model.Usuario.Text);
                     handler.pObtieneBloquesCodigo(archivo);
                     pCompilaObjetosBD(archivo);
+                    handler.pEjecutaPermisosArchivo(archivo, this.Model.Usuario.Text);
                 }
             }
 
