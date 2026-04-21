@@ -54,6 +54,7 @@ namespace Cygnus2_0.General
         private AppearanceViewModel settings;
         private MarkDAO dao;
         private RepositorioViewModel repositorioVM;
+        private UpdateModel updateModel;
 
         private string estadoConn;
         private bool roleAdmin;
@@ -162,6 +163,7 @@ namespace Cygnus2_0.General
             confGeneralViewModel = new ConfGeneralViewModel(this);
             pRegeneraIndexListas();
             repositorioVM = new RepositorioViewModel(this);
+            updateModel = new UpdateModel(this);
             #endregion ViewModels
 
             #region Appareance
@@ -212,6 +214,12 @@ namespace Cygnus2_0.General
         {
             get { return repositorioVM; }
             set { repositorioVM = value; }
+        }
+
+        public UpdateModel UpdateModel_
+        {
+            get { return updateModel; }
+            set { updateModel = value; }
         }
         #endregion AtrViewModels
 

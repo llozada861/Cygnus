@@ -1,38 +1,53 @@
 ﻿using Cygnus2_0.General;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using res = Cygnus2_0.Properties.Resources;
+using System.Windows.Forms;
+using System.Net;
 
 namespace Cygnus2_0.Model.Settings
 {
     public class UpdateModel
     {
         private Handler handler;
+        private string updateUrl = "https://raw.githubusercontent.com/llozada861/Cygnus/refs/heads/Desarrollo/update.json";
         public UpdateModel(Handler hand)
         {
             handler = hand;
         }
 
         #region Actualizacion
-        public void pActualizaApp(string usuario, string pass,string version, string servidor, string basedatos, string puerto)
+        public void pActualizaApp()
         {
-            pDescargarActualizacion(usuario,pass,version,servidor,basedatos,puerto);
+            pDescargarActualizacion();
         }
 
-        public static void pDescargarActualizacion(string usuario, string pass,string version, string servidor, string basedatos, string puerto)
+        public async void pDescargarActualizacion()
         {
-            string cmdLn = "";
-            cmdLn += "|usuario|" + usuario;
-            cmdLn += "|pass|" + pass;
-            cmdLn += "|servidor|" + servidor;
-            cmdLn += "|puerto|" + puerto;
-            cmdLn += "|baseDatos|" + basedatos;
-            cmdLn += "|version|" + version;
+            await CheckUpdate();
+        }
 
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "Updater";
-            startInfo.Arguments = cmdLn;
-            Process.Start(startInfo);
+        public async Task CheckUpdate()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            var client = new HttpClient();
+            var json = await client.GetStringAsync(updateUrl);
+
+            var info = JsonConvert.DeserializeObject<UpdateInfo>(json);
+
+            System.Version current = new System.Version(Application.ProductVersion);
+            System.Version remote = new System.Version(info.Version);
+
+            if (remote > current)
+            {
+                // lanzar updater externo
+                Process.Start("UpdaterGit.exe", info.Url);
+                Application.Exit();
+            }
         }
         #endregion Actualizacion
     }
