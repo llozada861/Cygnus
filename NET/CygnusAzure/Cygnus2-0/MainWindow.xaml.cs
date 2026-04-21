@@ -153,32 +153,14 @@ namespace Cygnus2_0
                     RequetInfo request = new RequetInfo(userControls, handler, this, "Antes de empezar, configura el acceso a AzureDevops",null);
                     request.ShowDialog();
                 }
-
-                //Se valida si se debe actualizar automáticamente
-                if (handler.ConexionOracle.ConexionOracleSQL != null)
-                {
-                    if (handler.ConexionOracle.ConexionOracleSQL.State == System.Data.ConnectionState.Open)
-                    {
-                        version = handler.DAO.pObtCodigoVersion();
-
-                        if (!handler.fsbVersion.Equals(version))
-                        {
-                            try
-                            {
-                                actualiza = true;
-
-                                UpdateModel.pDescargarActualizacion(handler.ConnView.Model.Usuario,handler.ConnView.Model.Pass, version,handler.ConnView.Model.Servidor, handler.ConnView.Model.BaseDatos, handler.ConnView.Model.Puerto);
-                                this.Close();
-                            }
-                            catch { }
-                        }
-                    }
-                }
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
+
+            //se busca actualización en git
+            handler.UpdateModel_.pActualizaApp();
 
             if (!actualiza)
             {

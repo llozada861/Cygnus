@@ -309,6 +309,7 @@
     <Compile Include="Model\Settings\ConfGeneralModel.cs" />
     <Compile Include="Model\Settings\Configuracion.cs" />
     <Compile Include="Model\Settings\PalabrasClaves.cs" />
+    <Compile Include="Model\Settings\UpdateInfo.cs" />
     <Compile Include="Model\Settings\UpdateModel.cs" />
     <Compile Include="Model\Threats\ThreatsModel.cs" />
     <Compile Include="Model\Time\TimeModel.cs" />
