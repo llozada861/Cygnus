@@ -91,13 +91,13 @@ namespace Cygnus2_0.ViewModel.Objects
 
                     handler.CursorWait();
 
-                    OracleClob pktbl = handler.DAO.pGeneraFuente(this.ObjetoSeleccionado.FileName, this.ObjetoSeleccionado.Owner, this.BdSeleccionada);
+                    string pktbl = handler.DAO.pGeneraFuente(this.ObjetoSeleccionado.FileName, this.ObjetoSeleccionado.Owner, this.BdSeleccionada);
 
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.FileName = this.BdSeleccionada.BaseDatos + "_" + this.ObjetoSeleccionado.FileName.ToLower() + ".sql";
 
                     if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        System.IO.File.WriteAllText(saveFileDialog.FileName, pktbl.Value, Encoding.Default);
+                        System.IO.File.WriteAllText(saveFileDialog.FileName, pktbl, Encoding.Default);
 
                     handler.CursorNormal();
                 }
@@ -107,13 +107,13 @@ namespace Cygnus2_0.ViewModel.Objects
 
                     handler.CursorWait();
 
-                    OracleClob pktbl = handler.DAO.pGeneraFuente(archivo.FileName, archivo.Owner, this.BdSeleccionada);
+                    string pktbl = handler.DAO.pGeneraFuente(archivo.FileName, archivo.Owner, this.BdSeleccionada);
 
                     if (!System.IO.File.Exists(archivo.RutaConArchivo))
                     {
                         using (StreamWriter descarga = new StreamWriter(archivo.RutaConArchivo, false, Encoding.Default))
                         {
-                            descarga.Write(pktbl.Value);
+                            descarga.Write(pktbl);
                         }
                     }
 
@@ -124,6 +124,7 @@ namespace Cygnus2_0.ViewModel.Objects
             }
             catch (Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
                 handler.ConexionOracle.ConexionOracleProd.Close();
             }
