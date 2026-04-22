@@ -32,6 +32,7 @@ using System.Drawing;
 using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Conn;
 using Cygnus2_0.Pages.Data;
+using System.Runtime.InteropServices;
 
 namespace Cygnus2_0.DAO
 {
@@ -53,8 +54,14 @@ namespace Cygnus2_0.DAO
         {
             string query = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_SQL_PARAMETRO)).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
 
-            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
+            handler.ConexionOracle.RealizarConexion();
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
+                cmd.CommandText = query;
+                cmd.Connection = con;
+
                 cmd.Parameters.Add(":PARAMETRO_ID", parametro.ParameterId);
                 cmd.Parameters.Add(":DESCRIPCION", parametro.Descripcion);
                 cmd.Parameters.Add(":VALOR", parametro.Valor);
@@ -63,15 +70,21 @@ namespace Cygnus2_0.DAO
                 cmd.ExecuteNonQuery();
             }
 
-            handler.ConexionOracle.ConexionOracleSQL.Close();
+            con.Close();
         }
 
         public void pCreaMensaje(MessageModel mensajesModel)
         {
             string query = handler.ListaHTML.Where(x => x.Nombre.Equals("SQL_MENSAJE")).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
 
-            using (OracleCommand cmd = new OracleCommand(query, handler.ConexionOracle.ConexionOracleSQL))
+            handler.ConexionOracle.RealizarConexion();
+            OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
+
+            using (OracleCommand cmd = new OracleCommand())
             {
+                cmd.CommandText = query;
+                cmd.Connection = con;
+
                 cmd.Parameters.Add(":CODIGO", mensajesModel.Codigo);
                 cmd.Parameters.Add(":DESCRIPCION", mensajesModel.Descripcion);
                 cmd.Parameters.Add(":CAUSA", mensajesModel.Causa);
@@ -79,7 +92,7 @@ namespace Cygnus2_0.DAO
                 cmd.ExecuteNonQuery();
             }
 
-            handler.ConexionOracle.ConexionOracleSQL.Close();
+            con.Close();
         }
 
         public string pObtCodigoMensaje()
@@ -88,6 +101,7 @@ namespace Cygnus2_0.DAO
 
             int Codigo = 0;
 
+            handler.ConexionOracle.RealizarConexion();
             OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
 
             using (OracleCommand cmd = new OracleCommand())
