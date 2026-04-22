@@ -569,8 +569,9 @@ namespace Cygnus2_0.DAO
         #endregion GenereacionPaquetes
 
         #region Fuentes PL
-        internal OracleClob pGeneraFuente(string nombre, string owner, UsuariosPDN conexion)
+        internal string pGeneraFuente(string nombre, string owner, UsuariosPDN conexion)
         {
+            string fuente = "";
             handler.ConexionOracle.RealizarConexionProd(conexion);
             OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
 
@@ -591,10 +592,11 @@ namespace Cygnus2_0.DAO
             sqlPktbl.Parameters.Add(clFile);
 
             sqlPktbl.ExecuteReader();
+            fuente = ((OracleClob)sqlPktbl.Parameters["oclObjeto"].Value).Value;
 
             conn.Close();
 
-            return (OracleClob)sqlPktbl.Parameters["oclObjeto"].Value;
+            return fuente;
         }
         #endregion Fuentes PL
 
