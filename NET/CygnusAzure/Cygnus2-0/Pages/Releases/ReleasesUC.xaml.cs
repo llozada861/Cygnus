@@ -57,7 +57,7 @@ namespace Cygnus2_0.Pages.Releases
             { }
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "ReleaseMgr.jar ";
+            startInfo.FileName = "ReleaseMgr_FAT.jar ";
             startInfo.Arguments = handler.Azure.Token;
             Process.Start(startInfo);
         }
