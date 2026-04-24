@@ -58,7 +58,7 @@ namespace Cygnus2_0.Pages.Releases
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "ReleaseMgr_FAT.jar ";
-            startInfo.Arguments = handler.Azure.Token;
+            startInfo.Arguments = handler.Azure.Token+ " OPEN "+"https://grupoepm.visualstudio.com/%s/_build/results?buildId=%s&view=logs&j=275f1d19-1bd8-5591-b06b-07d489ea915a&t=a46d8783-b972-547c-42b9-2f94289d3941 "+"https://grupoepm.visualstudio.com/%s/_releaseProgress?_a=release-pipeline-progress&releaseId=%s "+"https://grupoepm.visualstudio.com/%s/_release?_a=releases&view=mine&definitionId=%s&statusFilter=inProgress";
             Process.Start(startInfo);
         }
     }
