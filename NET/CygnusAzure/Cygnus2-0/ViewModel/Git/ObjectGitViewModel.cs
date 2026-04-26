@@ -124,6 +124,13 @@ namespace Cygnus2_0.ViewModel.Git
 
                 GitModel.ListaArchivosEncontrados.Clear();
                 RepoGit.pSetearLineaBase(GitModel.RamaLBSeleccionada.Text, GitSeleccionado);
+
+                handler.CursorNormal();
+                string mensaje = "Desea hacerle PULL a la rama " + GitModel.RamaLBSeleccionada.Text + "?";
+                if (handler.MensajeConfirmacion(mensaje) == "Y")
+                    RepoGit.pActualizarRepo(handler, GitSeleccionado.Ruta, GitModel.RamaLBSeleccionada.Text);
+
+                handler.CursorWait();
                 List<Archivo> archivos = new List<Archivo>();
                 handler.pListaArchivosCarpeta(GitSeleccionado.Ruta, archivos);
                 archivos = archivos.FindAll(x => x.FileName.ToUpper().IndexOf(GitModel.ObjetoBuscar.ToUpper()) > -1);
