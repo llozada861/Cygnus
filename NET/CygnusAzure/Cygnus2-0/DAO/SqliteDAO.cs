@@ -774,6 +774,7 @@ namespace Cygnus2_0.DAO
                          "WHERE hh.requerimiento = rq.codigo " +
                         "AND hh.usuario = '"+ usuario + "' " +
                         "AND hh.id_hoja = "+ view.HojaActual.Id.ToString() +
+                        " AND rq.empresa = "+handler.ConfGeneralView.Model.Empresa.Codigo.ToString() +
                         " ORDER BY idAzure DESC";
 
                 using (var command = new SQLiteCommand(query, conn))
