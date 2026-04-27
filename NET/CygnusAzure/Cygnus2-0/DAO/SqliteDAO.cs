@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using res = Cygnus2_0.Properties.Resources;
@@ -353,7 +354,6 @@ namespace Cygnus2_0.DAO
                     version_ = new VersionBD();
                     version_.Version = version;
                     version_.Aplicada = "Y";
-                    version_.Empresa = 99;
                     context.Versiones.Add(version_);
                     context.SaveChanges();
                 }
@@ -1310,13 +1310,13 @@ namespace Cygnus2_0.DAO
                 context.SaveChanges();
             }
         }
-        public static ObservableCollection<Repositorio> pListaRepositorios()
+        public static ObservableCollection<Repositorio> pListaRepositorios(Handler handler)
         {
             ObservableCollection<Repositorio> repositorios;
 
             using (DataBaseContext context = new DataBaseContext())
             {
-                repositorios = new ObservableCollection<Repositorio>(context.Repositorios.ToList());
+                repositorios = new ObservableCollection<Repositorio>(context.Repositorios.Where(x => x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
             }
 
             return repositorios;
@@ -1505,13 +1505,13 @@ namespace Cygnus2_0.DAO
             }
         }
 
-        public static List<UsuariosPDN> pObtListaBD()
+        public static List<UsuariosPDN> pObtListaBD(Handler handler)
         {
             List<UsuariosPDN> lista = new List<UsuariosPDN>();
 
             using (DataBaseContext context = new DataBaseContext())
             {
-                lista = context.ListaUsuariosPDN.ToList();
+                lista = context.ListaUsuariosPDN.Where(x => x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList();
             }
 
             return lista;

@@ -48,7 +48,7 @@ namespace Cygnus2_0.ViewModel.Objects
 
             Model.ListaArchivosBloqueo = new ObservableCollection<Archivo>();
             Model.ListaArchivosEncontrados = new ObservableCollection<Archivo>();
-            Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD());
+            Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD(handler));
         }
 
         public BlockModel Model { get; set; }
@@ -136,7 +136,7 @@ namespace Cygnus2_0.ViewModel.Objects
                 Model.ListaArchivosEncontrados.Clear();
                 Model.Objeto = "";
                 Model.ListaBD.Clear();
-                Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD());
+                Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD(handler));
             }
             catch (Exception ex)
             {

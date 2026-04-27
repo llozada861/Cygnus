@@ -29,8 +29,8 @@ namespace Cygnus2_0.ViewModel.Reglas
         public ReglasViewModel(Handler handler) 
         {
             Model = new ReglasModel();
-            Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD());
             this.handler = handler;
+            Model.ListaBD = new ObservableCollection<UsuariosPDN>(SqliteDAO.pObtListaBD(handler));
             Model.ListaReglas = new ObservableCollection<SelectListItem>();
             _process = new DelegateCommand(OnProcess);
             Model.Contador = 1;

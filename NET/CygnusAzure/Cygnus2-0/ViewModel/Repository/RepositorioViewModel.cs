@@ -31,7 +31,7 @@ namespace Cygnus2_0.ViewModel.Repository
             _agregar = new DelegateCommand(Agregar);
             _eliminar = new DelegateCommand(OnDelete);
             _eliminarRama = new DelegateCommand(OnDeleteRama);
-            ListaGit = SqliteDAO.pListaRepositorios();
+            ListaGit = SqliteDAO.pListaRepositorios(handler);
             RutaGitBash = SqliteDAO.pObtValorConfiguracion(res.KeyRutaGitBash);
         }
         public ICommand Add => _agregar;
@@ -198,7 +198,7 @@ namespace Cygnus2_0.ViewModel.Repository
                 else if (RepoSeleccionado != null && handler.MensajeConfirmacion("Seguro que desea eliminar el repositorio [" + RepoSeleccionado.Descripcion + " - " + RepoSeleccionado.Ruta + "] ?") == "Y")
                 {
                     SqliteDAO.pEliminaRepo(RepoSeleccionado);
-                    ListaGit = SqliteDAO.pListaRepositorios();
+                    ListaGit = SqliteDAO.pListaRepositorios(handler);
                 }
             }
             catch (Exception ex)
