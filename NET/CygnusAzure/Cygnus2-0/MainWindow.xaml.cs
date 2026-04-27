@@ -686,6 +686,31 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
+            sbVersion = "1.2.7.0";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                {
+                    "update configuration set company = null",
+                    "update version set company = null",
+                    "alter table cy_userbd add company integer",
+                    "update cy_userbd set company = 99",
+                    "INSERT INTO company (codigo, descripcion, azure, git, sonar, documentoad, defecto) VALUES ('100', 'EMCALI', 'Y', 'Y', 'Y', '', 'N')"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {

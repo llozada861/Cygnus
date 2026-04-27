@@ -29,6 +29,8 @@ namespace Cygnus2_0.Model.User
 
         [Column(name: "puerto")]
         public string Puerto { get; set; }
+        [Column(name: "company")]
+        public int Empresa { get; set; }
 
         [NotMapped]
         public string Displayname

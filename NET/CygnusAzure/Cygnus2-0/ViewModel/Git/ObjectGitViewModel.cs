@@ -60,7 +60,7 @@ namespace Cygnus2_0.ViewModel.Git
             _renombrar = new DelegateCommand(pRenombrar);
             _gitBash = new DelegateCommand(pEjecutaGitBash);
 
-            GitModel.ListaGit = SqliteDAO.pListaRepositorios();
+            GitModel.ListaGit = SqliteDAO.pListaRepositorios(handler);
         }
         public ObjectGitViewModel(Handler handler, List<SelectListItem> ListaCommitsLB, List<SelectListItem> ListaCommitsFeature)
         {
@@ -155,7 +155,7 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.ObjetoBuscar = "";
             GitModel.ListaArchivosEncontrados.Clear();
             GitModel.ListaGit.Clear();
-            GitModel.ListaGit = SqliteDAO.pListaRepositorios();
+            GitModel.ListaGit = SqliteDAO.pListaRepositorios(handler);
             GitModel.ListaRamasLB.Clear();
 
             GitModel.Comentario = "";

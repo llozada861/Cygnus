@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using res = Cygnus2_0.Properties.Resources;
+using System.Windows;
 
 namespace Cygnus2_0.ViewModel.Settings
 {
@@ -50,6 +51,9 @@ namespace Cygnus2_0.ViewModel.Settings
             SqliteDAO.pCreaConfiguracion(res.KeyGeneraHTML, "" + Model.GeneraHtml);
             SqliteDAO.pCreaConfiguracion(res.KEY_VALORW, "" + Model.ValorW);
             handler.ConfGeneralView.Model.Empresa = handler.ConfGeneralView.Model.ListaEmpresas.ToList().Find(x => x.Codigo== Model.Empresa.Codigo);
+
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
     }
 }
