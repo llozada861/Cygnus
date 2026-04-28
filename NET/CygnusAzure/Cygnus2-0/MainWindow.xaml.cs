@@ -711,6 +711,30 @@ namespace Cygnus2_0
                 SqliteDAO.pActualizaVersion(sbVersion);
             }
 
+            sbVersion = "1.2.7.3";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                {
+                    "CREATE TABLE html_new (\r\n\tname\tTEXT,\r\n\tdocumentation\tTEXT,\r\n\tcompany\tINTEGER,\r\n\tfilename\tTEXT,\r\n\tPRIMARY KEY (name, company)\r\n)",
+                    "INSERT INTO html_new (name, documentation,company,filename)\r\nSELECT name, documentation,company,filename FROM html",
+                    "drop table html",
+                    "ALTER TABLE html_new RENAME TO html"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
             //ultima versión
             /*if (!SqliteDAO.pblValidaVersion(fieVersionInfo.FileVersion))
             {
