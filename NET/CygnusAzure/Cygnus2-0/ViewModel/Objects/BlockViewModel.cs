@@ -19,6 +19,7 @@ using Oracle.ManagedDataAccess.Types;
 using System.Windows.Forms;
 using System.IO;
 using static System.Net.WebRequestMethods;
+using System.Text.RegularExpressions;
 
 namespace Cygnus2_0.ViewModel.Objects
 {
@@ -93,6 +94,10 @@ namespace Cygnus2_0.ViewModel.Objects
 
                     string pktbl = handler.DAO.pGeneraFuente(this.ObjetoSeleccionado.FileName, this.ObjetoSeleccionado.Owner, this.BdSeleccionada);
 
+                    pktbl = Regex.Replace(pktbl,"PACKAGE " + this.ObjetoSeleccionado.FileName,"CREATE OR REPLACE PACKAGE "+ this.ObjetoSeleccionado.FileName, RegexOptions.IgnoreCase);
+                    pktbl = Regex.Replace(pktbl, "PACKAGE BODY " + this.ObjetoSeleccionado.FileName, "\n/\nCREATE OR REPLACE PACKAGE BODY " + this.ObjetoSeleccionado.FileName, RegexOptions.IgnoreCase);
+                    pktbl = pktbl + "\n/";
+
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.FileName = this.BdSeleccionada.BaseDatos + "_" + this.ObjetoSeleccionado.FileName.ToLower() + ".sql";
 
@@ -108,6 +113,9 @@ namespace Cygnus2_0.ViewModel.Objects
                     handler.CursorWait();
 
                     string pktbl = handler.DAO.pGeneraFuente(archivo.FileName, archivo.Owner, this.BdSeleccionada);
+                    pktbl = Regex.Replace(pktbl,"PACKAGE " + archivo.FileName, "CREATE OR REPLACE PACKAGE " + archivo.FileName,RegexOptions.IgnoreCase);
+                    pktbl = Regex.Replace(pktbl, "PACKAGE BODY " + archivo.FileName, "\n/\nCREATE OR REPLACE PACKAGE BODY " + archivo.FileName, RegexOptions.IgnoreCase);
+                    pktbl = pktbl + "\n/";
 
                     if (!System.IO.File.Exists(archivo.RutaConArchivo))
                     {
