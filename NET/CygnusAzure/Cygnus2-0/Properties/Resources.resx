@@ -2279,4 +2279,8 @@ END;
   <data name="KEY_REGENERA_REGLA" xml:space="preserve">
     <value>PLANTILLA_REGENERA_REGLA</value>
   </data>
+  <data name="KEY_VERSIONBD" xml:space="preserve">
+    <value>VERSION_BD</value>
+    <comment>Version de la base de datos</comment>
+  </data>
 </root>

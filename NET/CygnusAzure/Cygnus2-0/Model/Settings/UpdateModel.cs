@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 using res = Cygnus2_0.Properties.Resources;
 using System.Windows.Forms;
 using System.Net;
+using System.Linq;
+using LibGit2Sharp;
+using System;
+using Cygnus2_0.DAO;
+using Cygnus2_0.Pages.Security;
+using Cygnus2_0.Model.Version;
 
 namespace Cygnus2_0.Model.Settings
 {
@@ -14,6 +20,7 @@ namespace Cygnus2_0.Model.Settings
     {
         private Handler handler;
         private string updateUrl = "https://raw.githubusercontent.com/llozada861/Cygnus/refs/heads/Desarrollo/update.json";
+        private string updateUrlData = "https://raw.githubusercontent.com/llozada861/Cygnus/refs/heads/Desarrollo/data.json";
         public UpdateModel(Handler hand)
         {
             handler = hand;
@@ -25,9 +32,19 @@ namespace Cygnus2_0.Model.Settings
             pDescargarActualizacion();
         }
 
+        public void pActualizaDataApp()
+        {
+            pDescargarActuaData();
+        }
+
         public async void pDescargarActualizacion()
         {
             await CheckUpdate();
+        }
+
+        public async void pDescargarActuaData()
+        {
+            await pActualizaDatos();
         }
 
         public async Task CheckUpdate()
@@ -47,6 +64,52 @@ namespace Cygnus2_0.Model.Settings
                 // lanzar updater externo
                 Process.Start("UpdaterGit.exe", info.Url);
                 Application.Exit();
+            }
+        }
+
+        public async Task pActualizaDatos()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            var client = new HttpClient();
+            var json = await client.GetStringAsync(updateUrlData);
+
+            VersionesBd jsonVer = JsonConvert.DeserializeObject<VersionesBd>(json);
+
+            string versionBD = handler.ListaConfiguracion.Where(x => x.Text == res.KEY_VERSIONBD).FirstOrDefault().Value;
+            string versionNueva = "";
+
+            System.Version current = new System.Version(versionBD);
+            System.Version remote;
+
+            foreach (VersionBd version in jsonVer.Versiones)
+            {
+                remote = new System.Version(version.Version);
+
+                if (remote > current)
+                {
+                    AjustesBd[] query = version.Ajustes;
+
+                    foreach (AjustesBd ajuste in query)
+                    {
+                        try
+                        {
+                            SqliteDAO.pExecuteNonQuery(ajuste.Sql);
+                            versionNueva = version.Version;
+                        }
+                        catch (Exception ex) { }
+                    }
+                }
+            }
+
+            if(!string.IsNullOrEmpty(versionNueva))
+            {
+                SqliteDAO.pCreaConfiguracion(res.KEY_VERSIONBD, versionNueva);
+
+                handler.MensajeAdvertencia("La base de datos ha sido actualizada a la versión ["+ versionNueva+"]. Se va a reiniciar la aplicación.");
+
+                System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);
+                System.Windows.Application.Current.Shutdown();
             }
         }
         #endregion Actualizacion
