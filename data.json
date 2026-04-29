@@ -1,1 +1,15 @@
-
+{
+    "versiones": [
+        {
+            "version": "2",
+            "ajustes": [
+                {
+                    "sql": "asd1"
+                },
+                {
+                    "sql": "asd2"
+                }
+            ]
+        }
+    ]
+}
