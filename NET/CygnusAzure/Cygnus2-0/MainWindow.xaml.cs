@@ -79,10 +79,12 @@ namespace Cygnus2_0
         {
             System.Reflection.Assembly executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
             var fieVersionInfo = FileVersionInfo.GetVersionInfo(executingAssembly.Location);
+            string versionBD = handler.ListaConfiguracion.Where(x => x.Text == "VERSION_BD").FirstOrDefault().Value;
                             
             try
             {
-                this.Title = "Cygnus [" + fieVersionInfo.FileVersion + "] - Empresa [" + handler.ConfGeneralView.Model.Empresa.Descripcion + "] - Base Datos ["+ handler.ConnView.Model.Conexion.Etiqueta + "]";
+                this.Title = "Cygnus [ App: " + fieVersionInfo.FileVersion + " BD: "+ versionBD+"] - Empresa [" + handler.ConfGeneralView.Model.Empresa.Descripcion + 
+                 "] - Base Datos ["+ handler.ConnView.Model.Conexion.Etiqueta + "]";
             }
             catch
             {
@@ -98,6 +100,12 @@ namespace Cygnus2_0
             Boolean actualiza = false;
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("es-CO");
+
+            //se busca actualización en git
+            handler.UpdateModel_.pActualizaApp();
+            
+            //Se actualizan datos si hay disponibles
+            handler.UpdateModel_.pActualizaDataApp();
 
             Next = true;
 
@@ -158,9 +166,6 @@ namespace Cygnus2_0
             {
                 System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
-
-            //se busca actualización en git
-            handler.UpdateModel_.pActualizaApp();
 
             if (!actualiza)
             {
@@ -721,6 +726,27 @@ namespace Cygnus2_0
                     "INSERT INTO html_new (name, documentation,company,filename)\r\nSELECT name, documentation,company,filename FROM html",
                     "drop table html",
                     "ALTER TABLE html_new RENAME TO html"
+                };
+
+                foreach (string sql in query)
+                {
+                    try
+                    {
+                        SqliteDAO.pExecuteNonQuery(sql);
+                    }
+                    catch (Exception ex) { }
+                }
+
+                SqliteDAO.pActualizaVersion(sbVersion);
+            }
+
+            sbVersion = "1.2.7.4";
+
+            if (!SqliteDAO.pblValidaVersion(sbVersion))
+            {
+                string[] query =
+                {
+                    "insert into configuration (key,value) values ('VERSION_BD','0.0.0.1')"
                 };
 
                 foreach (string sql in query)

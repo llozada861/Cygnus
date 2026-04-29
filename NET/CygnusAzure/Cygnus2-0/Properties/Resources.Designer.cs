@@ -1384,6 +1384,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a VERSION_BD.
+        /// </summary>
+        public static string KEY_VERSIONBD {
+            get {
+                return ResourceManager.GetString("KEY_VERSIONBD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a CORREO_GENERAL.
         /// </summary>
         public static string KeyCorreoGeneral {
