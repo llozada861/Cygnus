@@ -827,6 +827,7 @@ namespace Cygnus2_0.DAO
             string fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
             string fechaSiguiente = DateTime.Now.AddDays(8).ToString("yyyy-MM-dd");
             string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
+            string empresa = handler.ConfGeneralView.Model.Empresa.Codigo.ToString();
 
             using (SQLiteConnection conn = DataBaseContext.GetInstance())
             {
@@ -836,9 +837,11 @@ namespace Cygnus2_0.DAO
                                "fecha_fin, " +
                                "descripcion,                    " +
                                "(SELECT sum(lunes) + sum(martes) + sum(miercoles) + sum(jueves) + sum(viernes) + sum(sabado) + sum(domingo) " +
-                                "FROM timexweek hh " +
-                                "WHERE hh.id_hoja = h.codigo " +
-                                "AND hh.usuario = '" + usuario + "' ) horas " +
+                                "FROM timexweek hh, task_user b " +
+                                "WHERE hh.id_hoja = h.codigo" +
+                                " AND hh.usuario = '" + usuario + "'"+
+                                " AND hh.requerimiento = b.codigo" +
+                                " AND b.empresa = "+ empresa + "  ) horas " +
                         "FROM week h " +
                         "WHERE '" + fechaSiguiente + "' BETWEEN date(fecha_ini) AND date(fecha_fin) " +
                         "UNION " +
@@ -847,9 +850,11 @@ namespace Cygnus2_0.DAO
                                "fecha_fin, " +
                                "descripcion, " +
                                "(SELECT sum(lunes) + sum(martes) + sum(miercoles) + sum(jueves) + sum(viernes) + sum(sabado) + sum(domingo) " +
-                                "FROM timexweek hh " +
+                                "FROM timexweek hh, task_user b " +
                                 "WHERE hh.id_hoja = h.codigo " +
-                                "AND hh.usuario = '" + usuario + "' ) horas " +
+                                " AND hh.usuario = '" + usuario + "'"+
+                                " AND hh.requerimiento = b.codigo" +
+                                " AND b.empresa = " + empresa + "  ) horas " +
                         "FROM week h " +
                         "WHERE date(fecha_fin) < '" + fechaActual + "' " +
                         "OR   '" + fechaActual + "' BETWEEN date(fecha_ini) AND date(fecha_fin) " +

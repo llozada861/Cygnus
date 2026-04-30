@@ -83,8 +83,8 @@ namespace Cygnus2_0
                             
             try
             {
-                this.Title = "Cygnus [ App: " + fieVersionInfo.FileVersion + " BD: "+ versionBD+"] - Empresa [" + handler.ConfGeneralView.Model.Empresa.Descripcion + 
-                 "] - Base Datos ["+ handler.ConnView.Model.Conexion.Etiqueta + "]";
+                this.Title = "Cygnus [ App: " + fieVersionInfo.FileVersion + " - BD: "+ versionBD+"] - [" + handler.ConfGeneralView.Model.Empresa.Descripcion + 
+                 "] - ["+ handler.ConnView.Model.Conexion.Etiqueta + "]";
             }
             catch
             {
