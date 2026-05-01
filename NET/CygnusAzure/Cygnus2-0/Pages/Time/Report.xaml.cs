@@ -1,4 +1,5 @@
-﻿using Cygnus2_0.General;
+﻿using Cygnus2_0.DAO;
+using Cygnus2_0.General;
 using Cygnus2_0.ViewModel.Time;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,26 @@ namespace Cygnus2_0.Pages.Time
 
         private void BtnGenerar_Click(object sender, RoutedEventArgs e)
         {
-            view.pGeneraReporteAsync();
+            if(view.FechaDesde == null)
+            {
+                handler.MensajeError("Debe ingresar una Fecha Desde.");
+                return;
+            }
+
+            if (view.FechaHasta == null)
+            {
+                handler.MensajeError("Debe ingresar una Fecha Hasta.");
+                return;
+            }
+
+            view.ListaTask = SqliteDAO.pObtListaTask(handler,view.Descripcion, Convert.ToInt32(view.HU),view.FechaDesde.ToString("yyyy-MM-dd"),view.FechaHasta.ToString("yyyy-MM-dd"));
+        }
+
+        private void btnLimpiar_Click(object sender, RoutedEventArgs e)
+        {
+            view.HU = "";
+            view.Descripcion = "";
+            view.ListaTask.Clear();
         }
     }
 }

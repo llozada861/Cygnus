@@ -18,6 +18,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using res = Cygnus2_0.Properties.Resources;
 using System.Text.Json;
+using Cygnus2_0.Model.Azure;
+using System.Collections.ObjectModel;
 
 namespace Cygnus2_0.ViewModel.Time
 {
@@ -26,10 +28,13 @@ namespace Cygnus2_0.ViewModel.Time
         private DateTime fechaDesde;
         private DateTime fechaHasta;
         private Handler handler;
+        private string descripcion;
+        private string hu;
         private Microsoft.Office.Interop.Excel.Application ReporteExcel = null;
         private Microsoft.Office.Interop.Excel.Workbook WB = null;
         public Microsoft.Office.Interop.Excel.Worksheet SheetCygnus = null;
         public Microsoft.Office.Interop.Excel.Worksheet SheetAzure = null;
+        private ObservableCollection<TaskUser> listaTask;
 
         public ReportViewModel(Handler handler)
         {
@@ -48,6 +53,22 @@ namespace Cygnus2_0.ViewModel.Time
         {
             get { return fechaHasta; }
             set { SetProperty(ref fechaHasta, value); }
+        }
+
+        public ObservableCollection<TaskUser> ListaTask
+        {
+            get { return listaTask; }
+            set { SetProperty(ref listaTask, value); }
+        }
+        public string Descripcion
+        {
+            get { return descripcion; }
+            set { SetProperty(ref descripcion, value); }
+        }
+        public string HU
+        {
+            get { return hu; }
+            set { SetProperty(ref hu, value); }
         }
 
         public async Task pGeneraReporteAsync()
