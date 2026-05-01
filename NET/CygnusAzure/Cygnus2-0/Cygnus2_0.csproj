@@ -279,6 +279,8 @@
     <Compile Include="Model\Aplica\GenerateAplicaModel.cs" />
     <Compile Include="Model\Audit\TbAuditoriaModel.cs" />
     <Compile Include="Model\Azure\AzureModel.cs" />
+    <Compile Include="Model\Azure\StoryUser.cs" />
+    <Compile Include="Model\Azure\TaskUser.cs" />
     <Compile Include="Model\Compila\CompilaModel.cs" />
     <Compile Include="Model\Conexion\ConnModel.cs" />
     <Compile Include="Model\Data\MessageModel.cs" />

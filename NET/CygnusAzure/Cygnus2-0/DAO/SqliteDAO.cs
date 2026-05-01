@@ -21,6 +21,8 @@ using System.Data.SQLite;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using res = Cygnus2_0.Properties.Resources;
@@ -1228,6 +1230,41 @@ namespace Cygnus2_0.DAO
             }
 
             return listaTareas;
+        }
+
+        public static ObservableCollection<TaskUser> pObtListaTask(Handler handler,string descripcion,int hu, string fecha_ini, string fecha_fin)
+        {
+            ObservableCollection<TaskUser> lista;
+            List<StoryUser> listaHU;
+            string usuario = handler.Azure.Usuario != null ? handler.Azure.Usuario.ToUpper() : "";
+            int? empresa = handler.ConfGeneralView.Model.Empresa.Codigo;
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                lista = new ObservableCollection<TaskUser>(context.ListaTask.Where(x => x.Empresa == empresa && x.Usuario == usuario && x.FechaInicio.CompareTo(fecha_ini) >= 0 && x.FechaInicio.CompareTo(fecha_fin) <= 0).ToList().OrderBy(x => x.FechaInicio));
+            }
+
+            if (!string.IsNullOrEmpty(descripcion))
+            {
+                lista = new ObservableCollection<TaskUser>(lista.Where(x => x.Descripcion.Contains(descripcion)).ToList().OrderBy(x => x.FechaInicio));
+            }
+
+            if (hu > 0)
+            {
+                lista = new ObservableCollection<TaskUser>(lista.Where(x => x.UserStory == hu).ToList().OrderBy(x => x.FechaInicio));
+            }
+
+            using (DataBaseContext context = new DataBaseContext())
+            {
+                listaHU = new List<StoryUser>(context.ListaUS.Where(x => x.Empresa == empresa && x.Usuario == usuario).ToList());
+            }
+
+            foreach (TaskUser item in lista)
+            {
+                item.DescUs = listaHU.Where(x=>x.Codigo == item.UserStory).FirstOrDefault().Descripcion;
+            }
+
+            return lista;
         }
         #endregion Azure
 

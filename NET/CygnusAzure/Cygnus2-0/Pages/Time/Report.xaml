@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Cygnus2_0.Pages.Time"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="900">
     <Grid>
-        <GroupBox Header="Ingrese un rango de fechas [El reporte muestra la info de Azure y Cygnus]">
+        <GroupBox Header="Reporte Tareas Descargadas">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -33,41 +32,37 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Center"  HorizontalAlignment="Right"  >Para: </Label>
-                <TextBox x:Name="txtPara" Text="{Binding Path=MailCreaRq.Para, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,10,10,10" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="1" />
-                <Label  Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Center"  HorizontalAlignment="Right"  >Copia:</Label>
-                <TextBox x:Name="txtCC" Text="{Binding Path=MailCreaRq.Para, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,10,10,10" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="1" />
+                <Label  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Center"  HorizontalAlignment="Right"  >Descripción: </Label>
+                <TextBox x:Name="txtPara" Text="{Binding Path=Descripcion, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,10,10,10" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="1" VerticalAlignment="Center" />
+                <Label  Grid.Column="5" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Center"  HorizontalAlignment="Right"  >HU:</Label>
+                <TextBox x:Name="txtCC" Text="{Binding Path=HU, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,10,10,10" Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="1" VerticalAlignment="Center" />
                 <Label x:Name="lblFechaDesde" Content="Desde:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                
+
                 <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <DatePicker x:Name="dtFechaDesde" SelectedDate="{Binding Path=FechaDesde}" Margin="0,0,0,0" SelectedDateFormat="Long"/>
-                    <TextBox x:Name="txtHoraDesde" Width="60" Margin="5,0,0,0" Text="12:01"/>
                 </StackPanel>
-
                 
                 <Label x:Name="lblFechaHasta" Content="Hasta:" Grid.Column="5" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 
                 <StackPanel Orientation="Horizontal" Margin="10" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <DatePicker x:Name="dtFechaHasta" SelectedDate="{Binding Path=FechaHasta}" Margin="0,0,0,0" SelectedDateFormat="Long"/>
-                    <TextBox x:Name="txtHoraHasta" Width="60" Margin="5,0,0,0" Text="12:00"/>
                 </StackPanel>
-              
-                <Button x:Name="btnBuscar" Content="Buscar"  VerticalAlignment="Center" Grid.Column="8" Grid.Row="10" Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnGenerar_Click"/>
-                <Button x:Name="btnGenerar" Content="Enviar"  VerticalAlignment="Center" Grid.Column="9" Grid.Row="10" Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnGenerar_Click"/>
-                <GroupBox Header="Releases" Margin="10,10,10,10" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="4">
+                
+                <GroupBox Header="Releases" Margin="10,10,10,10" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" Grid.RowSpan="7">
                     <Grid>
                         <DataGrid
                         x:Name="dataGridReleases" 
                         IsReadOnly="false" 
                         AllowDrop="False"                   
                         AutoGenerateColumns="False"
-                        SelectionMode="Single"
+                        SelectionMode="Extended"
+                        SelectionUnit="FullRow"
                         CanUserDeleteRows="false"
                         CanUserAddRows="false"
                         CanUserReorderColumns="false"
-                        CanUserSortColumns="True" 
-                        ClipboardCopyMode="IncludeHeader"
-                        ItemsSource="{Binding Path=Model.ListaReleases, Mode=TwoWay }"
+                        CanUserSortColumns="True"
+                            ClipboardCopyMode="IncludeHeader"
+                        ItemsSource="{Binding Path=ListaTask, Mode=TwoWay }"
                                     GridLinesVisibility="All"
                                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                     ScrollViewer.VerticalScrollBarVisibility="Auto"                          
@@ -76,12 +71,12 @@
                     >
                             <DataGrid.Columns>
 
-                  <DataGridTextColumn 
-                        Header="Grupo"
-                        x:Name="grupo"
+                                <DataGridTextColumn 
+                        Header="Fecha"
+                        x:Name="Fecha"
                         IsReadOnly="True"  
-                        Width="120" 
-                        Binding="{Binding Path=Grupo, Mode=OneWay}"                        >
+                        Width="100" 
+                        Binding="{Binding Path=FechaInicio, Mode=OneWay}"                        >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextAlignment" Value="Left" />
@@ -90,11 +85,12 @@
                                 </DataGridTextColumn>
 
                                 <DataGridTextColumn 
-                        Header="WO/HU"
-                        x:Name="idHU"
+                        Header="Ingeniero"
+                        x:Name="Ingeniero"
                         IsReadOnly="True"  
-                        Width="85" 
-                        Binding="{Binding Path=HU, Mode=OneWay}" 
+                        Width="130" 
+                        MaxWidth="130"
+                        Binding="{Binding Path=Usuario, Mode=OneWay}" 
                         >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
@@ -104,10 +100,11 @@
                                 </DataGridTextColumn>
 
                                 <DataGridTextColumn
-                        Header="Responsable"
-                        x:Name="idResponsable"
-                        IsReadOnly="False"
-                        Binding="{Binding Path=Responsable, Mode=TwoWay}" 
+                        Header="Requerimiento"
+                        x:Name="Requerimiento"
+                        IsReadOnly="true"
+                        MaxWidth="160"
+                        Binding="{Binding Path=DescUs, Mode=TwoWay}" 
                                 >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
@@ -117,10 +114,10 @@
                                 </DataGridTextColumn>
 
                                 <DataGridTextColumn
-                        Header="Descripción"
-                        x:Name="idDesc"
-                        IsReadOnly="False"                
-                        Binding="{Binding Path=Descripcion, Mode=TwoWay}" 
+                        Header="Task"
+                        x:Name="Task"
+                        IsReadOnly="true"                
+                        Binding="{Binding Path=Codigo, Mode=TwoWay}" 
                         >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
@@ -130,73 +127,10 @@
                                 </DataGridTextColumn>
 
                                 <DataGridTextColumn
-                        Header="Tipo"
-                        x:Name="idTipo"
-                        IsReadOnly="False"
-                        Binding="{Binding Path=Tipo, Mode=TwoWay}" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Left" />
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn
-                        Header="Ciclo"
-                                x:Name="idCiclo"
-                        IsReadOnly="False"
-                        Binding="{Binding Path=Ciclo, Mode=TwoWay}" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Left" />
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn
-                        Header="Líder TI"
-                                x:Name="idLider"
-                        IsReadOnly="False"
-                        Binding="{Binding Path=Lider, Mode=TwoWay}" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Left" />
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn
-                        Header="Fecha Paso a PDN"
-                                x:Name="idFecha"
-                        IsReadOnly="False"
-                        Binding="{Binding Path=FechaPDN, Mode=TwoWay}" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Left" />
-
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn                  
-                        IsReadOnly="False"
-                        Header="Gen. Ind."
-                        x:Name="idIndis"
-                        Binding="{Binding Path=Indisponibilidad, Mode=TwoWay}"
-                                    >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Center" />
-
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn
-                        Header="Precedencia"
-                                x:Name="idPrecedencia"
-                        IsReadOnly="False" 
-                        Binding="{Binding Path=Precedencia, Mode=OneWay}" >
+                        Header="Tiempo"
+                        x:Name="Tiempo"
+                        IsReadOnly="true"
+                        Binding="{Binding Path=Horas, Mode=TwoWay}" >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextAlignment" Value="Center" />
@@ -204,108 +138,26 @@
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
 
+                                <DataGridTextColumn
+                        Header="Observación"
+                                x:Name="observacion"
+                        IsReadOnly="true"
+                        Binding="{Binding Path=Descripcion, Mode=TwoWay}" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextAlignment" Value="Left" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
                             </DataGrid.Columns>
-
-                            <DataGridTextColumn                  
-                                IsReadOnly="False"
-                                Header="Url"
-                                x:Name="idurl"
-                                Binding="{Binding Path=Url, Mode=TwoWay}"
-            >
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="TextAlignment" Value="Left" />
-
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-
                         </DataGrid>
                     </Grid>
                 </GroupBox>
 
-                <GroupBox Header="Releases Error" Margin="10,10,10,10" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="10" Grid.RowSpan="3">
-                    <Grid>
-                        <DataGrid
-            x:Name="dataGridReleasesErr" 
-            IsReadOnly="false" 
-            AllowDrop="False"                   
-            AutoGenerateColumns="False"
-            SelectionMode="Single"
-            CanUserDeleteRows="false"
-            CanUserAddRows="false"
-            CanUserReorderColumns="false"
-            CanUserSortColumns="True" 
-            ClipboardCopyMode="IncludeHeader"
-            ItemsSource="{Binding Path=Model.ListaReleasesError, Mode=TwoWay }"
-                        GridLinesVisibility="All"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                        ScrollViewer.VerticalScrollBarVisibility="Auto"                          
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-        >
-                            <DataGrid.Columns>
-
-                                <DataGridTextColumn 
-            Header="Id"
-            x:Name="idErrorRel"
-            IsReadOnly="True"  
-            Width="120" 
-            Binding="{Binding Path=ID, Mode=OneWay}"                        >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Left" />
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                
-                                <DataGridTextColumn
-            Header="Responsable"
-            x:Name="idResponsableErr"
-            IsReadOnly="False"
-            Binding="{Binding Path=Responsable, Mode=TwoWay}" 
-                    >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Left" />
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn
-            Header="Descripción"
-            x:Name="idDescError"
-            IsReadOnly="False"                
-            Binding="{Binding Path=Descripcion, Mode=TwoWay}" 
-            >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextAlignment" Value="Left" />
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-
-                                <DataGridTextColumn                  
-                    IsReadOnly="False"
-                    Header="Url"
-                    x:Name="idurlError"
-                    Binding="{Binding Path=Url, Mode=TwoWay}"
->
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="TextAlignment" Value="Left" />
-
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-
-                            </DataGrid.Columns>
-
-                        </DataGrid>
-                    </Grid>
-                </GroupBox>
-
+                <Button x:Name="btnBuscar" Content="Buscar"  VerticalAlignment="Center" Grid.Column="8" Grid.Row="10" Margin="0,0,5,0" HorizontalAlignment="Center" Click="BtnGenerar_Click"/>
+                <Button x:Name="btnLimpiar" Content="Limpiar"  VerticalAlignment="Center" Grid.Column="9" Grid.Row="10" Margin="0,0,5,0" HorizontalAlignment="Center" Click="btnLimpiar_Click"/>
             </Grid>
+            
         </GroupBox> 
     </Grid>
 </UserControl>
