@@ -541,7 +541,7 @@ namespace Cygnus2_0.DAO
         #endregion CompilacionObjetos
                         
         #region GenereacionPaquetes
-        internal OracleClob pGeneraPktbl(string tabla, SelectListItem usuarioBD, string caso,Handler handler)
+        internal string pGeneraPktbl(string tabla, SelectListItem usuarioBD, string caso,Handler handler)
         {
             UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Usuariobd.Equals(usuarioBD.Text.ToUpper())).FirstOrDefault();
             handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
@@ -578,7 +578,11 @@ namespace Cygnus2_0.DAO
 
             sqlPktbl.ExecuteReader();
 
-            return (OracleClob)sqlPktbl.Parameters["oclFile"].Value;
+            OracleClob pktbl = (OracleClob)sqlPktbl.Parameters["oclFile"].Value;
+
+            conn.Close();
+
+            return pktbl.Value;
         }
         #endregion GenereacionPaquetes
 
