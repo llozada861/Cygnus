@@ -1,5 +1,6 @@
 ﻿using Cygnus2_0.General;
 using Cygnus2_0.Interface;
+using Cygnus2_0.Model.Html;
 using Cygnus2_0.Model.Package;
 using Oracle.ManagedDataAccess.Types;
 using System;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using res = Cygnus2_0.Properties.Resources;
 
 namespace Cygnus2_0.ViewModel.Pkg
 {
@@ -68,23 +70,17 @@ namespace Cygnus2_0.ViewModel.Pkg
         {
             handler.CursorWait();
 
-            OracleClob pktbl = handler.DAO.pGeneraPktbl(this.Model.Tabla, this.Model.Usuario, this.Model.Caso,handler);
+            string pktbl = handler.DAO.pGeneraPktbl(this.Model.Tabla, this.Model.Usuario, this.Model.Caso,handler);
+
+            PlantillasHTMLModel plantillaPktbl = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_PKTBL)).FirstOrDefault();
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = "pktbl" + this.Model.Tabla.ToLower().Trim() + ".sql";
+            saveFileDialog.FileName = plantillaPktbl.NombreArchivo + this.Model.Tabla.ToLower().Trim() + ".sql";
 
             handler.CursorNormal();
 
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                File.WriteAllText(saveFileDialog.FileName, pktbl.Value, Encoding.Default);
-
-
-            //this.MensajeOk(pktbl.Value.ToString());
-
-            /*using (StreamWriter str = new StreamWriter("D:\\prueba.sql"))
-            {
-                str.Write(pktbl.Value);
-            }*/
+                File.WriteAllText(saveFileDialog.FileName, pktbl, Encoding.Default);
         }
     }
 }
