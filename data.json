@@ -8,7 +8,6 @@
                 }
             ]
         },
-        ,
         {
             "version": "0.0.0.5",
             "ajustes": [
@@ -16,7 +15,7 @@
                     "sql": "CREATE TABLE cy_userbd( codigo integer primary key,  user_        varchar2(50),    password_    varchar2(1000),    basedatos   varchar2(100),    servidor    varchar2(100),    puerto      varchar2(100), company integer)"
                 }
             ]
-        }
+        },
         {
             "version": "0.0.0.6",
             "ajustes": [
