@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Security.Policy;
 using System.Text;
@@ -25,7 +26,7 @@ namespace Updater
         private string URL = "";
         private string destinationFolder = "";
         private string Tipo = "";
-        private string updateFolder = Environment.CurrentDirectory + @"\updates\";
+        private string updateFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"updates");
         private string postProcessFile = "";
         private string path;
         private const string DBName = "Cygnus.db";
@@ -33,7 +34,7 @@ namespace Updater
         public MainWindow()
         {
             InitializeComponent();
-            path = System.IO.Path.Combine(Environment.CurrentDirectory, res.CarpetaBD);
+            path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, res.CarpetaBD);
         }
 
         public string RutaInstalador { set; get; }
@@ -77,6 +78,7 @@ namespace Updater
         private void backgroundWorker(object sender, DoWorkEventArgs e)
         {
             preDownload();
+
             (sender as BackgroundWorker).ReportProgress(10);
             Thread.Sleep(10000);
 
@@ -132,26 +134,44 @@ namespace Updater
                 }
 
             }
-            catch (Exception)
-            { }
-
-            if (!Directory.Exists(updateFolder))
-                Directory.CreateDirectory(updateFolder);
-            else
-                Directory.Delete(updateFolder, true);
-
-            tempDownloadFolder = updateFolder + DateTime.Now.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture) + @"\";
-
-            if (Directory.Exists(tempDownloadFolder))
+            catch (Exception ex)
             {
-                Directory.Delete(tempDownloadFolder, true);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            Directory.CreateDirectory(tempDownloadFolder);
+            try
+            {
 
-            string[] parametros = Environment.GetCommandLineArgs();
+                if (!Directory.Exists(@updateFolder))
+                    Directory.CreateDirectory(@updateFolder);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-            URL = parametros[1];
+            tempDownloadFolder = Path.Combine(@updateFolder,DateTime.Now.ToString("yyyyMMddHHmm", System.Globalization.CultureInfo.InvariantCulture));
+
+            try
+            {
+                if (!Directory.Exists(tempDownloadFolder))
+                    Directory.CreateDirectory(tempDownloadFolder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            try
+            {
+                string[] parametros = Environment.GetCommandLineArgs();
+                URL = parametros[1];
+            }
+            catch(Exception ex)
+            {
+                URL = "https://github.com/llozada861/Cygnus/releases/download/version_1278/Cygnus.zip";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void postDownload()
@@ -202,10 +222,18 @@ namespace Updater
         public void pDescargaVersion()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            // descargar
-            using (WebClient wc = new WebClient())
+
+            try
             {
-                wc.DownloadFile(URL, tempDownloadFolder + downloadFile);
+                // descargar
+                using (WebClient wc = new WebClient())
+                {
+                    wc.DownloadFile(URL, tempDownloadFolder + downloadFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

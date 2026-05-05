@@ -420,6 +420,7 @@
     <Compile Include="Pages\Settings\Database\GrantsUserControl.xaml.cs">
       <DependentUpon>GrantsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="General\PasswordBoxHelper.cs" />
     <Compile Include="Pages\Settings\Database\UserBDUserControl.xaml.cs">
       <DependentUpon>UserBDUserControl.xaml</DependentUpon>
     </Compile>
