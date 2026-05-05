@@ -8,8 +8,17 @@
                 }
             ]
         },
+        ,
         {
-            "version": "0.0.0.3",
+            "version": "0.0.0.5",
+            "ajustes": [
+                {
+                    "sql": "CREATE TABLE cy_userbd( codigo integer primary key,  user_        varchar2(50),    password_    varchar2(1000),    basedatos   varchar2(100),    servidor    varchar2(100),    puerto      varchar2(100), company integer)"
+                }
+            ]
+        }
+        {
+            "version": "0.0.0.6",
             "ajustes": [
                 {
                     "sql": "INSERT INTO html (name, documentation, company, filename) VALUES ('ESPECIFICACION', '    /***************************************************************************\r\n    <Package Fuente=\"Propiedad Intelectual de Emcali\">\r\n    <Unidad> [metodo] </Unidad>\r\n    <Autor> [autor] - MVM </Autor>\r\n    <Fecha> [fecha] </Fecha>\r\n    <Descripcion>\r\n        [descripcion]\r\n    </Descripcion>\r\n    <Historial>\r\n    <Modificacion Autor=\"[desarrollador]\" Fecha=\"[fecha]\" Inc=\"[numero_oc]\">\r\n        Creación.\r\n    </Modificacion>\r\n    </Historial>\r\n    </Package>\r\n    ***************************************************************************/\r\n', '100', '')"
@@ -56,7 +65,7 @@
             ]
         },
         {
-            "version": "0.0.0.4",
+            "version": "0.0.0.7",
             "ajustes": [
                 {
                     "sql": "update cy_userbd set password_ = 'e$FL7SSn5A9Dz5sdY%O7' where codigo = 3"
