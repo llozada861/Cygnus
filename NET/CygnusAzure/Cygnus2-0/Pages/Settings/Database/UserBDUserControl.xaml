@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cygnus2_0.Pages.Settings.Database"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -66,8 +67,23 @@
                                     </Style>
                                 </DataGridTextColumn.EditingElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Passwordbd}" Header="Contraseña" MinWidth="200" Visibility="Hidden">
-                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Contraseña">
+
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="••••••" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <PasswordBox
+                        local:PasswordBoxHelper.BindPassword="True"
+                        local:PasswordBoxHelper.BoundPassword="{Binding Passwordbd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
                             <DataGridTextColumn Binding="{Binding BaseDatos}" Header="Base De Datos" MinWidth="200">
                             </DataGridTextColumn>
                             <DataGridComboBoxColumn Width="200"
