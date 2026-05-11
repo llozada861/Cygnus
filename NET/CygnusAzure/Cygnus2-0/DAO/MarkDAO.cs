@@ -580,9 +580,11 @@ namespace Cygnus2_0.DAO
 
             OracleClob pktbl = (OracleClob)sqlPktbl.Parameters["oclFile"].Value;
 
+            string pktbl_ = pktbl.Value;
+
             conn.Close();
 
-            return pktbl.Value;
+            return pktbl_;
         }
         #endregion GenereacionPaquetes
 

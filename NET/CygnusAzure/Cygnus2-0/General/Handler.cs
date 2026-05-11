@@ -565,7 +565,7 @@ namespace Cygnus2_0.General
                 }
             }
 
-            splitCualificado = sbPalabra.Split('.');
+            /*splitCualificado = sbPalabra.Split('.');
 
             if (splitCualificado.Length > 1)
             {
@@ -576,7 +576,7 @@ namespace Cygnus2_0.General
                         throw new Exception("No se pueden trabajar, ni entregar objetos cualificados. Por favor ajustar. [" + sbPalabra + "]");
                     }
                 }
-            }
+            }*/
 
             return sbPalabra;
         }

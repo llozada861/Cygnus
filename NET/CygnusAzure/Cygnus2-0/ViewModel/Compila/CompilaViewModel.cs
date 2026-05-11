@@ -175,6 +175,8 @@ namespace Cygnus2_0.ViewModel.Compila
             string nombreArchivo = archivo.NombreSinExt;
             archivo.Observacion = "";
 
+            //List<PlsqlAnalisisDL.General.InstruccionPL> analisisPL = PlsqlAnalisisDL.General.Plsql.AnalizarPL(archivo.RutaConArchivo);
+
             if (res.Extensiones.IndexOf(archivo.Extension.ToLower()) > -1)
             {
                 using (StreamReader streamReader = new StreamReader(archivo.RutaConArchivo))
