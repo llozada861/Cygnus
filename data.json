@@ -75,7 +75,7 @@
             "version": "0.0.0.8",
             "ajustes": [
                 {
-                    "sql": "T INTO cy_userbd (codigo, user_, password_, basedatos, servidor, puerto, company) VALUES ('1', 'sql_mvm', 'Oj0-m3+B1oqu34*Pu35', 'SFDLLO', 'EPM-DO13', '1521', '99')"
+                    "sql": "INSERT INTO cy_userbd (codigo, user_, password_, basedatos, servidor, puerto, company) VALUES ('1', 'sql_mvm', 'Oj0-m3+B1oqu34*Pu35', 'SFDLLO', 'EPM-DO13', '1521', '99')"
                 },
                 {
                     "sql": "INSERT INTO cy_userbd (codigo, user_, password_, basedatos, servidor, puerto, company) VALUES ('2', 'sql_mvm', 'Oj0-m3+B1oqu34*Pu35', 'SFUAT', 'EPM-TO34', '1521', '99')"
