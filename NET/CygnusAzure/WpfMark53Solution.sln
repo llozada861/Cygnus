@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlsqlAnalisis", "PlsqlAnali
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlsqlAnalisisDL", "PlsqlAnalisisDL\PlsqlAnalisisDL.csproj", "{7F633881-E363-4C4B-A776-A589D891BCB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{FC008D40-CF86-4C94-BF39-C42D74CF08BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,26 @@ Global
 		{7F633881-E363-4C4B-A776-A589D891BCB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F633881-E363-4C4B-A776-A589D891BCB3}.Release|x86.ActiveCfg = Release|Any CPU
 		{7F633881-E363-4C4B-A776-A589D891BCB3}.Release|x86.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Debug|x86.Build.0 = Debug|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.0|Any CPU.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.0|Any CPU.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.0|x86.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.0|x86.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.5|Any CPU.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.5|Any CPU.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.5|x86.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.5|x86.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.6.1|Any CPU.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.6.1|Any CPU.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.6.1|x86.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release 4.6.1|x86.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC008D40-CF86-4C94-BF39-C42D74CF08BD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,7 @@ using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -73,7 +74,28 @@ namespace Cygnus2_0.ViewModel.Reglas
                             if (!string.IsNullOrEmpty(item.DocumentoAD))
                                 plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
 
-                            nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + contador.ToString().PadLeft(4, '0') + ".sql";
+                            // Quitar tildes
+                            string normalized = item.Text.Normalize(NormalizationForm.FormD);
+                            StringBuilder sb = new StringBuilder();
+
+                            foreach (char c in normalized)
+                            {
+                                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(c);
+
+                                if (uc != UnicodeCategory.NonSpacingMark)
+                                {
+                                    sb.Append(c);
+                                }
+                            }
+
+                            string sinTildes = sb.ToString().Normalize(NormalizationForm.FormC);
+                            string resultado = sinTildes.Replace(" ", "");
+                            int longitud = resultado.ToLower().Length;
+
+                            if (longitud > 99)
+                                longitud = 99;
+
+                            nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + resultado.ToLower().Substring(0, longitud) + ".sql";
                         }
                         else
                         {

@@ -130,9 +130,7 @@ namespace Cygnus2_0.ViewModel.Compila
                         archivo.ListaTipos = handler.ListaTiposObjetos;
                         ObtenerTipoArchivoComp(archivo);
                         archivo.BloquesCodigo = new List<string>();
-
-                        if (!archivo.Observacion.Equals(res.No_aplica))
-                            archivo.TipoAplicacion = res.SQLPLUS;
+                        archivo.TipoAplicacion = res.SQLPLUS;
 
                         this.Model.ListaArchivosCargados.Add(archivo);
                     }
@@ -167,15 +165,28 @@ namespace Cygnus2_0.ViewModel.Compila
 
         public void ObtenerTipoArchivoComp(Archivo archivo)
         {
-            string sbLine = "";
+            List<PlsqlAnalisisDL.General.InstruccionPL> analisisPL = PlsqlAnalisisDL.General.Plsql.AnalizarPL(archivo.RutaConArchivo);
+
+            foreach(PlsqlAnalisisDL.General.InstruccionPL item in analisisPL.Where(x=>x.Token == "TIPO"))
+            {
+                foreach (TipoObjetos tipo in handler.ListaTiposObjetos.OrderByDescending(x=>x.Prioridad))
+                {
+                    if(tipo.Descripcion == item.Valor)
+                    {
+                        archivo.Tipo = tipo.Codigo;
+                        archivo.SelectItemTipo = handler.ListaTiposObjetos.FirstOrDefault(x => x.Codigo == tipo.Codigo);
+                        archivo.NombreObjeto = item.NombreObjeto;
+                    }
+                }
+            }
+
+            /*string sbLine = "";
             bool existeOn;
             string sbLineSpace = "";
             Int64 nuMenosUno = Convert.ToInt64(res.MenosUno);
 
             string nombreArchivo = archivo.NombreSinExt;
             archivo.Observacion = "";
-
-            //List<PlsqlAnalisisDL.General.InstruccionPL> analisisPL = PlsqlAnalisisDL.General.Plsql.AnalizarPL(archivo.RutaConArchivo);
 
             if (res.Extensiones.IndexOf(archivo.Extension.ToLower()) > -1)
             {
@@ -235,7 +246,7 @@ namespace Cygnus2_0.ViewModel.Compila
                 {
                     archivo.NombreObjeto = nombreArchivo;
                 }
-            }
+            }*/
         }
 
         public string pObtCantObjsInvalidos()
@@ -246,21 +257,6 @@ namespace Cygnus2_0.ViewModel.Compila
         public void pCompilarObjetos()
         {
             handler.pObtenerUsuarioCompilacion(this.Model.Usuario.Text);
-
-            foreach (Archivo archivo in this.Model.ListaArchivosCargados.ToList().Where(x => x.TipoAplicacion.Equals(res.SQL)))
-            {
-                if (archivo.TipoAplicacion != res.SQLPLUS)
-                {
-                    handler.pObtieneBloquesCodigo(archivo);
-                    pCompilaObjetosBD(archivo);
-                    handler.pEjecutaPermisosArchivo(archivo, this.Model.Usuario.Text);
-                }
-            }
-
-            if (handler.ConexionOracle.ConexionOracleCompila.State == System.Data.ConnectionState.Open)
-            {
-                handler.ConexionOracle.ConexionOracleCompila.Close();
-            }
 
             this.Model.ArchivosDescompilados = pObtCantObjsInvalidos();
 
