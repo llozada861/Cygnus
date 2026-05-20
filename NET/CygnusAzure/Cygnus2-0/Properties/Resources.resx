@@ -2283,4 +2283,22 @@ END;
     <value>VERSION_BD</value>
     <comment>Version de la base de datos</comment>
   </data>
+  <data name="XML_HTML" xml:space="preserve">
+    <value>XML_HTML</value>
+  </data>
+  <data name="COMMENT_PKG" xml:space="preserve">
+    <value>COMMENT_PKG</value>
+  </data>
+  <data name="PACKAGE_XML" xml:space="preserve">
+    <value>[PACKAGE_XML]</value>
+  </data>
+  <data name="COMMENT_OUT" xml:space="preserve">
+    <value>COMMENT_OUT</value>
+  </data>
+  <data name="PROCEDURE_XML" xml:space="preserve">
+    <value>[PROCEDURE_XML]</value>
+  </data>
+  <data name="PLANTILLA_XSL" xml:space="preserve">
+    <value>PLANTILLA_XSL</value>
+  </data>
 </root>

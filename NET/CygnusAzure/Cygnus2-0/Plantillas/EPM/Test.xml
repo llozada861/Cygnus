@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<main>
+    <Package Fuente="Propiedad Intelectual de Empresas Publicas de Medellin">
+    <Unidad> PKG_EPM_OB_READINGRULE </Unidad>
+    <Autor> Luis Lozada </Autor>
+    <Fecha> 12-07-2017 </Fecha>
+    <Descripcion>  Paquete que contiene los procedimientos de la lógica del cálculo y análisis de los consumos medidos en EPM
+
+    IMPORTANTE!! : Este paquete es usado por OPEN para las reglas de lectura, la aplicacion
+     de este paquete durante las etapas de prueba debe realizarse por separado,
+     ya que de este dependen las configuraciones de las reglas.
+    </Descripcion>
+    <Historial>
+     <Modificacion Autor="malvaras" Fecha="08-05-2026" Inc="HU1058719">
+         Se crea el método [pReadingEneReaDep].
+     </Modificacion>   
+     <Modificacion Autor="malvaras" Fecha="04/05/2026" Inc="HU1058717">
+         Se crea el método [pNonReadingReadDep].
+     </Modificacion>
+     <Modificacion Autor="malvaras" Fecha="10/04/2026" Inc="HU1058714">
+         Se crea el método [pWithReadingDep].
+         Se crea el método [pNonReadingDep].
+     </Modificacion>   
+     <Modificacion Autor="jplaza" Fecha="01-12-2025" Inc="HU994911">
+         Se modifca el método [pNonReadingRreading]. Si la letura tuvo lectura y la reelectura no tiene lectura se toma la lectura inicial
+     </Modificacion>  
+     <Modificacion Autor="jplaza" Fecha="06-08-2025" Inc="HU994911">
+         Se modifica el método [pNonReading].
+         Se crea el método [pNonReadingRreading].
+     </Modificacion>    
+     <Modificacion Autor="jplaza" Fecha="20-12-2024" Inc="HU926993">
+         Se modifica el método [pDesviaWithReading].
+         Se modifica el método [psetDesviaAdditionalTrace].
+     </Modificacion>    
+     <Modificacion Autor="jplaza" Fecha="06-08-2024" Inc="HU889559">
+         Se modifica el método [pDesviaWithReading].
+         Se modifica el método [psetDesviaAdditionalTrace].
+     </Modificacion> 
+     <Modificacion Autor="epenao" Fecha=" 06/08/2024" Inc="HU859761">
+         Se cambia el llamado de los métodos:
+         +calcconsumpservs.consbyprereadcorrfact
+         +cm_bocalcconsumpservs.readdifandcorrectfactor
+         +pe_bocalcconsumpservs.consprevreadcorrfact
+         por:
+             pe_bogascorrectionfactors.getconsumptbyreadings
+         de acuerdo con lo solicitado en RN-GAS-0412.
+     </Modificacion>
+     <Modificacion Autor="jplaza" Fecha="14-08-2023" Inc="HU763412">
+         Se modifica el método [pWithReading].
+         Se modifica el método [pObtFuncConsumoGas]. 
+         Se modifica el método [pObtieneFuncConsumoAg]. 
+     </Modificacion>
+     <Modificacion Autor="malvaras" Fecha="08-04-2024" Inc="HU860854">
+         Se crea el método [pDesviaWithReading].
+         Se crea el método [psetDesviaAdditionalTrace].
+     </Modificacion> 
+     <Modificacion Autor="malvaras" Fecha="11-08-2022" Inc="HU768036">
+         Se modifica el método [pNonReading].
+     </Modificacion> 
+     <Modificacion Autor="malvaras" Fecha="26-09-2022" Inc="HU615344">
+         Se modifica el método [pWithReading].
+         Se modifica el método [InitializeVars]. 
+         Se modifica el método [InitializeVarsGlobal]. 
+     </Modificacion>   
+     <Modificacion Autor="jaristz" Fecha="09-06-2022" Inc="HU540895">
+         Se modifica el método [pWithReading]
+     </Modificacion>     
+     <Modificacion Autor="jrobayos" Fecha="04-04-2022" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se modifica el método [pWithReading]
+     </Modificacion>      
+     <Modificacion Autor="jrobayos" Fecha="30-03-2022" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se modifica el método [pObtieneFuncConsumo]
+         Se modifica el método [pObtieneFuncConsumoAg]       
+     </Modificacion>    
+     <Modificacion Autor="jrobayos" Fecha="15-03-2022" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se modifica el método [pWithReading]
+     </Modificacion>   
+     <Modificacion Autor="jrobayos" Fecha="11-01-2022" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se modifica el método [pObtFuncConsumoAguaEnergia]
+         Se modifica el método [pObtieneFuncConsumo]
+         Se modifica el método [pObtieneFuncConsumoAg]
+     </Modificacion>   
+     <Modificacion Autor="jrobayos" Fecha="07-01-2022" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se modifica el método [InitializeVars]
+     </Modificacion>    
+     <Modificacion Autor="jrobayos" Fecha="16-12-2021" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se modifica el método [InitializeVars]
+     </Modificacion>    
+     <Modificacion Autor="jrobayos" Fecha="16-12-2021" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se crea el método [pObtieneFuncConsumoAg]
+     </Modificacion>      
+     <Modificacion Autor="jrobayos" Fecha="15-12-2021" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se crea el método [pObtFuncConsumo]
+     </Modificacion>      
+     <Modificacion Autor="jrobayos" Fecha="14-12-2021" Inc="HU433243">
+         [Estabilización a Versión 8.0]
+            Se crean los métodos [pObtFuncConsumoAguaEnergia] y [pObtFuncConsumoGas].
+         Se modifica el método [pWithReading]
+     </Modificacion>   
+     <Modificacion Autor="malvaras" Fecha="10-05-2021" Inc="HU316948">
+         Se modifica el método [InitializeVarsGlobal].
+     </Modificacion>  
+     <Modificacion Autor="malvaras" Fecha="12-10-2020" Inc="WO0000000730765">
+         Se modifica el método [pWithReading].
+     </Modificacion>  
+    <Modificacion Autor="malvaras" Fecha="06-03-2020" Inc="WO0000000476094">
+         Se modifica el método [pWithReading].
+     </Modificacion>   
+     <Modificacion Autor="malvaras" Fecha="21-02-2020" Inc="WO0000000471175">
+         Se modifica el método [pWithReading].
+     </Modificacion>   
+     <Modificacion Autor="dcoba" Fecha="26-Dic-2019" Inc="WO0000000397464">
+         Se modifica el método [pWithReading].
+     </Modificacion>   
+     <Modificacion Autor="malvaras" Fecha="21-11-2019" Inc="WO0000000371199">
+      Se modifica el metodo [pWithReading].
+     </Modificacion>    
+     <Modificacion Autor="malvaras" Fecha="16-08-2019" Inc="WO0000000244929">
+      Se modifica el metodo [pWithReading].
+     </Modificacion>    
+     <Modificacion Autor="malvaras" Fecha="23-07-2019" Inc="WO0000000244934">
+      Se modifica el metodo [pWithReading].
+     </Modificacion>   
+     <Modificacion Autor="iosorio" Fecha="24-11-2018" Inc="OC[830315]">
+      Se modifica el metodo [InitializeVars]
+      Se modifica el metodo [pWithReading]
+     </Modificacion>
+     <Modificacion Autor="JRincong" Fecha="22-11-2018" Inc="OC[830315]">
+      -- Se modifica el método [pWithReading]
+      -- Se modifica el método [pNonReading]
+      -- Se modifica el método [InitializeVars]:
+     </Modificacion>
+     <Modificacion Autor="Luis.Lozada" Fecha="15-11-2018" Inc="OC[830315]">
+     -- Se modifica el método [pWithReading]
+     </Modificacion>
+     <Modificacion Autor="llozada" Fecha="16-11-2017" Inc="20171116_1700">
+     Se ajusta el metodo [InitializeVars]
+     </Modificacion>
+     <Modificacion Autor="ivan.osorio" Fecha="28/12/2017" Inc="SAO432204">
+     Se reemplaza el metodo PE_BOCALCCONSUMPSERVS.FNUGETPERRECVALREAD por
+     el parámetro EPM_MAX_PER_RECUPERA para especificar el numero maximo de
+     periodos a recuperar.
+     </Modificacion>
+     <Modificacion Autor="llozada" Fecha="12-07-2017" Inc="OC[XXXXXX]">
+     Creacion.
+     </Modificacion>
+    </Historial>
+    </Package>
+<methods>
+    <Procedure Fuente="Propiedad Intelectual de Empresas Publicas de Medellín">
+    <Unidad> pObtDescTipoTrabajo </Unidad>
+    <Descripcion>
+        Devuelve la descripción del tipo de trabajo
+    </Descripcion>
+    <Autor> Luis Lozada - MVM </Autor>
+    <Fecha>17/09/2021</Fecha>
+    <Parametros>
+            <param nombre="inuOrden" tipo="or_order.order_id%TYPE" Direccion="IN">
+            Orden
+        </param>
+        <param nombre="osbDato" tipo="VARCHAR2" Direccion="OUT">
+            Descripción tipo trabajo
+        </param>
+    </Parametros>
+    <Historial>
+    <Modificacion Autor="Llozada" Fecha="17/09/2021" Inc="HU387481">
+        Creación del método.
+    </Modificacion>
+    </Historial>
+    </Procedure>
+    <Procedure Fuente="Propiedad Intelectual de Empresas Publicas de Medellín">
+    <Unidad> fnugetquantity </Unidad>
+    <Descripcion>
+         Obtiene la cantidad de registros a procesar para el hilo
+    </Descripcion>
+    <Autor>Llozada - MVM </Autor>
+    <Fecha>22/04/2019</Fecha>
+    <Parametros>
+        <param nombre="inuHilo" tipo="NUMBER" Direccion="In" >
+             Hilo a procesar
+        </param>
+        <param nombre="isbPrograma" tipo="estaprog.esprprog%type" Direccion="In" >
+             Programa
+        </param>
+        <param nombre="inuHilo" tipo="NUMBER" Direccion="In" >
+             Hilo a procesar
+        </param>
+        <param nombre="inuHilos" tipo="NUMBER" Direccion="In" >
+             Cantidad de hilos
+        </param>
+        <param nombre="inuZona" tipo="or_route_zone.operating_zone_id%type" Direccion="In" >
+             Zona operativa
+        </param>
+        <param nombre="inuUnidOper" tipo="or_order.operating_unit_id%type" Direccion="In" >
+             Unidad operativa
+        </param>
+    </Parametros>
+    <Retorno Nombre = "Numérico" Tipo = "NUMBER">
+    Descripcion
+    </Retorno>
+    <Historial>
+    <Modificacion Autor="llozada" Fecha="22/04/2019" Inc="WOXXXXX">
+          Creacion.
+    </Modificacion>
+    </Historial>
+    <Comentarios>
+        <Com>
+            1. inicializa
+        </Com>
+        <Com>
+            2. Genera consumo ajusarco
+        </Com>
+        <Com>
+            2. Genera consumo dif lecturas
+        </Com>
+    </Comentarios>
+    </Procedure>
+    </methods>
+</main>
+

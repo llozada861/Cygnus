@@ -254,6 +254,24 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a COMMENT_OUT.
+        /// </summary>
+        public static string COMMENT_OUT {
+            get {
+                return ResourceManager.GetString("COMMENT_OUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a COMMENT_PKG.
+        /// </summary>
+        public static string COMMENT_PKG {
+            get {
+                return ResourceManager.GetString("COMMENT_PKG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Byte[].
         /// </summary>
         public static byte[] Conexion {
@@ -2279,6 +2297,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a [PACKAGE_XML].
+        /// </summary>
+        public static string PACKAGE_XML {
+            get {
+                return ResourceManager.GetString("PACKAGE_XML", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a pkg_epm.
         /// </summary>
         public static string Paquete_con_standar {
@@ -2320,6 +2347,15 @@ namespace Cygnus2_0.Properties {
         public static string PathPlantillas {
             get {
                 return ResourceManager.GetString("PathPlantillas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a PLANTILLA_XSL.
+        /// </summary>
+        public static string PLANTILLA_XSL {
+            get {
+                return ResourceManager.GetString("PLANTILLA_XSL", resourceCulture);
             }
         }
         
@@ -2617,6 +2653,15 @@ namespace Cygnus2_0.Properties {
         public static string procedure {
             get {
                 return ResourceManager.GetString("procedure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [PROCEDURE_XML].
+        /// </summary>
+        public static string PROCEDURE_XML {
+            get {
+                return ResourceManager.GetString("PROCEDURE_XML", resourceCulture);
             }
         }
         
@@ -4166,6 +4211,15 @@ namespace Cygnus2_0.Properties {
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a XML_HTML.
+        /// </summary>
+        public static string XML_HTML {
+            get {
+                return ResourceManager.GetString("XML_HTML", resourceCulture);
             }
         }
         

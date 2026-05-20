@@ -108,7 +108,9 @@ namespace Cygnus2_0.ViewModel.Aplica
 
                 this.Model.ListaArchivosGenerados.Clear();
 
+                handler.CursorWait();
                 ProcesaArchivos();
+                handler.CursorNormal();
 
                 this.Model.ArchivosGenerados = this.Model.ListaArchivosGenerados.Count().ToString();
 
@@ -123,6 +125,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             }
             catch (Exception ex)
             {
+                handler.CursorNormal();
                 this.Model.Objetos = false;
                 this.Model.Datos = false;
                 handler.MensajeError(ex.Message);
@@ -333,7 +336,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                 //Se instancian las listas del archivo
                 archivo.DocumentacionSinDepurar = new List<StringBuilder>();
                 archivo.Modificaciones = new List<ModificacionModel>();
-                archivo.ListDocumentacionDepurada = new List<DocumentacionHTMLModel>();
+                //archivo.ListDocumentacionDepurada = new List<DocumentacionHTMLModel>();
                 archivo.ObjetoSql = false;
                 pObtenerRutaDentroAplica(archivo);
 
