@@ -123,6 +123,98 @@
                     "sql": "update object_type set priority = '4' where codigo  =  '35'"
                 }
             ]
+        },
+        {
+            "version": "0.0.1.2",
+            "ajustes": [
+               {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '4'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '5'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX_CUSTOMIZACION' where codigo  =  '6'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '7'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '8'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '9'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '10'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '11'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '12'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '13'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '14'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '17'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '18'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '19'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '20'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '21'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '24'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '25'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '26'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '27'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '28'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '29'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '30'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '31'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '32'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '33'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '37'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '38'"
+                },
+                {
+                    "sql": "update object_path set user_default = 'FLEX' where codigo  =  '39'"
+                }
+            ]
         }
     ]
 }
