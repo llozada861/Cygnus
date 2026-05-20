@@ -990,9 +990,11 @@ namespace Cygnus2_0.General
                             archivo.NombreObjeto = "";
                     }
 
-                    if (archivo.ListaUsuarios.ToList().Exists(x => x.Usuariobd.ToUpper().Equals(archivo.CarpetaPadre.Trim().ToUpper())))
+                    UsuarioModel usuario = archivo.ListaUsuarios.ToList().Where(x => archivo.CarpetaPadre.ToUpper().Contains(x.Usuariobd.Trim().ToUpper())).LastOrDefault();
+
+                    if (usuario != null)
                     {
-                        archivo.Usuario = archivo.CarpetaPadre.Trim().ToUpper();
+                        archivo.Usuario = usuario.Usuariobd;
                     }
 
                     if (archivo.Tipo == null)
