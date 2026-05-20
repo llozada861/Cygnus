@@ -6,117 +6,126 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <html>
 <head>
     <title>
-        <xsl:value-of select="main/package/unidad"/>
+        <xsl:choose>
+            <xsl:when test="main/package">
+                <xsl:value-of select="main/package/unidad"/>
+            </xsl:when>
+
+            <xsl:otherwise>
+                <xsl:value-of select="main/methods/procedure/unidad"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </title>
 </head>
 <body>
 
-<table cellpadding="3"
-       width="90%"
-       style="background-color:#FFF;border-collapse:collapse;">
-
-    <tr>
-        <th align="left"
-            colspan="6"
-            style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:11.0pt;font-family:Arial;font-weight:bold">
-
-            Paquete:
-            <xsl:value-of select="main/package/unidad"/>
-        </th>
-    </tr>
-
-    <tr>
-        <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
-            Fuente de Datos
-        </td>
-
-        <td colspan="5"
-            style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
-            
-            <xsl:value-of select="main/package/@fuente"/>
-        </td>
-    </tr>
-
-    <tr>
-        <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
-            Creado Por
-        </td>
-
-        <td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
-
-            <xsl:value-of select="main/package/autor"/>
-        </td>
-    </tr>
-
-    <tr>
-        <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
-            Fecha de Creación
-        </td>
-
-        <td colspan="5"
-            style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
-
-            <xsl:value-of select="main/package/fecha"/>
-        </td>
-    </tr>
-
-    <tr>
-        <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
-            Descripción:
-        </td>
-
-        <td colspan="5" style="border:1px solid black;padding:5px">
-            <pre style="font-size:10.0pt;font-family:Arial;font-weight:plain">
-                <xsl:value-of select="main/package/descripcion"/>
-            </pre>
-        </td>
-
-    </tr>
-
-    <!-- HISTORIAL -->
-
-    <tr>
-        <td colspan="6"
-            align="center"
-            style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold">
-
-            Historial de Modificaciones
-
-        </td>
-    </tr>
-
-    <tr>
-        <th width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Fecha</center></th>
-        <th width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Autor</center></th>
-        <th width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Incidente</center></th>
-        <th width="40%" colspan="3" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Descripción</center></th>
-    </tr>
-
-    <xsl:for-each select="main/package/historial/modificacion">
+<xsl:if test="main/package">
+    <table cellpadding="3"
+           width="90%"
+           style="background-color:#FFF;border-collapse:collapse;">
 
         <tr>
-            <td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
-                <xsl:value-of select="@fecha"/>
+            <th align="left"
+                colspan="6"
+                style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:11.0pt;font-family:Arial;font-weight:bold">
+
+                Paquete:
+                <xsl:value-of select="main/package/unidad"/>
+            </th>
+        </tr>
+
+        <tr>
+            <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
+                Fuente de Datos
             </td>
 
-            <td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
-                <xsl:value-of select="@autor"/>
-            </td>
-
-            <td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
-                <xsl:value-of select="@inc"/>
-            </td>
-            
-            <td width="20%" colspan="4" style="border:1px solid black;padding:5px">
-                <pre style="font-size:10.0pt;font-family:Arial;font-weight:plain">
-                    <xsl:value-of select="."/>
-                </pre>
+            <td colspan="5"
+                style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
+                
+                <xsl:value-of select="main/package/@fuente"/>
             </td>
         </tr>
-    </xsl:for-each>
-</table>
-<br/><br/>
 
+        <tr>
+            <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
+                Creado Por
+            </td>
+
+            <td colspan="5" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
+
+                <xsl:value-of select="main/package/autor"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
+                Fecha de Creación
+            </td>
+
+            <td colspan="5"
+                style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
+
+                <xsl:value-of select="main/package/fecha"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold">
+                Descripción:
+            </td>
+
+            <td colspan="5" style="border:1px solid black;padding:5px">
+                <pre style="font-size:10.0pt;font-family:Arial;font-weight:plain">
+                    <xsl:value-of select="main/package/descripcion"/>
+                </pre>
+            </td>
+
+        </tr>
+
+        <!-- HISTORIAL -->
+
+        <tr>
+            <td colspan="6"
+                align="center"
+                style="border:1px solid black;padding:5px;background:#DCDCDC;font-size:10.0pt;font-family:Arial;font-weight:bold">
+
+                Historial de Modificaciones
+
+            </td>
+        </tr>
+
+        <tr>
+            <th width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Fecha</center></th>
+            <th width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Autor</center></th>
+            <th width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Incidente</center></th>
+            <th width="40%" colspan="3" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:bold"><center>Descripción</center></th>
+        </tr>
+
+        <xsl:for-each select="main/package/historial/modificacion">
+
+            <tr>
+                <td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
+                    <xsl:value-of select="@fecha"/>
+                </td>
+
+                <td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
+                    <xsl:value-of select="@autor"/>
+                </td>
+
+                <td width="20%" style="border:1px solid black;padding:5px;font-size:10.0pt;font-family:Arial;font-weight:plain">
+                    <xsl:value-of select="@inc"/>
+                </td>
+                
+                <td width="20%" colspan="4" style="border:1px solid black;padding:5px">
+                    <pre style="font-size:10.0pt;font-family:Arial;font-weight:plain">
+                        <xsl:value-of select="."/>
+                    </pre>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </table>
+    <br/><br/>
+</xsl:if>
 <!-- MÉTODOS -->
 
 <xsl:for-each select="main/methods/procedure">
@@ -332,11 +341,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     </table>
     <br/><br/>
 </xsl:for-each>
-
 </body>
-
 </html>
-
 </xsl:template>
-
 </xsl:stylesheet>

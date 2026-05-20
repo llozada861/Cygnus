@@ -11,5 +11,6 @@ namespace PlsqlAnalisisDL.General
         public string Token { get; set; }
         public string Valor { get; set; }
         public string NombreObjeto { get; set; }
+        public string Tabla { get; set; }
     }
 }

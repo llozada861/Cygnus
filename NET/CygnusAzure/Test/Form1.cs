@@ -39,6 +39,7 @@ namespace Test
             transform.Transform(xmlNormalizado, outputHtml);
 
             Console.WriteLine("HTML generado correctamente");
+            
         }
 
         static void Normalize(XElement element)

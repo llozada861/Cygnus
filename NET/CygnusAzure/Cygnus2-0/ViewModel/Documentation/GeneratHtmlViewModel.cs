@@ -39,10 +39,13 @@ namespace Cygnus2_0.ViewModel.Documentation
         {
             try
             {
+                handler.CursorWait();
                 handler.pGeneraArchivoHtml(this.Model.ListaArchivosCargados, this.Model.ListaObservaciones);
+                handler.CursorNormal();
             }
             catch(Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }

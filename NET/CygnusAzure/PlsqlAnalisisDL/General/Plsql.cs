@@ -204,7 +204,7 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "INSERT",
-                NombreObjeto = table
+                Tabla = table
             });
         }
 
@@ -216,7 +216,7 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "UPDATE",
-                NombreObjeto = table
+                Tabla = table
             });
         }
 
@@ -228,7 +228,19 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "DELETE",
-                NombreObjeto = table
+                Tabla = table
+            });
+        }
+
+        public override void EnterMerge_statement([NotNull] PlSqlParser.Merge_statementContext context)
+        {
+            var table = context.selected_tableview()[0].GetText();
+
+            InstruccionList.Add(new InstruccionPL
+            {
+                Token = "TIPO",
+                Valor = "MERGE",
+                Tabla = table
             });
         }
 
@@ -265,7 +277,6 @@ namespace PlsqlAnalisisDL.General
                 NombreObjeto= objeto
             });
         }
-
         public override void EnterCreate_procedure_body([NotNull] PlSqlParser.Create_procedure_bodyContext context)
         {
             var objeto = context.procedure_name().GetText();
@@ -353,12 +364,14 @@ namespace PlsqlAnalisisDL.General
         public override void EnterCreate_trigger([NotNull] PlSqlParser.Create_triggerContext context)
         {
             var objeto = context.trigger_name().GetText();
+            var tabla = context.simple_dml_trigger().dml_event_clause().tableview_name().GetText();
 
             InstruccionList.Add(new InstruccionPL
             {
                 Token = "TIPO",
                 Valor = "TRIGGER",
-                NombreObjeto= objeto
+                NombreObjeto= objeto,
+                Tabla = tabla
             });
         }
 
@@ -379,7 +392,7 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "TABLA",
-                NombreObjeto= objeto
+                Tabla = objeto
             });
         }
 
@@ -430,18 +443,18 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "ALTER",
-                NombreObjeto= objeto
+                Tabla = objeto
             });
         }
 
-        public override void EnterForeign_key_clause([NotNull] PlSqlParser.Foreign_key_clauseContext context)
+        /*public override void EnterForeign_key_clause([NotNull] PlSqlParser.Foreign_key_clauseContext context)
         {
             InstruccionList.Add(new InstruccionPL
             {
                 Token = "TIPO",
                 Valor = "LLAVE_FORANEA"
             });
-        }
+        }*/
 
         public override void EnterEveryRule(ParserRuleContext context)
         {
@@ -451,9 +464,22 @@ namespace PlsqlAnalisisDL.General
 
         public override void EnterOut_of_line_constraint([NotNull] PlSqlParser.Out_of_line_constraintContext context)
         {
-            string text =
-                _tokens.GetText(
-                    context.SourceInterval);
+            string text = _tokens.GetText(context.SourceInterval);
+            var tabla = "";
+
+            RuleContext parent = context.Parent;
+
+            while (parent != null)
+            {
+                if (parent is PlSqlParser.Alter_tableContext createTable)
+                {
+                    tabla = createTable.tableview_name().GetText();
+                    break;
+                }
+
+                parent =
+                    parent.Parent;
+            }
 
             if (text.Contains("PRIMARY KEY"))
             {
@@ -461,7 +487,8 @@ namespace PlsqlAnalisisDL.General
                 {
                     Token = "TIPO",
                     Valor = "LLAVE_PRIMARIA",
-                    NombreObjeto = context.constraint_name().GetText()
+                    NombreObjeto = context.constraint_name().GetText(),
+                    Tabla = tabla
                 });
             }
 
@@ -471,7 +498,8 @@ namespace PlsqlAnalisisDL.General
                 {
                     Token = "TIPO",
                     Valor = "LLAVE_UNICA",
-                    NombreObjeto = context.constraint_name().GetText()
+                    NombreObjeto = context.constraint_name().GetText(),
+                    Tabla = tabla
                 });
             }
 
@@ -481,7 +509,19 @@ namespace PlsqlAnalisisDL.General
                 {
                     Token = "TIPO",
                     Valor = "LLAVE_UNICA",
-                    NombreObjeto = context.constraint_name().GetText()
+                    NombreObjeto = context.constraint_name().GetText(),
+                    Tabla = tabla
+                });
+            }
+
+            if (text.Contains("FOREIGN"))
+            {
+                InstruccionList.Add(new InstruccionPL
+                {
+                    Token = "TIPO",
+                    Valor = "LLAVE_FORANEA",
+                    NombreObjeto = context.constraint_name().GetText(),
+                    Tabla = tabla
                 });
             }
         }
@@ -492,15 +532,6 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "GRANT"
-            });
-        }
-
-        public override void EnterMerge_statement([NotNull] PlSqlParser.Merge_statementContext context)
-        {
-            InstruccionList.Add(new InstruccionPL
-            {
-                Token = "TIPO",
-                Valor = "MERGE"
             });
         }
 
@@ -662,6 +693,114 @@ namespace PlsqlAnalisisDL.General
             _tokens = tokens;
         }
 
+        public override void EnterCreate_trigger([NotNull] PlSqlParser.Create_triggerContext context)
+        {
+            var comentarios_ = new HashSet<string>();
+
+            int start =
+                context.Start.TokenIndex;
+
+            int stop =
+                context.Stop.TokenIndex;
+
+            for (int i = start; i <= stop; i++)
+            {
+                var hidden =
+                    _tokens.GetHiddenTokensToLeft(i);
+
+                if (hidden == null)
+                    continue;
+
+                foreach (var token in hidden)
+                {
+                    string text =
+                        token.Text.Trim();
+
+                    if (token.Text.StartsWith("/*") && comentarios_.Add(text))
+                    {
+                        Comentarios.Add(new InstruccionPL { NombreObjeto = context.trigger_name().GetText(), Token = "COMMENT_OUT", Valor = token.Text });
+                    }
+
+                    if (token.Text.StartsWith("--") && comentarios_.Add(text))
+                    {
+                        Comentarios2.Add(new InstruccionPL { NombreObjeto = context.trigger_name().GetText(), Token = "COMMENT_IN", Valor = token.Text });
+                    }
+                }
+            }
+        }
+
+        public override void EnterCreate_procedure_body([NotNull] PlSqlParser.Create_procedure_bodyContext context)
+        {
+            var comentarios_ = new HashSet<string>();
+
+            int start =
+                context.Start.TokenIndex;
+
+            int stop =
+                context.Stop.TokenIndex;
+
+            for (int i = start; i <= stop; i++)
+            {
+                var hidden =
+                    _tokens.GetHiddenTokensToLeft(i);
+
+                if (hidden == null)
+                    continue;
+
+                foreach (var token in hidden)
+                {
+                    string text =
+                        token.Text.Trim();
+
+                    if (token.Text.StartsWith("/*") && comentarios_.Add(text))
+                    {
+                        Comentarios.Add(new InstruccionPL { NombreObjeto = context.procedure_name().GetText(), Token = "COMMENT_OUT", Valor = token.Text });
+                    }
+
+                    if (token.Text.StartsWith("--") && comentarios_.Add(text))
+                    {
+                        Comentarios2.Add(new InstruccionPL { NombreObjeto = context.procedure_name().GetText(), Token = "COMMENT_IN", Valor = token.Text });
+                    }
+                }
+            }
+        }
+
+        public override void EnterCreate_function_body([NotNull] PlSqlParser.Create_function_bodyContext context)
+        {
+            var comentarios_ = new HashSet<string>();
+
+            int start =
+                context.Start.TokenIndex;
+
+            int stop =
+                context.Stop.TokenIndex;
+
+            for (int i = start; i <= stop; i++)
+            {
+                var hidden =
+                    _tokens.GetHiddenTokensToLeft(i);
+
+                if (hidden == null)
+                    continue;
+
+                foreach (var token in hidden)
+                {
+                    string text =
+                        token.Text.Trim();
+
+                    if (token.Text.StartsWith("/*") && comentarios_.Add(text))
+                    {
+                        Comentarios.Add(new InstruccionPL { NombreObjeto = context.function_name().GetText(), Token = "COMMENT_OUT", Valor = token.Text });
+                    }
+
+                    if (token.Text.StartsWith("--") && comentarios_.Add(text))
+                    {
+                        Comentarios2.Add(new InstruccionPL { NombreObjeto = context.function_name().GetText(), Token = "COMMENT_IN", Valor = token.Text });
+                    }
+                }
+            }
+        }
+
         public override void EnterPackage_obj_spec([NotNull] PlSqlParser.Package_obj_specContext context)
         {
             var startToken = context.Start;
@@ -683,7 +822,7 @@ namespace PlsqlAnalisisDL.General
                 {
                     if (token.Text.StartsWith("/*"))
                     {
-                        Comentarios.Add(new InstruccionPL { NombreObjeto = metodo, Token = "COMMENT", Valor = token.Text });
+                        Comentarios.Add(new InstruccionPL { NombreObjeto = metodo, Token = "COMMENT_PKG", Valor = token.Text });
                     }
                 }
             }
@@ -743,7 +882,7 @@ namespace PlsqlAnalisisDL.General
                 {
                     if (token.Text.StartsWith("/*"))
                     {
-                        Comentarios.Add(new InstruccionPL { NombreObjeto = metodo, Token = "COMMENT", Valor = token.Text });
+                        Comentarios.Add(new InstruccionPL { NombreObjeto = metodo, Token = "COMMENT_OUT", Valor = token.Text });
                     }
                 }
             }
