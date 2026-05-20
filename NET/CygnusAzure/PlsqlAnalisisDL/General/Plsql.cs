@@ -198,49 +198,49 @@ namespace PlsqlAnalisisDL.General
 
         public override void EnterInsert_into_clause(PlSqlParser.Insert_into_clauseContext context)
         {
-            var table = context.general_table_ref().GetText();
+            var table = context.general_table_ref().dml_table_expression_clause().tableview_name().GetText();
 
             InstruccionList.Add(new InstruccionPL
             {
                 Token = "TIPO",
                 Valor = "INSERT",
-                Tabla = table
+                NombreObjeto = table
             });
         }
 
         public override void EnterUpdate_statement(PlSqlParser.Update_statementContext context)
         {
-            var table = context.general_table_ref().GetText();
+            var table = context.general_table_ref().dml_table_expression_clause().tableview_name().GetText();
 
             InstruccionList.Add(new InstruccionPL
             {
                 Token = "TIPO",
                 Valor = "UPDATE",
-                Tabla = table
+                NombreObjeto = table
             });
         }
 
         public override void EnterDelete_statement(PlSqlParser.Delete_statementContext context)
         {
-            var table = context.general_table_ref().GetText();
+            var table = context.general_table_ref().dml_table_expression_clause().tableview_name().GetText();
 
             InstruccionList.Add(new InstruccionPL
             {
                 Token = "TIPO",
                 Valor = "DELETE",
-                Tabla = table
+                NombreObjeto = table
             });
         }
 
         public override void EnterMerge_statement([NotNull] PlSqlParser.Merge_statementContext context)
         {
-            var table = context.selected_tableview()[0].GetText();
+            var table = context.selected_tableview()[0].tableview_name().GetText();
 
             InstruccionList.Add(new InstruccionPL
             {
                 Token = "TIPO",
                 Valor = "MERGE",
-                Tabla = table
+                NombreObjeto = table
             });
         }
 
@@ -304,12 +304,13 @@ namespace PlsqlAnalisisDL.General
         public override void EnterCreate_index([NotNull] PlSqlParser.Create_indexContext context)
         {
             var objeto = context.index_name().GetText();
+            var tabla = context.table_index_clause().tableview_name().GetText();
 
             InstruccionList.Add(new InstruccionPL
             {
                 Token = "TIPO",
                 Valor = "INDICE",
-                NombreObjeto= objeto  
+                NombreObjeto= tabla
             });
         }
 
@@ -370,8 +371,7 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "TRIGGER",
-                NombreObjeto= objeto,
-                Tabla = tabla
+                NombreObjeto= tabla
             });
         }
 
@@ -392,7 +392,7 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "TABLA",
-                Tabla = objeto
+                NombreObjeto = objeto
             });
         }
 
@@ -443,7 +443,7 @@ namespace PlsqlAnalisisDL.General
             {
                 Token = "TIPO",
                 Valor = "ALTER",
-                Tabla = objeto
+                NombreObjeto = objeto
             });
         }
 
@@ -487,8 +487,7 @@ namespace PlsqlAnalisisDL.General
                 {
                     Token = "TIPO",
                     Valor = "LLAVE_PRIMARIA",
-                    NombreObjeto = context.constraint_name().GetText(),
-                    Tabla = tabla
+                    NombreObjeto = tabla
                 });
             }
 
@@ -498,8 +497,7 @@ namespace PlsqlAnalisisDL.General
                 {
                     Token = "TIPO",
                     Valor = "LLAVE_UNICA",
-                    NombreObjeto = context.constraint_name().GetText(),
-                    Tabla = tabla
+                    NombreObjeto = tabla
                 });
             }
 
@@ -509,8 +507,7 @@ namespace PlsqlAnalisisDL.General
                 {
                     Token = "TIPO",
                     Valor = "LLAVE_UNICA",
-                    NombreObjeto = context.constraint_name().GetText(),
-                    Tabla = tabla
+                    NombreObjeto = tabla
                 });
             }
 
@@ -520,8 +517,7 @@ namespace PlsqlAnalisisDL.General
                 {
                     Token = "TIPO",
                     Valor = "LLAVE_FORANEA",
-                    NombreObjeto = context.constraint_name().GetText(),
-                    Tabla = tabla
+                    NombreObjeto = tabla
                 });
             }
         }

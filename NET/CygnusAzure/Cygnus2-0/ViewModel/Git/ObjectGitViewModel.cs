@@ -374,9 +374,19 @@ namespace Cygnus2_0.ViewModel.Git
                 return;
             }
 
-            string[] archivos = handler.pCargarArchivos();
-            ListarArchivos(archivos, GitSeleccionado.TipoDato);
-            pArmarArbol(null,null);
+            try
+            {
+                handler.CursorWait();
+                string[] archivos = handler.pCargarArchivos();
+                ListarArchivos(archivos, GitSeleccionado.TipoDato);
+                pArmarArbol(null, null);
+                handler.CursorNormal();
+            }
+            catch (Exception ex)
+            {
+                handler.CursorNormal();
+                handler.MensajeError(ex.Message);
+            }
         }
 
         public void pRenombrar(object commandParameter)

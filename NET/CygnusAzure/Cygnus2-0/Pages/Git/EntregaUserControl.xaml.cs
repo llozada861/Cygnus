@@ -90,6 +90,8 @@ namespace Cygnus2_0.Pages.Git
 
             try
             {
+                handler.CursorWait();
+
                 if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
                     DropPath = e.Data.GetData(DataFormats.FileDrop, true) as string[];
@@ -101,9 +103,12 @@ namespace Cygnus2_0.Pages.Git
                         chAprobar.IsEnabled = true;
                     }
                 }
+
+                handler.CursorNormal();
             }
             catch (Exception ex)
             {
+                handler.CursorNormal();
                 handler.MensajeError(ex.Message);
             }
         }

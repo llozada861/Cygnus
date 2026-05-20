@@ -406,26 +406,33 @@ namespace Cygnus2_0.General
 
             foreach (PlsqlAnalisisDL.General.InstruccionPL item in analisisPL.Where(x => x.Token == "TIPO"))
             {
-                foreach (TipoObjetos tipo in ListaTiposObjetos.OrderByDescending(x => x.Prioridad))
+                TipoObjetos tipo = ListaTiposObjetos.Where(x=>x.Descripcion == item.Valor).FirstOrDefault();
+
+                if (tipo != null)
                 {
-                    if (tipo.Descripcion == item.Valor)
-                    {
-                        archivo.Tipo = tipo.Codigo;
-                        archivo.SelectItemTipo = ListaTiposObjetos.FirstOrDefault(x => x.Codigo == tipo.Codigo);
+                    if(item.NombreObjeto != null)
+                        archivo.NombreObjeto = item.NombreObjeto.ToLower();
 
-                        if(item.NombreObjeto != null)
-                            archivo.NombreObjeto = item.NombreObjeto.ToLower();
+                    tiposArchivo.Add(tipo);
+                }
 
-                        if(item.Tabla != null)
-                            archivo.NombreObjeto = item.Tabla.ToLower();
-
-                        tiposArchivo.Add(tipo);
-                    }
+                if(tipo != null && (tipo.Descripcion == "PAQUETE" || tipo.Descripcion == "PROCEDIMIENTO" || tipo.Descripcion == "FUNCION" || tipo.Descripcion == "TRIGGER"))
+                {
+                    break;
                 }
             }
 
+
             if (tiposArchivo.Count > 0)
             {
+                var listaOrdenada = tiposArchivo.OrderBy(x => x.Prioridad).ToList();
+
+                foreach (var tipoOrd in listaOrdenada)
+                {
+                    archivo.Tipo = tipoOrd.Codigo;
+                    archivo.SelectItemTipo = ListaTiposObjetos.FirstOrDefault(x => x.Codigo == tipoOrd.Codigo);
+                }                
+
                 archivo.ListaTipos = tiposArchivo;
                 archivo.ListDocumentacionOut = analisisPL.Where(x => x.Token == "COMMENT_OUT").ToList();
                 archivo.ListDocumentacionIn = analisisPL.Where(x => x.Token == "COMMENT_IN").ToList();
