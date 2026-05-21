@@ -729,33 +729,31 @@ namespace PlsqlAnalisisDL.General
         {
             var comentarios_ = new HashSet<string>();
 
-            int start =
-                context.Start.TokenIndex;
+            int start = context.Start.TokenIndex;
 
-            int stop =
-                context.Stop.TokenIndex;
+            int stop = context.Stop.TokenIndex;
+
+            string nombreObjeto = context.procedure_name().GetText();
 
             for (int i = start; i <= stop; i++)
             {
-                var hidden =
-                    _tokens.GetHiddenTokensToLeft(i);
+                var hidden = _tokens.GetHiddenTokensToLeft(i);
 
                 if (hidden == null)
                     continue;
 
                 foreach (var token in hidden)
                 {
-                    string text =
-                        token.Text.Trim();
+                    string text = nombreObjeto+"-"+token.Text.Trim();
 
                     if (token.Text.StartsWith("/*") && comentarios_.Add(text))
                     {
-                        Comentarios.Add(new InstruccionPL { NombreObjeto = context.procedure_name().GetText(), Token = "COMMENT_OUT", Valor = token.Text });
+                        Comentarios.Add(new InstruccionPL { NombreObjeto = nombreObjeto, Token = "COMMENT_OUT", Valor = token.Text });
                     }
 
                     if (token.Text.StartsWith("--") && comentarios_.Add(text))
                     {
-                        Comentarios2.Add(new InstruccionPL { NombreObjeto = context.procedure_name().GetText(), Token = "COMMENT_IN", Valor = token.Text });
+                        Comentarios2.Add(new InstruccionPL { NombreObjeto = nombreObjeto, Token = "COMMENT_IN", Valor = token.Text });
                     }
                 }
             }
@@ -765,11 +763,11 @@ namespace PlsqlAnalisisDL.General
         {
             var comentarios_ = new HashSet<string>();
 
-            int start =
-                context.Start.TokenIndex;
+            int start = context.Start.TokenIndex;
 
-            int stop =
-                context.Stop.TokenIndex;
+            int stop = context.Stop.TokenIndex;
+
+            string nombreObjeto = context.function_name().GetText();
 
             for (int i = start; i <= stop; i++)
             {
@@ -781,17 +779,16 @@ namespace PlsqlAnalisisDL.General
 
                 foreach (var token in hidden)
                 {
-                    string text =
-                        token.Text.Trim();
+                    string text = nombreObjeto+"-"+token.Text.Trim();
 
                     if (token.Text.StartsWith("/*") && comentarios_.Add(text))
                     {
-                        Comentarios.Add(new InstruccionPL { NombreObjeto = context.function_name().GetText(), Token = "COMMENT_OUT", Valor = token.Text });
+                        Comentarios.Add(new InstruccionPL { NombreObjeto = nombreObjeto, Token = "COMMENT_OUT", Valor = token.Text });
                     }
 
                     if (token.Text.StartsWith("--") && comentarios_.Add(text))
                     {
-                        Comentarios2.Add(new InstruccionPL { NombreObjeto = context.function_name().GetText(), Token = "COMMENT_IN", Valor = token.Text });
+                        Comentarios2.Add(new InstruccionPL { NombreObjeto = nombreObjeto, Token = "COMMENT_IN", Valor = token.Text });
                     }
                 }
             }
