@@ -264,11 +264,14 @@ namespace Cygnus2_0.ViewModel.Aplica
         {
             try
             {
+                handler.CursorWait();
                 string[] archivos = handler.pCargarArchivos();
                 ListarArchivos(archivos);
+                handler.CursorNormal();
             }
             catch(Exception ex)
             {
+                handler.CursorNormal();
                 this.Model.ListaArchivosCargados.Clear();
                 this.Model.ListaArchivosNoOrden.Clear();
                 handler.MensajeError(ex.Message);
