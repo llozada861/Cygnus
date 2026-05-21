@@ -830,10 +830,12 @@ namespace Cygnus2_0.General
             }
             catch (Exception ex) 
             {
-                if(!File.Exists(xmlNormalizado))
+                this.CursorNormal();
+
+                if (!File.Exists(xmlNormalizado))
                     File.WriteAllText(xmlNormalizado, archivo.DocuXML, Encoding.UTF8);
 
-                MensajeErrorLink(ex.Message,"Ver XML", xmlNormalizado);
+                MensajeErrorLink(ex.Message," * ¡VER XML! *", xmlNormalizado);
             }
 
             return resultado;
