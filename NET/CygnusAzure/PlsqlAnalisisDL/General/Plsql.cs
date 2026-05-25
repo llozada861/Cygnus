@@ -79,7 +79,7 @@ namespace PlsqlAnalisisDL.General
                 instruccionesPL.Add(dep);
             }
 
-            foreach (var dep in listenerComm.Comentarios2.GroupBy(x => x.Token + "|" + x.Valor).Select(x => x.First()).ToList().OrderBy(x => x.Token))
+            foreach (var dep in listenerComm.Comentarios2.GroupBy(x => x.Token + "|" + x.Valor + "|" + x.NombreObjeto).Select(x => x.First()).ToList().OrderBy(x => x.Token))
             {
                 Console.WriteLine(
                     $"{dep.Token}:{dep.NombreObjeto} -> {dep.Valor}");
@@ -458,8 +458,7 @@ namespace PlsqlAnalisisDL.General
 
         public override void EnterEveryRule(ParserRuleContext context)
         {
-            Console.WriteLine(
-                context.GetType().Name);
+            //Console.WriteLine(context.GetType().Name);
         }
 
         public override void EnterOut_of_line_constraint([NotNull] PlSqlParser.Out_of_line_constraintContext context)
@@ -693,11 +692,9 @@ namespace PlsqlAnalisisDL.General
         {
             var comentarios_ = new HashSet<string>();
 
-            int start =
-                context.Start.TokenIndex;
+            int start = context.Start.TokenIndex;
 
-            int stop =
-                context.Stop.TokenIndex;
+            int stop = context.Stop.TokenIndex;
 
             for (int i = start; i <= stop; i++)
             {
@@ -709,8 +706,7 @@ namespace PlsqlAnalisisDL.General
 
                 foreach (var token in hidden)
                 {
-                    string text =
-                        token.Text.Trim();
+                    string text = token.Text.Trim();
 
                     if (token.Text.StartsWith("/*") && comentarios_.Add(text))
                     {
@@ -744,7 +740,7 @@ namespace PlsqlAnalisisDL.General
 
                 foreach (var token in hidden)
                 {
-                    string text = nombreObjeto+"-"+token.Text.Trim();
+                    string text = token.Text.Trim();
 
                     if (token.Text.StartsWith("/*") && comentarios_.Add(text))
                     {
@@ -771,15 +767,14 @@ namespace PlsqlAnalisisDL.General
 
             for (int i = start; i <= stop; i++)
             {
-                var hidden =
-                    _tokens.GetHiddenTokensToLeft(i);
+                var hidden = _tokens.GetHiddenTokensToLeft(i);
 
                 if (hidden == null)
                     continue;
 
                 foreach (var token in hidden)
                 {
-                    string text = nombreObjeto+"-"+token.Text.Trim();
+                    string text = token.Text.Trim();
 
                     if (token.Text.StartsWith("/*") && comentarios_.Add(text))
                     {
