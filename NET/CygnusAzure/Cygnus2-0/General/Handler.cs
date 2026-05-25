@@ -422,7 +422,6 @@ namespace Cygnus2_0.General
                 }
             }
 
-
             if (tiposArchivo.Count > 0)
             {
                 var listaOrdenada = tiposArchivo.OrderBy(x => x.Prioridad).ToList();
