@@ -248,5 +248,14 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.2.1",
+            "ajustes": [
+                {
+                    "sql": "update html set documentation = 'MERGE INTO MENSAJE A USING\r\n     (SELECT\r\n      :CODIGO as MENSCODI,\r\n      :DESCRIPCION as MENSDESC,\r\n      ''EMC'' as MENSDIVI,\r\n      ''CUZ'' as MENSMODU,\r\n      :CAUSA as MENSCAUS,\r\n      :SOLUCION  as MENSPOSO\r\n      FROM DUAL) B\r\n    ON (A.MENSDIVI = B.MENSDIVI and A.MENSMODU = B.MENSMODU and A.MENSCODI = B.MENSCODI)\r\n    WHEN NOT MATCHED THEN \r\n    INSERT (\r\n      MENSCODI, MENSDESC, MENSDIVI, MENSMODU, MENSCAUS, \r\n      MENSPOSO)\r\n    VALUES (\r\n      B.MENSCODI, B.MENSDESC, B.MENSDIVI, B.MENSMODU, B.MENSCAUS, \r\n      B.MENSPOSO)\r\n    WHEN MATCHED THEN\r\n    UPDATE SET \r\n      A.MENSDESC = B.MENSDESC,\r\n      A.MENSCAUS = B.MENSCAUS,\r\n      A.MENSPOSO = B.MENSPOSO;\r\n      \r\nCOMMIT;\r\n'\r\nwhere name = 'PLANTILLA_MENSAJE'\r\nand company = 100"
+                }
+            ]
+        }
     ]
 }
