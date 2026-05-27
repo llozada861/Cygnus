@@ -153,8 +153,6 @@ namespace Cygnus2_0
 
             try
             {
-                handler.pRealizaConexion();
-
                 if (handler.ConfGeneralView.Model.Empresa.Azure == res.No && Next && string.IsNullOrEmpty(handler.ConnView.Model.UsuarioAzure)) 
                 {
                     userControls = new Azure();

@@ -65,14 +65,14 @@ namespace Cygnus2_0.ViewModel.Pkg
                 handler.MensajeError(ex.Message);
             }
         }
-
+        
         internal void pGeneraPktbl()
         {
             handler.CursorWait();
 
-            string pktbl = handler.DAO.pGeneraPktbl(this.Model.Tabla, this.Model.Usuario, this.Model.Caso,handler);
+            string pktbl = handler.DAO.pGeneraPktbl(this.Model.Tabla, this.Model.Usuario,this.Model.Owner, this.Model.Caso,handler);
 
-            PlantillasHTMLModel plantillaPktbl = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_PKTBL)).FirstOrDefault();
+            PlantillasHTMLModel plantillaPktbl = handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_PKTBL)).FirstOrDefault();
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = plantillaPktbl.NombreArchivo + this.Model.Tabla.ToLower().Trim() + ".sql";

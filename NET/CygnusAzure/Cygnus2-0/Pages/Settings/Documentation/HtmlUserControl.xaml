@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <GroupBox x:Name="groupBox1" Header="Encabezados" >
             <DataGrid x:Name="dataGridDatos"
-                      ItemsSource="{Binding Path=ListaHTML}"
+                      ItemsSource="{Binding Path=ListaPlantillas}"
                       AutoGenerateColumns="False"
                     SelectionMode="Single"
                     CanUserDeleteRows="True"

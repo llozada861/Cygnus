@@ -211,7 +211,7 @@ declare
         END;
         
         /***************************************************************************
-        <Procedure Fuente="Propiedad Intelectual de Empresas Públicas de Medellín">
+        <Procedure Fuente="Propiedad Intelectual de Empresas Públicas de Cali">
           <Unidad>fboCampoEnPrimaryKey</Unidad>
           <Descripcion>
                 Indica si un campo está en la llave primaria
@@ -273,11 +273,11 @@ declare
             RETURN boEstaEnPK;
                 
         EXCEPTION
-            WHEN Epm_Errors.EX_CTRLERROR THEN
+            WHEN ex.CONTROLLED_ERROR THEN
                 RAISE;
             WHEN OTHERS THEN
-                Epm_Errors.SetError;
-                RAISE Epm_Errors.EX_CTRLERROR;
+                --pkErrors.SetError;
+                RAISE ex.CONTROLLED_ERROR;
         END fboCampoEnPrimaryKey; 
         
     BEGIN
@@ -330,7 +330,7 @@ declare
 'CREATE OR REPLACE PACKAGE pktbl' || gsbTableCap || '
 IS
 /**************************************************************************
-    Copyright (c) 2020 EPM - Empresas Públicas de Medellín
+    Copyright (c) 2020 Propiedad Intelectual de Empresas Públicas de Cali
     Archivo generado automaticamente.
     '|| sbUser ||' - MVM Ingeniería de Software S.A.S.
             

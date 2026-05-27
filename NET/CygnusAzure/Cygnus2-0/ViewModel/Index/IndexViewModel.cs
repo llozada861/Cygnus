@@ -143,7 +143,7 @@ namespace Cygnus2_0.ViewModel.Index
                 handler.ListaHistoria.Clear();
                 handler.ListaDocHtml.Clear();
                 handler.ListaRutas.Clear();
-                handler.ListaHTML.Clear();
+                handler.ListaPlantillas.Clear();
                 handler.HtmlEspecificacion.Clear();
                 handler.HtmlMetodo.Clear();
                 handler.HtmlMetodoParam.Clear();
@@ -356,14 +356,14 @@ namespace Cygnus2_0.ViewModel.Index
         {
             try
             {
-                handler.ListaHTML = new ObservableCollection<PlantillasHTMLModel>();
+                handler.ListaPlantillas = new ObservableCollection<PlantillasHTMLModel>();
                 SqliteDAO.pListaHTML(handler);
 
-                handler.HtmlEspecificacion.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyEspecificacion)).Documentacion);
-                handler.HtmlMetodo.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetodo)).Documentacion);
-                handler.HtmlMetodoParam.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoParam)).Documentacion);
-                handler.HtmlMetodoReturn.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyMetoReturn)).Documentacion);
-                handler.HtmlScript.Append(handler.ListaHTML.ToList().Find(x => x.Nombre.Equals(res.KeyScript)).Documentacion);
+                handler.HtmlEspecificacion.Append(handler.ListaPlantillas.ToList().Find(x => x.Nombre.Equals(res.KeyEspecificacion)).Documentacion);
+                handler.HtmlMetodo.Append(handler.ListaPlantillas.ToList().Find(x => x.Nombre.Equals(res.KeyMetodo)).Documentacion);
+                handler.HtmlMetodoParam.Append(handler.ListaPlantillas.ToList().Find(x => x.Nombre.Equals(res.KeyMetoParam)).Documentacion);
+                handler.HtmlMetodoReturn.Append(handler.ListaPlantillas.ToList().Find(x => x.Nombre.Equals(res.KeyMetoReturn)).Documentacion);
+                handler.HtmlScript.Append(handler.ListaPlantillas.ToList().Find(x => x.Nombre.Equals(res.KeyScript)).Documentacion);
             }
             catch (Exception ex)
             {

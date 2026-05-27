@@ -2301,4 +2301,7 @@ END;
   <data name="PLANTILLA_XSL" xml:space="preserve">
     <value>PLANTILLA_XSL</value>
   </data>
+  <data name="KEY_DEPENDENCIAS" xml:space="preserve">
+    <value>PLANTILLA_DEPS</value>
+  </data>
 </root>

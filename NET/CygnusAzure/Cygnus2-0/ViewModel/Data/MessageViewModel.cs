@@ -68,7 +68,7 @@ namespace Cygnus2_0.ViewModel.Data
         {
             StringBuilder insParam = new StringBuilder();
 
-            PlantillasHTMLModel plantilla = handler.ListaHTML.Where(x => x.Nombre.Equals("PLANTILLA_MENSAJE")).FirstOrDefault();
+            PlantillasHTMLModel plantilla = handler.ListaPlantillas.Where(x => x.Nombre.Equals("PLANTILLA_MENSAJE")).FirstOrDefault();
 
             insParam.Append(plantilla.Documentacion.Replace("\r\n", "\n"));
             insParam.Replace(":CODIGO", this.Model.Codigo );

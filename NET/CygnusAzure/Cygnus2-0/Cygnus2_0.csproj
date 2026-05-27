@@ -253,6 +253,7 @@
     <Compile Include="DAO\SqliteDAO.cs" />
     <Compile Include="General\Archivo.cs" />
     <Compile Include="General\ConexionOracle.cs" />
+    <Compile Include="General\Dependencia.cs" />
     <Compile Include="General\Documentacion\DocumentacionHTML.cs" />
     <Compile Include="General\Documentacion\DocumentacionHTMLModel.cs" />
     <Compile Include="General\Documentacion\ModificacionModel.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Model\Conexion\ConnModel.cs" />
     <Compile Include="Model\Data\MessageModel.cs" />
     <Compile Include="Model\Data\ParameterModel.cs" />
+    <Compile Include="Model\DepModel.cs" />
     <Compile Include="Model\Documentation\HtmlModel.cs" />
     <Compile Include="Model\Empresa\EmpresaModel.cs" />
     <Compile Include="Model\Estandar\EstandarModel.cs" />
@@ -345,6 +347,9 @@
     </Compile>
     <Compile Include="Pages\Data\UCParametro.xaml.cs">
       <DependentUpon>UCParametro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Deps\DependencyUC.xaml.cs">
+      <DependentUpon>DependencyUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Documentation\AdminDoc.xaml.cs">
       <DependentUpon>AdminDoc.xaml</DependentUpon>
@@ -531,6 +536,7 @@
     <Compile Include="ViewModel\Compila\CompilaViewModel.cs" />
     <Compile Include="ViewModel\Data\MessageViewModel.cs" />
     <Compile Include="ViewModel\Data\ParameterViewModel.cs" />
+    <Compile Include="ViewModel\Deps\DepViewModel.cs" />
     <Compile Include="ViewModel\Documentation\GeneratHtmlViewModel.cs" />
     <Compile Include="ViewModel\Estandar\EstandarViewModel.cs" />
     <Compile Include="ViewModel\Git\ObjectGitViewModel.cs" />
@@ -641,6 +647,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Data\UCParametro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Deps\DependencyUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -983,8 +993,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="General\Word\" />
-    <Folder Include="Pages\Azure\" />
-    <Folder Include="Pages\ObjetosBD\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Notifications.Wpf\Notifications.Wpf.csproj">
