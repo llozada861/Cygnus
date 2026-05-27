@@ -2,6 +2,7 @@
 using Cygnus2_0.General;
 using Cygnus2_0.General.Documentacion;
 using Cygnus2_0.General.Times;
+using Cygnus2_0.Model;
 using Cygnus2_0.Model.Azure;
 using Cygnus2_0.Model.Conexion;
 using Cygnus2_0.Model.Empresa;
@@ -337,7 +338,7 @@ namespace Cygnus2_0.DAO
         {
             using (DataBaseContext context = new DataBaseContext())
             {
-                handler.ListaHTML = new ObservableCollection<PlantillasHTMLModel>(context.PlantillasHTML.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
+                handler.ListaPlantillas = new ObservableCollection<PlantillasHTMLModel>(context.PlantillasHTML.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
             }
         }
         #endregion Plantillas

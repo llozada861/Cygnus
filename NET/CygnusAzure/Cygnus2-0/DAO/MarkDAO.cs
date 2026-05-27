@@ -33,6 +33,7 @@ using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Conn;
 using Cygnus2_0.Pages.Data;
 using System.Runtime.InteropServices;
+using Cygnus2_0.Model;
 
 namespace Cygnus2_0.DAO
 {
@@ -52,7 +53,7 @@ namespace Cygnus2_0.DAO
         #region GestionDatos
         public void pCreaParametro(ParameterModel parametro)
         {
-            string query = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_SQL_PARAMETRO)).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
+            string query = handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_SQL_PARAMETRO)).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
 
             handler.ConexionOracle.RealizarConexion();
             OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
@@ -75,7 +76,7 @@ namespace Cygnus2_0.DAO
 
         public void pCreaMensaje(MessageModel mensajesModel)
         {
-            string query = handler.ListaHTML.Where(x => x.Nombre.Equals("SQL_MENSAJE")).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
+            string query = handler.ListaPlantillas.Where(x => x.Nombre.Equals("SQL_MENSAJE")).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
 
             handler.ConexionOracle.RealizarConexion();
             OracleConnection con = handler.ConexionOracle.ConexionOracleSQL;
@@ -97,7 +98,7 @@ namespace Cygnus2_0.DAO
 
         public string pObtCodigoMensaje()
         {
-            string sql = handler.ListaHTML.Where(x => x.Nombre.Equals("CODIGO_MENSAJE")).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
+            string sql = handler.ListaPlantillas.Where(x => x.Nombre.Equals("CODIGO_MENSAJE")).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
 
             int Codigo = 0;
 
@@ -541,14 +542,14 @@ namespace Cygnus2_0.DAO
         #endregion CompilacionObjetos
                         
         #region GenereacionPaquetes
-        internal string pGeneraPktbl(string tabla, SelectListItem usuarioBD, string caso,Handler handler)
+        internal string pGeneraPktbl(string tabla, SelectListItem usuarioBD, SelectListItem owner, string caso,Handler handler)
         {
             UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Usuariobd.Equals(usuarioBD.Text.ToUpper())).FirstOrDefault();
             handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
 
             OracleConnection conn = handler.ConexionOracle.ConexionOracleCompila;
 
-            OracleCommand sqlPktbl = new OracleCommand(handler.ListaHTML.Where(x=>x.Nombre.Equals(res.KEY_PKTBL)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
+            OracleCommand sqlPktbl = new OracleCommand(handler.ListaPlantillas.Where(x=>x.Nombre.Equals(res.KEY_PKTBL)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
             sqlPktbl.BindByName = true;
 
@@ -557,7 +558,7 @@ namespace Cygnus2_0.DAO
             sqlPktbl.Parameters.Add(sbTabla);
 
             OracleParameter sbOwner = new OracleParameter("isbOwner", OracleDbType.Varchar2);
-            sbOwner.Value = usuarioBD.Text;
+            sbOwner.Value = owner.Text;
             sqlPktbl.Parameters.Add(sbOwner);
 
             OracleParameter sbOrder = new OracleParameter("isOrder", OracleDbType.Varchar2);
@@ -595,7 +596,7 @@ namespace Cygnus2_0.DAO
             handler.ConexionOracle.RealizarConexionProd(conexion);
             OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
 
-            OracleCommand sqlPktbl = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals("PLANTILLA_FUENTES")).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
+            OracleCommand sqlPktbl = new OracleCommand(handler.ListaPlantillas.Where(x => x.Nombre.Equals("PLANTILLA_FUENTES")).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
             sqlPktbl.BindByName = true;
 
@@ -618,7 +619,91 @@ namespace Cygnus2_0.DAO
 
             return fuente;
         }
+
+        internal List<SelectListItem> pObtPrimarias(string Tabla, UsuariosPDN conexion)
+        {
+            string sql;
+            List<SelectListItem> lista = new List<SelectListItem>();
+
+            sql = " select -- + ordered \n" +
+                  "  tcol.column_name as columna \n" +
+                  "  from    all_constraints cons, all_cons_columns ccol, all_tab_columns tcol \n" +
+                  "  where cons.table_name = upper('" + Tabla.ToUpper() + "') \n" +
+                  "  and cons.constraint_type = 'P' \n" +
+                  "  and cons.owner = upper('FLEX') \n" +
+                  "  and ccol.owner = cons.owner \n" +
+                  "  and ccol.constraint_name = cons.constraint_name \n" +
+                  "  and ccol.table_name = cons.table_name \n" +
+                  "  and tcol.owner = ccol.owner \n" +
+                  "  and tcol.table_name = ccol.table_name \n" +
+                  "  and tcol.column_name = ccol.column_name \n" +
+                  "  order by ccol.position";
+
+            handler.ConexionOracle.RealizarConexionProd(conexion);
+            OracleConnection con = handler.ConexionOracle.ConexionOracleProd;
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Connection = con;
+
+                using (OracleDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SelectListItem dato = new SelectListItem();
+                        dato.Value = Convert.ToString(reader["columna"]);
+                        lista.Add(dato);
+                    }
+                    reader.Close();
+                }
+            }
+            con.Close();
+            handler.ConexionOracle.ConexionOracleProd.Close();
+
+            return lista;
+        }
         #endregion Fuentes PL
+
+        #region Dependencias
+        public List<Dependencia> pGenerarDependencias(string objeto, UsuariosPDN conexion)
+        {
+            List<Dependencia> lista = new List<Dependencia>();
+
+            handler.ConexionOracle.RealizarConexionProd(conexion);
+            OracleConnection con = handler.ConexionOracle.ConexionOracleProd;
+
+            string sql = handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_DEPENDENCIAS)).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
+
+            sql = sql.Replace("[OBJETO]", objeto);
+
+            using (OracleCommand cmd = new OracleCommand())
+            {
+                cmd.CommandText = sql;
+                cmd.Connection = con;
+
+                using (OracleDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Dependencia dato = new Dependencia();
+                        dato.Origen = Convert.ToString(reader["origen"]);
+                        dato.Objeto = Convert.ToString(reader["objeto"]);
+                        dato.Tipo = Convert.ToString(reader["tipo_objeto"]);
+                        dato.Impacto = Convert.ToString(reader["impacto"]);
+                        dato.Texto = Convert.ToString(reader["texto"]);
+
+                        lista.Add(dato);
+                    }
+                    reader.Close();
+                }
+            }
+            con.Close();
+            handler.ConexionOracle.ConexionOracleProd.Close();
+
+            return lista;
+        }
+        #endregion Dependencias
 
         #region Auditoria
         internal void pGeneraAuditoria(TbAuditoriaModel model, out OracleClob tabla, out OracleClob trigger)
@@ -628,7 +713,7 @@ namespace Cygnus2_0.DAO
 
             OracleConnection conn = handler.ConexionOracle.ConexionOracleCompila;
 
-            OracleCommand sqlPktbl = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_AUDIT_TABLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
+            OracleCommand sqlPktbl = new OracleCommand(handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_AUDIT_TABLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
             sqlPktbl.BindByName = true;
 
@@ -787,6 +872,7 @@ namespace Cygnus2_0.DAO
             }
         }
 
+        #region Reglas
         public SelectListItem pObtDatosRegla(string codigo, UsuariosPDN conexion)
         {
             string sql;
@@ -794,7 +880,7 @@ namespace Cygnus2_0.DAO
             dato.Text = "Regla ["+ codigo+"] No existe en la base de datos ["+conexion.BaseDatos+"]";
             dato.Value = "-99";
 
-            sql = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_REGLAS)).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
+            sql = handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_REGLAS)).FirstOrDefault().Documentacion.Replace("\r\n", "\n");
 
             handler.ConexionOracle.RealizarConexionProd(conexion);
             OracleConnection con = handler.ConexionOracle.ConexionOracleProd;
@@ -833,7 +919,7 @@ namespace Cygnus2_0.DAO
             handler.ConexionOracle.RealizarConexionProd(conexion);
             OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
 
-            OracleCommand sqlValor = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_GENERA_REGLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
+            OracleCommand sqlValor = new OracleCommand(handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_GENERA_REGLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
             sqlValor.BindByName = true;
 
@@ -867,7 +953,7 @@ namespace Cygnus2_0.DAO
             handler.ConexionOracle.RealizarConexionProd(conexion);
             OracleConnection conn = handler.ConexionOracle.ConexionOracleProd;
 
-            OracleCommand sqlValor = new OracleCommand(handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_REGENERA_REGLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
+            OracleCommand sqlValor = new OracleCommand(handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_REGENERA_REGLA)).FirstOrDefault().Documentacion.Replace("\r\n", "\n"), conn);
 
             sqlValor.BindByName = true;
 
@@ -895,51 +981,6 @@ namespace Cygnus2_0.DAO
 
             return resultado;
         }
-
-        internal List<SelectListItem> pObtPrimarias(string Tabla, UsuariosPDN conexion)
-        {
-            string sql;
-            List<SelectListItem> lista = new List<SelectListItem>();
-
-            sql = " select -- + ordered \n" +
-                  "  tcol.column_name as columna \n" +
-                  "  from    all_constraints cons, all_cons_columns ccol, all_tab_columns tcol \n" +
-                  "  where cons.table_name = upper('" + Tabla.ToUpper() + "') \n" +
-                  "  and cons.constraint_type = 'P' \n" +
-                  "  and cons.owner = upper('FLEX') \n" +
-                  "  and ccol.owner = cons.owner \n" +
-                  "  and ccol.constraint_name = cons.constraint_name \n" +
-                  "  and ccol.table_name = cons.table_name \n" +
-                  "  and tcol.owner = ccol.owner \n" +
-                  "  and tcol.table_name = ccol.table_name \n" +
-                  "  and tcol.column_name = ccol.column_name \n" +
-                  "  order by ccol.position";
-
-            handler.ConexionOracle.RealizarConexionProd(conexion);
-            OracleConnection con = handler.ConexionOracle.ConexionOracleProd;
-
-            using (OracleCommand cmd = new OracleCommand())
-            {
-                cmd.CommandText = sql;
-                cmd.Connection = con;
-
-                using (OracleDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        SelectListItem dato = new SelectListItem();
-                        dato.Value = Convert.ToString(reader["columna"]);
-                        lista.Add(dato);
-                    }
-                    reader.Close();
-                }
-            }
-            con.Close();
-            handler.ConexionOracle.ConexionOracleProd.Close();
-
-            return lista;
-        }
-
         internal List<SelectListItem> pObtDatosTablaRegla(string sql, UsuariosPDN conexion)
         {
             List<SelectListItem> lista = new List<SelectListItem>();
@@ -984,6 +1025,8 @@ namespace Cygnus2_0.DAO
 
             return lista;
         }
+        #endregion Reglas
+
     }
 
 }

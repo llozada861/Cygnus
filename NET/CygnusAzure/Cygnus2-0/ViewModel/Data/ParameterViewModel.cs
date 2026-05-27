@@ -105,7 +105,7 @@ namespace Cygnus2_0.ViewModel.Data
         {
             StringBuilder insParam = new StringBuilder();
 
-            PlantillasHTMLModel plantilla = handler.ListaHTML.Where(x => x.Nombre.Equals(res.KEY_PLANT_PARAMETRO)).FirstOrDefault();
+            PlantillasHTMLModel plantilla = handler.ListaPlantillas.Where(x => x.Nombre.Equals(res.KEY_PLANT_PARAMETRO)).FirstOrDefault();
             insParam.Append(plantilla.Documentacion.Replace("\r\n", "\n"));
             insParam.Replace(":PARAMETRO_ID", "'"+this.Model.ParameterId+"'");
             insParam.Replace(":VALOR", "'" + this.Model.Valor + "'");

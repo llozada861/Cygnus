@@ -348,7 +348,7 @@ namespace Cygnus2_0.General
             }
         }
         public DocumentacionHTML DocHTMLSeleccionado { get; set; }
-        public ObservableCollection<PlantillasHTMLModel> ListaHTML 
+        public ObservableCollection<PlantillasHTMLModel> ListaPlantillas 
         {
             get
             {
@@ -733,11 +733,14 @@ namespace Cygnus2_0.General
             {
                 string comentario = comentarioPkg.Valor;
 
-                comentario = Regex.Replace(comentario, @"^\s*/\*+", "", RegexOptions.Multiline);
+                // quitar inicio /* o /*****
+                comentario = Regex.Replace(comentario,@"^\s*/\*+\s*$","",RegexOptions.Multiline);
 
-                comentario = Regex.Replace(comentario, @"\*+/\s*$", "", RegexOptions.Multiline);
+                // quitar final *****...*****/
+                comentario = Regex.Replace(comentario,@"^\s*\*+/+\s*$","",RegexOptions.Multiline);
 
-                comentario = Regex.Replace(comentario, @"^\s*\*+", "", RegexOptions.Multiline);
+                // quitar líneas decorativas ***** o +++++
+                comentario = Regex.Replace(comentario,@"^\s*[\*\+]{3,}\s*$","",RegexOptions.Multiline);
 
                 comentario = comentario.Trim();
 
@@ -751,6 +754,7 @@ namespace Cygnus2_0.General
             foreach (var docu in archivo.ListDocumentacionOut.Where(x=>x.Token == res.COMMENT_OUT))
             {
                 string comentario = docu.Valor;
+                bool blFin = false;
 
                 comentario = Regex.Replace(comentario,@"^\s*/\*+","",RegexOptions.Multiline);
 
@@ -766,7 +770,20 @@ namespace Cygnus2_0.General
                 {
                     string com = Regex.Replace(docuIn.Valor, @"^\s*--\s*", "").ToLower();
 
+                    blFin = false;
+
                     if (com.StartsWith("<com>"))
+                    {
+                        string lineaIn = docuIn.Valor.Replace("--", "");
+                        comentariosIn.AppendLine(lineaIn);
+
+                        if (com.EndsWith("</com>"))
+                        {
+                            blFin = true;
+                        }
+                    }
+
+                    if(com.TrimEnd().EndsWith("</com>") && !blFin)
                     {
                         string lineaIn = docuIn.Valor.Replace("--", "");
                         comentariosIn.AppendLine(lineaIn);

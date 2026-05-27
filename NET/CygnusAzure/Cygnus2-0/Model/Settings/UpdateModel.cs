@@ -101,8 +101,8 @@ namespace Cygnus2_0.Model.Settings
                     }
                 }
             }
-
-            if(!string.IsNullOrEmpty(versionNueva))
+            
+            if (!string.IsNullOrEmpty(versionNueva))
             {
                 SqliteDAO.pCreaConfiguracion(res.KEY_VERSIONBD, versionNueva);
 

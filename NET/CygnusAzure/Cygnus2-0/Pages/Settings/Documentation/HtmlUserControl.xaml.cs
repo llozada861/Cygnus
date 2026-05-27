@@ -92,7 +92,7 @@ namespace Cygnus2_0.Pages.Settings.Documentation
     
         public void pCargarLista()
         {
-            handler.ListaHTML.Clear();
+            handler.ListaPlantillas.Clear();
             SqliteDAO.pListaHTML(handler);
         }
 

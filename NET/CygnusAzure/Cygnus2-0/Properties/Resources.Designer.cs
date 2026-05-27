@@ -1321,6 +1321,15 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a PLANTILLA_DEPS.
+        /// </summary>
+        public static string KEY_DEPENDENCIAS {
+            get {
+                return ResourceManager.GetString("KEY_DEPENDENCIAS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a EMPRESA.
         /// </summary>
         public static string KEY_EMPRESA {

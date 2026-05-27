@@ -15,6 +15,7 @@ namespace Cygnus2_0.Model.Package
         private string tabla;
         private string caso;
         private SelectListItem usuario;
+        private SelectListItem owner;
         private ObservableCollection<SelectListItem> listaUsuarios;
 
         public string Tabla
@@ -31,6 +32,11 @@ namespace Cygnus2_0.Model.Package
         {
             get { return usuario; }
             set { SetProperty(ref usuario, value); }
+        }
+        public SelectListItem Owner
+        {
+            get { return owner; }
+            set { SetProperty(ref owner, value); }
         }
         public ObservableCollection<SelectListItem> ListaUsuarios
         {

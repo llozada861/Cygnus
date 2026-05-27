@@ -111,7 +111,7 @@ namespace Cygnus2_0.ViewModel.Security
                 File.Delete(sbAplica);
             }
 
-            sbAplicaBody.Append(handler.ListaHTML.Where(x=>x.Nombre.Equals(res.KEY_CREA_USUARIOS)).FirstOrDefault().Documentacion);
+            sbAplicaBody.Append(handler.ListaPlantillas.Where(x=>x.Nombre.Equals(res.KEY_CREA_USUARIOS)).FirstOrDefault().Documentacion);
             sbAplicaBody.Replace("[PAR_USUARIO_SQL]", this.Model.Usuario.Trim());
             sbAplicaBody.Replace("[PAR_PASS_SQL]", this.Model.Password);
 
