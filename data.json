@@ -269,5 +269,14 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.2.3",
+            "ajustes": [
+                {
+                    "sql": "update html set filename= 'pktbl' where name = 'PKTBL'"
+                }
+            ]
+        }
     ]
 }
