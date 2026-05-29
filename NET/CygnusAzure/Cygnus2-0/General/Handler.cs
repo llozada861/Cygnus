@@ -432,7 +432,7 @@ namespace Cygnus2_0.General
                     archivo.SelectItemTipo = ListaTiposObjetos.FirstOrDefault(x => x.Codigo == tipoOrd.Codigo);
                 }                
 
-                archivo.ListaTipos = tiposArchivo;
+                archivo.ListaTipos = ListaTiposObjetos;
                 archivo.ListDocumentacionOut = analisisPL.Where(x => x.Token == "COMMENT_OUT").ToList();
                 archivo.ListDocumentacionIn = analisisPL.Where(x => x.Token == "COMMENT_IN").ToList();
                 archivo.ListaDocumentacionPkg = analisisPL.Where(x => x.Token == "COMMENT_PKG").ToList();
@@ -566,8 +566,10 @@ namespace Cygnus2_0.General
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = NombreArchivo;
 
+            string resultado = cuerpo.ToString().TrimEnd('\r', '\n');
+
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                File.WriteAllText(saveFileDialog.FileName, cuerpo, Encoding.Default);
+                File.WriteAllText(saveFileDialog.FileName, resultado, Encoding.Default);
         }
 
         public void pGuardaArchivoByte(string NombreArchivo, string nuevoNombre)
@@ -839,8 +841,16 @@ namespace Cygnus2_0.General
                     transform.Load(xr);
                 }
 
-                // Transformar XML -> HTML
-                transform.Transform(xmlNormalizado, nombreArchivoHtml);
+                string resul;
+
+                using (StringWriter sw = new StringWriter())
+                {
+                    transform.Transform(xmlNormalizado, null, sw);
+
+                    resul = sw.ToString().TrimEnd('\r', '\n');
+                }
+
+                File.WriteAllText(nombreArchivoHtml, resul);
 
                 resultado = true;
             }
