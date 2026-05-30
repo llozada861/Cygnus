@@ -271,7 +271,7 @@
         }
         ,
         {
-            "version": "0.0.2.4",
+            "version": "0.0.2.5",
             "ajustes": [
                 {
                     "sql": "update html set filename= 'pktbl' where name = 'PKTBL'"
