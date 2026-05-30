@@ -271,19 +271,10 @@
         }
         ,
         {
-            "version": "0.0.2.3",
-            "ajustes": [
-                {
-                    "sql": "update html set filename= 'pktbl' where name = 'PKTBL'"
-                }
-            ]
-        }
-        ,
-        {
             "version": "0.0.2.4",
             "ajustes": [
                 {
-                    "sql": "update html set documentation ='INSERT INTO mensaje (menscodi,mensdesc,mensdivi,mensmodu,menscaus,mensposo )  \r\n VALUES \r\n( \r\n    :CODIGO, \r\n    :DESCRIPCION, \r\n    ''EMC'', \r\n    ''CUZ'', \r\n    :CAUSA, \r\n    :SOLUCION \r\n)\r\n'\r\nwhere company = 100"
+                    "sql": "update html set filename= 'pktbl' where name = 'PKTBL'"
                 }
             ]
         }
