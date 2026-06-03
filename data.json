@@ -287,5 +287,122 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.2.7",
+            "ajustes": [
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('41', '1', '[usuario]\server\sql\03fnc\[nombre]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('42', '2', '[usuario]\server\sql\04proc\[nombre]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('43', '3', '[usuario]\server\sql\05pkg\[nombre]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('44', '4', '[usuario]\server\sql\02tbls\[nombre]\05trg', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('45', '5', '[usuario]\server\sql\02tbls\[nombre]\00tbl', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('46', '6', '[usuario]\server\sql\01seq\[nombre]', 'INTEGRA_CUSTOM', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('47', '7', '[usuario]\server\sql\06view\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('48', '8', '[usuario]\server\sql\02tbls\[nombre]\02idx', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('49', '9', '[usuario]\server\sql\02tbls\[nombre]\11syn', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('50', '10', '[usuario]\server\sql\02tbls\[nombre]\00tbl', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('51', '11', '[usuario]\server\sql\02tbls\[nombre]\00tbl', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('52', '12', '[usuario]\server\sql\02tbls\[nombre]\06data', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('53', '13', '[usuario]\server\sql\02tbls\[nombre]\06data', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('54', '14', '[usuario]\server\sql\02tbls\[nombre]\06data', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('56', '16', 'Despliegues\[hu]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('57', '17', '[usuario]\server\sql\02tbls\[nombre]\06data', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('58', '18', '[usuario]\server\sql\02tbls\[nombre]\01pkey', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('59', '19', '[usuario]\server\sql\02tbls\[nombre]\03fkey', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('60', '20', '[usuario]\server\sql\02tbls\[nombre]\04chk', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('61', '21', '[usuario]\server\sql\07vwmat\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('62', '22', '[usuario]\server\sql\09job\[nombre]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('63', '23', '[usuario]\server\sql\10grt\[nombre]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('64', '24', 'client\framework\EA\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('65', '25', 'client\framework\GI\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('66', '26', 'client\framework\GR\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('67', '27', 'client\framework\MD\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('68', '28', 'client\framework\OB\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('69', '29', 'client\framework\OP\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('70', '30', 'client\framework\PB\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('71', '31', 'client\framework\PI\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('72', '32', 'client\framework\RU\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('73', '33', 'client\framework\TC\[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('74', '34', 'Despliegues\[hu]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('75', '36', '[hu]', '', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('77', '37', '[usuario]\server\sql\02tbls\epm_script\06data\plantillas\scripts\UPD_[nombre]', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('78', '38', '[usuario]\server\sql\00dir', 'INTEGRA', '100')"
+                  },
+                {
+                     "sql" = "INSERT INTO object_path (codigo, object_type, path, user_default, company) VALUES ('79', '40', '[usuario]\server\sql\02tbls\[nombre]\00tbl', 'INTEGRA', '100')"
+                  }
+            ]
+        }
     ]
 }
