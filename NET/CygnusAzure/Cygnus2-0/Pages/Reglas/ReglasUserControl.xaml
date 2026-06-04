@@ -56,8 +56,10 @@
 
         <TextBox x:Name="txCodigo" TextWrapping="Wrap" Text="{Binding Path=Model.Contador}" Grid.ColumnSpan="3" Grid.Column="7"  Grid.Row="3" VerticalAlignment="Center"
         Style="{StaticResource placeHolder}" Tag="Contador Reglas Nuevas" Margin="10,0,0,0" />
+
+        <CheckBox x:Name="ckNombre" Grid.Column="7" Grid.Row="4" Margin="10,0,0,0" Grid.ColumnSpan="3" IsChecked="{Binding Path=Model.IncluyeNombre}" Checked="CheckBox_Checked">Incluir Nombre?</CheckBox>
         
-        <GroupBox x:Name="groupBoxSql" Header="Update por regla" Grid.Column="7" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="5" Margin="10,0,0,0">
+        <GroupBox x:Name="groupBoxSql" Header="Update por regla" Grid.Column="7" Grid.ColumnSpan="3" Grid.Row="5" Grid.RowSpan="4" Margin="10,0,0,0">
             <RichTextBox x:Name="richTextBoxSql" >
                 <RichTextBox.Resources>
                     <Style TargetType="{x:Type Paragraph}">
