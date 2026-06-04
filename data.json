@@ -416,5 +416,77 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.2.9",
+            "ajustes": [
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('80', '1', '17', '1', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('81', '1', '16', '1', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('82', '2', '16', '1', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('83', '2', '17', '1', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('84', '3', '16', '1', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('85', '3', '17', '1', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('86', '5', '16', '2', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('87', '5', '16', '3', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('88', '5', '16', '4', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('89', '5', '16', '5', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('90', '6', '16', '2', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('91', '6', '17', '2', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('92', '7', '16', '2', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('93', '7', '17', '2', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('94', '5', '17', '5', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('95', '5', '17', '2', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('96', '5', '17', '3', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('97', '5', '17', '4', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('98', '40', '16', '2', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('99', '40', '16', '3', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('100', '40', '16', '4', '100')"
+                  },
+                {
+                     "sql": "INSERT INTO object_grants (codigo, objeto, usuario_grant, permiso, company) VALUES ('101', '40', '16', '5', '100')"
+                  }
+            ]
+        }
     ]
 }
