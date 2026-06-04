@@ -522,5 +522,14 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.2",
+            "ajustes": [
+                {
+                    "sql": "alter table deta_plantilla add direccion TEXT"
+                }
+            ]
+        }
     ]
 }
