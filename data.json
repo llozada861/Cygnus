@@ -488,5 +488,20 @@
                   }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.0",
+            "ajustes": [
+                {
+                    "sql": "ALTER TABLE COMPANY ADD prefijo_aplica TEXT"
+                },
+                {
+                    "sql": "update company set prefijo_aplica = 'FLEX' where codigo = 99"
+                },
+                {
+                    "sql": "update company set prefijo_aplica = 'INTEGRA' where codigo = 100"
+                }
+            ]
+        }
     ]
 }
