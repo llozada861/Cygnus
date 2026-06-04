@@ -65,6 +65,7 @@
                             <DataGridTextColumn Binding="{Binding Git}" Header="Git" />
                             <DataGridTextColumn Binding="{Binding Sonar}" Header="Sonar"/>
                             <DataGridTextColumn Binding="{Binding Defecto}" Header="Defecto?"/>
+                            <DataGridTextColumn Binding="{Binding PrefijoAplica}" Header="Prefijo Aplica"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

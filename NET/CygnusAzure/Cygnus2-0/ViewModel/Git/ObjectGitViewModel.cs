@@ -512,10 +512,12 @@ namespace Cygnus2_0.ViewModel.Git
             if (archivo.Tipo == null)
                 return;
 
-            path = handler.ListaRutas.FirstOrDefault(x => x.TipoObjeto == archivo.Tipo && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).Ruta;
+            RutaObjetos ruta = handler.ListaRutas.FirstOrDefault(x => x.TipoObjeto == archivo.Tipo && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo);
 
-            if (string.IsNullOrEmpty(path))
+            if (ruta == null)
                 return;
+
+            path = ruta.Ruta;
 
             path = path.Replace("[nombre]", archivo.NombreObjeto);
             path = path.Replace("[usuario]", archivo.Usuario != null ? archivo.Usuario : "");

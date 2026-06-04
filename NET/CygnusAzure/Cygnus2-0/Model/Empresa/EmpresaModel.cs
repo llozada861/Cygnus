@@ -20,6 +20,7 @@ namespace Cygnus2_0.Model.Empresa
         private string sonar;
         private string documentoad;
         private string defecto;
+        private string prefijo;
 
         [Column(name: "codigo")]
         [Key]
@@ -69,6 +70,12 @@ namespace Cygnus2_0.Model.Empresa
         {
             get { return defecto; }
             set { SetProperty(ref defecto, value); }
+        }
+        [Column(name: "prefijo_aplica")]
+        public string PrefijoAplica
+        {
+            get { return prefijo; }
+            set { SetProperty(ref prefijo, value); }
         }
     }
 }
