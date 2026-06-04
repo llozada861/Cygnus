@@ -17,6 +17,7 @@ namespace Cygnus2_0.Model.Reglas
         public UsuariosPDN BdSeleccionada { get; set; }
         public string Tabla { get; set; }
         public string Regla { get; set; }
+        public bool IncluyeNombre { get; set; }
 
         public Int32 Contador { get; set; }
 

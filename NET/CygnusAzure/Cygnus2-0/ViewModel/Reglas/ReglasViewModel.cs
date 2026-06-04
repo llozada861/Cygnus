@@ -14,6 +14,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -35,6 +36,7 @@ namespace Cygnus2_0.ViewModel.Reglas
             Model.ListaReglas = new ObservableCollection<SelectListItem>();
             _process = new DelegateCommand(OnProcess);
             Model.Contador = 1;
+            Model.IncluyeNombre = false;
         }
 
         public ReglasModel Model { get; set; }
@@ -74,28 +76,36 @@ namespace Cygnus2_0.ViewModel.Reglas
                             if (!string.IsNullOrEmpty(item.DocumentoAD))
                                 plantilla = plantilla.Replace("--<INSERT_TABLA> o <UPDATE_TABLA>", item.DocumentoAD);
 
-                            // Quitar tildes
-                            string normalized = item.Text.Normalize(NormalizationForm.FormD);
-                            StringBuilder sb = new StringBuilder();
-
-                            foreach (char c in normalized)
+                            if (Model.IncluyeNombre)
                             {
-                                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(c);
+                                // Quitar tildes
+                                string normalized = item.Text.Normalize(NormalizationForm.FormD);
+                                StringBuilder sb = new StringBuilder();
 
-                                if (uc != UnicodeCategory.NonSpacingMark)
+                                foreach (char c in normalized)
                                 {
-                                    sb.Append(c);
+                                    UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(c);
+
+                                    if (uc != UnicodeCategory.NonSpacingMark)
+                                    {
+                                        sb.Append(c);
+                                    }
                                 }
+
+                                string sinTildes = sb.ToString().Normalize(NormalizationForm.FormC);
+                                string resultado = sinTildes.Replace(" ", "");
+                                resultado = Regex.Replace(resultado, @"[^A-Za-z0-9_]", "");
+                                int longitud = resultado.ToLower().Length;
+
+                                if (longitud > 99)
+                                    longitud = 99;
+
+                                nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + resultado.ToLower().Substring(0, longitud) + ".sql";
                             }
-
-                            string sinTildes = sb.ToString().Normalize(NormalizationForm.FormC);
-                            string resultado = sinTildes.Replace(" ", "");
-                            int longitud = resultado.ToLower().Length;
-
-                            if (longitud > 99)
-                                longitud = 99;
-
-                            nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + resultado.ToLower().Substring(0, longitud) + ".sql";
+                            else
+                            {
+                                nombreArchivo = "ins_" + fecha + "_gr_config_expression_" + contador + ".sql";
+                            }
                         }
                         else
                         {

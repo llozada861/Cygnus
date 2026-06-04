@@ -94,6 +94,7 @@ namespace Cygnus2_0.Pages.Reglas
         {
             richTextBoxProce.Document.Blocks.Clear();
             view.Model.ListaReglas.Clear();
+            view.Model.IncluyeNombre = false;
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -172,5 +173,12 @@ namespace Cygnus2_0.Pages.Reglas
                 richTextBoxSql.Document.Blocks.Add(new Paragraph(new Run((seleccionado.DocumentoAD))));
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ckNombre.IsChecked == true)
+            {
+                handler.MensajeAdvertencia("Incluir el nombre de la regla en el nombre del archivo, puede que no permita la ejecución por sqlplus cuando son nombres muy complejos o muy largos");
+            }
+        }
     }
 }
