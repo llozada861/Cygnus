@@ -503,5 +503,24 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.1",
+            "ajustes": [
+                {
+                    "sql": "create table tipo_plantilla (codigo INTEGER primary key AUTOINCREMENT,descripcion TEXT)"
+                },
+                {
+                    "sql": "insert into tipo_plantilla (codigo,descripcion) values (1,'Genérica')"
+                },
+                {
+                    "sql": "create table deta_plantilla (codigo INTEGER PRIMARY key AUTOINCREMENT, parametro TEXT, descripcion TEXT, plantilla TEXT, empresa INTEGER)"
+                }
+                ,
+                {
+                    "sql": "alter table html add tipo INTEGER"
+                }
+            ]
+        }
     ]
 }
