@@ -65,6 +65,7 @@ namespace Cygnus2_0.Pages.Aplica
                 if (!pValidaciones())
                     return;
 
+                handler.CursorWait();
                 generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
                 generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
 
@@ -74,10 +75,11 @@ namespace Cygnus2_0.Pages.Aplica
                     generateAplicaViewModel.pListaArchivos(DropPath);
                     dataGridArchivosCargados.Items.Refresh();
                 }
-
+                handler.CursorNormal();
             }
             catch (Exception ex)
             {
+                handler.CursorNormal();
                 generateAplicaViewModel.Model.ListaArchivosCargados.Clear();
                 generateAplicaViewModel.Model.ListaArchivosNoOrden.Clear();
                 handler.MensajeError(ex.Message);

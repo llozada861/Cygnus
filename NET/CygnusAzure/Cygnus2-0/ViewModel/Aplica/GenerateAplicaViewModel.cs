@@ -253,7 +253,7 @@ namespace Cygnus2_0.ViewModel.Aplica
             }
             catch (Exception ex)
             {
-                handler.MensajeError(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
         public void pRefrescaConteo()
@@ -822,7 +822,7 @@ namespace Cygnus2_0.ViewModel.Aplica
         public void pGeneralApl(object commandParameter)
         {
             StringBuilder grant = new StringBuilder();
-            string nombre = "FLEX_"+res.NombreAplicaDatos + res.ExtensionSQL;
+            string nombre = handler.ConfGeneralView.Model.Empresa.PrefijoAplica+"_"+res.NombreAplicaDatos + res.ExtensionSQL;
             StringBuilder objetosApl = new StringBuilder();
             StringBuilder body = new StringBuilder();
 
