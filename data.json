@@ -404,5 +404,17 @@
                   }
             ]
         }
+        ,
+        {
+            "version": "0.0.2.8",
+            "ajustes": [
+                {
+                    "sql": "INSERT INTO user_grants (codigo, user, company) VALUES ('16', 'INTEGRA_CUSTOM', '100')"
+                },
+                {
+                    "sql": "INSERT INTO user_grants (codigo, user, company) VALUES ('17', 'SYSTEM_OBJ_PRIVS_ROLE', '100')"
+                }
+            ]
+        }
     ]
 }
