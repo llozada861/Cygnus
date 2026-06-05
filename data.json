@@ -659,7 +659,7 @@
             ]
         },
         {
-            "version": "0.0.4.6",
+            "version": "0.0.4.7",
             "ajustes": [               
                 {
                     "sql": "update object_path set path = '[usuario]\\'||path where codigo in (73,72,71,70,69,68,67,66,65,64)"
