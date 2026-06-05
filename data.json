@@ -573,5 +573,14 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.6",
+            "ajustes": [               
+                {
+                    "sql": "update html set name = 'EXPORT_FWCPI' where name = 'EXPORT_PI'"
+                }
+            ]
+        }
     ]
 }
