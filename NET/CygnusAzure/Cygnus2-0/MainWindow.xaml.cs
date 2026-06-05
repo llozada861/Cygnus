@@ -49,7 +49,7 @@ namespace Cygnus2_0
     {
         private Handler handler;
         UserControl userControls;
-
+        
         public MainWindow()
         {
             InitializeComponent();

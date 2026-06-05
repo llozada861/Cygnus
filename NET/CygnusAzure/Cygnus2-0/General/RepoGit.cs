@@ -110,7 +110,10 @@ namespace Cygnus2_0.General
                 boUnaRama = true;
             }
 
-            MensajeCommit = gitModel.HU + " - " + gitModel.Comentario;
+            if(gitModel.RamaLBSeleccionada.Text != gitModel.HU)
+                MensajeCommit = gitModel.RamaLBSeleccionada.Text + " - " + gitModel.HU + " - " + gitModel.Comentario;
+            else
+                MensajeCommit = gitModel.HU + " - " + gitModel.Comentario;
 
             using (var repo = new Repository(repositorioGit.Ruta))
             {

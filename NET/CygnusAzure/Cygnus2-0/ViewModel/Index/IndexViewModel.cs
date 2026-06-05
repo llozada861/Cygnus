@@ -353,7 +353,7 @@ namespace Cygnus2_0.ViewModel.Index
         }
 
         public void ListaHTML()
-        {
+        {            
             try
             {
                 handler.ListaPlantillas = new ObservableCollection<PlantillasHTMLModel>();
