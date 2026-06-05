@@ -290,7 +290,7 @@
     <Compile Include="Model\Conexion\ConnModel.cs" />
     <Compile Include="Model\Data\MessageModel.cs" />
     <Compile Include="Model\Data\ParameterModel.cs" />
-    <Compile Include="Model\DepModel.cs" />
+    <Compile Include="Model\Deps\DepModel.cs" />
     <Compile Include="Model\Documentation\HtmlModel.cs" />
     <Compile Include="Model\Empresa\EmpresaModel.cs" />
     <Compile Include="Model\Estandar\EstandarModel.cs" />
@@ -307,6 +307,8 @@
     <Compile Include="Model\Objects\TipoObjetos.cs" />
     <Compile Include="Model\Package\pkgModel.cs" />
     <Compile Include="Model\Permisos\PermisosModel.cs" />
+    <Compile Include="Model\Plantillas\DetallePlantilla.cs" />
+    <Compile Include="Model\Plantillas\PlantillaModel.cs" />
     <Compile Include="Model\Refresh\RefreshModel.cs" />
     <Compile Include="Model\Reglas\ReglasModel.cs" />
     <Compile Include="Model\Repository\RamaRepositorio.cs" />
@@ -395,6 +397,9 @@
     </Compile>
     <Compile Include="Pages\Pkg\UCPackageFirstLevel.xaml.cs">
       <DependentUpon>UCPackageFirstLevel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Plantillas\UCPlantillas.xaml.cs">
+      <DependentUpon>UCPlantillas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Refresh\RefreshView.xaml.cs">
       <DependentUpon>RefreshView.xaml</DependentUpon>
@@ -546,6 +551,7 @@
     <Compile Include="ViewModel\Objects\DesblockViewModel.cs" />
     <Compile Include="ViewModel\Objects\TipoObjetosVM.cs" />
     <Compile Include="ViewModel\Pkg\FirstLevelViewModel.cs" />
+    <Compile Include="ViewModel\Plantillas\PlantillaViewModel.cs" />
     <Compile Include="ViewModel\Refresh\RefreshViewModel.cs" />
     <Compile Include="ViewModel\Reglas\ReglasViewModel.cs" />
     <Compile Include="ViewModel\Repository\RepositorioViewModel.cs" />
@@ -711,6 +717,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Pkg\UCPackageFirstLevel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Plantillas\UCPlantillas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
