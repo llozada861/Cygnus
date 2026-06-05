@@ -609,6 +609,17 @@
                     "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('8', 'oclResultado', 'Salida', 'EXPORT_FWCOB', '100', 'O', '')"
                 }
             ]
+        },
+        {
+            "version": "0.0.4.1",
+            "ajustes": [               
+                {
+                    "sql": "update html set name = 'EXPORT_FWCEA' where name = 'EXPORT_FWCPI'"
+                },
+                {
+                    "sql": "update deta_plantilla set plantilla = 'EXPORT_FWCEA' where plantilla = 'EXPORT_FWCPI'"
+                }
+            ]
         }
     ]
 }
