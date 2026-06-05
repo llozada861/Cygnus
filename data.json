@@ -620,6 +620,17 @@
                     "sql": "update deta_plantilla set plantilla = 'EXPORT_FWCEA' where plantilla = 'EXPORT_FWCPI'"
                 }
             ]
+        },
+        {
+            "version": "0.0.4.2",
+            "ajustes": [               
+                {
+                    "sql": "INSERT INTO html (name, documentation, company, filename, tipo) VALUES ('EXPORT_PI_PB_MD', 'BEGIN\r\n    :oclResultado := GE_BOApplication.fclExportCreation(:sbNombre_objeto);\r\nEND;', '99', '', '1')"
+                },
+                {
+                    "sql": "INSERT INTO html (name, documentation, company, filename, tipo) VALUES ('EXPORT_PI_PB_MD', 'BEGIN\r\n    :oclResultado := GE_BOApplication.fclExportCreation(:sbNombre_objeto);\r\nEND;', '100', '', '1')"
+                }
+            ]
         }
     ]
 }
