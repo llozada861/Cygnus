@@ -582,5 +582,26 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.9",
+            "ajustes": [               
+                {
+                    "sql": "update deta_plantilla set plantilla = 'EXPORT_FWCPI' where plantilla = 'EXPORT_PI'"
+                },
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('5', 'sbNombre_objeto', 'Nombre Objeto', 'EXPORT_FWCOB', '99', 'I', 'S')"
+                },
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('6', 'oclResultado', 'Salida', 'EXPORT_FWCOB', '99', 'O', '')"
+                },
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('7', 'sbNombre_objeto', 'Nombre Objeto', 'EXPORT_FWCOB', '100', 'I', 'S')"
+                },
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('8', 'oclResultado', 'Salida', 'EXPORT_FWCOB', '100', 'O', '')"
+                }
+            ]
+        }
     ]
 }
