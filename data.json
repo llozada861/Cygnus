@@ -540,5 +540,25 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.4",
+            "ajustes": [
+                {
+                    "sql": "INSERT INTO html (name, documentation, company, filename, tipo) VALUES ('EXPORT_PI', 'BEGIN\r\n    GE_BOEXPORTENTITY.GENERATEEXPORTENTITY( :sbNombre_objeto, :oclResultado);\r\nEND;', '100', '', '1')"
+                },
+                {
+                    "sql": "INSERT INTO html (name, documentation, company, filename, tipo) VALUES ('EXPORT_PI', 'BEGIN\r\n    GE_BOEXPORTENTITY.GENERATEEXPORTENTITY( :sbNombre_objeto, :oclResultado);\r\nEND;', '99', '', '1')"
+                }
+                ,
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('1', 'sbNombre_objeto', 'Nombre Objeto', 'EXPORT_PI', '100', 'I', 'S')"
+                }
+                ,
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('2', 'oclResultado', 'Salida', 'EXPORT_PI', '100', 'O', '')"
+                }
+            ]
+        }
     ]
 }
