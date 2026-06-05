@@ -50,6 +50,7 @@ using System.Windows.Controls;
 using Newtonsoft.Json.Linq;
 using System.Windows.Documents;
 using System.Diagnostics;
+using Cygnus2_0.Model.Plantillas;
 
 namespace Cygnus2_0.General
 {
@@ -81,6 +82,7 @@ namespace Cygnus2_0.General
 
         public Handler()
         {
+            updateModel = new UpdateModel(this);
         }
 
         public void pInicializar()
@@ -171,7 +173,6 @@ namespace Cygnus2_0.General
             confGeneralViewModel = new ConfGeneralViewModel(this);
             pRegeneraIndexListas();
             repositorioVM = new RepositorioViewModel(this);
-            updateModel = new UpdateModel(this);
             #endregion ViewModels
 
             #region Appareance
@@ -359,6 +360,7 @@ namespace Cygnus2_0.General
                 SetProperty(ref listaHtml, value);
             }
         }
+
         public SelectListItem Generico { get; set; }
         public SelectListItem Generico2 { get; set; }
         public StringBuilder HtmlEspecificacion { set; get; }

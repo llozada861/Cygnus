@@ -10,6 +10,7 @@ using Cygnus2_0.Model.History;
 using Cygnus2_0.Model.Html;
 using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Permisos;
+using Cygnus2_0.Model.Plantillas;
 using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Model.Time;
@@ -339,6 +340,12 @@ namespace Cygnus2_0.DAO
             using (DataBaseContext context = new DataBaseContext())
             {
                 handler.ListaPlantillas = new ObservableCollection<PlantillasHTMLModel>(context.PlantillasHTML.Where(x=>x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo).ToList());
+
+                foreach (PlantillasHTMLModel item in handler.ListaPlantillas)
+                {
+                    item.ListaDetalleIn = new ObservableCollection<DetallePlantilla>(context.ListaDetallePlantilla.Where(x => x.Plantilla == item.Nombre && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo && x.Direccion == "I").ToList());
+                    item.ListaDetalleOut = new ObservableCollection<DetallePlantilla>(context.ListaDetallePlantilla.Where(x => x.Plantilla == item.Nombre && x.Empresa == handler.ConfGeneralView.Model.Empresa.Codigo && x.Direccion == "O").ToList());
+                }
             }
         }
         #endregion Plantillas

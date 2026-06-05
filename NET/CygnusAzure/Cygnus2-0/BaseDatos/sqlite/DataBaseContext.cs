@@ -6,6 +6,7 @@ using Cygnus2_0.Model.History;
 using Cygnus2_0.Model.Html;
 using Cygnus2_0.Model.Objects;
 using Cygnus2_0.Model.Permisos;
+using Cygnus2_0.Model.Plantillas;
 using Cygnus2_0.Model.Repository;
 using Cygnus2_0.Model.Settings;
 using Cygnus2_0.Model.User;
@@ -82,5 +83,6 @@ namespace Cygnus2_0.BaseDatos.sqlite
         public DbSet<HistoriaModel> Historia { get; set; }
         public DbSet<TaskUser> ListaTask { get; set; }
         public DbSet<StoryUser> ListaUS { get; set; }
+        public DbSet<DetallePlantilla> ListaDetallePlantilla { get; set; }
     }
 }

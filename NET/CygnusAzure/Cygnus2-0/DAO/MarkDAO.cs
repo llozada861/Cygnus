@@ -34,6 +34,8 @@ using Cygnus2_0.Conn;
 using Cygnus2_0.Pages.Data;
 using System.Runtime.InteropServices;
 using Cygnus2_0.Model;
+using Cygnus2_0.Model.Html;
+using Cygnus2_0.Model.Plantillas;
 
 namespace Cygnus2_0.DAO
 {
@@ -1027,6 +1029,49 @@ namespace Cygnus2_0.DAO
         }
         #endregion Reglas
 
+        #region Plantillas
+        internal static void pGeneraPlantilla(Handler handler, PlantillasHTMLModel PlantillaSeleccionada)
+        {
+            string nombreArchivo = "";
+            UsuarioModel userCompila = handler.ListaUsuarios.Where(x => x.Principal.Equals(res.Si)).FirstOrDefault();
+            handler.pObtenerUsuarioCompilacion(userCompila.Usuariobd);
+
+            OracleConnection conn = handler.ConexionOracle.ConexionOracleCompila;
+
+            OracleCommand sql = new OracleCommand(PlantillaSeleccionada.Documentacion.Replace("\r\n", "\n"), conn);
+
+            sql.BindByName = true;
+
+            foreach(DetallePlantilla param in PlantillaSeleccionada.ListaDetalleIn)
+            {
+                OracleParameter sbParam = new OracleParameter(param.Parametro, OracleDbType.Varchar2);
+                sbParam.Value = param.Valor.ToUpper().Trim();
+                sql.Parameters.Add(sbParam);
+
+                if(param.NombreArchivo == res.Si)
+                {
+                    nombreArchivo = param.Valor;
+                }
+            }
+
+            foreach (DetallePlantilla param in PlantillaSeleccionada.ListaDetalleOut)
+            {
+                OracleParameter clOut = new OracleParameter(param.Parametro, OracleDbType.Clob);
+                clOut.Direction = ParameterDirection.Output;
+                sql.Parameters.Add(clOut);
+            }
+
+            sql.ExecuteReader();
+
+            foreach (DetallePlantilla param in PlantillaSeleccionada.ListaDetalleOut)
+            {
+                param.Valor = ((OracleClob)sql.Parameters[param.Parametro].Value).Value;
+                param.Objeto = nombreArchivo;
+            }
+
+            conn.Close();
+        }
+        #endregion Plantillas
     }
 
 }

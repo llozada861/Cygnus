@@ -102,11 +102,13 @@ namespace Cygnus2_0.Model.Settings
                 }
             }
             
+
+
             if (!string.IsNullOrEmpty(versionNueva))
             {
                 SqliteDAO.pCreaConfiguracion(res.KEY_VERSIONBD, versionNueva);
 
-                handler.MensajeAdvertencia("La base de datos ha sido actualizada a la versión ["+ versionNueva+"]. Se va a reiniciar la aplicación.");
+                MessageBox.Show("La base de datos ha sido actualizada a la versión ["+ versionNueva+"]. Se va a reiniciar la aplicación.");
 
                 System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);
                 System.Windows.Application.Current.Shutdown();
