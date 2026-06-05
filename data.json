@@ -531,5 +531,14 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.3",
+            "ajustes": [
+                {
+                    "sql": "alter table deta_plantilla add nombre_archivo TEXT"
+                }
+            ]
+        }
     ]
 }
