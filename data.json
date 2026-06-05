@@ -634,19 +634,19 @@
         }
         ,
         {
-            "version": "0.0.4.3",
+            "version": "0.0.4.4",
             "ajustes": [               
                 {
                     "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('9', 'oclResultado', 'Salida', 'EXPORT_PI_PB_MD', '100', 'O', '')"
                 },
                 {
-                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('10', 'sbNombre_objeto', 'Salida', 'EXPORT_PI_PB_MD', '100', 'O', 'S')"
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('10', 'sbNombre_objeto', 'Nombre Objeto', 'EXPORT_PI_PB_MD', '100', 'I', 'S')"
                 },
                 {
                     "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('11', 'oclResultado', 'Salida', 'EXPORT_PI_PB_MD', '99', 'O', '')"
                 },
                 {
-                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('12', 'sbNombre_objeto', 'Salida', 'EXPORT_PI_PB_MD', '99', 'O', 'S')"
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('12', 'sbNombre_objeto', 'Nombre Objeto', 'EXPORT_PI_PB_MD', '99', 'I', 'S')"
                 }
             ]
         }
