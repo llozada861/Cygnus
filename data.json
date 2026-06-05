@@ -560,5 +560,18 @@
                 }
             ]
         }
+        ,
+        {
+            "version": "0.0.3.5",
+            "ajustes": [               
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('1', 'sbNombre_objeto', 'Nombre Objeto', 'EXPORT_PI', '99', 'I', 'S')"
+                }
+                ,
+                {
+                    "sql": "INSERT INTO deta_plantilla (codigo, parametro, descripcion, plantilla, empresa, direccion, nombre_archivo) VALUES ('2', 'oclResultado', 'Salida', 'EXPORT_PI', '99', 'O', '')"
+                }
+            ]
+        }
     ]
 }
