@@ -58,6 +58,8 @@ namespace Cygnus2_0
             {                
                 handler = new Handler();
 
+                handler.ListaConfiguracion = new List<SelectListItem>();
+                SqliteDAO.pCargaConfiguracion(handler);
                 //Se actualizan datos si hay disponibles
                 handler.UpdateModel_.pActualizaDataApp();
 

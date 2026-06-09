@@ -251,10 +251,6 @@ namespace Cygnus2_0.ViewModel.Index
             sbLine = null;
             archivoBD = Path.Combine(res.CarpetaBD, res.NombreArchivoConfiguracion);
             file = Path.Combine(path, archivoBD);
-
-            handler.ListaConfiguracion = new List<SelectListItem>();
-
-            SqliteDAO.pCargaConfiguracion(handler);
         }
 
         public void DatosBd()
