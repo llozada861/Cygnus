@@ -133,7 +133,7 @@
                       >
 
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn x:Name="idArchivo" Header="Archivo" IsReadOnly="True">
+                        <DataGridTemplateColumn x:Name="idArchivo" Header="Archivo" IsReadOnly="True" Width="200">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=FileName, Mode=OneWay}">
