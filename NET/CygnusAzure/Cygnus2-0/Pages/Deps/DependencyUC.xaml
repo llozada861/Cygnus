@@ -57,7 +57,7 @@
    Text="Selecciona la Instancia" 
    Style="{StaticResource ComboBoxSelectOverlay}"  Grid.Row="0" 
         Grid.Column="5"
-        Grid.ColumnSpan="4" Margin="5,5,0,5"/>
+        Grid.ColumnSpan="4" Margin="0,5,10,0"/>
 
         <GroupBox Header="Dependencias" Margin="10,10,10,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" Grid.RowSpan="8">
             <Grid>
@@ -86,7 +86,7 @@
                         Header="Origen"
                         x:Name="Origen"
                         IsReadOnly="True"  
-                        MaxWidth="150"
+                        MaxWidth="220"
                         Binding="{Binding Path=Origen, Mode=OneWay}"                        >
                             <DataGridTextColumn.ElementStyle>
                                 <Style TargetType="TextBlock">
@@ -99,7 +99,7 @@
                         Header="Objeto"
                         x:Name="Objeto"
                         IsReadOnly="True"  
-                        MaxWidth="250"
+                        Width="300"
                         Binding="{Binding Path=Objeto, Mode=OneWay}" 
                         >
                             <DataGridTextColumn.ElementStyle>
@@ -113,7 +113,7 @@
                         Header="Tipo"
                         x:Name="Tipo"
                         IsReadOnly="true"
-                        MaxWidth="100"
+                        MaxWidth="150"
                         Binding="{Binding Path=Tipo, Mode=TwoWay}" 
                                 >
                             <DataGridTextColumn.ElementStyle>

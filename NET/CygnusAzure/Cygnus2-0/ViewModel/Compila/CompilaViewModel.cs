@@ -99,8 +99,6 @@ namespace Cygnus2_0.ViewModel.Compila
             {
                 handler.MensajeError(ex.Message);
             }
-
-            this.Model.EstadoConn = handler.fsbValidaConexion();
         }
         public void pExaminar(object commandParameter)
         {

@@ -58,7 +58,11 @@
             </DataGrid>
         </GroupBox>
 
-        <GridSplitter Grid.Column="1" Grid.RowSpan="10" HorizontalAlignment="Stretch" />
+        <GridSplitter Grid.Column="1"
+              Width="4"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              ResizeBehavior="PreviousAndNext" />
 
         <GroupBox x:Name="Feature" Header="Commits Rama" Grid.Column="2" Grid.ColumnSpan="2" Foreground="{DynamicResource ButtonText}">
             <DataGrid x:Name="dataGridCommitsFeaure" 
