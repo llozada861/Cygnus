@@ -42,9 +42,9 @@ namespace Cygnus2_0.Model.Settings
             await CheckUpdate();
         }
 
-        public async void pDescargarActuaData()
+        public void pDescargarActuaData()
         {
-            await pActualizaDatos();
+            pActualizaDatos();
         }
 
         public async Task CheckUpdate()
@@ -67,51 +67,58 @@ namespace Cygnus2_0.Model.Settings
             }
         }
 
-        public async Task pActualizaDatos()
+        public void pActualizaDatos()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            var client = new HttpClient();
-            var json = await client.GetStringAsync(updateUrlData);
-
-            VersionesBd jsonVer = JsonConvert.DeserializeObject<VersionesBd>(json);
-
-            string versionBD = handler.ListaConfiguracion.Where(x => x.Text == res.KEY_VERSIONBD).FirstOrDefault().Value;
-            string versionNueva = "";
-
-            System.Version current = new System.Version(versionBD);
-            System.Version remote;
-
-            foreach (VersionBd version in jsonVer.Versiones)
+            using (var client = new HttpClient())
             {
-                remote = new System.Version(version.Version);
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-                if (remote > current)
+                var json = client.GetStringAsync(updateUrlData)
+                                 .GetAwaiter()
+                                 .GetResult();
+
+                //var client = new HttpClient();
+                //var json = await client.GetStringAsync(updateUrlData);
+
+                VersionesBd jsonVer = JsonConvert.DeserializeObject<VersionesBd>(json);
+
+                string versionBD = handler.ListaConfiguracion.Where(x => x.Text == res.KEY_VERSIONBD).FirstOrDefault().Value;
+                string versionNueva = "";
+
+                System.Version current = new System.Version(versionBD);
+                System.Version remote;
+
+                foreach (VersionBd version in jsonVer.Versiones)
                 {
-                    AjustesBd[] query = version.Ajustes;
+                    remote = new System.Version(version.Version);
 
-                    foreach (AjustesBd ajuste in query)
+                    if (remote > current)
                     {
-                        try
+                        AjustesBd[] query = version.Ajustes;
+
+                        foreach (AjustesBd ajuste in query)
                         {
-                            SqliteDAO.pExecuteNonQuery(ajuste.Sql);
-                            versionNueva = version.Version;
+                            try
+                            {
+                                SqliteDAO.pExecuteNonQuery(ajuste.Sql);
+                                versionNueva = version.Version;
+                            }
+                            catch (Exception ex) { }
                         }
-                        catch (Exception ex) { }
                     }
                 }
-            }
-            
 
 
-            if (!string.IsNullOrEmpty(versionNueva))
-            {
-                SqliteDAO.pCreaConfiguracion(res.KEY_VERSIONBD, versionNueva);
 
-                MessageBox.Show("La base de datos ha sido actualizada a la versión ["+ versionNueva+"]. Se va a reiniciar la aplicación.");
+                if (!string.IsNullOrEmpty(versionNueva))
+                {
+                    SqliteDAO.pCreaConfiguracion(res.KEY_VERSIONBD, versionNueva);
 
-                System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);
-                System.Windows.Application.Current.Shutdown();
+                    MessageBox.Show("La base de datos ha sido actualizada a la versión [" + versionNueva + "]. Se va a reiniciar la aplicación.");
+
+                    System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);
+                    System.Windows.Application.Current.Shutdown();
+                }
             }
         }
         #endregion Actualizacion
