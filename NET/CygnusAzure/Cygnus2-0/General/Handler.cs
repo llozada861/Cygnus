@@ -553,7 +553,7 @@ namespace Cygnus2_0.General
 
         public string fsbValidaConexion()
         {
-            if (this.ConexionOracle.ConexionOracleSQL.State == System.Data.ConnectionState.Open)
+            if (this.ConexionOracle.ConexionOracleSQL != null && this.ConexionOracle.ConexionOracleSQL.State == System.Data.ConnectionState.Open)
             {
                 return "Conectado.";
             }

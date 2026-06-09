@@ -548,7 +548,8 @@ namespace Cygnus2_0.General
                         Width = 900,
                         Height = 600,
                         WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                        ResizeMode = ResizeMode.CanResize
+                        ResizeMode = ResizeMode.CanResize,
+                        WindowStyle = WindowStyle.SingleBorderWindow
                     };
 
                     wnd.Buttons = new System.Windows.Controls.Button[] { wnd.OkButton, wnd.CancelButton };
