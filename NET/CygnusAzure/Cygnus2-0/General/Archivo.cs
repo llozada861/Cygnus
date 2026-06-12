@@ -34,6 +34,7 @@ namespace Cygnus2_0.General
         public List<InstruccionPL> ListDocumentacionOut { set; get; }
         public List<InstruccionPL> ListDocumentacionIn { set; get; }
         public List<InstruccionPL> ListaDocumentacionPkg { set; get; }
+        public List<InstruccionPL> ListaErrores { set; get; }
         public ObservableCollection<TipoObjetos> ListaTipos { set; get; }
         public ObservableCollection<UsuarioModel> ListaUsuarios { set; get; }
         public TipoObjetos SelectItemTipo { set; get; }

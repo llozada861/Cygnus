@@ -404,6 +404,12 @@ namespace Cygnus2_0.General
         {
             ObservableCollection<TipoObjetos> tiposArchivo = new ObservableCollection<TipoObjetos>();
 
+            //Se instancian las listas del archivo
+            archivo.ListDocumentacionOut = new List<InstruccionPL>();
+            archivo.ListDocumentacionIn = new List<InstruccionPL>();
+            archivo.ListaErrores = new List<InstruccionPL>();
+            archivo.ListaDocumentacionPkg = new List<InstruccionPL>();
+
             List<PlsqlAnalisisDL.General.InstruccionPL> analisisPL = PlsqlAnalisisDL.General.Plsql.AnalizarPL(archivo.RutaConArchivo);
 
             foreach (PlsqlAnalisisDL.General.InstruccionPL item in analisisPL.Where(x => x.Token == "TIPO"))
@@ -422,6 +428,7 @@ namespace Cygnus2_0.General
                 {
                     break;
                 }
+
             }
 
             if (tiposArchivo.Count > 0)
@@ -439,6 +446,8 @@ namespace Cygnus2_0.General
                 archivo.ListDocumentacionIn = analisisPL.Where(x => x.Token == "COMMENT_IN").ToList();
                 archivo.ListaDocumentacionPkg = analisisPL.Where(x => x.Token == "COMMENT_PKG").ToList();
             }
+
+            archivo.ListaErrores = analisisPL.Where(x => x.Token == "ERROR").ToList();
         }
 
         internal string pObtUsuarioTipo(int? tipo)
@@ -458,12 +467,7 @@ namespace Cygnus2_0.General
         {
             foreach (Archivo archivo in listaArchivosCargados)
             {
-                //Se instancian las listas del archivo
-                archivo.ListDocumentacionOut = new List<InstruccionPL>();
-                archivo.ListDocumentacionIn = new List<InstruccionPL>();
-
-                //if(archivo.Tipo == null)
-                    this.ObtenerTipoArchivo(archivo);
+                this.ObtenerTipoArchivo(archivo);
 
                 if (this.pDepuraDocumentacion(archivo) && listaObs != null)
                 {

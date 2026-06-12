@@ -166,15 +166,6 @@ namespace Cygnus2_0.ViewModel.Git
             GitModel.ActivaAprobRamas = false;
             GitModel.NuevaRama = "";
             GitModel.ListaRamasCreadas.Clear();
-            /*try
-            {
-                this.GitModel.ListaHU = null;
-                this.GitModel.ListaHU = SqliteDAO.pObtListaHUAzure(handler);
-            }
-            catch (Exception ex)
-            {
-                handler.MensajeError(ex.Message);
-            }*/
         }
         public void pEntrega(object commandParameter)
         {
@@ -236,6 +227,15 @@ namespace Cygnus2_0.ViewModel.Git
                     if (string.IsNullOrEmpty(GitSeleccionado.Documento) || archivo.FileName.ToUpper().StartsWith(GitSeleccionado.Documento.ToUpper()))
                     {
                         blDocArquitectura = true;
+                    }
+
+                    if (archivo.ListaErrores != null)
+                    {
+                        foreach (var item in archivo.ListaErrores)
+                        {
+                            handler.MensajeError("El archivo [" + archivo.NombreSinExt + "] tiene un error [" + item.Valor + "]");
+                            return;
+                        }
                     }
                 }
 

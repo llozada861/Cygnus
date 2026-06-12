@@ -251,6 +251,9 @@ namespace Cygnus2_0.ViewModel.Index
             sbLine = null;
             archivoBD = Path.Combine(res.CarpetaBD, res.NombreArchivoConfiguracion);
             file = Path.Combine(path, archivoBD);
+
+            handler.ListaConfiguracion = new List<SelectListItem>();
+            SqliteDAO.pCargaConfiguracion(handler);
         }
 
         public void DatosBd()
@@ -412,7 +415,7 @@ namespace Cygnus2_0.ViewModel.Index
         #region Configuracion
         public void pCargarConfiguracion()
         {
-            handler.ConfGeneralView.Model.OrdenAutomatico = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyOrdenAutomatico)).Value);
+            //handler.ConfGeneralView.Model.OrdenAutomatico = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyOrdenAutomatico)).Value);
             handler.ConfGeneralView.Model.Grant = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyGeneraGrants)).Value);
             handler.ConfGeneralView.Model.GeneraHtml = Convert.ToBoolean(handler.ListaConfiguracion.Find(x => x.Text.Equals(res.KeyGeneraHTML)).Value);
 

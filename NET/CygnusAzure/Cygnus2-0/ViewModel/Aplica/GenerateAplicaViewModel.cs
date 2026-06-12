@@ -92,6 +92,15 @@ namespace Cygnus2_0.ViewModel.Aplica
                     {
                         Noselec = true;
                     }
+
+                    if(archivo.ListaErrores != null)
+                    {
+                        foreach (var item in archivo.ListaErrores)
+                        {
+                            handler.MensajeError("El archivo ["+archivo.NombreSinExt+"] tiene un error ["+item.Valor+"]");
+                            return;
+                        }
+                    }
                 }
 
                 if (Noselec)
