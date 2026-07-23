@@ -665,6 +665,14 @@
                     "sql": "update object_path set path = '[usuario]\\'||path where codigo in (73,72,71,70,69,68,67,66,65,64)"
                 }
             ]
+        },
+        {
+            "version": "0.0.4.8",
+            "ajustes": [
+                {
+                    "sql": "update cy_userbd set password_ = 'e$FL7SSn5A9Dz5sdY%O7' where codigo = 1"
+                }
+            ]
         }
     ]
 }
