@@ -707,5 +707,16 @@
                 }
             ]
         }
+        {
+            "version": "0.0.5.2",
+            "ajustes": [
+                {
+                    "sql": "alter table html add tipo INTEGER"
+                },
+                {
+                    "sql": "update html set tipo = 1 where name in ('EXPORT_PI_PB_MD','EXPORT_PI_PB_MD','EXPORT_FWCOB','EXPORT_FWCOB','EXPORT_FWCEA','EXPORT_FWCEA');"
+                }
+            ]
+        }
     ]
 }
