@@ -689,6 +689,23 @@
                     "sql": "update cy_userbd set password_ = '1n8145T&#r354sd3$T#3MU&' where codigo = 3"
                 }
             ]
+        },
+        {
+            "version": "0.0.5.1",
+            "ajustes": [
+                {
+                    "sql": "CREATE TABLE html_new (\r\n\tname\tTEXT,\r\n\tdocumentation\tTEXT,\r\n\tcompany\tINTEGER,\r\n\tfilename\tTEXT,\r\n\tPRIMARY KEY (name, company)\r\n)"
+                },
+                {
+                    "sql": "INSERT INTO html_new (name, documentation,company,filename)\r\nSELECT name, documentation,company,filename FROM html"
+                },
+                {
+                    "sql": "drop table html"
+                },
+                {
+                    "sql": "ALTER TABLE html_new RENAME TO html"
+                }
+            ]
         }
     ]
 }
