@@ -2365,6 +2365,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSql_script(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSql_script(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -2935,6 +2941,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnit_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnit_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -4058,6 +4070,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_diskgroup(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_diskgroup(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6655,6 +6673,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_disk_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_disk_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -6785,6 +6809,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_disk_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_disk_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -6953,6 +6983,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitResize_disk_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitResize_disk_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7040,6 +7076,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReplace_disk_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReplace_disk_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7154,6 +7196,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWait_nowait(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWait_nowait(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7219,6 +7267,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRename_disk_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRename_disk_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7347,6 +7401,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDisk_online_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDisk_online_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7541,6 +7601,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDisk_offline_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDisk_offline_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7679,6 +7745,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTimeout_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTimeout_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7748,6 +7820,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRebalance_diskgroup_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRebalance_diskgroup_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -7884,6 +7962,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPhase(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPhase(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -7927,6 +8011,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCheck_diskgroup_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCheck_diskgroup_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8015,6 +8105,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDiskgroup_template_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDiskgroup_template_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8133,6 +8229,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQualified_template_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQualified_template_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8203,6 +8305,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRedundancy_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRedundancy_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8253,6 +8361,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStriping_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStriping_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8302,6 +8416,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitForce_noforce(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitForce_noforce(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8380,6 +8500,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDiskgroup_directory_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDiskgroup_directory_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8533,6 +8659,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDir_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDir_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8592,6 +8724,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDiskgroup_alias_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDiskgroup_alias_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8748,6 +8886,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDiskgroup_volume_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDiskgroup_volume_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -8850,6 +8994,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_volume_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_volume_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -8954,6 +9104,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_volume_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_volume_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -9030,6 +9186,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDiskgroup_attributes(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDiskgroup_attributes(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -9089,6 +9251,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_diskgroup_file_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_diskgroup_file_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -9155,6 +9323,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConvert_redundancy_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConvert_redundancy_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -9214,6 +9388,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsergroup_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsergroup_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -9357,6 +9537,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUser_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUser_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -9543,6 +9729,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFile_permissions_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFile_permissions_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -9722,6 +9914,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFile_owner_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFile_owner_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -9847,6 +10045,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitScrub_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitScrub_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10009,6 +10213,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuotagroup_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuotagroup_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -10126,6 +10336,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProperty_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProperty_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -10168,6 +10384,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProperty_value(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProperty_value(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10220,6 +10442,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFilegroup_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilegroup_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10311,6 +10539,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_filegroup_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_filegroup_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10427,6 +10661,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_filegroup_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_filegroup_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -10487,6 +10727,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMove_to_filegroup_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMove_to_filegroup_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -10542,6 +10788,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_filegroup_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_filegroup_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10600,6 +10852,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuorum_regular(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuorum_regular(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -10650,6 +10908,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUndrop_disk_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUndrop_disk_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -10697,6 +10961,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDiskgroup_availability(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDiskgroup_availability(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -10818,6 +11088,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEnable_disable_volume(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEnable_disable_volume(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -13159,6 +13435,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_function(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_function(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -13237,6 +13519,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_flashback_archive(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_flashback_archive(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -13423,6 +13711,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_hierarchy(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_hierarchy(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -13517,6 +13811,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_function(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_function(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -13668,6 +13968,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_java(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_java(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -16073,6 +16379,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMatch_string(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMatch_string(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -16208,6 +16520,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_function_body(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_function_body(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -16484,6 +16802,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSql_macro_body(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSql_macro_body(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -16539,6 +16863,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParallel_enable_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParallel_enable_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -16607,6 +16937,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartition_by_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartition_by_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -16705,6 +17041,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitResult_cache_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitResult_cache_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -16793,6 +17135,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAccessible_by_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAccessible_by_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -16861,6 +17209,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_collation_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_collation_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -16909,6 +17263,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAggregate_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAggregate_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -16961,6 +17321,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPipelined_using_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPipelined_using_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -17035,6 +17401,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAccessor(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAccessor(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -17098,6 +17470,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRelies_on_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRelies_on_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -17171,6 +17549,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStreaming_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStreaming_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -17238,6 +17622,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_outline(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_outline(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -17326,6 +17716,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOutline_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOutline_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -17433,6 +17829,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_lockdown_profile(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_lockdown_profile(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -17535,6 +17937,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLockdown_feature(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLockdown_feature(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -17631,6 +18039,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLockdown_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLockdown_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -17732,6 +18146,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLockdown_statements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLockdown_statements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -17843,6 +18263,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStatement_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStatement_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -17953,6 +18379,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClause_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClause_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -18071,6 +18503,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOption_values(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOption_values(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -18155,6 +18593,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitString_list(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitString_list(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -18214,6 +18658,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDisable_enable(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDisable_enable(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -18268,6 +18718,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_lockdown_profile(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_lockdown_profile(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -18324,6 +18780,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_package(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_package(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -18410,6 +18872,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_package(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_package(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -18541,6 +19009,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_package(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_package(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -18709,6 +19183,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_package_body(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_package_body(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -18896,6 +19376,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPackage_obj_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPackage_obj_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -19025,6 +19511,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProcedure_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProcedure_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -19195,6 +19687,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunction_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunction_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -19367,6 +19865,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPackage_obj_body(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPackage_obj_body(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -19508,6 +20012,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_pmem_filestore(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_pmem_filestore(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -19632,6 +20142,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_pmem_filestore(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_pmem_filestore(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -19723,6 +20239,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_procedure(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_procedure(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -19781,6 +20303,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_procedure(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_procedure(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -19937,6 +20465,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunction_body(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunction_body(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -20193,6 +20727,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProcedure_body(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProcedure_body(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -20396,6 +20936,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_procedure_body(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_procedure_body(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -20588,6 +21134,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_resource_cost(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_resource_cost(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -20662,6 +21214,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_outline(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_outline(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -20721,6 +21279,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_rollback_segment(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_rollback_segment(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -20825,6 +21389,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_restore_point(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_restore_point(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -20894,6 +21464,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_rollback_segment(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_rollback_segment(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -20944,6 +21520,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_role(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_role(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -21001,6 +21583,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_pmem_filestore(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_pmem_filestore(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -21079,6 +21667,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPmem_filestore_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPmem_filestore_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -21175,6 +21769,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFile_path(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFile_path(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -21237,6 +21837,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_rollback_segment(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_rollback_segment(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -21330,6 +21936,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_trigger(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_trigger(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -21397,6 +22009,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_trigger(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_trigger(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -21545,6 +22163,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_trigger(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_trigger(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -21674,6 +22298,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTrigger_follows_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTrigger_follows_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -21739,6 +22369,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTrigger_when_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTrigger_when_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -21797,6 +22433,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSimple_dml_trigger(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSimple_dml_trigger(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -21888,6 +22530,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFor_each_row(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFor_each_row(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -21938,6 +22586,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCompound_dml_trigger(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCompound_dml_trigger(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -22010,6 +22664,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNon_dml_trigger(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNon_dml_trigger(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -22117,6 +22777,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTrigger_body(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTrigger_body(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -22196,6 +22862,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCompound_trigger_block(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCompound_trigger_block(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -22302,6 +22974,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTiming_point_section(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTiming_point_section(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -22450,6 +23128,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNon_dml_event(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNon_dml_event(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -22681,6 +23365,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDml_event_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDml_event_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -22759,6 +23449,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDml_event_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDml_event_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -22825,6 +23521,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDml_event_nested_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDml_event_nested_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -22878,6 +23580,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReferencing_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReferencing_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -22958,6 +23666,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReferencing_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReferencing_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -23015,6 +23729,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -23113,6 +23833,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -23220,6 +23946,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCompile_type_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCompile_type_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -23336,6 +24068,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReplace_type_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReplace_type_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -23423,6 +24161,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_method_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_method_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -23487,6 +24231,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_method_element(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_method_element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -23566,6 +24316,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_collection_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_collection_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -23641,6 +24397,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDependent_handling_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDependent_handling_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -23757,6 +24519,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDependent_exceptions_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDependent_exceptions_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -23823,6 +24591,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -23920,6 +24694,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_definition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_definition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -24023,6 +24803,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_type_def(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_type_def(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -24155,6 +24941,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_as_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_as_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -24233,6 +25025,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_under_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_under_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -24281,6 +25079,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNested_table_type_def(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNested_table_type_def(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -24348,6 +25152,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSqlj_object_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSqlj_object_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -24421,6 +25231,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_body(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_body(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -24499,6 +25315,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_body_elements(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_body_elements(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -24574,6 +25396,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMap_order_func_declaration(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMap_order_func_declaration(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -24636,6 +25464,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubprog_decl_in_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubprog_decl_in_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -24747,6 +25581,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProc_decl_in_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProc_decl_in_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -24900,6 +25740,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunc_decl_in_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunc_decl_in_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -25070,6 +25916,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConstructor_declaration(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstructor_declaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -25251,6 +26103,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModifier_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModifier_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -25320,6 +26178,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_member_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_member_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -25392,6 +26256,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSqlj_object_type_attr(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSqlj_object_type_attr(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -25448,6 +26318,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitElement_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitElement_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -25533,6 +26409,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitElement_spec_options(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitElement_spec_options(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -25607,6 +26489,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubprogram_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubprogram_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -25680,6 +26568,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOverriding_subprogram_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOverriding_subprogram_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -25777,6 +26671,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOverriding_function_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOverriding_function_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -25963,6 +26863,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOverriding_procedure_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOverriding_procedure_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -26104,6 +27010,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_procedure_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_procedure_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -26231,6 +27143,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_function_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_function_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -26422,6 +27340,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConstructor_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstructor_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -26576,6 +27500,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMap_order_function_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMap_order_function_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -26641,6 +27571,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPragma_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPragma_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -26710,6 +27646,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPragma_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPragma_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -29031,6 +29973,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_elements_parameter(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_elements_parameter(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -29133,6 +30081,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_sequence(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_sequence(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -29187,6 +30141,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_sequence(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_sequence(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -29279,6 +30239,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_session(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_session(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -29478,6 +30444,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_session_set_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_session_set_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -29643,6 +30615,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_sequence(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_sequence(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -29762,6 +30740,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSequence_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSequence_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -29992,6 +30976,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSequence_start_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSequence_start_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -30080,6 +31070,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_analytic_view(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_analytic_view(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -30284,6 +31280,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClassification_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClassification_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -30432,6 +31434,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCaption_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCaption_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -30478,6 +31486,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDescription_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDescription_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -30534,6 +31548,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClassification_item(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClassification_item(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -30606,6 +31626,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLanguage(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLanguage(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -32928,6 +33954,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCav_using_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCav_using_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -33026,6 +34058,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDim_by_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDim_by_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -33146,6 +34184,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDim_key(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDim_key(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -37859,6 +38903,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDim_ref(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDim_ref(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -37945,6 +38995,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHier_ref(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHier_ref(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -38042,6 +39098,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMeasures_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMeasures_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -38115,6 +39177,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAv_measure(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAv_measure(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -38184,6 +39252,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBase_meas_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBase_meas_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -38242,6 +39316,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMeas_aggregate_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMeas_aggregate_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -38291,6 +39371,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCalc_meas_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCalc_meas_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -38344,6 +39430,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_measure_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_measure_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -38393,6 +39485,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_aggregate_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_aggregate_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -38450,6 +39548,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCache_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCache_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -38530,6 +39634,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCache_specification(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCache_specification(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -38649,6 +39759,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLevels_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLevels_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -38729,6 +39845,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLevel_specification(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLevel_specification(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -38807,6 +39929,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLevel_group_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLevel_group_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -38909,6 +40037,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFact_columns_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFact_columns_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -39004,6 +40138,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQry_transform_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQry_transform_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -39112,6 +40252,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_attribute_dimension(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_attribute_dimension(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -39302,6 +40448,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAd_using_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAd_using_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -39388,6 +40540,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSource_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSource_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -39482,6 +40640,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJoin_path_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJoin_path_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -39539,6 +40703,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJoin_condition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJoin_condition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -39615,6 +40785,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJoin_condition_item(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJoin_condition_item(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -39697,6 +40873,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAttributes_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAttributes_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -39778,6 +40960,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAd_attributes_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAd_attributes_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -39939,6 +41127,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAd_level_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAd_level_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -40211,6 +41405,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitKey_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitKey_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -42546,6 +43746,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlternate_key_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlternate_key_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -42596,6 +43802,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDim_order_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDim_order_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -42687,6 +43899,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAll_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAll_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -42818,6 +44036,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_audit_policy(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_audit_policy(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -42954,6 +44178,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPrivilege_audit_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPrivilege_audit_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -43030,6 +44260,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAction_audit_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAction_audit_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -43119,6 +44355,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSystem_actions(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSystem_actions(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -43188,6 +44430,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStandard_actions(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStandard_actions(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -43268,6 +44516,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitActions_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitActions_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -45680,6 +46934,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_action(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_action(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -45740,6 +47000,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSystem_action(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSystem_action(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -45860,6 +47126,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComponent_actions(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComponent_actions(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -45996,6 +47268,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComponent_action(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComponent_action(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -46046,6 +47324,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRole_audit_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRole_audit_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -46139,6 +47423,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_controlfile(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_controlfile(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -46297,6 +47587,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitControlfile_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitControlfile_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -46463,6 +47759,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLogfile_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLogfile_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -46568,6 +47870,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCharacter_set_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCharacter_set_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -46617,6 +47925,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFile_specification(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFile_specification(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -46722,6 +48036,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_diskgroup(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_diskgroup(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -46930,6 +48250,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQualified_disk_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQualified_disk_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -47018,6 +48344,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_edition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_edition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -47100,6 +48432,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_flashback_archive(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_flashback_archive(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -47203,6 +48541,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFlashback_archive_quota(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFlashback_archive_quota(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -47259,6 +48603,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFlashback_archive_retention(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFlashback_archive_retention(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -47344,6 +48694,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_hierarchy(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_hierarchy(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -47492,6 +48848,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHier_using_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHier_using_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -47562,6 +48924,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLevel_hier_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLevel_hier_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -47639,6 +49007,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHier_attrs_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHier_attrs_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -47695,6 +49069,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHier_attr_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHier_attr_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -47760,6 +49140,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHier_attr_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHier_attr_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -47833,6 +49219,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_index(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_index(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -47977,6 +49369,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCluster_index_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCluster_index_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -48036,6 +49434,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCluster_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCluster_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -48117,6 +49521,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_index_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_index_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -48276,6 +49686,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBitmap_join_index_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBitmap_join_index_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -48458,6 +49874,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_expr(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_expr(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -48536,6 +49958,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -50956,6 +52384,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDomain_index_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDomain_index_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -51064,6 +52498,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLocal_domain_index_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLocal_domain_index_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -51181,6 +52621,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmlindex_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmlindex_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -51270,6 +52716,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLocal_xmlindex_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLocal_xmlindex_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -51380,6 +52832,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGlobal_partitioned_index(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGlobal_partitioned_index(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -51543,6 +53001,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_partitioning_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_partitioning_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -51629,6 +53093,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_partitioning_values_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_partitioning_values_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -51746,6 +53216,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLocal_partitioned_index(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLocal_partitioned_index(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -51826,6 +53302,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_range_partitioned_table(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_range_partitioned_table(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -51898,6 +53380,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_list_partitioned_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_list_partitioned_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -51976,6 +53464,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartitioned_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartitioned_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -52083,6 +53577,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_hash_partitioned_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_hash_partitioned_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -52196,6 +53696,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_hash_partitioned_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_hash_partitioned_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -52304,6 +53810,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_comp_partitioned_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_comp_partitioned_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -52419,6 +53931,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_comp_partitioned_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_comp_partitioned_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -52537,6 +54055,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_subpartition_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_subpartition_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -52649,6 +54173,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_subpartition_subclause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_subpartition_subclause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -52733,6 +54263,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOdci_parameters(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOdci_parameters(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -52779,6 +54315,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndextype(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndextype(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -52842,6 +54384,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_index(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_index(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -52969,6 +54517,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_index_ops_set1(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_index_ops_set1(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -53101,6 +54655,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_index_ops_set2(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_index_ops_set2(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -53236,6 +54796,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVisible_or_invisible(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVisible_or_invisible(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -53285,6 +54851,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMonitoring_nomonitoring(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMonitoring_nomonitoring(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -53400,6 +54972,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRebuild_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRebuild_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -53595,6 +55173,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_index_partitioning(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_index_partitioning(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -53710,6 +55294,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_index_default_attrs(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_index_default_attrs(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -56085,6 +57675,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_hash_index_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_hash_index_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -56175,6 +57771,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCoalesce_index_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCoalesce_index_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -56249,6 +57851,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_index_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_index_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -56384,6 +57992,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_index_partitions_ops(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_index_partitions_ops(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -56488,6 +58102,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRename_index_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRename_index_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -56558,6 +58178,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_index_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_index_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -56636,6 +58262,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSplit_index_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSplit_index_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -56758,6 +58390,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_partition_description(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_partition_description(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -56890,6 +58528,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_index_subpartition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_index_subpartition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -56968,6 +58612,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartition_name_old(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartition_name_old(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -57011,6 +58661,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNew_partition_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNew_partition_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -57053,6 +58709,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNew_index_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNew_index_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -57126,6 +58788,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_inmemory_join_group(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_inmemory_join_group(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -57282,6 +58950,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_user(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_user(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -57490,6 +59164,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_user(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_user(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -59908,6 +61588,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_user(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_user(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -59982,6 +61668,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_identified_by(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_identified_by(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -60040,6 +61732,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentified_by(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentified_by(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -60090,6 +61788,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentified_other_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentified_other_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -60159,6 +61863,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUser_tablespace_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUser_tablespace_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -60219,6 +61929,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuota_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuota_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -60286,6 +62002,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProfile_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProfile_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -60342,6 +62064,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRole_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRole_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -62705,6 +64433,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUser_default_role_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUser_default_role_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -62765,6 +64499,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPassword_expire_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPassword_expire_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -62809,6 +64549,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUser_lock_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUser_lock_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -62861,6 +64607,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUser_editions_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUser_editions_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -62918,6 +64670,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_user_editions_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_user_editions_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -63021,6 +64779,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProxy_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProxy_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -63216,6 +64980,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitContainer_names(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitContainer_names(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -63284,6 +65054,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSet_container_data(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSet_container_data(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -63360,6 +65136,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_rem_container_data(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_rem_container_data(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -63423,6 +65205,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitContainer_data_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitContainer_data_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -63507,6 +65295,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdminister_key_management(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdminister_key_management(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -63606,6 +65400,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitKeystore_management_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitKeystore_management_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -63724,6 +65524,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_keystore(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_keystore(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -63822,6 +65628,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOpen_keystore(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOpen_keystore(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -63891,6 +65703,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitForce_keystore(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitForce_keystore(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -63941,6 +65759,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClose_keystore(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClose_keystore(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -64022,6 +65846,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBackup_keystore(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBackup_keystore(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -64122,6 +65952,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_keystore_password(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_keystore_password(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -64216,6 +66052,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_into_new_keystore(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_into_new_keystore(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -64320,6 +66162,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_into_existing_keystore(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_into_existing_keystore(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -64417,6 +66265,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIsolate_keystore(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIsolate_keystore(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -64527,6 +66381,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnite_keystore(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnite_keystore(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -64630,6 +66490,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitKey_management_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitKey_management_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -64760,6 +66626,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSet_key(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSet_key(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -64916,6 +66788,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_key(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_key(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -65044,6 +66922,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMkid(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMkid(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -65084,6 +66968,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMk(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMk(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -65141,6 +67031,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUse_key(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUse_key(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -65246,6 +67142,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSet_key_tag(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSet_key_tag(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -65353,6 +67255,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExport_keys(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExport_keys(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -65502,6 +67410,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitImport_keys(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImport_keys(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -65607,6 +67521,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMigrate_keys(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMigrate_keys(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -65710,6 +67630,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReverse_migrate_keys(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReverse_migrate_keys(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -65832,6 +67758,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMove_keys(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMove_keys(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -65986,6 +67918,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentified_by_store(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentified_by_store(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66052,6 +67990,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsing_algorithm_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsing_algorithm_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66099,6 +68043,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsing_tag_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsing_tag_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -66155,6 +68105,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSecret_management_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSecret_management_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -66245,6 +68201,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_update_secret(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_update_secret(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -66359,6 +68321,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDelete_secret(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDelete_secret(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66450,6 +68418,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_update_secret_seps(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_update_secret_seps(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -66555,6 +68529,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDelete_secret_seps(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDelete_secret_seps(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66635,6 +68615,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitZero_downtime_software_patching_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitZero_downtime_software_patching_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66701,6 +68687,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWith_backup_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWith_backup_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66761,6 +68753,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentified_by_password_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentified_by_password_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66806,6 +68804,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitKeystore_password(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitKeystore_password(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66847,6 +68851,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPath(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPath(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -66887,6 +68897,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSecret(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSecret(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -66965,6 +68981,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAnalyze(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAnalyze(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -67189,6 +69211,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartition_extention_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartition_extention_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -67355,6 +69383,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitValidation_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValidation_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -67501,6 +69535,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCompute_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCompute_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -67590,6 +69630,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFor_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFor_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -67795,6 +69841,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOnline_or_offline(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOnline_or_offline(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -67846,6 +69898,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInto_clause1(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInto_clause1(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -67904,6 +69962,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartition_key_value(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartition_key_value(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -67979,6 +70043,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubpartition_key_value(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubpartition_key_value(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -68059,6 +70129,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAssociate_statistics(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAssociate_statistics(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -68160,6 +70236,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_association(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_association(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -68277,6 +70359,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunction_association(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunction_association(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -68492,6 +70580,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndextype_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndextype_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -68536,6 +70630,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsing_statistics_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsing_statistics_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -70848,6 +72948,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStatistics_type_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStatistics_type_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -70904,6 +73010,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_cost_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_cost_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -70962,6 +73074,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCpu_cost(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCpu_cost(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -71003,6 +73121,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIo_cost(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIo_cost(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -71043,6 +73167,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNetwork_cost(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNetwork_cost(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -71089,6 +73219,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_selectivity_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_selectivity_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -71133,6 +73269,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_selectivity(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_selectivity(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -71179,6 +73321,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStorage_table_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStorage_table_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -71267,6 +73415,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnified_auditing(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnified_auditing(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -71443,6 +73597,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPolicy_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPolicy_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -71510,6 +73670,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAudit_traditional(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAudit_traditional(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -71655,6 +73821,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAudit_direct_path(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAudit_direct_path(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -71702,6 +73874,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAudit_container_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAudit_container_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -71786,6 +73964,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAudit_operation_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAudit_operation_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -71969,6 +74153,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAuditing_by_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAuditing_by_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -72033,6 +74223,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAudit_user(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAudit_user(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -72086,6 +74282,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAudit_schema_object_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAudit_schema_object_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -72189,6 +74391,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSql_operation(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSql_operation(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -72256,6 +74464,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAuditing_on_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAuditing_on_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -72352,6 +74566,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -72411,6 +74631,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -72469,6 +74695,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProfile_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProfile_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -72559,6 +74791,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSql_statement_shortcut(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSql_statement_shortcut(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -72961,6 +75199,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_index(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_index(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -73054,6 +75298,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDisassociate_statistics(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDisassociate_statistics(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -73423,6 +75673,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_indextype(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_indextype(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -73501,6 +75757,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_inmemory_join_group(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_inmemory_join_group(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -73593,6 +75855,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFlashback_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFlashback_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -73755,6 +76023,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRestore_point(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRestore_point(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -73827,6 +76101,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPurge_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPurge_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -73951,6 +76231,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNoaudit_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNoaudit_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -74083,6 +76369,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRename_object(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRename_object(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -74189,6 +76481,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGrant_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGrant_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -74415,6 +76713,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitContainer_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitContainer_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -74479,6 +76783,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRevoke_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRevoke_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -74573,6 +76883,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRevoke_system_privilege(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRevoke_system_privilege(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -74652,6 +76968,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRevokee_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRevokee_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -74765,6 +77087,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRevoke_object_privileges(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRevoke_object_privileges(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -74937,6 +77265,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_object_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_object_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -75133,6 +77467,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRevoke_roles_from_programs(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRevoke_roles_from_programs(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -77489,6 +79829,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProgram_unit(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProgram_unit(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -77579,6 +79925,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_dimension(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_dimension(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -77686,6 +80038,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_directory(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_directory(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -77771,6 +80129,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDirectory_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDirectory_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -77811,6 +80175,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDirectory_path(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDirectory_path(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -77886,6 +80256,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_inmemory_join_group(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_inmemory_join_group(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -78016,6 +80392,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_hierarchy(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_hierarchy(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -78091,6 +80473,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_library(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_library(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -78204,6 +80592,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_java(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_java(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -78274,6 +80668,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_library(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_library(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -78383,6 +80783,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_java(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_java(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -80934,6 +83340,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_library(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_library(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -81027,6 +83439,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPlsql_library_source(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPlsql_library_source(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -81123,6 +83541,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCredential_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCredential_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -81177,6 +83601,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLibrary_editionable(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLibrary_editionable(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -81228,6 +83658,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLibrary_debug(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLibrary_debug(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -81277,6 +83713,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCompiler_parameters_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCompiler_parameters_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -81324,6 +83766,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParameter_value(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParameter_value(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -83637,6 +86085,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLibrary_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLibrary_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -83763,6 +86217,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_dimension(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_dimension(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -84003,6 +86463,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLevel_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLevel_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -86385,6 +88851,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHierarchy_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHierarchy_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -86486,6 +88958,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDimension_join_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDimension_join_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -86566,6 +89044,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAttribute_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAttribute_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -86653,6 +89137,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExtended_attribute_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExtended_attribute_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -86727,6 +89217,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_one_or_more_sub_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_one_or_more_sub_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -89095,6 +91591,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_view(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_view(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -89264,6 +91766,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_view_editionable(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_view_editionable(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -89360,6 +91868,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_view(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_view(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -89598,6 +92112,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEditioning_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEditioning_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -89679,6 +92199,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitView_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitView_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -89763,6 +92289,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitView_alias_constraint(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitView_alias_constraint(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -89914,6 +92446,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_view_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_view_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -90132,6 +92670,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInline_constraint(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInline_constraint(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -90259,6 +92803,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInline_ref_constraint(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInline_ref_constraint(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -90384,6 +92934,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOut_of_line_ref_constraint(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOut_of_line_ref_constraint(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -90557,6 +93113,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOut_of_line_constraint(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOut_of_line_constraint(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -90770,6 +93332,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConstraint_state(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstraint_state(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -90934,6 +93502,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmltype_view_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmltype_view_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -91064,6 +93638,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_schema_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_schema_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -91187,6 +93767,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_schema_url(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_schema_url(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -91227,6 +93813,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitElement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitElement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -91319,6 +93911,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_tablespace(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_tablespace(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -91529,6 +94127,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatafile_tempfile_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatafile_tempfile_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -91754,6 +94358,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_logging_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_logging_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -91830,6 +94440,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_group_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_group_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -94144,6 +96760,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_group_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_group_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -94192,6 +96814,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_state_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_state_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -94299,6 +96927,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFlashback_mode_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFlashback_mode_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -94352,6 +96986,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNew_tablespace_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNew_tablespace_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -94403,6 +97043,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_tablespace(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_tablespace(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -94567,6 +97213,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPermanent_tablespace_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPermanent_tablespace_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -94734,6 +97386,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_encryption_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_encryption_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -94778,6 +97436,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLogging_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLogging_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -94835,6 +97499,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExtent_management_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExtent_management_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -94958,6 +97628,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSegment_management_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSegment_management_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -95029,6 +97705,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTemporary_tablespace_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTemporary_tablespace_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -95137,6 +97819,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUndo_tablespace_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUndo_tablespace_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -95229,6 +97917,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_retention_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_retention_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -95312,6 +98006,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_tablespace_set(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_tablespace_set(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -95466,6 +98166,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPermanent_tablespace_attrs(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPermanent_tablespace_attrs(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -95622,6 +98328,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_encryption_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_encryption_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -95707,6 +98419,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_tablespace_params(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_tablespace_params(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -95809,6 +98527,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_table_compression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_table_compression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -95899,6 +98623,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLow_high(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLow_high(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -95953,6 +98683,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_index_compression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_index_compression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -96041,6 +98777,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmmemory_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmmemory_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -96181,6 +98923,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatafile_specification(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatafile_specification(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -96240,6 +98988,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTempfile_specification(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTempfile_specification(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -96304,6 +99058,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatafile_tempfile_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatafile_tempfile_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -96406,6 +99166,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRedo_log_file_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRedo_log_file_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -96528,6 +99294,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAutoextend_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAutoextend_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -96614,6 +99386,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMaxsize_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMaxsize_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -96675,6 +99453,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBuild_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBuild_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -96734,6 +99518,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParallel_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParallel_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -96835,6 +99625,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParallel_instances_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParallel_instances_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -96953,6 +99749,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_materialized_view(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_materialized_view(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -97177,6 +99979,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_mv_option1(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_mv_option1(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -97305,6 +100113,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_mv_refresh(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_mv_refresh(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -97474,6 +100288,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRollback_segment(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRollback_segment(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -97524,6 +100344,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_mv_column_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_mv_column_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -97631,6 +100457,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_materialized_view_log(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_materialized_view_log(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -97771,6 +100603,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_mv_log_column_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_mv_log_column_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -97823,6 +100661,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMove_mv_log_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMove_mv_log_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -97898,6 +100742,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMv_log_augmentation(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMv_log_augmentation(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -98160,6 +101010,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_materialized_view_log(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_materialized_view_log(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -98425,6 +101281,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNew_values_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNew_values_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -98480,6 +101342,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMv_log_purge_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMv_log_purge_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -98568,6 +101436,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_materialized_zonemap(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_materialized_zonemap(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -98705,6 +101579,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_materialized_zonemap(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_materialized_zonemap(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -98815,6 +101695,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_materialized_zonemap(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_materialized_zonemap(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -98870,6 +101756,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitZonemap_refresh_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitZonemap_refresh_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99015,6 +101907,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitZonemap_attributes(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitZonemap_attributes(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -99123,6 +102021,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitZonemap_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitZonemap_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -99182,6 +102086,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOperator_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOperator_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99249,6 +102159,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOperator_function_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOperator_function_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -99315,6 +102231,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_zonemap_on_table(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_zonemap_on_table(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -99366,6 +102288,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_zonemap_as_subquery(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_zonemap_as_subquery(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99420,6 +102348,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_operator(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_operator(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99494,6 +102428,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_operator(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_operator(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99571,6 +102511,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_operator(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_operator(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99695,6 +102641,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBinding_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBinding_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -99797,6 +102749,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_binding_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_binding_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -99848,6 +102806,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitImplementation_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImplementation_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99917,6 +102881,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPrimary_operator_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPrimary_operator_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -99989,6 +102959,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPrimary_operator_item(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPrimary_operator_item(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -100070,6 +103046,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOperator_context_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOperator_context_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -100156,6 +103138,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsing_function_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsing_function_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -100212,6 +103200,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_binding_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_binding_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -100366,6 +103360,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_materialized_view(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_materialized_view(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -100744,6 +103744,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitScoped_table_ref_constraint(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitScoped_table_ref_constraint(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -100817,6 +103823,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMv_column_alias(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMv_column_alias(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -103231,6 +106243,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_mv_refresh(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_mv_refresh(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -103475,6 +106493,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_materialized_view(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_materialized_view(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -103543,6 +106567,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_materialized_view_log(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_materialized_view_log(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -103625,6 +106655,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_context(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_context(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -103734,6 +106770,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOracle_namespace(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOracle_namespace(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -103868,6 +106910,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_cluster(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_cluster(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -104111,6 +107159,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_profile(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_profile(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -104237,6 +107291,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitResource_parameters(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitResource_parameters(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -104357,6 +107417,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPassword_parameters(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPassword_parameters(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -106760,6 +109826,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_lockdown_profile(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_lockdown_profile(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -106833,6 +109905,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStatic_base_profile(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStatic_base_profile(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -106879,6 +109957,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDynamic_base_profile(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDynamic_base_profile(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -106949,6 +110033,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_outline(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_outline(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -107115,6 +110205,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_restore_point(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_restore_point(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -107248,6 +110344,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_role(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_role(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -107355,6 +110457,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -107619,6 +110727,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmltype_table(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmltype_table(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -107801,6 +110915,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmltype_virtual_columns(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmltype_virtual_columns(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -107892,6 +111012,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmltype_column_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmltype_column_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -107985,6 +111111,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmltype_storage(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmltype_storage(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -108161,6 +111293,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmlschema_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmlschema_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -108279,6 +111417,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -108441,6 +111585,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_type(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_type(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -108502,6 +111652,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOid_index_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOid_index_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -108600,6 +111756,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOid_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOid_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -108697,6 +111859,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -108832,6 +112000,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_table_substitution(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_table_substitution(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -108903,6 +112077,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRelational_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRelational_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -108989,6 +112169,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRelational_table_properties(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRelational_table_properties(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -109071,6 +112257,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRelational_table_property(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRelational_table_property(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -109200,6 +112392,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitImmutable_table_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImmutable_table_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -109260,6 +112458,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitImmutable_table_no_drop_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImmutable_table_no_drop_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -109329,6 +112533,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitImmutable_table_no_delete_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImmutable_table_no_delete_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -109480,6 +112690,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBlockchain_table_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockchain_table_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -109531,6 +112747,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBlockchain_drop_table_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockchain_drop_table_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -109600,6 +112822,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBlockchain_row_retention_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockchain_row_retention_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -109694,6 +112922,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBlockchain_hash_and_data_format_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlockchain_hash_and_data_format_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -109744,6 +112978,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCollation_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCollation_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -109847,6 +113087,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -110062,6 +113308,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRead_only_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRead_only_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -110114,6 +113366,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndexing_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndexing_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -110187,6 +113445,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAttribute_clustering_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAttribute_clustering_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -110314,6 +113578,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClustering_join(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClustering_join(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -110399,6 +113669,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClustering_join_item(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClustering_join_item(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -110464,6 +113740,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEquijoin_condition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEquijoin_condition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -110510,6 +113792,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCluster_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCluster_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -110584,6 +113872,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClustering_columns(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClustering_columns(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -110671,6 +113965,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClustering_column_group(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClustering_column_group(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -110734,6 +114034,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitYes_no(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitYes_no(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -110790,6 +114096,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitZonemap_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitZonemap_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -110879,6 +114191,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLogical_replication_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLogical_replication_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -110995,6 +114313,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -111052,6 +114376,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRelational_property(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRelational_property(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -111157,6 +114487,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_partitioning_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_partitioning_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -111306,6 +114642,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRange_partitions(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRange_partitions(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -111522,6 +114864,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitList_partitions(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitList_partitions(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -111696,6 +115044,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHash_partitions(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHash_partitions(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -111802,6 +115156,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndividual_hash_partitions(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndividual_hash_partitions(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -111941,6 +115301,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHash_partitions_by_quantity(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHash_partitions_by_quantity(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -112071,6 +115437,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHash_partition_quantity(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHash_partition_quantity(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -112158,6 +115530,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComposite_range_partitions(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComposite_range_partitions(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -112353,6 +115731,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComposite_list_partitions(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComposite_list_partitions(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -112477,6 +115861,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComposite_hash_partitions(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComposite_hash_partitions(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -112607,6 +115997,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReference_partitioning(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReference_partitioning(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -112695,6 +116091,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReference_partition_desc(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReference_partition_desc(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -112761,6 +116163,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSystem_partitioning(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSystem_partitioning(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -112877,6 +116285,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRange_partition_desc(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRange_partition_desc(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -113076,6 +116490,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitList_partition_desc(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitList_partition_desc(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -113266,6 +116686,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubpartition_template(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubpartition_template(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -113402,6 +116828,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHash_subpartition_quantity(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHash_subpartition_quantity(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -113459,6 +116891,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubpartition_by_range(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubpartition_by_range(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -113547,6 +116985,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubpartition_by_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubpartition_by_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -113642,6 +117086,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubpartition_by_hash(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubpartition_by_hash(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -113770,6 +117220,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubpartition_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubpartition_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -113819,6 +117275,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRange_subpartition_desc(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRange_subpartition_desc(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -113893,6 +117355,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitList_subpartition_desc(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitList_subpartition_desc(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -113962,6 +117430,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndividual_hash_subparts(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndividual_hash_subparts(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -114039,6 +117513,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHash_subparts_by_quantity(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHash_subparts_by_quantity(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -114125,6 +117605,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRange_values_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRange_values_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -114188,6 +117674,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRange_values_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRange_values_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -114309,6 +117801,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitList_values_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitList_values_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -114473,6 +117971,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_partition_description(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_partition_description(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -114737,6 +118241,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartitioning_storage_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartitioning_storage_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -114895,6 +118405,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_partitioning_storage(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_partitioning_storage(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -117261,6 +120777,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSize_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSize_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -117337,6 +120859,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_compression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_compression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -117579,6 +121107,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmemory_table_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmemory_table_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -117719,6 +121253,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmemory_attributes(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmemory_attributes(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -117809,6 +121349,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmemory_memcompress(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmemory_memcompress(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -117919,6 +121465,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmemory_priority(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmemory_priority(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -117983,6 +121535,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmemory_distribute(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmemory_distribute(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -118211,6 +121769,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmemory_duplicate(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmemory_duplicate(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -118288,6 +121852,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInmemory_column_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInmemory_column_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -118399,6 +121969,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPhysical_attributes_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPhysical_attributes_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -118599,6 +122175,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStorage_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStorage_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -118814,6 +122396,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDeferred_segment_creation(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeferred_segment_creation(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -118904,6 +122492,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSegment_attributes_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSegment_attributes_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -119073,6 +122667,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPhysical_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPhysical_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -119282,6 +122882,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIlm_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIlm_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -119385,6 +122991,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIlm_policy_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIlm_policy_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -119477,6 +123089,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIlm_compression_policy(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIlm_compression_policy(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -119598,6 +123216,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIlm_tiering_policy(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIlm_tiering_policy(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -119706,6 +123330,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIlm_after_on(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIlm_after_on(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -119797,6 +123427,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSegment_group(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSegment_group(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -119858,6 +123494,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIlm_inmemory_policy(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIlm_inmemory_policy(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -119961,6 +123603,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIlm_time_period(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIlm_time_period(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -120019,6 +123667,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHeap_org_table_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHeap_org_table_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -120108,6 +123762,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -120221,6 +123881,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAccess_driver_type(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAccess_driver_type(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -120303,6 +123969,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_data_props(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_data_props(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -120477,6 +124149,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_data_format(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_data_format(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -120629,6 +124307,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_transform(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_transform(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -120813,6 +124497,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_field(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_field(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -120895,6 +124585,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_field_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_field_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -120979,6 +124675,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_fields_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_fields_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -121097,6 +124799,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_position_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_position_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -121262,6 +124970,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_datatype_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_datatype_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -121666,6 +125380,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_delimit_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_delimit_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -121800,6 +125520,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_trim_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_trim_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -121861,6 +125587,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_date_format_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_date_format_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -121977,6 +125709,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_init_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_init_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -122049,6 +125787,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_condition_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_condition_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -124440,6 +128184,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_lls_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_lls_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -124511,6 +128261,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_records(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_records(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -124771,6 +128527,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_record_options_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_record_options_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -125019,6 +128781,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_output_files(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_output_files(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -125160,6 +128928,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_fields(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_fields(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -125463,6 +129237,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_datapump(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_datapump(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -125825,6 +129605,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_hive(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_hive(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -126181,6 +129967,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_hive_parameter_map(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_hive_parameter_map(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -126257,6 +130049,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_hive_parameter_map_entry(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_hive_parameter_map_entry(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -126379,6 +130177,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExternal_table_directory(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExternal_table_directory(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -126477,6 +130281,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRow_movement_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRow_movement_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -126543,6 +130353,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFlashback_archive_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFlashback_archive_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -126618,6 +130434,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLog_grp(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLog_grp(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -128962,6 +132784,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSupplemental_table_logging(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSupplemental_table_logging(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -129163,6 +132991,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSupplemental_log_grp_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSupplemental_log_grp_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -129293,6 +133127,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSupplemental_id_key_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSupplemental_id_key_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -129439,6 +133279,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAllocate_extent_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAllocate_extent_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -129540,6 +133386,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDeallocate_unused_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeallocate_unused_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -129599,6 +133451,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitShrink_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitShrink_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -129676,6 +133534,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRecords_per_block_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRecords_per_block_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -129740,6 +133604,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpgrade_table_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpgrade_table_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -129814,6 +133684,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTruncate_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTruncate_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -129961,6 +133837,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_table(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_table(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -130097,6 +133979,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_tablespace(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_tablespace(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -130201,6 +134089,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_tablespace_set(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_tablespace_set(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -130264,6 +134158,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIncluding_contents_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIncluding_contents_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -130348,6 +134248,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_view(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_view(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -130427,6 +134333,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComment_on_column(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComment_on_column(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -130479,6 +134391,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEnable_or_disable(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEnable_or_disable(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -130528,6 +134446,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAllow_or_disallow(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAllow_or_disallow(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -130589,6 +134513,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_synonym(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_synonym(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -130691,6 +134621,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_synonym(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_synonym(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -130871,6 +134807,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_synonym(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_synonym(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -130964,6 +134906,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_spfile(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_spfile(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -131065,6 +135013,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSpfile_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSpfile_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -131105,6 +135059,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPfile_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPfile_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -131155,6 +135115,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComment_on_table(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComment_on_table(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -131216,6 +135182,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitComment_on_materialized(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitComment_on_materialized(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -131291,6 +135263,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_analytic_view(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_analytic_view(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -131410,6 +135388,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_add_cache_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_add_cache_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -133770,6 +137754,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLevels_item(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLevels_item(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -133843,6 +137833,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMeasure_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMeasure_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -133927,6 +137923,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_drop_cache_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_drop_cache_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -136292,6 +140294,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_attribute_dimension(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_attribute_dimension(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -136416,6 +140424,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_audit_policy(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_audit_policy(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -136675,6 +140689,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_cluster(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_cluster(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -136795,6 +140815,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_analytic_view(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_analytic_view(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -136864,6 +140890,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_attribute_dimension(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_attribute_dimension(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -136929,6 +140961,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_audit_policy(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_audit_policy(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -136981,6 +141019,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_flashback_archive(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_flashback_archive(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137036,6 +141080,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_cluster(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_cluster(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137112,6 +141162,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_context(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_context(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -137161,6 +141217,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_directory(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_directory(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137215,6 +141277,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_diskgroup(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_diskgroup(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137307,6 +141375,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_edition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_edition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -137369,6 +141443,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTruncate_cluster(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTruncate_cluster(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137436,6 +141516,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCache_or_nocache(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCache_or_nocache(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -137486,6 +141572,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatabase_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatabase_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137575,6 +141667,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_database(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_database(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137717,6 +141815,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatabase_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatabase_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -137791,6 +141895,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStartup_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStartup_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -137910,6 +142020,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitResetlogs_or_noresetlogs(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitResetlogs_or_noresetlogs(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -137959,6 +142075,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpgrade_or_downgrade(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpgrade_or_downgrade(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -138017,6 +142139,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRecovery_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRecovery_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -138081,6 +142209,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBegin_or_end(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBegin_or_end(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -138168,6 +142302,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGeneral_recovery(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGeneral_recovery(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -138379,6 +142519,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFull_database_recovery(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFull_database_recovery(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -138539,6 +142685,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartial_database_recovery(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartial_database_recovery(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -138683,6 +142835,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartial_database_recovery_10g(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartial_database_recovery_10g(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -138880,6 +143038,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitManaged_standby_recovery(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitManaged_standby_recovery(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -139071,6 +143235,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDb_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDb_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -139135,6 +143305,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatabase_file_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatabase_file_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -139256,6 +143432,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_datafile_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_datafile_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -139393,6 +143575,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_datafile_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_datafile_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -139566,6 +143754,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_tempfile_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_tempfile_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -139721,6 +143915,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMove_datafile_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMove_datafile_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -139896,6 +144096,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLogfile_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLogfile_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -140167,6 +144373,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_logfile_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_logfile_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -140343,6 +144555,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGroup_redo_logfile(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGroup_redo_logfile(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -140415,6 +144633,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_logfile_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_logfile_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -140529,6 +144753,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSwitch_logfile_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSwitch_logfile_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -140590,6 +144820,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSupplemental_db_logging(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSupplemental_db_logging(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -140659,6 +144895,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_or_drop(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_or_drop(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -140710,6 +144952,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSupplemental_plsql_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSupplemental_plsql_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -140770,6 +145018,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLogfile_descriptor(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLogfile_descriptor(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -140870,6 +145124,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitControlfile_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitControlfile_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -141002,6 +145262,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTrace_file_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTrace_file_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -141105,6 +145371,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStandby_database_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStandby_database_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -141212,6 +145484,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitActivate_standby_db_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitActivate_standby_db_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -141294,6 +145572,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMaximize_standby_db_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMaximize_standby_db_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -141357,6 +145641,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRegister_logfile_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRegister_logfile_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -141439,6 +145729,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCommit_switchover_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCommit_switchover_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -141650,6 +145946,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStart_standby_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStart_standby_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -141776,6 +146078,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStop_standby_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStop_standby_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -141834,6 +146142,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConvert_database_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConvert_database_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -141938,6 +146252,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_settings_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_settings_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142147,6 +146467,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSet_time_zone_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSet_time_zone_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142198,6 +146524,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInstance_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInstance_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142245,6 +146577,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSecurity_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSecurity_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142299,6 +146637,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDomain(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDomain(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142341,6 +146685,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatabase(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatabase(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142385,6 +146735,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEdition_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEdition_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142426,6 +146782,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFilenumber(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilenumber(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142466,6 +146828,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFilename(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilename(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142525,6 +146893,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPrepare_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPrepare_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142615,6 +146989,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_mirror_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_mirror_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142667,6 +147047,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLost_write_protection(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLost_write_protection(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142728,6 +147114,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCdb_fleet_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCdb_fleet_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142785,6 +147177,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLead_cdb_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLead_cdb_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142844,6 +147242,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLead_cdb_uri_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLead_cdb_uri_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -142898,6 +147302,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProperty_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProperty_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -142958,6 +147368,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReplay_upgrade_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReplay_upgrade_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -143031,6 +147447,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_database_link(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_database_link(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -143144,6 +147566,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPassword_value(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPassword_value(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -145473,6 +149901,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLink_authentication(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLink_authentication(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -145546,6 +149980,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_schema(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_schema(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -145758,6 +150198,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_database(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_database(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -145991,6 +150437,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatabase_logging_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatabase_logging_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -146104,6 +150556,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatabase_logging_sub_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatabase_logging_sub_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -146180,6 +150638,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -146306,6 +150770,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEnable_pluggable_database(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEnable_pluggable_database(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -146420,6 +150890,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFile_name_convert(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFile_name_convert(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -146506,6 +150982,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFilename_convert_sub_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilename_convert_sub_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -146574,6 +151056,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace_datafile_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace_datafile_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -146650,6 +151138,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUndo_mode_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUndo_mode_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -146713,6 +151207,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_tablespace(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_tablespace(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -146805,6 +151305,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_temp_tablespace(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_temp_tablespace(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -146957,6 +151463,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUndo_tablespace(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUndo_tablespace(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -147051,6 +151563,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_database(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_database(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -147164,6 +151682,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCreate_database_link(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCreate_database_link(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -147313,6 +151837,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_database_link(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_database_link(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -147379,6 +151909,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_tablespace_set(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_tablespace_set(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -147476,6 +152012,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_tablespace_attrs(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_tablespace_attrs(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -147675,6 +152217,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_tablespace_encryption(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_tablespace_encryption(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -147848,6 +152396,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTs_file_name_convert(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTs_file_name_convert(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -147942,6 +152496,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_role(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_role(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -148013,6 +152573,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRole_identified_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRole_identified_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -148183,6 +152749,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_table(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_table(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -148344,6 +152916,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMemoptimize_read_write_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMemoptimize_read_write_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -148427,6 +153005,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_table_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_table_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -148579,6 +153163,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_table_partitioning(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_table_partitioning(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -148716,6 +153306,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_table_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_table_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -148834,6 +153430,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_table_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_table_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -148928,6 +153530,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_table_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_table_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -149008,6 +153616,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_table_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_table_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -149182,6 +153796,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSplit_table_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSplit_table_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -149382,6 +154002,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTruncate_table_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTruncate_table_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -149531,6 +154157,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExchange_table_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExchange_table_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -149629,6 +154261,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCoalesce_table_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCoalesce_table_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -149703,6 +154341,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_interval_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_interval_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -149815,6 +154459,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMove_table_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMove_table_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -149967,6 +154617,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFilter_condition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilter_condition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -150021,6 +154677,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRename_table_partition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRename_table_partition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -150106,6 +154768,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartition_extended_names(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartition_extended_names(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -152526,6 +157194,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubpartition_extended_names(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubpartition_extended_names(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -155033,6 +159707,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_table_properties_1(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_table_properties_1(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -155225,6 +159905,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_iot_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_iot_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -155299,6 +159985,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_mapping_table_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_mapping_table_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -155387,6 +160079,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAlter_overflow_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAlter_overflow_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -155515,6 +160213,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_overflow_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_overflow_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -155624,6 +160328,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_index_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_index_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -155680,6 +160390,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_global_index_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_global_index_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -155739,6 +160455,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_all_indexes_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_all_indexes_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -155817,6 +160539,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_all_indexes_index_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_all_indexes_index_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -155913,6 +160641,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_index_partition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_index_partition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -156000,6 +160734,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_index_subpartition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_index_subpartition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -156115,6 +160855,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEnable_disable_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEnable_disable_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -156293,6 +161039,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsing_index_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsing_index_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -156414,6 +161166,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_attributes(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_attributes(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -158806,6 +163564,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSort_or_nosort(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSort_or_nosort(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -158858,6 +163622,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExceptions_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExceptions_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -158928,6 +163698,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMove_table_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMove_table_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -159071,6 +163847,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_org_table_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_org_table_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -159188,6 +163970,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMapping_table_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMapping_table_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -159247,6 +164035,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitKey_compression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitKey_compression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -159312,6 +164106,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_org_overflow_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_org_overflow_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -159387,6 +164187,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -159465,6 +164271,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_collection_retrieval(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_collection_retrieval(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -159528,6 +164340,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCollection_item(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCollection_item(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -159576,6 +164394,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRename_column_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRename_column_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -159628,6 +164452,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOld_column_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOld_column_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -159670,6 +164500,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNew_column_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNew_column_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -159734,6 +164570,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_modify_drop_column_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_modify_drop_column_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -159843,6 +164685,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_column_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_column_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -160111,6 +164959,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_column_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_column_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -160254,6 +165108,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_col_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_col_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -160411,6 +165271,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_col_visibility(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_col_visibility(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -160470,6 +165336,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_col_substitutable(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_col_substitutable(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -160563,6 +165435,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_column_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_column_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -162957,6 +167835,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVarray_col_properties(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVarray_col_properties(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -163038,6 +167922,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVarray_storage_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVarray_storage_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -163134,6 +168024,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_segname(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_segname(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -163180,6 +168076,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_item(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_item(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -165505,6 +170407,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_storage_parameters(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_storage_parameters(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -165634,6 +170542,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_storage_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_storage_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -165860,6 +170774,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_lob_storage_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_lob_storage_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -166003,6 +170923,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModify_lob_parameters(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModify_lob_parameters(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -166266,6 +171192,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_parameters(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_parameters(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -166447,6 +171379,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_deduplicate_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_deduplicate_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -166499,6 +171437,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_compression_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_compression_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -166578,6 +171522,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_retention_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_retention_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -166683,6 +171633,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEncryption_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEncryption_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -166781,6 +171737,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTablespace(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTablespace(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -166830,6 +171792,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVarray_item(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVarray_item(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -166942,6 +171910,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -167113,6 +172087,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLob_partition_storage(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLob_partition_storage(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -167290,6 +172270,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPeriod_definition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPeriod_definition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -167358,6 +172344,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStart_time_column(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStart_time_column(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -167400,6 +172392,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEnd_time_column(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEnd_time_column(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -167481,6 +172479,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_definition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_definition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -167700,6 +172704,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_collation_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_collation_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -167750,6 +172760,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentity_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentity_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -167847,6 +172863,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentity_options_parentheses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentity_options_parentheses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -167971,6 +172993,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentity_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentity_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -168218,6 +173246,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVirtual_column_definition(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVirtual_column_definition(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -168441,6 +173475,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVirtual_column_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVirtual_column_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -168542,6 +173582,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAutogenerated_sequence_definition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAutogenerated_sequence_definition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -168664,6 +173710,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBy_user_for_statistics_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBy_user_for_statistics_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -168717,6 +173769,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitEvaluation_edition_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEvaluation_edition_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -168838,6 +173896,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNested_table_col_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNested_table_col_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -169011,6 +174075,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNested_item(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNested_item(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -169064,6 +174134,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubstitutable_column_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubstitutable_column_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -169170,6 +174246,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartition_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartition_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -171484,6 +176566,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSupplemental_logging_props(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSupplemental_logging_props(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -171551,6 +176639,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_type_col_properties(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_type_col_properties(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -171643,6 +176737,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConstraint_clauses(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstraint_clauses(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -171863,6 +176963,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOld_constraint_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOld_constraint_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -171905,6 +177011,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNew_constraint_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNew_constraint_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -171974,6 +177086,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDrop_constraint_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDrop_constraint_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172112,6 +177230,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCheck_constraint(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCheck_constraint(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -172178,6 +177302,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitForeign_key_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitForeign_key_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172247,6 +177377,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReferences_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReferences_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172338,6 +177474,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOn_delete_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOn_delete_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -172415,6 +177557,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAnonymous_block(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAnonymous_block(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172508,6 +177656,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInvoker_rights_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInvoker_rights_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -172563,6 +177717,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCall_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCall_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172620,6 +177780,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJava_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJava_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172685,6 +177851,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitC_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitC_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172822,6 +177994,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitC_agent_in_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitC_agent_in_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -172882,6 +178060,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitC_parameters_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitC_parameters_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -172961,6 +178145,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitC_external_parameter(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitC_external_parameter(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -173103,6 +178293,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitC_property(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitC_property(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -173229,6 +178425,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParameter(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParameter(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -173319,6 +178521,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDefault_value_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDefault_value_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -173374,6 +178582,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSeq_of_declare_specs(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSeq_of_declare_specs(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -173466,6 +178680,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDeclare_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeclare_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -173596,6 +178816,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVariable_declaration(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariable_declaration(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -173700,6 +178926,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubtype_declaration(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubtype_declaration(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -173801,6 +179033,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCursor_declaration(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCursor_declaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -173911,6 +179149,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParameter_spec(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParameter_spec(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -173986,6 +179230,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitException_declaration(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitException_declaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -174063,6 +179313,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPragma_declaration(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPragma_declaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -176496,6 +181752,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRecord_type_def(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRecord_type_def(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -176569,6 +181831,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitField_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitField_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -176649,6 +181917,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRef_cursor_type_def(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRef_cursor_type_def(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -176721,6 +181995,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_declaration(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_declaration(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -176810,6 +182090,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_type_def(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_type_def(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -176885,6 +182171,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_indexed_by_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_indexed_by_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -176958,6 +182250,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVarray_type_def(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVarray_type_def(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -177081,6 +182379,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSeq_of_statements(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSeq_of_statements(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -177196,6 +182500,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLabel_declaration(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLabel_declaration(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -177294,6 +182604,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStatement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStatement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -177462,6 +182778,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAssignment_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAssignment_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -179785,6 +185107,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitContinue_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitContinue_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -179856,6 +185184,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExit_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExit_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -179923,6 +185257,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGoto_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGoto_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -179985,6 +185325,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIf_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIf_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -180069,6 +185415,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitElsif_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitElsif_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -180118,6 +185470,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitElse_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitElse_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -180182,6 +185540,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLoop_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLoop_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -180300,6 +185664,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCursor_loop_param(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCursor_loop_param(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -180433,6 +185803,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitForall_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitForall_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -180537,6 +185913,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBounds_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBounds_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -180628,6 +186010,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBetween_bound(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBetween_bound(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -180677,6 +186065,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLower_bound(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLower_bound(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -180720,6 +186114,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpper_bound(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpper_bound(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -180760,6 +186160,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNull_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNull_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -180804,6 +186210,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRaise_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRaise_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -180859,6 +186271,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReturn_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReturn_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -180930,6 +186348,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCall_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCall_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181037,6 +186461,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPipe_row_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPipe_row_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -181101,6 +186531,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSelection_directive(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelection_directive(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181183,6 +186619,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitError_directive(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitError_directive(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181267,6 +186709,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSelection_directive_body(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelection_directive_body(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181384,6 +186832,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBody(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBody(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -181478,6 +186932,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitException_handler(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitException_handler(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -181550,6 +187010,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTrigger_block(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTrigger_block(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181628,6 +187094,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTps_block(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTps_block(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -181694,6 +187166,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBlock(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBlock(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181777,6 +187255,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSql_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSql_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181865,6 +187349,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExecute_immediate(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExecute_immediate(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -181966,6 +187456,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDynamic_returning_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDynamic_returning_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -182036,6 +187532,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitData_manipulation_language_statements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitData_manipulation_language_statements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -182141,6 +187643,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCursor_manipulation_statements(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCursor_manipulation_statements(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -182212,6 +187720,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClose_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClose_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -182262,6 +187776,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOpen_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOpen_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -182349,6 +187869,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFetch_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFetch_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -184740,6 +190266,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVariable_or_collection(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariable_or_collection(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -184806,6 +190338,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOpen_for_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOpen_for_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -184892,6 +190430,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTransaction_control_statements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTransaction_control_statements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -184985,6 +190529,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSet_transaction_command(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSet_transaction_command(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -185122,6 +190672,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSet_constraint_command(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSet_constraint_command(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -187485,6 +193041,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCommit_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCommit_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -187635,6 +193197,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWrite_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWrite_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -187731,6 +193299,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRollback_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRollback_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -187822,6 +193396,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSavepoint_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSavepoint_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -187881,6 +193461,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCollection_method_call(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCollection_method_call(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -188026,6 +193612,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExplain_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExplain_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -188143,6 +193735,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSelect_only_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelect_only_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -188220,6 +193818,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSelect_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelect_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -188324,6 +193928,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWith_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWith_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -188494,6 +194104,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWith_factoring_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWith_factoring_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -188567,6 +194183,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubquery_factoring_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubquery_factoring_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -188691,6 +194313,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSearch_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSearch_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -188872,6 +194500,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCycle_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCycle_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -188938,6 +194572,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubav_factoring_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubav_factoring_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -189003,6 +194643,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubav_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubav_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -189092,6 +194738,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHierarchies_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHierarchies_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -189171,6 +194823,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFilter_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilter_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -189245,6 +194903,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFilter_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFilter_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -189316,6 +194980,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_calcs_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_calcs_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -189392,6 +195062,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAdd_calc_meas_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAdd_calc_meas_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -189448,6 +195124,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubquery(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubquery(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -189511,6 +195193,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubquery_basic_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubquery_basic_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -189577,6 +195265,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubquery_operation_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubquery_operation_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -189692,6 +195386,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuery_block(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuery_block(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -189867,6 +195567,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSelected_list(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelected_list(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -189943,6 +195649,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFrom_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFrom_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -189995,6 +195707,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSelect_list_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelect_list_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -190073,6 +195791,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_ref_list(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_ref_list(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -190146,6 +195870,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_ref(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_ref(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -190231,6 +195961,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_ref_aux(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_ref_aux(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -190318,6 +196054,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_ref_aux_internal_one(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_ref_aux_internal_one(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 	public partial class Table_ref_aux_internal_threContext : Table_ref_aux_internalContext {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode ONLY() { return GetToken(PlSqlParser.ONLY, 0); }
@@ -190336,6 +196078,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_ref_aux_internal_thre(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_ref_aux_internal_thre(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 	public partial class Table_ref_aux_internal_twoContext : Table_ref_aux_internalContext {
@@ -190366,6 +196114,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_ref_aux_internal_two(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_ref_aux_internal_two(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -190516,6 +196270,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJoin_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJoin_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -190678,6 +196438,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJoin_on_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJoin_on_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -190724,6 +196490,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJoin_using_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJoin_using_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -190769,6 +196541,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOuter_join_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOuter_join_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -190837,6 +196615,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuery_partition_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuery_partition_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -190934,6 +196718,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFlashback_query_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFlashback_query_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -191090,6 +196880,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPivot_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPivot_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -191191,6 +196987,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPivot_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPivot_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -191268,6 +197070,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPivot_for_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPivot_for_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -193599,6 +199407,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPivot_in_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPivot_in_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -193704,6 +199518,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPivot_in_clause_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPivot_in_clause_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -193762,6 +199582,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPivot_in_clause_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPivot_in_clause_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -193848,6 +199674,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnpivot_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnpivot_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -196210,6 +202042,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnpivot_in_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnpivot_in_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -196291,6 +202129,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnpivot_in_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnpivot_in_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -198672,6 +204516,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHierarchical_query_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHierarchical_query_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -198772,6 +204622,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStart_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStart_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -198830,6 +204686,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGroup_by_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGroup_by_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -198960,6 +204822,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGroup_by_elements(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGroup_by_elements(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -199033,6 +204901,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRollup_cube_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRollup_cube_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -199118,6 +204992,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGrouping_sets_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGrouping_sets_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -199193,6 +205073,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGrouping_sets_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGrouping_sets_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -199270,6 +205156,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitHaving_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitHaving_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -199330,6 +205222,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -199418,6 +205316,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCell_reference_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCell_reference_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -199509,6 +205413,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReturn_rows_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReturn_rows_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -199579,6 +205489,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReference_model(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReference_model(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -199663,6 +205579,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMain_model(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMain_model(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -199744,6 +205666,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_column_clauses(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_column_clauses(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -199808,6 +205736,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_column_partition_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_column_partition_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -199863,6 +205797,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_column_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_column_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -199933,6 +205873,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_column(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_column(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -200013,6 +205959,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_rules_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_rules_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -200102,6 +206054,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_rules_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_rules_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -200219,6 +206177,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_rules_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_rules_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -200303,6 +206267,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCell_assignment(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCell_assignment(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -200351,6 +206321,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_iterate_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_iterate_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -200415,6 +206391,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUntil_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUntil_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -200473,6 +206455,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOrder_by_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOrder_by_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -200555,6 +206543,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOrder_by_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOrder_by_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -200639,6 +206633,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOffset_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOffset_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -200702,6 +206702,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFetch_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFetch_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -200810,6 +206816,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFor_update_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFor_update_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -200877,6 +206889,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFor_update_of_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFor_update_of_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -200925,6 +206943,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFor_update_options(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFor_update_options(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -201007,6 +207031,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -201104,6 +207134,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUpdate_set_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUpdate_set_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -201199,6 +207235,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_based_update_set_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_based_update_set_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -203529,6 +209571,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDelete_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDelete_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -203619,6 +209667,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInsert_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInsert_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -203693,6 +209747,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSingle_table_insert(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSingle_table_insert(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -203788,6 +209848,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMulti_table_insert(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMulti_table_insert(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -203868,6 +209934,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMulti_table_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMulti_table_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -203939,6 +210011,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConditional_insert_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConditional_insert_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -204031,6 +210109,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConditional_insert_when_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConditional_insert_when_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -204097,6 +210181,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConditional_insert_else_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConditional_insert_else_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -204159,6 +210249,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInsert_into_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInsert_into_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -204232,6 +210328,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitValues_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValues_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -204322,6 +210424,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -204447,6 +210555,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_update_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_update_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -204541,6 +210655,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -204588,6 +210708,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_update_delete_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_update_delete_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -204644,6 +210770,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMerge_insert_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMerge_insert_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -204729,6 +210861,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSelected_tableview(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSelected_tableview(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -204834,6 +210972,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLock_table_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLock_table_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -204916,6 +211060,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWait_nowait_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWait_nowait_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -204979,6 +211129,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLock_table_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLock_table_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205033,6 +211189,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLock_mode(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLock_mode(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -205136,6 +211298,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGeneral_table_ref(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGeneral_table_ref(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205214,6 +211382,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStatic_returning_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStatic_returning_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205276,6 +211450,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitError_logging_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitError_logging_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -205354,6 +211534,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitError_logging_into_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitError_logging_into_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205401,6 +211587,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitError_logging_reject_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitError_logging_reject_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -205493,6 +211685,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDml_table_expression_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDml_table_expression_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -205665,6 +211863,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_collection_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_collection_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205756,6 +211960,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSubquery_restriction_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSubquery_restriction_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205845,6 +212055,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSample_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSample_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205930,6 +212146,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSeed_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSeed_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -205984,6 +212206,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCondition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCondition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -206054,6 +212282,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExpressions_(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExpressions_(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -206119,6 +212353,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitExpression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExpression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -206178,6 +212418,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCursor_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCursor_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -206234,6 +212480,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLogical_expression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLogical_expression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -206337,6 +212589,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnary_logical_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnary_logical_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -206401,6 +212659,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnary_logical_operation(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnary_logical_operation(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -206487,6 +212751,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLogical_operation(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLogical_operation(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -206696,6 +212966,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMultiset_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMultiset_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -206857,6 +213133,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRelational_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRelational_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -206984,6 +213266,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCompound_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCompound_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -207101,6 +213389,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRelational_operator(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRelational_operator(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -207238,6 +213532,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIn_elements(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIn_elements(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -207344,6 +213644,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBetween_elements(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBetween_elements(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -207422,6 +213728,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConcatenation(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConcatenation(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -207651,6 +213963,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInterval_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInterval_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -207765,6 +214083,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -207841,6 +214165,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitModel_expression_element(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitModel_expression_element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -207988,6 +214318,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSingle_column_for_loop(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSingle_column_for_loop(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -208113,6 +214449,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMulti_column_for_loop(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMulti_column_for_loop(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -208227,6 +214569,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUnary_expression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUnary_expression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -208448,6 +214796,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitImplicit_cursor_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImplicit_cursor_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -208566,6 +214920,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCollection_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCollection_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -208634,6 +214994,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCase_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCase_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -208711,6 +215077,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSimple_case_statement(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSimple_case_statement(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -208832,6 +215204,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSearched_case_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSearched_case_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -208937,6 +215315,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCase_when_part_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCase_when_part_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -208987,6 +215371,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCase_else_part_statement(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCase_else_part_statement(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -209034,6 +215424,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCase_expression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCase_expression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -209105,6 +215501,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSimple_case_expression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSimple_case_expression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -209200,6 +215602,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSearched_case_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSearched_case_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -209285,6 +215693,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCase_when_part_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCase_when_part_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -209334,6 +215748,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCase_else_part_expression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCase_else_part_expression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -209405,6 +215825,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAtom(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAtom(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -209541,6 +215967,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuantified_expression(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuantified_expression(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -209675,6 +216107,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitString_function(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitString_function(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -209988,6 +216426,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStandard_function(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStandard_function(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -210172,6 +216616,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_function(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_function(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -210849,6 +217299,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_object_content(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_object_content(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -210978,6 +217434,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_object_entry(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_object_entry(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -211114,6 +217576,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_table_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_table_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -211248,6 +217716,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_array_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_array_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -211339,6 +217813,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_on_null_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_on_null_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -211399,6 +217879,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_return_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_return_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -211529,6 +218015,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_transform_op(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_transform_op(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -211925,6 +218417,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_column_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_column_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -212020,6 +218518,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_column_definition(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_column_definition(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -212245,6 +218749,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_query_returning_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_query_returning_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -212323,6 +218833,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_query_return_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_query_return_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -212423,6 +218939,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_query_wrapper_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_query_wrapper_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -212534,6 +219056,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_query_on_error_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_query_on_error_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -212623,6 +219151,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_query_on_empty_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_query_on_empty_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -212707,6 +219241,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_value_return_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_value_return_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -212793,6 +219333,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_value_return_type(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_value_return_type(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -212990,6 +219536,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitJson_value_on_mismatch_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitJson_value_on_mismatch_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -213089,6 +219641,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLiteral(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLiteral(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -213181,6 +219739,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNumeric_function_wrapper(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNumeric_function_wrapper(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -213270,6 +219834,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNumeric_function(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNumeric_function(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -213638,6 +220208,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitListagg_overflow_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitListagg_overflow_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -213940,6 +220516,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOther_function(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOther_function(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -215366,6 +221948,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOver_clause_keyword(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOver_clause_keyword(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -215420,6 +222008,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWithin_or_over_clause_keyword(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWithin_or_over_clause_keyword(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -215473,6 +222067,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStandard_prediction_function_keyword(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStandard_prediction_function_keyword(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -215549,6 +222149,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOver_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOver_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -215678,6 +222284,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWindowing_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWindowing_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -215742,6 +222354,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWindowing_type(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWindowing_type(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -215797,6 +222415,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWindowing_elements(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWindowing_elements(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -215884,6 +222508,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsing_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsing_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -215967,6 +222597,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUsing_element(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUsing_element(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -216047,6 +222683,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAssignable_element(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAssignable_element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -218369,6 +225011,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCollect_order_by_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCollect_order_by_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -218439,6 +225087,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWithin_or_over_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWithin_or_over_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -218521,6 +225175,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitString_delimiter(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitString_delimiter(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -218654,6 +225314,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCost_matrix_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCost_matrix_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -218778,6 +225444,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_passing_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_passing_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -218885,6 +225557,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_attributes_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_attributes_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -219005,6 +225683,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_namespaces_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_namespaces_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -219104,6 +225788,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_table_column(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_table_column(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -221445,6 +228135,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_general_default_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_general_default_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -221497,6 +228193,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_multiuse_expression_element(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_multiuse_expression_element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -221579,6 +228281,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmlroot_param_version_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmlroot_param_version_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -221640,6 +228348,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmlroot_param_standalone_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmlroot_param_standalone_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -221714,6 +228428,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmlserialize_param_enconding_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmlserialize_param_enconding_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -221759,6 +228479,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmlserialize_param_version_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmlserialize_param_version_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -221808,6 +228534,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmlserialize_param_ident_part(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmlserialize_param_ident_part(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -221887,6 +228619,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAnnotations_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAnnotations_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -221952,6 +228690,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAnnotations_list(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAnnotations_list(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -222072,6 +228816,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAnnotation(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAnnotation(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -222142,6 +228892,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSql_plus_command(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSql_plus_command(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -222258,6 +229014,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitStart_command(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStart_command(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -222328,6 +229090,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWhenever_command(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWhenever_command(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -222484,6 +229252,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSet_command(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSet_command(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -222616,6 +229390,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTiming_command(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTiming_command(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -222701,6 +229481,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitClear_command(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitClear_command(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -222777,6 +229563,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPartition_extension_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPartition_extension_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -222856,6 +229648,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_alias(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_alias(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -225196,6 +231994,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_alias(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_alias(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -227513,6 +234317,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitWhere_clause(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitWhere_clause(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -227591,6 +234401,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInto_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInto_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -232212,6 +239028,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXml_column_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXml_column_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -234523,6 +241345,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCost_class_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCost_class_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -234565,6 +241393,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAttribute_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAttribute_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -234609,6 +241443,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSavepoint_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSavepoint_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -234652,6 +241492,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRollback_segment_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRollback_segment_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -234694,6 +241540,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSchema_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSchema_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -234751,6 +241603,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRoutine_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRoutine_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -234827,6 +241685,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPackage_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPackage_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -234873,6 +241737,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitImplementation_type_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImplementation_type_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -234930,6 +241800,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParameter_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParameter_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -234973,6 +241849,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitReference_model_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitReference_model_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -235015,6 +241897,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitMain_model_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitMain_model_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -235062,6 +241950,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitContainer_tableview_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitContainer_tableview_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -235129,6 +242023,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitAggregate_function_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAggregate_function_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -235189,6 +242089,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuery_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuery_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -235234,6 +242140,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGrantee_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGrantee_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -235289,6 +242201,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRole_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRole_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -237613,6 +244531,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConstraint_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstraint_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -237685,6 +244609,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLabel_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLabel_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -237734,6 +244664,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -237803,6 +244739,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSequence_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSequence_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -237874,6 +244816,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitException_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitException_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -237938,6 +244886,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunction_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunction_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -237998,6 +244952,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitProcedure_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitProcedure_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -238057,6 +245017,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTrigger_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTrigger_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -238124,6 +245090,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitVariable_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariable_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -240465,6 +247437,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIndex_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIndex_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -240522,6 +247500,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitCursor_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCursor_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -242837,6 +249821,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRecord_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRecord_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -245163,6 +252153,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLink_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLink_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -245237,6 +252233,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitLocal_link_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitLocal_link_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -245279,6 +252281,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConnection_qualifier(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConnection_qualifier(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -245332,6 +252340,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -245411,6 +252425,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTableview_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTableview_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -245532,6 +252552,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitXmltable(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitXmltable(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -245651,6 +252677,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitChar_set_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitChar_set_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -245713,6 +252745,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSynonym_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSynonym_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -245755,6 +252793,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSchema_object_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSchema_object_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -245799,6 +252843,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDir_object_name(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDir_object_name(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -245841,6 +252891,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitUser_object_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitUser_object_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -245911,6 +252967,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGrant_object_name(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGrant_object_name(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -246054,6 +253116,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitColumn_list(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitColumn_list(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -246116,6 +253184,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitParen_column_list(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParen_column_list(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -246174,6 +253248,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitKeep_clause(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitKeep_clause(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -246274,6 +253354,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunction_argument(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunction_argument(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -246373,6 +253459,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunction_argument_analytic(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunction_argument_analytic(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -246512,6 +253604,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitFunction_argument_modeling(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunction_argument_modeling(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -246693,6 +253791,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRespect_or_ignore_nulls(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRespect_or_ignore_nulls(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -246750,6 +253854,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitArgument(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitArgument(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -246813,6 +253923,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitType_spec(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitType_spec(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -246929,6 +254045,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitDatatype(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDatatype(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -247148,6 +254270,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitPrecision_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitPrecision_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -247313,6 +254441,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNative_datatype_element(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNative_datatype_element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -247800,6 +254934,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitBind_variable(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBind_variable(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -247930,6 +255070,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGeneral_element(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGeneral_element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -250313,6 +257459,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitGeneral_element_part(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitGeneral_element_part(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -250408,6 +257560,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitTable_element(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTable_element(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -250507,6 +257665,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitObject_privilege(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitObject_privilege(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -250850,6 +258014,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitSystem_privilege(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSystem_privilege(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -252436,6 +259606,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitConstant(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstant(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -255037,6 +262213,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNumeric(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNumeric(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -255106,6 +262288,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNumeric_negative(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNumeric_negative(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -255149,6 +262337,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitQuoted_string(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitQuoted_string(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -255204,6 +262398,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitIdentifier(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitIdentifier(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -255261,6 +262461,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitId_expression(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitId_expression(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -257568,6 +264774,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitInquiry_directive(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitInquiry_directive(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -257610,6 +264822,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitOuter_join_sign(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOuter_join_sign(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -257779,6 +264997,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitRegular_id(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitRegular_id(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -258654,6 +265878,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNon_reserved_keywords_in_18c(this);
 		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNon_reserved_keywords_in_18c(this);
+			else return visitor.VisitChildren(this);
+		}
 	}
 
 	[RuleVersion(0)]
@@ -259087,6 +266317,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNon_reserved_keywords_in_12c(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNon_reserved_keywords_in_12c(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 
@@ -260890,6 +268126,12 @@ public partial class PlSqlParser : PlSqlParserBase {
 		public override void ExitRule(IParseTreeListener listener) {
 			IPlSqlParserListener typedListener = listener as IPlSqlParserListener;
 			if (typedListener != null) typedListener.ExitNon_reserved_keywords_pre12c(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPlSqlParserVisitor<TResult> typedVisitor = visitor as IPlSqlParserVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNon_reserved_keywords_pre12c(this);
+			else return visitor.VisitChildren(this);
 		}
 	}
 

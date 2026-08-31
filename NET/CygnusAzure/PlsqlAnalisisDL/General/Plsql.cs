@@ -46,6 +46,8 @@ namespace PlsqlAnalisisDL.General
 
             var tree = parser.sql_script();
 
+            Console.WriteLine(tree.ToStringTree(parser));
+
             foreach (var dep in errorListener.InstruccionList)
             {
                 Console.WriteLine(
@@ -85,6 +87,18 @@ namespace PlsqlAnalisisDL.General
                     $"{dep.Token}:{dep.NombreObjeto} -> {dep.Valor}");
 
                 instruccionesPL.Add(dep);
+            }
+
+            var listenerRollback = new RollbackVisitor();
+
+            // Ejecutar recorrido
+            listenerRollback.Visit(tree);
+
+            // Resultado
+            foreach (var op in listenerRollback.Operations)
+            {
+                Console.WriteLine(
+                    $"{op.Operacion} - {op.Objeto} - {op.Metadata["Action"]} - {op.Metadata["Column"]} - {op.Metadata["Type"]}");
             }
 
             return instruccionesPL;
@@ -911,6 +925,79 @@ namespace PlsqlAnalisisDL.General
                 Valor = $"Línea {line}:{charPositionInLine} -> {msg}"
             });
         }
+    }
+
+    public class RollbackVisitor: PlSqlParserBaseVisitor<object>
+    {
+        private readonly CommonTokenStream _tokens;
+        public List<DdlOperation> Operations { get; } = new List<DdlOperation>();
+
+        public override object VisitAlter_table(PlSqlParser.Alter_tableContext context)
+        {
+            string tabla = context.tableview_name().GetText();
+
+            var addClauses =
+                context.column_clauses()
+                       ?.add_modify_drop_column_clauses()
+                       ?.add_column_clause();
+
+            if (addClauses != null)
+            {
+                foreach (var addClause in addClauses)
+                {
+                    foreach (var column in addClause.column_definition())
+                    {
+                        var op = new DdlOperation();
+
+                        op.Operacion = "ALTER";
+                        op.Objeto = "TABLE";
+                        op.NombreObjeto = tabla;
+
+                        op.Metadata["Action"] = "ADD_COLUMN";
+                        op.Metadata["Column"] =
+                            column.column_name().GetText();
+
+                        op.Metadata["Type"] =
+                            column.datatype().GetText();
+
+                        Operations.Add(op);
+                    }
+                }
+            }
+
+            return base.VisitAlter_table(context);
+        }
+        public override object VisitCreate_index( PlSqlParser.Create_indexContext context)
+        {
+            var operation = new DdlOperation
+            {
+                Operacion = "CREATE",
+                Objeto = "INDEX",
+                NombreObjeto =
+                    context.index_name().GetText()
+            };
+
+            Operations.Add(operation);
+
+            return null;
+        }
+
+        /*public override object VisitChildren(IRuleNode node)
+        {
+            Console.WriteLine(node.GetType().Name);
+            return base.VisitChildren(node);
+        }*/
+    }
+
+    public class DdlOperation
+    {
+        public string Operacion { get; set; }
+
+        public string Objeto { get; set; }
+
+        public string NombreObjeto { get; set; }
+
+        public Dictionary<string, string> Metadata { get; set; }= new Dictionary<string, string>();
     }
 
     /*public override void EnterGeneral_element(

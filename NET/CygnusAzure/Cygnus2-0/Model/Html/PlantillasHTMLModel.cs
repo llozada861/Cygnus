@@ -13,17 +13,18 @@ namespace Cygnus2_0.Model.Html
     [Table(name: "html")]
     public class PlantillasHTMLModel
     {
-        [Column(name: "name")]
+        [Column(name: "name", Order = 0)]
         [Key]
         public string Nombre { get; set; }
+        [Column(name: "company", Order = 1)]
+        [Key]
+        public int? Empresa { get; set; }
 
         [Column(name: "documentation")]
         public string Documentacion { get; set; }
         [Column(name: "filename")]
         public string NombreArchivo { get; set; }
 
-        [Column(name: "company")]
-        public int? Empresa { get; set; }
         [Column(name: "tipo")]
         public int? Tipo { get; set; }
 

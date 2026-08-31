@@ -2304,4 +2304,42 @@ END;
   <data name="KEY_DEPENDENCIAS" xml:space="preserve">
     <value>PLANTILLA_DEPS</value>
   </data>
+  <data name="PLANTILLA_COMPILA" xml:space="preserve">
+    <value>DECLARE
+
+    v_sql  VARCHAR2(200);
+BEGIN
+    FOR cur IN (SELECT OBJECT_TYPE, OWNER, OBJECT_NAME
+                FROM  all_objects,
+                      (select 1 Ord, 'TYPE' Tipo         from dual UNION
+                       select 2,     'TRIGGER'           from dual UNION
+                       select 3,     'VIEW'              from dual UNION
+                       select 4,     'PROCEDURE'         from dual UNION
+                       select 5,     'FUNCTION'          from dual UNION
+                       select 6,     'MATERIALIZED VIEW' from dual UNION
+                       select 7,     'PACKAGE'           from dual UNION
+                       select 8,     'PACKAGE BODY'      from dual UNION
+                       select 9,     'SYNONYM'      from dual) Orden_Obj
+                WHERE STATUS = 'INVALID' 
+                  AND OBJECT_TYPE = Orden_Obj.Tipo
+                  AND OWNER in ('FLEX_CUSTOMIZACION', 'FLEX','OPENSIRIUS' )
+                  ORDER BY Orden_Obj.Ord, OBJECT_NAME
+               )                
+    LOOP
+        v_sql := 'alter '||cur.OBJECT_TYPE||' '||cur.OWNER||'.'||cur.OBJECT_NAME||' compile';
+        IF (cur.OBJECT_TYPE like 'PACKAGE BODY') THEN
+            v_sql := 'alter PACKAGE '||cur.OWNER||'.'||cur.OBJECT_NAME||' compile body';
+        END IF;
+        BEGIN
+           dbms_output.put_line(v_sql);
+           EXECUTE IMMEDIATE v_sql;
+        EXCEPTION
+            WHEN OTHERS THEN
+               dbms_output.put_line(SUBSTR(SQLERRM, 1, 200));
+               null;
+        END;  
+    END LOOP;
+END;
+/</value>
+  </data>
 </root>

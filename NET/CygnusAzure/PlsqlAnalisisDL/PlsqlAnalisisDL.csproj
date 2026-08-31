@@ -63,7 +63,9 @@
     <Compile Include="PlsqlClass\PlSqlParser.cs" />
     <Compile Include="PlsqlClass\PlSqlParserBase.cs" />
     <Compile Include="PlsqlClass\PlSqlParserBaseListener.cs" />
+    <Compile Include="PlsqlClass\PlSqlParserBaseVisitor.cs" />
     <Compile Include="PlsqlClass\PlSqlParserListener.cs" />
+    <Compile Include="PlsqlClass\PlSqlParserVisitor.cs" />
     <Compile Include="UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
       <SubType>Code</SubType>

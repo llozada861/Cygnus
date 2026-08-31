@@ -372,7 +372,7 @@ namespace Cygnus2_0.General
         public ObservableCollection<AzureModel> ListaAzure { get; set; }
         public AzureModel Azure { set; get; }
         public void MensajeError(string mensaje)
-        {
+        {            
             try
             {
                 ModernDialog.ShowMessage(mensaje, "Error", System.Windows.MessageBoxButton.OKCancel);
@@ -410,44 +410,51 @@ namespace Cygnus2_0.General
             archivo.ListaErrores = new List<InstruccionPL>();
             archivo.ListaDocumentacionPkg = new List<InstruccionPL>();
 
-            List<PlsqlAnalisisDL.General.InstruccionPL> analisisPL = PlsqlAnalisisDL.General.Plsql.AnalizarPL(archivo.RutaConArchivo);
-
-            foreach (PlsqlAnalisisDL.General.InstruccionPL item in analisisPL.Where(x => x.Token == "TIPO"))
+            try
             {
-                TipoObjetos tipo = ListaTiposObjetos.Where(x=>x.Descripcion == item.Valor).FirstOrDefault();
+                List<PlsqlAnalisisDL.General.InstruccionPL> analisisPL = PlsqlAnalisisDL.General.Plsql.AnalizarPL(archivo.RutaConArchivo);
 
-                if (tipo != null)
+                foreach (PlsqlAnalisisDL.General.InstruccionPL item in analisisPL.Where(x => x.Token == "TIPO"))
                 {
-                    if(item.NombreObjeto != null)
-                        archivo.NombreObjeto = item.NombreObjeto.ToLower();
+                    TipoObjetos tipo = ListaTiposObjetos.Where(x=>x.Descripcion == item.Valor).FirstOrDefault();
 
-                    tiposArchivo.Add(tipo);
+                    if (tipo != null)
+                    {
+                        if(item.NombreObjeto != null)
+                            archivo.NombreObjeto = item.NombreObjeto.ToLower();
+
+                        tiposArchivo.Add(tipo);
+                    }
+
+                    if(tipo != null && (tipo.Descripcion == "PAQUETE" || tipo.Descripcion == "PROCEDIMIENTO" || tipo.Descripcion == "FUNCION" || tipo.Descripcion == "TRIGGER"))
+                    {
+                        break;
+                    }
+
+                }            
+
+                if (tiposArchivo.Count > 0)
+                {
+                    var listaOrdenada = tiposArchivo.OrderBy(x => x.Prioridad).ToList();
+
+                    foreach (var tipoOrd in listaOrdenada)
+                    {
+                        archivo.Tipo = tipoOrd.Codigo;
+                        archivo.SelectItemTipo = ListaTiposObjetos.FirstOrDefault(x => x.Codigo == tipoOrd.Codigo);
+                    }                
+
+                    archivo.ListaTipos = ListaTiposObjetos;
+                    archivo.ListDocumentacionOut = analisisPL.Where(x => x.Token == "COMMENT_OUT").ToList();
+                    archivo.ListDocumentacionIn = analisisPL.Where(x => x.Token == "COMMENT_IN").ToList();
+                    archivo.ListaDocumentacionPkg = analisisPL.Where(x => x.Token == "COMMENT_PKG").ToList();
                 }
 
-                if(tipo != null && (tipo.Descripcion == "PAQUETE" || tipo.Descripcion == "PROCEDIMIENTO" || tipo.Descripcion == "FUNCION" || tipo.Descripcion == "TRIGGER"))
-                {
-                    break;
-                }
-
+                //archivo.ListaErrores = analisisPL.Where(x => x.Token == "ERROR").ToList();
             }
-
-            if (tiposArchivo.Count > 0)
+            catch (Exception ex)
             {
-                var listaOrdenada = tiposArchivo.OrderBy(x => x.Prioridad).ToList();
-
-                foreach (var tipoOrd in listaOrdenada)
-                {
-                    archivo.Tipo = tipoOrd.Codigo;
-                    archivo.SelectItemTipo = ListaTiposObjetos.FirstOrDefault(x => x.Codigo == tipoOrd.Codigo);
-                }                
-
-                archivo.ListaTipos = ListaTiposObjetos;
-                archivo.ListDocumentacionOut = analisisPL.Where(x => x.Token == "COMMENT_OUT").ToList();
-                archivo.ListDocumentacionIn = analisisPL.Where(x => x.Token == "COMMENT_IN").ToList();
-                archivo.ListaDocumentacionPkg = analisisPL.Where(x => x.Token == "COMMENT_PKG").ToList();
+                //this.MensajeConfirmacion("Se presentó el si");
             }
-
-            archivo.ListaErrores = analisisPL.Where(x => x.Token == "ERROR").ToList();
         }
 
         internal string pObtUsuarioTipo(int? tipo)

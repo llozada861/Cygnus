@@ -2360,6 +2360,26 @@ namespace Cygnus2_0.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a DECLARE
+        ///
+        ///    v_sql  VARCHAR2(200);
+        ///BEGIN
+        ///    FOR cur IN (SELECT OBJECT_TYPE, OWNER, OBJECT_NAME
+        ///                FROM  all_objects,
+        ///                      (select 1 Ord, &apos;TYPE&apos; Tipo         from dual UNION
+        ///                       select 2,     &apos;TRIGGER&apos;           from dual UNION
+        ///                       select 3,     &apos;VIEW&apos;              from dual UNION
+        ///                       select 4,     &apos;PROCEDURE&apos;         from dual UNION
+        ///                       select 5,     &apos;FUNCTION&apos;          from dual UNION
+        ///      [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string PLANTILLA_COMPILA {
+            get {
+                return ResourceManager.GetString("PLANTILLA_COMPILA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a PLANTILLA_XSL.
         /// </summary>
         public static string PLANTILLA_XSL {

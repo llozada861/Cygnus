@@ -93,7 +93,7 @@ namespace Cygnus2_0.ViewModel.Aplica
                         Noselec = true;
                     }
 
-                    if(archivo.ListaErrores != null)
+                    if (archivo.ListaErrores != null)
                     {
                         foreach (var item in archivo.ListaErrores)
                         {
@@ -834,9 +834,14 @@ namespace Cygnus2_0.ViewModel.Aplica
             string nombre = handler.ConfGeneralView.Model.Empresa.PrefijoAplica+"_"+res.NombreAplicaDatos + res.ExtensionSQL;
             StringBuilder objetosApl = new StringBuilder();
             StringBuilder body = new StringBuilder();
+            string nombreCompila = this.Model.Codigo + "_compila.sql";
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.FileName = nombre;
+
+            SaveFileDialog saveFileDialogComp = new SaveFileDialog();
+            saveFileDialogComp.FileName = nombreCompila;
+
 
             foreach (Archivo item in this.Model.ListaAplicaHistoria.OrderBy(x=>x.Index))
             {
@@ -844,6 +849,11 @@ namespace Cygnus2_0.ViewModel.Aplica
                 objetosApl.Replace(res.TagObjetoAplica, "/" + item.FileName);
                 objetosApl.AppendLine();
             }
+
+            //Agrega el archivo de compilación
+            objetosApl.AppendLine(res.CuerpoAplica);
+            objetosApl.Replace(res.TagObjetoAplica, "/" + this.Model.Codigo+"_compila.sql");
+            objetosApl.AppendLine();
 
             StringBuilder encabezado = new StringBuilder();
             encabezado.Append(res.EncabezadoAplicaGenDatos);
@@ -855,7 +865,14 @@ namespace Cygnus2_0.ViewModel.Aplica
             body.Append(res.FinAplicaGenDatos);
 
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
                 File.WriteAllText(saveFileDialog.FileName, body.ToString(), Encoding.Default);
+            }
+
+            if (saveFileDialogComp.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialogComp.FileName, res.PLANTILLA_COMPILA, Encoding.Default);
+            }
 
             Archivo archivoGrant = new Archivo
             {
