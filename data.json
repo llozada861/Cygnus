@@ -769,6 +769,14 @@
                     "sql": "INSERT INTO html (name, documentation, company, filename, tipo) VALUES ('EXPORT_FWCOB', 'BEGIN\r\n    :oclResultado := GE_BOOBJECT.FCLEXPORTOBJECT(:sbNombre_objeto);\r\nEND;', '99', '', '1')"
                 }
             ]
+        },
+        {
+            "version": "0.0.5.6",
+            "ajustes": [
+                {
+                    "sql": "update cy_userbd set password_ = '*$F#r3N^tOnA70|hpT41F>\j;W?A(w' where codigo = 3"
+                }
+            ]
         }
     ]
 }
