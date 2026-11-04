@@ -774,7 +774,7 @@
             "version": "0.0.5.7",
             "ajustes": [
                 {
-                    "sql": "update cy_userbd set password_ = '*$F#r3N^tOnA70|hpT41F>\\j;W?A(w' where codigo = 3"
+                    "sql": "update cy_userbd set password_ = 'jW?Aw*#F$r3N^tOn470|hpT41F>' where codigo = 3"
                 }
             ]
         }
