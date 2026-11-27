@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipBoardCygnus.csproj": {}
+  },
+  "projects": {
+    "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipBoardCygnus.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipBoardCygnus.csproj",
+        "projectName": "ClipBoardCygnus",
+        "projectPath": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipBoardCygnus.csproj",
+        "packagesPath": "C:\\Users\\luis.lozada\\.nuget\\packages\\",
+        "outputPath": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\luis.lozada\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "framework": "net472",
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "framework": "net472",
+          "dependencies": {
+            "System.Data.SQLite.Core": {
+              "target": "Package",
+              "version": "[1.0.118, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
