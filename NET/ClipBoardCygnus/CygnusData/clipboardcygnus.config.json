@@ -1,0 +1,22 @@
+{
+  "portableMode": true,
+  "dataDirectory": ".\\CygnusData\\ClipBoardCygnus.db",
+  "startWithWindows": true,
+  "startMinimized": true,
+  "globalHotkey": "Ctrl + <",
+  "maxHistoryItems": 1000,
+  "retentionDays": 30,
+  "deduplicateCopies": true,
+  "ignorePasswordManagers": true,
+  "popupWidth": 462,
+  "popupHeight": 482,
+  "maxSyncFileMb": 5,
+  "syncEnabled": true,
+  "syncRoomCode": "CLIPBOARDCYGNUS-01",
+  "deviceName": "PC-Windows",
+  "syncTypes": {
+    "text": true,
+    "image": true,
+    "file": true
+  }
+}

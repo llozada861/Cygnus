@@ -1,0 +1,307 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7F633881-E363-4C4B-A776-A589D891BCB3}|PlsqlAnalisisDL\\PlsqlAnalisisDL.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\plsqlanalisisdl\\plsqlclass\\plsqlparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F633881-E363-4C4B-A776-A589D891BCB3}|PlsqlAnalisisDL\\PlsqlAnalisisDL.csproj|solutionrelative:plsqlanalisisdl\\plsqlclass\\plsqlparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\cygnus2-0\\pages\\home.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|solutionrelative:cygnus2-0\\pages\\home.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F633881-E363-4C4B-A776-A589D891BCB3}|PlsqlAnalisisDL\\PlsqlAnalisisDL.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\plsqlanalisisdl\\general\\plsql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F633881-E363-4C4B-A776-A589D891BCB3}|PlsqlAnalisisDL\\PlsqlAnalisisDL.csproj|solutionrelative:plsqlanalisisdl\\general\\plsql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\clipboardcygnus\\clipboardpopupform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|d:\\dirtrab\\repositorios\\cygnus\\net\\clipboardcygnus\\sqlitestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|d:\\dirtrab\\repositorios\\cygnus\\net\\clipboardcygnus\\clipboardmonitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|d:\\dirtrab\\repositorios\\cygnus\\net\\clipboardcygnus\\clipboardmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\clipboardcygnus\\clipboardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|d:\\dirtrab\\repositorios\\cygnus\\net\\clipboardcygnus\\windowsstartupservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\clipboardcygnus\\mainsettingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\clipboardcygnus\\mainsettingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\clipboardcygnus\\clipboardpopupform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A4D2F10-4E21-4B68-9A1F-77C0DE204722}|..\\ClipBoardCygnus\\ClipBoardCygnus.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\clipboardcygnus\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\cygnus2-0\\dao\\sqlitedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|solutionrelative:cygnus2-0\\dao\\sqlitedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\cygnus2-0\\viewmodel\\aplica\\generateaplicaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|solutionrelative:cygnus2-0\\viewmodel\\aplica\\generateaplicaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\cygnus2-0\\pages\\aplica\\ucgenerateaplica.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|solutionrelative:cygnus2-0\\pages\\aplica\\ucgenerateaplica.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\cygnus2-0\\pages\\aplica\\ucgenerateaplica.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{85C50BA1-895F-4159-8207-6EF6757028F4}|Cygnus2-0\\Cygnus2_0.csproj|solutionrelative:cygnus2-0\\pages\\aplica\\ucgenerateaplica.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\UpdaterDropBox\\UpdaterDB.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlSqlParser.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\PlsqlAnalisisDL\\PlsqlClass\\PlSqlParser.cs",
+              "RelativeDocumentMoniker": "PlsqlAnalisisDL\\PlsqlClass\\PlSqlParser.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\PlsqlAnalisisDL\\PlsqlClass\\PlSqlParser.cs",
+              "RelativeToolTip": "PlsqlAnalisisDL\\PlsqlClass\\PlSqlParser.cs",
+              "ViewState": "AgIAAAgJAAAAAAAAAADwvycJAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-25T13:10:29.385Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Plsql.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\PlsqlAnalisisDL\\General\\Plsql.cs",
+              "RelativeDocumentMoniker": "PlsqlAnalisisDL\\General\\Plsql.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\PlsqlAnalisisDL\\General\\Plsql.cs",
+              "RelativeToolTip": "PlsqlAnalisisDL\\General\\Plsql.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAawGUAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-25T12:48:11.484Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClipboardModels.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardModels.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\ClipboardModels.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardModels.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\ClipboardModels.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAlwBkAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-25T04:27:58.764Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClipboardPopupForm.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardPopupForm.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\ClipboardPopupForm.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardPopupForm.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\ClipboardPopupForm.cs",
+              "ViewState": "AgIAAOoEAAAAAAAAAAAowP0EAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-24T23:53:27.774Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainSettingsForm.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\MainSettingsForm.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\MainSettingsForm.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\MainSettingsForm.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\MainSettingsForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-24T23:46:17.409Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\Program.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\Program.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\Program.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-24T23:45:34.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Home.xaml",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\Pages\\Home.xaml",
+              "RelativeDocumentMoniker": "Cygnus2-0\\Pages\\Home.xaml",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\Pages\\Home.xaml",
+              "RelativeToolTip": "Cygnus2-0\\Pages\\Home.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-11-24T23:44:16.606Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClipboardMonitor.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardMonitor.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\ClipboardMonitor.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardMonitor.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\ClipboardMonitor.cs",
+              "ViewState": "AgIAALMBAAAAAAAAAAAWwLsBAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-25T04:47:40.997Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MainSettingsForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\MainSettingsForm.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\MainSettingsForm.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\MainSettingsForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\MainSettingsForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-24T23:45:32.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SqliteStorageService.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\SqliteStorageService.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\SqliteStorageService.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\SqliteStorageService.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\SqliteStorageService.cs",
+              "ViewState": "AgIAAFwBAAAAAAAAAAAWwGQBAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-24T23:29:04.24Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ClipboardManager.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardManager.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\ClipboardManager.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardManager.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\ClipboardManager.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAIwCQAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-24T23:52:47.654Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "WindowsStartupService.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\WindowsStartupService.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\WindowsStartupService.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\WindowsStartupService.cs",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\WindowsStartupService.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-25T04:27:54.253Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "UpdaterDB.csproj",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\UpdaterDropBox\\UpdaterDB.csproj",
+              "RelativeDocumentMoniker": "..\\UpdaterDropBox\\UpdaterDB.csproj",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\UpdaterDropBox\\UpdaterDB.csproj",
+              "RelativeToolTip": "..\\UpdaterDropBox\\UpdaterDB.csproj",
+              "ViewState": "AgIAAJAAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-11-24T23:36:41.049Z",
+              "OwnerCaption": "%3"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ClipboardPopupForm.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardPopupForm.cs",
+              "RelativeDocumentMoniker": "..\\ClipBoardCygnus\\ClipboardPopupForm.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\ClipBoardCygnus\\ClipboardPopupForm.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\ClipBoardCygnus\\ClipboardPopupForm.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-24T23:52:53.963Z",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "SqliteDAO.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\DAO\\SqliteDAO.cs",
+              "RelativeDocumentMoniker": "Cygnus2-0\\DAO\\SqliteDAO.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\DAO\\SqliteDAO.cs",
+              "RelativeToolTip": "Cygnus2-0\\DAO\\SqliteDAO.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAiwFoBAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T11:38:38.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GenerateAplicaViewModel.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\ViewModel\\Aplica\\GenerateAplicaViewModel.cs",
+              "RelativeDocumentMoniker": "Cygnus2-0\\ViewModel\\Aplica\\GenerateAplicaViewModel.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\ViewModel\\Aplica\\GenerateAplicaViewModel.cs",
+              "RelativeToolTip": "Cygnus2-0\\ViewModel\\Aplica\\GenerateAplicaViewModel.cs",
+              "ViewState": "AgIAAFADAAAAAAAAAAAAAGQDAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T11:31:54.055Z",
+              "EditorCaption": "",
+              "OwnerCaption": "%2"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UCGenerateAplica.xaml.cs",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml.cs",
+              "RelativeDocumentMoniker": "Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml.cs",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml.cs",
+              "RelativeToolTip": "Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACsAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2026-08-31T11:31:48.799Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UCGenerateAplica.xaml",
+              "DocumentMoniker": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml",
+              "RelativeDocumentMoniker": "Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml",
+              "ToolTip": "D:\\Dirtrab\\Repositorios\\Cygnus\\NET\\CygnusAzure\\Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml",
+              "RelativeToolTip": "Cygnus2-0\\Pages\\Aplica\\UCGenerateAplica.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-08-31T11:31:40.566Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
