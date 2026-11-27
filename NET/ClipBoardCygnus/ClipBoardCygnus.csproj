@@ -52,10 +52,18 @@
     <Compile Include="ClipboardManager.cs" />
     <Compile Include="ClipboardModels.cs" />
     <Compile Include="ClipboardMonitor.cs" />
-    <Compile Include="ClipboardPopupForm.cs" />
-    <Compile Include="MainSettingsForm.cs" />
-    <Compile Include="TemplatesForm.cs" />
-    <Compile Include="TemplateUseForm.cs" />
+    <Compile Include="ClipboardPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TemplatesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TemplateUseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SqliteStorageService.cs" />
     <Compile Include="WindowsStartupService.cs" />
   </ItemGroup>

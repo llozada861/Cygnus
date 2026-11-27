@@ -12,6 +12,8 @@ namespace ClipBoardCygnus
         private static SqliteStorageService _storage;
         private static ClipboardMonitor _monitor;
         private static ClipboardPopupForm _popup;
+        private static TemplatesForm _templatesForm;
+        private static Icon _appIcon;
 
         public static SqliteStorageService Storage => _storage;
 
@@ -31,8 +33,8 @@ namespace ClipBoardCygnus
 
             _monitor = new ClipboardMonitor(_storage);
 
-            Icon icon = mainForm?.Icon ?? Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-            _popup = new ClipboardPopupForm(_storage, _monitor, icon);
+            _appIcon = mainForm?.Icon ?? Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            _popup = new ClipboardPopupForm(_storage, _monitor, _appIcon);
 
             _monitor.ClipCaptured += item => _popup.RefreshList();
             _monitor.HotkeyPressed += () => _popup.TogglePopup();
@@ -43,6 +45,19 @@ namespace ClipBoardCygnus
         public static void ShowPopup()
         {
             _popup?.TogglePopup();
+        }
+
+        public static void ShowPopupForTarget(Form targetForm)
+        {
+            if (_popup == null || _popup.IsDisposed) return;
+            IntPtr targetHwnd = (targetForm != null && !targetForm.IsDisposed) ? targetForm.Handle : IntPtr.Zero;
+            _popup.ShowPopupForTargetHandle(targetHwnd);
+        }
+
+        public static void TrackActiveOwnWindow(Form form)
+        {
+            if (_popup == null || _popup.IsDisposed || form == null || form.IsDisposed) return;
+            _popup.TrackOwnWindow(form.Handle);
         }
 
         public static void ShowSettingsWindow()
@@ -65,26 +80,35 @@ namespace ClipBoardCygnus
             }
         }
 
+        public static void HidePopup()
+        {
+            if (_popup != null && !_popup.IsDisposed)
+            {
+                _popup.HidePopup();
+            }
+        }
+
         public static void ShowTemplatesWindow()
         {
             if (_storage == null) return;
 
-            if (_popup != null && !_popup.IsDisposed && _popup.Visible)
+            HidePopup();
+
+            if (_templatesForm != null && !_templatesForm.IsDisposed)
             {
-                _popup.RunWithModalPause(() =>
-                {
-                    using (var form = new TemplatesForm(_storage))
-                    {
-                        form.ShowDialog(_popup);
-                    }
-                });
+                if (_templatesForm.WindowState == FormWindowState.Minimized)
+                    _templatesForm.WindowState = FormWindowState.Normal;
+                _templatesForm.Show();
+                _templatesForm.Activate();
+                _templatesForm.BringToFront();
                 return;
             }
 
-            using (var form = new TemplatesForm(_storage))
-            {
-                form.ShowDialog();
-            }
+            _templatesForm = new TemplatesForm(_storage, _appIcon);
+            _templatesForm.FormClosed += (s, e) => _templatesForm = null;
+            _templatesForm.Show();
+            _templatesForm.Activate();
+            _templatesForm.BringToFront();
         }
 
         public static void ApplyRenderedTemplate(string renderedCode, string templateName, bool pasteIntoExternalApp)
@@ -102,6 +126,12 @@ namespace ClipBoardCygnus
 
         public static void Shutdown()
         {
+            if (_templatesForm != null && !_templatesForm.IsDisposed)
+            {
+                _templatesForm.Close();
+                _templatesForm.Dispose();
+            }
+            _templatesForm = null;
             _monitor?.Dispose();
             _popup?.Dispose();
             _monitor = null;

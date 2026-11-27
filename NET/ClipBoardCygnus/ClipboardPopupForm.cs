@@ -70,6 +70,8 @@ namespace ClipBoardCygnus
         private List<ClipItem> _visibleItems = new List<ClipItem>();
         private IntPtr _previousForegroundWindow;
         private IntPtr _lastExternalWindow;
+        private IntPtr _lastPasteTargetWindow;
+        private IntPtr _lastOwnWindow;
         private Timer _boundsSaveTimer;
         private Timer _foregroundWatchTimer;
         private Timer _pasteTimer;
@@ -193,6 +195,11 @@ namespace ClipBoardCygnus
                 if (IsExternalAppWindow(fg))
                 {
                     _lastExternalWindow = fg;
+                    _lastPasteTargetWindow = fg;
+                }
+                else if (IsPasteTargetWindow(fg))
+                {
+                    _lastPasteTargetWindow = fg;
                 }
             };
             _foregroundWatchTimer.Start();
@@ -721,6 +728,59 @@ namespace ClipBoardCygnus
             };
         }
 
+        public void TrackOwnWindow(IntPtr hWnd)
+        {
+            if (IsPasteTargetWindow(hWnd))
+            {
+                _lastOwnWindow = hWnd;
+                _lastPasteTargetWindow = hWnd;
+            }
+        }
+
+        public void HidePopup()
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(HidePopup));
+                return;
+            }
+
+            if (Visible)
+            {
+                PersistCurrentBounds();
+                Hide();
+            }
+        }
+
+        public void ShowPopupForTargetHandle(IntPtr targetHwnd)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => ShowPopupForTargetHandle(targetHwnd)));
+                return;
+            }
+
+            if (Visible)
+            {
+                PersistCurrentBounds();
+                Hide();
+                return;
+            }
+
+            if (IsPasteTargetWindow(targetHwnd))
+            {
+                _previousForegroundWindow = targetHwnd;
+                _lastPasteTargetWindow = targetHwnd;
+                _lastOwnWindow = targetHwnd;
+            }
+            else
+            {
+                _previousForegroundWindow = ResolveTargetPasteWindow();
+            }
+
+            ShowAndFocusPopup();
+        }
+
         public void TogglePopup()
         {
             if (InvokeRequired)
@@ -741,6 +801,20 @@ namespace ClipBoardCygnus
             {
                 _previousForegroundWindow = fg;
                 _lastExternalWindow = fg;
+                _lastPasteTargetWindow = fg;
+            }
+            else if (IsPasteTargetWindow(fg))
+            {
+                _previousForegroundWindow = fg;
+                _lastPasteTargetWindow = fg;
+            }
+            else if (IsPasteTargetWindow(_lastPasteTargetWindow))
+            {
+                _previousForegroundWindow = _lastPasteTargetWindow;
+            }
+            else if (IsPasteTargetWindow(_lastOwnWindow))
+            {
+                _previousForegroundWindow = _lastOwnWindow;
             }
             else if (IsExternalAppWindow(_lastExternalWindow))
             {
@@ -748,9 +822,14 @@ namespace ClipBoardCygnus
             }
             else
             {
-                _previousForegroundWindow = FindTopExternalWindow();
+                _previousForegroundWindow = FindTopPasteTargetWindow();
             }
 
+            ShowAndFocusPopup();
+        }
+
+        private void ShowAndFocusPopup()
+        {
             if (_titleLabel != null)
             {
                 _titleLabel.Text = $"ClipBoardCygnus · {_storage.Settings.GlobalHotkey}";
@@ -767,14 +846,8 @@ namespace ClipBoardCygnus
             _searchBox.SelectAll();
         }
 
-        private bool IsExternalAppWindow(IntPtr hWnd)
+        private static bool IsShellOrToolWindow(IntPtr hWnd)
         {
-            if (hWnd == IntPtr.Zero || !IsWindow(hWnd) || !IsWindowVisible(hWnd)) return false;
-
-            uint pid;
-            GetWindowThreadProcessId(hWnd, out pid);
-            if (pid == GetCurrentProcessId()) return false;
-
             var cls = new System.Text.StringBuilder(128);
             GetClassName(hWnd, cls, cls.Capacity);
             string className = cls.ToString();
@@ -786,13 +859,28 @@ namespace ClipBoardCygnus
                 className == "WorkerW" ||
                 className == "Windows.UI.Core.CoreWindow")
             {
-                return false;
+                return true;
             }
 
             int exStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
-            if ((exStyle & WS_EX_TOOLWINDOW) != 0) return false;
+            return (exStyle & WS_EX_TOOLWINDOW) != 0;
+        }
 
-            return true;
+        private bool IsExternalAppWindow(IntPtr hWnd)
+        {
+            if (hWnd == IntPtr.Zero || !IsWindow(hWnd) || !IsWindowVisible(hWnd)) return false;
+
+            uint pid;
+            GetWindowThreadProcessId(hWnd, out pid);
+            if (pid == GetCurrentProcessId()) return false;
+
+            return !IsShellOrToolWindow(hWnd);
+        }
+
+        private bool IsPasteTargetWindow(IntPtr hWnd)
+        {
+            if (hWnd == IntPtr.Zero || hWnd == Handle || !IsWindow(hWnd) || !IsWindowVisible(hWnd)) return false;
+            return !IsShellOrToolWindow(hWnd);
         }
 
         private IntPtr FindTopExternalWindow()
@@ -807,9 +895,28 @@ namespace ClipBoardCygnus
             return IntPtr.Zero;
         }
 
+        private IntPtr FindTopPasteTargetWindow()
+        {
+            IntPtr h = GetWindow(Handle, GW_HWNDNEXT);
+            int guard = 0;
+            while (h != IntPtr.Zero && guard++ < 80)
+            {
+                if (IsPasteTargetWindow(h)) return h;
+                h = GetWindow(h, GW_HWNDNEXT);
+            }
+            return IntPtr.Zero;
+        }
+
         private IntPtr ResolveTargetPasteWindow()
         {
-            if (IsExternalAppWindow(_previousForegroundWindow)) return _previousForegroundWindow;
+            if (IsPasteTargetWindow(_previousForegroundWindow)) return _previousForegroundWindow;
+            if (IsPasteTargetWindow(_lastPasteTargetWindow)) return _lastPasteTargetWindow;
+            if (IsExternalAppWindow(_lastExternalWindow)) return _lastExternalWindow;
+            return FindTopPasteTargetWindow();
+        }
+
+        private IntPtr ResolveExternalTargetWindow()
+        {
             if (IsExternalAppWindow(_lastExternalWindow)) return _lastExternalWindow;
             return FindTopExternalWindow();
         }
@@ -1008,7 +1115,7 @@ namespace ClipBoardCygnus
 
             if (pasteIntoExternalApp)
             {
-                IntPtr targetHwnd = ResolveTargetPasteWindow();
+                IntPtr targetHwnd = ResolveExternalTargetWindow();
                 PersistCurrentBounds();
                 Hide();
 
@@ -1088,8 +1195,24 @@ namespace ClipBoardCygnus
                         _pasteTimer = null;
 
                         ForceForegroundWindow(targetHwnd);
-                        System.Threading.Thread.Sleep(40);
-                        ClipboardMonitor.SendCtrlV();
+                        Control targetCtrl = Control.FromHandle(targetHwnd);
+                        if (targetCtrl is Form ownForm && !ownForm.IsDisposed)
+                        {
+                            ownForm.Activate();
+                            var sendTimer = new Timer { Interval = 45 };
+                            sendTimer.Tick += (s2, e2) =>
+                            {
+                                sendTimer.Stop();
+                                sendTimer.Dispose();
+                                ClipboardMonitor.SendCtrlV();
+                            };
+                            sendTimer.Start();
+                        }
+                        else
+                        {
+                            System.Threading.Thread.Sleep(40);
+                            ClipboardMonitor.SendCtrlV();
+                        }
                     };
                     _pasteTimer.Start();
                 }

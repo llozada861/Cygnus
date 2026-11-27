@@ -12,13 +12,13 @@ namespace ClipBoardCygnus
         private readonly Dictionary<string, TextBox> _inputs = new Dictionary<string, TextBox>(StringComparer.Ordinal);
         private TextBox _previewBox;
         private TextBox _firstInput;
+        private TextBox _lastFocusedInput;
 
-        public bool ShouldCloseParentAfterPaste { get; private set; }
-
-        public TemplateUseForm(CodeTemplate template)
+        public TemplateUseForm(CodeTemplate template, Icon appIcon = null)
         {
             _template = template ?? new CodeTemplate();
             _defaults = SqliteStorageService.ParseDefaults(_template.DefaultsJson);
+            if (appIcon != null) Icon = appIcon;
             BuildUi();
             UpdatePreview();
         }
@@ -29,14 +29,15 @@ namespace ClipBoardCygnus
             FormBorderStyle = FormBorderStyle.Sizable;
             MinimumSize = new Size(560, 440);
             Size = new Size(640, 540);
-            MaximizeBox = false;
-            MinimizeBox = false;
-            ShowInTaskbar = false;
-            TopMost = true;
-            StartPosition = FormStartPosition.CenterParent;
+            MaximizeBox = true;
+            MinimizeBox = true;
+            ShowInTaskbar = true;
+            TopMost = false;
+            StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.White;
             Font = new Font("Segoe UI", 9.25f);
 
+            Activated += (s, e) => ClipboardManager.TrackActiveOwnWindow(this);
             Shown += (s, e) =>
             {
                 Activate();
@@ -58,6 +59,25 @@ namespace ClipBoardCygnus
                     e.Graphics.DrawLine(pen, 0, header.Height - 1, header.Width, header.Height - 1);
             };
 
+            var clipboardBtn = new Button
+            {
+                Dock = DockStyle.Right,
+                Width = 108,
+                Text = "Portapapeles",
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.White,
+                ForeColor = Color.FromArgb(30, 64, 175),
+                Font = new Font("Segoe UI", 8.25f, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            clipboardBtn.FlatAppearance.BorderColor = Color.FromArgb(191, 219, 254);
+            clipboardBtn.Click += (s, e) =>
+            {
+                var targetTb = _lastFocusedInput ?? _firstInput;
+                if (targetTb != null && !targetTb.IsDisposed) targetTb.Focus();
+                ClipboardManager.ShowPopupForTarget(this);
+            };
+
             var lblTitle = new Label
             {
                 Dock = DockStyle.Fill,
@@ -67,6 +87,7 @@ namespace ClipBoardCygnus
                 TextAlign = ContentAlignment.MiddleLeft
             };
             header.Controls.Add(lblTitle);
+            header.Controls.Add(clipboardBtn);
 
             var footer = new Panel
             {
@@ -222,6 +243,7 @@ namespace ClipBoardCygnus
                         Margin = new Padding(0, 4, 0, 4)
                     };
                     tb.TextChanged += (s, e) => UpdatePreview();
+                    tb.Enter += (s, e) => _lastFocusedInput = tb;
 
                     if (_firstInput == null) _firstInput = tb;
                     _inputs[varName] = tb;
@@ -259,8 +281,6 @@ namespace ClipBoardCygnus
         {
             string rendered = BuildRenderedCode();
             ClipboardManager.ApplyRenderedTemplate(rendered, _template.Name, pasteIntoExternalApp);
-            ShouldCloseParentAfterPaste = pasteIntoExternalApp;
-            DialogResult = DialogResult.OK;
             Close();
         }
     }

@@ -25,6 +25,7 @@ namespace ClipBoardCygnus
         private ComboBox _sysVarCombo;
         private Button _applySysVarBtn;
         private Label _statusLabel;
+        private Button _clipboardBtn;
         private Button _saveBtn;
         private Button _useBtn;
         private Button _closeBtn;
@@ -35,11 +36,13 @@ namespace ClipBoardCygnus
         private bool _suppressSelectionChange;
         private bool _suppressGroupFilterChange;
         private bool _suppressGridSync;
+        private Control _lastEditableControl;
         private Dictionary<string, string> _currentDefaults = new Dictionary<string, string>(StringComparer.Ordinal);
 
-        public TemplatesForm(SqliteStorageService storage)
+        public TemplatesForm(SqliteStorageService storage, Icon appIcon = null)
         {
             _storage = storage;
+            if (appIcon != null) Icon = appIcon;
             BuildUi();
             RefreshGroupSelectors();
             LoadTemplates();
@@ -49,16 +52,17 @@ namespace ClipBoardCygnus
         {
             Text = "ClipBoardCygnus — Plantillas de código";
             FormBorderStyle = FormBorderStyle.Sizable;
-            MinimumSize = new Size(760, 520);
-            Size = new Size(880, 600);
+            MinimumSize = new Size(840, 540);
+            Size = new Size(920, 620);
             MaximizeBox = true;
-            MinimizeBox = false;
-            ShowInTaskbar = false;
-            TopMost = true;
+            MinimizeBox = true;
+            ShowInTaskbar = true;
+            TopMost = false;
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.White;
             Font = new Font("Segoe UI", 9.25f);
 
+            Activated += (s, e) => ClipboardManager.TrackActiveOwnWindow(this);
             Shown += (s, e) =>
             {
                 Activate();
@@ -299,10 +303,24 @@ namespace ClipBoardCygnus
                 ForeColor = Color.FromArgb(100, 116, 139)
             };
 
+            _clipboardBtn = new Button
+            {
+                Dock = DockStyle.Right,
+                Width = 108,
+                Text = "Portapapeles",
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.FromArgb(248, 250, 252),
+                ForeColor = Color.FromArgb(30, 64, 175),
+                Font = new Font("Segoe UI", 8.5f, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            _clipboardBtn.FlatAppearance.BorderColor = Color.FromArgb(191, 219, 254);
+            _clipboardBtn.Click += (s, e) => OpenClipboardForActiveField();
+
             _closeBtn = new Button
             {
                 Dock = DockStyle.Right,
-                Width = 84,
+                Width = 80,
                 Text = "Cerrar",
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.White,
@@ -315,7 +333,7 @@ namespace ClipBoardCygnus
             _saveBtn = new Button
             {
                 Dock = DockStyle.Right,
-                Width = 98,
+                Width = 92,
                 Text = "Guardar",
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.White,
@@ -329,7 +347,7 @@ namespace ClipBoardCygnus
             _useBtn = new Button
             {
                 Dock = DockStyle.Right,
-                Width = 148,
+                Width = 142,
                 Text = "Usar plantilla...",
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.FromArgb(37, 99, 235),
@@ -342,12 +360,15 @@ namespace ClipBoardCygnus
 
             var sep1 = new Panel { Dock = DockStyle.Right, Width = 8 };
             var sep2 = new Panel { Dock = DockStyle.Right, Width = 8 };
+            var sep3 = new Panel { Dock = DockStyle.Right, Width = 8 };
 
             footer.Controls.Add(_statusLabel);
             footer.Controls.Add(_useBtn);
             footer.Controls.Add(sep1);
             footer.Controls.Add(_saveBtn);
             footer.Controls.Add(sep2);
+            footer.Controls.Add(_clipboardBtn);
+            footer.Controls.Add(sep3);
             footer.Controls.Add(_closeBtn);
 
             // Detected Bind Variables Grid + Dynamic System Variables Helper
@@ -478,8 +499,24 @@ namespace ClipBoardCygnus
             rightPanel.Controls.Add(varBar);
             rightPanel.Controls.Add(metaRow);
 
+            _lastEditableControl = _codeBox;
+            _nameBox.Enter += (s, e) => _lastEditableControl = _nameBox;
+            _groupBox.Enter += (s, e) => _lastEditableControl = _groupBox;
+            _varNameBox.Enter += (s, e) => _lastEditableControl = _varNameBox;
+            _codeBox.Enter += (s, e) => _lastEditableControl = _codeBox;
+            _defaultsGrid.Enter += (s, e) => _lastEditableControl = _defaultsGrid;
+
             Controls.Add(rightPanel);
             Controls.Add(leftPanel);
+        }
+
+        private void OpenClipboardForActiveField()
+        {
+            if (_lastEditableControl != null && !_lastEditableControl.IsDisposed)
+                _lastEditableControl.Focus();
+            else
+                _codeBox.Focus();
+            ClipboardManager.ShowPopupForTarget(this);
         }
 
         private void OnDrawTemplateItem(object sender, DrawItemEventArgs e)
@@ -789,13 +826,11 @@ namespace ClipBoardCygnus
             }
             if (string.IsNullOrWhiteSpace(draft.Name)) draft.Name = "Plantilla rápida";
 
-            using (var useForm = new TemplateUseForm(draft))
-            {
-                if (useForm.ShowDialog(this) == DialogResult.OK && useForm.ShouldCloseParentAfterPaste)
-                {
-                    Close();
-                }
-            }
+            var useForm = new TemplateUseForm(draft, Icon);
+            useForm.FormClosed += (s, e) => useForm.Dispose();
+            useForm.Show();
+            useForm.Activate();
+            useForm.BringToFront();
         }
     }
 }
